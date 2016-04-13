@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="stockmonitor:war">
+    <output-path>$PROJECT_DIR$/stockmonitor/target</output-path>
+    <root id="archive" name="stockmonitor-1.0.1.RELEASE.war">
+      <element id="artifact" artifact-name="stockmonitor:war exploded" />
+    </root>
+  </artifact>
+</component>
