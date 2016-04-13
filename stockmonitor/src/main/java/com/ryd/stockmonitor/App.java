@@ -1,4 +1,4 @@
-package com.ryd;
+package com.ryd.stockmonitor;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;

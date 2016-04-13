@@ -1,4 +1,4 @@
-package com.ryd.bean;
+package com.ryd.stockmonitor.bean;
 
 import java.io.Serializable;
 

@@ -1,8 +1,4 @@
-package com.ryd.common;
-
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.view.InternalResourceViewResolver;
+package com.ryd.stockmonitor.common;
 
 /**
  * Created by Administrator on 2016/4/13.

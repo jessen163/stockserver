@@ -1,4 +1,4 @@
-package com.ryd.controller;
+package com.ryd.stockmonitor.controller;
 
 import javax.websocket.OnMessage;
 import javax.websocket.server.ServerEndpoint;

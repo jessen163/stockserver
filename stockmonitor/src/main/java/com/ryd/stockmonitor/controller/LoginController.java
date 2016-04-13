@@ -1,11 +1,9 @@
-package com.ryd.controller;
+package com.ryd.stockmonitor.controller;
 
-import com.ryd.bean.StAccount;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import com.ryd.stockmonitor.bean.StAccount;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
 /**
  * Created by Administrator on 2016/4/13.
