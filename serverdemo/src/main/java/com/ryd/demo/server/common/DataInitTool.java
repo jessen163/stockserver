@@ -83,13 +83,46 @@ public class DataInitTool {
         dateScheduleInit();
         //中国平安-股票
         StStock stStock = new StStock("601318","中国平安","601318","sh");
-        stStock.setBfclosePrice(31);
         StStock stStock2 = new StStock("000776","广发证券","000776", "sz");
-        stStock2.setBfclosePrice(10);
         StStock stStock3 = new StStock("600723","首商股份","600723", "sh");
+        StStock stStock4 = new StStock("600008","首创股份","600008", "sh");
+        StStock stStock5 = new StStock("600009","上海机场","600009", "sh");
+        StStock stStock6 = new StStock("600010","包钢股份","600010", "sh");
+        StStock stStock7 = new StStock("600015","华夏银行","600015", "sh");
+        StStock stStock8 = new StStock("600018","上港集团","600018", "sh");
+        StStock stStock9 = new StStock("600019","宝钢股份","600019", "sh");
+        StStock stStock10 = new StStock("600020","中原高速","600020", "sh");
+        StStock stStock11 = new StStock("600021","上海电力","600021", "sh");
+        StStock stStock12 = new StStock("600023","浙能电力","600023", "sh");
+        StStock stStock13 = new StStock("600026","中海发展","600026", "sh");
+        StStock stStock14 = new StStock("002248","华东数控","002248", "sz");
+        StStock stStock15 = new StStock("002131","利欧股份","002131", "sz");
+        StStock stStock16 = new StStock("002789","建艺集团","002789", "sz");
+        StStock stStock17 = new StStock("000505","珠江控股","000505", "sz");
+        StStock stStock18 = new StStock("000609","绵世股份","000609", "sz");
+        StStock stStock19 = new StStock("002591","恒大高新","002591", "sz");
+        StStock stStock20 = new StStock("000628","高新发展","000628", "sz");
+
         DataConstant.stockTable.put(stStock.getStockId(),stStock);
         DataConstant.stockTable.put(stStock2.getStockId(),stStock2);
         DataConstant.stockTable.put(stStock3.getStockId(),stStock3);
+        DataConstant.stockTable.put(stStock4.getStockId(),stStock4);
+        DataConstant.stockTable.put(stStock5.getStockId(),stStock5);
+        DataConstant.stockTable.put(stStock6.getStockId(),stStock6);
+        DataConstant.stockTable.put(stStock7.getStockId(),stStock7);
+        DataConstant.stockTable.put(stStock8.getStockId(),stStock8);
+        DataConstant.stockTable.put(stStock9.getStockId(),stStock9);
+        DataConstant.stockTable.put(stStock10.getStockId(),stStock10);
+        DataConstant.stockTable.put(stStock11.getStockId(),stStock11);
+        DataConstant.stockTable.put(stStock12.getStockId(),stStock12);
+        DataConstant.stockTable.put(stStock13.getStockId(),stStock13);
+        DataConstant.stockTable.put(stStock14.getStockId(),stStock14);
+        DataConstant.stockTable.put(stStock15.getStockId(),stStock15);
+        DataConstant.stockTable.put(stStock16.getStockId(),stStock16);
+        DataConstant.stockTable.put(stStock17.getStockId(),stStock17);
+        DataConstant.stockTable.put(stStock18.getStockId(),stStock18);
+        DataConstant.stockTable.put(stStock19.getStockId(),stStock19);
+        DataConstant.stockTable.put(stStock20.getStockId(),stStock20);
 
         StockAnalysisServiceI stockAnalysisServiceI = new StockAnalysisServiceImpl();
         stockAnalysisServiceI.updateSyncStockInfo();
