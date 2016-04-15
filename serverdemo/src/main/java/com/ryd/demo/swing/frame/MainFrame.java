@@ -1,7 +1,7 @@
 package com.ryd.demo.swing.frame;
 
 import com.ryd.demo.server.bean.*;
-import com.ryd.demo.server.protocol.NettyMessage;
+import com.ryd.protocol.NettyMessage;
 import com.ryd.demo.swing.common.ClientConstants;
 import com.ryd.demo.swing.common.ListToArray;
 import com.ryd.demo.swing.listener.QuoteListListener;
