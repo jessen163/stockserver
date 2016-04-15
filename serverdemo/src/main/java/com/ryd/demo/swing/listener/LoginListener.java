@@ -1,7 +1,7 @@
 package com.ryd.demo.swing.listener;
 
 import com.ryd.demo.server.bean.StAccount;
-import com.ryd.demo.server.protocol.NettyMessage;
+import com.ryd.protocol.NettyMessage;
 import com.ryd.demo.swing.common.ClientConstants;
 import com.ryd.demo.swing.service.impl.MessageServiceImpl;
 
