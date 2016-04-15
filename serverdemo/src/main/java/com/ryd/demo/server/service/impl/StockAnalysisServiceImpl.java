@@ -123,7 +123,7 @@ public class StockAnalysisServiceImpl implements StockAnalysisServiceI {
                         DataConstant.newQuoteList.remove(stQuote.getStockId() + Constant.STOCK_STQUOTE_TYPE_SELL);
                         DataConstant.newQuoteList.put(stQuote.getStockId() + Constant.STOCK_STQUOTE_TYPE_SELL, stQuoteSell);
                     }
-                    DataConstant.newQuoteList.put(stQuote.getStockId() + stQuote.getType(), stQuoteSell);
+                    DataConstant.newQuoteList.put(stQuote.getStockId() + stQuote.getType(), stQuote);
                 }
             }
         }
