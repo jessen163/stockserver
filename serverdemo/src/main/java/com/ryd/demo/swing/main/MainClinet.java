@@ -2,6 +2,7 @@ package com.ryd.demo.swing.main;
 
 
 import com.ryd.demo.swing.frame.LoginFrame;
+import com.ryd.demo.swing.net.ClientServer;
 import com.ryd.demo.swing.net.StockClient;
 
 import javax.swing.*;
@@ -30,14 +31,3 @@ public class MainClinet {
 	}
 }
 
-class ClientServer implements Runnable {
-	@Override
-	public void run() {
-		try {
-			StockClient client = new StockClient();
-			client.connect("127.0.0.1", 8888);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-}

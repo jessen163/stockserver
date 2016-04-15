@@ -35,9 +35,8 @@ public class StockMainDemo {
         // 创建一个可重用固定线程数的线程池
         ExecutorService pool = Executors.newFixedThreadPool(50);
         pool.execute(new Runnable() {
-            @Override
             public void run() {
-                StockServer stockServer = new StockServer(8888);
+                StockServer stockServer = new StockServer(9999);
                 try {
                     stockServer.run();
                 } catch (Exception e) {
