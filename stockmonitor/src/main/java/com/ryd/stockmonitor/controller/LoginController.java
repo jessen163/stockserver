@@ -1,38 +1,39 @@
 package com.ryd.stockmonitor.controller;
 
-import com.ryd.stockmonitor.bean.StAccount;
+import com.ryd.demo.server.bean.StAccount;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
+ * 鏄剧ず鐩戞帶鐣岄潰
  * Created by Administrator on 2016/4/13.
  */
 @Controller
-@RequestMapping(value="/user")
+@RequestMapping("/user")
 public class LoginController {
-    @RequestMapping("/{accountNumber}")
-    @ResponseBody
-    public StAccount view(@PathVariable("accountNumber") String accountNumber) {
-        StAccount account = new StAccount();
-        account.setAccountNumber(accountNumber);
-
-        return account;
-    }
-
     @RequestMapping("/index")
-    public String index(Model map) {
-        // 加入一个属性，用来在模板中读取
-        map.addAttribute("host", "http://blog.didispace.com");
-        // return模板文件的名称，对应src/main/resources/templates/index.html
+    String index(Model model) {
         return "index";
     }
 
-    @RequestMapping(value="/demo2")
-    public String demo2(Model map) {
-//        // 加入一个属性，用来在模板中读取
-//        map.addAttribute("host", "http://blog.didispace.com");
-        // return模板文件的名称，对应src/main/resources/templates/index.html
-        return "demo";
+    @RequestMapping("/stock_list")
+    public String stockList() {
+        return "stock_list";
+    }
+
+    @RequestMapping("/stock_detail/{stockId}")
+    public String showStockDetail(@PathVariable String stockId) {
+        return "stock_detail";
+    }
+
+    @RequestMapping("/echoIndex")
+    public String echoIndex() {
+        return "echo";
+    }
+    @RequestMapping("/reverseIndex")
+    public String reverseIndex() {
+        return "reverse";
     }
 }

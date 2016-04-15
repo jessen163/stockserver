@@ -53,6 +53,19 @@
         <input onclick="send_echo()" value="Press to send" type="button">
         <input id="textID" name="message" value="Hello Web Sockets" type="text"><br>
     </form>
+    <table>
+        <tr>
+            <td>股票代码</td>
+            <td>股票名称</td>
+            <td>当前价格</td>
+            <td>今日开盘价</td>
+            <td>昨日收盘价</td>
+            <td>今日最高竟价</td>
+            <td>今日最低竟价</td>
+            <td>竞买价</td>
+            <td>竞卖价</td>
+        </tr>
+    </table>
 </div>
 <div id="output"></div>
 </body>
