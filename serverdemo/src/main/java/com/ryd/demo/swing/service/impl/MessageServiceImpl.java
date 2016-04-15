@@ -5,7 +5,7 @@ import com.ryd.demo.server.bean.StAccount;
 import com.ryd.demo.server.bean.StPosition;
 import com.ryd.demo.server.bean.StQuote;
 import com.ryd.demo.server.bean.StStock;
-import com.ryd.demo.server.protocol.NettyMessage;
+import com.ryd.protocol.NettyMessage;
 import com.ryd.demo.swing.common.ClientConstants;
 import com.ryd.demo.swing.frame.MainFrame;
 import com.ryd.demo.swing.frame.QuoteListDialog;
