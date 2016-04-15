@@ -1,11 +1,8 @@
 package com.ryd.demo.server.net;
 
-import com.ryd.demo.server.bean.StAccount;
-import com.ryd.demo.server.bean.StPosition;
-import com.ryd.demo.server.bean.StQuote;
-import com.ryd.demo.server.bean.StStock;
+import com.ryd.demo.server.bean.*;
 import com.ryd.demo.server.common.DataConstant;
-import com.ryd.demo.server.protocol.NettyMessage;
+import com.ryd.protocol.NettyMessage;
 import com.ryd.demo.server.service.StAccountServiceI;
 import com.ryd.demo.server.service.StStockServiceI;
 import com.ryd.demo.server.service.StockAnalysisServiceI;
@@ -17,6 +14,7 @@ import io.netty.channel.ChannelInboundHandlerAdapter;
 import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -40,6 +38,7 @@ public class StockServerHandler extends ChannelInboundHandlerAdapter {
             boolean flag = false;
             StQuote stQuote = null;
             StAccount account = null;
+            Integer stockId = null;
             switch (msgType) {
                 case 1 :
                     // 登陆
@@ -100,62 +99,56 @@ public class StockServerHandler extends ChannelInboundHandlerAdapter {
                     nettyMessage.setMsgObj(positionList);
                     logger.info("我的持仓信息：" + positionList.toString());
                     break;
+                case 7 :
+                    // 客户报价单条报价信息、买-卖
+                    logger.info("客户报价单条报价信息");
+                    quoteList = new ArrayList<StQuote>();
+                    if (DataConstant.newQuoteList!=null) {
+                            for (int i = DataConstant.newQuoteList.size()-1; i>=0; i--) {
+                                StQuote stQuoteNew = DataConstant.newQuoteList.get(i);
+                                quoteList.add(stQuoteNew);
+                                if (quoteList!=null&&quoteList.size()==20) break;
+                            }
+                    }
+                    nettyMessage.setMsgObj(quoteList);
+                    logger.info("客户报价单条报价信息：" + DataConstant.newQuoteList.toString());
+                    break;
+                case 8 :
+                    // 最新的10条报价-买/卖
+                    logger.info("最新的10条报价-买/卖");
+                    stockId = (Integer)nettyMessage.getMsgObj();
+                    nettyMessage.setMsgObj(DataConstant.stTradeQueueMap.get(stockId));
+                    logger.info("最新的10条报价-买/卖：" + DataConstant.stTradeQueueMap.get(stockId).toString());
+                    break;
+                case 9 :
+                    // 最新的交易记录
+                    logger.info("最新的交易记录");
+                    stockId = (Integer)nettyMessage.getMsgObj();
+                    List<StTradeRecord> recordList = new ArrayList<StTradeRecord>();
+                    if (recordList!=null&&recordList.size()>0) {
+                        for (int i = recordList.size()-1; i>=0; i--) {
+                            StTradeRecord record = recordList.get(i);
+                            if (record.getStockId().equals(stockId)) {
+                                recordList.add(record);
+                                if (recordList.size()==10) break;
+                            }
+                        }
+                    }
+                    nettyMessage.setMsgObj(recordList);
+                    logger.info("最新的10条最新的交易记录：" + recordList);
+
+                    break;
+                case 10 :
+                    logger.info("获取单只股票的最近五次报价");
+                    stockId = (Integer)nettyMessage.getMsgObj();
+                    LinkedList<StStock> stockList = DataConstant.stockPriceList.get(stockId);
+
+                    nettyMessage.setMsgObj(stockList);
+                    logger.info("获取单只股票的最近五次报价：" + stockList);
+                    break;
             }
             ctx.writeAndFlush(nettyMessage);
         }
-
-//        if (msg instanceof StAccount) {
-//            StAccount stAccount = (StAccount) msg;
-//            System.out.println("stAccount:"+stAccount);
-//
-//        } else if  (msg instanceof StQuote) {
-//
-//        } else if (msg instanceof String) {
-//            String str = (String)msg;
-//
-//            System.out.println("string:"+msg);
-//
-//            Boolean flag = false;
-//            String[] strArr = str.toString().split("@");
-//            if (strArr==null||strArr.length!=7) {
-//                // 向客户端发送消息
-//                String response = "parameter error";
-//                // 在当前场景下，发送的数据必须转换成ByteBuf数组
-////                ByteBuf encoded = ctx.alloc().buffer(4 * response.length());
-////                encoded.writeBytes(response.getBytes());
-////                ctx.write(encoded);
-//                ctx.writeAndFlush("parameter error");
-//                return;
-//            }
-//
-//            if (strArr[0].equals("A")) {
-//                // 从互动端获取报价
-//                StQuote stQuote = new StQuote();
-//                stQuote.setStockId(strArr[1]);
-//                stQuote.setAccountId(strArr[2]);
-//                stQuote.setQuotePrice(Double.parseDouble(strArr[3]));
-//                stQuote.setAmount(Integer.parseInt(strArr[4]));
-//                stQuote.setType(Integer.parseInt(strArr[5]));
-//                stQuote.setDateTime(Long.parseLong(strArr[6]));
-//                stQuote.setStatus(Constant.STOCK_STQUOTE_STATUS_TRUSTEE);
-//
-//                flag = stockAnalysisServiceI.quotePrice(stQuote);
-//            } else if(strArr[0].equals("B")) {
-//                // 撤单
-//                StQuote stQuote = new StQuote();
-//                stQuote.setQuoteId(strArr[1]);
-//                stQuote.setStockId(strArr[2]);
-//                stQuote.setAccountId(strArr[3]);
-//                stQuote.setType(Integer.parseInt(strArr[4]));
-//                DataInitTool.printTradeQueue("cancel before",stQuote.getStockId());
-//                flag = stockAnalysisServiceI.cancelStQuote(stQuote);
-//                DataInitTool.printTradeQueue("cancel end", stQuote.getStockId());
-//            }
-//
-//            // 向客户端发送消息
-//            String response = flag?"Operation success":"Operation fail";
-//            ctx.writeAndFlush(flag);
-//        }
     }
 
     @Override

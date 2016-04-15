@@ -4,12 +4,10 @@ import com.ryd.demo.server.bean.*;
 import com.ryd.demo.server.util.ConcurrentSortedLinkedList;
 import com.ryd.demo.server.util.SortedLinkedList;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * <p>标题:数据常量</p>
@@ -20,10 +18,15 @@ import java.util.concurrent.ConcurrentMap;
  */
 public class DataConstant {
 
+    //股票列表------------五次报价记录
+    public static ConcurrentMap<String, LinkedList<StStock>> stockPriceList = new ConcurrentHashMap<String,LinkedList<StStock>>();
+
     //队列-多只股票
     public static ConcurrentHashMap<String,StTradeQueue> stTradeQueueMap = new ConcurrentHashMap<String,StTradeQueue>();
     //帐户
     public static ConcurrentMap<String,StAccount> stAccounts = new ConcurrentHashMap<String,StAccount>();
+    // 报价列表-最新
+    public static ConcurrentMap<String,StQuote> newQuoteList = new ConcurrentHashMap<String,StQuote>();
 
     // 模拟账户-马甲
     public static List<StAccount> accountList = null;
@@ -41,12 +44,12 @@ public class DataConstant {
 
     //股票列表
     public static ConcurrentMap<String,StStock> stockTable = new ConcurrentHashMap<String,StStock>();
-    //买卖家报价
-    public static SortedLinkedList<StQuote> sellList = new ConcurrentSortedLinkedList<StQuote>();
-    public static SortedLinkedList<StQuote> buyList = new ConcurrentSortedLinkedList<StQuote>();
+//    //买卖家报价
+//    public static SortedLinkedList<StQuote> sellList = new ConcurrentSortedLinkedList<StQuote>();
+//    public static SortedLinkedList<StQuote> buyList = new ConcurrentSortedLinkedList<StQuote>();
 
-    //所有报价信息
-    public static ConcurrentMap<String,Map> allQuoteTable = new ConcurrentHashMap<String,Map>();
+//    //所有报价信息
+//    public static ConcurrentMap<String,Map> allQuoteTable = new ConcurrentHashMap<String,Map>();
     //交易记录列表
     public static List<StTradeRecord> recordList = new ArrayList<StTradeRecord>();
 

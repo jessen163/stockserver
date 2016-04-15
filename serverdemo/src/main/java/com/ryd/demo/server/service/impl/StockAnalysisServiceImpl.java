@@ -1,10 +1,13 @@
 package com.ryd.demo.server.service.impl;
 
 import java.util.*;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import com.ryd.demo.server.bean.*;
 import com.ryd.demo.server.common.Constant;
 import com.ryd.demo.server.common.DataConstant;
+import com.ryd.demo.server.handle.StSyncStockThread;
 import com.ryd.demo.server.service.*;
 import com.ryd.demo.server.util.ArithUtil;
 import org.apache.log4j.Logger;
@@ -109,6 +112,18 @@ public class StockAnalysisServiceImpl implements StockAnalysisServiceI {
                     } else {
                         logger.info("报价成功----报价状态->卖出---卖方->" + stQuote.getAccountId() + "--股票名称->" + stStock.getStockName() + "--股票编码->" + stStock.getStockCode() + "--申报价格->" + stQuote.getQuotePrice() + "--申报数量->" + stQuote.getAmount() + "--报价时间->" + new Date(stQuote.getDateTime()));
                     }
+                    // 用于监控最新报价情况
+                    StQuote stQuoteBuy = DataConstant.newQuoteList.get(stQuote.getStockId()+Constant.STOCK_STQUOTE_TYPE_BUY);
+                    StQuote stQuoteSell = DataConstant.newQuoteList.get(stQuote.getStockId()+Constant.STOCK_STQUOTE_TYPE_SELL);
+                    if (stQuoteBuy!=null) {
+                        DataConstant.newQuoteList.remove(stQuote.getStockId() + Constant.STOCK_STQUOTE_TYPE_BUY);
+                        DataConstant.newQuoteList.put(stQuote.getStockId() + Constant.STOCK_STQUOTE_TYPE_BUY, stQuoteBuy);
+                    }
+                    if (stQuoteSell!=null) {
+                        DataConstant.newQuoteList.remove(stQuote.getStockId() + Constant.STOCK_STQUOTE_TYPE_SELL);
+                        DataConstant.newQuoteList.put(stQuote.getStockId() + Constant.STOCK_STQUOTE_TYPE_SELL, stQuoteSell);
+                    }
+                    DataConstant.newQuoteList.put(stQuote.getStockId() + stQuote.getType(), stQuoteSell);
                 }
             }
         }
@@ -349,6 +364,7 @@ public class StockAnalysisServiceImpl implements StockAnalysisServiceI {
     public void updateSyncStockInfo() {
 //        logger.info("更新股票实时信息.............start...........");
         StStock stock = null;
+        ExecutorService pool = Executors.newFixedThreadPool(10);
         for (String k :DataConstant.stockTable.keySet()) {
             StStock stStock = DataConstant.stockTable.get(k);
             stock = stockGetInfoFromApiI.getStStockInfo(stStock.getStockType(), stStock.getStockCode());
@@ -358,6 +374,8 @@ public class StockAnalysisServiceImpl implements StockAnalysisServiceI {
                 stock.setStockType(stStock.getStockType());
                 DataConstant.stockTable.put(stStock.getStockId(), stock);
             }
+            // 用于监控数据
+            pool.execute(new StSyncStockThread(stockGetInfoFromApiI, stStock));
         }
 //        logger.info("更新股票实时信息.............end...........");
     }
