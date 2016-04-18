@@ -19,6 +19,7 @@
 
     function init() {
       output = document.getElementById("output");
+      send_echo();
     }
 
     function send_echo() {
@@ -29,7 +30,7 @@
 //        setConnected(true);
         writeToScreen("Info: WebSocket connection opened");
 //        log('Info: WebSocket connection opened.');
-        ws.send("test");
+        ws.send("1");
         writeToScreen("send messgage : test");
       };
       ws.onmessage = function (event) {
@@ -46,6 +47,7 @@
                   $("#stockList").append(stockList);
               }
           }
+          load_price();
       };
       ws.onclose = function () {
 //        setConnected(false);
@@ -64,7 +66,7 @@
                 '<td width="10%">'+ d.minPrice+'</td>'+
                 '<td width="10%">'+ d.biddingBuyPrice+'</td>'+
                 '<td width="10%">'+ d.biddingSellPrice+'</td>'+
-                '<td width="10%"><a href="">详细</a></td>'+
+                '<td width="10%"><a href="${base}user/stockprice_detail/'+ d.stockId+'" target="_blank">股票详细</a></td>'+
                 '</tr>';
         return stockhtml;
     }
@@ -72,11 +74,13 @@
     // 报价列表
     function quoteToHtml(d) {
         var quotehtml = '<tr>'+
-                '<td><a href="${base}user/stock_detail/1">股票详细</a></td>'+
-        '<td>股票代码</td>'+
-        '<td>价格</td>'+
-        '<td>数量</td>'+
-        '<td>账户</td>'+
+        '<td>'+ d.stockId +'</td>'+
+        '<td>'+ d.stockId +'</td>'+
+        '<td>'+ d.quotePrice +'</td>';
+
+        quotehtml += '<td>'+ d.amount +'</td>'+
+        '<td>' + d.accountId + '</td>'+
+        '<td><a href="${base}user/stock_detail/'+ d.stockId+'" target="_blank">股票详细</a></td>'+
         '</tr>';
         return quotehtml;
     }
@@ -87,10 +91,10 @@
     }
 
     function writeToScreen(message) {
-      var pre = document.createElement("p");
+      /*var pre = document.createElement("p");
       pre.style.wordWrap = "break-word";
       pre.innerHTML = message;
-      output.appendChild(pre);
+      output.appendChild(pre);*/
     }
 
     window.addEventListener("load", init, false);
@@ -106,10 +110,10 @@
         };
         ws.onmessage = function (event) {
 //        log('Received: ' + event.data);
-            //writeToScreen("Info: WebSocket connection Received:"+event.data);
+            writeToScreen("Info: WebSocket connection Received:"+event.data);
             if (event.data!='') {
                 var dataJson = eval(event.data);
-                // alert("dataJson:"+dataJson);
+//                alert("dataJson:"+dataJson);
                 $("#quoteList").html("");
                 for (var i=0; i<dataJson.length; i++) {
                     //alert("event.data:"+dataJson[i]);
@@ -121,6 +125,7 @@
         };
         ws.onclose = function () {
 //        setConnected(false);
+            ws.send("111");
 //        log('Info: WebSocket connection closed.');
             writeToScreen("Info: WebSocket connection closed");
         };
@@ -133,8 +138,8 @@
 
 <div style="text-align: left;">
   <form action="">
-    <input onclick="send_echo()" value="开启" type="button">
-      <input onclick="load_price()" value="开启2" type="button">
+    <%--<input onclick="send_echo()" value="开启" type="button">
+      <input onclick="load_price()" value="开启2" type="button">--%>
     <%--<input id="textID" name="message" value="Hello Web Sockets" type="text">--%><br>
   </form>
   <table border="1" width="1024">
@@ -160,7 +165,8 @@
       <td width="20%">股票代码</td>
       <td width="20%">价格</td>
       <td width="20%">数量</td>
-      <td width="20%">账户</td>
+      <td width="10%">账户</td>
+      <td width="10%">详细</td>
     </tr>
   </table>
     <table border="1" id="quoteList" width="1024">

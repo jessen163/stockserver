@@ -1,11 +1,13 @@
 package com.ryd.stockmonitor.controller;
 
+import com.ryd.demo.server.bean.StStock;
 import com.ryd.protocol.NettyMessage;
 import com.ryd.stockmonitor.net.MessageService;
 
 import javax.websocket.*;
 import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
+import java.util.LinkedList;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -29,7 +31,17 @@ public class StockWebSocketEndpoint {
 //        } catch (InterruptedException e) {
 //            e.printStackTrace();
 //        }
-        Integer i = Integer.parseInt(incomingMessage);
+        String[] messageArr = null;
+        Integer i = null;
+        String stockId = null;
+        if (incomingMessage.indexOf("@")!=-1) {
+            messageArr = incomingMessage.split("@");
+            i = Integer.parseInt(messageArr[0]);
+            stockId = messageArr[1];
+        } else {
+            i = Integer.parseInt(incomingMessage);
+        }
+
 
         while (true) {
             try {
@@ -49,16 +61,25 @@ public class StockWebSocketEndpoint {
                         break;
                     case 8:
                         nettyMessage.setMsgType(8);
-                        nettyMessage.setMsgObj(1);
+                        nettyMessage.setMsgObj(stockId);
                         MessageService.sendMessage(nettyMessage);
                         TimeUnit.SECONDS.sleep(60);
                         break;
                     case 9:
-                        nettyMessage.setMsgType(8);
-                        nettyMessage.setMsgObj(1);
+                        nettyMessage.setMsgType(9);
+                        nettyMessage.setMsgObj(stockId);
                         MessageService.sendMessage(nettyMessage);
                         TimeUnit.SECONDS.sleep(60);
                         break;
+
+                    case 10 :
+                        nettyMessage.setMsgType(10);
+                        nettyMessage.setMsgObj(stockId);
+                        MessageService.sendMessage(nettyMessage);
+                        TimeUnit.SECONDS.sleep(60);
+                        break;
+                    default:
+                        throw new RuntimeException();
                 }
             } catch (InterruptedException e) {
                 e.printStackTrace();

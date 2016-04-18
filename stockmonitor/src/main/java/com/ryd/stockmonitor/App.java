@@ -24,7 +24,7 @@ public class App {
         SpringApplication.run(App.class);
         StockClient client = new StockClient();
         try {
-            client.connect("127.0.0.1", 8888);
+            client.connect("127.0.0.1", 9999);
         } catch (Exception e) {
             e.printStackTrace();
         }

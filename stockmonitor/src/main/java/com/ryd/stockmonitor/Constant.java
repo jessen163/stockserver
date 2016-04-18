@@ -1,5 +1,10 @@
 package com.ryd.stockmonitor;
 
+import com.ryd.demo.server.bean.StStock;
+
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
+
 /**
  * <p>标题:常量</p>
  * <p>描述:常量</p>
@@ -10,7 +15,9 @@ package com.ryd.stockmonitor;
 public class Constant {
 
     //1、买，2、卖
-    public static Integer STOCK_STQUOTE_TYPE_BUY=1;
-    public static Integer STOCK_STQUOTE_TYPE_SELL=2;
+    public static Integer STOCK_STQUOTE_TYPE_BUY = 1;
+    public static Integer STOCK_STQUOTE_TYPE_SELL = 2;
 
+    //股票列表
+    public static ConcurrentMap<String,String> stockMap = new ConcurrentHashMap<String,String>();
 }

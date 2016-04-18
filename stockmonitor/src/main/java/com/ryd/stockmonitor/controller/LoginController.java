@@ -13,27 +13,42 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/user")
 public class LoginController {
+    /**
+     * 首页
+     * @param model
+     * @return
+     */
     @RequestMapping("/index")
     String index(Model model) {
         return "index";
     }
 
+    /**
+     * 股票列表
+     * @return
+     */
     @RequestMapping("/stock_list")
     public String stockList() {
         return "stock_list";
     }
 
+    /**
+     * 股票详情-买、卖队列及交易记录
+     * @param stockId
+     * @return
+     */
     @RequestMapping("/stock_detail/{stockId}")
     public String showStockDetail(@PathVariable String stockId) {
         return "stock_detail";
     }
 
-    @RequestMapping("/echoIndex")
-    public String echoIndex() {
-        return "echo";
-    }
-    @RequestMapping("/reverseIndex")
-    public String reverseIndex() {
-        return "reverse";
+    /**
+     * 股票价格记录
+     * @param stockId
+     * @return
+     */
+    @RequestMapping("/stockprice_detail/{stockId}")
+    public String showStockPriceDetail(@PathVariable String stockId) {
+        return "stockprice_detail";
     }
 }
