@@ -17,6 +17,7 @@
         <module>stock-system-api</module>
         <module>stock-business-api</module>
         <module>stock-system-dao-impl</module>
+        <module>stock-business-dao-impl</module>
     </modules>
 
     <properties>
