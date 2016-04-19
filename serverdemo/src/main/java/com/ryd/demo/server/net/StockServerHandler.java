@@ -140,13 +140,13 @@ public class StockServerHandler extends ChannelInboundHandlerAdapter {
                             sellQuote.add(q);
                         }
                     }
-                    if (buyQuote.isEmpty()||sellQuote.isEmpty()) {
+                    /*if (buyQuote.isEmpty()||sellQuote.isEmpty()) {
                         StQuote quote = new StQuote();
                         quote.setAccountId("A");
                         quote.setQuotePrice(20d);
                         buyQuote.add(quote);
                         sellQuote.add(quote);
-                    }
+                    }*/
                     // 买队列
                     stockDetailMap.put("buyqueue", buyQuote);
                     // 卖队列
