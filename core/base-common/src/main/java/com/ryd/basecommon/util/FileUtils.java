@@ -4,15 +4,15 @@
  */
 package com.ryd.basecommon.util;
 
-import com.sun.image.codec.jpeg.JPEGCodec;
-import com.sun.image.codec.jpeg.JPEGEncodeParam;
-import com.sun.image.codec.jpeg.JPEGImageEncoder;
-import com.sun.imageio.plugins.bmp.BMPImageWriterSpi;
-import com.sun.imageio.plugins.jpeg.JPEGImageWriter;
-import com.sun.imageio.plugins.jpeg.JPEGImageWriterSpi;
-import com.sun.imageio.plugins.png.PNGImageWriter;
-import com.sun.imageio.plugins.png.PNGImageWriterSpi;
-import com.sun.imageio.plugins.wbmp.WBMPImageWriter;
+//import com.sun.image.codec.jpeg.JPEGCodec;
+//import com.sun.image.codec.jpeg.JPEGEncodeParam;
+//import com.sun.image.codec.jpeg.JPEGImageEncoder;
+//import com.sun.imageio.plugins.bmp.BMPImageWriterSpi;
+//import com.sun.imageio.plugins.jpeg.JPEGImageWriter;
+//import com.sun.imageio.plugins.jpeg.JPEGImageWriterSpi;
+//import com.sun.imageio.plugins.png.PNGImageWriter;
+//import com.sun.imageio.plugins.png.PNGImageWriterSpi;
+//import com.sun.imageio.plugins.wbmp.WBMPImageWriter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -191,57 +191,57 @@ public class FileUtils {
         return stringBuilder.toString();
     }
 
-    /**
-     * 压缩图片
-     *
-     * @param image
-     * @param quality 质量最好为1
-     *
-     * @return
-     * @throws IOException
-     */
-    public static InputStream pressImage(BufferedImage image,
-                                         float quality,String type) throws IOException {
-
-        File temFile = null;
-        InputStream is2 = null;
-        ImageWriter imgWrier = null;
-        ImageWriteParam param = null;
-        ByteArrayOutputStream bos = null, bos2 = new ByteArrayOutputStream();
-        try {
-            bos = new ByteArrayOutputStream();
-            JPEGImageEncoder encoder = JPEGCodec.createJPEGEncoder(bos);
-            JPEGEncodeParam jpeg = JPEGCodec.getDefaultJPEGEncodeParam(image);
-//            jpeg.setQuality(0.5f, true);
-            jpeg.setQuality(quality, true);
-            encoder.encode(image, jpeg);
-            bos.flush();
-            is2 = new ByteArrayInputStream(bos.toByteArray());
-            if (type.equals("png")) {
-                imgWrier = new PNGImageWriter(new PNGImageWriterSpi());
-            } else if (type.equals("bmp")) {
-                imgWrier = new WBMPImageWriter(new BMPImageWriterSpi());
-            } else if (type.equals("jpg")) {
-                imgWrier = new JPEGImageWriter(new JPEGImageWriterSpi());
-            }
-            if (null != imgWrier) {
-                temFile = File.createTempFile("tmppic", "." + type);
-                param = imgWrier.getDefaultWriteParam();
-                param.setProgressiveMode(ImageWriteParam.MODE_DEFAULT);
-                imgWrier.setOutput(ImageIO.createImageOutputStream(temFile));
-                imgWrier.write(null, new IIOImage(ImageIO.read(is2), null, null), param);
-                imgWrier.dispose();
-                InputStream is = new FileInputStream(temFile);
-                return is;
-            } else {
-                return is2;
-            }
-        } finally {
-            if (null != temFile) temFile.delete();
-            closeOutputStream(bos);
-            FileUtils.closeInputStream(is2);
-        }
-    }
+//    /**
+//     * 压缩图片
+//     *
+//     * @param image
+//     * @param quality 质量最好为1
+//     *
+//     * @return
+//     * @throws IOException
+//     */
+//    public static InputStream pressImage(BufferedImage image,
+//                                         float quality,String type) throws IOException {
+//
+//        File temFile = null;
+//        InputStream is2 = null;
+//        ImageWriter imgWrier = null;
+//        ImageWriteParam param = null;
+//        ByteArrayOutputStream bos = null, bos2 = new ByteArrayOutputStream();
+//        try {
+//            bos = new ByteArrayOutputStream();
+//            JPEGImageEncoder encoder = JPEGCodec.createJPEGEncoder(bos);
+//            JPEGEncodeParam jpeg = JPEGCodec.getDefaultJPEGEncodeParam(image);
+////            jpeg.setQuality(0.5f, true);
+//            jpeg.setQuality(quality, true);
+//            encoder.encode(image, jpeg);
+//            bos.flush();
+//            is2 = new ByteArrayInputStream(bos.toByteArray());
+//            if (type.equals("png")) {
+//                imgWrier = new PNGImageWriter(new PNGImageWriterSpi());
+//            } else if (type.equals("bmp")) {
+//                imgWrier = new WBMPImageWriter(new BMPImageWriterSpi());
+//            } else if (type.equals("jpg")) {
+//                imgWrier = new JPEGImageWriter(new JPEGImageWriterSpi());
+//            }
+//            if (null != imgWrier) {
+//                temFile = File.createTempFile("tmppic", "." + type);
+//                param = imgWrier.getDefaultWriteParam();
+//                param.setProgressiveMode(ImageWriteParam.MODE_DEFAULT);
+//                imgWrier.setOutput(ImageIO.createImageOutputStream(temFile));
+//                imgWrier.write(null, new IIOImage(ImageIO.read(is2), null, null), param);
+//                imgWrier.dispose();
+//                InputStream is = new FileInputStream(temFile);
+//                return is;
+//            } else {
+//                return is2;
+//            }
+//        } finally {
+//            if (null != temFile) temFile.delete();
+//            closeOutputStream(bos);
+//            FileUtils.closeInputStream(is2);
+//        }
+//    }
 
     /**
      * 关闭输入流对象
