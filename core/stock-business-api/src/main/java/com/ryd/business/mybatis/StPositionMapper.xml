@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ryd.business.mybatis.StPositionMapper" >
+  <resultMap id="BaseResultMap" type="com.ryd.business.model.StPosition" >
+    <id column="position_id" property="positionId" jdbcType="CHAR" />
+    <result column="account_id" property="accountId" jdbcType="CHAR" />
+    <result column="stock_id" property="stockId" jdbcType="CHAR" />
+    <result column="amount" property="amount" jdbcType="BIGINT" />
+    <result column="market_amount" property="marketAmount" jdbcType="BIGINT" />
+    <result column="avg_price" property="avgPrice" jdbcType="DECIMAL" />
+    <result column="status" property="status" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    position_id, account_id, stock_id, amount, market_amount, avg_price, status
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from st_position
+    where position_id = #{positionId,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from st_position
+    where position_id = #{positionId,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.ryd.business.model.StPosition" >
+    insert into st_position (position_id, account_id, stock_id, 
+      amount, market_amount, avg_price, 
+      status)
+    values (#{positionId,jdbcType=CHAR}, #{accountId,jdbcType=CHAR}, #{stockId,jdbcType=CHAR}, 
+      #{amount,jdbcType=BIGINT}, #{marketAmount,jdbcType=BIGINT}, #{avgPrice,jdbcType=DECIMAL}, 
+      #{status,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ryd.business.model.StPosition" >
+    insert into st_position
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="positionId != null" >
+        position_id,
+      </if>
+      <if test="accountId != null" >
+        account_id,
+      </if>
+      <if test="stockId != null" >
+        stock_id,
+      </if>
+      <if test="amount != null" >
+        amount,
+      </if>
+      <if test="marketAmount != null" >
+        market_amount,
+      </if>
+      <if test="avgPrice != null" >
+        avg_price,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="positionId != null" >
+        #{positionId,jdbcType=CHAR},
+      </if>
+      <if test="accountId != null" >
+        #{accountId,jdbcType=CHAR},
+      </if>
+      <if test="stockId != null" >
+        #{stockId,jdbcType=CHAR},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=BIGINT},
+      </if>
+      <if test="marketAmount != null" >
+        #{marketAmount,jdbcType=BIGINT},
+      </if>
+      <if test="avgPrice != null" >
+        #{avgPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ryd.business.model.StPosition" >
+    update st_position
+    <set >
+      <if test="accountId != null" >
+        account_id = #{accountId,jdbcType=CHAR},
+      </if>
+      <if test="stockId != null" >
+        stock_id = #{stockId,jdbcType=CHAR},
+      </if>
+      <if test="amount != null" >
+        amount = #{amount,jdbcType=BIGINT},
+      </if>
+      <if test="marketAmount != null" >
+        market_amount = #{marketAmount,jdbcType=BIGINT},
+      </if>
+      <if test="avgPrice != null" >
+        avg_price = #{avgPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=CHAR},
+      </if>
+    </set>
+    where position_id = #{positionId,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ryd.business.model.StPosition" >
+    update st_position
+    set account_id = #{accountId,jdbcType=CHAR},
+      stock_id = #{stockId,jdbcType=CHAR},
+      amount = #{amount,jdbcType=BIGINT},
+      market_amount = #{marketAmount,jdbcType=BIGINT},
+      avg_price = #{avgPrice,jdbcType=DECIMAL},
+      status = #{status,jdbcType=CHAR}
+    where position_id = #{positionId,jdbcType=CHAR}
+  </update>
+</mapper>

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ryd.business.mybatis.StStockConfigMapper" >
+  <resultMap id="BaseResultMap" type="com.ryd.business.model.StStockConfig" >
+    <result column="id" property="id" jdbcType="CHAR" />
+    <result column="stock_name" property="stockName" jdbcType="VARCHAR" />
+    <result column="stock_code" property="stockCode" jdbcType="VARCHAR" />
+    <result column="stock_type" property="stockType" jdbcType="CHAR" />
+    <result column="status" property="status" jdbcType="CHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="created_by" property="createdBy" jdbcType="CHAR" />
+    <result column="created_on" property="createdOn" jdbcType="BIGINT" />
+    <result column="updated_by" property="updatedBy" jdbcType="CHAR" />
+    <result column="updated_on" property="updatedOn" jdbcType="BIGINT" />
+  </resultMap>
+  <insert id="insert" parameterType="com.ryd.business.model.StStockConfig" >
+    insert into st_stock_config (id, stock_name, stock_code, 
+      stock_type, status, remark, 
+      created_by, created_on, updated_by, 
+      updated_on)
+    values (#{id,jdbcType=CHAR}, #{stockName,jdbcType=VARCHAR}, #{stockCode,jdbcType=VARCHAR}, 
+      #{stockType,jdbcType=CHAR}, #{status,jdbcType=CHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{createdBy,jdbcType=CHAR}, #{createdOn,jdbcType=BIGINT}, #{updatedBy,jdbcType=CHAR}, 
+      #{updatedOn,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ryd.business.model.StStockConfig" >
+    insert into st_stock_config
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="stockName != null" >
+        stock_name,
+      </if>
+      <if test="stockCode != null" >
+        stock_code,
+      </if>
+      <if test="stockType != null" >
+        stock_type,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="createdBy != null" >
+        created_by,
+      </if>
+      <if test="createdOn != null" >
+        created_on,
+      </if>
+      <if test="updatedBy != null" >
+        updated_by,
+      </if>
+      <if test="updatedOn != null" >
+        updated_on,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=CHAR},
+      </if>
+      <if test="stockName != null" >
+        #{stockName,jdbcType=VARCHAR},
+      </if>
+      <if test="stockCode != null" >
+        #{stockCode,jdbcType=VARCHAR},
+      </if>
+      <if test="stockType != null" >
+        #{stockType,jdbcType=CHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=CHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createdBy != null" >
+        #{createdBy,jdbcType=CHAR},
+      </if>
+      <if test="createdOn != null" >
+        #{createdOn,jdbcType=BIGINT},
+      </if>
+      <if test="updatedBy != null" >
+        #{updatedBy,jdbcType=CHAR},
+      </if>
+      <if test="updatedOn != null" >
+        #{updatedOn,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+</mapper>

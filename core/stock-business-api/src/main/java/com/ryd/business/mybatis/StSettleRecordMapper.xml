@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ryd.business.mybatis.StSettleRecordMapper" >
+  <resultMap id="BaseResultMap" type="com.ryd.business.model.StSettleRecord" >
+    <result column="settle_record_id" property="settleRecordId" jdbcType="CHAR" />
+    <result column="settle_account_id" property="settleAccountId" jdbcType="CHAR" />
+    <result column="stock_id" property="stockId" jdbcType="CHAR" />
+    <result column="quote_price" property="quotePrice" jdbcType="DECIMAL" />
+    <result column="amount" property="amount" jdbcType="BIGINT" />
+    <result column="deal_fee" property="dealFee" jdbcType="DECIMAL" />
+    <result column="deal_type" property="dealType" jdbcType="CHAR" />
+    <result column="date_time" property="dateTime" jdbcType="BIGINT" />
+  </resultMap>
+  <insert id="insert" parameterType="com.ryd.business.model.StSettleRecord" >
+    insert into st_settle_record (settle_record_id, settle_account_id, stock_id, 
+      quote_price, amount, deal_fee, 
+      deal_type, date_time)
+    values (#{settleRecordId,jdbcType=CHAR}, #{settleAccountId,jdbcType=CHAR}, #{stockId,jdbcType=CHAR}, 
+      #{quotePrice,jdbcType=DECIMAL}, #{amount,jdbcType=BIGINT}, #{dealFee,jdbcType=DECIMAL}, 
+      #{dealType,jdbcType=CHAR}, #{dateTime,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ryd.business.model.StSettleRecord" >
+    insert into st_settle_record
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="settleRecordId != null" >
+        settle_record_id,
+      </if>
+      <if test="settleAccountId != null" >
+        settle_account_id,
+      </if>
+      <if test="stockId != null" >
+        stock_id,
+      </if>
+      <if test="quotePrice != null" >
+        quote_price,
+      </if>
+      <if test="amount != null" >
+        amount,
+      </if>
+      <if test="dealFee != null" >
+        deal_fee,
+      </if>
+      <if test="dealType != null" >
+        deal_type,
+      </if>
+      <if test="dateTime != null" >
+        date_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="settleRecordId != null" >
+        #{settleRecordId,jdbcType=CHAR},
+      </if>
+      <if test="settleAccountId != null" >
+        #{settleAccountId,jdbcType=CHAR},
+      </if>
+      <if test="stockId != null" >
+        #{stockId,jdbcType=CHAR},
+      </if>
+      <if test="quotePrice != null" >
+        #{quotePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=BIGINT},
+      </if>
+      <if test="dealFee != null" >
+        #{dealFee,jdbcType=DECIMAL},
+      </if>
+      <if test="dealType != null" >
+        #{dealType,jdbcType=CHAR},
+      </if>
+      <if test="dateTime != null" >
+        #{dateTime,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+</mapper>

@@ -1,0 +1,449 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ryd.business.mybatis.StStockMapper" >
+  <resultMap id="BaseResultMap" type="com.ryd.business.model.StStock" >
+    <id column="stock_id" property="stockId" jdbcType="CHAR" />
+    <result column="stock_name" property="stockName" jdbcType="VARCHAR" />
+    <result column="stock_code" property="stockCode" jdbcType="VARCHAR" />
+    <result column="stock_type" property="stockType" jdbcType="CHAR" />
+    <result column="open_price" property="openPrice" jdbcType="DECIMAL" />
+    <result column="bfclose_price" property="bfclosePrice" jdbcType="DECIMAL" />
+    <result column="current_price" property="currentPrice" jdbcType="DECIMAL" />
+    <result column="max_price" property="maxPrice" jdbcType="DECIMAL" />
+    <result column="min_price" property="minPrice" jdbcType="DECIMAL" />
+    <result column="bidding_buy_price" property="biddingBuyPrice" jdbcType="DECIMAL" />
+    <result column="bidding_sell_price" property="biddingSellPrice" jdbcType="DECIMAL" />
+    <result column="trade_amount" property="tradeAmount" jdbcType="BIGINT" />
+    <result column="trade_money" property="tradeMoney" jdbcType="DECIMAL" />
+    <result column="buy_one_price" property="buyOnePrice" jdbcType="DECIMAL" />
+    <result column="buy_one_amount" property="buyOneAmount" jdbcType="BIGINT" />
+    <result column="buy_two_price" property="buyTwoPrice" jdbcType="DECIMAL" />
+    <result column="buy_two_amount" property="buyTwoAmount" jdbcType="BIGINT" />
+    <result column="buy_three_price" property="buyThreePrice" jdbcType="DECIMAL" />
+    <result column="buy_three_amount" property="buyThreeAmount" jdbcType="BIGINT" />
+    <result column="buy_four_price" property="buyFourPrice" jdbcType="DECIMAL" />
+    <result column="buy_four_amount" property="buyFourAmount" jdbcType="BIGINT" />
+    <result column="buy_five_price" property="buyFivePrice" jdbcType="DECIMAL" />
+    <result column="buy_five_amount" property="buyFiveAmount" jdbcType="BIGINT" />
+    <result column="sell_one_price" property="sellOnePrice" jdbcType="DECIMAL" />
+    <result column="sell_one_amount" property="sellOneAmount" jdbcType="BIGINT" />
+    <result column="sell_two_price" property="sellTwoPrice" jdbcType="DECIMAL" />
+    <result column="sell_two_amount" property="sellTwoAmount" jdbcType="BIGINT" />
+    <result column="sell_three_price" property="sellThreePrice" jdbcType="DECIMAL" />
+    <result column="sell_three_amount" property="sellThreeAmount" jdbcType="BIGINT" />
+    <result column="sell_four_price" property="sellFourPrice" jdbcType="DECIMAL" />
+    <result column="sell_four_amount" property="sellFourAmount" jdbcType="BIGINT" />
+    <result column="sell_five_price" property="sellFivePrice" jdbcType="DECIMAL" />
+    <result column="sell_five_amount" property="sellFiveAmount" jdbcType="BIGINT" />
+    <result column="stock_date" property="stockDate" jdbcType="DATE" />
+    <result column="stock_time" property="stockTime" jdbcType="TIME" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    stock_id, stock_name, stock_code, stock_type, open_price, bfclose_price, current_price, 
+    max_price, min_price, bidding_buy_price, bidding_sell_price, trade_amount, trade_money, 
+    buy_one_price, buy_one_amount, buy_two_price, buy_two_amount, buy_three_price, buy_three_amount, 
+    buy_four_price, buy_four_amount, buy_five_price, buy_five_amount, sell_one_price, 
+    sell_one_amount, sell_two_price, sell_two_amount, sell_three_price, sell_three_amount, 
+    sell_four_price, sell_four_amount, sell_five_price, sell_five_amount, stock_date, 
+    stock_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from st_stock
+    where stock_id = #{stockId,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from st_stock
+    where stock_id = #{stockId,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.ryd.business.model.StStock" >
+    insert into st_stock (stock_id, stock_name, stock_code, 
+      stock_type, open_price, bfclose_price, 
+      current_price, max_price, min_price, 
+      bidding_buy_price, bidding_sell_price, trade_amount, 
+      trade_money, buy_one_price, buy_one_amount, 
+      buy_two_price, buy_two_amount, buy_three_price, 
+      buy_three_amount, buy_four_price, buy_four_amount, 
+      buy_five_price, buy_five_amount, sell_one_price, 
+      sell_one_amount, sell_two_price, sell_two_amount, 
+      sell_three_price, sell_three_amount, sell_four_price, 
+      sell_four_amount, sell_five_price, sell_five_amount, 
+      stock_date, stock_time)
+    values (#{stockId,jdbcType=CHAR}, #{stockName,jdbcType=VARCHAR}, #{stockCode,jdbcType=VARCHAR}, 
+      #{stockType,jdbcType=CHAR}, #{openPrice,jdbcType=DECIMAL}, #{bfclosePrice,jdbcType=DECIMAL}, 
+      #{currentPrice,jdbcType=DECIMAL}, #{maxPrice,jdbcType=DECIMAL}, #{minPrice,jdbcType=DECIMAL}, 
+      #{biddingBuyPrice,jdbcType=DECIMAL}, #{biddingSellPrice,jdbcType=DECIMAL}, #{tradeAmount,jdbcType=BIGINT}, 
+      #{tradeMoney,jdbcType=DECIMAL}, #{buyOnePrice,jdbcType=DECIMAL}, #{buyOneAmount,jdbcType=BIGINT}, 
+      #{buyTwoPrice,jdbcType=DECIMAL}, #{buyTwoAmount,jdbcType=BIGINT}, #{buyThreePrice,jdbcType=DECIMAL}, 
+      #{buyThreeAmount,jdbcType=BIGINT}, #{buyFourPrice,jdbcType=DECIMAL}, #{buyFourAmount,jdbcType=BIGINT}, 
+      #{buyFivePrice,jdbcType=DECIMAL}, #{buyFiveAmount,jdbcType=BIGINT}, #{sellOnePrice,jdbcType=DECIMAL}, 
+      #{sellOneAmount,jdbcType=BIGINT}, #{sellTwoPrice,jdbcType=DECIMAL}, #{sellTwoAmount,jdbcType=BIGINT}, 
+      #{sellThreePrice,jdbcType=DECIMAL}, #{sellThreeAmount,jdbcType=BIGINT}, #{sellFourPrice,jdbcType=DECIMAL}, 
+      #{sellFourAmount,jdbcType=BIGINT}, #{sellFivePrice,jdbcType=DECIMAL}, #{sellFiveAmount,jdbcType=BIGINT}, 
+      #{stockDate,jdbcType=DATE}, #{stockTime,jdbcType=TIME})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ryd.business.model.StStock" >
+    insert into st_stock
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="stockId != null" >
+        stock_id,
+      </if>
+      <if test="stockName != null" >
+        stock_name,
+      </if>
+      <if test="stockCode != null" >
+        stock_code,
+      </if>
+      <if test="stockType != null" >
+        stock_type,
+      </if>
+      <if test="openPrice != null" >
+        open_price,
+      </if>
+      <if test="bfclosePrice != null" >
+        bfclose_price,
+      </if>
+      <if test="currentPrice != null" >
+        current_price,
+      </if>
+      <if test="maxPrice != null" >
+        max_price,
+      </if>
+      <if test="minPrice != null" >
+        min_price,
+      </if>
+      <if test="biddingBuyPrice != null" >
+        bidding_buy_price,
+      </if>
+      <if test="biddingSellPrice != null" >
+        bidding_sell_price,
+      </if>
+      <if test="tradeAmount != null" >
+        trade_amount,
+      </if>
+      <if test="tradeMoney != null" >
+        trade_money,
+      </if>
+      <if test="buyOnePrice != null" >
+        buy_one_price,
+      </if>
+      <if test="buyOneAmount != null" >
+        buy_one_amount,
+      </if>
+      <if test="buyTwoPrice != null" >
+        buy_two_price,
+      </if>
+      <if test="buyTwoAmount != null" >
+        buy_two_amount,
+      </if>
+      <if test="buyThreePrice != null" >
+        buy_three_price,
+      </if>
+      <if test="buyThreeAmount != null" >
+        buy_three_amount,
+      </if>
+      <if test="buyFourPrice != null" >
+        buy_four_price,
+      </if>
+      <if test="buyFourAmount != null" >
+        buy_four_amount,
+      </if>
+      <if test="buyFivePrice != null" >
+        buy_five_price,
+      </if>
+      <if test="buyFiveAmount != null" >
+        buy_five_amount,
+      </if>
+      <if test="sellOnePrice != null" >
+        sell_one_price,
+      </if>
+      <if test="sellOneAmount != null" >
+        sell_one_amount,
+      </if>
+      <if test="sellTwoPrice != null" >
+        sell_two_price,
+      </if>
+      <if test="sellTwoAmount != null" >
+        sell_two_amount,
+      </if>
+      <if test="sellThreePrice != null" >
+        sell_three_price,
+      </if>
+      <if test="sellThreeAmount != null" >
+        sell_three_amount,
+      </if>
+      <if test="sellFourPrice != null" >
+        sell_four_price,
+      </if>
+      <if test="sellFourAmount != null" >
+        sell_four_amount,
+      </if>
+      <if test="sellFivePrice != null" >
+        sell_five_price,
+      </if>
+      <if test="sellFiveAmount != null" >
+        sell_five_amount,
+      </if>
+      <if test="stockDate != null" >
+        stock_date,
+      </if>
+      <if test="stockTime != null" >
+        stock_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="stockId != null" >
+        #{stockId,jdbcType=CHAR},
+      </if>
+      <if test="stockName != null" >
+        #{stockName,jdbcType=VARCHAR},
+      </if>
+      <if test="stockCode != null" >
+        #{stockCode,jdbcType=VARCHAR},
+      </if>
+      <if test="stockType != null" >
+        #{stockType,jdbcType=CHAR},
+      </if>
+      <if test="openPrice != null" >
+        #{openPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="bfclosePrice != null" >
+        #{bfclosePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="currentPrice != null" >
+        #{currentPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="maxPrice != null" >
+        #{maxPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="minPrice != null" >
+        #{minPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="biddingBuyPrice != null" >
+        #{biddingBuyPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="biddingSellPrice != null" >
+        #{biddingSellPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="tradeAmount != null" >
+        #{tradeAmount,jdbcType=BIGINT},
+      </if>
+      <if test="tradeMoney != null" >
+        #{tradeMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="buyOnePrice != null" >
+        #{buyOnePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="buyOneAmount != null" >
+        #{buyOneAmount,jdbcType=BIGINT},
+      </if>
+      <if test="buyTwoPrice != null" >
+        #{buyTwoPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="buyTwoAmount != null" >
+        #{buyTwoAmount,jdbcType=BIGINT},
+      </if>
+      <if test="buyThreePrice != null" >
+        #{buyThreePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="buyThreeAmount != null" >
+        #{buyThreeAmount,jdbcType=BIGINT},
+      </if>
+      <if test="buyFourPrice != null" >
+        #{buyFourPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="buyFourAmount != null" >
+        #{buyFourAmount,jdbcType=BIGINT},
+      </if>
+      <if test="buyFivePrice != null" >
+        #{buyFivePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="buyFiveAmount != null" >
+        #{buyFiveAmount,jdbcType=BIGINT},
+      </if>
+      <if test="sellOnePrice != null" >
+        #{sellOnePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="sellOneAmount != null" >
+        #{sellOneAmount,jdbcType=BIGINT},
+      </if>
+      <if test="sellTwoPrice != null" >
+        #{sellTwoPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="sellTwoAmount != null" >
+        #{sellTwoAmount,jdbcType=BIGINT},
+      </if>
+      <if test="sellThreePrice != null" >
+        #{sellThreePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="sellThreeAmount != null" >
+        #{sellThreeAmount,jdbcType=BIGINT},
+      </if>
+      <if test="sellFourPrice != null" >
+        #{sellFourPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="sellFourAmount != null" >
+        #{sellFourAmount,jdbcType=BIGINT},
+      </if>
+      <if test="sellFivePrice != null" >
+        #{sellFivePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="sellFiveAmount != null" >
+        #{sellFiveAmount,jdbcType=BIGINT},
+      </if>
+      <if test="stockDate != null" >
+        #{stockDate,jdbcType=DATE},
+      </if>
+      <if test="stockTime != null" >
+        #{stockTime,jdbcType=TIME},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ryd.business.model.StStock" >
+    update st_stock
+    <set >
+      <if test="stockName != null" >
+        stock_name = #{stockName,jdbcType=VARCHAR},
+      </if>
+      <if test="stockCode != null" >
+        stock_code = #{stockCode,jdbcType=VARCHAR},
+      </if>
+      <if test="stockType != null" >
+        stock_type = #{stockType,jdbcType=CHAR},
+      </if>
+      <if test="openPrice != null" >
+        open_price = #{openPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="bfclosePrice != null" >
+        bfclose_price = #{bfclosePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="currentPrice != null" >
+        current_price = #{currentPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="maxPrice != null" >
+        max_price = #{maxPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="minPrice != null" >
+        min_price = #{minPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="biddingBuyPrice != null" >
+        bidding_buy_price = #{biddingBuyPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="biddingSellPrice != null" >
+        bidding_sell_price = #{biddingSellPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="tradeAmount != null" >
+        trade_amount = #{tradeAmount,jdbcType=BIGINT},
+      </if>
+      <if test="tradeMoney != null" >
+        trade_money = #{tradeMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="buyOnePrice != null" >
+        buy_one_price = #{buyOnePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="buyOneAmount != null" >
+        buy_one_amount = #{buyOneAmount,jdbcType=BIGINT},
+      </if>
+      <if test="buyTwoPrice != null" >
+        buy_two_price = #{buyTwoPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="buyTwoAmount != null" >
+        buy_two_amount = #{buyTwoAmount,jdbcType=BIGINT},
+      </if>
+      <if test="buyThreePrice != null" >
+        buy_three_price = #{buyThreePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="buyThreeAmount != null" >
+        buy_three_amount = #{buyThreeAmount,jdbcType=BIGINT},
+      </if>
+      <if test="buyFourPrice != null" >
+        buy_four_price = #{buyFourPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="buyFourAmount != null" >
+        buy_four_amount = #{buyFourAmount,jdbcType=BIGINT},
+      </if>
+      <if test="buyFivePrice != null" >
+        buy_five_price = #{buyFivePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="buyFiveAmount != null" >
+        buy_five_amount = #{buyFiveAmount,jdbcType=BIGINT},
+      </if>
+      <if test="sellOnePrice != null" >
+        sell_one_price = #{sellOnePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="sellOneAmount != null" >
+        sell_one_amount = #{sellOneAmount,jdbcType=BIGINT},
+      </if>
+      <if test="sellTwoPrice != null" >
+        sell_two_price = #{sellTwoPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="sellTwoAmount != null" >
+        sell_two_amount = #{sellTwoAmount,jdbcType=BIGINT},
+      </if>
+      <if test="sellThreePrice != null" >
+        sell_three_price = #{sellThreePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="sellThreeAmount != null" >
+        sell_three_amount = #{sellThreeAmount,jdbcType=BIGINT},
+      </if>
+      <if test="sellFourPrice != null" >
+        sell_four_price = #{sellFourPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="sellFourAmount != null" >
+        sell_four_amount = #{sellFourAmount,jdbcType=BIGINT},
+      </if>
+      <if test="sellFivePrice != null" >
+        sell_five_price = #{sellFivePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="sellFiveAmount != null" >
+        sell_five_amount = #{sellFiveAmount,jdbcType=BIGINT},
+      </if>
+      <if test="stockDate != null" >
+        stock_date = #{stockDate,jdbcType=DATE},
+      </if>
+      <if test="stockTime != null" >
+        stock_time = #{stockTime,jdbcType=TIME},
+      </if>
+    </set>
+    where stock_id = #{stockId,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ryd.business.model.StStock" >
+    update st_stock
+    set stock_name = #{stockName,jdbcType=VARCHAR},
+      stock_code = #{stockCode,jdbcType=VARCHAR},
+      stock_type = #{stockType,jdbcType=CHAR},
+      open_price = #{openPrice,jdbcType=DECIMAL},
+      bfclose_price = #{bfclosePrice,jdbcType=DECIMAL},
+      current_price = #{currentPrice,jdbcType=DECIMAL},
+      max_price = #{maxPrice,jdbcType=DECIMAL},
+      min_price = #{minPrice,jdbcType=DECIMAL},
+      bidding_buy_price = #{biddingBuyPrice,jdbcType=DECIMAL},
+      bidding_sell_price = #{biddingSellPrice,jdbcType=DECIMAL},
+      trade_amount = #{tradeAmount,jdbcType=BIGINT},
+      trade_money = #{tradeMoney,jdbcType=DECIMAL},
+      buy_one_price = #{buyOnePrice,jdbcType=DECIMAL},
+      buy_one_amount = #{buyOneAmount,jdbcType=BIGINT},
+      buy_two_price = #{buyTwoPrice,jdbcType=DECIMAL},
+      buy_two_amount = #{buyTwoAmount,jdbcType=BIGINT},
+      buy_three_price = #{buyThreePrice,jdbcType=DECIMAL},
+      buy_three_amount = #{buyThreeAmount,jdbcType=BIGINT},
+      buy_four_price = #{buyFourPrice,jdbcType=DECIMAL},
+      buy_four_amount = #{buyFourAmount,jdbcType=BIGINT},
+      buy_five_price = #{buyFivePrice,jdbcType=DECIMAL},
+      buy_five_amount = #{buyFiveAmount,jdbcType=BIGINT},
+      sell_one_price = #{sellOnePrice,jdbcType=DECIMAL},
+      sell_one_amount = #{sellOneAmount,jdbcType=BIGINT},
+      sell_two_price = #{sellTwoPrice,jdbcType=DECIMAL},
+      sell_two_amount = #{sellTwoAmount,jdbcType=BIGINT},
+      sell_three_price = #{sellThreePrice,jdbcType=DECIMAL},
+      sell_three_amount = #{sellThreeAmount,jdbcType=BIGINT},
+      sell_four_price = #{sellFourPrice,jdbcType=DECIMAL},
+      sell_four_amount = #{sellFourAmount,jdbcType=BIGINT},
+      sell_five_price = #{sellFivePrice,jdbcType=DECIMAL},
+      sell_five_amount = #{sellFiveAmount,jdbcType=BIGINT},
+      stock_date = #{stockDate,jdbcType=DATE},
+      stock_time = #{stockTime,jdbcType=TIME}
+    where stock_id = #{stockId,jdbcType=CHAR}
+  </update>
+</mapper>

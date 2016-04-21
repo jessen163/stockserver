@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ryd.business.mybatis.StTradeRecordMapper" >
+  <resultMap id="BaseResultMap" type="com.ryd.business.model.StTradeRecord" >
+    <result column="record_id" property="recordId" jdbcType="CHAR" />
+    <result column="seller_account_id" property="sellerAccountId" jdbcType="CHAR" />
+    <result column="buyer_account_id" property="buyerAccountId" jdbcType="CHAR" />
+    <result column="stock_id" property="stockId" jdbcType="CHAR" />
+    <result column="quote_price" property="quotePrice" jdbcType="DECIMAL" />
+    <result column="amount" property="amount" jdbcType="BIGINT" />
+    <result column="date_time" property="dateTime" jdbcType="BIGINT" />
+    <result column="deal_fee" property="dealFee" jdbcType="DECIMAL" />
+    <result column="deal_tax" property="dealTax" jdbcType="DECIMAL" />
+  </resultMap>
+  <insert id="insert" parameterType="com.ryd.business.model.StTradeRecord" >
+    insert into st_trade_record (record_id, seller_account_id, buyer_account_id, 
+      stock_id, quote_price, amount, 
+      date_time, deal_fee, deal_tax
+      )
+    values (#{recordId,jdbcType=CHAR}, #{sellerAccountId,jdbcType=CHAR}, #{buyerAccountId,jdbcType=CHAR}, 
+      #{stockId,jdbcType=CHAR}, #{quotePrice,jdbcType=DECIMAL}, #{amount,jdbcType=BIGINT}, 
+      #{dateTime,jdbcType=BIGINT}, #{dealFee,jdbcType=DECIMAL}, #{dealTax,jdbcType=DECIMAL}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ryd.business.model.StTradeRecord" >
+    insert into st_trade_record
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="recordId != null" >
+        record_id,
+      </if>
+      <if test="sellerAccountId != null" >
+        seller_account_id,
+      </if>
+      <if test="buyerAccountId != null" >
+        buyer_account_id,
+      </if>
+      <if test="stockId != null" >
+        stock_id,
+      </if>
+      <if test="quotePrice != null" >
+        quote_price,
+      </if>
+      <if test="amount != null" >
+        amount,
+      </if>
+      <if test="dateTime != null" >
+        date_time,
+      </if>
+      <if test="dealFee != null" >
+        deal_fee,
+      </if>
+      <if test="dealTax != null" >
+        deal_tax,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="recordId != null" >
+        #{recordId,jdbcType=CHAR},
+      </if>
+      <if test="sellerAccountId != null" >
+        #{sellerAccountId,jdbcType=CHAR},
+      </if>
+      <if test="buyerAccountId != null" >
+        #{buyerAccountId,jdbcType=CHAR},
+      </if>
+      <if test="stockId != null" >
+        #{stockId,jdbcType=CHAR},
+      </if>
+      <if test="quotePrice != null" >
+        #{quotePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=BIGINT},
+      </if>
+      <if test="dateTime != null" >
+        #{dateTime,jdbcType=BIGINT},
+      </if>
+      <if test="dealFee != null" >
+        #{dealFee,jdbcType=DECIMAL},
+      </if>
+      <if test="dealTax != null" >
+        #{dealTax,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+</mapper>
