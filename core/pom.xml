@@ -18,6 +18,8 @@
         <module>stock-business-api</module>
         <module>stock-system-dao-impl</module>
         <module>stock-business-dao-impl</module>
+        <module>stock-business-service-impl</module>
+        <module>stock-system-service-impl</module>
     </modules>
 
     <properties>
@@ -99,7 +101,13 @@
         <dependency>
             <groupId>io.netty</groupId>
             <artifactId>netty-all</artifactId>
-            <version>4.0.36.Final</version>
+            <version>${netty-all.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.google.protobuf</groupId>
+            <artifactId>protobuf-java</artifactId>
+            <version>${protobuf-java.version}</version>
+        </dependency>
+
     </dependencies>
 </project>

@@ -33,6 +33,8 @@
     <aspectj.version>1.6.10</aspectj.version>
     <proxool.version>0.8.3</proxool.version><!--TODO 更好版本0.9.1-->
     <mybatis-spring.version>1.2.5</mybatis-spring.version>
+    <netty-all.version>4.0.36.Final</netty-all.version>
+    <protobuf-java.version>2.6.1</protobuf-java.version>
 
   </properties>
 
