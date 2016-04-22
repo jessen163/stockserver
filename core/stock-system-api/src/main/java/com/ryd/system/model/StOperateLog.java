@@ -28,7 +28,7 @@ public class StOperateLog implements Serializable {
     //操作股票代码
     private String stockCode;
     //操作类型
-    private String operateType;
+    private Short operateType;
     //操作内容
     private String operateContent;
     //操作时间
@@ -92,12 +92,12 @@ public class StOperateLog implements Serializable {
         this.stockCode = stockCode == null ? null : stockCode.trim();
     }
 
-    public String getOperateType() {
+    public Short getOperateType() {
         return operateType;
     }
 
-    public void setOperateType(String operateType) {
-        this.operateType = operateType == null ? null : operateType.trim();
+    public void setOperateType(Short operateType) {
+        this.operateType = operateType;
     }
 
     public String getOperateContent() {
