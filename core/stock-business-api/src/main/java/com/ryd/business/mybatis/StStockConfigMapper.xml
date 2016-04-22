@@ -1,20 +1,38 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.ryd.business.mybatis.StStockConfigMapper" >
-  <resultMap id="BaseResultMap" type="com.ryd.business.model.StStockConfig" >
-    <result column="id" property="id" jdbcType="CHAR" />
-    <result column="stock_name" property="stockName" jdbcType="VARCHAR" />
-    <result column="stock_code" property="stockCode" jdbcType="VARCHAR" />
-    <result column="stock_type" property="stockType" jdbcType="SMALLINT" />
-    <result column="board_type" property="boardType" jdbcType="SMALLINT" />
-    <result column="status" property="status" jdbcType="SMALLINT" />
-    <result column="remark" property="remark" jdbcType="VARCHAR" />
-    <result column="created_by" property="createdBy" jdbcType="CHAR" />
-    <result column="created_on" property="createdOn" jdbcType="BIGINT" />
-    <result column="updated_by" property="updatedBy" jdbcType="CHAR" />
-    <result column="updated_on" property="updatedOn" jdbcType="BIGINT" />
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ryd.business.mybatis.StStockConfigMapper">
+  <resultMap id="BaseResultMap" type="com.ryd.business.model.StStockConfig">
+    <id column="id" jdbcType="CHAR" property="id" />
+    <result column="stock_name" jdbcType="VARCHAR" property="stockName" />
+    <result column="stock_code" jdbcType="VARCHAR" property="stockCode" />
+    <result column="stock_type" jdbcType="SMALLINT" property="stockType" />
+    <result column="board_type" jdbcType="SMALLINT" property="boardType" />
+    <result column="status" jdbcType="SMALLINT" property="status" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="created_by" jdbcType="CHAR" property="createdBy" />
+    <result column="created_on" jdbcType="BIGINT" property="createdOn" />
+    <result column="updated_by" jdbcType="CHAR" property="updatedBy" />
+    <result column="updated_on" jdbcType="BIGINT" property="updatedOn" />
   </resultMap>
-  <insert id="insert" parameterType="com.ryd.business.model.StStockConfig" >
+  <sql id="Base_Column_List">
+    id, stock_name, stock_code, stock_type, board_type, status, remark, created_by, created_on, 
+    updated_by, updated_on
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from st_stock_config
+    where id = #{id,jdbcType=CHAR}
+  </select>
+  <select id="selectListByKeySelective" resultType="java.util.List" resultMap="BaseResultMap">
+    select * from st_stock_config
+    limit #{offset, jdbcType=INTEGER},#{limit, jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from st_stock_config
+    where id = #{id,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.ryd.business.model.StStockConfig">
     insert into st_stock_config (id, stock_name, stock_code, 
       stock_type, board_type, status, 
       remark, created_by, created_on, 
@@ -24,75 +42,221 @@
       #{remark,jdbcType=VARCHAR}, #{createdBy,jdbcType=CHAR}, #{createdOn,jdbcType=BIGINT}, 
       #{updatedBy,jdbcType=CHAR}, #{updatedOn,jdbcType=BIGINT})
   </insert>
-  <insert id="insertSelective" parameterType="com.ryd.business.model.StStockConfig" >
+  <insert id="insertSelective" parameterType="com.ryd.business.model.StStockConfig">
     insert into st_stock_config
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
         id,
       </if>
-      <if test="stockName != null" >
+      <if test="stockName != null">
         stock_name,
       </if>
-      <if test="stockCode != null" >
+      <if test="stockCode != null">
         stock_code,
       </if>
-      <if test="stockType != null" >
+      <if test="stockType != null">
         stock_type,
       </if>
-      <if test="boardType != null" >
+      <if test="boardType != null">
         board_type,
       </if>
-      <if test="status != null" >
+      <if test="status != null">
         status,
       </if>
-      <if test="remark != null" >
+      <if test="remark != null">
         remark,
       </if>
-      <if test="createdBy != null" >
+      <if test="createdBy != null">
         created_by,
       </if>
-      <if test="createdOn != null" >
+      <if test="createdOn != null">
         created_on,
       </if>
-      <if test="updatedBy != null" >
+      <if test="updatedBy != null">
         updated_by,
       </if>
-      <if test="updatedOn != null" >
+      <if test="updatedOn != null">
         updated_on,
       </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
         #{id,jdbcType=CHAR},
       </if>
-      <if test="stockName != null" >
+      <if test="stockName != null">
         #{stockName,jdbcType=VARCHAR},
       </if>
-      <if test="stockCode != null" >
+      <if test="stockCode != null">
         #{stockCode,jdbcType=VARCHAR},
       </if>
-      <if test="stockType != null" >
+      <if test="stockType != null">
         #{stockType,jdbcType=SMALLINT},
       </if>
-      <if test="boardType != null" >
+      <if test="boardType != null">
         #{boardType,jdbcType=SMALLINT},
       </if>
-      <if test="status != null" >
+      <if test="status != null">
         #{status,jdbcType=SMALLINT},
       </if>
-      <if test="remark != null" >
+      <if test="remark != null">
         #{remark,jdbcType=VARCHAR},
       </if>
-      <if test="createdBy != null" >
+      <if test="createdBy != null">
         #{createdBy,jdbcType=CHAR},
       </if>
-      <if test="createdOn != null" >
+      <if test="createdOn != null">
         #{createdOn,jdbcType=BIGINT},
       </if>
-      <if test="updatedBy != null" >
+      <if test="updatedBy != null">
         #{updatedBy,jdbcType=CHAR},
       </if>
-      <if test="updatedOn != null" >
+      <if test="updatedOn != null">
+        #{updatedOn,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ryd.business.model.StStockConfig">
+    update st_stock_config
+    <set>
+      <if test="stockName != null">
+        stock_name = #{stockName,jdbcType=VARCHAR},
+      </if>
+      <if test="stockCode != null">
+        stock_code = #{stockCode,jdbcType=VARCHAR},
+      </if>
+      <if test="stockType != null">
+        stock_type = #{stockType,jdbcType=SMALLINT},
+      </if>
+      <if test="boardType != null">
+        board_type = #{boardType,jdbcType=SMALLINT},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=SMALLINT},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createdBy != null">
+        created_by = #{createdBy,jdbcType=CHAR},
+      </if>
+      <if test="createdOn != null">
+        created_on = #{createdOn,jdbcType=BIGINT},
+      </if>
+      <if test="updatedBy != null">
+        updated_by = #{updatedBy,jdbcType=CHAR},
+      </if>
+      <if test="updatedOn != null">
+        updated_on = #{updatedOn,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ryd.business.model.StStockConfig">
+    update st_stock_config
+    set stock_name = #{stockName,jdbcType=VARCHAR},
+      stock_code = #{stockCode,jdbcType=VARCHAR},
+      stock_type = #{stockType,jdbcType=SMALLINT},
+      board_type = #{boardType,jdbcType=SMALLINT},
+      status = #{status,jdbcType=SMALLINT},
+      remark = #{remark,jdbcType=VARCHAR},
+      created_by = #{createdBy,jdbcType=CHAR},
+      created_on = #{createdOn,jdbcType=BIGINT},
+      updated_by = #{updatedBy,jdbcType=CHAR},
+      updated_on = #{updatedOn,jdbcType=BIGINT}
+    where id = #{id,jdbcType=CHAR}
+  </update>
+  <resultMap id="BaseResultMap" type="com.ryd.business.model.StStockConfig">
+    <result column="id" jdbcType="CHAR" property="id" />
+    <result column="stock_name" jdbcType="VARCHAR" property="stockName" />
+    <result column="stock_code" jdbcType="VARCHAR" property="stockCode" />
+    <result column="stock_type" jdbcType="SMALLINT" property="stockType" />
+    <result column="board_type" jdbcType="SMALLINT" property="boardType" />
+    <result column="status" jdbcType="SMALLINT" property="status" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="created_by" jdbcType="CHAR" property="createdBy" />
+    <result column="created_on" jdbcType="BIGINT" property="createdOn" />
+    <result column="updated_by" jdbcType="CHAR" property="updatedBy" />
+    <result column="updated_on" jdbcType="BIGINT" property="updatedOn" />
+  </resultMap>
+  <insert id="insert" parameterType="com.ryd.business.model.StStockConfig">
+    insert into st_stock_config (id, stock_name, stock_code, 
+      stock_type, board_type, status, 
+      remark, created_by, created_on, 
+      updated_by, updated_on)
+    values (#{id,jdbcType=CHAR}, #{stockName,jdbcType=VARCHAR}, #{stockCode,jdbcType=VARCHAR}, 
+      #{stockType,jdbcType=SMALLINT}, #{boardType,jdbcType=SMALLINT}, #{status,jdbcType=SMALLINT}, 
+      #{remark,jdbcType=VARCHAR}, #{createdBy,jdbcType=CHAR}, #{createdOn,jdbcType=BIGINT}, 
+      #{updatedBy,jdbcType=CHAR}, #{updatedOn,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ryd.business.model.StStockConfig">
+    insert into st_stock_config
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="stockName != null">
+        stock_name,
+      </if>
+      <if test="stockCode != null">
+        stock_code,
+      </if>
+      <if test="stockType != null">
+        stock_type,
+      </if>
+      <if test="boardType != null">
+        board_type,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="createdBy != null">
+        created_by,
+      </if>
+      <if test="createdOn != null">
+        created_on,
+      </if>
+      <if test="updatedBy != null">
+        updated_by,
+      </if>
+      <if test="updatedOn != null">
+        updated_on,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=CHAR},
+      </if>
+      <if test="stockName != null">
+        #{stockName,jdbcType=VARCHAR},
+      </if>
+      <if test="stockCode != null">
+        #{stockCode,jdbcType=VARCHAR},
+      </if>
+      <if test="stockType != null">
+        #{stockType,jdbcType=SMALLINT},
+      </if>
+      <if test="boardType != null">
+        #{boardType,jdbcType=SMALLINT},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=SMALLINT},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createdBy != null">
+        #{createdBy,jdbcType=CHAR},
+      </if>
+      <if test="createdOn != null">
+        #{createdOn,jdbcType=BIGINT},
+      </if>
+      <if test="updatedBy != null">
+        #{updatedBy,jdbcType=CHAR},
+      </if>
+      <if test="updatedOn != null">
         #{updatedOn,jdbcType=BIGINT},
       </if>
     </trim>

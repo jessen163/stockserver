@@ -1,29 +1,33 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.ryd.business.mybatis.StPositionMapper" >
-  <resultMap id="BaseResultMap" type="com.ryd.business.model.StPosition" >
-    <id column="position_id" property="positionId" jdbcType="CHAR" />
-    <result column="account_id" property="accountId" jdbcType="CHAR" />
-    <result column="stock_id" property="stockId" jdbcType="CHAR" />
-    <result column="amount" property="amount" jdbcType="BIGINT" />
-    <result column="market_amount" property="marketAmount" jdbcType="BIGINT" />
-    <result column="avg_price" property="avgPrice" jdbcType="DECIMAL" />
-    <result column="status" property="status" jdbcType="SMALLINT" />
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ryd.business.mybatis.StPositionMapper">
+  <resultMap id="BaseResultMap" type="com.ryd.business.model.StPosition">
+    <id column="position_id" jdbcType="CHAR" property="positionId" />
+    <result column="account_id" jdbcType="CHAR" property="accountId" />
+    <result column="stock_id" jdbcType="CHAR" property="stockId" />
+    <result column="amount" jdbcType="BIGINT" property="amount" />
+    <result column="market_amount" jdbcType="BIGINT" property="marketAmount" />
+    <result column="avg_price" jdbcType="DECIMAL" property="avgPrice" />
+    <result column="status" jdbcType="SMALLINT" property="status" />
   </resultMap>
-  <sql id="Base_Column_List" >
+  <sql id="Base_Column_List">
     position_id, account_id, stock_id, amount, market_amount, avg_price, status
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from st_position
     where position_id = #{positionId,jdbcType=CHAR}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+  <select id="selectListByKeySelective" resultType="java.util.List" resultMap="BaseResultMap">
+    select * from st_position
+    limit #{offset, jdbcType=INTEGER},#{limit, jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from st_position
     where position_id = #{positionId,jdbcType=CHAR}
   </delete>
-  <insert id="insert" parameterType="com.ryd.business.model.StPosition" >
+  <insert id="insert" parameterType="com.ryd.business.model.StPosition">
     insert into st_position (position_id, account_id, stock_id, 
       amount, market_amount, avg_price, 
       status)
@@ -31,80 +35,193 @@
       #{amount,jdbcType=BIGINT}, #{marketAmount,jdbcType=BIGINT}, #{avgPrice,jdbcType=DECIMAL}, 
       #{status,jdbcType=SMALLINT})
   </insert>
-  <insert id="insertSelective" parameterType="com.ryd.business.model.StPosition" >
+  <insert id="insertSelective" parameterType="com.ryd.business.model.StPosition">
     insert into st_position
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="positionId != null" >
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="positionId != null">
         position_id,
       </if>
-      <if test="accountId != null" >
+      <if test="accountId != null">
         account_id,
       </if>
-      <if test="stockId != null" >
+      <if test="stockId != null">
         stock_id,
       </if>
-      <if test="amount != null" >
+      <if test="amount != null">
         amount,
       </if>
-      <if test="marketAmount != null" >
+      <if test="marketAmount != null">
         market_amount,
       </if>
-      <if test="avgPrice != null" >
+      <if test="avgPrice != null">
         avg_price,
       </if>
-      <if test="status != null" >
+      <if test="status != null">
         status,
       </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="positionId != null" >
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="positionId != null">
         #{positionId,jdbcType=CHAR},
       </if>
-      <if test="accountId != null" >
+      <if test="accountId != null">
         #{accountId,jdbcType=CHAR},
       </if>
-      <if test="stockId != null" >
+      <if test="stockId != null">
         #{stockId,jdbcType=CHAR},
       </if>
-      <if test="amount != null" >
+      <if test="amount != null">
         #{amount,jdbcType=BIGINT},
       </if>
-      <if test="marketAmount != null" >
+      <if test="marketAmount != null">
         #{marketAmount,jdbcType=BIGINT},
       </if>
-      <if test="avgPrice != null" >
+      <if test="avgPrice != null">
         #{avgPrice,jdbcType=DECIMAL},
       </if>
-      <if test="status != null" >
+      <if test="status != null">
         #{status,jdbcType=SMALLINT},
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ryd.business.model.StPosition" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.ryd.business.model.StPosition">
     update st_position
-    <set >
-      <if test="accountId != null" >
+    <set>
+      <if test="accountId != null">
         account_id = #{accountId,jdbcType=CHAR},
       </if>
-      <if test="stockId != null" >
+      <if test="stockId != null">
         stock_id = #{stockId,jdbcType=CHAR},
       </if>
-      <if test="amount != null" >
+      <if test="amount != null">
         amount = #{amount,jdbcType=BIGINT},
       </if>
-      <if test="marketAmount != null" >
+      <if test="marketAmount != null">
         market_amount = #{marketAmount,jdbcType=BIGINT},
       </if>
-      <if test="avgPrice != null" >
+      <if test="avgPrice != null">
         avg_price = #{avgPrice,jdbcType=DECIMAL},
       </if>
-      <if test="status != null" >
+      <if test="status != null">
         status = #{status,jdbcType=SMALLINT},
       </if>
     </set>
     where position_id = #{positionId,jdbcType=CHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.ryd.business.model.StPosition" >
+  <update id="updateByPrimaryKey" parameterType="com.ryd.business.model.StPosition">
+    update st_position
+    set account_id = #{accountId,jdbcType=CHAR},
+      stock_id = #{stockId,jdbcType=CHAR},
+      amount = #{amount,jdbcType=BIGINT},
+      market_amount = #{marketAmount,jdbcType=BIGINT},
+      avg_price = #{avgPrice,jdbcType=DECIMAL},
+      status = #{status,jdbcType=SMALLINT}
+    where position_id = #{positionId,jdbcType=CHAR}
+  </update>
+  <resultMap id="BaseResultMap" type="com.ryd.business.model.StPosition">
+    <id column="position_id" jdbcType="CHAR" property="positionId" />
+    <result column="account_id" jdbcType="CHAR" property="accountId" />
+    <result column="stock_id" jdbcType="CHAR" property="stockId" />
+    <result column="amount" jdbcType="BIGINT" property="amount" />
+    <result column="market_amount" jdbcType="BIGINT" property="marketAmount" />
+    <result column="avg_price" jdbcType="DECIMAL" property="avgPrice" />
+    <result column="status" jdbcType="SMALLINT" property="status" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    position_id, account_id, stock_id, amount, market_amount, avg_price, status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from st_position
+    where position_id = #{positionId,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from st_position
+    where position_id = #{positionId,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.ryd.business.model.StPosition">
+    insert into st_position (position_id, account_id, stock_id, 
+      amount, market_amount, avg_price, 
+      status)
+    values (#{positionId,jdbcType=CHAR}, #{accountId,jdbcType=CHAR}, #{stockId,jdbcType=CHAR}, 
+      #{amount,jdbcType=BIGINT}, #{marketAmount,jdbcType=BIGINT}, #{avgPrice,jdbcType=DECIMAL}, 
+      #{status,jdbcType=SMALLINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ryd.business.model.StPosition">
+    insert into st_position
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="positionId != null">
+        position_id,
+      </if>
+      <if test="accountId != null">
+        account_id,
+      </if>
+      <if test="stockId != null">
+        stock_id,
+      </if>
+      <if test="amount != null">
+        amount,
+      </if>
+      <if test="marketAmount != null">
+        market_amount,
+      </if>
+      <if test="avgPrice != null">
+        avg_price,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="positionId != null">
+        #{positionId,jdbcType=CHAR},
+      </if>
+      <if test="accountId != null">
+        #{accountId,jdbcType=CHAR},
+      </if>
+      <if test="stockId != null">
+        #{stockId,jdbcType=CHAR},
+      </if>
+      <if test="amount != null">
+        #{amount,jdbcType=BIGINT},
+      </if>
+      <if test="marketAmount != null">
+        #{marketAmount,jdbcType=BIGINT},
+      </if>
+      <if test="avgPrice != null">
+        #{avgPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=SMALLINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ryd.business.model.StPosition">
+    update st_position
+    <set>
+      <if test="accountId != null">
+        account_id = #{accountId,jdbcType=CHAR},
+      </if>
+      <if test="stockId != null">
+        stock_id = #{stockId,jdbcType=CHAR},
+      </if>
+      <if test="amount != null">
+        amount = #{amount,jdbcType=BIGINT},
+      </if>
+      <if test="marketAmount != null">
+        market_amount = #{marketAmount,jdbcType=BIGINT},
+      </if>
+      <if test="avgPrice != null">
+        avg_price = #{avgPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=SMALLINT},
+      </if>
+    </set>
+    where position_id = #{positionId,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ryd.business.model.StPosition">
     update st_position
     set account_id = #{accountId,jdbcType=CHAR},
       stock_id = #{stockId,jdbcType=CHAR},
