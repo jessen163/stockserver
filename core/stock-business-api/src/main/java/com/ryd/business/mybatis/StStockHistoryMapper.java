@@ -1,6 +1,9 @@
 package com.ryd.business.mybatis;
 
 import com.ryd.business.model.StStockHistory;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface StStockHistoryMapper {
     int deleteByPrimaryKey(String stockId);
@@ -14,4 +17,8 @@ public interface StStockHistoryMapper {
     int updateByPrimaryKeySelective(StStockHistory record);
 
     int updateByPrimaryKey(StStockHistory record);
+
+    List<StStockHistory> selectListByKeySelective(@Param(value = "record") StStockHistory record,
+                                                  @Param(value = "limit") Integer limit,
+                                                  @Param(value = "offset") Integer offset);
 }
