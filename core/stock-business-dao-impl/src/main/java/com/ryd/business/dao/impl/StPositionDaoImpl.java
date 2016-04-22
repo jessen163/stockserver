@@ -6,6 +6,7 @@ import com.ryd.business.model.StPosition;
 import com.ryd.business.mybatis.StPositionMapper;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -16,6 +17,7 @@ import java.util.List;
  * 创建人：songby
  * 创建时间：2016/4/22 14:02
  */
+@Repository
 public class StPositionDaoImpl implements StPositionDao {
 
     @Autowired

@@ -1,20 +1,38 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.ryd.system.mybatis.StOperateLogMapper" >
-  <resultMap id="BaseResultMap" type="com.ryd.system.model.StOperateLog" >
-    <result column="id" property="id" jdbcType="CHAR" />
-    <result column="account_id" property="accountId" jdbcType="CHAR" />
-    <result column="account_num" property="accountNum" jdbcType="VARCHAR" />
-    <result column="account_name" property="accountName" jdbcType="VARCHAR" />
-    <result column="stock_id" property="stockId" jdbcType="CHAR" />
-    <result column="stock_name" property="stockName" jdbcType="VARCHAR" />
-    <result column="stock_code" property="stockCode" jdbcType="VARCHAR" />
-    <result column="operate_type" property="operateType" jdbcType="SMALLINT" />
-    <result column="operate_content" property="operateContent" jdbcType="VARCHAR" />
-    <result column="date_time" property="dateTime" jdbcType="TIMESTAMP" />
-    <result column="remark" property="remark" jdbcType="VARCHAR" />
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ryd.system.mybatis.StOperateLogMapper">
+  <resultMap id="BaseResultMap" type="com.ryd.system.model.StOperateLog">
+    <id column="id" jdbcType="CHAR" property="id" />
+    <result column="account_id" jdbcType="CHAR" property="accountId" />
+    <result column="account_num" jdbcType="VARCHAR" property="accountNum" />
+    <result column="account_name" jdbcType="VARCHAR" property="accountName" />
+    <result column="stock_id" jdbcType="CHAR" property="stockId" />
+    <result column="stock_name" jdbcType="VARCHAR" property="stockName" />
+    <result column="stock_code" jdbcType="VARCHAR" property="stockCode" />
+    <result column="operate_type" jdbcType="SMALLINT" property="operateType" />
+    <result column="operate_content" jdbcType="VARCHAR" property="operateContent" />
+    <result column="date_time" jdbcType="TIMESTAMP" property="dateTime" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
   </resultMap>
-  <insert id="insert" parameterType="com.ryd.system.model.StOperateLog" >
+  <sql id="Base_Column_List">
+    id, account_id, account_num, account_name, stock_id, stock_name, stock_code, operate_type, 
+    operate_content, date_time, remark
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from st_operate_log
+    where id = #{id,jdbcType=CHAR}
+  </select>
+  <select id="selectListByKeySelective" resultType="java.util.List" resultMap="BaseResultMap">
+    select * from st_operate_log
+    limit #{offset, jdbcType=INTEGER},#{limit, jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from st_operate_log
+    where id = #{id,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.ryd.system.model.StOperateLog">
     insert into st_operate_log (id, account_id, account_num, 
       account_name, stock_id, stock_name, 
       stock_code, operate_type, operate_content, 
@@ -24,75 +42,381 @@
       #{stockCode,jdbcType=VARCHAR}, #{operateType,jdbcType=SMALLINT}, #{operateContent,jdbcType=VARCHAR}, 
       #{dateTime,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.ryd.system.model.StOperateLog" >
+  <insert id="insertSelective" parameterType="com.ryd.system.model.StOperateLog">
     insert into st_operate_log
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
         id,
       </if>
-      <if test="accountId != null" >
+      <if test="accountId != null">
         account_id,
       </if>
-      <if test="accountNum != null" >
+      <if test="accountNum != null">
         account_num,
       </if>
-      <if test="accountName != null" >
+      <if test="accountName != null">
         account_name,
       </if>
-      <if test="stockId != null" >
+      <if test="stockId != null">
         stock_id,
       </if>
-      <if test="stockName != null" >
+      <if test="stockName != null">
         stock_name,
       </if>
-      <if test="stockCode != null" >
+      <if test="stockCode != null">
         stock_code,
       </if>
-      <if test="operateType != null" >
+      <if test="operateType != null">
         operate_type,
       </if>
-      <if test="operateContent != null" >
+      <if test="operateContent != null">
         operate_content,
       </if>
-      <if test="dateTime != null" >
+      <if test="dateTime != null">
         date_time,
       </if>
-      <if test="remark != null" >
+      <if test="remark != null">
         remark,
       </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
         #{id,jdbcType=CHAR},
       </if>
-      <if test="accountId != null" >
+      <if test="accountId != null">
         #{accountId,jdbcType=CHAR},
       </if>
-      <if test="accountNum != null" >
+      <if test="accountNum != null">
         #{accountNum,jdbcType=VARCHAR},
       </if>
-      <if test="accountName != null" >
+      <if test="accountName != null">
         #{accountName,jdbcType=VARCHAR},
       </if>
-      <if test="stockId != null" >
+      <if test="stockId != null">
         #{stockId,jdbcType=CHAR},
       </if>
-      <if test="stockName != null" >
+      <if test="stockName != null">
         #{stockName,jdbcType=VARCHAR},
       </if>
-      <if test="stockCode != null" >
+      <if test="stockCode != null">
         #{stockCode,jdbcType=VARCHAR},
       </if>
-      <if test="operateType != null" >
+      <if test="operateType != null">
         #{operateType,jdbcType=SMALLINT},
       </if>
-      <if test="operateContent != null" >
+      <if test="operateContent != null">
         #{operateContent,jdbcType=VARCHAR},
       </if>
-      <if test="dateTime != null" >
+      <if test="dateTime != null">
         #{dateTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="remark != null" >
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ryd.system.model.StOperateLog">
+    update st_operate_log
+    <set>
+      <if test="accountId != null">
+        account_id = #{accountId,jdbcType=CHAR},
+      </if>
+      <if test="accountNum != null">
+        account_num = #{accountNum,jdbcType=VARCHAR},
+      </if>
+      <if test="accountName != null">
+        account_name = #{accountName,jdbcType=VARCHAR},
+      </if>
+      <if test="stockId != null">
+        stock_id = #{stockId,jdbcType=CHAR},
+      </if>
+      <if test="stockName != null">
+        stock_name = #{stockName,jdbcType=VARCHAR},
+      </if>
+      <if test="stockCode != null">
+        stock_code = #{stockCode,jdbcType=VARCHAR},
+      </if>
+      <if test="operateType != null">
+        operate_type = #{operateType,jdbcType=SMALLINT},
+      </if>
+      <if test="operateContent != null">
+        operate_content = #{operateContent,jdbcType=VARCHAR},
+      </if>
+      <if test="dateTime != null">
+        date_time = #{dateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ryd.system.model.StOperateLog">
+    update st_operate_log
+    set account_id = #{accountId,jdbcType=CHAR},
+      account_num = #{accountNum,jdbcType=VARCHAR},
+      account_name = #{accountName,jdbcType=VARCHAR},
+      stock_id = #{stockId,jdbcType=CHAR},
+      stock_name = #{stockName,jdbcType=VARCHAR},
+      stock_code = #{stockCode,jdbcType=VARCHAR},
+      operate_type = #{operateType,jdbcType=SMALLINT},
+      operate_content = #{operateContent,jdbcType=VARCHAR},
+      date_time = #{dateTime,jdbcType=TIMESTAMP},
+      remark = #{remark,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=CHAR}
+  </update>
+  <resultMap id="BaseResultMap" type="com.ryd.system.model.StOperateLog">
+    <id column="id" jdbcType="CHAR" property="id" />
+    <result column="account_id" jdbcType="CHAR" property="accountId" />
+    <result column="account_num" jdbcType="VARCHAR" property="accountNum" />
+    <result column="account_name" jdbcType="VARCHAR" property="accountName" />
+    <result column="stock_id" jdbcType="CHAR" property="stockId" />
+    <result column="stock_name" jdbcType="VARCHAR" property="stockName" />
+    <result column="stock_code" jdbcType="VARCHAR" property="stockCode" />
+    <result column="operate_type" jdbcType="SMALLINT" property="operateType" />
+    <result column="operate_content" jdbcType="VARCHAR" property="operateContent" />
+    <result column="date_time" jdbcType="TIMESTAMP" property="dateTime" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, account_id, account_num, account_name, stock_id, stock_name, stock_code, operate_type, 
+    operate_content, date_time, remark
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from st_operate_log
+    where id = #{id,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from st_operate_log
+    where id = #{id,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.ryd.system.model.StOperateLog">
+    insert into st_operate_log (id, account_id, account_num, 
+      account_name, stock_id, stock_name, 
+      stock_code, operate_type, operate_content, 
+      date_time, remark)
+    values (#{id,jdbcType=CHAR}, #{accountId,jdbcType=CHAR}, #{accountNum,jdbcType=VARCHAR}, 
+      #{accountName,jdbcType=VARCHAR}, #{stockId,jdbcType=CHAR}, #{stockName,jdbcType=VARCHAR}, 
+      #{stockCode,jdbcType=VARCHAR}, #{operateType,jdbcType=SMALLINT}, #{operateContent,jdbcType=VARCHAR}, 
+      #{dateTime,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ryd.system.model.StOperateLog">
+    insert into st_operate_log
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="accountId != null">
+        account_id,
+      </if>
+      <if test="accountNum != null">
+        account_num,
+      </if>
+      <if test="accountName != null">
+        account_name,
+      </if>
+      <if test="stockId != null">
+        stock_id,
+      </if>
+      <if test="stockName != null">
+        stock_name,
+      </if>
+      <if test="stockCode != null">
+        stock_code,
+      </if>
+      <if test="operateType != null">
+        operate_type,
+      </if>
+      <if test="operateContent != null">
+        operate_content,
+      </if>
+      <if test="dateTime != null">
+        date_time,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=CHAR},
+      </if>
+      <if test="accountId != null">
+        #{accountId,jdbcType=CHAR},
+      </if>
+      <if test="accountNum != null">
+        #{accountNum,jdbcType=VARCHAR},
+      </if>
+      <if test="accountName != null">
+        #{accountName,jdbcType=VARCHAR},
+      </if>
+      <if test="stockId != null">
+        #{stockId,jdbcType=CHAR},
+      </if>
+      <if test="stockName != null">
+        #{stockName,jdbcType=VARCHAR},
+      </if>
+      <if test="stockCode != null">
+        #{stockCode,jdbcType=VARCHAR},
+      </if>
+      <if test="operateType != null">
+        #{operateType,jdbcType=SMALLINT},
+      </if>
+      <if test="operateContent != null">
+        #{operateContent,jdbcType=VARCHAR},
+      </if>
+      <if test="dateTime != null">
+        #{dateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ryd.system.model.StOperateLog">
+    update st_operate_log
+    <set>
+      <if test="accountId != null">
+        account_id = #{accountId,jdbcType=CHAR},
+      </if>
+      <if test="accountNum != null">
+        account_num = #{accountNum,jdbcType=VARCHAR},
+      </if>
+      <if test="accountName != null">
+        account_name = #{accountName,jdbcType=VARCHAR},
+      </if>
+      <if test="stockId != null">
+        stock_id = #{stockId,jdbcType=CHAR},
+      </if>
+      <if test="stockName != null">
+        stock_name = #{stockName,jdbcType=VARCHAR},
+      </if>
+      <if test="stockCode != null">
+        stock_code = #{stockCode,jdbcType=VARCHAR},
+      </if>
+      <if test="operateType != null">
+        operate_type = #{operateType,jdbcType=SMALLINT},
+      </if>
+      <if test="operateContent != null">
+        operate_content = #{operateContent,jdbcType=VARCHAR},
+      </if>
+      <if test="dateTime != null">
+        date_time = #{dateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ryd.system.model.StOperateLog">
+    update st_operate_log
+    set account_id = #{accountId,jdbcType=CHAR},
+      account_num = #{accountNum,jdbcType=VARCHAR},
+      account_name = #{accountName,jdbcType=VARCHAR},
+      stock_id = #{stockId,jdbcType=CHAR},
+      stock_name = #{stockName,jdbcType=VARCHAR},
+      stock_code = #{stockCode,jdbcType=VARCHAR},
+      operate_type = #{operateType,jdbcType=SMALLINT},
+      operate_content = #{operateContent,jdbcType=VARCHAR},
+      date_time = #{dateTime,jdbcType=TIMESTAMP},
+      remark = #{remark,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=CHAR}
+  </update>
+  <resultMap id="BaseResultMap" type="com.ryd.system.model.StOperateLog">
+    <result column="id" jdbcType="CHAR" property="id" />
+    <result column="account_id" jdbcType="CHAR" property="accountId" />
+    <result column="account_num" jdbcType="VARCHAR" property="accountNum" />
+    <result column="account_name" jdbcType="VARCHAR" property="accountName" />
+    <result column="stock_id" jdbcType="CHAR" property="stockId" />
+    <result column="stock_name" jdbcType="VARCHAR" property="stockName" />
+    <result column="stock_code" jdbcType="VARCHAR" property="stockCode" />
+    <result column="operate_type" jdbcType="SMALLINT" property="operateType" />
+    <result column="operate_content" jdbcType="VARCHAR" property="operateContent" />
+    <result column="date_time" jdbcType="TIMESTAMP" property="dateTime" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+  </resultMap>
+  <insert id="insert" parameterType="com.ryd.system.model.StOperateLog">
+    insert into st_operate_log (id, account_id, account_num, 
+      account_name, stock_id, stock_name, 
+      stock_code, operate_type, operate_content, 
+      date_time, remark)
+    values (#{id,jdbcType=CHAR}, #{accountId,jdbcType=CHAR}, #{accountNum,jdbcType=VARCHAR}, 
+      #{accountName,jdbcType=VARCHAR}, #{stockId,jdbcType=CHAR}, #{stockName,jdbcType=VARCHAR}, 
+      #{stockCode,jdbcType=VARCHAR}, #{operateType,jdbcType=SMALLINT}, #{operateContent,jdbcType=VARCHAR}, 
+      #{dateTime,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ryd.system.model.StOperateLog">
+    insert into st_operate_log
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="accountId != null">
+        account_id,
+      </if>
+      <if test="accountNum != null">
+        account_num,
+      </if>
+      <if test="accountName != null">
+        account_name,
+      </if>
+      <if test="stockId != null">
+        stock_id,
+      </if>
+      <if test="stockName != null">
+        stock_name,
+      </if>
+      <if test="stockCode != null">
+        stock_code,
+      </if>
+      <if test="operateType != null">
+        operate_type,
+      </if>
+      <if test="operateContent != null">
+        operate_content,
+      </if>
+      <if test="dateTime != null">
+        date_time,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=CHAR},
+      </if>
+      <if test="accountId != null">
+        #{accountId,jdbcType=CHAR},
+      </if>
+      <if test="accountNum != null">
+        #{accountNum,jdbcType=VARCHAR},
+      </if>
+      <if test="accountName != null">
+        #{accountName,jdbcType=VARCHAR},
+      </if>
+      <if test="stockId != null">
+        #{stockId,jdbcType=CHAR},
+      </if>
+      <if test="stockName != null">
+        #{stockName,jdbcType=VARCHAR},
+      </if>
+      <if test="stockCode != null">
+        #{stockCode,jdbcType=VARCHAR},
+      </if>
+      <if test="operateType != null">
+        #{operateType,jdbcType=SMALLINT},
+      </if>
+      <if test="operateContent != null">
+        #{operateContent,jdbcType=VARCHAR},
+      </if>
+      <if test="dateTime != null">
+        #{dateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null">
         #{remark,jdbcType=VARCHAR},
       </if>
     </trim>
