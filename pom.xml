@@ -13,6 +13,7 @@
     <module>core</module>
     <module>serverdemo</module>
     <module>stockmonitor</module>
+    <module>stocktrader</module>
   </modules>
 
   <properties>
