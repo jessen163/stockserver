@@ -1,5 +1,6 @@
 package com.ryd.business.dao;
 
+import com.ryd.basecommon.dao.BaseDao;
 import com.ryd.business.model.StAccount;
 
 import java.util.List;
@@ -11,37 +12,8 @@ import java.util.List;
  * 创建人：songby
  * 创建时间：2016/4/20 9:57
  */
-public interface StAccountDao {
+public interface StAccountDao  extends BaseDao<StAccount> {
 
-    /**
-     * 添加帐户
-     * @param account
-     * @return
-     */
-    public int add(StAccount account);
-
-    /**
-     * 修改帐户信息
-     * @param account
-     * @return
-     */
-    public int update(StAccount account);
-
-    /**
-     * 根据ID查询帐户
-     * @param accountId
-     * @return
-     */
-    public StAccount getStAccountById(String accountId);
-
-    /**
-     * 根据条件查询帐户
-     * @param stAccount
-     * @param limit
-     * @param offset
-     * @return
-     */
-    public List<StAccount> getStAccountList(StAccount stAccount, int limit,int offset);
 
     /**
      * 根据用户名密码查询帐户
@@ -51,10 +23,4 @@ public interface StAccountDao {
      */
     public StAccount getStAccountByLogin(String userName,String password);
 
-    /**
-     * 删除帐户
-     * @param accountId
-     * @return
-     */
-    public int deleteStAccountById(String accountId);
 }
