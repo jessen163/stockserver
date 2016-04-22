@@ -8,7 +8,7 @@
     <result column="amount" property="amount" jdbcType="BIGINT" />
     <result column="market_amount" property="marketAmount" jdbcType="BIGINT" />
     <result column="avg_price" property="avgPrice" jdbcType="DECIMAL" />
-    <result column="status" property="status" jdbcType="CHAR" />
+    <result column="status" property="status" jdbcType="SMALLINT" />
   </resultMap>
   <sql id="Base_Column_List" >
     position_id, account_id, stock_id, amount, market_amount, avg_price, status
@@ -29,7 +29,7 @@
       status)
     values (#{positionId,jdbcType=CHAR}, #{accountId,jdbcType=CHAR}, #{stockId,jdbcType=CHAR}, 
       #{amount,jdbcType=BIGINT}, #{marketAmount,jdbcType=BIGINT}, #{avgPrice,jdbcType=DECIMAL}, 
-      #{status,jdbcType=CHAR})
+      #{status,jdbcType=SMALLINT})
   </insert>
   <insert id="insertSelective" parameterType="com.ryd.business.model.StPosition" >
     insert into st_position
@@ -76,7 +76,7 @@
         #{avgPrice,jdbcType=DECIMAL},
       </if>
       <if test="status != null" >
-        #{status,jdbcType=CHAR},
+        #{status,jdbcType=SMALLINT},
       </if>
     </trim>
   </insert>
@@ -99,7 +99,7 @@
         avg_price = #{avgPrice,jdbcType=DECIMAL},
       </if>
       <if test="status != null" >
-        status = #{status,jdbcType=CHAR},
+        status = #{status,jdbcType=SMALLINT},
       </if>
     </set>
     where position_id = #{positionId,jdbcType=CHAR}
@@ -111,7 +111,7 @@
       amount = #{amount,jdbcType=BIGINT},
       market_amount = #{marketAmount,jdbcType=BIGINT},
       avg_price = #{avgPrice,jdbcType=DECIMAL},
-      status = #{status,jdbcType=CHAR}
+      status = #{status,jdbcType=SMALLINT}
     where position_id = #{positionId,jdbcType=CHAR}
   </update>
 </mapper>

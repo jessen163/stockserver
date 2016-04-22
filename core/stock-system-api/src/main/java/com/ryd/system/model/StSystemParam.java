@@ -19,9 +19,9 @@ public class StSystemParam implements Serializable {
     //参数值
     private String keyValue;
     //参数类型 1.系统参数
-    private String keyType;
+    private Short keyType;
     //状态 1.正常 2.禁用
-    private String status;
+    private Short status;
 
     private String createdBy;
 
@@ -55,20 +55,20 @@ public class StSystemParam implements Serializable {
         this.keyValue = keyValue == null ? null : keyValue.trim();
     }
 
-    public String getKeyType() {
+    public Short getKeyType() {
         return keyType;
     }
 
-    public void setKeyType(String keyType) {
-        this.keyType = keyType == null ? null : keyType.trim();
+    public void setKeyType(Short keyType) {
+        this.keyType = keyType;
     }
 
-    public String getStatus() {
+    public Short getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
-        this.status = status == null ? null : status.trim();
+    public void setStatus(Short status) {
+        this.status = status;
     }
 
     public String getCreatedBy() {

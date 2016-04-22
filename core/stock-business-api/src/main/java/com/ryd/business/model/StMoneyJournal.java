@@ -28,7 +28,7 @@ public class StMoneyJournal implements Serializable {
     //股票数量
     private Long amount;
     //交易类型 1.买入 2.卖出
-    private String dealType;
+    private Short dealType;
     //交易金额
     private BigDecimal dealMoney;
     //交易佣金
@@ -88,12 +88,12 @@ public class StMoneyJournal implements Serializable {
         this.amount = amount;
     }
 
-    public String getDealType() {
+    public Short getDealType() {
         return dealType;
     }
 
-    public void setDealType(String dealType) {
-        this.dealType = dealType == null ? null : dealType.trim();
+    public void setDealType(Short dealType) {
+        this.dealType = dealType;
     }
 
     public BigDecimal getDealMoney() {

@@ -8,7 +8,7 @@
     <result column="quote_price" property="quotePrice" jdbcType="DECIMAL" />
     <result column="amount" property="amount" jdbcType="BIGINT" />
     <result column="deal_fee" property="dealFee" jdbcType="DECIMAL" />
-    <result column="deal_type" property="dealType" jdbcType="CHAR" />
+    <result column="deal_type" property="dealType" jdbcType="SMALLINT" />
     <result column="date_time" property="dateTime" jdbcType="BIGINT" />
   </resultMap>
   <insert id="insert" parameterType="com.ryd.business.model.StSettleRecord" >
@@ -17,7 +17,7 @@
       deal_type, date_time)
     values (#{settleRecordId,jdbcType=CHAR}, #{settleAccountId,jdbcType=CHAR}, #{stockId,jdbcType=CHAR}, 
       #{quotePrice,jdbcType=DECIMAL}, #{amount,jdbcType=BIGINT}, #{dealFee,jdbcType=DECIMAL}, 
-      #{dealType,jdbcType=CHAR}, #{dateTime,jdbcType=BIGINT})
+      #{dealType,jdbcType=SMALLINT}, #{dateTime,jdbcType=BIGINT})
   </insert>
   <insert id="insertSelective" parameterType="com.ryd.business.model.StSettleRecord" >
     insert into st_settle_record
@@ -67,7 +67,7 @@
         #{dealFee,jdbcType=DECIMAL},
       </if>
       <if test="dealType != null" >
-        #{dealType,jdbcType=CHAR},
+        #{dealType,jdbcType=SMALLINT},
       </if>
       <if test="dateTime != null" >
         #{dateTime,jdbcType=BIGINT},

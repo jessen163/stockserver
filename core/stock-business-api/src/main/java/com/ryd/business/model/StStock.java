@@ -20,8 +20,6 @@ public class StStock implements Serializable {
     private String stockName;
     //股票代码
     private String stockCode;
-    //股票类型 1.sh-上海 2.sz-深圳
-    private String stockType;
     //今日开盘价
     private BigDecimal openPrice;
     //昨日收盘价
@@ -107,14 +105,6 @@ public class StStock implements Serializable {
 
     public void setStockCode(String stockCode) {
         this.stockCode = stockCode == null ? null : stockCode.trim();
-    }
-
-    public String getStockType() {
-        return stockType;
-    }
-
-    public void setStockType(String stockType) {
-        this.stockType = stockType == null ? null : stockType.trim();
     }
 
     public BigDecimal getOpenPrice() {

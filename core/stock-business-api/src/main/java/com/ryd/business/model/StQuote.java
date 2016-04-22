@@ -26,15 +26,15 @@ public class StQuote  implements Serializable {
     //当前股票数量
     private Long currentAmount;
     //报价类型 1。买入 2。卖出
-    private String quoteType;
+    private Short quoteType;
     //买入报价时-冻结资金
     private BigDecimal frozeMoney;
     //佣金
     private BigDecimal commissionFee;
     //状态 1.托管  2.交易中 3.已成交 4.撤单  5. 结算未成交
-    private String status;
+    private Short status;
     //报价用户类型 1.真实用户 2.马甲用户
-    private String userType;
+    private Short userType;
     //报价时间
     private Long dateTime;
 
@@ -86,12 +86,12 @@ public class StQuote  implements Serializable {
         this.currentAmount = currentAmount;
     }
 
-    public String getQuoteType() {
+    public Short getQuoteType() {
         return quoteType;
     }
 
-    public void setQuoteType(String quoteType) {
-        this.quoteType = quoteType == null ? null : quoteType.trim();
+    public void setQuoteType(Short quoteType) {
+        this.quoteType = quoteType;
     }
 
     public BigDecimal getFrozeMoney() {
@@ -110,20 +110,20 @@ public class StQuote  implements Serializable {
         this.commissionFee = commissionFee;
     }
 
-    public String getStatus() {
+    public Short getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
-        this.status = status == null ? null : status.trim();
+    public void setStatus(Short status) {
+        this.status = status;
     }
 
-    public String getUserType() {
+    public Short getUserType() {
         return userType;
     }
 
-    public void setUserType(String userType) {
-        this.userType = userType == null ? null : userType.trim();
+    public void setUserType(Short userType) {
+        this.userType = userType;
     }
 
     public Long getDateTime() {

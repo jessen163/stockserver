@@ -9,18 +9,19 @@
     <result column="quote_price" property="quotePrice" jdbcType="DECIMAL" />
     <result column="amount" property="amount" jdbcType="BIGINT" />
     <result column="date_time" property="dateTime" jdbcType="BIGINT" />
-    <result column="deal_fee" property="dealFee" jdbcType="DECIMAL" />
+    <result column="buy_fee" property="buyFee" jdbcType="DECIMAL" />
+    <result column="sell_fee" property="sellFee" jdbcType="DECIMAL" />
     <result column="deal_tax" property="dealTax" jdbcType="DECIMAL" />
   </resultMap>
   <insert id="insert" parameterType="com.ryd.business.model.StTradeRecord" >
     insert into st_trade_record (record_id, seller_account_id, buyer_account_id, 
       stock_id, quote_price, amount, 
-      date_time, deal_fee, deal_tax
-      )
+      date_time, buy_fee, sell_fee, 
+      deal_tax)
     values (#{recordId,jdbcType=CHAR}, #{sellerAccountId,jdbcType=CHAR}, #{buyerAccountId,jdbcType=CHAR}, 
       #{stockId,jdbcType=CHAR}, #{quotePrice,jdbcType=DECIMAL}, #{amount,jdbcType=BIGINT}, 
-      #{dateTime,jdbcType=BIGINT}, #{dealFee,jdbcType=DECIMAL}, #{dealTax,jdbcType=DECIMAL}
-      )
+      #{dateTime,jdbcType=BIGINT}, #{buyFee,jdbcType=DECIMAL}, #{sellFee,jdbcType=DECIMAL}, 
+      #{dealTax,jdbcType=DECIMAL})
   </insert>
   <insert id="insertSelective" parameterType="com.ryd.business.model.StTradeRecord" >
     insert into st_trade_record
@@ -46,8 +47,11 @@
       <if test="dateTime != null" >
         date_time,
       </if>
-      <if test="dealFee != null" >
-        deal_fee,
+      <if test="buyFee != null" >
+        buy_fee,
+      </if>
+      <if test="sellFee != null" >
+        sell_fee,
       </if>
       <if test="dealTax != null" >
         deal_tax,
@@ -75,8 +79,11 @@
       <if test="dateTime != null" >
         #{dateTime,jdbcType=BIGINT},
       </if>
-      <if test="dealFee != null" >
-        #{dealFee,jdbcType=DECIMAL},
+      <if test="buyFee != null" >
+        #{buyFee,jdbcType=DECIMAL},
+      </if>
+      <if test="sellFee != null" >
+        #{sellFee,jdbcType=DECIMAL},
       </if>
       <if test="dealTax != null" >
         #{dealTax,jdbcType=DECIMAL},

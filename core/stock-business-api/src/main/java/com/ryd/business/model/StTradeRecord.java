@@ -39,7 +39,7 @@ public class StTradeRecord implements Serializable {
     }
 
     public void setRecordId(String recordId) {
-        this.recordId = recordId;
+        this.recordId = recordId == null ? null : recordId.trim();
     }
 
     public String getSellerAccountId() {
@@ -47,7 +47,7 @@ public class StTradeRecord implements Serializable {
     }
 
     public void setSellerAccountId(String sellerAccountId) {
-        this.sellerAccountId = sellerAccountId;
+        this.sellerAccountId = sellerAccountId == null ? null : sellerAccountId.trim();
     }
 
     public String getBuyerAccountId() {
@@ -55,7 +55,7 @@ public class StTradeRecord implements Serializable {
     }
 
     public void setBuyerAccountId(String buyerAccountId) {
-        this.buyerAccountId = buyerAccountId;
+        this.buyerAccountId = buyerAccountId == null ? null : buyerAccountId.trim();
     }
 
     public String getStockId() {
@@ -63,7 +63,7 @@ public class StTradeRecord implements Serializable {
     }
 
     public void setStockId(String stockId) {
-        this.stockId = stockId;
+        this.stockId = stockId == null ? null : stockId.trim();
     }
 
     public BigDecimal getQuotePrice() {

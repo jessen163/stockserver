@@ -20,6 +20,10 @@
         <module>stock-business-dao-impl</module>
         <module>stock-business-service-impl</module>
         <module>stock-system-service-impl</module>
+        <module>cache-redis-api</module>
+        <module>cache-redis-impl</module>
+        <module>message-queue-kafka-api</module>
+        <module>message-queue-kafka-impl</module>
     </modules>
 
     <properties>
@@ -124,5 +128,11 @@
             <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-commons-core</artifactId>
+            <version>1.4.1.RELEASE</version>
+        </dependency>
+
     </dependencies>
 </project>

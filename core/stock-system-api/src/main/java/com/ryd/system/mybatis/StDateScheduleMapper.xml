@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ryd.system.mybatis.StDateScheduleMapper" >
+  <resultMap id="BaseResultMap" type="com.ryd.system.model.StDateSchedule" >
+    <result column="id" property="id" jdbcType="CHAR" />
+    <result column="special_date" property="specialDate" jdbcType="TIMESTAMP" />
+    <result column="date_type" property="dateType" jdbcType="SMALLINT" />
+    <result column="status" property="status" jdbcType="SMALLINT" />
+    <result column="created_by" property="createdBy" jdbcType="CHAR" />
+    <result column="created_on" property="createdOn" jdbcType="BIGINT" />
+    <result column="updated_by" property="updatedBy" jdbcType="CHAR" />
+    <result column="updated_on" property="updatedOn" jdbcType="BIGINT" />
+  </resultMap>
+  <insert id="insert" parameterType="com.ryd.system.model.StDateSchedule" >
+    insert into st_date_schedule (id, special_date, date_type, 
+      status, created_by, created_on, 
+      updated_by, updated_on)
+    values (#{id,jdbcType=CHAR}, #{specialDate,jdbcType=TIMESTAMP}, #{dateType,jdbcType=SMALLINT}, 
+      #{status,jdbcType=SMALLINT}, #{createdBy,jdbcType=CHAR}, #{createdOn,jdbcType=BIGINT}, 
+      #{updatedBy,jdbcType=CHAR}, #{updatedOn,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ryd.system.model.StDateSchedule" >
+    insert into st_date_schedule
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="specialDate != null" >
+        special_date,
+      </if>
+      <if test="dateType != null" >
+        date_type,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="createdBy != null" >
+        created_by,
+      </if>
+      <if test="createdOn != null" >
+        created_on,
+      </if>
+      <if test="updatedBy != null" >
+        updated_by,
+      </if>
+      <if test="updatedOn != null" >
+        updated_on,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=CHAR},
+      </if>
+      <if test="specialDate != null" >
+        #{specialDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dateType != null" >
+        #{dateType,jdbcType=SMALLINT},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=SMALLINT},
+      </if>
+      <if test="createdBy != null" >
+        #{createdBy,jdbcType=CHAR},
+      </if>
+      <if test="createdOn != null" >
+        #{createdOn,jdbcType=BIGINT},
+      </if>
+      <if test="updatedBy != null" >
+        #{updatedBy,jdbcType=CHAR},
+      </if>
+      <if test="updatedOn != null" >
+        #{updatedOn,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+</mapper>

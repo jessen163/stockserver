@@ -3,7 +3,6 @@ package com.ryd.system.model;
 import java.io.Serializable;
 import java.util.Date;
 
-
 /**
  * <p>标题:特殊时间配置-节假日</p>
  * <p>描述:特殊时间配置-节假日</p>
@@ -19,9 +18,9 @@ public class StDateSchedule implements Serializable {
     //日期
     private Date specialDate;
     //日期类型 1.节假日 2.特殊工作日
-    private String dateType;
+    private Short dateType;
     //状态 1.正常 2.禁用
-    private String status;
+    private Short status;
 
     private String createdBy;
 
@@ -30,6 +29,7 @@ public class StDateSchedule implements Serializable {
     private String updatedBy;
 
     private Long updatedOn;
+
 
     public String getId() {
         return id;
@@ -47,20 +47,20 @@ public class StDateSchedule implements Serializable {
         this.specialDate = specialDate;
     }
 
-    public String getDateType() {
+    public Short getDateType() {
         return dateType;
     }
 
-    public void setDateType(String dateType) {
-        this.dateType = dateType == null ? null : dateType.trim();
+    public void setDateType(Short dateType) {
+        this.dateType = dateType;
     }
 
-    public String getStatus() {
+    public Short getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
-        this.status = status == null ? null : status.trim();
+    public void setStatus(Short status) {
+        this.status = status;
     }
 
     public String getCreatedBy() {

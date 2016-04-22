@@ -28,19 +28,19 @@ public class StAccount implements Serializable {
     //可用资产
     private BigDecimal useMoney;
     //帐户级别 1.普通 2.VIP
-    private String accountLevel;
+    private Short accountLevel;
     //帐户类型 1.真实账户 2.马甲帐户
-    private String accountType;
+    private Short accountType;
     //手机号
     private String mobile;
     //性别
-    private String sex;
+    private Short sex;
     //备注
     private String remark;
     //创建时间
     private Long createtime;
     //状态 1.正常 2.禁用
-    private String status;
+    private Short status;
 
     public String getId() {
         return id;
@@ -98,20 +98,20 @@ public class StAccount implements Serializable {
         this.useMoney = useMoney;
     }
 
-    public String getAccountLevel() {
+    public Short getAccountLevel() {
         return accountLevel;
     }
 
-    public void setAccountLevel(String accountLevel) {
-        this.accountLevel = accountLevel == null ? null : accountLevel.trim();
+    public void setAccountLevel(Short accountLevel) {
+        this.accountLevel = accountLevel;
     }
 
-    public String getAccountType() {
+    public Short getAccountType() {
         return accountType;
     }
 
-    public void setAccountType(String accountType) {
-        this.accountType = accountType == null ? null : accountType.trim();
+    public void setAccountType(Short accountType) {
+        this.accountType = accountType;
     }
 
     public String getMobile() {
@@ -122,12 +122,12 @@ public class StAccount implements Serializable {
         this.mobile = mobile == null ? null : mobile.trim();
     }
 
-    public String getSex() {
+    public Short getSex() {
         return sex;
     }
 
-    public void setSex(String sex) {
-        this.sex = sex == null ? null : sex.trim();
+    public void setSex(Short sex) {
+        this.sex = sex;
     }
 
     public String getRemark() {
@@ -146,11 +146,11 @@ public class StAccount implements Serializable {
         this.createtime = createtime;
     }
 
-    public String getStatus() {
+    public Short getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
-        this.status = status == null ? null : status.trim();
+    public void setStatus(Short status) {
+        this.status = status;
     }
 }
