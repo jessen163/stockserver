@@ -1,17 +1,35 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.ryd.business.mybatis.StSettleRecordMapper" >
-  <resultMap id="BaseResultMap" type="com.ryd.business.model.StSettleRecord" >
-    <result column="settle_record_id" property="settleRecordId" jdbcType="CHAR" />
-    <result column="settle_account_id" property="settleAccountId" jdbcType="CHAR" />
-    <result column="stock_id" property="stockId" jdbcType="CHAR" />
-    <result column="quote_price" property="quotePrice" jdbcType="DECIMAL" />
-    <result column="amount" property="amount" jdbcType="BIGINT" />
-    <result column="deal_fee" property="dealFee" jdbcType="DECIMAL" />
-    <result column="deal_type" property="dealType" jdbcType="SMALLINT" />
-    <result column="date_time" property="dateTime" jdbcType="BIGINT" />
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ryd.business.mybatis.StSettleRecordMapper">
+  <resultMap id="BaseResultMap" type="com.ryd.business.model.StSettleRecord">
+    <id column="settle_record_id" jdbcType="CHAR" property="settleRecordId" />
+    <result column="settle_account_id" jdbcType="CHAR" property="settleAccountId" />
+    <result column="stock_id" jdbcType="CHAR" property="stockId" />
+    <result column="quote_price" jdbcType="DECIMAL" property="quotePrice" />
+    <result column="amount" jdbcType="BIGINT" property="amount" />
+    <result column="deal_fee" jdbcType="DECIMAL" property="dealFee" />
+    <result column="deal_type" jdbcType="SMALLINT" property="dealType" />
+    <result column="date_time" jdbcType="BIGINT" property="dateTime" />
   </resultMap>
-  <insert id="insert" parameterType="com.ryd.business.model.StSettleRecord" >
+  <sql id="Base_Column_List">
+    settle_record_id, settle_account_id, stock_id, quote_price, amount, deal_fee, deal_type, 
+    date_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from st_settle_record
+    where settle_record_id = #{settleRecordId,jdbcType=CHAR}
+  </select>
+  <select id="selectListByKeySelective" resultType="java.util.List" resultMap="BaseResultMap">
+    select * from st_settle_record
+    limit #{offset, jdbcType=INTEGER},#{limit, jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from st_settle_record
+    where settle_record_id = #{settleRecordId,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.ryd.business.model.StSettleRecord">
     insert into st_settle_record (settle_record_id, settle_account_id, stock_id, 
       quote_price, amount, deal_fee, 
       deal_type, date_time)
@@ -19,57 +37,168 @@
       #{quotePrice,jdbcType=DECIMAL}, #{amount,jdbcType=BIGINT}, #{dealFee,jdbcType=DECIMAL}, 
       #{dealType,jdbcType=SMALLINT}, #{dateTime,jdbcType=BIGINT})
   </insert>
-  <insert id="insertSelective" parameterType="com.ryd.business.model.StSettleRecord" >
+  <insert id="insertSelective" parameterType="com.ryd.business.model.StSettleRecord">
     insert into st_settle_record
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="settleRecordId != null" >
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="settleRecordId != null">
         settle_record_id,
       </if>
-      <if test="settleAccountId != null" >
+      <if test="settleAccountId != null">
         settle_account_id,
       </if>
-      <if test="stockId != null" >
+      <if test="stockId != null">
         stock_id,
       </if>
-      <if test="quotePrice != null" >
+      <if test="quotePrice != null">
         quote_price,
       </if>
-      <if test="amount != null" >
+      <if test="amount != null">
         amount,
       </if>
-      <if test="dealFee != null" >
+      <if test="dealFee != null">
         deal_fee,
       </if>
-      <if test="dealType != null" >
+      <if test="dealType != null">
         deal_type,
       </if>
-      <if test="dateTime != null" >
+      <if test="dateTime != null">
         date_time,
       </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="settleRecordId != null" >
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="settleRecordId != null">
         #{settleRecordId,jdbcType=CHAR},
       </if>
-      <if test="settleAccountId != null" >
+      <if test="settleAccountId != null">
         #{settleAccountId,jdbcType=CHAR},
       </if>
-      <if test="stockId != null" >
+      <if test="stockId != null">
         #{stockId,jdbcType=CHAR},
       </if>
-      <if test="quotePrice != null" >
+      <if test="quotePrice != null">
         #{quotePrice,jdbcType=DECIMAL},
       </if>
-      <if test="amount != null" >
+      <if test="amount != null">
         #{amount,jdbcType=BIGINT},
       </if>
-      <if test="dealFee != null" >
+      <if test="dealFee != null">
         #{dealFee,jdbcType=DECIMAL},
       </if>
-      <if test="dealType != null" >
+      <if test="dealType != null">
         #{dealType,jdbcType=SMALLINT},
       </if>
-      <if test="dateTime != null" >
+      <if test="dateTime != null">
+        #{dateTime,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ryd.business.model.StSettleRecord">
+    update st_settle_record
+    <set>
+      <if test="settleAccountId != null">
+        settle_account_id = #{settleAccountId,jdbcType=CHAR},
+      </if>
+      <if test="stockId != null">
+        stock_id = #{stockId,jdbcType=CHAR},
+      </if>
+      <if test="quotePrice != null">
+        quote_price = #{quotePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="amount != null">
+        amount = #{amount,jdbcType=BIGINT},
+      </if>
+      <if test="dealFee != null">
+        deal_fee = #{dealFee,jdbcType=DECIMAL},
+      </if>
+      <if test="dealType != null">
+        deal_type = #{dealType,jdbcType=SMALLINT},
+      </if>
+      <if test="dateTime != null">
+        date_time = #{dateTime,jdbcType=BIGINT},
+      </if>
+    </set>
+    where settle_record_id = #{settleRecordId,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ryd.business.model.StSettleRecord">
+    update st_settle_record
+    set settle_account_id = #{settleAccountId,jdbcType=CHAR},
+      stock_id = #{stockId,jdbcType=CHAR},
+      quote_price = #{quotePrice,jdbcType=DECIMAL},
+      amount = #{amount,jdbcType=BIGINT},
+      deal_fee = #{dealFee,jdbcType=DECIMAL},
+      deal_type = #{dealType,jdbcType=SMALLINT},
+      date_time = #{dateTime,jdbcType=BIGINT}
+    where settle_record_id = #{settleRecordId,jdbcType=CHAR}
+  </update>
+  <resultMap id="BaseResultMap" type="com.ryd.business.model.StSettleRecord">
+    <result column="settle_record_id" jdbcType="CHAR" property="settleRecordId" />
+    <result column="settle_account_id" jdbcType="CHAR" property="settleAccountId" />
+    <result column="stock_id" jdbcType="CHAR" property="stockId" />
+    <result column="quote_price" jdbcType="DECIMAL" property="quotePrice" />
+    <result column="amount" jdbcType="BIGINT" property="amount" />
+    <result column="deal_fee" jdbcType="DECIMAL" property="dealFee" />
+    <result column="deal_type" jdbcType="SMALLINT" property="dealType" />
+    <result column="date_time" jdbcType="BIGINT" property="dateTime" />
+  </resultMap>
+  <insert id="insert" parameterType="com.ryd.business.model.StSettleRecord">
+    insert into st_settle_record (settle_record_id, settle_account_id, stock_id, 
+      quote_price, amount, deal_fee, 
+      deal_type, date_time)
+    values (#{settleRecordId,jdbcType=CHAR}, #{settleAccountId,jdbcType=CHAR}, #{stockId,jdbcType=CHAR}, 
+      #{quotePrice,jdbcType=DECIMAL}, #{amount,jdbcType=BIGINT}, #{dealFee,jdbcType=DECIMAL}, 
+      #{dealType,jdbcType=SMALLINT}, #{dateTime,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ryd.business.model.StSettleRecord">
+    insert into st_settle_record
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="settleRecordId != null">
+        settle_record_id,
+      </if>
+      <if test="settleAccountId != null">
+        settle_account_id,
+      </if>
+      <if test="stockId != null">
+        stock_id,
+      </if>
+      <if test="quotePrice != null">
+        quote_price,
+      </if>
+      <if test="amount != null">
+        amount,
+      </if>
+      <if test="dealFee != null">
+        deal_fee,
+      </if>
+      <if test="dealType != null">
+        deal_type,
+      </if>
+      <if test="dateTime != null">
+        date_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="settleRecordId != null">
+        #{settleRecordId,jdbcType=CHAR},
+      </if>
+      <if test="settleAccountId != null">
+        #{settleAccountId,jdbcType=CHAR},
+      </if>
+      <if test="stockId != null">
+        #{stockId,jdbcType=CHAR},
+      </if>
+      <if test="quotePrice != null">
+        #{quotePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="amount != null">
+        #{amount,jdbcType=BIGINT},
+      </if>
+      <if test="dealFee != null">
+        #{dealFee,jdbcType=DECIMAL},
+      </if>
+      <if test="dealType != null">
+        #{dealType,jdbcType=SMALLINT},
+      </if>
+      <if test="dateTime != null">
         #{dateTime,jdbcType=BIGINT},
       </if>
     </trim>
