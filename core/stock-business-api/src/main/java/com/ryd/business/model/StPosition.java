@@ -26,7 +26,7 @@ public class StPosition  implements Serializable {
     //平均成本
     private BigDecimal avgPrice;
     //状态
-    private String status;
+    private Short status;
 
     public String getPositionId() {
         return positionId;
@@ -76,11 +76,11 @@ public class StPosition  implements Serializable {
         this.avgPrice = avgPrice;
     }
 
-    public String getStatus() {
+    public Short getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
-        this.status = status == null ? null : status.trim();
+    public void setStatus(Short status) {
+        this.status = status;
     }
 }

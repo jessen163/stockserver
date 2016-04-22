@@ -8,11 +8,11 @@
     <result column="quote_price" property="quotePrice" jdbcType="DECIMAL" />
     <result column="amount" property="amount" jdbcType="BIGINT" />
     <result column="current_amount" property="currentAmount" jdbcType="BIGINT" />
-    <result column="quote_type" property="quoteType" jdbcType="CHAR" />
+    <result column="quote_type" property="quoteType" jdbcType="SMALLINT" />
     <result column="froze_money" property="frozeMoney" jdbcType="DECIMAL" />
     <result column="commission_fee" property="commissionFee" jdbcType="DECIMAL" />
-    <result column="status" property="status" jdbcType="CHAR" />
-    <result column="user_type" property="userType" jdbcType="CHAR" />
+    <result column="status" property="status" jdbcType="SMALLINT" />
+    <result column="user_type" property="userType" jdbcType="SMALLINT" />
     <result column="date_time" property="dateTime" jdbcType="BIGINT" />
   </resultMap>
   <insert id="insert" parameterType="com.ryd.business.model.StQuote" >
@@ -23,8 +23,8 @@
       )
     values (#{quoteId,jdbcType=CHAR}, #{accountId,jdbcType=CHAR}, #{stockId,jdbcType=CHAR}, 
       #{quotePrice,jdbcType=DECIMAL}, #{amount,jdbcType=BIGINT}, #{currentAmount,jdbcType=BIGINT}, 
-      #{quoteType,jdbcType=CHAR}, #{frozeMoney,jdbcType=DECIMAL}, #{commissionFee,jdbcType=DECIMAL}, 
-      #{status,jdbcType=CHAR}, #{userType,jdbcType=CHAR}, #{dateTime,jdbcType=BIGINT}
+      #{quoteType,jdbcType=SMALLINT}, #{frozeMoney,jdbcType=DECIMAL}, #{commissionFee,jdbcType=DECIMAL}, 
+      #{status,jdbcType=SMALLINT}, #{userType,jdbcType=SMALLINT}, #{dateTime,jdbcType=BIGINT}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.ryd.business.model.StQuote" >
@@ -87,7 +87,7 @@
         #{currentAmount,jdbcType=BIGINT},
       </if>
       <if test="quoteType != null" >
-        #{quoteType,jdbcType=CHAR},
+        #{quoteType,jdbcType=SMALLINT},
       </if>
       <if test="frozeMoney != null" >
         #{frozeMoney,jdbcType=DECIMAL},
@@ -96,10 +96,10 @@
         #{commissionFee,jdbcType=DECIMAL},
       </if>
       <if test="status != null" >
-        #{status,jdbcType=CHAR},
+        #{status,jdbcType=SMALLINT},
       </if>
       <if test="userType != null" >
-        #{userType,jdbcType=CHAR},
+        #{userType,jdbcType=SMALLINT},
       </if>
       <if test="dateTime != null" >
         #{dateTime,jdbcType=BIGINT},

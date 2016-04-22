@@ -5,7 +5,6 @@
     <id column="stock_id" property="stockId" jdbcType="CHAR" />
     <result column="stock_name" property="stockName" jdbcType="VARCHAR" />
     <result column="stock_code" property="stockCode" jdbcType="VARCHAR" />
-    <result column="stock_type" property="stockType" jdbcType="CHAR" />
     <result column="open_price" property="openPrice" jdbcType="DECIMAL" />
     <result column="bfclose_price" property="bfclosePrice" jdbcType="DECIMAL" />
     <result column="current_price" property="currentPrice" jdbcType="DECIMAL" />
@@ -39,9 +38,9 @@
     <result column="stock_time" property="stockTime" jdbcType="TIME" />
   </resultMap>
   <sql id="Base_Column_List" >
-    stock_id, stock_name, stock_code, stock_type, open_price, bfclose_price, current_price, 
-    max_price, min_price, bidding_buy_price, bidding_sell_price, trade_amount, trade_money, 
-    buy_one_price, buy_one_amount, buy_two_price, buy_two_amount, buy_three_price, buy_three_amount, 
+    stock_id, stock_name, stock_code, open_price, bfclose_price, current_price, max_price, 
+    min_price, bidding_buy_price, bidding_sell_price, trade_amount, trade_money, buy_one_price, 
+    buy_one_amount, buy_two_price, buy_two_amount, buy_three_price, buy_three_amount, 
     buy_four_price, buy_four_amount, buy_five_price, buy_five_amount, sell_one_price, 
     sell_one_amount, sell_two_price, sell_two_amount, sell_three_price, sell_three_amount, 
     sell_four_price, sell_four_amount, sell_five_price, sell_five_amount, stock_date, 
@@ -59,29 +58,29 @@
   </delete>
   <insert id="insert" parameterType="com.ryd.business.model.StStock" >
     insert into st_stock (stock_id, stock_name, stock_code, 
-      stock_type, open_price, bfclose_price, 
-      current_price, max_price, min_price, 
-      bidding_buy_price, bidding_sell_price, trade_amount, 
-      trade_money, buy_one_price, buy_one_amount, 
-      buy_two_price, buy_two_amount, buy_three_price, 
-      buy_three_amount, buy_four_price, buy_four_amount, 
-      buy_five_price, buy_five_amount, sell_one_price, 
-      sell_one_amount, sell_two_price, sell_two_amount, 
-      sell_three_price, sell_three_amount, sell_four_price, 
-      sell_four_amount, sell_five_price, sell_five_amount, 
-      stock_date, stock_time)
+      open_price, bfclose_price, current_price, 
+      max_price, min_price, bidding_buy_price, 
+      bidding_sell_price, trade_amount, trade_money, 
+      buy_one_price, buy_one_amount, buy_two_price, 
+      buy_two_amount, buy_three_price, buy_three_amount, 
+      buy_four_price, buy_four_amount, buy_five_price, 
+      buy_five_amount, sell_one_price, sell_one_amount, 
+      sell_two_price, sell_two_amount, sell_three_price, 
+      sell_three_amount, sell_four_price, sell_four_amount, 
+      sell_five_price, sell_five_amount, stock_date, 
+      stock_time)
     values (#{stockId,jdbcType=CHAR}, #{stockName,jdbcType=VARCHAR}, #{stockCode,jdbcType=VARCHAR}, 
-      #{stockType,jdbcType=CHAR}, #{openPrice,jdbcType=DECIMAL}, #{bfclosePrice,jdbcType=DECIMAL}, 
-      #{currentPrice,jdbcType=DECIMAL}, #{maxPrice,jdbcType=DECIMAL}, #{minPrice,jdbcType=DECIMAL}, 
-      #{biddingBuyPrice,jdbcType=DECIMAL}, #{biddingSellPrice,jdbcType=DECIMAL}, #{tradeAmount,jdbcType=BIGINT}, 
-      #{tradeMoney,jdbcType=DECIMAL}, #{buyOnePrice,jdbcType=DECIMAL}, #{buyOneAmount,jdbcType=BIGINT}, 
-      #{buyTwoPrice,jdbcType=DECIMAL}, #{buyTwoAmount,jdbcType=BIGINT}, #{buyThreePrice,jdbcType=DECIMAL}, 
-      #{buyThreeAmount,jdbcType=BIGINT}, #{buyFourPrice,jdbcType=DECIMAL}, #{buyFourAmount,jdbcType=BIGINT}, 
-      #{buyFivePrice,jdbcType=DECIMAL}, #{buyFiveAmount,jdbcType=BIGINT}, #{sellOnePrice,jdbcType=DECIMAL}, 
-      #{sellOneAmount,jdbcType=BIGINT}, #{sellTwoPrice,jdbcType=DECIMAL}, #{sellTwoAmount,jdbcType=BIGINT}, 
-      #{sellThreePrice,jdbcType=DECIMAL}, #{sellThreeAmount,jdbcType=BIGINT}, #{sellFourPrice,jdbcType=DECIMAL}, 
-      #{sellFourAmount,jdbcType=BIGINT}, #{sellFivePrice,jdbcType=DECIMAL}, #{sellFiveAmount,jdbcType=BIGINT}, 
-      #{stockDate,jdbcType=DATE}, #{stockTime,jdbcType=TIME})
+      #{openPrice,jdbcType=DECIMAL}, #{bfclosePrice,jdbcType=DECIMAL}, #{currentPrice,jdbcType=DECIMAL}, 
+      #{maxPrice,jdbcType=DECIMAL}, #{minPrice,jdbcType=DECIMAL}, #{biddingBuyPrice,jdbcType=DECIMAL}, 
+      #{biddingSellPrice,jdbcType=DECIMAL}, #{tradeAmount,jdbcType=BIGINT}, #{tradeMoney,jdbcType=DECIMAL}, 
+      #{buyOnePrice,jdbcType=DECIMAL}, #{buyOneAmount,jdbcType=BIGINT}, #{buyTwoPrice,jdbcType=DECIMAL}, 
+      #{buyTwoAmount,jdbcType=BIGINT}, #{buyThreePrice,jdbcType=DECIMAL}, #{buyThreeAmount,jdbcType=BIGINT}, 
+      #{buyFourPrice,jdbcType=DECIMAL}, #{buyFourAmount,jdbcType=BIGINT}, #{buyFivePrice,jdbcType=DECIMAL}, 
+      #{buyFiveAmount,jdbcType=BIGINT}, #{sellOnePrice,jdbcType=DECIMAL}, #{sellOneAmount,jdbcType=BIGINT}, 
+      #{sellTwoPrice,jdbcType=DECIMAL}, #{sellTwoAmount,jdbcType=BIGINT}, #{sellThreePrice,jdbcType=DECIMAL}, 
+      #{sellThreeAmount,jdbcType=BIGINT}, #{sellFourPrice,jdbcType=DECIMAL}, #{sellFourAmount,jdbcType=BIGINT}, 
+      #{sellFivePrice,jdbcType=DECIMAL}, #{sellFiveAmount,jdbcType=BIGINT}, #{stockDate,jdbcType=DATE}, 
+      #{stockTime,jdbcType=TIME})
   </insert>
   <insert id="insertSelective" parameterType="com.ryd.business.model.StStock" >
     insert into st_stock
@@ -94,9 +93,6 @@
       </if>
       <if test="stockCode != null" >
         stock_code,
-      </if>
-      <if test="stockType != null" >
-        stock_type,
       </if>
       <if test="openPrice != null" >
         open_price,
@@ -202,9 +198,6 @@
       <if test="stockCode != null" >
         #{stockCode,jdbcType=VARCHAR},
       </if>
-      <if test="stockType != null" >
-        #{stockType,jdbcType=CHAR},
-      </if>
       <if test="openPrice != null" >
         #{openPrice,jdbcType=DECIMAL},
       </if>
@@ -309,9 +302,6 @@
       <if test="stockCode != null" >
         stock_code = #{stockCode,jdbcType=VARCHAR},
       </if>
-      <if test="stockType != null" >
-        stock_type = #{stockType,jdbcType=CHAR},
-      </if>
       <if test="openPrice != null" >
         open_price = #{openPrice,jdbcType=DECIMAL},
       </if>
@@ -412,7 +402,6 @@
     update st_stock
     set stock_name = #{stockName,jdbcType=VARCHAR},
       stock_code = #{stockCode,jdbcType=VARCHAR},
-      stock_type = #{stockType,jdbcType=CHAR},
       open_price = #{openPrice,jdbcType=DECIMAL},
       bfclose_price = #{bfclosePrice,jdbcType=DECIMAL},
       current_price = #{currentPrice,jdbcType=DECIMAL},

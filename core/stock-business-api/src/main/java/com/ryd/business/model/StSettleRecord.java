@@ -26,7 +26,7 @@ public class StSettleRecord implements Serializable {
     //佣金
     private BigDecimal dealFee;
     //类型 1.买入 2.卖出
-    private String dealType;
+    private Short dealType;
     //结算时间
     private Long dateTime;
 
@@ -78,12 +78,12 @@ public class StSettleRecord implements Serializable {
         this.dealFee = dealFee;
     }
 
-    public String getDealType() {
+    public Short getDealType() {
         return dealType;
     }
 
-    public void setDealType(String dealType) {
-        this.dealType = dealType == null ? null : dealType.trim();
+    public void setDealType(Short dealType) {
+        this.dealType = dealType;
     }
 
     public Long getDateTime() {

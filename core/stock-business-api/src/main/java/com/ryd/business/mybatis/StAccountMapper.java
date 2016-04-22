@@ -20,8 +20,8 @@ public interface StAccountMapper {
     int updateByPrimaryKey(StAccount record);
 
     List<StAccount> selectListByKeySelective(@Param(value = "account") StAccount account,
-                                               @Param(value = "limit") Integer limit,
-                                               @Param(value = "offset") Integer offset);
+                                             @Param(value = "limit") Integer limit,
+                                             @Param(value = "offset") Integer offset);
 
     StAccount selectByNamePassword(@Param(value = "account_num") String account_num,
                                    @Param(value = "password") String password);

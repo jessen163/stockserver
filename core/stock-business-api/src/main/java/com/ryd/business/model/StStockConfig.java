@@ -1,5 +1,7 @@
 package com.ryd.business.model;
 
+import java.io.Serializable;
+
 /**
  * <p>标题:股票配置表</p>
  * <p>描述:股票配置表</p>
@@ -7,16 +9,18 @@ package com.ryd.business.model;
  * 创建人：songby
  * 创建时间：2016/4/21 10:29
  */
-public class StStockConfig {
+public class StStockConfig implements Serializable {
     private String id;
     //股票名称
     private String stockName;
     //股票代码
     private String stockCode;
     //股票类型 1.上海 2。深圳
-    private String stockType;
+    private Short stockType;
     //股票状态 1.正常 2.禁用
-    private String status;
+    private Short status;
+    //板块类型 1.中小 2.创业
+    private Short boardType;
     //备注
     private String remark;
 
@@ -52,20 +56,28 @@ public class StStockConfig {
         this.stockCode = stockCode == null ? null : stockCode.trim();
     }
 
-    public String getStockType() {
+    public Short getStockType() {
         return stockType;
     }
 
-    public void setStockType(String stockType) {
-        this.stockType = stockType == null ? null : stockType.trim();
+    public void setStockType(Short stockType) {
+        this.stockType = stockType;
     }
 
-    public String getStatus() {
+    public Short getBoardType() {
+        return boardType;
+    }
+
+    public void setBoardType(Short boardType) {
+        this.boardType = boardType;
+    }
+
+    public Short getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
-        this.status = status == null ? null : status.trim();
+    public void setStatus(Short status) {
+        this.status = status;
     }
 
     public String getRemark() {

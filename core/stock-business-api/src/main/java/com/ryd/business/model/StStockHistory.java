@@ -1,27 +1,17 @@
 package com.ryd.business.model;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
-/**
- * <p>标题:股票历史</p>
- * <p>描述:股票历史</p>
- * 包名：com.ryd.basecommon.common
- * 创建人：songby
- * 创建时间：2016/4/21 10:29
- */
-public class StStockHistory implements Serializable {
+public class StStockHistory {
 
-    private static final long serialVersionUID = 2505426955780631212L;
+    private static final long serialVersionUID = -5808387262109584648L;
 
     private String stockId;
     //股票名称
     private String stockName;
     //股票代码
     private String stockCode;
-    //股票类型 1.sh-上海 2.sz-深圳
-    private String stockType;
     //今日开盘价
     private BigDecimal openPrice;
     //昨日收盘价
@@ -107,14 +97,6 @@ public class StStockHistory implements Serializable {
 
     public void setStockCode(String stockCode) {
         this.stockCode = stockCode == null ? null : stockCode.trim();
-    }
-
-    public String getStockType() {
-        return stockType;
-    }
-
-    public void setStockType(String stockType) {
-        this.stockType = stockType == null ? null : stockType.trim();
     }
 
     public BigDecimal getOpenPrice() {

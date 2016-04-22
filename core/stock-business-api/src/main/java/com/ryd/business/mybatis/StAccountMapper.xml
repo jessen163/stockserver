@@ -9,32 +9,32 @@
     <result column="password" property="password" jdbcType="VARCHAR" />
     <result column="total_assets" property="totalAssets" jdbcType="DECIMAL" />
     <result column="use_money" property="useMoney" jdbcType="DECIMAL" />
-    <result column="account_level" property="accountLevel" jdbcType="CHAR" />
-    <result column="account_type" property="accountType" jdbcType="CHAR" />
+    <result column="account_level" property="accountLevel" jdbcType="SMALLINT" />
+    <result column="account_type" property="accountType" jdbcType="SMALLINT" />
     <result column="mobile" property="mobile" jdbcType="VARCHAR" />
-    <result column="sex" property="sex" jdbcType="CHAR" />
+    <result column="sex" property="sex" jdbcType="SMALLINT" />
     <result column="remark" property="remark" jdbcType="VARCHAR" />
     <result column="createtime" property="createtime" jdbcType="BIGINT" />
-    <result column="status" property="status" jdbcType="CHAR" />
+    <result column="status" property="status" jdbcType="SMALLINT" />
   </resultMap>
   <sql id="Base_Column_List" >
     id, real_name, account_name, account_num, password, total_assets, use_money, account_level, 
     account_type, mobile, sex, remark, createtime, status
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
-    select
+    select 
     <include refid="Base_Column_List" />
     from st_account
     where id = #{id,jdbcType=CHAR}
   </select>
   <select id="selectByNamePassword" resultMap="BaseResultMap">
-    select * from st_account where account_num = #{account_num,jdbcType=CHAR} and password = #{password,jdbcType=VARCHAR}
+    select * from st_account where account_num = #{account_num,jdbcType=VARCHAR} and password = #{password,jdbcType=VARCHAR}
   </select>
   <select id="selectListByKeySelective" resultType="java.util.List" resultMap="BaseResultMap">
     select * from st_account
     <trim prefix="WHERE" prefixOverrides="AND|OR">
       <if test="account.realName != null and account.realName != ''" >
-         real_name = #{account.realName,jdbcType=VARCHAR}
+        real_name = #{account.realName,jdbcType=VARCHAR}
       </if>
       <if test="account.accountName != null and account.accountName != ''" >
         and account_name like CONCAT(CONCAT('%', #{account.accountName, jdbcType=VARCHAR}),'%')
@@ -43,13 +43,13 @@
         and account_num like CONCAT(CONCAT('%', #{account.accountNum, jdbcType=VARCHAR}),'%')
       </if>
       <if test="account.accountLevel != null" >
-        and account_level = #{account.accountLevel,jdbcType=CHAR}
+        and account_level = #{account.accountLevel,jdbcType=SMALLINT}
       </if>
       <if test="account.accountType != null" >
-        and account_type = #{account.accountType,jdbcType=CHAR}
+        and account_type = #{account.accountType,jdbcType=SMALLINT}
       </if>
       <if test="account.status != null" >
-        and status = #{account.status,jdbcType=CHAR},
+        and status = #{account.status,jdbcType=SMALLINT},
       </if>
     </trim>
     limit #{offset, jdbcType=INTEGER},#{limit, jdbcType=INTEGER}
@@ -59,16 +59,16 @@
     where id = #{id,jdbcType=CHAR}
   </delete>
   <insert id="insert" parameterType="com.ryd.business.model.StAccount" >
-    insert into st_account (id, real_name, account_name,
-      account_num, password, total_assets,
-      use_money, account_level, account_type,
-      mobile, sex, remark, createtime,
-      status)
-    values (#{id,jdbcType=CHAR}, #{realName,jdbcType=VARCHAR}, #{accountName,jdbcType=VARCHAR},
-      #{accountNum,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{totalAssets,jdbcType=DECIMAL},
-      #{useMoney,jdbcType=DECIMAL}, #{accountLevel,jdbcType=CHAR}, #{accountType,jdbcType=CHAR}, 
-      #{mobile,jdbcType=VARCHAR}, #{sex,jdbcType=CHAR}, #{remark,jdbcType=VARCHAR}, #{createtime,jdbcType=BIGINT}, 
-      #{status,jdbcType=CHAR})
+    insert into st_account (id, real_name, account_name, 
+      account_num, password, total_assets, 
+      use_money, account_level, account_type, 
+      mobile, sex, remark, 
+      createtime, status)
+    values (#{id,jdbcType=CHAR}, #{realName,jdbcType=VARCHAR}, #{accountName,jdbcType=VARCHAR}, 
+      #{accountNum,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{totalAssets,jdbcType=DECIMAL}, 
+      #{useMoney,jdbcType=DECIMAL}, #{accountLevel,jdbcType=SMALLINT}, #{accountType,jdbcType=SMALLINT}, 
+      #{mobile,jdbcType=VARCHAR}, #{sex,jdbcType=SMALLINT}, #{remark,jdbcType=VARCHAR}, 
+      #{createtime,jdbcType=BIGINT}, #{status,jdbcType=SMALLINT})
   </insert>
   <insert id="insertSelective" parameterType="com.ryd.business.model.StAccount" >
     insert into st_account
@@ -139,16 +139,16 @@
         #{useMoney,jdbcType=DECIMAL},
       </if>
       <if test="accountLevel != null" >
-        #{accountLevel,jdbcType=CHAR},
+        #{accountLevel,jdbcType=SMALLINT},
       </if>
       <if test="accountType != null" >
-        #{accountType,jdbcType=CHAR},
+        #{accountType,jdbcType=SMALLINT},
       </if>
       <if test="mobile != null" >
         #{mobile,jdbcType=VARCHAR},
       </if>
       <if test="sex != null" >
-        #{sex,jdbcType=CHAR},
+        #{sex,jdbcType=SMALLINT},
       </if>
       <if test="remark != null" >
         #{remark,jdbcType=VARCHAR},
@@ -157,7 +157,7 @@
         #{createtime,jdbcType=BIGINT},
       </if>
       <if test="status != null" >
-        #{status,jdbcType=CHAR},
+        #{status,jdbcType=SMALLINT},
       </if>
     </trim>
   </insert>
@@ -183,16 +183,16 @@
         use_money = #{useMoney,jdbcType=DECIMAL},
       </if>
       <if test="accountLevel != null" >
-        account_level = #{accountLevel,jdbcType=CHAR},
+        account_level = #{accountLevel,jdbcType=SMALLINT},
       </if>
       <if test="accountType != null" >
-        account_type = #{accountType,jdbcType=CHAR},
+        account_type = #{accountType,jdbcType=SMALLINT},
       </if>
       <if test="mobile != null" >
         mobile = #{mobile,jdbcType=VARCHAR},
       </if>
       <if test="sex != null" >
-        sex = #{sex,jdbcType=CHAR},
+        sex = #{sex,jdbcType=SMALLINT},
       </if>
       <if test="remark != null" >
         remark = #{remark,jdbcType=VARCHAR},
@@ -201,7 +201,7 @@
         createtime = #{createtime,jdbcType=BIGINT},
       </if>
       <if test="status != null" >
-        status = #{status,jdbcType=CHAR},
+        status = #{status,jdbcType=SMALLINT},
       </if>
     </set>
     where id = #{id,jdbcType=CHAR}
@@ -214,13 +214,13 @@
       password = #{password,jdbcType=VARCHAR},
       total_assets = #{totalAssets,jdbcType=DECIMAL},
       use_money = #{useMoney,jdbcType=DECIMAL},
-      account_level = #{accountLevel,jdbcType=CHAR},
-      account_type = #{accountType,jdbcType=CHAR},
+      account_level = #{accountLevel,jdbcType=SMALLINT},
+      account_type = #{accountType,jdbcType=SMALLINT},
       mobile = #{mobile,jdbcType=VARCHAR},
-      sex = #{sex,jdbcType=CHAR},
+      sex = #{sex,jdbcType=SMALLINT},
       remark = #{remark,jdbcType=VARCHAR},
       createtime = #{createtime,jdbcType=BIGINT},
-      status = #{status,jdbcType=CHAR}
+      status = #{status,jdbcType=SMALLINT}
     where id = #{id,jdbcType=CHAR}
   </update>
 </mapper>

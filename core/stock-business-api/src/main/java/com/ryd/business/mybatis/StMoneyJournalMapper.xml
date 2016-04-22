@@ -8,7 +8,7 @@
     <result column="stock_id" property="stockId" jdbcType="CHAR" />
     <result column="quote_price" property="quotePrice" jdbcType="DECIMAL" />
     <result column="amount" property="amount" jdbcType="BIGINT" />
-    <result column="deal_type" property="dealType" jdbcType="CHAR" />
+    <result column="deal_type" property="dealType" jdbcType="SMALLINT" />
     <result column="deal_money" property="dealMoney" jdbcType="DECIMAL" />
     <result column="deal_fee" property="dealFee" jdbcType="DECIMAL" />
     <result column="deal_tax" property="dealTax" jdbcType="DECIMAL" />
@@ -23,7 +23,7 @@
       )
     values (#{recordId,jdbcType=CHAR}, #{quoteId,jdbcType=CHAR}, #{accountId,jdbcType=CHAR}, 
       #{stockId,jdbcType=CHAR}, #{quotePrice,jdbcType=DECIMAL}, #{amount,jdbcType=BIGINT}, 
-      #{dealType,jdbcType=CHAR}, #{dealMoney,jdbcType=DECIMAL}, #{dealFee,jdbcType=DECIMAL}, 
+      #{dealType,jdbcType=SMALLINT}, #{dealMoney,jdbcType=DECIMAL}, #{dealFee,jdbcType=DECIMAL}, 
       #{dealTax,jdbcType=DECIMAL}, #{dealDate,jdbcType=DATE}, #{dealTime,jdbcType=TIME}
       )
   </insert>
@@ -87,7 +87,7 @@
         #{amount,jdbcType=BIGINT},
       </if>
       <if test="dealType != null" >
-        #{dealType,jdbcType=CHAR},
+        #{dealType,jdbcType=SMALLINT},
       </if>
       <if test="dealMoney != null" >
         #{dealMoney,jdbcType=DECIMAL},
