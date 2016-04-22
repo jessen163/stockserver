@@ -3,6 +3,7 @@ package com.ryd.business.dao.impl;
 import com.ryd.business.dao.StAccountDao;
 import com.ryd.business.model.StAccount;
 import com.ryd.business.mybatis.StAccountMapper;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -24,28 +25,34 @@ public class StAccountDaoImpl implements StAccountDao {
     public StAccountMapper stAccountMapper;
 
     @Override
-    public int add(StAccount account) {
+    public int add(StAccount obj) {
 
-       return stAccountMapper.insert(account);
+       return stAccountMapper.insert(obj);
     }
 
     @Override
-    public int update(StAccount account){
-       return stAccountMapper.updateByPrimaryKeySelective(account);
-    }
-
-    @Override
-    public StAccount getStAccountById(String accountId) {
-        return stAccountMapper.selectByPrimaryKey(accountId);
-    }
-
-    @Override
-    public List<StAccount> getStAccountList(StAccount stAccount, int limit,int offset) {
-
-        if(stAccount==null){
-            stAccount = new StAccount();
+    public int update(StAccount obj){
+        if(StringUtils.isBlank(obj.getId())){
+            return -1;
         }
-        return stAccountMapper.selectListByKeySelective(stAccount,limit,offset);
+        return stAccountMapper.updateByPrimaryKeySelective(obj);
+    }
+
+    @Override
+    public StAccount getTById(StAccount obj) {
+        if(StringUtils.isBlank(obj.getId())){
+            return null;
+        }
+        return stAccountMapper.selectByPrimaryKey(obj.getId());
+    }
+
+    @Override
+    public List<StAccount> getTList(StAccount obj, int limit,int offset) {
+
+        if(obj==null){
+            obj = new StAccount();
+        }
+        return stAccountMapper.selectListByKeySelective(obj,limit,offset);
     }
 
     @Override
@@ -55,7 +62,10 @@ public class StAccountDaoImpl implements StAccountDao {
     }
 
     @Override
-    public int deleteStAccountById(String accountId){
-        return stAccountMapper.deleteByPrimaryKey(accountId);
+    public int deleteTById(StAccount obj){
+        if(StringUtils.isBlank(obj.getId())){
+            return -1;
+        }
+        return stAccountMapper.deleteByPrimaryKey(obj.getId());
     }
 }
