@@ -16,11 +16,18 @@ public interface StAccountDao  extends BaseDao<StAccount> {
 
 
     /**
-     * 根据用户名密码查询帐户
-     * @param userName
+     * 根据帐号密码查询帐户
+     * @param accountNum
      * @param password
      * @return
      */
-    public StAccount getStAccountByLogin(String userName,String password);
+    public StAccount getStAccountByLogin(String accountNum,String password);
+
+    /**
+     * 按帐号查询
+     * @param accountNum
+     * @return
+     */
+    public StAccount getStAccountByAccountNum(String accountNum);
 
 }

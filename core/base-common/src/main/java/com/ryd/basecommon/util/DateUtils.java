@@ -7,8 +7,11 @@ import java.util.Calendar;
 import java.util.Date;
 
 /**
- * 日期处理类
- * Created by Administrator on 2016/4/19.
+ * <p>标题:日期工具类</p>
+ * <p>描述:日期工具类</p>
+ * 包名：com.ryd.basecommon.util
+ * 创建人：songby
+ * 创建时间：2016/4/13 9:59
  */
 public class DateUtils {
     public final static String DATE_FORMAT ="yyyy-MM-dd";
@@ -243,6 +246,25 @@ public class DateUtils {
         return cal.getTime();
     }
 
+
+    /**
+     * 获得每天固定时间
+     * @param hourStr
+     * @return
+     */
+    public static Date getSetHourTime(String hourStr){
+
+        Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DAY_OF_MONTH);//每天
+
+        String[] strarr = hourStr.split(":");
+
+        calendar.set(year, month, day, Integer.parseInt(strarr[0]), Integer.parseInt(strarr[1]), Integer.parseInt(strarr[2]));
+
+        return calendar.getTime();
+    }
     /**
      * nums小时以前
      * @param nums
@@ -285,7 +307,7 @@ public class DateUtils {
     public static boolean isToday(Date d) {
         String oldTime=formatDateToStr(d, "yyyy-MM-dd");
         String newTime=formatDateToStr(new Date(), "yyyy-MM-dd");
-        if(oldTime.equals(newTime)){
+	    if(oldTime.equals(newTime)){
             return true;
         }
         return false;

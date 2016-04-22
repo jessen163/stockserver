@@ -21,6 +21,10 @@
     from st_system_param
     where id = #{id,jdbcType=CHAR}
   </select>
+  <select id="selectByKey" parameterType="java.lang.String" resultMap="java.lang.String">
+    select key_value from st_system_param
+    where key_name = #{key,jdbcType=VARCHAR}
+  </select>
   <select id="selectListByKeySelective" resultType="java.util.List" resultMap="BaseResultMap">
     select * from st_system_param
     limit #{offset, jdbcType=INTEGER},#{limit, jdbcType=INTEGER}

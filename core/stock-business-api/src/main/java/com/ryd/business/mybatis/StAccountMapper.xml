@@ -27,8 +27,14 @@
     from st_account
     where id = #{id,jdbcType=CHAR}
   </select>
+  <select id="selectByNameKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from st_account
+    where account_num = #{accountNum,jdbcType=VARCHAR}
+  </select>
   <select id="selectByNamePassword" resultMap="BaseResultMap">
-    select * from st_account where account_num = #{account_num,jdbcType=VARCHAR} and password = #{password,jdbcType=VARCHAR}
+    select * from st_account where account_num = #{accountNum,jdbcType=VARCHAR} and password = #{password,jdbcType=VARCHAR}
   </select>
   <select id="selectListByKeySelective" resultType="java.util.List" resultMap="BaseResultMap">
     select * from st_account

@@ -14,6 +14,8 @@ public interface StSystemParamMapper {
 
     StSystemParam selectByPrimaryKey(String id);
 
+    String selectByKey(String key);
+
     int updateByPrimaryKeySelective(StSystemParam record);
 
     int updateByPrimaryKey(StSystemParam record);

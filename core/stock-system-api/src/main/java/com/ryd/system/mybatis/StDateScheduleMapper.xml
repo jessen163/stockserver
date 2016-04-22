@@ -20,6 +20,12 @@
     from st_date_schedule
     where id = #{id,jdbcType=CHAR}
   </select>
+  <select id="selectListByKeyType" parameterType="java.lang.Short" resultMap="java.util.List" resultType="java.util.Date">
+    select
+    <include refid="Base_Column_List" />
+    from special_date
+    where date_type = #{type,jdbcType=SMALLINT}
+  </select>
   <select id="selectListByKeySelective" resultType="java.util.List" resultMap="BaseResultMap">
     select * from st_date_schedule
     limit #{offset, jdbcType=INTEGER},#{limit, jdbcType=INTEGER}

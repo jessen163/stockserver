@@ -11,4 +11,11 @@ import com.ryd.system.model.StSystemParam;
  * 创建时间：2016/4/22 15:18
  */
 public interface StSystemParamDao extends BaseDao<StSystemParam> {
+
+    /**
+     * 根据key查询
+     * @param key
+     * @return
+     */
+    public String getParamByKey(String key);
 }

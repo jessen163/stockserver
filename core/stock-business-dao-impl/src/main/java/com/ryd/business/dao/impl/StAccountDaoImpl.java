@@ -52,13 +52,18 @@ public class StAccountDaoImpl implements StAccountDao {
         if(obj==null){
             obj = new StAccount();
         }
-        return stAccountMapper.selectListByKeySelective(obj,limit,offset);
+        return stAccountMapper.selectListByKeySelective(obj, limit, offset);
     }
 
     @Override
-    public StAccount getStAccountByLogin(String userName,String password){
+    public StAccount getStAccountByLogin(String accountNum,String password){
 
-        return stAccountMapper.selectByNamePassword(userName,password);
+        return stAccountMapper.selectByNamePassword(accountNum, password);
+    }
+
+    @Override
+    public StAccount getStAccountByAccountNum(String accountNum){
+        return stAccountMapper.selectByNameKey(accountNum);
     }
 
     @Override
