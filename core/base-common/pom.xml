@@ -48,5 +48,6 @@
             <artifactId>jackson-annotations</artifactId>
             <version>${com.fasterxml.jackson.version}</version>
         </dependency>
+
     </dependencies>
 </project>
