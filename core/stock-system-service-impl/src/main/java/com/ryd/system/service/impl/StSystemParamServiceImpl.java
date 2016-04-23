@@ -1,8 +1,11 @@
 package com.ryd.system.service.impl;
 
+import com.ryd.basecommon.common.CacheConstant;
+import com.ryd.cache.service.ICacheService;
 import com.ryd.system.dao.StSystemParamDao;
 import com.ryd.system.model.StSystemParam;
 import com.ryd.system.service.StSystemParamService;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +24,9 @@ public class StSystemParamServiceImpl implements StSystemParamService {
     @Autowired
     private StSystemParamDao stSystemParamDao;
 
+    @Autowired
+    private ICacheService iCacheService;
+
     @Override
     public boolean addParam(StSystemParam param) {
         return stSystemParamDao.add(param) > 0;
@@ -28,19 +34,34 @@ public class StSystemParamServiceImpl implements StSystemParamService {
 
     @Override
     public boolean updateParam(StSystemParam param) {
+
+        iCacheService.remove(CacheConstant.CACHEKEY_SYSTEM_CONFIG_MAP, param.getKeyName());
+
         return stSystemParamDao.update(param) > 0;
     }
 
     @Override
-    public boolean deleteParam(String id) {
-        StSystemParam param = new StSystemParam();
-        param.setId(id);
+    public boolean deleteParam(StSystemParam param) {
+
+        if(StringUtils.isBlank(param.getKeyName())){
+            return false;
+        }
+        iCacheService.remove(CacheConstant.CACHEKEY_SYSTEM_CONFIG_MAP, param.getKeyName());
+
         return stSystemParamDao.deleteTById(param) > 0;
     }
 
     @Override
     public String getParamByKey(String key) {
-        return stSystemParamDao.getParamByKey(key);
+        String value = null;
+        value = iCacheService.getStringByKey(CacheConstant.CACHEKEY_SYSTEM_CONFIG_MAP+key,null);
+        if(StringUtils.isNotBlank(value)){
+            return value;
+        }
+        value = stSystemParamDao.getParamByKey(key);
+        iCacheService.setStringByKey(CacheConstant.CACHEKEY_SYSTEM_CONFIG_MAP, key, value);
+
+        return value;
     }
 
     @Override

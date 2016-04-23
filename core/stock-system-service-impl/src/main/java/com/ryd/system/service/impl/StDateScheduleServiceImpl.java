@@ -1,12 +1,16 @@
 package com.ryd.system.service.impl;
 
+import com.ryd.basecommon.common.CacheConstant;
 import com.ryd.basecommon.common.Constant;
 import com.ryd.basecommon.util.DateUtils;
 import com.ryd.basecommon.util.FestivalDateUtil;
+import com.ryd.cache.service.ICacheService;
 import com.ryd.system.dao.StDateScheduleDao;
 import com.ryd.system.model.StDateSchedule;
 import com.ryd.system.service.StDateScheduleService;
 import com.ryd.system.service.StSystemParamService;
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,18 +33,9 @@ public class StDateScheduleServiceImpl implements StDateScheduleService {
 
     @Autowired
     private StSystemParamService stSystemParamService;
-    String openTime="",restTimeStart="",restTimeEnd="",closeTime="";
-    List<Date> workday = null;
-    List<Date> festival = null;
 
-    public StDateScheduleServiceImpl(){
-        openTime = stSystemParamService.getParamByKey(Constant.SYSPARAM_OPEN_TIME);
-        restTimeStart = stSystemParamService.getParamByKey(Constant.SYSPARAM_REST_TIME_START);
-        restTimeEnd = stSystemParamService.getParamByKey(Constant.SYSPARAM_REST_TIME_END);
-        closeTime = stSystemParamService.getParamByKey(Constant.SYSPARAM_CLOSE_TIME);
-        festival = stDateScheduleDao.getScheduleByType(Constant.DATE_SCHEDULE_FESTIVALDAY);
-        workday = stDateScheduleDao.getScheduleByType(Constant.DATE_SCHEDULE_SEPCIAL_WORKDAY);
-    }
+    @Autowired
+    private ICacheService iCacheService;
 
     @Override
     public boolean addSchedule(StDateSchedule schedule) {
@@ -49,19 +44,33 @@ public class StDateScheduleServiceImpl implements StDateScheduleService {
 
     @Override
     public boolean updateSchedule(StDateSchedule schedule) {
+        iCacheService.remove(CacheConstant.CACHEKEY_DATE_SCHEDULE_FESTIVALDAY,null);
         return stDateScheduleDao.update(schedule) > 0;
     }
 
     @Override
-    public boolean deleteSchedule(String id) {
-        StDateSchedule schedule = new StDateSchedule();
-        schedule.setId(id);
+    public boolean deleteSchedule(StDateSchedule schedule) {
+
+        iCacheService.remove(CacheConstant.CACHEKEY_DATE_SCHEDULE_FESTIVALDAY,null);
+
         return stDateScheduleDao.deleteTById(schedule) > 0;
     }
 
     @Override
-    public List<Date> getScheduleByType(Short type) {
-        return stDateScheduleDao.getScheduleByType(type);
+    public boolean getIsFestival() {
+
+        Boolean value = null;
+
+        value = (Boolean) iCacheService.getObjectByKey(CacheConstant.CACHEKEY_DATE_SCHEDULE_FESTIVALDAY, null);
+        if (value!=null) {
+            return value;
+        }
+
+        value = stDateScheduleDao.getScheduleByDate(new Date());
+
+        iCacheService.setObjectByKey(CacheConstant.CACHEKEY_DATE_SCHEDULE_FESTIVALDAY, value);
+
+        return value;
     }
 
     @Override
@@ -71,12 +80,40 @@ public class StDateScheduleServiceImpl implements StDateScheduleService {
     }
 
     @Override
-    public int getDateAndTimeJudge() {
+    public boolean getIsCanTrade() {
+        if(Constant.STQUOTE_TRADE_TIMECOMPARE_1.intValue() == getDateAndTimeJudge()){
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean getIsCanQuote() {
+        if(getDateAndTimeJudge() == Constant.STQUOTE_TRADE_TIMECOMPARE_1.intValue() ||
+                getDateAndTimeJudge() == Constant.STQUOTE_TRADE_TIMECOMPARE_2.intValue()){
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean getDateIsWorkDayJudge() {
+        Calendar calNow = Calendar.getInstance();
+        //如果当前时间是工作日
+        boolean isWorkDay = !getIsFestival();
+        return isWorkDay;
+    }
+
+    private int getDateAndTimeJudge() {
         //当前时间
         Calendar calNow = Calendar.getInstance();
 
+        String openTime = stSystemParamService.getParamByKey(CacheConstant.CACHEKEY_SYSTEM_CONFIG_OPEN_TIME);
+        String restTimeStart = stSystemParamService.getParamByKey(CacheConstant.CACHEKEY_SYSTEM_CONFIG_REST_TIME_START);
+        String restTimeEnd = stSystemParamService.getParamByKey(CacheConstant.CACHEKEY_SYSTEM_CONFIG_REST_TIME_END);
+        String closeTime = stSystemParamService.getParamByKey(CacheConstant.CACHEKEY_SYSTEM_CONFIG_CLOSE_TIME);
         //如果当前时间是工作日
-        if (FestivalDateUtil.isWorkDay(calNow.getTime(), workday, festival)) {
+        if (!getIsFestival()) {
 
             long tnow = calNow.getTime().getTime();
             //开盘时间
@@ -100,10 +137,4 @@ public class StDateScheduleServiceImpl implements StDateScheduleService {
         return Constant.STQUOTE_TRADE_TIMECOMPARE_3;
     }
 
-    @Override
-    public boolean getDateIsWorkDayJudge() {
-        Calendar calNow = Calendar.getInstance();
-        //如果当前时间是工作日
-        return FestivalDateUtil.isWorkDay(calNow.getTime(), workday, festival);
-    }
 }
