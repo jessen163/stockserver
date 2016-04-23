@@ -30,10 +30,10 @@ public interface StSystemParamService {
 
     /**
      * 删除参数
-     * @param id
+     * @param param
      * @return
      */
-    public boolean deleteParam(String id);
+    public boolean deleteParam(StSystemParam param);
 
     /**
      * 根据key查询参数

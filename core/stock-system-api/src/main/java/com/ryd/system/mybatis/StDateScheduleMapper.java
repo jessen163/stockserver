@@ -19,7 +19,7 @@ public interface StDateScheduleMapper {
 
     int updateByPrimaryKey(StDateSchedule record);
 
-    List<Date> selectListByKeyType(Short type);
+    StDateSchedule selectByDateKey(Date festivalDate);
 
     List<StDateSchedule> selectListByKeySelective(@Param(value = "record") StDateSchedule record,
                                               @Param(value = "limit") Integer limit,

@@ -31,17 +31,16 @@ public interface StDateScheduleService {
 
     /**
      * 删除日期
-     * @param id
+     * @param schedule
      * @return
      */
-    public boolean deleteSchedule(String id);
+    public boolean deleteSchedule(StDateSchedule schedule);
 
     /**
-     * 根据类型查询
-     * @param type
+     * 是否是节假日
      * @return
      */
-    public List<Date> getScheduleByType(Short type);
+    public boolean getIsFestival();
 
     /**
      * 分页查询
@@ -53,10 +52,16 @@ public interface StDateScheduleService {
     public List<StDateSchedule> getScheduleList(StDateSchedule schedule, int pageIndex, int limit);
 
     /**
-     * 判断交易日交易时间区间
+     * 是否可以交易
      * @return
      */
-    public int getDateAndTimeJudge();
+    public boolean getIsCanTrade();
+
+    /**
+     * 是否可以报价
+     * @return
+     */
+    public boolean getIsCanQuote();
 
     /**
      * 当前时间是否是工作日

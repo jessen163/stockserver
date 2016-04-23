@@ -15,10 +15,9 @@ public class StDateSchedule implements Serializable {
     private static final long serialVersionUID = -8171316139284024723L;
 
     private String id;
-    //日期
-    private Date specialDate;
-    //日期类型 1.节假日 2.特殊工作日
-    private Short dateType;
+
+    private Date festivalDate;
+
     //状态 1.正常 2.禁用
     private Short status;
 
@@ -37,22 +36,6 @@ public class StDateSchedule implements Serializable {
 
     public void setId(String id) {
         this.id = id == null ? null : id.trim();
-    }
-
-    public Date getSpecialDate() {
-        return specialDate;
-    }
-
-    public void setSpecialDate(Date specialDate) {
-        this.specialDate = specialDate;
-    }
-
-    public Short getDateType() {
-        return dateType;
-    }
-
-    public void setDateType(Short dateType) {
-        this.dateType = dateType;
     }
 
     public Short getStatus() {

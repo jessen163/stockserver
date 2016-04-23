@@ -16,9 +16,10 @@ import java.util.List;
 public interface StDateScheduleDao  extends BaseDao<StDateSchedule>{
 
     /**
-     * 根据类型获取日期
-     * @param type
+     * 获取日期
+     * @param festivalDate
      * @return
      */
-    public List<Date> getScheduleByType(Short type);
+    public boolean getScheduleByDate(Date festivalDate);
+
 }

@@ -3,6 +3,252 @@
 <mapper namespace="com.ryd.system.mybatis.StDateScheduleMapper">
   <resultMap id="BaseResultMap" type="com.ryd.system.model.StDateSchedule">
     <id column="id" jdbcType="CHAR" property="id" />
+    <result column="festival_date" jdbcType="DATE" property="festivalDate" />
+    <result column="status" jdbcType="SMALLINT" property="status" />
+    <result column="created_by" jdbcType="CHAR" property="createdBy" />
+    <result column="created_on" jdbcType="BIGINT" property="createdOn" />
+    <result column="updated_by" jdbcType="CHAR" property="updatedBy" />
+    <result column="updated_on" jdbcType="BIGINT" property="updatedOn" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, festival_date, status, created_by, created_on, updated_by, updated_on
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from st_date_schedule
+    where id = #{id,jdbcType=CHAR}
+  </select>
+  <select id="selectByDateKey" parameterType="java.util.Date" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from st_date_schedule
+    where festival_date = #{festivalDate,jdbcType=DATE}
+  </select>
+  <select id="selectListByKeySelective" resultType="java.util.List" resultMap="BaseResultMap">
+    select * from st_date_schedule
+    limit #{offset, jdbcType=INTEGER},#{limit, jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from st_date_schedule
+    where id = #{id,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.ryd.system.model.StDateSchedule">
+    insert into st_date_schedule (id, festival_date, status, 
+      created_by, created_on, updated_by, 
+      updated_on)
+    values (#{id,jdbcType=CHAR}, #{festivalDate,jdbcType=DATE}, #{status,jdbcType=SMALLINT}, 
+      #{createdBy,jdbcType=CHAR}, #{createdOn,jdbcType=BIGINT}, #{updatedBy,jdbcType=CHAR}, 
+      #{updatedOn,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ryd.system.model.StDateSchedule">
+    insert into st_date_schedule
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="festivalDate != null">
+        festival_date,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="createdBy != null">
+        created_by,
+      </if>
+      <if test="createdOn != null">
+        created_on,
+      </if>
+      <if test="updatedBy != null">
+        updated_by,
+      </if>
+      <if test="updatedOn != null">
+        updated_on,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=CHAR},
+      </if>
+      <if test="festivalDate != null">
+        #{festivalDate,jdbcType=DATE},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=SMALLINT},
+      </if>
+      <if test="createdBy != null">
+        #{createdBy,jdbcType=CHAR},
+      </if>
+      <if test="createdOn != null">
+        #{createdOn,jdbcType=BIGINT},
+      </if>
+      <if test="updatedBy != null">
+        #{updatedBy,jdbcType=CHAR},
+      </if>
+      <if test="updatedOn != null">
+        #{updatedOn,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ryd.system.model.StDateSchedule">
+    update st_date_schedule
+    <set>
+      <if test="festivalDate != null">
+        festival_date = #{festivalDate,jdbcType=DATE},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=SMALLINT},
+      </if>
+      <if test="createdBy != null">
+        created_by = #{createdBy,jdbcType=CHAR},
+      </if>
+      <if test="createdOn != null">
+        created_on = #{createdOn,jdbcType=BIGINT},
+      </if>
+      <if test="updatedBy != null">
+        updated_by = #{updatedBy,jdbcType=CHAR},
+      </if>
+      <if test="updatedOn != null">
+        updated_on = #{updatedOn,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ryd.system.model.StDateSchedule">
+    update st_date_schedule
+    set festival_date = #{festivalDate,jdbcType=DATE},
+      status = #{status,jdbcType=SMALLINT},
+      created_by = #{createdBy,jdbcType=CHAR},
+      created_on = #{createdOn,jdbcType=BIGINT},
+      updated_by = #{updatedBy,jdbcType=CHAR},
+      updated_on = #{updatedOn,jdbcType=BIGINT}
+    where id = #{id,jdbcType=CHAR}
+  </update>
+  <resultMap id="BaseResultMap" type="com.ryd.system.model.StDateSchedule">
+    <id column="id" jdbcType="CHAR" property="id" />
+    <result column="festival_date" jdbcType="TIMESTAMP" property="festivalDate" />
+    <result column="status" jdbcType="SMALLINT" property="status" />
+    <result column="created_by" jdbcType="CHAR" property="createdBy" />
+    <result column="created_on" jdbcType="BIGINT" property="createdOn" />
+    <result column="updated_by" jdbcType="CHAR" property="updatedBy" />
+    <result column="updated_on" jdbcType="BIGINT" property="updatedOn" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, festival_date, status, created_by, created_on, updated_by, updated_on
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from st_date_schedule
+    where id = #{id,jdbcType=CHAR}
+  </select>
+  <select id="selectByDateKey" parameterType="java.util.Date" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from st_date_schedule
+    where festival_date = #{festival_date,jdbcType=CHAR}
+  </select>
+  <select id="selectListByKeySelective" resultMap="BaseResultMap" resultType="java.util.List">
+    select * from st_date_schedule
+    limit #{offset, jdbcType=INTEGER},#{limit, jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from st_date_schedule
+    where id = #{id,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.ryd.system.model.StDateSchedule">
+    insert into st_date_schedule (id, festival_date, status, 
+      created_by, created_on, updated_by, 
+      updated_on)
+    values (#{id,jdbcType=CHAR}, #{festivalDate,jdbcType=TIMESTAMP}, #{status,jdbcType=SMALLINT}, 
+      #{createdBy,jdbcType=CHAR}, #{createdOn,jdbcType=BIGINT}, #{updatedBy,jdbcType=CHAR}, 
+      #{updatedOn,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ryd.system.model.StDateSchedule">
+    insert into st_date_schedule
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="festivalDate != null">
+        festival_date,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="createdBy != null">
+        created_by,
+      </if>
+      <if test="createdOn != null">
+        created_on,
+      </if>
+      <if test="updatedBy != null">
+        updated_by,
+      </if>
+      <if test="updatedOn != null">
+        updated_on,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=CHAR},
+      </if>
+      <if test="festivalDate != null">
+        #{festivalDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=SMALLINT},
+      </if>
+      <if test="createdBy != null">
+        #{createdBy,jdbcType=CHAR},
+      </if>
+      <if test="createdOn != null">
+        #{createdOn,jdbcType=BIGINT},
+      </if>
+      <if test="updatedBy != null">
+        #{updatedBy,jdbcType=CHAR},
+      </if>
+      <if test="updatedOn != null">
+        #{updatedOn,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ryd.system.model.StDateSchedule">
+    update st_date_schedule
+    <set>
+      <if test="festivalDate != null">
+        festival_date = #{festivalDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=SMALLINT},
+      </if>
+      <if test="createdBy != null">
+        created_by = #{createdBy,jdbcType=CHAR},
+      </if>
+      <if test="createdOn != null">
+        created_on = #{createdOn,jdbcType=BIGINT},
+      </if>
+      <if test="updatedBy != null">
+        updated_by = #{updatedBy,jdbcType=CHAR},
+      </if>
+      <if test="updatedOn != null">
+        updated_on = #{updatedOn,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ryd.system.model.StDateSchedule">
+    update st_date_schedule
+    set festival_date = #{festivalDate,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=SMALLINT},
+      created_by = #{createdBy,jdbcType=CHAR},
+      created_on = #{createdOn,jdbcType=BIGINT},
+      updated_by = #{updatedBy,jdbcType=CHAR},
+      updated_on = #{updatedOn,jdbcType=BIGINT}
+    where id = #{id,jdbcType=CHAR}
+  </update>
+  <resultMap id="BaseResultMap" type="com.ryd.system.model.StDateSchedule">
+    <id column="id" jdbcType="CHAR" property="id" />
     <result column="special_date" jdbcType="TIMESTAMP" property="specialDate" />
     <result column="date_type" jdbcType="SMALLINT" property="dateType" />
     <result column="status" jdbcType="SMALLINT" property="status" />
@@ -20,13 +266,7 @@
     from st_date_schedule
     where id = #{id,jdbcType=CHAR}
   </select>
-  <select id="selectListByKeyType" parameterType="java.lang.Short" resultMap="java.util.List" resultType="java.util.Date">
-    select
-    <include refid="Base_Column_List" />
-    from special_date
-    where date_type = #{type,jdbcType=SMALLINT}
-  </select>
-  <select id="selectListByKeySelective" resultType="java.util.List" resultMap="BaseResultMap">
+  <select id="selectListByKeySelective" resultMap="BaseResultMap" resultType="java.util.List">
     select * from st_date_schedule
     limit #{offset, jdbcType=INTEGER},#{limit, jdbcType=INTEGER}
   </select>
