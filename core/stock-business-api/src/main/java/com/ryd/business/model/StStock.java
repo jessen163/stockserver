@@ -1,5 +1,9 @@
 package com.ryd.business.model;
 
+import com.bugull.mongo.BuguEntity;
+import com.bugull.mongo.annotations.Entity;
+import com.bugull.mongo.annotations.Id;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -11,10 +15,12 @@ import java.util.Date;
  * 创建人：songby
  * 创建时间：2016/4/21 10:29
  */
-public class StStock implements Serializable {
+@Entity
+public class StStock implements Serializable,BuguEntity {
 
     private static final long serialVersionUID = -5808387262109584648L;
 
+    @Id
     private String stockId;
     //股票名称
     private String stockName;
@@ -353,5 +359,15 @@ public class StStock implements Serializable {
 
     public void setStockTime(Date stockTime) {
         this.stockTime = stockTime;
+    }
+
+    @Override
+    public void setId(String s) {
+        this.stockId = s;
+    }
+
+    @Override
+    public String getId() {
+        return this.stockId;
     }
 }

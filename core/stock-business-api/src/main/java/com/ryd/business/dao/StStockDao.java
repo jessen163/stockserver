@@ -3,6 +3,8 @@ package com.ryd.business.dao;
 import com.ryd.basecommon.dao.BaseDao;
 import com.ryd.business.model.StStock;
 
+import java.util.List;
+
 /**
  * <p>标题:股票Dao</p>
  * <p>描述:股票Dao</p>
@@ -11,4 +13,10 @@ import com.ryd.business.model.StStock;
  * 创建时间：2016/4/22 13:53
  */
 public interface StStockDao extends BaseDao<StStock> {
+    /**
+     * 批量保存股票信息
+     * @param stStockList
+     * @return
+     */
+    public boolean saveStockBatch(List<StStock> stStockList);
 }
