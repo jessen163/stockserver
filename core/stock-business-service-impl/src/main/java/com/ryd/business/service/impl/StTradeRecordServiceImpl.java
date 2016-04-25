@@ -32,6 +32,11 @@ public class StTradeRecordServiceImpl implements StTradeRecordService {
     }
 
     @Override
+    public void updateStockSettling() {
+        // 结算
+    }
+
+    @Override
     public List<StTradeRecord> findTradeRecordListByStock(SearchTradeRecordDTO searchTradeRecordDTO) {
         return null;
     }
