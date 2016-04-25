@@ -61,7 +61,11 @@ public class StDateScheduleDaoImpl implements StDateScheduleDao {
     }
 
     @Override
-    public List<Date> getScheduleByType(Short type) {
-        return stDateScheduleMapper.selectListByKeyType(type);
+    public boolean getScheduleByDate(Date festivalDate) {
+        StDateSchedule stt = stDateScheduleMapper.selectByDateKey(festivalDate);
+        if(stt==null){
+            return false;
+        }
+        return true;
     }
 }
