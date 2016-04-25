@@ -64,6 +64,11 @@ public interface StDateScheduleService {
     public boolean getIsCanQuote();
 
     /**
+     * 当前时间是否可以报价
+     * @return
+     */
+    public boolean getIsTimeCanQuote();
+    /**
      * 当前时间是否是工作日
      * @return
      */
