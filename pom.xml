@@ -43,6 +43,8 @@
     <junit.version>4.12</junit.version>
     <jedis.version>2.1.0</jedis.version>
     <kafka_2.9.2.version>0.8.1</kafka_2.9.2.version>
+    <mongo-java-driver.version>3.2.2</mongo-java-driver.version>
+    <bugu-mongo-core.version>2.2.0</bugu-mongo-core.version>
   </properties>
 
   <dependencies>
@@ -58,11 +60,22 @@
       <id>central</id>
       <name>Maven Repository Switchboard</name>
       <layout>default</layout>
-      <url>http://repo1.maven.org/maven2</url>
+      <url>http://192.168.5.61:8081/nexus/content/groups/public/</url>
       <snapshots>
         <enabled>false</enabled>
       </snapshots>
     </repository>
+    <repository>
+      <id>thrid part</id>
+      <name>Maven Repository 2</name>
+      <layout>default</layout>
+      <url>http://192.168.5.61:8081/nexus/content/repositories/thirdparty/</url>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+    </repository>
+
+
   </repositories>
   <build>
     <plugins>
