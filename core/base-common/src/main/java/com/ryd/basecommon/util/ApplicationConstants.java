@@ -39,4 +39,8 @@ public class ApplicationConstants {
     /** 消息接口状态-status 服务器异常 status=3 **/
     public final static int NETTYMESSAGE_STATUS_RESPONSE_SERVER_ERROR = 3;
 
+    // 1、买，2、卖
+    public static final Integer STOCK_QUOTETYPE_BUY = 1;
+    public static final Integer STOCK_QUOTETYPE_SELL = 2;
+
 }
