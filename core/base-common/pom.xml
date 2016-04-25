@@ -48,6 +48,17 @@
             <artifactId>jackson-annotations</artifactId>
             <version>${com.fasterxml.jackson.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.mongodb</groupId>
+            <artifactId>mongo-java-driver</artifactId>
+            <version>${mongo-java-driver.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.bugull</groupId>
+            <artifactId>mongo</artifactId>
+            <version>${bugu-mongo-core.version}</version>
+        </dependency>
+
 
     </dependencies>
 </project>

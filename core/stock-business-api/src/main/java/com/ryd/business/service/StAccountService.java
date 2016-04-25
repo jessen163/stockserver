@@ -5,7 +5,7 @@ import com.ryd.business.model.StAccount;
 import java.util.List;
 
 /**
- * <p>标题:帐户Service</p>
+ * <p>标题:帐户Service--基础业务</p>
  * <p>描述:帐户Service</p>
  * 包名：com.ryd.business.service
  * 创建人：songby
