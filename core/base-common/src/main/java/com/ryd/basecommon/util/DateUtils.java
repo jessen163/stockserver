@@ -1,5 +1,7 @@
 package com.ryd.basecommon.util;
 
+import org.apache.commons.lang.StringUtils;
+
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -254,16 +256,18 @@ public class DateUtils {
      */
     public static Date getSetHourTime(String hourStr){
 
-        Calendar calendar = Calendar.getInstance();
-        int year = calendar.get(Calendar.YEAR);
-        int month = calendar.get(Calendar.MONTH);
-        int day = calendar.get(Calendar.DAY_OF_MONTH);//每天
+        if(StringUtils.isNotBlank(hourStr)) {
+            Calendar calendar = Calendar.getInstance();
+            int year = calendar.get(Calendar.YEAR);
+            int month = calendar.get(Calendar.MONTH);
+            int day = calendar.get(Calendar.DAY_OF_MONTH);//每天
 
-        String[] strarr = hourStr.split(":");
+            String[] strarr = hourStr.split(":");
 
-        calendar.set(year, month, day, Integer.parseInt(strarr[0]), Integer.parseInt(strarr[1]), Integer.parseInt(strarr[2]));
-
-        return calendar.getTime();
+            calendar.set(year, month, day, Integer.parseInt(strarr[0]), Integer.parseInt(strarr[1]), Integer.parseInt(strarr[2]));
+            return calendar.getTime();
+        }
+        return null;
     }
     /**
      * nums小时以前

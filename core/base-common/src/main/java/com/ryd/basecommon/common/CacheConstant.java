@@ -29,5 +29,7 @@ public class CacheConstant {
     // 缓存key-节假日
     public static final String CACHEKEY_DATE_SCHEDULE_FESTIVALDAY  = "dateScheduleFestivalDayList";
 
+    // 缓存key-股票涨跌幅度
+    public static final String  CACHEKEY_STOCK_UP_AND_DOWN_PERCENT = "stockUpAndDownPercent";
 
 }

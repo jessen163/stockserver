@@ -28,6 +28,11 @@ public class ArithUtil {
 
     }
 
+
+    public static BigDecimal add(BigDecimal b1,BigDecimal b2){
+        return b1.add(b2);
+    }
+
     /**
      * 减 d1-d2
      * @param d1 参数1
@@ -38,7 +43,10 @@ public class ArithUtil {
         BigDecimal b1=new BigDecimal(Double.toString(d1));
         BigDecimal b2=new BigDecimal(Double.toString(d2));
         return b1.subtract(b2).doubleValue();
+    }
 
+    public static BigDecimal subtract(BigDecimal b1,BigDecimal b2){
+        return b1.subtract(b2);
     }
 
     /**
@@ -54,6 +62,10 @@ public class ArithUtil {
 
     }
 
+    public static BigDecimal multiply(BigDecimal b1,BigDecimal b2){
+        return b1.multiply(b2);
+    }
+
     /**
      * 除 d1/d2
      * @param d1 参数1
@@ -61,17 +73,20 @@ public class ArithUtil {
      * @return
      */
     public static double divide(double d1,double d2){
-
-        return div(d1, d2, DEF_DIV_SCALE);
+        BigDecimal b1=new BigDecimal(Double.toString(d1));
+        BigDecimal b2=new BigDecimal(Double.toString(d2));
+        return div(b1, b2, DEF_DIV_SCALE).doubleValue();
     }
 
-    private static double div(double d1,double d2,int scale){
+    public static BigDecimal divide(BigDecimal b1,BigDecimal b2){
+        return div(b1, b2, DEF_DIV_SCALE);
+    }
+
+    private static BigDecimal div(BigDecimal b1,BigDecimal b2,int scale){
         if(scale<0){
             throw new IllegalArgumentException("The scale must be a positive integer or zero");
         }
-        BigDecimal b1=new BigDecimal(Double.toString(d1));
-        BigDecimal b2=new BigDecimal(Double.toString(d2));
-        return b1.divide(b2,scale,BigDecimal.ROUND_HALF_UP).doubleValue();
+        return b1.divide(b2, scale, BigDecimal.ROUND_HALF_UP);
 
     }
 
@@ -85,6 +100,10 @@ public class ArithUtil {
         BigDecimal b1=new BigDecimal(Double.toString(d1));
         BigDecimal b2=new BigDecimal(Double.toString(d2));
 
+        return b1.compareTo(b2);
+    }
+
+    public static int compare(BigDecimal b1,BigDecimal b2){
         return b1.compareTo(b2);
     }
 
