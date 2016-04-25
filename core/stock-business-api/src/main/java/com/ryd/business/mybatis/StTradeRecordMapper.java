@@ -22,4 +22,6 @@ public interface StTradeRecordMapper {
     List<StTradeRecord> selectListByKeySelective(@Param(value = "record") StTradeRecord record,
                                                   @Param(value = "limit") Integer limit,
                                                   @Param(value = "offset") Integer offset);
+
+    int insertBatch(List<StTradeRecord> list);
 }

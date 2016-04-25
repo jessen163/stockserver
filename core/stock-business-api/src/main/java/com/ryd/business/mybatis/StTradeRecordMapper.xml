@@ -36,10 +36,24 @@
       stock_id, quote_price, amount, 
       date_time, buy_fee, sell_fee, 
       deal_tax)
-    values (#{recordId,jdbcType=CHAR}, #{sellerAccountId,jdbcType=CHAR}, #{buyerAccountId,jdbcType=CHAR}, 
-      #{stockId,jdbcType=CHAR}, #{quotePrice,jdbcType=DECIMAL}, #{amount,jdbcType=BIGINT}, 
-      #{dateTime,jdbcType=BIGINT}, #{buyFee,jdbcType=DECIMAL}, #{sellFee,jdbcType=DECIMAL}, 
+    values (#{recordId,jdbcType=CHAR}, #{sellerAccountId,jdbcType=CHAR}, #{buyerAccountId,jdbcType=CHAR},
+      #{stockId,jdbcType=CHAR}, #{quotePrice,jdbcType=DECIMAL}, #{amount,jdbcType=BIGINT},
+      #{dateTime,jdbcType=BIGINT}, #{buyFee,jdbcType=DECIMAL}, #{sellFee,jdbcType=DECIMAL},
       #{dealTax,jdbcType=DECIMAL})
+  </insert>
+  <insert id ="insertBatch" parameterType="java.util.List" >
+    insert into st_trade_record (record_id, seller_account_id, buyer_account_id,
+    stock_id, quote_price, amount,
+    date_time, buy_fee, sell_fee,
+    deal_tax)
+    <foreach collection ="list" item ="item" index ="index" separator ="union all">
+      (
+      #{item.recordId,jdbcType=CHAR}, #{item.sellerAccountId,jdbcType=CHAR}, #{item.buyerAccountId,jdbcType=CHAR},
+      #{item.stockId,jdbcType=CHAR}, #{item.quotePrice,jdbcType=DECIMAL}, #{item.amount,jdbcType=BIGINT},
+      #{item.dateTime,jdbcType=BIGINT}, #{item.buyFee,jdbcType=DECIMAL}, #{item.sellFee,jdbcType=DECIMAL},
+      #{item.dealTax,jdbcType=DECIMAL}
+      )
+    </foreach>
   </insert>
   <insert id="insertSelective" parameterType="com.ryd.business.model.StTradeRecord">
     insert into st_trade_record
@@ -154,93 +168,4 @@
       deal_tax = #{dealTax,jdbcType=DECIMAL}
     where record_id = #{recordId,jdbcType=CHAR}
   </update>
-  <resultMap id="BaseResultMap" type="com.ryd.business.model.StTradeRecord">
-    <result column="record_id" jdbcType="CHAR" property="recordId" />
-    <result column="seller_account_id" jdbcType="CHAR" property="sellerAccountId" />
-    <result column="buyer_account_id" jdbcType="CHAR" property="buyerAccountId" />
-    <result column="stock_id" jdbcType="CHAR" property="stockId" />
-    <result column="quote_price" jdbcType="DECIMAL" property="quotePrice" />
-    <result column="amount" jdbcType="BIGINT" property="amount" />
-    <result column="date_time" jdbcType="BIGINT" property="dateTime" />
-    <result column="buy_fee" jdbcType="DECIMAL" property="buyFee" />
-    <result column="sell_fee" jdbcType="DECIMAL" property="sellFee" />
-    <result column="deal_tax" jdbcType="DECIMAL" property="dealTax" />
-  </resultMap>
-  <insert id="insert" parameterType="com.ryd.business.model.StTradeRecord">
-    insert into st_trade_record (record_id, seller_account_id, buyer_account_id, 
-      stock_id, quote_price, amount, 
-      date_time, buy_fee, sell_fee, 
-      deal_tax)
-    values (#{recordId,jdbcType=CHAR}, #{sellerAccountId,jdbcType=CHAR}, #{buyerAccountId,jdbcType=CHAR}, 
-      #{stockId,jdbcType=CHAR}, #{quotePrice,jdbcType=DECIMAL}, #{amount,jdbcType=BIGINT}, 
-      #{dateTime,jdbcType=BIGINT}, #{buyFee,jdbcType=DECIMAL}, #{sellFee,jdbcType=DECIMAL}, 
-      #{dealTax,jdbcType=DECIMAL})
-  </insert>
-  <insert id="insertSelective" parameterType="com.ryd.business.model.StTradeRecord">
-    insert into st_trade_record
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="recordId != null">
-        record_id,
-      </if>
-      <if test="sellerAccountId != null">
-        seller_account_id,
-      </if>
-      <if test="buyerAccountId != null">
-        buyer_account_id,
-      </if>
-      <if test="stockId != null">
-        stock_id,
-      </if>
-      <if test="quotePrice != null">
-        quote_price,
-      </if>
-      <if test="amount != null">
-        amount,
-      </if>
-      <if test="dateTime != null">
-        date_time,
-      </if>
-      <if test="buyFee != null">
-        buy_fee,
-      </if>
-      <if test="sellFee != null">
-        sell_fee,
-      </if>
-      <if test="dealTax != null">
-        deal_tax,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="recordId != null">
-        #{recordId,jdbcType=CHAR},
-      </if>
-      <if test="sellerAccountId != null">
-        #{sellerAccountId,jdbcType=CHAR},
-      </if>
-      <if test="buyerAccountId != null">
-        #{buyerAccountId,jdbcType=CHAR},
-      </if>
-      <if test="stockId != null">
-        #{stockId,jdbcType=CHAR},
-      </if>
-      <if test="quotePrice != null">
-        #{quotePrice,jdbcType=DECIMAL},
-      </if>
-      <if test="amount != null">
-        #{amount,jdbcType=BIGINT},
-      </if>
-      <if test="dateTime != null">
-        #{dateTime,jdbcType=BIGINT},
-      </if>
-      <if test="buyFee != null">
-        #{buyFee,jdbcType=DECIMAL},
-      </if>
-      <if test="sellFee != null">
-        #{sellFee,jdbcType=DECIMAL},
-      </if>
-      <if test="dealTax != null">
-        #{dealTax,jdbcType=DECIMAL},
-      </if>
-    </trim>
-  </insert>
 </mapper>
