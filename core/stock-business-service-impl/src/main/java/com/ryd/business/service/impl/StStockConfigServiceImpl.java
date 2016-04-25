@@ -20,6 +20,7 @@ public class StStockConfigServiceImpl implements StStockConfigService {
 
     @Override
     public List<StStockConfig> findStockConfig(StStockConfig stStockConfig, int pageIndex, int limit) {
+        // TODO 放入缓存
         int offset = (pageIndex-1)*limit;
         List<StStockConfig> stStockConfigList = stStockConfigDao.getTList(stStockConfig, limit, offset);
         return stStockConfigList;
@@ -27,6 +28,7 @@ public class StStockConfigServiceImpl implements StStockConfigService {
 
     @Override
     public StStockConfig findStockConfigById(StStockConfig stStockConfig) {
+        // TODO 从缓存获取
         return stStockConfigDao.getTById(stStockConfig);
     }
 }
