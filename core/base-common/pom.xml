@@ -58,6 +58,11 @@
             <artifactId>mongo</artifactId>
             <version>${bugu-mongo-core.version}</version>
         </dependency>
+        <dependency>
+            <groupId>commons-httpclient</groupId>
+            <artifactId>commons-httpclient</artifactId>
+            <version>${commons-httpclient.version}</version>
+        </dependency>
 
 
     </dependencies>
