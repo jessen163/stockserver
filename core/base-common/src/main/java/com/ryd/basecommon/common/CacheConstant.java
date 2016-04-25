@@ -32,4 +32,7 @@ public class CacheConstant {
     // 缓存key-股票涨跌幅度
     public static final String  CACHEKEY_STOCK_UP_AND_DOWN_PERCENT = "stockUpAndDownPercent";
 
+    // 缓存key-股票价格信息
+    public static final String CACHEKEY_STOCK_PRICELIST  = "stockPriceList_";
+
 }

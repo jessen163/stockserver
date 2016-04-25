@@ -5,6 +5,8 @@ package com.ryd.basecommon.util;
  * Created by Administrator on 2016/4/19.
  */
 public class ApplicationConstants {
+    // 股票服务器url
+    public static final String STOCK_SERVER_URL = "http://hq.sinajs.cn/list=";
     /** 消息接口ID 心跳 id=1 **/
     public final static int NETTYMESSAGE_ID_HEARTBEAT = 1;
     /** 消息接口ID 股票信息 id=5 **/
