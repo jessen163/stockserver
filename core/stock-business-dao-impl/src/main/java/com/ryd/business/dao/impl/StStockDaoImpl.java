@@ -1,5 +1,7 @@
 package com.ryd.business.dao.impl;
 
+import com.bugull.mongo.BuguDao;
+import com.mongodb.WriteResult;
 import com.ryd.business.dao.StStockDao;
 import com.ryd.business.model.StStock;
 import com.ryd.business.mybatis.StStockMapper;
@@ -17,36 +19,33 @@ import java.util.List;
  * 创建时间：2016/4/22 14:04
  */
 @Repository
-public class StStockDaoImpl implements StStockDao {
-
-    @Autowired
-    private StStockMapper stStockMapper;
+public class StStockDaoImpl extends BuguDao<StStock> implements StStockDao {
+    public StStockDaoImpl(Class<StStock> clazz) {
+        super(clazz);
+    }
 
     @Override
     public int add(StStock obj) {
-        return stStockMapper.insert(obj);
+        WriteResult result = super.save(obj);
+        return result.getN();
     }
 
     @Override
     public int update(StStock obj) {
-        return 0;
+        WriteResult result = super.save(obj);
+        return result.getN();
     }
 
     @Override
     public StStock getTById(StStock obj) {
-        if(StringUtils.isBlank(obj.getStockId())){
-            return null;
-        }
-        return stStockMapper.selectByPrimaryKey(obj.getStockId());
+        return super.findOne(obj.getId());
     }
 
     @Override
     public List<StStock> getTList(StStock obj, int limit, int offset) {
-
-        if(obj==null){
-            obj = new StStock();
-        }
-        return stStockMapper.selectListByKeySelective(obj,limit,offset);
+        int pageNum = limit/offset+1;
+        int pageSize = offset;
+        return super.findAll(pageNum, pageSize);
     }
 
     @Override
@@ -54,6 +53,14 @@ public class StStockDaoImpl implements StStockDao {
         if(StringUtils.isBlank(obj.getStockId())){
             return -1;
         }
-        return stStockMapper.deleteByPrimaryKey(obj.getStockId());
+//        return stStockMapper.deleteByPrimaryKey(obj.getStockId());
+        WriteResult result = super.remove(obj.getId());
+        return result.getN();
+    }
+
+    @Override
+    public boolean saveStockBatch(List<StStock> stStockList) {
+        WriteResult result = super.insert(stStockList);
+        return result.getN() == stStockList.size();
     }
 }

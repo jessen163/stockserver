@@ -14,6 +14,13 @@ import java.util.List;
  */
 public interface StStockService {
     /**
+     * 批量保存报价信息
+     * @param stStockList
+     * @return
+     */
+    public boolean saveStockBatch(List<StStock> stStockList);
+
+    /**
      * 更新股票信息
      * @return
      */
@@ -31,5 +38,5 @@ public interface StStockService {
      * @param searchStockDTO
      * @return
      */
-    public List<StStock> findStockListByStock(SearchStockDTO searchStockDTO);
+    public StStock findStockListByStock(SearchStockDTO searchStockDTO);
 }
