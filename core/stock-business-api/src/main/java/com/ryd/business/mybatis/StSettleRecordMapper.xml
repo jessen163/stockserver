@@ -29,6 +29,12 @@
     delete from st_settle_record
     where settle_record_id = #{settleRecordId,jdbcType=CHAR}
   </delete>
+  <delete id="deleteBatch" parameterType="List">
+    delete from st_settle_record where settle_record_id in
+    <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+      #{item}
+    </foreach>
+  </delete>
   <insert id="insert" parameterType="com.ryd.business.model.StSettleRecord">
     insert into st_settle_record (settle_record_id, settle_account_id, stock_id, 
       quote_price, amount, deal_fee, 
@@ -36,6 +42,17 @@
     values (#{settleRecordId,jdbcType=CHAR}, #{settleAccountId,jdbcType=CHAR}, #{stockId,jdbcType=CHAR}, 
       #{quotePrice,jdbcType=DECIMAL}, #{amount,jdbcType=BIGINT}, #{dealFee,jdbcType=DECIMAL}, 
       #{dealType,jdbcType=SMALLINT}, #{dateTime,jdbcType=BIGINT})
+  </insert>
+  <insert id ="insertBatch" parameterType="java.util.List" >
+    insert into st_settle_record (settle_record_id, settle_account_id, stock_id,
+    quote_price, amount, deal_fee,
+    deal_type, date_time)
+    values
+    <foreach collection ="list" item ="item" index ="index" separator =",">
+      (#{item.settleRecordId,jdbcType=CHAR}, #{item.settleAccountId,jdbcType=CHAR}, #{item.stockId,jdbcType=CHAR},
+      #{item.quotePrice,jdbcType=DECIMAL}, #{item.amount,jdbcType=BIGINT}, #{item.dealFee,jdbcType=DECIMAL},
+      #{item.dealType,jdbcType=SMALLINT}, #{item.dateTime,jdbcType=BIGINT})
+    </foreach>
   </insert>
   <insert id="insertSelective" parameterType="com.ryd.business.model.StSettleRecord">
     insert into st_settle_record
@@ -129,5 +146,49 @@
       deal_type = #{dealType,jdbcType=SMALLINT},
       date_time = #{dateTime,jdbcType=BIGINT}
     where settle_record_id = #{settleRecordId,jdbcType=CHAR}
+  </update>
+  <update id="updateBatch" parameterType="java.util.List">
+    <foreach collection="list" item="item" index="index" separator="," >
+      update st_settle_record
+      <set>
+        settle_account_id = #{item.settleAccountId,jdbcType=CHAR},
+        stock_id = #{item.stockId,jdbcType=CHAR},
+        quote_price = #{item.quotePrice,jdbcType=DECIMAL},
+        amount = #{item.amount,jdbcType=BIGINT},
+        deal_fee = #{item.dealFee,jdbcType=DECIMAL},
+        deal_type = #{item.dealType,jdbcType=SMALLINT},
+        date_time = #{item.dateTime,jdbcType=BIGINT}
+      </set>
+      where settle_record_id = #{item.settleRecordId,jdbcType=CHAR}
+    </foreach>
+  </update>
+  <update id="updateBatchSelective" parameterType="java.util.List">
+    <foreach collection="list" item="item" index="index" separator="," >
+      update st_settle_record
+      <set>
+        <if test="item.settleAccountId != null">
+          settle_account_id = #{item.settleAccountId,jdbcType=CHAR},
+        </if>
+        <if test="item.stockId != null">
+          stock_id = #{item.stockId,jdbcType=CHAR},
+        </if>
+        <if test="item.quotePrice != null">
+          quote_price = #{item.quotePrice,jdbcType=DECIMAL},
+        </if>
+        <if test="item.amount != null">
+          amount = #{item.amount,jdbcType=BIGINT},
+        </if>
+        <if test="item.dealFee != null">
+          deal_fee = #{item.dealFee,jdbcType=DECIMAL},
+        </if>
+        <if test="item.dealType != null">
+          deal_type = #{item.dealType,jdbcType=SMALLINT},
+        </if>
+        <if test="item.dateTime != null">
+          date_time = #{item.dateTime,jdbcType=BIGINT},
+        </if>
+      </set>
+      where settle_record_id = #{item.settleRecordId,jdbcType=CHAR}
+    </foreach>
   </update>
 </mapper>

@@ -9,9 +9,13 @@ import java.util.Map;
 public interface StAccountMapper {
     int deleteByPrimaryKey(String id);
 
+    int deleteBatch(List<String> list);
+
     int insert(StAccount record);
 
     int insertSelective(StAccount record);
+
+    int insertBatch(List<StAccount> list);
 
     StAccount selectByPrimaryKey(String id);
 
@@ -20,6 +24,10 @@ public interface StAccountMapper {
     int updateByPrimaryKeySelective(StAccount record);
 
     int updateByPrimaryKey(StAccount record);
+
+    int updateBatch(List<StAccount> list);
+
+    int updateBatchSelective(List<StAccount> list);
 
     List<StAccount> selectListByKeySelective(@Param(value = "account") StAccount account,
                                              @Param(value = "limit") Integer limit,

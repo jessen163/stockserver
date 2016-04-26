@@ -60,6 +60,12 @@
     delete from st_stock_history
     where stock_id = #{stockId,jdbcType=CHAR}
   </delete>
+  <delete id="deleteBatch" parameterType="List">
+    delete from st_stock_history where stock_id in
+    <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+      #{item}
+    </foreach>
+  </delete>
   <insert id="insert" parameterType="com.ryd.business.model.StStockHistory">
     insert into st_stock_history (stock_id, stock_name, stock_code, 
       open_price, bfclose_price, current_price, 
@@ -85,6 +91,35 @@
       #{sellThreeAmount,jdbcType=BIGINT}, #{sellFourPrice,jdbcType=DECIMAL}, #{sellFourAmount,jdbcType=BIGINT}, 
       #{sellFivePrice,jdbcType=DECIMAL}, #{sellFiveAmount,jdbcType=BIGINT}, #{stockDate,jdbcType=DATE}, 
       #{stockTime,jdbcType=TIME})
+  </insert>
+  <insert id ="insertBatch" parameterType="java.util.List" >
+    insert into st_stock_history (stock_id, stock_name, stock_code,
+    open_price, bfclose_price, current_price,
+    max_price, min_price, bidding_buy_price,
+    bidding_sell_price, trade_amount, trade_money,
+    buy_one_price, buy_one_amount, buy_two_price,
+    buy_two_amount, buy_three_price, buy_three_amount,
+    buy_four_price, buy_four_amount, buy_five_price,
+    buy_five_amount, sell_one_price, sell_one_amount,
+    sell_two_price, sell_two_amount, sell_three_price,
+    sell_three_amount, sell_four_price, sell_four_amount,
+    sell_five_price, sell_five_amount, stock_date,
+    stock_time)
+    values
+    <foreach collection ="list" item ="item" index ="index" separator =",">
+      (#{item.stockId,jdbcType=CHAR}, #{item.stockName,jdbcType=VARCHAR}, #{item.stockCode,jdbcType=VARCHAR},
+      #{item.openPrice,jdbcType=DECIMAL}, #{item.bfclosePrice,jdbcType=DECIMAL}, #{item.currentPrice,jdbcType=DECIMAL},
+      #{item.maxPrice,jdbcType=DECIMAL}, #{item.minPrice,jdbcType=DECIMAL}, #{item.biddingBuyPrice,jdbcType=DECIMAL},
+      #{item.biddingSellPrice,jdbcType=DECIMAL}, #{item.tradeAmount,jdbcType=BIGINT}, #{item.tradeMoney,jdbcType=DECIMAL},
+      #{item.buyOnePrice,jdbcType=DECIMAL}, #{item.buyOneAmount,jdbcType=BIGINT}, #{item.buyTwoPrice,jdbcType=DECIMAL},
+      #{item.buyTwoAmount,jdbcType=BIGINT}, #{item.buyThreePrice,jdbcType=DECIMAL}, #{item.buyThreeAmount,jdbcType=BIGINT},
+      #{item.buyFourPrice,jdbcType=DECIMAL}, #{item.buyFourAmount,jdbcType=BIGINT}, #{item.buyFivePrice,jdbcType=DECIMAL},
+      #{item.buyFiveAmount,jdbcType=BIGINT}, #{item.sellOnePrice,jdbcType=DECIMAL}, #{item.sellOneAmount,jdbcType=BIGINT},
+      #{item.sellTwoPrice,jdbcType=DECIMAL}, #{item.sellTwoAmount,jdbcType=BIGINT}, #{item.sellThreePrice,jdbcType=DECIMAL},
+      #{item.sellThreeAmount,jdbcType=BIGINT}, #{item.sellFourPrice,jdbcType=DECIMAL}, #{item.sellFourAmount,jdbcType=BIGINT},
+      #{item.sellFivePrice,jdbcType=DECIMAL}, #{item.sellFiveAmount,jdbcType=BIGINT}, #{item.stockDate,jdbcType=DATE},
+      #{item.stockTime,jdbcType=TIME})
+    </foreach>
   </insert>
   <insert id="insertSelective" parameterType="com.ryd.business.model.StStockHistory">
     insert into st_stock_history
@@ -438,5 +473,58 @@
       stock_date = #{stockDate,jdbcType=DATE},
       stock_time = #{stockTime,jdbcType=TIME}
     where stock_id = #{stockId,jdbcType=CHAR}
+  </update>
+  <update id="updateBatch" parameterType="java.util.List">
+    <foreach collection="list" item="item" index="index" separator="," >
+      update st_trade_record
+      <set>
+        seller_account_id = #{item.sellerAccountId,jdbcType=CHAR},
+        buyer_account_id = #{item.buyerAccountId,jdbcType=CHAR},
+        stock_id = #{item.stockId,jdbcType=CHAR},
+        quote_price = #{item.quotePrice,jdbcType=DECIMAL},
+        amount = #{item.amount,jdbcType=BIGINT},
+        date_time = #{item.dateTime,jdbcType=BIGINT},
+        buy_fee = #{item.buyFee,jdbcType=DECIMAL},
+        sell_fee = #{item.sellFee,jdbcType=DECIMAL},
+        deal_tax = #{item.dealTax,jdbcType=DECIMAL}
+      </set>
+
+      where record_id = #{item.recordId,jdbcType=CHAR}
+    </foreach>
+  </update>
+  <update id="updateBatchSelective" parameterType="java.util.List">
+    <foreach collection="list" item="item" index="index" separator="," >
+      update st_trade_record
+      <set>
+        <if test="item.sellerAccountId != null">
+          seller_account_id = #{item.sellerAccountId,jdbcType=CHAR},
+        </if>
+        <if test="item.buyerAccountId != null">
+          buyer_account_id = #{item.buyerAccountId,jdbcType=CHAR},
+        </if>
+        <if test="item.stockId != null">
+          stock_id = #{item.stockId,jdbcType=CHAR},
+        </if>
+        <if test="item.quotePrice != null">
+          quote_price = #{item.quotePrice,jdbcType=DECIMAL},
+        </if>
+        <if test="item.amount != null">
+          amount = #{item.amount,jdbcType=BIGINT},
+        </if>
+        <if test="item.dateTime != null">
+          date_time = #{item.dateTime,jdbcType=BIGINT},
+        </if>
+        <if test="item.buyFee != null">
+          buy_fee = #{item.buyFee,jdbcType=DECIMAL},
+        </if>
+        <if test="item.sellFee != null">
+          sell_fee = #{item.sellFee,jdbcType=DECIMAL},
+        </if>
+        <if test="item.dealTax != null">
+          deal_tax = #{item.dealTax,jdbcType=DECIMAL},
+        </if>
+      </set>
+      where record_id = #{item.recordId,jdbcType=CHAR}
+    </foreach>
   </update>
 </mapper>

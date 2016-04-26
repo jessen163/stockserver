@@ -9,6 +9,8 @@ public interface StTradeRecordMapper {
 
     int deleteByPrimaryKey(String id);
 
+    int deleteBatch(List<String> list);
+
     int insert(StTradeRecord record);
 
     int insertSelective(StTradeRecord record);
@@ -18,6 +20,10 @@ public interface StTradeRecordMapper {
     int updateByPrimaryKeySelective(StTradeRecord record);
 
     int updateByPrimaryKey(StTradeRecord record);
+
+    int updateBatch(List<StTradeRecord> list);
+
+    int updateBatchSelective(List<StTradeRecord> list);
 
     List<StTradeRecord> selectListByKeySelective(@Param(value = "record") StTradeRecord record,
                                                   @Param(value = "limit") Integer limit,

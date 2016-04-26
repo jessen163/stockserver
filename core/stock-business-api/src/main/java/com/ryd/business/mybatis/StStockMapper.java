@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 public interface StStockMapper {
+
     int deleteByPrimaryKey(String stockId);
 
     int insert(StStock record);
@@ -17,7 +18,6 @@ public interface StStockMapper {
     int updateByPrimaryKeySelective(StStock record);
 
     int updateByPrimaryKey(StStock record);
-
 
     List<StStock> selectListByKeySelective(@Param(value = "record") StStock record,
                                                   @Param(value = "limit") Integer limit,
