@@ -28,25 +28,31 @@ public interface StQuoteService {
     public Integer updateQuoteList(List<StQuote> quoteList);
 
     /**
-     * 查询单只股票的报价信息(买、卖)
+     * 查询报价队列信息，接收参数(队列为有序)
+     *
+     * 通过股票id查询买卖报价列表
+     * 通过买卖类型查询所有股票的报价列表
      * @return
      */
     public List<StQuote> findQuoteQueueByStock(SearchQuoteDTO searchQuoteDTO);
 
     /**
-     * 查询单只股票的报价信息(买、卖)
+     * 查询单只股票的最靠前的一条报价信息(买/卖)
      * @return
      */
     public StQuote findFirstQuoteByStock(SearchQuoteDTO searchQuoteDTO);
 
     /**
      * 查询报价信息，接收参数
+     *
+     * 通过账户查询报价列表，我的今日报价，历史报价
+     *
      * @return
      */
     public List<StQuote> findQuoteList(SearchQuoteDTO searchQuoteDTO);
 
     /**
-     * 查询报价信息，接收参数
+     * 查询报价信息中的股票ID（哪些股票包含报价信息）
      * @return
      */
     public List<String> findQuoteStockIdList();

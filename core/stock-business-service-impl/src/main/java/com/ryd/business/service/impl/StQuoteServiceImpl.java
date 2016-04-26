@@ -11,6 +11,8 @@ import com.ryd.cache.service.ICacheService;
 import com.ryd.system.service.StDateScheduleService;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentSkipListMap;
@@ -68,11 +70,13 @@ public class StQuoteServiceImpl implements StQuoteService {
 
     @Override
     public Integer updateQuoteList(List<StQuote> quoteList) {
+        // TODO 暂时没有修改报价,不考虑
         return null;
     }
 
     @Override
     public List<StQuote> findQuoteList(SearchQuoteDTO searchQuoteDTO) {
+        // 查询数据库,加缓存
         return null;
     }
 
@@ -89,11 +93,34 @@ public class StQuoteServiceImpl implements StQuoteService {
     @Override
     public List<StQuote> findQuoteQueueByStock(SearchQuoteDTO searchQuoteDTO) {
         // 从缓存中获取
-        return null;
+        ConcurrentSkipListMap<Long, StQuote> quoteList = null;
+
+        Object quoteobj = null;
+        if (searchQuoteDTO.getQuoteType() == ApplicationConstants.STOCK_QUOTETYPE_BUY) {
+            quoteobj = iCacheService.getObjectByKey(CacheConstant.CACHEKEY_STOCK_QUOTE_BUYQUEUE, searchQuoteDTO.getStockCode(), null);
+        } else if (searchQuoteDTO.getQuoteType() == ApplicationConstants.STOCK_QUOTETYPE_SELL){
+            quoteobj = iCacheService.getObjectByKey(CacheConstant.CACHEKEY_STOCK_QUOTE_SELLQUEUE, searchQuoteDTO.getStockCode(), null);
+        }
+        quoteList = (ConcurrentSkipListMap<Long, StQuote>) quoteobj;
+        Collection<StQuote> collectionList = quoteList.values();
+        List<StQuote> list = new ArrayList<StQuote>();
+        list.addAll(collectionList);
+        return list;
     }
 
     @Override
     public StQuote findFirstQuoteByStock(SearchQuoteDTO searchQuoteDTO) {
+        // 从缓存中获取
+        ConcurrentSkipListMap<Long, StQuote> quoteList = null;
+
+        Object quoteobj = null;
+        if (searchQuoteDTO.getQuoteType() == ApplicationConstants.STOCK_QUOTETYPE_BUY) {
+            quoteobj = iCacheService.getObjectByKey(CacheConstant.CACHEKEY_STOCK_QUOTE_BUYQUEUE, searchQuoteDTO.getStockCode(), null);
+        } else if (searchQuoteDTO.getQuoteType() == ApplicationConstants.STOCK_QUOTETYPE_SELL){
+            quoteobj = iCacheService.getObjectByKey(CacheConstant.CACHEKEY_STOCK_QUOTE_SELLQUEUE, searchQuoteDTO.getStockCode(), null);
+        }
+        quoteList = (ConcurrentSkipListMap<Long, StQuote>) quoteobj;
+//        return quoteList.higherEntry();
         return null;
     }
 
