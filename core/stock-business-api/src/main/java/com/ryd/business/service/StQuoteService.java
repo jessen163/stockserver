@@ -34,8 +34,35 @@ public interface StQuoteService {
     public List<StQuote> findQuoteQueueByStock(SearchQuoteDTO searchQuoteDTO);
 
     /**
+     * 查询单只股票的报价信息(买、卖)
+     * @return
+     */
+    public StQuote findFirstQuoteByStock(SearchQuoteDTO searchQuoteDTO);
+
+    /**
      * 查询报价信息，接收参数
      * @return
      */
     public List<StQuote> findQuoteList(SearchQuoteDTO searchQuoteDTO);
+
+    /**
+     * 查询报价信息，接收参数
+     * @return
+     */
+    public List<StQuote> findQuoteList(int pageid, int size);
+
+    /**
+     * 天津
+     * @param stQuote
+     * @return
+     */
+    public boolean addQuoteToQueue(StQuote stQuote);
+
+    /**
+     * 从队列中删除报价，同时修改报价状态
+     * @param buyQuote
+     * @param sellQuote
+     * @return
+     */
+    public boolean deleteQuoteFromQueue(StQuote buyQuote, StQuote sellQuote);
 }

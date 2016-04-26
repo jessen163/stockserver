@@ -1,10 +1,18 @@
 package com.ryd.business.service.impl;
 
+import com.ryd.basecommon.util.ApplicationConstants;
+import com.ryd.basecommon.util.CacheConstant;
+import com.ryd.basecommon.util.StringUtils;
+import com.ryd.business.dao.StQuoteDao;
 import com.ryd.business.dto.SearchQuoteDTO;
 import com.ryd.business.model.StQuote;
 import com.ryd.business.service.StQuoteService;
+import com.ryd.cache.service.ICacheService;
+import com.ryd.system.service.StDateScheduleService;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
+import java.util.concurrent.ConcurrentSkipListMap;
 
 /**
  * <p>标题:报价业务实现类</p>
@@ -14,6 +22,13 @@ import java.util.List;
  * 创建时间：2016/4/25 10:11
  */
 public class StQuoteServiceImpl implements StQuoteService {
+    @Autowired
+    private StDateScheduleService stDateScheduleService;
+    @Autowired
+    private StQuoteDao stQuoteDao;
+    @Autowired
+    private ICacheService iCacheService;
+
     @Override
     public Integer saveQuoteList(List<StQuote> quoteList) {
         Integer quoteFlag = 0;
@@ -24,8 +39,30 @@ public class StQuoteServiceImpl implements StQuoteService {
         // 将报价加入队列 失败后回滚
 
         // 将报价放入Kafka 失败后不回滚
+        if (StringUtils.isEmpty(quoteList)) return -1; // 参数不匹配
+        // 交易时间内
+        if (stDateScheduleService.getIsCanQuote()) {
+            // 非交易时间
+            return -2;
+        }
+        // 价格是否匹配涨跌幅
+        for (StQuote quote: quoteList) {
+//            if (不匹配) {
+//                // 超出涨跌幅
+//                return -3;
+//            }
+        }
+        // 账户金额是否够用
+        for (StQuote quote: quoteList) {
+//            if (账户是否足够) {
+                  // 账户余额不足
+//                return -4;
+//            }
+            // 添加报价到队列，同时保存到数据库 失败后回滚
+            this.addQuoteToQueue(quote);
+        }
 
-        return quoteFlag;
+        return quoteList.size();
     }
 
     @Override
@@ -39,8 +76,49 @@ public class StQuoteServiceImpl implements StQuoteService {
     }
 
     @Override
+    public List<StQuote> findQuoteList(int pageid, int size) {
+        return null;
+    }
+
+    @Override
     public List<StQuote> findQuoteQueueByStock(SearchQuoteDTO searchQuoteDTO) {
         // 从缓存中获取
         return null;
+    }
+
+    @Override
+    public StQuote findFirstQuoteByStock(SearchQuoteDTO searchQuoteDTO) {
+        return null;
+    }
+
+    @Override
+    public boolean addQuoteToQueue(StQuote quote) {
+        // 入库
+        stQuoteDao.add(quote);
+
+        Object quoteobj = null;
+        ConcurrentSkipListMap<Long, StQuote> quoteList = null;
+        if (quote.getQuoteType().intValue() == ApplicationConstants.STOCK_QUOTETYPE_BUY) {
+            quoteobj = iCacheService.getObjectByKey(CacheConstant.CACHEKEY_STOCK_QUOTE_BUYQUEUE, quote.getStockId(), null);
+            // TODO 冻结资金
+        } else {
+            quoteobj = iCacheService.getObjectByKey(CacheConstant.CACHEKEY_STOCK_QUOTE_SELLQUEUE, quote.getStockId(), null);
+            // TODO 冻结股票
+        }
+        if (quoteobj == null) {
+            return false;
+        }
+
+        quoteList = (ConcurrentSkipListMap<Long, StQuote>) quoteobj;
+        // 入队列 TODO 待修改
+        quoteList.put(quote.getDateTime() + quote.getQuotePrice().longValue(), quote);
+
+        return true;
+    }
+
+    @Override
+    public boolean deleteQuoteFromQueue(StQuote buyQuote, StQuote sellQuote) {
+        // 从队列中删除报价，同时修改报价状态 TODO 待实现
+        return false;
     }
 }
