@@ -20,8 +20,8 @@ import java.util.List;
  */
 @Repository
 public class StStockDaoImpl extends BuguDao<StStock> implements StStockDao {
-    public StStockDaoImpl(Class<StStock> clazz) {
-        super(clazz);
+    public StStockDaoImpl() {
+        super(StStock.class);
     }
 
     @Override
