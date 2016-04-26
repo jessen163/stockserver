@@ -16,12 +16,27 @@ public interface BaseDao<T> {
      */
     public int add(T obj);
 
+
+    /**
+     * 批量添加
+     * @param list
+     * @return
+     */
+//    public int addBatch(List<T> list);
+
     /**
      * 修改信息
      * @param obj
      * @return
      */
     public int update(T obj);
+
+    /**
+     * 批量修改
+     * @param list
+     * @return
+     */
+//    public int updateBatch(List<T> list);
 
     /**
      * 根据ID查询
@@ -40,9 +55,16 @@ public interface BaseDao<T> {
     public List<T> getTList(T obj, int limit,int offset);
 
     /**
-     * 删除帐户
+     * 删除
      * @param obj
      * @return
      */
     public int deleteTById(T obj);
+
+    /**
+     * 批量删除
+     * @param list
+     * @return
+     */
+//    public int deleteBatch(List<String> list);
 }

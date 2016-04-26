@@ -45,4 +45,26 @@ public class ApplicationConstants {
     public static final Integer STOCK_QUOTETYPE_BUY = 1;
     public static final Integer STOCK_QUOTETYPE_SELL = 2;
 
+    //1、增加，2、减少
+    public static final Integer STOCK_STQUOTE_ACCOUNTMONEY_TYPE_ADD=1;
+    public static final Integer STOCK_STQUOTE_ACCOUNTMONEY_TYPE_REDUSE=2;
+
+    //报价状态 1、托管 2、成交 3、过期
+    public static final Integer STOCK_STQUOTE_STATUS_TRUSTEE=1;
+    public static final Integer STOCK_STQUOTE_STATUS_DEAL=2;
+    public static final Integer STOCK_STQUOTE_STATUS_OUTDATE=3;
+
+    //持仓状态 1、托管 2、成交 3、过期
+    public static final Integer STOCK_STPOSITION_STATUS_TRUSTEE=1;
+    public static final Integer STOCK_STPOSITION_STATUS_DEAL=2;
+    public static final Integer STOCK_STPOSITION_STATUS_OUTDATE=3;
+
+    //时间判断结果 1.可以交易和报价 2.只允许报价 3.不允许报价，不允许交易
+    public static final Integer STQUOTE_TRADE_TIMECOMPARE_1 = 1;
+    public static final Integer STQUOTE_TRADE_TIMECOMPARE_2 = 2;
+    public static final Integer STQUOTE_TRADE_TIMECOMPARE_3 = 3;
+
+    //1.节假日 2.特殊工作日
+    public static final Short DATE_SCHEDULE_FESTIVALDAY = 1;
+    public static final Short DATE_SCHEDULE_SEPCIAL_WORKDAY = 2;
 }
