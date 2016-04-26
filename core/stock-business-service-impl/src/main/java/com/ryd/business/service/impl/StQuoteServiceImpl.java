@@ -12,6 +12,7 @@ import com.ryd.system.service.StDateScheduleService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ConcurrentSkipListMap;
 
 /**
@@ -76,8 +77,13 @@ public class StQuoteServiceImpl implements StQuoteService {
     }
 
     @Override
-    public List<StQuote> findQuoteList(int pageid, int size) {
-        return null;
+    public List<String> findQuoteStockIdList() {
+        Object stockIdListObj = iCacheService.getObjectByKey(CacheConstant.CACHEKEY_QUEUE_STOCKID_LIST, null);
+        if (stockIdListObj == null) {
+            return null;
+        }
+        List<String> stockIdList = (List<String>) stockIdListObj;
+        return stockIdList;
     }
 
     @Override
@@ -112,6 +118,19 @@ public class StQuoteServiceImpl implements StQuoteService {
         quoteList = (ConcurrentSkipListMap<Long, StQuote>) quoteobj;
         // 入队列 TODO 待修改
         quoteList.put(quote.getDateTime() + quote.getQuotePrice().longValue(), quote);
+        // 存入缓存
+        iCacheService.setObjectByKey(CacheConstant.CACHEKEY_STOCK_QUOTE_BUYQUEUE, quote.getStockId(), quoteList, 8 * 60 * 60);
+
+        Object stockIdListObj = iCacheService.getObjectByKey(CacheConstant.CACHEKEY_QUEUE_STOCKID_LIST, null);
+        if (stockIdListObj != null) {
+            List<String> stockIdList = (List<String>) stockIdListObj;
+            if (!stockIdList.contains(quote.getStockId())) {
+                stockIdList.add(quote.getStockId());
+
+                // 存入缓存
+                iCacheService.setObjectByKey(CacheConstant.CACHEKEY_QUEUE_STOCKID_LIST, quote.getQuoteId());
+            }
+        }
 
         return true;
     }

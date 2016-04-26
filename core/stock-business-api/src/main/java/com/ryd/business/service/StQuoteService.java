@@ -49,10 +49,10 @@ public interface StQuoteService {
      * 查询报价信息，接收参数
      * @return
      */
-    public List<StQuote> findQuoteList(int pageid, int size);
+    public List<String> findQuoteStockIdList();
 
     /**
-     * 天津
+     * 添加
      * @param stQuote
      * @return
      */
