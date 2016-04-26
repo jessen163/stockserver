@@ -1,7 +1,7 @@
 package com.ryd.business.service.thread;
 
-import com.ryd.basecommon.common.CacheConstant;
 import com.ryd.basecommon.util.ApplicationConstants;
+import com.ryd.basecommon.util.CacheConstant;
 import com.ryd.basecommon.util.HttpclientUtil;
 import com.ryd.business.model.StStock;
 import com.ryd.business.model.StStockConfig;
