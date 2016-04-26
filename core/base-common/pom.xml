@@ -54,6 +54,16 @@
             <version>${mongo-java-driver.version}</version>
         </dependency>
         <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+            <version>${log4j-api.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>${log4j-api.version}</version>
+        </dependency>
+        <dependency>
             <groupId>com.bugull</groupId>
             <artifactId>mongo</artifactId>
             <version>${bugu-mongo-core.version}</version>
@@ -63,7 +73,11 @@
             <artifactId>commons-httpclient</artifactId>
             <version>${commons-httpclient.version}</version>
         </dependency>
-
+        <dependency>
+            <groupId>commons-collections</groupId>
+            <artifactId>commons-collections</artifactId>
+            <version>3.2.1</version>
+        </dependency>
 
     </dependencies>
 </project>
