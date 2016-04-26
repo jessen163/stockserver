@@ -4,6 +4,7 @@ import com.ryd.business.dao.StStockConfigDao;
 import com.ryd.business.model.StStockConfig;
 import com.ryd.business.service.StStockConfigService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -14,6 +15,7 @@ import java.util.List;
  * 创建人：chenji
  * 创建时间：2016/4/25 10:11
  */
+@Service
 public class StStockConfigServiceImpl implements StStockConfigService {
     @Autowired
     private StStockConfigDao stStockConfigDao;

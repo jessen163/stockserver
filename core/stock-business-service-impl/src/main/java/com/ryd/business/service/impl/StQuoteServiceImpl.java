@@ -10,6 +10,7 @@ import com.ryd.business.service.StQuoteService;
 import com.ryd.cache.service.ICacheService;
 import com.ryd.system.service.StDateScheduleService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -24,6 +25,7 @@ import java.util.concurrent.ConcurrentSkipListMap;
  * 创建人：chenji
  * 创建时间：2016/4/25 10:11
  */
+@Service
 public class StQuoteServiceImpl implements StQuoteService {
     @Autowired
     private StDateScheduleService stDateScheduleService;
@@ -70,14 +72,37 @@ public class StQuoteServiceImpl implements StQuoteService {
 
     @Override
     public Integer updateQuoteList(List<StQuote> quoteList) {
-        // TODO 暂时没有修改报价,不考虑
+        // TODO 撤销报价 交易时间以外不允许撤单，涨跌停股票允许报价、交易 在涨停或跌停以前报价成功的股票允许撮合
+        if (StringUtils.isEmpty(quoteList)) {
+            ConcurrentSkipListMap<Long, StQuote> quoteQueueList = null;
+            for (StQuote quote : quoteList) {
+                //
+
+                Object quoteobj = null;
+                if (quote.getQuoteType().intValue() == ApplicationConstants.STOCK_QUOTETYPE_BUY) {
+                    quoteobj = iCacheService.getObjectByKey(CacheConstant.CACHEKEY_STOCK_QUOTE_BUYQUEUE, quote.getStockId(), null);
+                } else if (quote.getQuoteType().intValue() == ApplicationConstants.STOCK_QUOTETYPE_SELL){
+                    quoteobj = iCacheService.getObjectByKey(CacheConstant.CACHEKEY_STOCK_QUOTE_SELLQUEUE, quote.getStockId(), null);
+                }
+                quoteQueueList = (ConcurrentSkipListMap<Long, StQuote>) quoteobj;
+                quoteQueueList.remove(quote);
+                if (quote.getQuoteType().intValue() == ApplicationConstants.STOCK_QUOTETYPE_BUY) {
+                    iCacheService.setObjectByKey(CacheConstant.CACHEKEY_STOCK_QUOTE_BUYQUEUE, quote.getStockId(), quoteQueueList, 8 * 60 * 60);
+                } else if (quote.getQuoteType().intValue() == ApplicationConstants.STOCK_QUOTETYPE_SELL){
+                    iCacheService.setObjectByKey(CacheConstant.CACHEKEY_STOCK_QUOTE_SELLQUEUE, quote.getStockId(), quoteQueueList, 8 * 60 * 60);
+                }
+            }
+        }
         return null;
     }
 
     @Override
     public List<StQuote> findQuoteList(SearchQuoteDTO searchQuoteDTO) {
-        // 查询数据库,加缓存
-        return null;
+        // TODO 待修改
+        StQuote stQuote = new StQuote();
+        stQuote.setAccountId(searchQuoteDTO.getAccountId());
+        List<StQuote> quoteList = stQuoteDao.getTList(stQuote, 0, Integer.MAX_VALUE);
+        return quoteList;
     }
 
     @Override
@@ -163,7 +188,7 @@ public class StQuoteServiceImpl implements StQuoteService {
     }
 
     @Override
-    public boolean deleteQuoteFromQueue(StQuote buyQuote, StQuote sellQuote) {
+    public boolean deleteQuoteFromQueue(StQuote stQuote) {
         // 从队列中删除报价，同时修改报价状态 TODO 待实现
         return false;
     }

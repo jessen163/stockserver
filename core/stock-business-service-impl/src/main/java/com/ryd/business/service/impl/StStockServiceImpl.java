@@ -9,6 +9,7 @@ import com.ryd.business.service.StStockService;
 import com.ryd.business.service.thread.SyncStockThread;
 import com.ryd.cache.service.ICacheService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
@@ -22,6 +23,7 @@ import java.util.concurrent.Executors;
  * 创建人：chenji
  * 创建时间：2016/4/25 10:11
  */
+@Service
 public class StStockServiceImpl implements StStockService {
     @Autowired
     private StStockDao stStockDao;

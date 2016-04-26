@@ -66,9 +66,8 @@ public interface StQuoteService {
 
     /**
      * 从队列中删除报价，同时修改报价状态
-     * @param buyQuote
-     * @param sellQuote
+     * @param stQuote
      * @return
      */
-    public boolean deleteQuoteFromQueue(StQuote buyQuote, StQuote sellQuote);
+    public boolean deleteQuoteFromQueue(StQuote stQuote);
 }
