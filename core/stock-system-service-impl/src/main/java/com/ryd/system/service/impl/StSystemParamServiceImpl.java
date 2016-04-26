@@ -1,6 +1,6 @@
 package com.ryd.system.service.impl;
 
-import com.ryd.basecommon.common.CacheConstant;
+import com.ryd.basecommon.util.CacheConstant;
 import com.ryd.cache.service.ICacheService;
 import com.ryd.system.dao.StSystemParamDao;
 import com.ryd.system.model.StSystemParam;
