@@ -67,4 +67,13 @@ public class ApplicationConstants {
     //1.节假日 2.特殊工作日
     public static final Short DATE_SCHEDULE_FESTIVALDAY = 1;
     public static final Short DATE_SCHEDULE_SEPCIAL_WORKDAY = 2;
+
+    // 交易主线程是否停止
+    public static volatile boolean isMainThreadStop = false;
+
+    // 交易子线程是否停止
+    public static volatile boolean isSubThreadStop = false;
+
+    // 交易子线程是否等待
+    public static volatile boolean isSubThreadWait = false;
 }
