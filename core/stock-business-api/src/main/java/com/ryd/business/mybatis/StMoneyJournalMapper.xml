@@ -33,6 +33,12 @@
     delete from st_money_journal
     where record_id = #{recordId,jdbcType=CHAR}
   </delete>
+  <delete id="deleteBatch" parameterType="List">
+    delete from st_money_journal where record_id in
+    <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+      #{item}
+    </foreach>
+  </delete>
   <insert id="insert" parameterType="com.ryd.business.model.StMoneyJournal">
     insert into st_money_journal (record_id, quote_id, account_id, 
       stock_id, quote_price, amount, 
@@ -44,6 +50,21 @@
       #{dealType,jdbcType=SMALLINT}, #{dealMoney,jdbcType=DECIMAL}, #{dealFee,jdbcType=DECIMAL}, 
       #{dealTax,jdbcType=DECIMAL}, #{dealDate,jdbcType=DATE}, #{dealTime,jdbcType=TIME}
       )
+  </insert>
+  <insert id ="insertBatch" parameterType="java.util.List" >
+    insert into st_money_journal (record_id, quote_id, account_id,
+    stock_id, quote_price, amount,
+    deal_type, deal_money, deal_fee,
+    deal_tax, deal_date, deal_time
+    )
+    values
+    <foreach collection ="list" item ="item" index ="index" separator =",">
+      (#{item.recordId,jdbcType=CHAR}, #{item.quoteId,jdbcType=CHAR}, #{item.accountId,jdbcType=CHAR},
+      #{item.stockId,jdbcType=CHAR}, #{item.quotePrice,jdbcType=DECIMAL}, #{item.amount,jdbcType=BIGINT},
+      #{item.dealType,jdbcType=SMALLINT}, #{item.dealMoney,jdbcType=DECIMAL}, #{item.dealFee,jdbcType=DECIMAL},
+      #{item.dealTax,jdbcType=DECIMAL}, #{item.dealDate,jdbcType=DATE}, #{item.dealTime,jdbcType=TIME}
+      )
+    </foreach>
   </insert>
   <insert id="insertSelective" parameterType="com.ryd.business.model.StMoneyJournal">
     insert into st_money_journal
@@ -177,5 +198,65 @@
       deal_date = #{dealDate,jdbcType=DATE},
       deal_time = #{dealTime,jdbcType=TIME}
     where record_id = #{recordId,jdbcType=CHAR}
+  </update>
+  <update id="updateBatch" parameterType="java.util.List">
+    <foreach collection="list" item="item" index="index" separator="," >
+      update st_money_journal
+      <set>
+        quote_id = #{item.quoteId,jdbcType=CHAR},
+        account_id = #{item.accountId,jdbcType=CHAR},
+        stock_id = #{item.stockId,jdbcType=CHAR},
+        quote_price = #{item.quotePrice,jdbcType=DECIMAL},
+        amount = #{item.amount,jdbcType=BIGINT},
+        deal_type = #{item.dealType,jdbcType=SMALLINT},
+        deal_money = #{item.dealMoney,jdbcType=DECIMAL},
+        deal_fee = #{item.dealFee,jdbcType=DECIMAL},
+        deal_tax = #{item.dealTax,jdbcType=DECIMAL},
+        deal_date = #{item.dealDate,jdbcType=DATE},
+        deal_time = #{item.dealTime,jdbcType=TIME}
+      </set>
+      where record_id = #{item.recordId,jdbcType=CHAR}
+    </foreach>
+  </update>
+  <update id="updateBatchSelective" parameterType="java.util.List">
+    <foreach collection="list" item="item" index="index" separator="," >
+      update st_money_journal
+      <set>
+        <if test="item.quoteId != null">
+          quote_id = #{item.quoteId,jdbcType=CHAR},
+        </if>
+        <if test="item.accountId != null">
+          account_id = #{item.accountId,jdbcType=CHAR},
+        </if>
+        <if test="item.stockId != null">
+          stock_id = #{item.stockId,jdbcType=CHAR},
+        </if>
+        <if test="item.quotePrice != null">
+          quote_price = #{item.quotePrice,jdbcType=DECIMAL},
+        </if>
+        <if test="item.amount != null">
+          amount = #{item.amount,jdbcType=BIGINT},
+        </if>
+        <if test="item.dealType != null">
+          deal_type = #{item.dealType,jdbcType=SMALLINT},
+        </if>
+        <if test="item.dealMoney != null">
+          deal_money = #{item.dealMoney,jdbcType=DECIMAL},
+        </if>
+        <if test="item.dealFee != null">
+          deal_fee = #{item.dealFee,jdbcType=DECIMAL},
+        </if>
+        <if test="item.dealTax != null">
+          deal_tax = #{item.dealTax,jdbcType=DECIMAL},
+        </if>
+        <if test="item.dealDate != null">
+          deal_date = #{item.dealDate,jdbcType=DATE},
+        </if>
+        <if test="item.dealTime != null">
+          deal_time = #{item.dealTime,jdbcType=TIME},
+        </if>
+      </set>
+      where record_id = #{item.recordId,jdbcType=CHAR}
+    </foreach>
   </update>
 </mapper>

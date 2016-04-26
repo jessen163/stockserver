@@ -32,6 +32,12 @@
     delete from st_stock_config
     where id = #{id,jdbcType=CHAR}
   </delete>
+  <delete id="deleteBatch" parameterType="List">
+    delete from st_stock_config where id in
+    <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+      #{item}
+    </foreach>
+  </delete>
   <insert id="insert" parameterType="com.ryd.business.model.StStockConfig">
     insert into st_stock_config (id, stock_name, stock_code, 
       stock_type, board_type, status, 
@@ -41,6 +47,19 @@
       #{stockType,jdbcType=SMALLINT}, #{boardType,jdbcType=SMALLINT}, #{status,jdbcType=SMALLINT}, 
       #{remark,jdbcType=VARCHAR}, #{createdBy,jdbcType=CHAR}, #{createdOn,jdbcType=BIGINT}, 
       #{updatedBy,jdbcType=CHAR}, #{updatedOn,jdbcType=BIGINT})
+  </insert>
+  <insert id ="insertBatch" parameterType="java.util.List" >
+    insert into st_stock_config (id, stock_name, stock_code,
+    stock_type, board_type, status,
+    remark, created_by, created_on,
+    updated_by, updated_on)
+    values
+    <foreach collection ="list" item ="item" index ="index" separator =",">
+      (#{item.id,jdbcType=CHAR}, #{item.stockName,jdbcType=VARCHAR}, #{item.stockCode,jdbcType=VARCHAR},
+      #{item.stockType,jdbcType=SMALLINT}, #{item.boardType,jdbcType=SMALLINT}, #{item.status,jdbcType=SMALLINT},
+      #{item.remark,jdbcType=VARCHAR}, #{item.createdBy,jdbcType=CHAR}, #{item.createdOn,jdbcType=BIGINT},
+      #{item.updatedBy,jdbcType=CHAR}, #{item.updatedOn,jdbcType=BIGINT})
+    </foreach>
   </insert>
   <insert id="insertSelective" parameterType="com.ryd.business.model.StStockConfig">
     insert into st_stock_config
@@ -164,5 +183,61 @@
       updated_by = #{updatedBy,jdbcType=CHAR},
       updated_on = #{updatedOn,jdbcType=BIGINT}
     where id = #{id,jdbcType=CHAR}
+  </update>
+  <update id="updateBatch" parameterType="java.util.List">
+    <foreach collection="list" item="item" index="index" separator="," >
+      update st_stock_config
+      <set>
+        stock_name = #{item.stockName,jdbcType=VARCHAR},
+        stock_code = #{item.stockCode,jdbcType=VARCHAR},
+        stock_type = #{item.stockType,jdbcType=SMALLINT},
+        board_type = #{item.boardType,jdbcType=SMALLINT},
+        status = #{item.status,jdbcType=SMALLINT},
+        remark = #{item.remark,jdbcType=VARCHAR},
+        created_by = #{item.createdBy,jdbcType=CHAR},
+        created_on = #{item.createdOn,jdbcType=BIGINT},
+        updated_by = #{item.updatedBy,jdbcType=CHAR},
+        updated_on = #{item.updatedOn,jdbcType=BIGINT}
+      </set>
+      where id = #{item.id,jdbcType=CHAR}
+    </foreach>
+  </update>
+  <update id="updateBatchSelective" parameterType="java.util.List">
+    <foreach collection="list" item="item" index="index" separator="," >
+      update st_stock_config
+      <set>
+        <if test="item.stockName != null">
+          stock_name = #{item.stockName,jdbcType=VARCHAR},
+        </if>
+        <if test="item.stockCode != null">
+          stock_code = #{item.stockCode,jdbcType=VARCHAR},
+        </if>
+        <if test="item.stockType != null">
+          stock_type = #{item.stockType,jdbcType=SMALLINT},
+        </if>
+        <if test="item.boardType != null">
+          board_type = #{item.boardType,jdbcType=SMALLINT},
+        </if>
+        <if test="item.status != null">
+          status = #{item.status,jdbcType=SMALLINT},
+        </if>
+        <if test="item.remark != null">
+          remark = #{item.remark,jdbcType=VARCHAR},
+        </if>
+        <if test="item.createdBy != null">
+          created_by = #{item.createdBy,jdbcType=CHAR},
+        </if>
+        <if test="item.createdOn != null">
+          created_on = #{item.createdOn,jdbcType=BIGINT},
+        </if>
+        <if test="item.updatedBy != null">
+          updated_by = #{item.updatedBy,jdbcType=CHAR},
+        </if>
+        <if test="item.updatedOn != null">
+          updated_on = #{item.updatedOn,jdbcType=BIGINT},
+        </if>
+      </set>
+      where id = #{item.id,jdbcType=CHAR}
+    </foreach>
   </update>
 </mapper>

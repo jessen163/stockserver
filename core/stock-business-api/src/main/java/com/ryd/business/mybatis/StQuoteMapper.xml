@@ -33,6 +33,12 @@
     delete from st_quote
     where quote_id = #{quoteId,jdbcType=CHAR}
   </delete>
+  <delete id="deleteBatch" parameterType="List">
+    delete from st_quote where quote_id in
+    <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+      #{item}
+    </foreach>
+  </delete>
   <insert id="insert" parameterType="com.ryd.business.model.StQuote">
     insert into st_quote (quote_id, account_id, stock_id, 
       quote_price, amount, current_amount, 
@@ -44,6 +50,21 @@
       #{quoteType,jdbcType=SMALLINT}, #{frozeMoney,jdbcType=DECIMAL}, #{commissionFee,jdbcType=DECIMAL}, 
       #{status,jdbcType=SMALLINT}, #{userType,jdbcType=SMALLINT}, #{dateTime,jdbcType=BIGINT}
       )
+  </insert>
+  <insert id ="insertBatch" parameterType="java.util.List" >
+    insert into st_quote (quote_id, account_id, stock_id,
+    quote_price, amount, current_amount,
+    quote_type, froze_money, commission_fee,
+    status, user_type, date_time
+    )
+    values
+    <foreach collection ="list" item ="item" index ="index" separator =",">
+      (#{item.quoteId,jdbcType=CHAR}, #{item.accountId,jdbcType=CHAR}, #{item.stockId,jdbcType=CHAR},
+      #{item.quotePrice,jdbcType=DECIMAL}, #{item.amount,jdbcType=BIGINT}, #{item.currentAmount,jdbcType=BIGINT},
+      #{item.quoteType,jdbcType=SMALLINT}, #{item.frozeMoney,jdbcType=DECIMAL}, #{item.commissionFee,jdbcType=DECIMAL},
+      #{item.status,jdbcType=SMALLINT}, #{item.userType,jdbcType=SMALLINT}, #{item.dateTime,jdbcType=BIGINT}
+      )
+    </foreach>
   </insert>
   <insert id="insertSelective" parameterType="com.ryd.business.model.StQuote">
     insert into st_quote
@@ -124,4 +145,118 @@
       </if>
     </trim>
   </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ryd.business.model.StQuote">
+    update st_quote
+    <set>
+      <if test="accountId != null">
+        account_id = #{accountId,jdbcType=CHAR},
+      </if>
+      <if test="stockId != null">
+        stock_id = #{stockId,jdbcType=CHAR},
+      </if>
+      <if test="quotePrice != null">
+        quote_price = #{quotePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="amount != null">
+        amount = #{amount,jdbcType=BIGINT},
+      </if>
+      <if test="currentAmount != null">
+        current_amount = #{currentAmount,jdbcType=BIGINT},
+      </if>
+      <if test="quoteType != null">
+        quote_type = #{quoteType,jdbcType=SMALLINT},
+      </if>
+      <if test="frozeMoney != null">
+        froze_money = #{frozeMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="commissionFee != null">
+        commission_fee = #{commissionFee,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=SMALLINT},
+      </if>
+      <if test="userType != null">
+        user_type = #{userType,jdbcType=SMALLINT},
+      </if>
+      <if test="dateTime != null">
+        date_time = #{dateTime,jdbcType=BIGINT},
+      </if>
+    </set>
+    where quote_id = #{quoteId,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ryd.business.model.StQuote">
+    update st_quote
+    set account_id = #{accountId,jdbcType=CHAR},
+    stock_id = #{stockId,jdbcType=CHAR},
+    quote_price = #{quotePrice,jdbcType=DECIMAL},
+    amount = #{amount,jdbcType=BIGINT},
+    current_amount = #{currentAmount,jdbcType=BIGINT},
+    quote_type = #{quoteType,jdbcType=SMALLINT},
+    froze_money = #{frozeMoney,jdbcType=DECIMAL},
+    commission_fee = #{commissionFee,jdbcType=DECIMAL},
+    status = #{status,jdbcType=SMALLINT},
+    user_type = #{userType,jdbcType=SMALLINT},
+    date_time = #{dateTime,jdbcType=BIGINT}
+    where quote_id = #{quoteId,jdbcType=CHAR}
+  </update>
+  <update id="updateBatch" parameterType="java.util.List">
+    <foreach collection="list" item="item" index="index" separator="," >
+      update st_quote
+      <set>
+        account_id = #{item.accountId,jdbcType=CHAR},
+        stock_id = #{item.stockId,jdbcType=CHAR},
+        quote_price = #{item.quotePrice,jdbcType=DECIMAL},
+        amount = #{item.amount,jdbcType=BIGINT},
+        current_amount = #{item.currentAmount,jdbcType=BIGINT},
+        quote_type = #{item.quoteType,jdbcType=SMALLINT},
+        froze_money = #{item.frozeMoney,jdbcType=DECIMAL},
+        commission_fee = #{item.commissionFee,jdbcType=DECIMAL},
+        status = #{item.status,jdbcType=SMALLINT},
+        user_type = #{item.userType,jdbcType=SMALLINT},
+        date_time = #{item.dateTime,jdbcType=BIGINT}
+      </set>
+      where quote_id = #{item.quoteId,jdbcType=CHAR}
+    </foreach>
+  </update>
+  <update id="updateBatchSelective" parameterType="java.util.List">
+    <foreach collection="list" item="item" index="index" separator="," >
+      update st_quote
+      <set>
+        <if test="item.accountId != null">
+          account_id = #{item.accountId,jdbcType=CHAR},
+        </if>
+        <if test="item.stockId != null">
+          stock_id = #{item.stockId,jdbcType=CHAR},
+        </if>
+        <if test="item.quotePrice != null">
+          quote_price = #{item.quotePrice,jdbcType=DECIMAL},
+        </if>
+        <if test="item.amount != null">
+          amount = #{item.amount,jdbcType=BIGINT},
+        </if>
+        <if test="item.currentAmount != null">
+          current_amount = #{item.currentAmount,jdbcType=BIGINT},
+        </if>
+        <if test="item.quoteType != null">
+          quote_type = #{item.quoteType,jdbcType=SMALLINT},
+        </if>
+        <if test="item.frozeMoney != null">
+          froze_money = #{item.frozeMoney,jdbcType=DECIMAL},
+        </if>
+        <if test="item.commissionFee != null">
+          commission_fee = #{item.commissionFee,jdbcType=DECIMAL},
+        </if>
+        <if test="item.status != null">
+          status = #{item.status,jdbcType=SMALLINT},
+        </if>
+        <if test="item.userType != null">
+          user_type = #{item.userType,jdbcType=SMALLINT},
+        </if>
+        <if test="item.dateTime != null">
+          date_time = #{item.dateTime,jdbcType=BIGINT},
+        </if>
+      </set>
+      where quote_id = #{item.quoteId,jdbcType=CHAR}
+    </foreach>
+  </update>
 </mapper>

@@ -9,15 +9,23 @@ public interface StSettleRecordMapper {
 
     int deleteByPrimaryKey(String id);
 
+    int deleteBatch(List<String> list);
+
     int insert(StSettleRecord record);
 
     int insertSelective(StSettleRecord record);
+
+    int insertBatch(List<StSettleRecord> list);
 
     StSettleRecord selectByPrimaryKey(String id);
 
     int updateByPrimaryKeySelective(StSettleRecord record);
 
     int updateByPrimaryKey(StSettleRecord record);
+
+    int updateBatch(List<StSettleRecord> list);
+
+    int updateBatchSelective(List<StSettleRecord> list);
 
     List<StSettleRecord> selectListByKeySelective(@Param(value = "record") StSettleRecord record,
                                                  @Param(value = "limit") Integer limit,

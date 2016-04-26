@@ -64,6 +64,12 @@
     delete from st_account
     where id = #{id,jdbcType=CHAR}
   </delete>
+  <delete id="deleteBatch" parameterType="List">
+    delete from st_account where id in
+    <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+      #{item}
+    </foreach>
+  </delete>
   <insert id="insert" parameterType="com.ryd.business.model.StAccount" >
     insert into st_account (id, real_name, account_name, 
       account_num, password, total_assets, 
@@ -75,6 +81,21 @@
       #{useMoney,jdbcType=DECIMAL}, #{accountLevel,jdbcType=SMALLINT}, #{accountType,jdbcType=SMALLINT}, 
       #{mobile,jdbcType=VARCHAR}, #{sex,jdbcType=SMALLINT}, #{remark,jdbcType=VARCHAR}, 
       #{createtime,jdbcType=BIGINT}, #{status,jdbcType=SMALLINT})
+  </insert>
+  <insert id ="insertBatch" parameterType="java.util.List" >
+    insert into  st_account (id, real_name, account_name,
+    account_num, password, total_assets,
+    use_money, account_level, account_type,
+    mobile, sex, remark,
+    createtime, status)
+    values
+    <foreach collection ="list" item ="item" index ="index" separator =",">
+      (#{item.id,jdbcType=CHAR}, #{item.realName,jdbcType=VARCHAR}, #{item.accountName,jdbcType=VARCHAR},
+      #{item.accountNum,jdbcType=VARCHAR}, #{item.password,jdbcType=VARCHAR}, #{item.totalAssets,jdbcType=DECIMAL},
+      #{item.useMoney,jdbcType=DECIMAL}, #{item.accountLevel,jdbcType=SMALLINT}, #{item.accountType,jdbcType=SMALLINT},
+      #{item.mobile,jdbcType=VARCHAR}, #{item.sex,jdbcType=SMALLINT}, #{item.remark,jdbcType=VARCHAR},
+      #{item.createtime,jdbcType=BIGINT}, #{item.status,jdbcType=SMALLINT})
+    </foreach>
   </insert>
   <insert id="insertSelective" parameterType="com.ryd.business.model.StAccount" >
     insert into st_account
@@ -228,5 +249,73 @@
       createtime = #{createtime,jdbcType=BIGINT},
       status = #{status,jdbcType=SMALLINT}
     where id = #{id,jdbcType=CHAR}
+  </update>
+  <update id="updateBatch" parameterType="java.util.List">
+    <foreach collection="list" item="item" index="index" separator="," >
+      update st_account
+      <set>
+        real_name = #{item.realName,jdbcType=VARCHAR},
+        account_name = #{item.accountName,jdbcType=VARCHAR},
+        account_num = #{item.accountNum,jdbcType=VARCHAR},
+        password = #{item.password,jdbcType=VARCHAR},
+        total_assets = #{item.totalAssets,jdbcType=DECIMAL},
+        use_money = #{item.useMoney,jdbcType=DECIMAL},
+        account_level = #{item.accountLevel,jdbcType=SMALLINT},
+        account_type = #{item.accountType,jdbcType=SMALLINT},
+        mobile = #{item.mobile,jdbcType=VARCHAR},
+        sex = #{item.sex,jdbcType=SMALLINT},
+        remark = #{item.remark,jdbcType=VARCHAR},
+        createtime = #{item.createtime,jdbcType=BIGINT},
+        status = #{item.status,jdbcType=SMALLINT}
+      </set>
+      where id = #{item.id,jdbcType=CHAR}
+    </foreach>
+  </update>
+  <update id="updateBatchSelective" parameterType="java.util.List">
+    <foreach collection="list" item="item" index="index" separator="," >
+      update st_account
+      <set >
+        <if test="item.realName != null" >
+          real_name = #{item.realName,jdbcType=VARCHAR},
+        </if>
+        <if test="item.accountName != null" >
+          account_name = #{item.accountName,jdbcType=VARCHAR},
+        </if>
+        <if test="item.accountNum != null" >
+          account_num = #{item.accountNum,jdbcType=VARCHAR},
+        </if>
+        <if test="item.password != null" >
+          password = #{item.password,jdbcType=VARCHAR},
+        </if>
+        <if test="item.totalAssets != null" >
+          total_assets = #{item.totalAssets,jdbcType=DECIMAL},
+        </if>
+        <if test="item.useMoney != null" >
+          use_money = #{item.useMoney,jdbcType=DECIMAL},
+        </if>
+        <if test="item.accountLevel != null" >
+          account_level = #{item.accountLevel,jdbcType=SMALLINT},
+        </if>
+        <if test="item.accountType != null" >
+          account_type = #{item.accountType,jdbcType=SMALLINT},
+        </if>
+        <if test="item.mobile != null" >
+          mobile = #{item.mobile,jdbcType=VARCHAR},
+        </if>
+        <if test="item.sex != null" >
+          sex = #{item.sex,jdbcType=SMALLINT},
+        </if>
+        <if test="item.remark != null" >
+          remark = #{item.remark,jdbcType=VARCHAR},
+        </if>
+        <if test="item.createtime != null" >
+          createtime = #{item.createtime,jdbcType=BIGINT},
+        </if>
+        <if test="item.status != null" >
+          status = #{item.status,jdbcType=SMALLINT},
+        </if>
+      </set>
+      where id = #{item.id,jdbcType=CHAR}
+    </foreach>
   </update>
 </mapper>

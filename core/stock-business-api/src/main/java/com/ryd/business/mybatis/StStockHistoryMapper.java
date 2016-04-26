@@ -6,11 +6,16 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 public interface StStockHistoryMapper {
+
     int deleteByPrimaryKey(String stockId);
+
+    int deleteBatch(List<String> list);
 
     int insert(StStockHistory record);
 
     int insertSelective(StStockHistory record);
+
+    int insertBatch(List<StStockHistory> list);
 
     StStockHistory selectByPrimaryKey(String stockId);
 

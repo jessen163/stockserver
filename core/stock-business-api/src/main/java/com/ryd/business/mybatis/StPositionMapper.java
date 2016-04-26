@@ -9,15 +9,23 @@ public interface StPositionMapper {
 
     int deleteByPrimaryKey(String positionId);
 
+    int deleteBatch(List<String> list);
+
     int insert(StPosition record);
 
     int insertSelective(StPosition record);
+
+    int insertBatch(List<StPosition> list);
 
     StPosition selectByPrimaryKey(String positionId);
 
     int updateByPrimaryKeySelective(StPosition record);
 
     int updateByPrimaryKey(StPosition record);
+
+    int updateBatch(List<StPosition> list);
+
+    int updateBatchSelective(List<StPosition> list);
 
     List<StPosition> selectListByKeySelective(@Param(value = "record") StPosition record,
                                                   @Param(value = "limit") Integer limit,
