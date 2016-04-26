@@ -31,6 +31,12 @@
     delete from st_trade_record
     where record_id = #{recordId,jdbcType=CHAR}
   </delete>
+  <delete id="deleteBatch" parameterType="List">
+    delete from st_trade_record where record_id in
+    <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+      #{item}
+    </foreach>
+  </delete>
   <insert id="insert" parameterType="com.ryd.business.model.StTradeRecord">
     insert into st_trade_record (record_id, seller_account_id, buyer_account_id, 
       stock_id, quote_price, amount, 
@@ -40,20 +46,6 @@
       #{stockId,jdbcType=CHAR}, #{quotePrice,jdbcType=DECIMAL}, #{amount,jdbcType=BIGINT},
       #{dateTime,jdbcType=BIGINT}, #{buyFee,jdbcType=DECIMAL}, #{sellFee,jdbcType=DECIMAL},
       #{dealTax,jdbcType=DECIMAL})
-  </insert>
-  <insert id ="insertBatch" parameterType="java.util.List" >
-    insert into st_trade_record (record_id, seller_account_id, buyer_account_id,
-    stock_id, quote_price, amount,
-    date_time, buy_fee, sell_fee,
-    deal_tax)
-    <foreach collection ="list" item ="item" index ="index" separator ="union all">
-      (
-      #{item.recordId,jdbcType=CHAR}, #{item.sellerAccountId,jdbcType=CHAR}, #{item.buyerAccountId,jdbcType=CHAR},
-      #{item.stockId,jdbcType=CHAR}, #{item.quotePrice,jdbcType=DECIMAL}, #{item.amount,jdbcType=BIGINT},
-      #{item.dateTime,jdbcType=BIGINT}, #{item.buyFee,jdbcType=DECIMAL}, #{item.sellFee,jdbcType=DECIMAL},
-      #{item.dealTax,jdbcType=DECIMAL}
-      )
-    </foreach>
   </insert>
   <insert id="insertSelective" parameterType="com.ryd.business.model.StTradeRecord">
     insert into st_trade_record
@@ -122,6 +114,17 @@
       </if>
     </trim>
   </insert>
+  <insert id ="insertBatch" parameterType="java.util.List" >
+    insert into st_trade_record (record_id, seller_account_id, buyer_account_id,
+    stock_id, quote_price, amount,
+    date_time, buy_fee, sell_fee, deal_tax)
+    values
+    <foreach collection ="list" item ="item" index ="index" separator =",">
+      (#{item.recordId,jdbcType=CHAR}, #{item.sellerAccountId,jdbcType=CHAR}, #{item.buyerAccountId,jdbcType=CHAR},
+      #{item.stockId,jdbcType=CHAR}, #{item.quotePrice,jdbcType=DECIMAL}, #{item.amount,jdbcType=BIGINT},
+      #{item.dateTime,jdbcType=BIGINT}, #{item.buyFee,jdbcType=DECIMAL}, #{item.sellFee,jdbcType=DECIMAL}, #{item.dealTax,jdbcType=DECIMAL})
+    </foreach>
+  </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.ryd.business.model.StTradeRecord">
     update st_trade_record
     <set>
@@ -167,5 +170,58 @@
       sell_fee = #{sellFee,jdbcType=DECIMAL},
       deal_tax = #{dealTax,jdbcType=DECIMAL}
     where record_id = #{recordId,jdbcType=CHAR}
+  </update>
+  <update id="updateBatch" parameterType="java.util.List">
+    <foreach collection="list" item="item" index="index" separator="," >
+      update st_trade_record
+      <set>
+        seller_account_id = #{item.sellerAccountId,jdbcType=CHAR},
+        buyer_account_id = #{item.buyerAccountId,jdbcType=CHAR},
+        stock_id = #{item.stockId,jdbcType=CHAR},
+        quote_price = #{item.quotePrice,jdbcType=DECIMAL},
+        amount = #{item.amount,jdbcType=BIGINT},
+        date_time = #{item.dateTime,jdbcType=BIGINT},
+        buy_fee = #{item.buyFee,jdbcType=DECIMAL},
+        sell_fee = #{item.sellFee,jdbcType=DECIMAL},
+        deal_tax = #{item.dealTax,jdbcType=DECIMAL}
+      </set>
+
+      where record_id = #{item.recordId,jdbcType=CHAR}
+    </foreach>
+  </update>
+  <update id="updateBatchSelective" parameterType="java.util.List">
+    <foreach collection="list" item="item" index="index" separator="," >
+      update st_trade_record
+      <set>
+        <if test="item.sellerAccountId != null">
+          seller_account_id = #{item.sellerAccountId,jdbcType=CHAR},
+        </if>
+        <if test="item.buyerAccountId != null">
+          buyer_account_id = #{item.buyerAccountId,jdbcType=CHAR},
+        </if>
+        <if test="item.stockId != null">
+          stock_id = #{item.stockId,jdbcType=CHAR},
+        </if>
+        <if test="item.quotePrice != null">
+          quote_price = #{item.quotePrice,jdbcType=DECIMAL},
+        </if>
+        <if test="item.amount != null">
+          amount = #{item.amount,jdbcType=BIGINT},
+        </if>
+        <if test="item.dateTime != null">
+          date_time = #{item.dateTime,jdbcType=BIGINT},
+        </if>
+        <if test="item.buyFee != null">
+          buy_fee = #{item.buyFee,jdbcType=DECIMAL},
+        </if>
+        <if test="item.sellFee != null">
+          sell_fee = #{item.sellFee,jdbcType=DECIMAL},
+        </if>
+        <if test="item.dealTax != null">
+          deal_tax = #{item.dealTax,jdbcType=DECIMAL},
+        </if>
+      </set>
+      where record_id = #{item.recordId,jdbcType=CHAR}
+    </foreach>
   </update>
 </mapper>
