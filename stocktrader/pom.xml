@@ -71,6 +71,12 @@
             <artifactId>stock-business-service-impl</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+            <version>${servlet-api.version}</version>
+        </dependency>
+
 
         <dependency>
             <groupId>io.netty</groupId>
