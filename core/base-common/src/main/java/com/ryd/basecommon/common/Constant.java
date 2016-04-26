@@ -1,12 +1,15 @@
+/*
 package com.ryd.basecommon.common;
 
+*/
 /**
  * <p>标题:通用常量</p>
  * <p>描述:通用常量</p>
  * 包名：com.ryd.basecommon.common
  * 创建人：songby
  * 创建时间：2016/4/21 10:29
- */
+ *//*
+
 public class Constant {
 
     //1、买，2、卖
@@ -47,3 +50,4 @@ public class Constant {
     //结算时间
     public static final String SYSPARAM_SETTLE_TIME = "settleTime";
 }
+*/
