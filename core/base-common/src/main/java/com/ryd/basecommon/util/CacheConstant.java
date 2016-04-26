@@ -1,4 +1,4 @@
-package com.ryd.basecommon.common;
+package com.ryd.basecommon.util;
 
 /**
  * <p>标题:Redis key</p>

@@ -1,16 +1,13 @@
 package com.ryd.system.service.impl;
 
-import com.ryd.basecommon.common.CacheConstant;
-import com.ryd.basecommon.common.Constant;
+import com.ryd.basecommon.util.ApplicationConstants;
+import com.ryd.basecommon.util.CacheConstant;
 import com.ryd.basecommon.util.DateUtils;
-import com.ryd.basecommon.util.FestivalDateUtil;
 import com.ryd.cache.service.ICacheService;
 import com.ryd.system.dao.StDateScheduleDao;
 import com.ryd.system.model.StDateSchedule;
 import com.ryd.system.service.StDateScheduleService;
 import com.ryd.system.service.StSystemParamService;
-import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -81,7 +78,7 @@ public class StDateScheduleServiceImpl implements StDateScheduleService {
 
     @Override
     public boolean getIsCanTrade() {
-        if(Constant.STQUOTE_TRADE_TIMECOMPARE_1.intValue() == getDateAndTimeJudge()){
+        if(ApplicationConstants.STQUOTE_TRADE_TIMECOMPARE_1.intValue() == getDateAndTimeJudge()){
             return true;
         }
         return false;
@@ -93,8 +90,8 @@ public class StDateScheduleServiceImpl implements StDateScheduleService {
         if (getIsFestival()) {
             return false;
         }
-        if(getDateAndTimeJudge() == Constant.STQUOTE_TRADE_TIMECOMPARE_1.intValue() ||
-                getDateAndTimeJudge() == Constant.STQUOTE_TRADE_TIMECOMPARE_2.intValue()){
+        if(getDateAndTimeJudge() == ApplicationConstants.STQUOTE_TRADE_TIMECOMPARE_1.intValue() ||
+                getDateAndTimeJudge() == ApplicationConstants.STQUOTE_TRADE_TIMECOMPARE_2.intValue()){
             return true;
         }
         return false;
@@ -102,8 +99,8 @@ public class StDateScheduleServiceImpl implements StDateScheduleService {
 
     @Override
     public boolean getIsTimeCanQuote() {
-        if(getDateAndTimeJudge() == Constant.STQUOTE_TRADE_TIMECOMPARE_1.intValue() ||
-                getDateAndTimeJudge() == Constant.STQUOTE_TRADE_TIMECOMPARE_2.intValue()){
+        if(getDateAndTimeJudge() == ApplicationConstants.STQUOTE_TRADE_TIMECOMPARE_1.intValue() ||
+                getDateAndTimeJudge() == ApplicationConstants.STQUOTE_TRADE_TIMECOMPARE_2.intValue()){
             return true;
         }
         return false;
@@ -138,11 +135,11 @@ public class StDateScheduleServiceImpl implements StDateScheduleService {
 
         //如果当前时间在上午9：30~11：30之间，或者下午1：00~3：00之间，可以交易和报价
         if ((t9 < tnow && tnow < t11) || (t13 < tnow && tnow < t15)) {
-            return Constant.STQUOTE_TRADE_TIMECOMPARE_1;
+            return ApplicationConstants.STQUOTE_TRADE_TIMECOMPARE_1;
         } else if ((t11 < tnow && tnow < t13)) {//如果当前时间在11：30~13：00之间只允许报价
-            return Constant.STQUOTE_TRADE_TIMECOMPARE_2;
+            return ApplicationConstants.STQUOTE_TRADE_TIMECOMPARE_2;
         } else {//之外的时间，不允许报价，不允许交易
-            return Constant.STQUOTE_TRADE_TIMECOMPARE_3;
+            return ApplicationConstants.STQUOTE_TRADE_TIMECOMPARE_3;
         }
 
     }
