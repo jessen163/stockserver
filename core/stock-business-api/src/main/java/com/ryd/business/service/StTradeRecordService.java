@@ -1,6 +1,7 @@
 package com.ryd.business.service;
 
 import com.ryd.business.dto.SearchTradeRecordDTO;
+import com.ryd.business.model.StQuote;
 import com.ryd.business.model.StTradeRecord;
 
 import java.util.List;
@@ -21,14 +22,20 @@ public interface StTradeRecordService {
     public boolean saveTradeRecordBatch(List<StTradeRecord> tradeRecordList);
 
     /**
+     * 添加交易记录
+     * @param record
+     * @return
+     */
+    public boolean addTradeRecord(StTradeRecord record);
+    /**
      * 股票交易
      */
     public void updateStockTrading();
 
     /**
-     * 股票结算
+     * 交易结算
      */
-    public void updateStockSettling();
+    public void updateTradeSettling(StQuote buyQuote, StQuote sellQuote);
 
     /**
      * 查询单只股票的交易记录
