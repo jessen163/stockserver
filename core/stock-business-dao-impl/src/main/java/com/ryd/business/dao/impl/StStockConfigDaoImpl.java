@@ -37,11 +37,11 @@ public class StStockConfigDaoImpl implements StStockConfigDao {
     }
 
     @Override
-    public StStockConfig getTById(StStockConfig obj) {
-        if(StringUtils.isBlank(obj.getId())){
+    public StStockConfig getTById(String id) {
+        if(StringUtils.isBlank(id)){
             return null;
         }
-        return stStockConfigMapper.selectByPrimaryKey(obj.getId());
+        return stStockConfigMapper.selectByPrimaryKey(id);
     }
 
     @Override
@@ -54,10 +54,10 @@ public class StStockConfigDaoImpl implements StStockConfigDao {
     }
 
     @Override
-    public int deleteTById(StStockConfig obj) {
-        if(StringUtils.isBlank(obj.getId())){
+    public int deleteTById(String id) {
+        if(StringUtils.isBlank(id)){
             return -1;
         }
-        return stStockConfigMapper.deleteByPrimaryKey(obj.getId());
+        return stStockConfigMapper.deleteByPrimaryKey(id);
     }
 }

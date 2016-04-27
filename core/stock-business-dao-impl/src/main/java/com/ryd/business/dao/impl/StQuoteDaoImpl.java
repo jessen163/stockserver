@@ -36,11 +36,11 @@ public class StQuoteDaoImpl implements StQuoteDao {
     }
 
     @Override
-    public StQuote getTById(StQuote obj) {
-        if(StringUtils.isBlank(obj.getQuoteId())){
+    public StQuote getTById(String id) {
+        if(StringUtils.isBlank(id)){
             return null;
         }
-        return stQuoteMapper.selectByPrimaryKey(obj.getQuoteId());
+        return stQuoteMapper.selectByPrimaryKey(id);
     }
 
     @Override
@@ -53,10 +53,10 @@ public class StQuoteDaoImpl implements StQuoteDao {
     }
 
     @Override
-    public int deleteTById(StQuote obj) {
-        if(StringUtils.isBlank(obj.getQuoteId())){
+    public int deleteTById(String id) {
+        if(StringUtils.isBlank(id)){
             return -1;
         }
-        return stQuoteMapper.deleteByPrimaryKey(obj.getQuoteId());
+        return stQuoteMapper.deleteByPrimaryKey(id);
     }
 }

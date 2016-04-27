@@ -39,11 +39,11 @@ public class StAccountDaoImpl implements StAccountDao {
     }
 
     @Override
-    public StAccount getTById(StAccount obj) {
-        if(StringUtils.isBlank(obj.getId())){
+    public StAccount getTById(String id) {
+        if(StringUtils.isBlank(id)){
             return null;
         }
-        return stAccountMapper.selectByPrimaryKey(obj.getId());
+        return stAccountMapper.selectByPrimaryKey(id);
     }
 
     @Override
@@ -58,7 +58,8 @@ public class StAccountDaoImpl implements StAccountDao {
     @Override
     public StAccount getStAccountByLogin(String accountNum,String password){
 
-        return stAccountMapper.selectByNamePassword(accountNum, password);
+        StAccount st = stAccountMapper.selectByNamePassword(accountNum, password);
+        return st;
     }
 
     @Override
@@ -67,10 +68,10 @@ public class StAccountDaoImpl implements StAccountDao {
     }
 
     @Override
-    public int deleteTById(StAccount obj){
-        if(StringUtils.isBlank(obj.getId())){
+    public int deleteTById(String id){
+        if(StringUtils.isBlank(id)){
             return -1;
         }
-        return stAccountMapper.deleteByPrimaryKey(obj.getId());
+        return stAccountMapper.deleteByPrimaryKey(id);
     }
 }
