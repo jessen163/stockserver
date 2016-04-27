@@ -5,6 +5,7 @@ import com.ryd.basecommon.util.ArithUtil;
 import com.ryd.business.dto.SearchQuoteDTO;
 import com.ryd.business.model.StQuote;
 import com.ryd.business.service.StQuoteService;
+import com.ryd.business.service.StTradeRecordService;
 
 import java.util.concurrent.TimeUnit;
 
@@ -15,9 +16,11 @@ import java.util.concurrent.TimeUnit;
 public class TradingSubThread implements Runnable {
     private String stockId;
     private StQuoteService stQuoteService;
-    public TradingSubThread(String stockId, StQuoteService stQuoteService) {
+    private StTradeRecordService stTradeRecordService;
+    public TradingSubThread(String stockId, StQuoteService stQuoteService, StTradeRecordService stTradeRecordService) {
         this.stockId = stockId;
         this.stQuoteService = stQuoteService;
+        this.stTradeRecordService = stTradeRecordService;
     }
 
     @Override
@@ -40,7 +43,7 @@ public class TradingSubThread implements Runnable {
                     // 如果撮合成功, 执行交易, 同时更新买入、卖出队列
                     if (ArithUtil.compare(buyQuote.getQuotePrice(), sellQuote.getQuotePrice()) >= 0 && !buyQuote.getAccountId().equals(sellQuote.getAccountId())) {
                         // 调用交易接口
-
+                        stTradeRecordService.updateTradeSettling(buyQuote, sellQuote);
                     }
                 } else {
                     break;
