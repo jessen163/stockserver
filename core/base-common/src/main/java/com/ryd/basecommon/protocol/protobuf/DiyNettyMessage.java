@@ -102,12 +102,12 @@ public final class DiyNettyMessage {
     /**
      * <code>repeated .com.ryd.protocol.protobuf.StockInfo stockInfo = 9;</code>
      */
-    java.util.List<com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockInfo> 
+    java.util.List<StockInfo>
         getStockInfoList();
     /**
      * <code>repeated .com.ryd.protocol.protobuf.StockInfo stockInfo = 9;</code>
      */
-    com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockInfo getStockInfo(int index);
+    StockInfo getStockInfo(int index);
     /**
      * <code>repeated .com.ryd.protocol.protobuf.StockInfo stockInfo = 9;</code>
      */
@@ -115,23 +115,23 @@ public final class DiyNettyMessage {
     /**
      * <code>repeated .com.ryd.protocol.protobuf.StockInfo stockInfo = 9;</code>
      */
-    java.util.List<? extends com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockInfoOrBuilder> 
+    java.util.List<? extends StockInfoOrBuilder>
         getStockInfoOrBuilderList();
     /**
      * <code>repeated .com.ryd.protocol.protobuf.StockInfo stockInfo = 9;</code>
      */
-    com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockInfoOrBuilder getStockInfoOrBuilder(
+    StockInfoOrBuilder getStockInfoOrBuilder(
             int index);
 
     /**
      * <code>repeated .com.ryd.protocol.protobuf.AccountInfo accountInfo = 10;</code>
      */
-    java.util.List<com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.AccountInfo> 
+    java.util.List<AccountInfo>
         getAccountInfoList();
     /**
      * <code>repeated .com.ryd.protocol.protobuf.AccountInfo accountInfo = 10;</code>
      */
-    com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.AccountInfo getAccountInfo(int index);
+    AccountInfo getAccountInfo(int index);
     /**
      * <code>repeated .com.ryd.protocol.protobuf.AccountInfo accountInfo = 10;</code>
      */
@@ -139,23 +139,23 @@ public final class DiyNettyMessage {
     /**
      * <code>repeated .com.ryd.protocol.protobuf.AccountInfo accountInfo = 10;</code>
      */
-    java.util.List<? extends com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.AccountInfoOrBuilder> 
+    java.util.List<? extends AccountInfoOrBuilder>
         getAccountInfoOrBuilderList();
     /**
      * <code>repeated .com.ryd.protocol.protobuf.AccountInfo accountInfo = 10;</code>
      */
-    com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.AccountInfoOrBuilder getAccountInfoOrBuilder(
+    AccountInfoOrBuilder getAccountInfoOrBuilder(
             int index);
 
     /**
      * <code>repeated .com.ryd.protocol.protobuf.QuoteInfo quoteInfo = 11;</code>
      */
-    java.util.List<com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.QuoteInfo> 
+    java.util.List<QuoteInfo>
         getQuoteInfoList();
     /**
      * <code>repeated .com.ryd.protocol.protobuf.QuoteInfo quoteInfo = 11;</code>
      */
-    com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.QuoteInfo getQuoteInfo(int index);
+    QuoteInfo getQuoteInfo(int index);
     /**
      * <code>repeated .com.ryd.protocol.protobuf.QuoteInfo quoteInfo = 11;</code>
      */
@@ -163,23 +163,23 @@ public final class DiyNettyMessage {
     /**
      * <code>repeated .com.ryd.protocol.protobuf.QuoteInfo quoteInfo = 11;</code>
      */
-    java.util.List<? extends com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.QuoteInfoOrBuilder> 
+    java.util.List<? extends QuoteInfoOrBuilder>
         getQuoteInfoOrBuilderList();
     /**
      * <code>repeated .com.ryd.protocol.protobuf.QuoteInfo quoteInfo = 11;</code>
      */
-    com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.QuoteInfoOrBuilder getQuoteInfoOrBuilder(
+    QuoteInfoOrBuilder getQuoteInfoOrBuilder(
             int index);
 
     /**
      * <code>repeated .com.ryd.protocol.protobuf.PositionInfo positionInfo = 12;</code>
      */
-    java.util.List<com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.PositionInfo> 
+    java.util.List<PositionInfo>
         getPositionInfoList();
     /**
      * <code>repeated .com.ryd.protocol.protobuf.PositionInfo positionInfo = 12;</code>
      */
-    com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.PositionInfo getPositionInfo(int index);
+    PositionInfo getPositionInfo(int index);
     /**
      * <code>repeated .com.ryd.protocol.protobuf.PositionInfo positionInfo = 12;</code>
      */
@@ -187,23 +187,23 @@ public final class DiyNettyMessage {
     /**
      * <code>repeated .com.ryd.protocol.protobuf.PositionInfo positionInfo = 12;</code>
      */
-    java.util.List<? extends com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.PositionInfoOrBuilder> 
+    java.util.List<? extends PositionInfoOrBuilder>
         getPositionInfoOrBuilderList();
     /**
      * <code>repeated .com.ryd.protocol.protobuf.PositionInfo positionInfo = 12;</code>
      */
-    com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.PositionInfoOrBuilder getPositionInfoOrBuilder(
+    PositionInfoOrBuilder getPositionInfoOrBuilder(
             int index);
 
     /**
      * <code>repeated .com.ryd.protocol.protobuf.MoneyJournalInfo moneyJournalInfo = 13;</code>
      */
-    java.util.List<com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.MoneyJournalInfo> 
+    java.util.List<MoneyJournalInfo>
         getMoneyJournalInfoList();
     /**
      * <code>repeated .com.ryd.protocol.protobuf.MoneyJournalInfo moneyJournalInfo = 13;</code>
      */
-    com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.MoneyJournalInfo getMoneyJournalInfo(int index);
+    MoneyJournalInfo getMoneyJournalInfo(int index);
     /**
      * <code>repeated .com.ryd.protocol.protobuf.MoneyJournalInfo moneyJournalInfo = 13;</code>
      */
@@ -211,12 +211,12 @@ public final class DiyNettyMessage {
     /**
      * <code>repeated .com.ryd.protocol.protobuf.MoneyJournalInfo moneyJournalInfo = 13;</code>
      */
-    java.util.List<? extends com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.MoneyJournalInfoOrBuilder> 
+    java.util.List<? extends MoneyJournalInfoOrBuilder>
         getMoneyJournalInfoOrBuilderList();
     /**
      * <code>repeated .com.ryd.protocol.protobuf.MoneyJournalInfo moneyJournalInfo = 13;</code>
      */
-    com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.MoneyJournalInfoOrBuilder getMoneyJournalInfoOrBuilder(
+    MoneyJournalInfoOrBuilder getMoneyJournalInfoOrBuilder(
             int index);
 
     /**
@@ -254,12 +254,12 @@ public final class DiyNettyMessage {
     /**
      * <code>repeated .com.ryd.protocol.protobuf.TradeRecordInfo tradeRecordInfo = 17;</code>
      */
-    java.util.List<com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.TradeRecordInfo> 
+    java.util.List<TradeRecordInfo>
         getTradeRecordInfoList();
     /**
      * <code>repeated .com.ryd.protocol.protobuf.TradeRecordInfo tradeRecordInfo = 17;</code>
      */
-    com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.TradeRecordInfo getTradeRecordInfo(int index);
+    TradeRecordInfo getTradeRecordInfo(int index);
     /**
      * <code>repeated .com.ryd.protocol.protobuf.TradeRecordInfo tradeRecordInfo = 17;</code>
      */
@@ -267,23 +267,23 @@ public final class DiyNettyMessage {
     /**
      * <code>repeated .com.ryd.protocol.protobuf.TradeRecordInfo tradeRecordInfo = 17;</code>
      */
-    java.util.List<? extends com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.TradeRecordInfoOrBuilder> 
+    java.util.List<? extends TradeRecordInfoOrBuilder>
         getTradeRecordInfoOrBuilderList();
     /**
      * <code>repeated .com.ryd.protocol.protobuf.TradeRecordInfo tradeRecordInfo = 17;</code>
      */
-    com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.TradeRecordInfoOrBuilder getTradeRecordInfoOrBuilder(
+    TradeRecordInfoOrBuilder getTradeRecordInfoOrBuilder(
             int index);
 
     /**
      * <code>repeated .com.ryd.protocol.protobuf.StockPriceInfo stockPriceInfo = 18;</code>
      */
-    java.util.List<com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockPriceInfo> 
+    java.util.List<StockPriceInfo>
         getStockPriceInfoList();
     /**
      * <code>repeated .com.ryd.protocol.protobuf.StockPriceInfo stockPriceInfo = 18;</code>
      */
-    com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockPriceInfo getStockPriceInfo(int index);
+    StockPriceInfo getStockPriceInfo(int index);
     /**
      * <code>repeated .com.ryd.protocol.protobuf.StockPriceInfo stockPriceInfo = 18;</code>
      */
@@ -291,12 +291,36 @@ public final class DiyNettyMessage {
     /**
      * <code>repeated .com.ryd.protocol.protobuf.StockPriceInfo stockPriceInfo = 18;</code>
      */
-    java.util.List<? extends com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockPriceInfoOrBuilder> 
+    java.util.List<? extends StockPriceInfoOrBuilder>
         getStockPriceInfoOrBuilderList();
     /**
      * <code>repeated .com.ryd.protocol.protobuf.StockPriceInfo stockPriceInfo = 18;</code>
      */
-    com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockPriceInfoOrBuilder getStockPriceInfoOrBuilder(
+    StockPriceInfoOrBuilder getStockPriceInfoOrBuilder(
+            int index);
+
+    /**
+     * <code>repeated .com.ryd.protocol.protobuf.StockConfigInfo stockConfigInfo = 19;</code>
+     */
+    java.util.List<StockConfigInfo>
+        getStockConfigInfoList();
+    /**
+     * <code>repeated .com.ryd.protocol.protobuf.StockConfigInfo stockConfigInfo = 19;</code>
+     */
+    StockConfigInfo getStockConfigInfo(int index);
+    /**
+     * <code>repeated .com.ryd.protocol.protobuf.StockConfigInfo stockConfigInfo = 19;</code>
+     */
+    int getStockConfigInfoCount();
+    /**
+     * <code>repeated .com.ryd.protocol.protobuf.StockConfigInfo stockConfigInfo = 19;</code>
+     */
+    java.util.List<? extends StockConfigInfoOrBuilder>
+        getStockConfigInfoOrBuilderList();
+    /**
+     * <code>repeated .com.ryd.protocol.protobuf.StockConfigInfo stockConfigInfo = 19;</code>
+     */
+    StockConfigInfoOrBuilder getStockConfigInfoOrBuilder(
             int index);
   }
   /**
@@ -396,42 +420,42 @@ public final class DiyNettyMessage {
             }
             case 74: {
               if (!((mutable_bitField0_ & 0x00000100) == 0x00000100)) {
-                stockInfo_ = new java.util.ArrayList<com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockInfo>();
+                stockInfo_ = new java.util.ArrayList<StockInfo>();
                 mutable_bitField0_ |= 0x00000100;
               }
-              stockInfo_.add(input.readMessage(com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockInfo.PARSER, extensionRegistry));
+              stockInfo_.add(input.readMessage(StockInfo.PARSER, extensionRegistry));
               break;
             }
             case 82: {
               if (!((mutable_bitField0_ & 0x00000200) == 0x00000200)) {
-                accountInfo_ = new java.util.ArrayList<com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.AccountInfo>();
+                accountInfo_ = new java.util.ArrayList<AccountInfo>();
                 mutable_bitField0_ |= 0x00000200;
               }
-              accountInfo_.add(input.readMessage(com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.AccountInfo.PARSER, extensionRegistry));
+              accountInfo_.add(input.readMessage(AccountInfo.PARSER, extensionRegistry));
               break;
             }
             case 90: {
               if (!((mutable_bitField0_ & 0x00000400) == 0x00000400)) {
-                quoteInfo_ = new java.util.ArrayList<com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.QuoteInfo>();
+                quoteInfo_ = new java.util.ArrayList<QuoteInfo>();
                 mutable_bitField0_ |= 0x00000400;
               }
-              quoteInfo_.add(input.readMessage(com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.QuoteInfo.PARSER, extensionRegistry));
+              quoteInfo_.add(input.readMessage(QuoteInfo.PARSER, extensionRegistry));
               break;
             }
             case 98: {
               if (!((mutable_bitField0_ & 0x00000800) == 0x00000800)) {
-                positionInfo_ = new java.util.ArrayList<com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.PositionInfo>();
+                positionInfo_ = new java.util.ArrayList<PositionInfo>();
                 mutable_bitField0_ |= 0x00000800;
               }
-              positionInfo_.add(input.readMessage(com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.PositionInfo.PARSER, extensionRegistry));
+              positionInfo_.add(input.readMessage(PositionInfo.PARSER, extensionRegistry));
               break;
             }
             case 106: {
               if (!((mutable_bitField0_ & 0x00001000) == 0x00001000)) {
-                moneyJournalInfo_ = new java.util.ArrayList<com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.MoneyJournalInfo>();
+                moneyJournalInfo_ = new java.util.ArrayList<MoneyJournalInfo>();
                 mutable_bitField0_ |= 0x00001000;
               }
-              moneyJournalInfo_.add(input.readMessage(com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.MoneyJournalInfo.PARSER, extensionRegistry));
+              moneyJournalInfo_.add(input.readMessage(MoneyJournalInfo.PARSER, extensionRegistry));
               break;
             }
             case 114: {
@@ -452,18 +476,26 @@ public final class DiyNettyMessage {
             }
             case 138: {
               if (!((mutable_bitField0_ & 0x00010000) == 0x00010000)) {
-                tradeRecordInfo_ = new java.util.ArrayList<com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.TradeRecordInfo>();
+                tradeRecordInfo_ = new java.util.ArrayList<TradeRecordInfo>();
                 mutable_bitField0_ |= 0x00010000;
               }
-              tradeRecordInfo_.add(input.readMessage(com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.TradeRecordInfo.PARSER, extensionRegistry));
+              tradeRecordInfo_.add(input.readMessage(TradeRecordInfo.PARSER, extensionRegistry));
               break;
             }
             case 146: {
               if (!((mutable_bitField0_ & 0x00020000) == 0x00020000)) {
-                stockPriceInfo_ = new java.util.ArrayList<com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockPriceInfo>();
+                stockPriceInfo_ = new java.util.ArrayList<StockPriceInfo>();
                 mutable_bitField0_ |= 0x00020000;
               }
-              stockPriceInfo_.add(input.readMessage(com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockPriceInfo.PARSER, extensionRegistry));
+              stockPriceInfo_.add(input.readMessage(StockPriceInfo.PARSER, extensionRegistry));
+              break;
+            }
+            case 154: {
+              if (!((mutable_bitField0_ & 0x00040000) == 0x00040000)) {
+                stockConfigInfo_ = new java.util.ArrayList<StockConfigInfo>();
+                mutable_bitField0_ |= 0x00040000;
+              }
+              stockConfigInfo_.add(input.readMessage(StockConfigInfo.PARSER, extensionRegistry));
               break;
             }
           }
@@ -495,20 +527,23 @@ public final class DiyNettyMessage {
         if (((mutable_bitField0_ & 0x00020000) == 0x00020000)) {
           stockPriceInfo_ = java.util.Collections.unmodifiableList(stockPriceInfo_);
         }
+        if (((mutable_bitField0_ & 0x00040000) == 0x00040000)) {
+          stockConfigInfo_ = java.util.Collections.unmodifiableList(stockConfigInfo_);
+        }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return internal_static_com_ryd_protocol_protobuf_NettyMessage_descriptor;
+      return DiyNettyMessage.internal_static_com_ryd_protocol_protobuf_NettyMessage_descriptor;
     }
 
     protected FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return internal_static_com_ryd_protocol_protobuf_NettyMessage_fieldAccessorTable
+      return DiyNettyMessage.internal_static_com_ryd_protocol_protobuf_NettyMessage_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-                  com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.NettyMessage.class, com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.NettyMessage.Builder.class);
+              NettyMessage.class, Builder.class);
     }
 
     public static com.google.protobuf.Parser<NettyMessage> PARSER =
@@ -729,17 +764,17 @@ public final class DiyNettyMessage {
     }
 
     public static final int STOCKINFO_FIELD_NUMBER = 9;
-    private java.util.List<com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockInfo> stockInfo_;
+    private java.util.List<StockInfo> stockInfo_;
     /**
      * <code>repeated .com.ryd.protocol.protobuf.StockInfo stockInfo = 9;</code>
      */
-    public java.util.List<com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockInfo> getStockInfoList() {
+    public java.util.List<StockInfo> getStockInfoList() {
       return stockInfo_;
     }
     /**
      * <code>repeated .com.ryd.protocol.protobuf.StockInfo stockInfo = 9;</code>
      */
-    public java.util.List<? extends com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockInfoOrBuilder> 
+    public java.util.List<? extends StockInfoOrBuilder>
         getStockInfoOrBuilderList() {
       return stockInfo_;
     }
@@ -752,29 +787,29 @@ public final class DiyNettyMessage {
     /**
      * <code>repeated .com.ryd.protocol.protobuf.StockInfo stockInfo = 9;</code>
      */
-    public com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockInfo getStockInfo(int index) {
+    public StockInfo getStockInfo(int index) {
       return stockInfo_.get(index);
     }
     /**
      * <code>repeated .com.ryd.protocol.protobuf.StockInfo stockInfo = 9;</code>
      */
-    public com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockInfoOrBuilder getStockInfoOrBuilder(
+    public StockInfoOrBuilder getStockInfoOrBuilder(
         int index) {
       return stockInfo_.get(index);
     }
 
     public static final int ACCOUNTINFO_FIELD_NUMBER = 10;
-    private java.util.List<com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.AccountInfo> accountInfo_;
+    private java.util.List<AccountInfo> accountInfo_;
     /**
      * <code>repeated .com.ryd.protocol.protobuf.AccountInfo accountInfo = 10;</code>
      */
-    public java.util.List<com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.AccountInfo> getAccountInfoList() {
+    public java.util.List<AccountInfo> getAccountInfoList() {
       return accountInfo_;
     }
     /**
      * <code>repeated .com.ryd.protocol.protobuf.AccountInfo accountInfo = 10;</code>
      */
-    public java.util.List<? extends com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.AccountInfoOrBuilder> 
+    public java.util.List<? extends AccountInfoOrBuilder>
         getAccountInfoOrBuilderList() {
       return accountInfo_;
     }
@@ -787,29 +822,29 @@ public final class DiyNettyMessage {
     /**
      * <code>repeated .com.ryd.protocol.protobuf.AccountInfo accountInfo = 10;</code>
      */
-    public com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.AccountInfo getAccountInfo(int index) {
+    public AccountInfo getAccountInfo(int index) {
       return accountInfo_.get(index);
     }
     /**
      * <code>repeated .com.ryd.protocol.protobuf.AccountInfo accountInfo = 10;</code>
      */
-    public com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.AccountInfoOrBuilder getAccountInfoOrBuilder(
+    public AccountInfoOrBuilder getAccountInfoOrBuilder(
         int index) {
       return accountInfo_.get(index);
     }
 
     public static final int QUOTEINFO_FIELD_NUMBER = 11;
-    private java.util.List<com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.QuoteInfo> quoteInfo_;
+    private java.util.List<QuoteInfo> quoteInfo_;
     /**
      * <code>repeated .com.ryd.protocol.protobuf.QuoteInfo quoteInfo = 11;</code>
      */
-    public java.util.List<com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.QuoteInfo> getQuoteInfoList() {
+    public java.util.List<QuoteInfo> getQuoteInfoList() {
       return quoteInfo_;
     }
     /**
      * <code>repeated .com.ryd.protocol.protobuf.QuoteInfo quoteInfo = 11;</code>
      */
-    public java.util.List<? extends com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.QuoteInfoOrBuilder> 
+    public java.util.List<? extends QuoteInfoOrBuilder>
         getQuoteInfoOrBuilderList() {
       return quoteInfo_;
     }
@@ -822,29 +857,29 @@ public final class DiyNettyMessage {
     /**
      * <code>repeated .com.ryd.protocol.protobuf.QuoteInfo quoteInfo = 11;</code>
      */
-    public com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.QuoteInfo getQuoteInfo(int index) {
+    public QuoteInfo getQuoteInfo(int index) {
       return quoteInfo_.get(index);
     }
     /**
      * <code>repeated .com.ryd.protocol.protobuf.QuoteInfo quoteInfo = 11;</code>
      */
-    public com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.QuoteInfoOrBuilder getQuoteInfoOrBuilder(
+    public QuoteInfoOrBuilder getQuoteInfoOrBuilder(
         int index) {
       return quoteInfo_.get(index);
     }
 
     public static final int POSITIONINFO_FIELD_NUMBER = 12;
-    private java.util.List<com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.PositionInfo> positionInfo_;
+    private java.util.List<PositionInfo> positionInfo_;
     /**
      * <code>repeated .com.ryd.protocol.protobuf.PositionInfo positionInfo = 12;</code>
      */
-    public java.util.List<com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.PositionInfo> getPositionInfoList() {
+    public java.util.List<PositionInfo> getPositionInfoList() {
       return positionInfo_;
     }
     /**
      * <code>repeated .com.ryd.protocol.protobuf.PositionInfo positionInfo = 12;</code>
      */
-    public java.util.List<? extends com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.PositionInfoOrBuilder> 
+    public java.util.List<? extends PositionInfoOrBuilder>
         getPositionInfoOrBuilderList() {
       return positionInfo_;
     }
@@ -857,29 +892,29 @@ public final class DiyNettyMessage {
     /**
      * <code>repeated .com.ryd.protocol.protobuf.PositionInfo positionInfo = 12;</code>
      */
-    public com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.PositionInfo getPositionInfo(int index) {
+    public PositionInfo getPositionInfo(int index) {
       return positionInfo_.get(index);
     }
     /**
      * <code>repeated .com.ryd.protocol.protobuf.PositionInfo positionInfo = 12;</code>
      */
-    public com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.PositionInfoOrBuilder getPositionInfoOrBuilder(
+    public PositionInfoOrBuilder getPositionInfoOrBuilder(
         int index) {
       return positionInfo_.get(index);
     }
 
     public static final int MONEYJOURNALINFO_FIELD_NUMBER = 13;
-    private java.util.List<com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.MoneyJournalInfo> moneyJournalInfo_;
+    private java.util.List<MoneyJournalInfo> moneyJournalInfo_;
     /**
      * <code>repeated .com.ryd.protocol.protobuf.MoneyJournalInfo moneyJournalInfo = 13;</code>
      */
-    public java.util.List<com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.MoneyJournalInfo> getMoneyJournalInfoList() {
+    public java.util.List<MoneyJournalInfo> getMoneyJournalInfoList() {
       return moneyJournalInfo_;
     }
     /**
      * <code>repeated .com.ryd.protocol.protobuf.MoneyJournalInfo moneyJournalInfo = 13;</code>
      */
-    public java.util.List<? extends com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.MoneyJournalInfoOrBuilder> 
+    public java.util.List<? extends MoneyJournalInfoOrBuilder>
         getMoneyJournalInfoOrBuilderList() {
       return moneyJournalInfo_;
     }
@@ -892,13 +927,13 @@ public final class DiyNettyMessage {
     /**
      * <code>repeated .com.ryd.protocol.protobuf.MoneyJournalInfo moneyJournalInfo = 13;</code>
      */
-    public com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.MoneyJournalInfo getMoneyJournalInfo(int index) {
+    public MoneyJournalInfo getMoneyJournalInfo(int index) {
       return moneyJournalInfo_.get(index);
     }
     /**
      * <code>repeated .com.ryd.protocol.protobuf.MoneyJournalInfo moneyJournalInfo = 13;</code>
      */
-    public com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.MoneyJournalInfoOrBuilder getMoneyJournalInfoOrBuilder(
+    public MoneyJournalInfoOrBuilder getMoneyJournalInfoOrBuilder(
         int index) {
       return moneyJournalInfo_.get(index);
     }
@@ -976,17 +1011,17 @@ public final class DiyNettyMessage {
     }
 
     public static final int TRADERECORDINFO_FIELD_NUMBER = 17;
-    private java.util.List<com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.TradeRecordInfo> tradeRecordInfo_;
+    private java.util.List<TradeRecordInfo> tradeRecordInfo_;
     /**
      * <code>repeated .com.ryd.protocol.protobuf.TradeRecordInfo tradeRecordInfo = 17;</code>
      */
-    public java.util.List<com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.TradeRecordInfo> getTradeRecordInfoList() {
+    public java.util.List<TradeRecordInfo> getTradeRecordInfoList() {
       return tradeRecordInfo_;
     }
     /**
      * <code>repeated .com.ryd.protocol.protobuf.TradeRecordInfo tradeRecordInfo = 17;</code>
      */
-    public java.util.List<? extends com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.TradeRecordInfoOrBuilder> 
+    public java.util.List<? extends TradeRecordInfoOrBuilder>
         getTradeRecordInfoOrBuilderList() {
       return tradeRecordInfo_;
     }
@@ -999,29 +1034,29 @@ public final class DiyNettyMessage {
     /**
      * <code>repeated .com.ryd.protocol.protobuf.TradeRecordInfo tradeRecordInfo = 17;</code>
      */
-    public com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.TradeRecordInfo getTradeRecordInfo(int index) {
+    public TradeRecordInfo getTradeRecordInfo(int index) {
       return tradeRecordInfo_.get(index);
     }
     /**
      * <code>repeated .com.ryd.protocol.protobuf.TradeRecordInfo tradeRecordInfo = 17;</code>
      */
-    public com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.TradeRecordInfoOrBuilder getTradeRecordInfoOrBuilder(
+    public TradeRecordInfoOrBuilder getTradeRecordInfoOrBuilder(
         int index) {
       return tradeRecordInfo_.get(index);
     }
 
     public static final int STOCKPRICEINFO_FIELD_NUMBER = 18;
-    private java.util.List<com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockPriceInfo> stockPriceInfo_;
+    private java.util.List<StockPriceInfo> stockPriceInfo_;
     /**
      * <code>repeated .com.ryd.protocol.protobuf.StockPriceInfo stockPriceInfo = 18;</code>
      */
-    public java.util.List<com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockPriceInfo> getStockPriceInfoList() {
+    public java.util.List<StockPriceInfo> getStockPriceInfoList() {
       return stockPriceInfo_;
     }
     /**
      * <code>repeated .com.ryd.protocol.protobuf.StockPriceInfo stockPriceInfo = 18;</code>
      */
-    public java.util.List<? extends com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockPriceInfoOrBuilder> 
+    public java.util.List<? extends StockPriceInfoOrBuilder>
         getStockPriceInfoOrBuilderList() {
       return stockPriceInfo_;
     }
@@ -1034,15 +1069,50 @@ public final class DiyNettyMessage {
     /**
      * <code>repeated .com.ryd.protocol.protobuf.StockPriceInfo stockPriceInfo = 18;</code>
      */
-    public com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockPriceInfo getStockPriceInfo(int index) {
+    public StockPriceInfo getStockPriceInfo(int index) {
       return stockPriceInfo_.get(index);
     }
     /**
      * <code>repeated .com.ryd.protocol.protobuf.StockPriceInfo stockPriceInfo = 18;</code>
      */
-    public com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockPriceInfoOrBuilder getStockPriceInfoOrBuilder(
+    public StockPriceInfoOrBuilder getStockPriceInfoOrBuilder(
         int index) {
       return stockPriceInfo_.get(index);
+    }
+
+    public static final int STOCKCONFIGINFO_FIELD_NUMBER = 19;
+    private java.util.List<StockConfigInfo> stockConfigInfo_;
+    /**
+     * <code>repeated .com.ryd.protocol.protobuf.StockConfigInfo stockConfigInfo = 19;</code>
+     */
+    public java.util.List<StockConfigInfo> getStockConfigInfoList() {
+      return stockConfigInfo_;
+    }
+    /**
+     * <code>repeated .com.ryd.protocol.protobuf.StockConfigInfo stockConfigInfo = 19;</code>
+     */
+    public java.util.List<? extends StockConfigInfoOrBuilder>
+        getStockConfigInfoOrBuilderList() {
+      return stockConfigInfo_;
+    }
+    /**
+     * <code>repeated .com.ryd.protocol.protobuf.StockConfigInfo stockConfigInfo = 19;</code>
+     */
+    public int getStockConfigInfoCount() {
+      return stockConfigInfo_.size();
+    }
+    /**
+     * <code>repeated .com.ryd.protocol.protobuf.StockConfigInfo stockConfigInfo = 19;</code>
+     */
+    public StockConfigInfo getStockConfigInfo(int index) {
+      return stockConfigInfo_.get(index);
+    }
+    /**
+     * <code>repeated .com.ryd.protocol.protobuf.StockConfigInfo stockConfigInfo = 19;</code>
+     */
+    public StockConfigInfoOrBuilder getStockConfigInfoOrBuilder(
+        int index) {
+      return stockConfigInfo_.get(index);
     }
 
     private void initFields() {
@@ -1064,6 +1134,7 @@ public final class DiyNettyMessage {
       size_ = 0;
       tradeRecordInfo_ = java.util.Collections.emptyList();
       stockPriceInfo_ = java.util.Collections.emptyList();
+      stockConfigInfo_ = java.util.Collections.emptyList();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -1085,6 +1156,12 @@ public final class DiyNettyMessage {
       }
       for (int i = 0; i < getStockPriceInfoCount(); i++) {
         if (!getStockPriceInfo(i).isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
+      for (int i = 0; i < getStockConfigInfoCount(); i++) {
+        if (!getStockConfigInfo(i).isInitialized()) {
           memoizedIsInitialized = 0;
           return false;
         }
@@ -1149,6 +1226,9 @@ public final class DiyNettyMessage {
       }
       for (int i = 0; i < stockPriceInfo_.size(); i++) {
         output.writeMessage(18, stockPriceInfo_.get(i));
+      }
+      for (int i = 0; i < stockConfigInfo_.size(); i++) {
+        output.writeMessage(19, stockConfigInfo_.get(i));
       }
       getUnknownFields().writeTo(output);
     }
@@ -1231,6 +1311,10 @@ public final class DiyNettyMessage {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(18, stockPriceInfo_.get(i));
       }
+      for (int i = 0; i < stockConfigInfo_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(19, stockConfigInfo_.get(i));
+      }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
       return size;
@@ -1243,53 +1327,53 @@ public final class DiyNettyMessage {
       return super.writeReplace();
     }
 
-    public static com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.NettyMessage parseFrom(
+    public static NettyMessage parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.NettyMessage parseFrom(
+    public static NettyMessage parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.NettyMessage parseFrom(byte[] data)
+    public static NettyMessage parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.NettyMessage parseFrom(
+    public static NettyMessage parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.NettyMessage parseFrom(java.io.InputStream input)
+    public static NettyMessage parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.NettyMessage parseFrom(
+    public static NettyMessage parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return PARSER.parseFrom(input, extensionRegistry);
     }
-    public static com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.NettyMessage parseDelimitedFrom(java.io.InputStream input)
+    public static NettyMessage parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input);
     }
-    public static com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.NettyMessage parseDelimitedFrom(
+    public static NettyMessage parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
-    public static com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.NettyMessage parseFrom(
+    public static NettyMessage parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.NettyMessage parseFrom(
+    public static NettyMessage parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -1298,7 +1382,7 @@ public final class DiyNettyMessage {
 
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.NettyMessage prototype) {
+    public static Builder newBuilder(NettyMessage prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
@@ -1315,17 +1399,17 @@ public final class DiyNettyMessage {
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder> implements
         // @@protoc_insertion_point(builder_implements:com.ryd.protocol.protobuf.NettyMessage)
-        com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.NettyMessageOrBuilder {
+        NettyMessageOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return internal_static_com_ryd_protocol_protobuf_NettyMessage_descriptor;
+        return DiyNettyMessage.internal_static_com_ryd_protocol_protobuf_NettyMessage_descriptor;
       }
 
       protected FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return internal_static_com_ryd_protocol_protobuf_NettyMessage_fieldAccessorTable
+        return DiyNettyMessage.internal_static_com_ryd_protocol_protobuf_NettyMessage_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                    com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.NettyMessage.class, com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.NettyMessage.Builder.class);
+                NettyMessage.class, Builder.class);
       }
 
       // Construct using com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.NettyMessage.newBuilder()
@@ -1347,6 +1431,7 @@ public final class DiyNettyMessage {
           getMoneyJournalInfoFieldBuilder();
           getTradeRecordInfoFieldBuilder();
           getStockPriceInfoFieldBuilder();
+          getStockConfigInfoFieldBuilder();
         }
       }
       private static Builder create() {
@@ -1419,6 +1504,12 @@ public final class DiyNettyMessage {
         } else {
           stockPriceInfoBuilder_.clear();
         }
+        if (stockConfigInfoBuilder_ == null) {
+          stockConfigInfo_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00040000);
+        } else {
+          stockConfigInfoBuilder_.clear();
+        }
         return this;
       }
 
@@ -1428,23 +1519,23 @@ public final class DiyNettyMessage {
 
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return internal_static_com_ryd_protocol_protobuf_NettyMessage_descriptor;
+        return DiyNettyMessage.internal_static_com_ryd_protocol_protobuf_NettyMessage_descriptor;
       }
 
-      public com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.NettyMessage getDefaultInstanceForType() {
-        return getDefaultInstance();
+      public NettyMessage getDefaultInstanceForType() {
+        return NettyMessage.getDefaultInstance();
       }
 
-      public com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.NettyMessage build() {
-        com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.NettyMessage result = buildPartial();
+      public NettyMessage build() {
+        NettyMessage result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      public com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.NettyMessage buildPartial() {
-        com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.NettyMessage result = new com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.NettyMessage(this);
+      public NettyMessage buildPartial() {
+        NettyMessage result = new NettyMessage(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
@@ -1554,22 +1645,31 @@ public final class DiyNettyMessage {
         } else {
           result.stockPriceInfo_ = stockPriceInfoBuilder_.build();
         }
+        if (stockConfigInfoBuilder_ == null) {
+          if (((bitField0_ & 0x00040000) == 0x00040000)) {
+            stockConfigInfo_ = java.util.Collections.unmodifiableList(stockConfigInfo_);
+            bitField0_ = (bitField0_ & ~0x00040000);
+          }
+          result.stockConfigInfo_ = stockConfigInfo_;
+        } else {
+          result.stockConfigInfo_ = stockConfigInfoBuilder_.build();
+        }
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
       }
 
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.NettyMessage) {
-          return mergeFrom((com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.NettyMessage)other);
+        if (other instanceof NettyMessage) {
+          return mergeFrom((NettyMessage)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.NettyMessage other) {
-        if (other == getDefaultInstance()) return this;
+      public Builder mergeFrom(NettyMessage other) {
+        if (other == NettyMessage.getDefaultInstance()) return this;
         if (other.hasId()) {
           setId(other.getId());
         }
@@ -1793,6 +1893,32 @@ public final class DiyNettyMessage {
             }
           }
         }
+        if (stockConfigInfoBuilder_ == null) {
+          if (!other.stockConfigInfo_.isEmpty()) {
+            if (stockConfigInfo_.isEmpty()) {
+              stockConfigInfo_ = other.stockConfigInfo_;
+              bitField0_ = (bitField0_ & ~0x00040000);
+            } else {
+              ensureStockConfigInfoIsMutable();
+              stockConfigInfo_.addAll(other.stockConfigInfo_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.stockConfigInfo_.isEmpty()) {
+            if (stockConfigInfoBuilder_.isEmpty()) {
+              stockConfigInfoBuilder_.dispose();
+              stockConfigInfoBuilder_ = null;
+              stockConfigInfo_ = other.stockConfigInfo_;
+              bitField0_ = (bitField0_ & ~0x00040000);
+              stockConfigInfoBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getStockConfigInfoFieldBuilder() : null;
+            } else {
+              stockConfigInfoBuilder_.addAllMessages(other.stockConfigInfo_);
+            }
+          }
+        }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
@@ -1816,6 +1942,12 @@ public final class DiyNettyMessage {
             return false;
           }
         }
+        for (int i = 0; i < getStockConfigInfoCount(); i++) {
+          if (!getStockConfigInfo(i).isInitialized()) {
+            
+            return false;
+          }
+        }
         return true;
       }
 
@@ -1823,11 +1955,11 @@ public final class DiyNettyMessage {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.NettyMessage parsedMessage = null;
+        NettyMessage parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.NettyMessage) e.getUnfinishedMessage();
+          parsedMessage = (NettyMessage) e.getUnfinishedMessage();
           throw e;
         } finally {
           if (parsedMessage != null) {
@@ -2226,22 +2358,22 @@ public final class DiyNettyMessage {
         return this;
       }
 
-      private java.util.List<com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockInfo> stockInfo_ =
+      private java.util.List<StockInfo> stockInfo_ =
         java.util.Collections.emptyList();
       private void ensureStockInfoIsMutable() {
         if (!((bitField0_ & 0x00000100) == 0x00000100)) {
-          stockInfo_ = new java.util.ArrayList<com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockInfo>(stockInfo_);
+          stockInfo_ = new java.util.ArrayList<StockInfo>(stockInfo_);
           bitField0_ |= 0x00000100;
          }
       }
 
       private com.google.protobuf.RepeatedFieldBuilder<
-          com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockInfo, com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockInfo.Builder, com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockInfoOrBuilder> stockInfoBuilder_;
+          StockInfo, StockInfo.Builder, StockInfoOrBuilder> stockInfoBuilder_;
 
       /**
        * <code>repeated .com.ryd.protocol.protobuf.StockInfo stockInfo = 9;</code>
        */
-      public java.util.List<com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockInfo> getStockInfoList() {
+      public java.util.List<StockInfo> getStockInfoList() {
         if (stockInfoBuilder_ == null) {
           return java.util.Collections.unmodifiableList(stockInfo_);
         } else {
@@ -2261,7 +2393,7 @@ public final class DiyNettyMessage {
       /**
        * <code>repeated .com.ryd.protocol.protobuf.StockInfo stockInfo = 9;</code>
        */
-      public com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockInfo getStockInfo(int index) {
+      public StockInfo getStockInfo(int index) {
         if (stockInfoBuilder_ == null) {
           return stockInfo_.get(index);
         } else {
@@ -2272,7 +2404,7 @@ public final class DiyNettyMessage {
        * <code>repeated .com.ryd.protocol.protobuf.StockInfo stockInfo = 9;</code>
        */
       public Builder setStockInfo(
-          int index, com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockInfo value) {
+          int index, StockInfo value) {
         if (stockInfoBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -2289,7 +2421,7 @@ public final class DiyNettyMessage {
        * <code>repeated .com.ryd.protocol.protobuf.StockInfo stockInfo = 9;</code>
        */
       public Builder setStockInfo(
-          int index, com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockInfo.Builder builderForValue) {
+          int index, StockInfo.Builder builderForValue) {
         if (stockInfoBuilder_ == null) {
           ensureStockInfoIsMutable();
           stockInfo_.set(index, builderForValue.build());
@@ -2302,7 +2434,7 @@ public final class DiyNettyMessage {
       /**
        * <code>repeated .com.ryd.protocol.protobuf.StockInfo stockInfo = 9;</code>
        */
-      public Builder addStockInfo(com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockInfo value) {
+      public Builder addStockInfo(StockInfo value) {
         if (stockInfoBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -2319,7 +2451,7 @@ public final class DiyNettyMessage {
        * <code>repeated .com.ryd.protocol.protobuf.StockInfo stockInfo = 9;</code>
        */
       public Builder addStockInfo(
-          int index, com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockInfo value) {
+          int index, StockInfo value) {
         if (stockInfoBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -2336,7 +2468,7 @@ public final class DiyNettyMessage {
        * <code>repeated .com.ryd.protocol.protobuf.StockInfo stockInfo = 9;</code>
        */
       public Builder addStockInfo(
-          com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockInfo.Builder builderForValue) {
+          StockInfo.Builder builderForValue) {
         if (stockInfoBuilder_ == null) {
           ensureStockInfoIsMutable();
           stockInfo_.add(builderForValue.build());
@@ -2350,7 +2482,7 @@ public final class DiyNettyMessage {
        * <code>repeated .com.ryd.protocol.protobuf.StockInfo stockInfo = 9;</code>
        */
       public Builder addStockInfo(
-          int index, com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockInfo.Builder builderForValue) {
+          int index, StockInfo.Builder builderForValue) {
         if (stockInfoBuilder_ == null) {
           ensureStockInfoIsMutable();
           stockInfo_.add(index, builderForValue.build());
@@ -2364,7 +2496,7 @@ public final class DiyNettyMessage {
        * <code>repeated .com.ryd.protocol.protobuf.StockInfo stockInfo = 9;</code>
        */
       public Builder addAllStockInfo(
-          Iterable<? extends com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockInfo> values) {
+          Iterable<? extends StockInfo> values) {
         if (stockInfoBuilder_ == null) {
           ensureStockInfoIsMutable();
           com.google.protobuf.AbstractMessageLite.Builder.addAll(
@@ -2404,14 +2536,14 @@ public final class DiyNettyMessage {
       /**
        * <code>repeated .com.ryd.protocol.protobuf.StockInfo stockInfo = 9;</code>
        */
-      public com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockInfo.Builder getStockInfoBuilder(
+      public StockInfo.Builder getStockInfoBuilder(
           int index) {
         return getStockInfoFieldBuilder().getBuilder(index);
       }
       /**
        * <code>repeated .com.ryd.protocol.protobuf.StockInfo stockInfo = 9;</code>
        */
-      public com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockInfoOrBuilder getStockInfoOrBuilder(
+      public StockInfoOrBuilder getStockInfoOrBuilder(
           int index) {
         if (stockInfoBuilder_ == null) {
           return stockInfo_.get(index);  } else {
@@ -2421,7 +2553,7 @@ public final class DiyNettyMessage {
       /**
        * <code>repeated .com.ryd.protocol.protobuf.StockInfo stockInfo = 9;</code>
        */
-      public java.util.List<? extends com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockInfoOrBuilder> 
+      public java.util.List<? extends StockInfoOrBuilder>
            getStockInfoOrBuilderList() {
         if (stockInfoBuilder_ != null) {
           return stockInfoBuilder_.getMessageOrBuilderList();
@@ -2432,31 +2564,31 @@ public final class DiyNettyMessage {
       /**
        * <code>repeated .com.ryd.protocol.protobuf.StockInfo stockInfo = 9;</code>
        */
-      public com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockInfo.Builder addStockInfoBuilder() {
+      public StockInfo.Builder addStockInfoBuilder() {
         return getStockInfoFieldBuilder().addBuilder(
-            com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockInfo.getDefaultInstance());
+            StockInfo.getDefaultInstance());
       }
       /**
        * <code>repeated .com.ryd.protocol.protobuf.StockInfo stockInfo = 9;</code>
        */
-      public com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockInfo.Builder addStockInfoBuilder(
+      public StockInfo.Builder addStockInfoBuilder(
           int index) {
         return getStockInfoFieldBuilder().addBuilder(
-            index, com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockInfo.getDefaultInstance());
+            index, StockInfo.getDefaultInstance());
       }
       /**
        * <code>repeated .com.ryd.protocol.protobuf.StockInfo stockInfo = 9;</code>
        */
-      public java.util.List<com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockInfo.Builder> 
+      public java.util.List<StockInfo.Builder>
            getStockInfoBuilderList() {
         return getStockInfoFieldBuilder().getBuilderList();
       }
       private com.google.protobuf.RepeatedFieldBuilder<
-          com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockInfo, com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockInfo.Builder, com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockInfoOrBuilder> 
+          StockInfo, StockInfo.Builder, StockInfoOrBuilder>
           getStockInfoFieldBuilder() {
         if (stockInfoBuilder_ == null) {
           stockInfoBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
-              com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockInfo, com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockInfo.Builder, com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockInfoOrBuilder>(
+              StockInfo, StockInfo.Builder, StockInfoOrBuilder>(
                   stockInfo_,
                   ((bitField0_ & 0x00000100) == 0x00000100),
                   getParentForChildren(),
@@ -2466,22 +2598,22 @@ public final class DiyNettyMessage {
         return stockInfoBuilder_;
       }
 
-      private java.util.List<com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.AccountInfo> accountInfo_ =
+      private java.util.List<AccountInfo> accountInfo_ =
         java.util.Collections.emptyList();
       private void ensureAccountInfoIsMutable() {
         if (!((bitField0_ & 0x00000200) == 0x00000200)) {
-          accountInfo_ = new java.util.ArrayList<com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.AccountInfo>(accountInfo_);
+          accountInfo_ = new java.util.ArrayList<AccountInfo>(accountInfo_);
           bitField0_ |= 0x00000200;
          }
       }
 
       private com.google.protobuf.RepeatedFieldBuilder<
-          com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.AccountInfo, com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.AccountInfo.Builder, com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.AccountInfoOrBuilder> accountInfoBuilder_;
+          AccountInfo, AccountInfo.Builder, AccountInfoOrBuilder> accountInfoBuilder_;
 
       /**
        * <code>repeated .com.ryd.protocol.protobuf.AccountInfo accountInfo = 10;</code>
        */
-      public java.util.List<com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.AccountInfo> getAccountInfoList() {
+      public java.util.List<AccountInfo> getAccountInfoList() {
         if (accountInfoBuilder_ == null) {
           return java.util.Collections.unmodifiableList(accountInfo_);
         } else {
@@ -2501,7 +2633,7 @@ public final class DiyNettyMessage {
       /**
        * <code>repeated .com.ryd.protocol.protobuf.AccountInfo accountInfo = 10;</code>
        */
-      public com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.AccountInfo getAccountInfo(int index) {
+      public AccountInfo getAccountInfo(int index) {
         if (accountInfoBuilder_ == null) {
           return accountInfo_.get(index);
         } else {
@@ -2512,7 +2644,7 @@ public final class DiyNettyMessage {
        * <code>repeated .com.ryd.protocol.protobuf.AccountInfo accountInfo = 10;</code>
        */
       public Builder setAccountInfo(
-          int index, com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.AccountInfo value) {
+          int index, AccountInfo value) {
         if (accountInfoBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -2529,7 +2661,7 @@ public final class DiyNettyMessage {
        * <code>repeated .com.ryd.protocol.protobuf.AccountInfo accountInfo = 10;</code>
        */
       public Builder setAccountInfo(
-          int index, com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.AccountInfo.Builder builderForValue) {
+          int index, AccountInfo.Builder builderForValue) {
         if (accountInfoBuilder_ == null) {
           ensureAccountInfoIsMutable();
           accountInfo_.set(index, builderForValue.build());
@@ -2542,7 +2674,7 @@ public final class DiyNettyMessage {
       /**
        * <code>repeated .com.ryd.protocol.protobuf.AccountInfo accountInfo = 10;</code>
        */
-      public Builder addAccountInfo(com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.AccountInfo value) {
+      public Builder addAccountInfo(AccountInfo value) {
         if (accountInfoBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -2559,7 +2691,7 @@ public final class DiyNettyMessage {
        * <code>repeated .com.ryd.protocol.protobuf.AccountInfo accountInfo = 10;</code>
        */
       public Builder addAccountInfo(
-          int index, com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.AccountInfo value) {
+          int index, AccountInfo value) {
         if (accountInfoBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -2576,7 +2708,7 @@ public final class DiyNettyMessage {
        * <code>repeated .com.ryd.protocol.protobuf.AccountInfo accountInfo = 10;</code>
        */
       public Builder addAccountInfo(
-          com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.AccountInfo.Builder builderForValue) {
+          AccountInfo.Builder builderForValue) {
         if (accountInfoBuilder_ == null) {
           ensureAccountInfoIsMutable();
           accountInfo_.add(builderForValue.build());
@@ -2590,7 +2722,7 @@ public final class DiyNettyMessage {
        * <code>repeated .com.ryd.protocol.protobuf.AccountInfo accountInfo = 10;</code>
        */
       public Builder addAccountInfo(
-          int index, com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.AccountInfo.Builder builderForValue) {
+          int index, AccountInfo.Builder builderForValue) {
         if (accountInfoBuilder_ == null) {
           ensureAccountInfoIsMutable();
           accountInfo_.add(index, builderForValue.build());
@@ -2604,7 +2736,7 @@ public final class DiyNettyMessage {
        * <code>repeated .com.ryd.protocol.protobuf.AccountInfo accountInfo = 10;</code>
        */
       public Builder addAllAccountInfo(
-          Iterable<? extends com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.AccountInfo> values) {
+          Iterable<? extends AccountInfo> values) {
         if (accountInfoBuilder_ == null) {
           ensureAccountInfoIsMutable();
           com.google.protobuf.AbstractMessageLite.Builder.addAll(
@@ -2644,14 +2776,14 @@ public final class DiyNettyMessage {
       /**
        * <code>repeated .com.ryd.protocol.protobuf.AccountInfo accountInfo = 10;</code>
        */
-      public com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.AccountInfo.Builder getAccountInfoBuilder(
+      public AccountInfo.Builder getAccountInfoBuilder(
           int index) {
         return getAccountInfoFieldBuilder().getBuilder(index);
       }
       /**
        * <code>repeated .com.ryd.protocol.protobuf.AccountInfo accountInfo = 10;</code>
        */
-      public com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.AccountInfoOrBuilder getAccountInfoOrBuilder(
+      public AccountInfoOrBuilder getAccountInfoOrBuilder(
           int index) {
         if (accountInfoBuilder_ == null) {
           return accountInfo_.get(index);  } else {
@@ -2661,7 +2793,7 @@ public final class DiyNettyMessage {
       /**
        * <code>repeated .com.ryd.protocol.protobuf.AccountInfo accountInfo = 10;</code>
        */
-      public java.util.List<? extends com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.AccountInfoOrBuilder> 
+      public java.util.List<? extends AccountInfoOrBuilder>
            getAccountInfoOrBuilderList() {
         if (accountInfoBuilder_ != null) {
           return accountInfoBuilder_.getMessageOrBuilderList();
@@ -2672,31 +2804,31 @@ public final class DiyNettyMessage {
       /**
        * <code>repeated .com.ryd.protocol.protobuf.AccountInfo accountInfo = 10;</code>
        */
-      public com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.AccountInfo.Builder addAccountInfoBuilder() {
+      public AccountInfo.Builder addAccountInfoBuilder() {
         return getAccountInfoFieldBuilder().addBuilder(
-            com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.AccountInfo.getDefaultInstance());
+            AccountInfo.getDefaultInstance());
       }
       /**
        * <code>repeated .com.ryd.protocol.protobuf.AccountInfo accountInfo = 10;</code>
        */
-      public com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.AccountInfo.Builder addAccountInfoBuilder(
+      public AccountInfo.Builder addAccountInfoBuilder(
           int index) {
         return getAccountInfoFieldBuilder().addBuilder(
-            index, com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.AccountInfo.getDefaultInstance());
+            index, AccountInfo.getDefaultInstance());
       }
       /**
        * <code>repeated .com.ryd.protocol.protobuf.AccountInfo accountInfo = 10;</code>
        */
-      public java.util.List<com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.AccountInfo.Builder> 
+      public java.util.List<AccountInfo.Builder>
            getAccountInfoBuilderList() {
         return getAccountInfoFieldBuilder().getBuilderList();
       }
       private com.google.protobuf.RepeatedFieldBuilder<
-          com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.AccountInfo, com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.AccountInfo.Builder, com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.AccountInfoOrBuilder> 
+          AccountInfo, AccountInfo.Builder, AccountInfoOrBuilder>
           getAccountInfoFieldBuilder() {
         if (accountInfoBuilder_ == null) {
           accountInfoBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
-              com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.AccountInfo, com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.AccountInfo.Builder, com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.AccountInfoOrBuilder>(
+              AccountInfo, AccountInfo.Builder, AccountInfoOrBuilder>(
                   accountInfo_,
                   ((bitField0_ & 0x00000200) == 0x00000200),
                   getParentForChildren(),
@@ -2706,22 +2838,22 @@ public final class DiyNettyMessage {
         return accountInfoBuilder_;
       }
 
-      private java.util.List<com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.QuoteInfo> quoteInfo_ =
+      private java.util.List<QuoteInfo> quoteInfo_ =
         java.util.Collections.emptyList();
       private void ensureQuoteInfoIsMutable() {
         if (!((bitField0_ & 0x00000400) == 0x00000400)) {
-          quoteInfo_ = new java.util.ArrayList<com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.QuoteInfo>(quoteInfo_);
+          quoteInfo_ = new java.util.ArrayList<QuoteInfo>(quoteInfo_);
           bitField0_ |= 0x00000400;
          }
       }
 
       private com.google.protobuf.RepeatedFieldBuilder<
-          com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.QuoteInfo, com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.QuoteInfo.Builder, com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.QuoteInfoOrBuilder> quoteInfoBuilder_;
+          QuoteInfo, QuoteInfo.Builder, QuoteInfoOrBuilder> quoteInfoBuilder_;
 
       /**
        * <code>repeated .com.ryd.protocol.protobuf.QuoteInfo quoteInfo = 11;</code>
        */
-      public java.util.List<com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.QuoteInfo> getQuoteInfoList() {
+      public java.util.List<QuoteInfo> getQuoteInfoList() {
         if (quoteInfoBuilder_ == null) {
           return java.util.Collections.unmodifiableList(quoteInfo_);
         } else {
@@ -2741,7 +2873,7 @@ public final class DiyNettyMessage {
       /**
        * <code>repeated .com.ryd.protocol.protobuf.QuoteInfo quoteInfo = 11;</code>
        */
-      public com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.QuoteInfo getQuoteInfo(int index) {
+      public QuoteInfo getQuoteInfo(int index) {
         if (quoteInfoBuilder_ == null) {
           return quoteInfo_.get(index);
         } else {
@@ -2752,7 +2884,7 @@ public final class DiyNettyMessage {
        * <code>repeated .com.ryd.protocol.protobuf.QuoteInfo quoteInfo = 11;</code>
        */
       public Builder setQuoteInfo(
-          int index, com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.QuoteInfo value) {
+          int index, QuoteInfo value) {
         if (quoteInfoBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -2769,7 +2901,7 @@ public final class DiyNettyMessage {
        * <code>repeated .com.ryd.protocol.protobuf.QuoteInfo quoteInfo = 11;</code>
        */
       public Builder setQuoteInfo(
-          int index, com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.QuoteInfo.Builder builderForValue) {
+          int index, QuoteInfo.Builder builderForValue) {
         if (quoteInfoBuilder_ == null) {
           ensureQuoteInfoIsMutable();
           quoteInfo_.set(index, builderForValue.build());
@@ -2782,7 +2914,7 @@ public final class DiyNettyMessage {
       /**
        * <code>repeated .com.ryd.protocol.protobuf.QuoteInfo quoteInfo = 11;</code>
        */
-      public Builder addQuoteInfo(com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.QuoteInfo value) {
+      public Builder addQuoteInfo(QuoteInfo value) {
         if (quoteInfoBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -2799,7 +2931,7 @@ public final class DiyNettyMessage {
        * <code>repeated .com.ryd.protocol.protobuf.QuoteInfo quoteInfo = 11;</code>
        */
       public Builder addQuoteInfo(
-          int index, com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.QuoteInfo value) {
+          int index, QuoteInfo value) {
         if (quoteInfoBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -2816,7 +2948,7 @@ public final class DiyNettyMessage {
        * <code>repeated .com.ryd.protocol.protobuf.QuoteInfo quoteInfo = 11;</code>
        */
       public Builder addQuoteInfo(
-          com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.QuoteInfo.Builder builderForValue) {
+          QuoteInfo.Builder builderForValue) {
         if (quoteInfoBuilder_ == null) {
           ensureQuoteInfoIsMutable();
           quoteInfo_.add(builderForValue.build());
@@ -2830,7 +2962,7 @@ public final class DiyNettyMessage {
        * <code>repeated .com.ryd.protocol.protobuf.QuoteInfo quoteInfo = 11;</code>
        */
       public Builder addQuoteInfo(
-          int index, com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.QuoteInfo.Builder builderForValue) {
+          int index, QuoteInfo.Builder builderForValue) {
         if (quoteInfoBuilder_ == null) {
           ensureQuoteInfoIsMutable();
           quoteInfo_.add(index, builderForValue.build());
@@ -2844,7 +2976,7 @@ public final class DiyNettyMessage {
        * <code>repeated .com.ryd.protocol.protobuf.QuoteInfo quoteInfo = 11;</code>
        */
       public Builder addAllQuoteInfo(
-          Iterable<? extends com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.QuoteInfo> values) {
+          Iterable<? extends QuoteInfo> values) {
         if (quoteInfoBuilder_ == null) {
           ensureQuoteInfoIsMutable();
           com.google.protobuf.AbstractMessageLite.Builder.addAll(
@@ -2884,14 +3016,14 @@ public final class DiyNettyMessage {
       /**
        * <code>repeated .com.ryd.protocol.protobuf.QuoteInfo quoteInfo = 11;</code>
        */
-      public com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.QuoteInfo.Builder getQuoteInfoBuilder(
+      public QuoteInfo.Builder getQuoteInfoBuilder(
           int index) {
         return getQuoteInfoFieldBuilder().getBuilder(index);
       }
       /**
        * <code>repeated .com.ryd.protocol.protobuf.QuoteInfo quoteInfo = 11;</code>
        */
-      public com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.QuoteInfoOrBuilder getQuoteInfoOrBuilder(
+      public QuoteInfoOrBuilder getQuoteInfoOrBuilder(
           int index) {
         if (quoteInfoBuilder_ == null) {
           return quoteInfo_.get(index);  } else {
@@ -2901,7 +3033,7 @@ public final class DiyNettyMessage {
       /**
        * <code>repeated .com.ryd.protocol.protobuf.QuoteInfo quoteInfo = 11;</code>
        */
-      public java.util.List<? extends com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.QuoteInfoOrBuilder> 
+      public java.util.List<? extends QuoteInfoOrBuilder>
            getQuoteInfoOrBuilderList() {
         if (quoteInfoBuilder_ != null) {
           return quoteInfoBuilder_.getMessageOrBuilderList();
@@ -2912,31 +3044,31 @@ public final class DiyNettyMessage {
       /**
        * <code>repeated .com.ryd.protocol.protobuf.QuoteInfo quoteInfo = 11;</code>
        */
-      public com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.QuoteInfo.Builder addQuoteInfoBuilder() {
+      public QuoteInfo.Builder addQuoteInfoBuilder() {
         return getQuoteInfoFieldBuilder().addBuilder(
-            com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.QuoteInfo.getDefaultInstance());
+            QuoteInfo.getDefaultInstance());
       }
       /**
        * <code>repeated .com.ryd.protocol.protobuf.QuoteInfo quoteInfo = 11;</code>
        */
-      public com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.QuoteInfo.Builder addQuoteInfoBuilder(
+      public QuoteInfo.Builder addQuoteInfoBuilder(
           int index) {
         return getQuoteInfoFieldBuilder().addBuilder(
-            index, com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.QuoteInfo.getDefaultInstance());
+            index, QuoteInfo.getDefaultInstance());
       }
       /**
        * <code>repeated .com.ryd.protocol.protobuf.QuoteInfo quoteInfo = 11;</code>
        */
-      public java.util.List<com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.QuoteInfo.Builder> 
+      public java.util.List<QuoteInfo.Builder>
            getQuoteInfoBuilderList() {
         return getQuoteInfoFieldBuilder().getBuilderList();
       }
       private com.google.protobuf.RepeatedFieldBuilder<
-          com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.QuoteInfo, com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.QuoteInfo.Builder, com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.QuoteInfoOrBuilder> 
+          QuoteInfo, QuoteInfo.Builder, QuoteInfoOrBuilder>
           getQuoteInfoFieldBuilder() {
         if (quoteInfoBuilder_ == null) {
           quoteInfoBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
-              com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.QuoteInfo, com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.QuoteInfo.Builder, com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.QuoteInfoOrBuilder>(
+              QuoteInfo, QuoteInfo.Builder, QuoteInfoOrBuilder>(
                   quoteInfo_,
                   ((bitField0_ & 0x00000400) == 0x00000400),
                   getParentForChildren(),
@@ -2946,22 +3078,22 @@ public final class DiyNettyMessage {
         return quoteInfoBuilder_;
       }
 
-      private java.util.List<com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.PositionInfo> positionInfo_ =
+      private java.util.List<PositionInfo> positionInfo_ =
         java.util.Collections.emptyList();
       private void ensurePositionInfoIsMutable() {
         if (!((bitField0_ & 0x00000800) == 0x00000800)) {
-          positionInfo_ = new java.util.ArrayList<com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.PositionInfo>(positionInfo_);
+          positionInfo_ = new java.util.ArrayList<PositionInfo>(positionInfo_);
           bitField0_ |= 0x00000800;
          }
       }
 
       private com.google.protobuf.RepeatedFieldBuilder<
-          com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.PositionInfo, com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.PositionInfo.Builder, com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.PositionInfoOrBuilder> positionInfoBuilder_;
+          PositionInfo, PositionInfo.Builder, PositionInfoOrBuilder> positionInfoBuilder_;
 
       /**
        * <code>repeated .com.ryd.protocol.protobuf.PositionInfo positionInfo = 12;</code>
        */
-      public java.util.List<com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.PositionInfo> getPositionInfoList() {
+      public java.util.List<PositionInfo> getPositionInfoList() {
         if (positionInfoBuilder_ == null) {
           return java.util.Collections.unmodifiableList(positionInfo_);
         } else {
@@ -2981,7 +3113,7 @@ public final class DiyNettyMessage {
       /**
        * <code>repeated .com.ryd.protocol.protobuf.PositionInfo positionInfo = 12;</code>
        */
-      public com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.PositionInfo getPositionInfo(int index) {
+      public PositionInfo getPositionInfo(int index) {
         if (positionInfoBuilder_ == null) {
           return positionInfo_.get(index);
         } else {
@@ -2992,7 +3124,7 @@ public final class DiyNettyMessage {
        * <code>repeated .com.ryd.protocol.protobuf.PositionInfo positionInfo = 12;</code>
        */
       public Builder setPositionInfo(
-          int index, com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.PositionInfo value) {
+          int index, PositionInfo value) {
         if (positionInfoBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -3009,7 +3141,7 @@ public final class DiyNettyMessage {
        * <code>repeated .com.ryd.protocol.protobuf.PositionInfo positionInfo = 12;</code>
        */
       public Builder setPositionInfo(
-          int index, com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.PositionInfo.Builder builderForValue) {
+          int index, PositionInfo.Builder builderForValue) {
         if (positionInfoBuilder_ == null) {
           ensurePositionInfoIsMutable();
           positionInfo_.set(index, builderForValue.build());
@@ -3022,7 +3154,7 @@ public final class DiyNettyMessage {
       /**
        * <code>repeated .com.ryd.protocol.protobuf.PositionInfo positionInfo = 12;</code>
        */
-      public Builder addPositionInfo(com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.PositionInfo value) {
+      public Builder addPositionInfo(PositionInfo value) {
         if (positionInfoBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -3039,7 +3171,7 @@ public final class DiyNettyMessage {
        * <code>repeated .com.ryd.protocol.protobuf.PositionInfo positionInfo = 12;</code>
        */
       public Builder addPositionInfo(
-          int index, com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.PositionInfo value) {
+          int index, PositionInfo value) {
         if (positionInfoBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -3056,7 +3188,7 @@ public final class DiyNettyMessage {
        * <code>repeated .com.ryd.protocol.protobuf.PositionInfo positionInfo = 12;</code>
        */
       public Builder addPositionInfo(
-          com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.PositionInfo.Builder builderForValue) {
+          PositionInfo.Builder builderForValue) {
         if (positionInfoBuilder_ == null) {
           ensurePositionInfoIsMutable();
           positionInfo_.add(builderForValue.build());
@@ -3070,7 +3202,7 @@ public final class DiyNettyMessage {
        * <code>repeated .com.ryd.protocol.protobuf.PositionInfo positionInfo = 12;</code>
        */
       public Builder addPositionInfo(
-          int index, com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.PositionInfo.Builder builderForValue) {
+          int index, PositionInfo.Builder builderForValue) {
         if (positionInfoBuilder_ == null) {
           ensurePositionInfoIsMutable();
           positionInfo_.add(index, builderForValue.build());
@@ -3084,7 +3216,7 @@ public final class DiyNettyMessage {
        * <code>repeated .com.ryd.protocol.protobuf.PositionInfo positionInfo = 12;</code>
        */
       public Builder addAllPositionInfo(
-          Iterable<? extends com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.PositionInfo> values) {
+          Iterable<? extends PositionInfo> values) {
         if (positionInfoBuilder_ == null) {
           ensurePositionInfoIsMutable();
           com.google.protobuf.AbstractMessageLite.Builder.addAll(
@@ -3124,14 +3256,14 @@ public final class DiyNettyMessage {
       /**
        * <code>repeated .com.ryd.protocol.protobuf.PositionInfo positionInfo = 12;</code>
        */
-      public com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.PositionInfo.Builder getPositionInfoBuilder(
+      public PositionInfo.Builder getPositionInfoBuilder(
           int index) {
         return getPositionInfoFieldBuilder().getBuilder(index);
       }
       /**
        * <code>repeated .com.ryd.protocol.protobuf.PositionInfo positionInfo = 12;</code>
        */
-      public com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.PositionInfoOrBuilder getPositionInfoOrBuilder(
+      public PositionInfoOrBuilder getPositionInfoOrBuilder(
           int index) {
         if (positionInfoBuilder_ == null) {
           return positionInfo_.get(index);  } else {
@@ -3141,7 +3273,7 @@ public final class DiyNettyMessage {
       /**
        * <code>repeated .com.ryd.protocol.protobuf.PositionInfo positionInfo = 12;</code>
        */
-      public java.util.List<? extends com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.PositionInfoOrBuilder> 
+      public java.util.List<? extends PositionInfoOrBuilder>
            getPositionInfoOrBuilderList() {
         if (positionInfoBuilder_ != null) {
           return positionInfoBuilder_.getMessageOrBuilderList();
@@ -3152,31 +3284,31 @@ public final class DiyNettyMessage {
       /**
        * <code>repeated .com.ryd.protocol.protobuf.PositionInfo positionInfo = 12;</code>
        */
-      public com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.PositionInfo.Builder addPositionInfoBuilder() {
+      public PositionInfo.Builder addPositionInfoBuilder() {
         return getPositionInfoFieldBuilder().addBuilder(
-            com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.PositionInfo.getDefaultInstance());
+            PositionInfo.getDefaultInstance());
       }
       /**
        * <code>repeated .com.ryd.protocol.protobuf.PositionInfo positionInfo = 12;</code>
        */
-      public com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.PositionInfo.Builder addPositionInfoBuilder(
+      public PositionInfo.Builder addPositionInfoBuilder(
           int index) {
         return getPositionInfoFieldBuilder().addBuilder(
-            index, com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.PositionInfo.getDefaultInstance());
+            index, PositionInfo.getDefaultInstance());
       }
       /**
        * <code>repeated .com.ryd.protocol.protobuf.PositionInfo positionInfo = 12;</code>
        */
-      public java.util.List<com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.PositionInfo.Builder> 
+      public java.util.List<PositionInfo.Builder>
            getPositionInfoBuilderList() {
         return getPositionInfoFieldBuilder().getBuilderList();
       }
       private com.google.protobuf.RepeatedFieldBuilder<
-          com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.PositionInfo, com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.PositionInfo.Builder, com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.PositionInfoOrBuilder> 
+          PositionInfo, PositionInfo.Builder, PositionInfoOrBuilder>
           getPositionInfoFieldBuilder() {
         if (positionInfoBuilder_ == null) {
           positionInfoBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
-              com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.PositionInfo, com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.PositionInfo.Builder, com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.PositionInfoOrBuilder>(
+              PositionInfo, PositionInfo.Builder, PositionInfoOrBuilder>(
                   positionInfo_,
                   ((bitField0_ & 0x00000800) == 0x00000800),
                   getParentForChildren(),
@@ -3186,22 +3318,22 @@ public final class DiyNettyMessage {
         return positionInfoBuilder_;
       }
 
-      private java.util.List<com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.MoneyJournalInfo> moneyJournalInfo_ =
+      private java.util.List<MoneyJournalInfo> moneyJournalInfo_ =
         java.util.Collections.emptyList();
       private void ensureMoneyJournalInfoIsMutable() {
         if (!((bitField0_ & 0x00001000) == 0x00001000)) {
-          moneyJournalInfo_ = new java.util.ArrayList<com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.MoneyJournalInfo>(moneyJournalInfo_);
+          moneyJournalInfo_ = new java.util.ArrayList<MoneyJournalInfo>(moneyJournalInfo_);
           bitField0_ |= 0x00001000;
          }
       }
 
       private com.google.protobuf.RepeatedFieldBuilder<
-          com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.MoneyJournalInfo, com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.MoneyJournalInfo.Builder, com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.MoneyJournalInfoOrBuilder> moneyJournalInfoBuilder_;
+          MoneyJournalInfo, MoneyJournalInfo.Builder, MoneyJournalInfoOrBuilder> moneyJournalInfoBuilder_;
 
       /**
        * <code>repeated .com.ryd.protocol.protobuf.MoneyJournalInfo moneyJournalInfo = 13;</code>
        */
-      public java.util.List<com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.MoneyJournalInfo> getMoneyJournalInfoList() {
+      public java.util.List<MoneyJournalInfo> getMoneyJournalInfoList() {
         if (moneyJournalInfoBuilder_ == null) {
           return java.util.Collections.unmodifiableList(moneyJournalInfo_);
         } else {
@@ -3221,7 +3353,7 @@ public final class DiyNettyMessage {
       /**
        * <code>repeated .com.ryd.protocol.protobuf.MoneyJournalInfo moneyJournalInfo = 13;</code>
        */
-      public com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.MoneyJournalInfo getMoneyJournalInfo(int index) {
+      public MoneyJournalInfo getMoneyJournalInfo(int index) {
         if (moneyJournalInfoBuilder_ == null) {
           return moneyJournalInfo_.get(index);
         } else {
@@ -3232,7 +3364,7 @@ public final class DiyNettyMessage {
        * <code>repeated .com.ryd.protocol.protobuf.MoneyJournalInfo moneyJournalInfo = 13;</code>
        */
       public Builder setMoneyJournalInfo(
-          int index, com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.MoneyJournalInfo value) {
+          int index, MoneyJournalInfo value) {
         if (moneyJournalInfoBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -3249,7 +3381,7 @@ public final class DiyNettyMessage {
        * <code>repeated .com.ryd.protocol.protobuf.MoneyJournalInfo moneyJournalInfo = 13;</code>
        */
       public Builder setMoneyJournalInfo(
-          int index, com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.MoneyJournalInfo.Builder builderForValue) {
+          int index, MoneyJournalInfo.Builder builderForValue) {
         if (moneyJournalInfoBuilder_ == null) {
           ensureMoneyJournalInfoIsMutable();
           moneyJournalInfo_.set(index, builderForValue.build());
@@ -3262,7 +3394,7 @@ public final class DiyNettyMessage {
       /**
        * <code>repeated .com.ryd.protocol.protobuf.MoneyJournalInfo moneyJournalInfo = 13;</code>
        */
-      public Builder addMoneyJournalInfo(com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.MoneyJournalInfo value) {
+      public Builder addMoneyJournalInfo(MoneyJournalInfo value) {
         if (moneyJournalInfoBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -3279,7 +3411,7 @@ public final class DiyNettyMessage {
        * <code>repeated .com.ryd.protocol.protobuf.MoneyJournalInfo moneyJournalInfo = 13;</code>
        */
       public Builder addMoneyJournalInfo(
-          int index, com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.MoneyJournalInfo value) {
+          int index, MoneyJournalInfo value) {
         if (moneyJournalInfoBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -3296,7 +3428,7 @@ public final class DiyNettyMessage {
        * <code>repeated .com.ryd.protocol.protobuf.MoneyJournalInfo moneyJournalInfo = 13;</code>
        */
       public Builder addMoneyJournalInfo(
-          com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.MoneyJournalInfo.Builder builderForValue) {
+          MoneyJournalInfo.Builder builderForValue) {
         if (moneyJournalInfoBuilder_ == null) {
           ensureMoneyJournalInfoIsMutable();
           moneyJournalInfo_.add(builderForValue.build());
@@ -3310,7 +3442,7 @@ public final class DiyNettyMessage {
        * <code>repeated .com.ryd.protocol.protobuf.MoneyJournalInfo moneyJournalInfo = 13;</code>
        */
       public Builder addMoneyJournalInfo(
-          int index, com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.MoneyJournalInfo.Builder builderForValue) {
+          int index, MoneyJournalInfo.Builder builderForValue) {
         if (moneyJournalInfoBuilder_ == null) {
           ensureMoneyJournalInfoIsMutable();
           moneyJournalInfo_.add(index, builderForValue.build());
@@ -3324,7 +3456,7 @@ public final class DiyNettyMessage {
        * <code>repeated .com.ryd.protocol.protobuf.MoneyJournalInfo moneyJournalInfo = 13;</code>
        */
       public Builder addAllMoneyJournalInfo(
-          Iterable<? extends com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.MoneyJournalInfo> values) {
+          Iterable<? extends MoneyJournalInfo> values) {
         if (moneyJournalInfoBuilder_ == null) {
           ensureMoneyJournalInfoIsMutable();
           com.google.protobuf.AbstractMessageLite.Builder.addAll(
@@ -3364,14 +3496,14 @@ public final class DiyNettyMessage {
       /**
        * <code>repeated .com.ryd.protocol.protobuf.MoneyJournalInfo moneyJournalInfo = 13;</code>
        */
-      public com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.MoneyJournalInfo.Builder getMoneyJournalInfoBuilder(
+      public MoneyJournalInfo.Builder getMoneyJournalInfoBuilder(
           int index) {
         return getMoneyJournalInfoFieldBuilder().getBuilder(index);
       }
       /**
        * <code>repeated .com.ryd.protocol.protobuf.MoneyJournalInfo moneyJournalInfo = 13;</code>
        */
-      public com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.MoneyJournalInfoOrBuilder getMoneyJournalInfoOrBuilder(
+      public MoneyJournalInfoOrBuilder getMoneyJournalInfoOrBuilder(
           int index) {
         if (moneyJournalInfoBuilder_ == null) {
           return moneyJournalInfo_.get(index);  } else {
@@ -3381,7 +3513,7 @@ public final class DiyNettyMessage {
       /**
        * <code>repeated .com.ryd.protocol.protobuf.MoneyJournalInfo moneyJournalInfo = 13;</code>
        */
-      public java.util.List<? extends com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.MoneyJournalInfoOrBuilder> 
+      public java.util.List<? extends MoneyJournalInfoOrBuilder>
            getMoneyJournalInfoOrBuilderList() {
         if (moneyJournalInfoBuilder_ != null) {
           return moneyJournalInfoBuilder_.getMessageOrBuilderList();
@@ -3392,31 +3524,31 @@ public final class DiyNettyMessage {
       /**
        * <code>repeated .com.ryd.protocol.protobuf.MoneyJournalInfo moneyJournalInfo = 13;</code>
        */
-      public com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.MoneyJournalInfo.Builder addMoneyJournalInfoBuilder() {
+      public MoneyJournalInfo.Builder addMoneyJournalInfoBuilder() {
         return getMoneyJournalInfoFieldBuilder().addBuilder(
-            com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.MoneyJournalInfo.getDefaultInstance());
+            MoneyJournalInfo.getDefaultInstance());
       }
       /**
        * <code>repeated .com.ryd.protocol.protobuf.MoneyJournalInfo moneyJournalInfo = 13;</code>
        */
-      public com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.MoneyJournalInfo.Builder addMoneyJournalInfoBuilder(
+      public MoneyJournalInfo.Builder addMoneyJournalInfoBuilder(
           int index) {
         return getMoneyJournalInfoFieldBuilder().addBuilder(
-            index, com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.MoneyJournalInfo.getDefaultInstance());
+            index, MoneyJournalInfo.getDefaultInstance());
       }
       /**
        * <code>repeated .com.ryd.protocol.protobuf.MoneyJournalInfo moneyJournalInfo = 13;</code>
        */
-      public java.util.List<com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.MoneyJournalInfo.Builder> 
+      public java.util.List<MoneyJournalInfo.Builder>
            getMoneyJournalInfoBuilderList() {
         return getMoneyJournalInfoFieldBuilder().getBuilderList();
       }
       private com.google.protobuf.RepeatedFieldBuilder<
-          com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.MoneyJournalInfo, com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.MoneyJournalInfo.Builder, com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.MoneyJournalInfoOrBuilder> 
+          MoneyJournalInfo, MoneyJournalInfo.Builder, MoneyJournalInfoOrBuilder>
           getMoneyJournalInfoFieldBuilder() {
         if (moneyJournalInfoBuilder_ == null) {
           moneyJournalInfoBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
-              com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.MoneyJournalInfo, com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.MoneyJournalInfo.Builder, com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.MoneyJournalInfoOrBuilder>(
+              MoneyJournalInfo, MoneyJournalInfo.Builder, MoneyJournalInfoOrBuilder>(
                   moneyJournalInfo_,
                   ((bitField0_ & 0x00001000) == 0x00001000),
                   getParentForChildren(),
@@ -3566,22 +3698,22 @@ public final class DiyNettyMessage {
         return this;
       }
 
-      private java.util.List<com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.TradeRecordInfo> tradeRecordInfo_ =
+      private java.util.List<TradeRecordInfo> tradeRecordInfo_ =
         java.util.Collections.emptyList();
       private void ensureTradeRecordInfoIsMutable() {
         if (!((bitField0_ & 0x00010000) == 0x00010000)) {
-          tradeRecordInfo_ = new java.util.ArrayList<com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.TradeRecordInfo>(tradeRecordInfo_);
+          tradeRecordInfo_ = new java.util.ArrayList<TradeRecordInfo>(tradeRecordInfo_);
           bitField0_ |= 0x00010000;
          }
       }
 
       private com.google.protobuf.RepeatedFieldBuilder<
-          com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.TradeRecordInfo, com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.TradeRecordInfo.Builder, com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.TradeRecordInfoOrBuilder> tradeRecordInfoBuilder_;
+          TradeRecordInfo, TradeRecordInfo.Builder, TradeRecordInfoOrBuilder> tradeRecordInfoBuilder_;
 
       /**
        * <code>repeated .com.ryd.protocol.protobuf.TradeRecordInfo tradeRecordInfo = 17;</code>
        */
-      public java.util.List<com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.TradeRecordInfo> getTradeRecordInfoList() {
+      public java.util.List<TradeRecordInfo> getTradeRecordInfoList() {
         if (tradeRecordInfoBuilder_ == null) {
           return java.util.Collections.unmodifiableList(tradeRecordInfo_);
         } else {
@@ -3601,7 +3733,7 @@ public final class DiyNettyMessage {
       /**
        * <code>repeated .com.ryd.protocol.protobuf.TradeRecordInfo tradeRecordInfo = 17;</code>
        */
-      public com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.TradeRecordInfo getTradeRecordInfo(int index) {
+      public TradeRecordInfo getTradeRecordInfo(int index) {
         if (tradeRecordInfoBuilder_ == null) {
           return tradeRecordInfo_.get(index);
         } else {
@@ -3612,7 +3744,7 @@ public final class DiyNettyMessage {
        * <code>repeated .com.ryd.protocol.protobuf.TradeRecordInfo tradeRecordInfo = 17;</code>
        */
       public Builder setTradeRecordInfo(
-          int index, com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.TradeRecordInfo value) {
+          int index, TradeRecordInfo value) {
         if (tradeRecordInfoBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -3629,7 +3761,7 @@ public final class DiyNettyMessage {
        * <code>repeated .com.ryd.protocol.protobuf.TradeRecordInfo tradeRecordInfo = 17;</code>
        */
       public Builder setTradeRecordInfo(
-          int index, com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.TradeRecordInfo.Builder builderForValue) {
+          int index, TradeRecordInfo.Builder builderForValue) {
         if (tradeRecordInfoBuilder_ == null) {
           ensureTradeRecordInfoIsMutable();
           tradeRecordInfo_.set(index, builderForValue.build());
@@ -3642,7 +3774,7 @@ public final class DiyNettyMessage {
       /**
        * <code>repeated .com.ryd.protocol.protobuf.TradeRecordInfo tradeRecordInfo = 17;</code>
        */
-      public Builder addTradeRecordInfo(com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.TradeRecordInfo value) {
+      public Builder addTradeRecordInfo(TradeRecordInfo value) {
         if (tradeRecordInfoBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -3659,7 +3791,7 @@ public final class DiyNettyMessage {
        * <code>repeated .com.ryd.protocol.protobuf.TradeRecordInfo tradeRecordInfo = 17;</code>
        */
       public Builder addTradeRecordInfo(
-          int index, com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.TradeRecordInfo value) {
+          int index, TradeRecordInfo value) {
         if (tradeRecordInfoBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -3676,7 +3808,7 @@ public final class DiyNettyMessage {
        * <code>repeated .com.ryd.protocol.protobuf.TradeRecordInfo tradeRecordInfo = 17;</code>
        */
       public Builder addTradeRecordInfo(
-          com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.TradeRecordInfo.Builder builderForValue) {
+          TradeRecordInfo.Builder builderForValue) {
         if (tradeRecordInfoBuilder_ == null) {
           ensureTradeRecordInfoIsMutable();
           tradeRecordInfo_.add(builderForValue.build());
@@ -3690,7 +3822,7 @@ public final class DiyNettyMessage {
        * <code>repeated .com.ryd.protocol.protobuf.TradeRecordInfo tradeRecordInfo = 17;</code>
        */
       public Builder addTradeRecordInfo(
-          int index, com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.TradeRecordInfo.Builder builderForValue) {
+          int index, TradeRecordInfo.Builder builderForValue) {
         if (tradeRecordInfoBuilder_ == null) {
           ensureTradeRecordInfoIsMutable();
           tradeRecordInfo_.add(index, builderForValue.build());
@@ -3704,7 +3836,7 @@ public final class DiyNettyMessage {
        * <code>repeated .com.ryd.protocol.protobuf.TradeRecordInfo tradeRecordInfo = 17;</code>
        */
       public Builder addAllTradeRecordInfo(
-          Iterable<? extends com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.TradeRecordInfo> values) {
+          Iterable<? extends TradeRecordInfo> values) {
         if (tradeRecordInfoBuilder_ == null) {
           ensureTradeRecordInfoIsMutable();
           com.google.protobuf.AbstractMessageLite.Builder.addAll(
@@ -3744,14 +3876,14 @@ public final class DiyNettyMessage {
       /**
        * <code>repeated .com.ryd.protocol.protobuf.TradeRecordInfo tradeRecordInfo = 17;</code>
        */
-      public com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.TradeRecordInfo.Builder getTradeRecordInfoBuilder(
+      public TradeRecordInfo.Builder getTradeRecordInfoBuilder(
           int index) {
         return getTradeRecordInfoFieldBuilder().getBuilder(index);
       }
       /**
        * <code>repeated .com.ryd.protocol.protobuf.TradeRecordInfo tradeRecordInfo = 17;</code>
        */
-      public com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.TradeRecordInfoOrBuilder getTradeRecordInfoOrBuilder(
+      public TradeRecordInfoOrBuilder getTradeRecordInfoOrBuilder(
           int index) {
         if (tradeRecordInfoBuilder_ == null) {
           return tradeRecordInfo_.get(index);  } else {
@@ -3761,7 +3893,7 @@ public final class DiyNettyMessage {
       /**
        * <code>repeated .com.ryd.protocol.protobuf.TradeRecordInfo tradeRecordInfo = 17;</code>
        */
-      public java.util.List<? extends com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.TradeRecordInfoOrBuilder> 
+      public java.util.List<? extends TradeRecordInfoOrBuilder>
            getTradeRecordInfoOrBuilderList() {
         if (tradeRecordInfoBuilder_ != null) {
           return tradeRecordInfoBuilder_.getMessageOrBuilderList();
@@ -3772,31 +3904,31 @@ public final class DiyNettyMessage {
       /**
        * <code>repeated .com.ryd.protocol.protobuf.TradeRecordInfo tradeRecordInfo = 17;</code>
        */
-      public com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.TradeRecordInfo.Builder addTradeRecordInfoBuilder() {
+      public TradeRecordInfo.Builder addTradeRecordInfoBuilder() {
         return getTradeRecordInfoFieldBuilder().addBuilder(
-            com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.TradeRecordInfo.getDefaultInstance());
+            TradeRecordInfo.getDefaultInstance());
       }
       /**
        * <code>repeated .com.ryd.protocol.protobuf.TradeRecordInfo tradeRecordInfo = 17;</code>
        */
-      public com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.TradeRecordInfo.Builder addTradeRecordInfoBuilder(
+      public TradeRecordInfo.Builder addTradeRecordInfoBuilder(
           int index) {
         return getTradeRecordInfoFieldBuilder().addBuilder(
-            index, com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.TradeRecordInfo.getDefaultInstance());
+            index, TradeRecordInfo.getDefaultInstance());
       }
       /**
        * <code>repeated .com.ryd.protocol.protobuf.TradeRecordInfo tradeRecordInfo = 17;</code>
        */
-      public java.util.List<com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.TradeRecordInfo.Builder> 
+      public java.util.List<TradeRecordInfo.Builder>
            getTradeRecordInfoBuilderList() {
         return getTradeRecordInfoFieldBuilder().getBuilderList();
       }
       private com.google.protobuf.RepeatedFieldBuilder<
-          com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.TradeRecordInfo, com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.TradeRecordInfo.Builder, com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.TradeRecordInfoOrBuilder> 
+          TradeRecordInfo, TradeRecordInfo.Builder, TradeRecordInfoOrBuilder>
           getTradeRecordInfoFieldBuilder() {
         if (tradeRecordInfoBuilder_ == null) {
           tradeRecordInfoBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
-              com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.TradeRecordInfo, com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.TradeRecordInfo.Builder, com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.TradeRecordInfoOrBuilder>(
+              TradeRecordInfo, TradeRecordInfo.Builder, TradeRecordInfoOrBuilder>(
                   tradeRecordInfo_,
                   ((bitField0_ & 0x00010000) == 0x00010000),
                   getParentForChildren(),
@@ -3806,22 +3938,22 @@ public final class DiyNettyMessage {
         return tradeRecordInfoBuilder_;
       }
 
-      private java.util.List<com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockPriceInfo> stockPriceInfo_ =
+      private java.util.List<StockPriceInfo> stockPriceInfo_ =
         java.util.Collections.emptyList();
       private void ensureStockPriceInfoIsMutable() {
         if (!((bitField0_ & 0x00020000) == 0x00020000)) {
-          stockPriceInfo_ = new java.util.ArrayList<com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockPriceInfo>(stockPriceInfo_);
+          stockPriceInfo_ = new java.util.ArrayList<StockPriceInfo>(stockPriceInfo_);
           bitField0_ |= 0x00020000;
          }
       }
 
       private com.google.protobuf.RepeatedFieldBuilder<
-          com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockPriceInfo, com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockPriceInfo.Builder, com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockPriceInfoOrBuilder> stockPriceInfoBuilder_;
+          StockPriceInfo, StockPriceInfo.Builder, StockPriceInfoOrBuilder> stockPriceInfoBuilder_;
 
       /**
        * <code>repeated .com.ryd.protocol.protobuf.StockPriceInfo stockPriceInfo = 18;</code>
        */
-      public java.util.List<com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockPriceInfo> getStockPriceInfoList() {
+      public java.util.List<StockPriceInfo> getStockPriceInfoList() {
         if (stockPriceInfoBuilder_ == null) {
           return java.util.Collections.unmodifiableList(stockPriceInfo_);
         } else {
@@ -3841,7 +3973,7 @@ public final class DiyNettyMessage {
       /**
        * <code>repeated .com.ryd.protocol.protobuf.StockPriceInfo stockPriceInfo = 18;</code>
        */
-      public com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockPriceInfo getStockPriceInfo(int index) {
+      public StockPriceInfo getStockPriceInfo(int index) {
         if (stockPriceInfoBuilder_ == null) {
           return stockPriceInfo_.get(index);
         } else {
@@ -3852,7 +3984,7 @@ public final class DiyNettyMessage {
        * <code>repeated .com.ryd.protocol.protobuf.StockPriceInfo stockPriceInfo = 18;</code>
        */
       public Builder setStockPriceInfo(
-          int index, com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockPriceInfo value) {
+          int index, StockPriceInfo value) {
         if (stockPriceInfoBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -3869,7 +4001,7 @@ public final class DiyNettyMessage {
        * <code>repeated .com.ryd.protocol.protobuf.StockPriceInfo stockPriceInfo = 18;</code>
        */
       public Builder setStockPriceInfo(
-          int index, com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockPriceInfo.Builder builderForValue) {
+          int index, StockPriceInfo.Builder builderForValue) {
         if (stockPriceInfoBuilder_ == null) {
           ensureStockPriceInfoIsMutable();
           stockPriceInfo_.set(index, builderForValue.build());
@@ -3882,7 +4014,7 @@ public final class DiyNettyMessage {
       /**
        * <code>repeated .com.ryd.protocol.protobuf.StockPriceInfo stockPriceInfo = 18;</code>
        */
-      public Builder addStockPriceInfo(com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockPriceInfo value) {
+      public Builder addStockPriceInfo(StockPriceInfo value) {
         if (stockPriceInfoBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -3899,7 +4031,7 @@ public final class DiyNettyMessage {
        * <code>repeated .com.ryd.protocol.protobuf.StockPriceInfo stockPriceInfo = 18;</code>
        */
       public Builder addStockPriceInfo(
-          int index, com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockPriceInfo value) {
+          int index, StockPriceInfo value) {
         if (stockPriceInfoBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -3916,7 +4048,7 @@ public final class DiyNettyMessage {
        * <code>repeated .com.ryd.protocol.protobuf.StockPriceInfo stockPriceInfo = 18;</code>
        */
       public Builder addStockPriceInfo(
-          com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockPriceInfo.Builder builderForValue) {
+          StockPriceInfo.Builder builderForValue) {
         if (stockPriceInfoBuilder_ == null) {
           ensureStockPriceInfoIsMutable();
           stockPriceInfo_.add(builderForValue.build());
@@ -3930,7 +4062,7 @@ public final class DiyNettyMessage {
        * <code>repeated .com.ryd.protocol.protobuf.StockPriceInfo stockPriceInfo = 18;</code>
        */
       public Builder addStockPriceInfo(
-          int index, com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockPriceInfo.Builder builderForValue) {
+          int index, StockPriceInfo.Builder builderForValue) {
         if (stockPriceInfoBuilder_ == null) {
           ensureStockPriceInfoIsMutable();
           stockPriceInfo_.add(index, builderForValue.build());
@@ -3944,7 +4076,7 @@ public final class DiyNettyMessage {
        * <code>repeated .com.ryd.protocol.protobuf.StockPriceInfo stockPriceInfo = 18;</code>
        */
       public Builder addAllStockPriceInfo(
-          Iterable<? extends com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockPriceInfo> values) {
+          Iterable<? extends StockPriceInfo> values) {
         if (stockPriceInfoBuilder_ == null) {
           ensureStockPriceInfoIsMutable();
           com.google.protobuf.AbstractMessageLite.Builder.addAll(
@@ -3984,14 +4116,14 @@ public final class DiyNettyMessage {
       /**
        * <code>repeated .com.ryd.protocol.protobuf.StockPriceInfo stockPriceInfo = 18;</code>
        */
-      public com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockPriceInfo.Builder getStockPriceInfoBuilder(
+      public StockPriceInfo.Builder getStockPriceInfoBuilder(
           int index) {
         return getStockPriceInfoFieldBuilder().getBuilder(index);
       }
       /**
        * <code>repeated .com.ryd.protocol.protobuf.StockPriceInfo stockPriceInfo = 18;</code>
        */
-      public com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockPriceInfoOrBuilder getStockPriceInfoOrBuilder(
+      public StockPriceInfoOrBuilder getStockPriceInfoOrBuilder(
           int index) {
         if (stockPriceInfoBuilder_ == null) {
           return stockPriceInfo_.get(index);  } else {
@@ -4001,7 +4133,7 @@ public final class DiyNettyMessage {
       /**
        * <code>repeated .com.ryd.protocol.protobuf.StockPriceInfo stockPriceInfo = 18;</code>
        */
-      public java.util.List<? extends com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockPriceInfoOrBuilder> 
+      public java.util.List<? extends StockPriceInfoOrBuilder>
            getStockPriceInfoOrBuilderList() {
         if (stockPriceInfoBuilder_ != null) {
           return stockPriceInfoBuilder_.getMessageOrBuilderList();
@@ -4012,31 +4144,31 @@ public final class DiyNettyMessage {
       /**
        * <code>repeated .com.ryd.protocol.protobuf.StockPriceInfo stockPriceInfo = 18;</code>
        */
-      public com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockPriceInfo.Builder addStockPriceInfoBuilder() {
+      public StockPriceInfo.Builder addStockPriceInfoBuilder() {
         return getStockPriceInfoFieldBuilder().addBuilder(
-            com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockPriceInfo.getDefaultInstance());
+            StockPriceInfo.getDefaultInstance());
       }
       /**
        * <code>repeated .com.ryd.protocol.protobuf.StockPriceInfo stockPriceInfo = 18;</code>
        */
-      public com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockPriceInfo.Builder addStockPriceInfoBuilder(
+      public StockPriceInfo.Builder addStockPriceInfoBuilder(
           int index) {
         return getStockPriceInfoFieldBuilder().addBuilder(
-            index, com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockPriceInfo.getDefaultInstance());
+            index, StockPriceInfo.getDefaultInstance());
       }
       /**
        * <code>repeated .com.ryd.protocol.protobuf.StockPriceInfo stockPriceInfo = 18;</code>
        */
-      public java.util.List<com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockPriceInfo.Builder> 
+      public java.util.List<StockPriceInfo.Builder>
            getStockPriceInfoBuilderList() {
         return getStockPriceInfoFieldBuilder().getBuilderList();
       }
       private com.google.protobuf.RepeatedFieldBuilder<
-          com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockPriceInfo, com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockPriceInfo.Builder, com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockPriceInfoOrBuilder> 
+          StockPriceInfo, StockPriceInfo.Builder, StockPriceInfoOrBuilder>
           getStockPriceInfoFieldBuilder() {
         if (stockPriceInfoBuilder_ == null) {
           stockPriceInfoBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
-              com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockPriceInfo, com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockPriceInfo.Builder, com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockPriceInfoOrBuilder>(
+              StockPriceInfo, StockPriceInfo.Builder, StockPriceInfoOrBuilder>(
                   stockPriceInfo_,
                   ((bitField0_ & 0x00020000) == 0x00020000),
                   getParentForChildren(),
@@ -4044,6 +4176,246 @@ public final class DiyNettyMessage {
           stockPriceInfo_ = null;
         }
         return stockPriceInfoBuilder_;
+      }
+
+      private java.util.List<StockConfigInfo> stockConfigInfo_ =
+        java.util.Collections.emptyList();
+      private void ensureStockConfigInfoIsMutable() {
+        if (!((bitField0_ & 0x00040000) == 0x00040000)) {
+          stockConfigInfo_ = new java.util.ArrayList<StockConfigInfo>(stockConfigInfo_);
+          bitField0_ |= 0x00040000;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilder<
+          StockConfigInfo, StockConfigInfo.Builder, StockConfigInfoOrBuilder> stockConfigInfoBuilder_;
+
+      /**
+       * <code>repeated .com.ryd.protocol.protobuf.StockConfigInfo stockConfigInfo = 19;</code>
+       */
+      public java.util.List<StockConfigInfo> getStockConfigInfoList() {
+        if (stockConfigInfoBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(stockConfigInfo_);
+        } else {
+          return stockConfigInfoBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .com.ryd.protocol.protobuf.StockConfigInfo stockConfigInfo = 19;</code>
+       */
+      public int getStockConfigInfoCount() {
+        if (stockConfigInfoBuilder_ == null) {
+          return stockConfigInfo_.size();
+        } else {
+          return stockConfigInfoBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .com.ryd.protocol.protobuf.StockConfigInfo stockConfigInfo = 19;</code>
+       */
+      public StockConfigInfo getStockConfigInfo(int index) {
+        if (stockConfigInfoBuilder_ == null) {
+          return stockConfigInfo_.get(index);
+        } else {
+          return stockConfigInfoBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .com.ryd.protocol.protobuf.StockConfigInfo stockConfigInfo = 19;</code>
+       */
+      public Builder setStockConfigInfo(
+          int index, StockConfigInfo value) {
+        if (stockConfigInfoBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureStockConfigInfoIsMutable();
+          stockConfigInfo_.set(index, value);
+          onChanged();
+        } else {
+          stockConfigInfoBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.ryd.protocol.protobuf.StockConfigInfo stockConfigInfo = 19;</code>
+       */
+      public Builder setStockConfigInfo(
+          int index, StockConfigInfo.Builder builderForValue) {
+        if (stockConfigInfoBuilder_ == null) {
+          ensureStockConfigInfoIsMutable();
+          stockConfigInfo_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          stockConfigInfoBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.ryd.protocol.protobuf.StockConfigInfo stockConfigInfo = 19;</code>
+       */
+      public Builder addStockConfigInfo(StockConfigInfo value) {
+        if (stockConfigInfoBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureStockConfigInfoIsMutable();
+          stockConfigInfo_.add(value);
+          onChanged();
+        } else {
+          stockConfigInfoBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.ryd.protocol.protobuf.StockConfigInfo stockConfigInfo = 19;</code>
+       */
+      public Builder addStockConfigInfo(
+          int index, StockConfigInfo value) {
+        if (stockConfigInfoBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureStockConfigInfoIsMutable();
+          stockConfigInfo_.add(index, value);
+          onChanged();
+        } else {
+          stockConfigInfoBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.ryd.protocol.protobuf.StockConfigInfo stockConfigInfo = 19;</code>
+       */
+      public Builder addStockConfigInfo(
+          StockConfigInfo.Builder builderForValue) {
+        if (stockConfigInfoBuilder_ == null) {
+          ensureStockConfigInfoIsMutable();
+          stockConfigInfo_.add(builderForValue.build());
+          onChanged();
+        } else {
+          stockConfigInfoBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.ryd.protocol.protobuf.StockConfigInfo stockConfigInfo = 19;</code>
+       */
+      public Builder addStockConfigInfo(
+          int index, StockConfigInfo.Builder builderForValue) {
+        if (stockConfigInfoBuilder_ == null) {
+          ensureStockConfigInfoIsMutable();
+          stockConfigInfo_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          stockConfigInfoBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.ryd.protocol.protobuf.StockConfigInfo stockConfigInfo = 19;</code>
+       */
+      public Builder addAllStockConfigInfo(
+          Iterable<? extends StockConfigInfo> values) {
+        if (stockConfigInfoBuilder_ == null) {
+          ensureStockConfigInfoIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, stockConfigInfo_);
+          onChanged();
+        } else {
+          stockConfigInfoBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.ryd.protocol.protobuf.StockConfigInfo stockConfigInfo = 19;</code>
+       */
+      public Builder clearStockConfigInfo() {
+        if (stockConfigInfoBuilder_ == null) {
+          stockConfigInfo_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00040000);
+          onChanged();
+        } else {
+          stockConfigInfoBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.ryd.protocol.protobuf.StockConfigInfo stockConfigInfo = 19;</code>
+       */
+      public Builder removeStockConfigInfo(int index) {
+        if (stockConfigInfoBuilder_ == null) {
+          ensureStockConfigInfoIsMutable();
+          stockConfigInfo_.remove(index);
+          onChanged();
+        } else {
+          stockConfigInfoBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.ryd.protocol.protobuf.StockConfigInfo stockConfigInfo = 19;</code>
+       */
+      public StockConfigInfo.Builder getStockConfigInfoBuilder(
+          int index) {
+        return getStockConfigInfoFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .com.ryd.protocol.protobuf.StockConfigInfo stockConfigInfo = 19;</code>
+       */
+      public StockConfigInfoOrBuilder getStockConfigInfoOrBuilder(
+          int index) {
+        if (stockConfigInfoBuilder_ == null) {
+          return stockConfigInfo_.get(index);  } else {
+          return stockConfigInfoBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .com.ryd.protocol.protobuf.StockConfigInfo stockConfigInfo = 19;</code>
+       */
+      public java.util.List<? extends StockConfigInfoOrBuilder>
+           getStockConfigInfoOrBuilderList() {
+        if (stockConfigInfoBuilder_ != null) {
+          return stockConfigInfoBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(stockConfigInfo_);
+        }
+      }
+      /**
+       * <code>repeated .com.ryd.protocol.protobuf.StockConfigInfo stockConfigInfo = 19;</code>
+       */
+      public StockConfigInfo.Builder addStockConfigInfoBuilder() {
+        return getStockConfigInfoFieldBuilder().addBuilder(
+            StockConfigInfo.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .com.ryd.protocol.protobuf.StockConfigInfo stockConfigInfo = 19;</code>
+       */
+      public StockConfigInfo.Builder addStockConfigInfoBuilder(
+          int index) {
+        return getStockConfigInfoFieldBuilder().addBuilder(
+            index, StockConfigInfo.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .com.ryd.protocol.protobuf.StockConfigInfo stockConfigInfo = 19;</code>
+       */
+      public java.util.List<StockConfigInfo.Builder>
+           getStockConfigInfoBuilderList() {
+        return getStockConfigInfoFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          StockConfigInfo, StockConfigInfo.Builder, StockConfigInfoOrBuilder>
+          getStockConfigInfoFieldBuilder() {
+        if (stockConfigInfoBuilder_ == null) {
+          stockConfigInfoBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              StockConfigInfo, StockConfigInfo.Builder, StockConfigInfoOrBuilder>(
+                  stockConfigInfo_,
+                  ((bitField0_ & 0x00040000) == 0x00040000),
+                  getParentForChildren(),
+                  isClean());
+          stockConfigInfo_ = null;
+        }
+        return stockConfigInfoBuilder_;
       }
 
       // @@protoc_insertion_point(builder_scope:com.ryd.protocol.protobuf.NettyMessage)
@@ -4055,6 +4427,992 @@ public final class DiyNettyMessage {
     }
 
     // @@protoc_insertion_point(class_scope:com.ryd.protocol.protobuf.NettyMessage)
+  }
+
+  public interface StockConfigInfoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.ryd.protocol.protobuf.StockConfigInfo)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>required string id = 1;</code>
+     */
+    boolean hasId();
+    /**
+     * <code>required string id = 1;</code>
+     */
+    String getId();
+    /**
+     * <code>required string id = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getIdBytes();
+
+    /**
+     * <code>required string stockName = 2;</code>
+     */
+    boolean hasStockName();
+    /**
+     * <code>required string stockName = 2;</code>
+     */
+    String getStockName();
+    /**
+     * <code>required string stockName = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getStockNameBytes();
+
+    /**
+     * <code>required string stockCode = 3;</code>
+     */
+    boolean hasStockCode();
+    /**
+     * <code>required string stockCode = 3;</code>
+     */
+    String getStockCode();
+    /**
+     * <code>required string stockCode = 3;</code>
+     */
+    com.google.protobuf.ByteString
+        getStockCodeBytes();
+
+    /**
+     * <code>required int32 stockType = 4;</code>
+     */
+    boolean hasStockType();
+    /**
+     * <code>required int32 stockType = 4;</code>
+     */
+    int getStockType();
+
+    /**
+     * <code>required int32 boardType = 5;</code>
+     */
+    boolean hasBoardType();
+    /**
+     * <code>required int32 boardType = 5;</code>
+     */
+    int getBoardType();
+  }
+  /**
+   * Protobuf type {@code com.ryd.protocol.protobuf.StockConfigInfo}
+   */
+  public static final class StockConfigInfo extends
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.ryd.protocol.protobuf.StockConfigInfo)
+      StockConfigInfoOrBuilder {
+    // Use StockConfigInfo.newBuilder() to construct.
+    private StockConfigInfo(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private StockConfigInfo(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final StockConfigInfo defaultInstance;
+    public static StockConfigInfo getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public StockConfigInfo getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private StockConfigInfo(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000001;
+              id_ = bs;
+              break;
+            }
+            case 18: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000002;
+              stockName_ = bs;
+              break;
+            }
+            case 26: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000004;
+              stockCode_ = bs;
+              break;
+            }
+            case 32: {
+              bitField0_ |= 0x00000008;
+              stockType_ = input.readInt32();
+              break;
+            }
+            case 40: {
+              bitField0_ |= 0x00000010;
+              boardType_ = input.readInt32();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return DiyNettyMessage.internal_static_com_ryd_protocol_protobuf_StockConfigInfo_descriptor;
+    }
+
+    protected FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return DiyNettyMessage.internal_static_com_ryd_protocol_protobuf_StockConfigInfo_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              StockConfigInfo.class, Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<StockConfigInfo> PARSER =
+        new com.google.protobuf.AbstractParser<StockConfigInfo>() {
+      public StockConfigInfo parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new StockConfigInfo(input, extensionRegistry);
+      }
+    };
+
+    @Override
+    public com.google.protobuf.Parser<StockConfigInfo> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    public static final int ID_FIELD_NUMBER = 1;
+    private Object id_;
+    /**
+     * <code>required string id = 1;</code>
+     */
+    public boolean hasId() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required string id = 1;</code>
+     */
+    public String getId() {
+      Object ref = id_;
+      if (ref instanceof String) {
+        return (String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          id_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>required string id = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getIdBytes() {
+      Object ref = id_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (String) ref);
+        id_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int STOCKNAME_FIELD_NUMBER = 2;
+    private Object stockName_;
+    /**
+     * <code>required string stockName = 2;</code>
+     */
+    public boolean hasStockName() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>required string stockName = 2;</code>
+     */
+    public String getStockName() {
+      Object ref = stockName_;
+      if (ref instanceof String) {
+        return (String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          stockName_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>required string stockName = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getStockNameBytes() {
+      Object ref = stockName_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (String) ref);
+        stockName_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int STOCKCODE_FIELD_NUMBER = 3;
+    private Object stockCode_;
+    /**
+     * <code>required string stockCode = 3;</code>
+     */
+    public boolean hasStockCode() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>required string stockCode = 3;</code>
+     */
+    public String getStockCode() {
+      Object ref = stockCode_;
+      if (ref instanceof String) {
+        return (String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          stockCode_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>required string stockCode = 3;</code>
+     */
+    public com.google.protobuf.ByteString
+        getStockCodeBytes() {
+      Object ref = stockCode_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (String) ref);
+        stockCode_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int STOCKTYPE_FIELD_NUMBER = 4;
+    private int stockType_;
+    /**
+     * <code>required int32 stockType = 4;</code>
+     */
+    public boolean hasStockType() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>required int32 stockType = 4;</code>
+     */
+    public int getStockType() {
+      return stockType_;
+    }
+
+    public static final int BOARDTYPE_FIELD_NUMBER = 5;
+    private int boardType_;
+    /**
+     * <code>required int32 boardType = 5;</code>
+     */
+    public boolean hasBoardType() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    /**
+     * <code>required int32 boardType = 5;</code>
+     */
+    public int getBoardType() {
+      return boardType_;
+    }
+
+    private void initFields() {
+      id_ = "";
+      stockName_ = "";
+      stockCode_ = "";
+      stockType_ = 0;
+      boardType_ = 0;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      if (!hasId()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasStockName()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasStockCode()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasStockType()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasBoardType()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeBytes(1, getIdBytes());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeBytes(2, getStockNameBytes());
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeBytes(3, getStockCodeBytes());
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeInt32(4, stockType_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeInt32(5, boardType_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(1, getIdBytes());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(2, getStockNameBytes());
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(3, getStockCodeBytes());
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(4, stockType_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(5, boardType_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @Override
+    protected Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static StockConfigInfo parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static StockConfigInfo parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static StockConfigInfo parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static StockConfigInfo parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static StockConfigInfo parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static StockConfigInfo parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static StockConfigInfo parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static StockConfigInfo parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static StockConfigInfo parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static StockConfigInfo parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(StockConfigInfo prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @Override
+    protected Builder newBuilderForType(
+        BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code com.ryd.protocol.protobuf.StockConfigInfo}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.ryd.protocol.protobuf.StockConfigInfo)
+        StockConfigInfoOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return DiyNettyMessage.internal_static_com_ryd_protocol_protobuf_StockConfigInfo_descriptor;
+      }
+
+      protected FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return DiyNettyMessage.internal_static_com_ryd_protocol_protobuf_StockConfigInfo_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                StockConfigInfo.class, Builder.class);
+      }
+
+      // Construct using com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockConfigInfo.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        id_ = "";
+        bitField0_ = (bitField0_ & ~0x00000001);
+        stockName_ = "";
+        bitField0_ = (bitField0_ & ~0x00000002);
+        stockCode_ = "";
+        bitField0_ = (bitField0_ & ~0x00000004);
+        stockType_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000008);
+        boardType_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000010);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return DiyNettyMessage.internal_static_com_ryd_protocol_protobuf_StockConfigInfo_descriptor;
+      }
+
+      public StockConfigInfo getDefaultInstanceForType() {
+        return StockConfigInfo.getDefaultInstance();
+      }
+
+      public StockConfigInfo build() {
+        StockConfigInfo result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public StockConfigInfo buildPartial() {
+        StockConfigInfo result = new StockConfigInfo(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.id_ = id_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.stockName_ = stockName_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.stockCode_ = stockCode_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.stockType_ = stockType_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.boardType_ = boardType_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof StockConfigInfo) {
+          return mergeFrom((StockConfigInfo)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(StockConfigInfo other) {
+        if (other == StockConfigInfo.getDefaultInstance()) return this;
+        if (other.hasId()) {
+          bitField0_ |= 0x00000001;
+          id_ = other.id_;
+          onChanged();
+        }
+        if (other.hasStockName()) {
+          bitField0_ |= 0x00000002;
+          stockName_ = other.stockName_;
+          onChanged();
+        }
+        if (other.hasStockCode()) {
+          bitField0_ |= 0x00000004;
+          stockCode_ = other.stockCode_;
+          onChanged();
+        }
+        if (other.hasStockType()) {
+          setStockType(other.getStockType());
+        }
+        if (other.hasBoardType()) {
+          setBoardType(other.getBoardType());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (!hasId()) {
+          
+          return false;
+        }
+        if (!hasStockName()) {
+          
+          return false;
+        }
+        if (!hasStockCode()) {
+          
+          return false;
+        }
+        if (!hasStockType()) {
+          
+          return false;
+        }
+        if (!hasBoardType()) {
+          
+          return false;
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        StockConfigInfo parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (StockConfigInfo) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private Object id_ = "";
+      /**
+       * <code>required string id = 1;</code>
+       */
+      public boolean hasId() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required string id = 1;</code>
+       */
+      public String getId() {
+        Object ref = id_;
+        if (!(ref instanceof String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            id_ = s;
+          }
+          return s;
+        } else {
+          return (String) ref;
+        }
+      }
+      /**
+       * <code>required string id = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getIdBytes() {
+        Object ref = id_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (String) ref);
+          id_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string id = 1;</code>
+       */
+      public Builder setId(
+          String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        id_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required string id = 1;</code>
+       */
+      public Builder clearId() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        id_ = getDefaultInstance().getId();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required string id = 1;</code>
+       */
+      public Builder setIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        id_ = value;
+        onChanged();
+        return this;
+      }
+
+      private Object stockName_ = "";
+      /**
+       * <code>required string stockName = 2;</code>
+       */
+      public boolean hasStockName() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>required string stockName = 2;</code>
+       */
+      public String getStockName() {
+        Object ref = stockName_;
+        if (!(ref instanceof String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            stockName_ = s;
+          }
+          return s;
+        } else {
+          return (String) ref;
+        }
+      }
+      /**
+       * <code>required string stockName = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+          getStockNameBytes() {
+        Object ref = stockName_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (String) ref);
+          stockName_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string stockName = 2;</code>
+       */
+      public Builder setStockName(
+          String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        stockName_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required string stockName = 2;</code>
+       */
+      public Builder clearStockName() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        stockName_ = getDefaultInstance().getStockName();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required string stockName = 2;</code>
+       */
+      public Builder setStockNameBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        stockName_ = value;
+        onChanged();
+        return this;
+      }
+
+      private Object stockCode_ = "";
+      /**
+       * <code>required string stockCode = 3;</code>
+       */
+      public boolean hasStockCode() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>required string stockCode = 3;</code>
+       */
+      public String getStockCode() {
+        Object ref = stockCode_;
+        if (!(ref instanceof String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            stockCode_ = s;
+          }
+          return s;
+        } else {
+          return (String) ref;
+        }
+      }
+      /**
+       * <code>required string stockCode = 3;</code>
+       */
+      public com.google.protobuf.ByteString
+          getStockCodeBytes() {
+        Object ref = stockCode_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (String) ref);
+          stockCode_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string stockCode = 3;</code>
+       */
+      public Builder setStockCode(
+          String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+        stockCode_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required string stockCode = 3;</code>
+       */
+      public Builder clearStockCode() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        stockCode_ = getDefaultInstance().getStockCode();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required string stockCode = 3;</code>
+       */
+      public Builder setStockCodeBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+        stockCode_ = value;
+        onChanged();
+        return this;
+      }
+
+      private int stockType_ ;
+      /**
+       * <code>required int32 stockType = 4;</code>
+       */
+      public boolean hasStockType() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>required int32 stockType = 4;</code>
+       */
+      public int getStockType() {
+        return stockType_;
+      }
+      /**
+       * <code>required int32 stockType = 4;</code>
+       */
+      public Builder setStockType(int value) {
+        bitField0_ |= 0x00000008;
+        stockType_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required int32 stockType = 4;</code>
+       */
+      public Builder clearStockType() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        stockType_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int boardType_ ;
+      /**
+       * <code>required int32 boardType = 5;</code>
+       */
+      public boolean hasBoardType() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      /**
+       * <code>required int32 boardType = 5;</code>
+       */
+      public int getBoardType() {
+        return boardType_;
+      }
+      /**
+       * <code>required int32 boardType = 5;</code>
+       */
+      public Builder setBoardType(int value) {
+        bitField0_ |= 0x00000010;
+        boardType_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required int32 boardType = 5;</code>
+       */
+      public Builder clearBoardType() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        boardType_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:com.ryd.protocol.protobuf.StockConfigInfo)
+    }
+
+    static {
+      defaultInstance = new StockConfigInfo(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:com.ryd.protocol.protobuf.StockConfigInfo)
   }
 
   public interface StockInfoOrBuilder extends
@@ -4648,14 +6006,14 @@ public final class DiyNettyMessage {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return internal_static_com_ryd_protocol_protobuf_StockInfo_descriptor;
+      return DiyNettyMessage.internal_static_com_ryd_protocol_protobuf_StockInfo_descriptor;
     }
 
     protected FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return internal_static_com_ryd_protocol_protobuf_StockInfo_fieldAccessorTable
+      return DiyNettyMessage.internal_static_com_ryd_protocol_protobuf_StockInfo_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-                  com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockInfo.class, com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockInfo.Builder.class);
+              StockInfo.class, Builder.class);
     }
 
     public static com.google.protobuf.Parser<StockInfo> PARSER =
@@ -5651,53 +7009,53 @@ public final class DiyNettyMessage {
       return super.writeReplace();
     }
 
-    public static com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockInfo parseFrom(
+    public static StockInfo parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockInfo parseFrom(
+    public static StockInfo parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockInfo parseFrom(byte[] data)
+    public static StockInfo parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockInfo parseFrom(
+    public static StockInfo parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockInfo parseFrom(java.io.InputStream input)
+    public static StockInfo parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockInfo parseFrom(
+    public static StockInfo parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return PARSER.parseFrom(input, extensionRegistry);
     }
-    public static com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockInfo parseDelimitedFrom(java.io.InputStream input)
+    public static StockInfo parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input);
     }
-    public static com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockInfo parseDelimitedFrom(
+    public static StockInfo parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
-    public static com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockInfo parseFrom(
+    public static StockInfo parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockInfo parseFrom(
+    public static StockInfo parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -5706,7 +7064,7 @@ public final class DiyNettyMessage {
 
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockInfo prototype) {
+    public static Builder newBuilder(StockInfo prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
@@ -5723,17 +7081,17 @@ public final class DiyNettyMessage {
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder> implements
         // @@protoc_insertion_point(builder_implements:com.ryd.protocol.protobuf.StockInfo)
-        com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockInfoOrBuilder {
+        StockInfoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return internal_static_com_ryd_protocol_protobuf_StockInfo_descriptor;
+        return DiyNettyMessage.internal_static_com_ryd_protocol_protobuf_StockInfo_descriptor;
       }
 
       protected FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return internal_static_com_ryd_protocol_protobuf_StockInfo_fieldAccessorTable
+        return DiyNettyMessage.internal_static_com_ryd_protocol_protobuf_StockInfo_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                    com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockInfo.class, com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockInfo.Builder.class);
+                StockInfo.class, Builder.class);
       }
 
       // Construct using com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockInfo.newBuilder()
@@ -5835,23 +7193,23 @@ public final class DiyNettyMessage {
 
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return internal_static_com_ryd_protocol_protobuf_StockInfo_descriptor;
+        return DiyNettyMessage.internal_static_com_ryd_protocol_protobuf_StockInfo_descriptor;
       }
 
-      public com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockInfo getDefaultInstanceForType() {
-        return getDefaultInstance();
+      public StockInfo getDefaultInstanceForType() {
+        return StockInfo.getDefaultInstance();
       }
 
-      public com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockInfo build() {
-        com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockInfo result = buildPartial();
+      public StockInfo build() {
+        StockInfo result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      public com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockInfo buildPartial() {
-        com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockInfo result = new com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockInfo(this);
+      public StockInfo buildPartial() {
+        StockInfo result = new StockInfo(this);
         int from_bitField0_ = bitField0_;
         int from_bitField1_ = bitField1_;
         int to_bitField0_ = 0;
@@ -6003,16 +7361,16 @@ public final class DiyNettyMessage {
       }
 
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockInfo) {
-          return mergeFrom((com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockInfo)other);
+        if (other instanceof StockInfo) {
+          return mergeFrom((StockInfo)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockInfo other) {
-        if (other == getDefaultInstance()) return this;
+      public Builder mergeFrom(StockInfo other) {
+        if (other == StockInfo.getDefaultInstance()) return this;
         if (other.hasId()) {
           bitField0_ |= 0x00000001;
           id_ = other.id_;
@@ -6140,11 +7498,11 @@ public final class DiyNettyMessage {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockInfo parsedMessage = null;
+        StockInfo parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockInfo) e.getUnfinishedMessage();
+          parsedMessage = (StockInfo) e.getUnfinishedMessage();
           throw e;
         } finally {
           if (parsedMessage != null) {
@@ -7631,14 +8989,14 @@ public final class DiyNettyMessage {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return internal_static_com_ryd_protocol_protobuf_StockPriceInfo_descriptor;
+      return DiyNettyMessage.internal_static_com_ryd_protocol_protobuf_StockPriceInfo_descriptor;
     }
 
     protected FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return internal_static_com_ryd_protocol_protobuf_StockPriceInfo_fieldAccessorTable
+      return DiyNettyMessage.internal_static_com_ryd_protocol_protobuf_StockPriceInfo_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-                  com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockPriceInfo.class, com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockPriceInfo.Builder.class);
+              StockPriceInfo.class, Builder.class);
     }
 
     public static com.google.protobuf.Parser<StockPriceInfo> PARSER =
@@ -7828,53 +9186,53 @@ public final class DiyNettyMessage {
       return super.writeReplace();
     }
 
-    public static com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockPriceInfo parseFrom(
+    public static StockPriceInfo parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockPriceInfo parseFrom(
+    public static StockPriceInfo parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockPriceInfo parseFrom(byte[] data)
+    public static StockPriceInfo parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockPriceInfo parseFrom(
+    public static StockPriceInfo parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockPriceInfo parseFrom(java.io.InputStream input)
+    public static StockPriceInfo parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockPriceInfo parseFrom(
+    public static StockPriceInfo parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return PARSER.parseFrom(input, extensionRegistry);
     }
-    public static com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockPriceInfo parseDelimitedFrom(java.io.InputStream input)
+    public static StockPriceInfo parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input);
     }
-    public static com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockPriceInfo parseDelimitedFrom(
+    public static StockPriceInfo parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
-    public static com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockPriceInfo parseFrom(
+    public static StockPriceInfo parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockPriceInfo parseFrom(
+    public static StockPriceInfo parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -7883,7 +9241,7 @@ public final class DiyNettyMessage {
 
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockPriceInfo prototype) {
+    public static Builder newBuilder(StockPriceInfo prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
@@ -7900,17 +9258,17 @@ public final class DiyNettyMessage {
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder> implements
         // @@protoc_insertion_point(builder_implements:com.ryd.protocol.protobuf.StockPriceInfo)
-        com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockPriceInfoOrBuilder {
+        StockPriceInfoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return internal_static_com_ryd_protocol_protobuf_StockPriceInfo_descriptor;
+        return DiyNettyMessage.internal_static_com_ryd_protocol_protobuf_StockPriceInfo_descriptor;
       }
 
       protected FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return internal_static_com_ryd_protocol_protobuf_StockPriceInfo_fieldAccessorTable
+        return DiyNettyMessage.internal_static_com_ryd_protocol_protobuf_StockPriceInfo_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                    com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockPriceInfo.class, com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockPriceInfo.Builder.class);
+                StockPriceInfo.class, Builder.class);
       }
 
       // Construct using com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockPriceInfo.newBuilder()
@@ -7948,23 +9306,23 @@ public final class DiyNettyMessage {
 
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return internal_static_com_ryd_protocol_protobuf_StockPriceInfo_descriptor;
+        return DiyNettyMessage.internal_static_com_ryd_protocol_protobuf_StockPriceInfo_descriptor;
       }
 
-      public com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockPriceInfo getDefaultInstanceForType() {
-        return getDefaultInstance();
+      public StockPriceInfo getDefaultInstanceForType() {
+        return StockPriceInfo.getDefaultInstance();
       }
 
-      public com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockPriceInfo build() {
-        com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockPriceInfo result = buildPartial();
+      public StockPriceInfo build() {
+        StockPriceInfo result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      public com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockPriceInfo buildPartial() {
-        com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockPriceInfo result = new com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockPriceInfo(this);
+      public StockPriceInfo buildPartial() {
+        StockPriceInfo result = new StockPriceInfo(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
@@ -7985,16 +9343,16 @@ public final class DiyNettyMessage {
       }
 
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockPriceInfo) {
-          return mergeFrom((com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockPriceInfo)other);
+        if (other instanceof StockPriceInfo) {
+          return mergeFrom((StockPriceInfo)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockPriceInfo other) {
-        if (other == getDefaultInstance()) return this;
+      public Builder mergeFrom(StockPriceInfo other) {
+        if (other == StockPriceInfo.getDefaultInstance()) return this;
         if (other.hasId()) {
           bitField0_ |= 0x00000001;
           id_ = other.id_;
@@ -8032,11 +9390,11 @@ public final class DiyNettyMessage {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockPriceInfo parsedMessage = null;
+        StockPriceInfo parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockPriceInfo) e.getUnfinishedMessage();
+          parsedMessage = (StockPriceInfo) e.getUnfinishedMessage();
           throw e;
         } finally {
           if (parsedMessage != null) {
@@ -8522,14 +9880,14 @@ public final class DiyNettyMessage {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return internal_static_com_ryd_protocol_protobuf_AccountInfo_descriptor;
+      return DiyNettyMessage.internal_static_com_ryd_protocol_protobuf_AccountInfo_descriptor;
     }
 
     protected FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return internal_static_com_ryd_protocol_protobuf_AccountInfo_fieldAccessorTable
+      return DiyNettyMessage.internal_static_com_ryd_protocol_protobuf_AccountInfo_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-                  com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.AccountInfo.class, com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.AccountInfo.Builder.class);
+              AccountInfo.class, Builder.class);
     }
 
     public static com.google.protobuf.Parser<AccountInfo> PARSER =
@@ -9049,53 +10407,53 @@ public final class DiyNettyMessage {
       return super.writeReplace();
     }
 
-    public static com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.AccountInfo parseFrom(
+    public static AccountInfo parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.AccountInfo parseFrom(
+    public static AccountInfo parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.AccountInfo parseFrom(byte[] data)
+    public static AccountInfo parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.AccountInfo parseFrom(
+    public static AccountInfo parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.AccountInfo parseFrom(java.io.InputStream input)
+    public static AccountInfo parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.AccountInfo parseFrom(
+    public static AccountInfo parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return PARSER.parseFrom(input, extensionRegistry);
     }
-    public static com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.AccountInfo parseDelimitedFrom(java.io.InputStream input)
+    public static AccountInfo parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input);
     }
-    public static com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.AccountInfo parseDelimitedFrom(
+    public static AccountInfo parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
-    public static com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.AccountInfo parseFrom(
+    public static AccountInfo parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.AccountInfo parseFrom(
+    public static AccountInfo parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -9104,7 +10462,7 @@ public final class DiyNettyMessage {
 
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.AccountInfo prototype) {
+    public static Builder newBuilder(AccountInfo prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
@@ -9121,17 +10479,17 @@ public final class DiyNettyMessage {
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder> implements
         // @@protoc_insertion_point(builder_implements:com.ryd.protocol.protobuf.AccountInfo)
-        com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.AccountInfoOrBuilder {
+        AccountInfoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return internal_static_com_ryd_protocol_protobuf_AccountInfo_descriptor;
+        return DiyNettyMessage.internal_static_com_ryd_protocol_protobuf_AccountInfo_descriptor;
       }
 
       protected FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return internal_static_com_ryd_protocol_protobuf_AccountInfo_fieldAccessorTable
+        return DiyNettyMessage.internal_static_com_ryd_protocol_protobuf_AccountInfo_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                    com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.AccountInfo.class, com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.AccountInfo.Builder.class);
+                AccountInfo.class, Builder.class);
       }
 
       // Construct using com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.AccountInfo.newBuilder()
@@ -9187,23 +10545,23 @@ public final class DiyNettyMessage {
 
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return internal_static_com_ryd_protocol_protobuf_AccountInfo_descriptor;
+        return DiyNettyMessage.internal_static_com_ryd_protocol_protobuf_AccountInfo_descriptor;
       }
 
-      public com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.AccountInfo getDefaultInstanceForType() {
-        return getDefaultInstance();
+      public AccountInfo getDefaultInstanceForType() {
+        return AccountInfo.getDefaultInstance();
       }
 
-      public com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.AccountInfo build() {
-        com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.AccountInfo result = buildPartial();
+      public AccountInfo build() {
+        AccountInfo result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      public com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.AccountInfo buildPartial() {
-        com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.AccountInfo result = new com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.AccountInfo(this);
+      public AccountInfo buildPartial() {
+        AccountInfo result = new AccountInfo(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
@@ -9260,16 +10618,16 @@ public final class DiyNettyMessage {
       }
 
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.AccountInfo) {
-          return mergeFrom((com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.AccountInfo)other);
+        if (other instanceof AccountInfo) {
+          return mergeFrom((AccountInfo)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.AccountInfo other) {
-        if (other == getDefaultInstance()) return this;
+      public Builder mergeFrom(AccountInfo other) {
+        if (other == AccountInfo.getDefaultInstance()) return this;
         if (other.hasAccountId()) {
           bitField0_ |= 0x00000001;
           accountId_ = other.accountId_;
@@ -9332,11 +10690,11 @@ public final class DiyNettyMessage {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.AccountInfo parsedMessage = null;
+        AccountInfo parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.AccountInfo) e.getUnfinishedMessage();
+          parsedMessage = (AccountInfo) e.getUnfinishedMessage();
           throw e;
         } finally {
           if (parsedMessage != null) {
@@ -10312,14 +11670,14 @@ public final class DiyNettyMessage {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return internal_static_com_ryd_protocol_protobuf_QuoteInfo_descriptor;
+      return DiyNettyMessage.internal_static_com_ryd_protocol_protobuf_QuoteInfo_descriptor;
     }
 
     protected FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return internal_static_com_ryd_protocol_protobuf_QuoteInfo_fieldAccessorTable
+      return DiyNettyMessage.internal_static_com_ryd_protocol_protobuf_QuoteInfo_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-                  com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.QuoteInfo.class, com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.QuoteInfo.Builder.class);
+              QuoteInfo.class, Builder.class);
     }
 
     public static com.google.protobuf.Parser<QuoteInfo> PARSER =
@@ -10758,53 +12116,53 @@ public final class DiyNettyMessage {
       return super.writeReplace();
     }
 
-    public static com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.QuoteInfo parseFrom(
+    public static QuoteInfo parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.QuoteInfo parseFrom(
+    public static QuoteInfo parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.QuoteInfo parseFrom(byte[] data)
+    public static QuoteInfo parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.QuoteInfo parseFrom(
+    public static QuoteInfo parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.QuoteInfo parseFrom(java.io.InputStream input)
+    public static QuoteInfo parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.QuoteInfo parseFrom(
+    public static QuoteInfo parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return PARSER.parseFrom(input, extensionRegistry);
     }
-    public static com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.QuoteInfo parseDelimitedFrom(java.io.InputStream input)
+    public static QuoteInfo parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input);
     }
-    public static com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.QuoteInfo parseDelimitedFrom(
+    public static QuoteInfo parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
-    public static com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.QuoteInfo parseFrom(
+    public static QuoteInfo parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.QuoteInfo parseFrom(
+    public static QuoteInfo parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -10813,7 +12171,7 @@ public final class DiyNettyMessage {
 
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.QuoteInfo prototype) {
+    public static Builder newBuilder(QuoteInfo prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
@@ -10830,17 +12188,17 @@ public final class DiyNettyMessage {
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder> implements
         // @@protoc_insertion_point(builder_implements:com.ryd.protocol.protobuf.QuoteInfo)
-        com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.QuoteInfoOrBuilder {
+        QuoteInfoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return internal_static_com_ryd_protocol_protobuf_QuoteInfo_descriptor;
+        return DiyNettyMessage.internal_static_com_ryd_protocol_protobuf_QuoteInfo_descriptor;
       }
 
       protected FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return internal_static_com_ryd_protocol_protobuf_QuoteInfo_fieldAccessorTable
+        return DiyNettyMessage.internal_static_com_ryd_protocol_protobuf_QuoteInfo_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                    com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.QuoteInfo.class, com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.QuoteInfo.Builder.class);
+                QuoteInfo.class, Builder.class);
       }
 
       // Construct using com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.QuoteInfo.newBuilder()
@@ -10896,23 +12254,23 @@ public final class DiyNettyMessage {
 
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return internal_static_com_ryd_protocol_protobuf_QuoteInfo_descriptor;
+        return DiyNettyMessage.internal_static_com_ryd_protocol_protobuf_QuoteInfo_descriptor;
       }
 
-      public com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.QuoteInfo getDefaultInstanceForType() {
-        return getDefaultInstance();
+      public QuoteInfo getDefaultInstanceForType() {
+        return QuoteInfo.getDefaultInstance();
       }
 
-      public com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.QuoteInfo build() {
-        com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.QuoteInfo result = buildPartial();
+      public QuoteInfo build() {
+        QuoteInfo result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      public com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.QuoteInfo buildPartial() {
-        com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.QuoteInfo result = new com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.QuoteInfo(this);
+      public QuoteInfo buildPartial() {
+        QuoteInfo result = new QuoteInfo(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
@@ -10969,16 +12327,16 @@ public final class DiyNettyMessage {
       }
 
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.QuoteInfo) {
-          return mergeFrom((com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.QuoteInfo)other);
+        if (other instanceof QuoteInfo) {
+          return mergeFrom((QuoteInfo)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.QuoteInfo other) {
-        if (other == getDefaultInstance()) return this;
+      public Builder mergeFrom(QuoteInfo other) {
+        if (other == QuoteInfo.getDefaultInstance()) return this;
         if (other.hasStockId()) {
           bitField0_ |= 0x00000001;
           stockId_ = other.stockId_;
@@ -11035,11 +12393,11 @@ public final class DiyNettyMessage {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.QuoteInfo parsedMessage = null;
+        QuoteInfo parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.QuoteInfo) e.getUnfinishedMessage();
+          parsedMessage = (QuoteInfo) e.getUnfinishedMessage();
           throw e;
         } finally {
           if (parsedMessage != null) {
@@ -11841,14 +13199,14 @@ public final class DiyNettyMessage {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return internal_static_com_ryd_protocol_protobuf_PositionInfo_descriptor;
+      return DiyNettyMessage.internal_static_com_ryd_protocol_protobuf_PositionInfo_descriptor;
     }
 
     protected FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return internal_static_com_ryd_protocol_protobuf_PositionInfo_fieldAccessorTable
+      return DiyNettyMessage.internal_static_com_ryd_protocol_protobuf_PositionInfo_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-                  com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.PositionInfo.class, com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.PositionInfo.Builder.class);
+              PositionInfo.class, Builder.class);
     }
 
     public static com.google.protobuf.Parser<PositionInfo> PARSER =
@@ -12218,53 +13576,53 @@ public final class DiyNettyMessage {
       return super.writeReplace();
     }
 
-    public static com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.PositionInfo parseFrom(
+    public static PositionInfo parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.PositionInfo parseFrom(
+    public static PositionInfo parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.PositionInfo parseFrom(byte[] data)
+    public static PositionInfo parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.PositionInfo parseFrom(
+    public static PositionInfo parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.PositionInfo parseFrom(java.io.InputStream input)
+    public static PositionInfo parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.PositionInfo parseFrom(
+    public static PositionInfo parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return PARSER.parseFrom(input, extensionRegistry);
     }
-    public static com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.PositionInfo parseDelimitedFrom(java.io.InputStream input)
+    public static PositionInfo parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input);
     }
-    public static com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.PositionInfo parseDelimitedFrom(
+    public static PositionInfo parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
-    public static com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.PositionInfo parseFrom(
+    public static PositionInfo parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.PositionInfo parseFrom(
+    public static PositionInfo parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -12273,7 +13631,7 @@ public final class DiyNettyMessage {
 
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.PositionInfo prototype) {
+    public static Builder newBuilder(PositionInfo prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
@@ -12290,17 +13648,17 @@ public final class DiyNettyMessage {
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder> implements
         // @@protoc_insertion_point(builder_implements:com.ryd.protocol.protobuf.PositionInfo)
-        com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.PositionInfoOrBuilder {
+        PositionInfoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return internal_static_com_ryd_protocol_protobuf_PositionInfo_descriptor;
+        return DiyNettyMessage.internal_static_com_ryd_protocol_protobuf_PositionInfo_descriptor;
       }
 
       protected FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return internal_static_com_ryd_protocol_protobuf_PositionInfo_fieldAccessorTable
+        return DiyNettyMessage.internal_static_com_ryd_protocol_protobuf_PositionInfo_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                    com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.PositionInfo.class, com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.PositionInfo.Builder.class);
+                PositionInfo.class, Builder.class);
       }
 
       // Construct using com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.PositionInfo.newBuilder()
@@ -12350,23 +13708,23 @@ public final class DiyNettyMessage {
 
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return internal_static_com_ryd_protocol_protobuf_PositionInfo_descriptor;
+        return DiyNettyMessage.internal_static_com_ryd_protocol_protobuf_PositionInfo_descriptor;
       }
 
-      public com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.PositionInfo getDefaultInstanceForType() {
-        return getDefaultInstance();
+      public PositionInfo getDefaultInstanceForType() {
+        return PositionInfo.getDefaultInstance();
       }
 
-      public com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.PositionInfo build() {
-        com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.PositionInfo result = buildPartial();
+      public PositionInfo build() {
+        PositionInfo result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      public com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.PositionInfo buildPartial() {
-        com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.PositionInfo result = new com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.PositionInfo(this);
+      public PositionInfo buildPartial() {
+        PositionInfo result = new PositionInfo(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
@@ -12411,16 +13769,16 @@ public final class DiyNettyMessage {
       }
 
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.PositionInfo) {
-          return mergeFrom((com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.PositionInfo)other);
+        if (other instanceof PositionInfo) {
+          return mergeFrom((PositionInfo)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.PositionInfo other) {
-        if (other == getDefaultInstance()) return this;
+      public Builder mergeFrom(PositionInfo other) {
+        if (other == PositionInfo.getDefaultInstance()) return this;
         if (other.hasStockId()) {
           bitField0_ |= 0x00000001;
           stockId_ = other.stockId_;
@@ -12468,11 +13826,11 @@ public final class DiyNettyMessage {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.PositionInfo parsedMessage = null;
+        PositionInfo parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.PositionInfo) e.getUnfinishedMessage();
+          parsedMessage = (PositionInfo) e.getUnfinishedMessage();
           throw e;
         } finally {
           if (parsedMessage != null) {
@@ -13198,14 +14556,14 @@ public final class DiyNettyMessage {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return internal_static_com_ryd_protocol_protobuf_MoneyJournalInfo_descriptor;
+      return DiyNettyMessage.internal_static_com_ryd_protocol_protobuf_MoneyJournalInfo_descriptor;
     }
 
     protected FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return internal_static_com_ryd_protocol_protobuf_MoneyJournalInfo_fieldAccessorTable
+      return DiyNettyMessage.internal_static_com_ryd_protocol_protobuf_MoneyJournalInfo_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-                  com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.MoneyJournalInfo.class, com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.MoneyJournalInfo.Builder.class);
+              MoneyJournalInfo.class, Builder.class);
     }
 
     public static com.google.protobuf.Parser<MoneyJournalInfo> PARSER =
@@ -13625,53 +14983,53 @@ public final class DiyNettyMessage {
       return super.writeReplace();
     }
 
-    public static com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.MoneyJournalInfo parseFrom(
+    public static MoneyJournalInfo parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.MoneyJournalInfo parseFrom(
+    public static MoneyJournalInfo parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.MoneyJournalInfo parseFrom(byte[] data)
+    public static MoneyJournalInfo parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.MoneyJournalInfo parseFrom(
+    public static MoneyJournalInfo parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.MoneyJournalInfo parseFrom(java.io.InputStream input)
+    public static MoneyJournalInfo parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.MoneyJournalInfo parseFrom(
+    public static MoneyJournalInfo parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return PARSER.parseFrom(input, extensionRegistry);
     }
-    public static com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.MoneyJournalInfo parseDelimitedFrom(java.io.InputStream input)
+    public static MoneyJournalInfo parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input);
     }
-    public static com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.MoneyJournalInfo parseDelimitedFrom(
+    public static MoneyJournalInfo parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
-    public static com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.MoneyJournalInfo parseFrom(
+    public static MoneyJournalInfo parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.MoneyJournalInfo parseFrom(
+    public static MoneyJournalInfo parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -13680,7 +15038,7 @@ public final class DiyNettyMessage {
 
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.MoneyJournalInfo prototype) {
+    public static Builder newBuilder(MoneyJournalInfo prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
@@ -13697,17 +15055,17 @@ public final class DiyNettyMessage {
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder> implements
         // @@protoc_insertion_point(builder_implements:com.ryd.protocol.protobuf.MoneyJournalInfo)
-        com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.MoneyJournalInfoOrBuilder {
+        MoneyJournalInfoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return internal_static_com_ryd_protocol_protobuf_MoneyJournalInfo_descriptor;
+        return DiyNettyMessage.internal_static_com_ryd_protocol_protobuf_MoneyJournalInfo_descriptor;
       }
 
       protected FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return internal_static_com_ryd_protocol_protobuf_MoneyJournalInfo_fieldAccessorTable
+        return DiyNettyMessage.internal_static_com_ryd_protocol_protobuf_MoneyJournalInfo_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                    com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.MoneyJournalInfo.class, com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.MoneyJournalInfo.Builder.class);
+                MoneyJournalInfo.class, Builder.class);
       }
 
       // Construct using com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.MoneyJournalInfo.newBuilder()
@@ -13759,23 +15117,23 @@ public final class DiyNettyMessage {
 
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return internal_static_com_ryd_protocol_protobuf_MoneyJournalInfo_descriptor;
+        return DiyNettyMessage.internal_static_com_ryd_protocol_protobuf_MoneyJournalInfo_descriptor;
       }
 
-      public com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.MoneyJournalInfo getDefaultInstanceForType() {
-        return getDefaultInstance();
+      public MoneyJournalInfo getDefaultInstanceForType() {
+        return MoneyJournalInfo.getDefaultInstance();
       }
 
-      public com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.MoneyJournalInfo build() {
-        com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.MoneyJournalInfo result = buildPartial();
+      public MoneyJournalInfo build() {
+        MoneyJournalInfo result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      public com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.MoneyJournalInfo buildPartial() {
-        com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.MoneyJournalInfo result = new com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.MoneyJournalInfo(this);
+      public MoneyJournalInfo buildPartial() {
+        MoneyJournalInfo result = new MoneyJournalInfo(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
@@ -13824,16 +15182,16 @@ public final class DiyNettyMessage {
       }
 
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.MoneyJournalInfo) {
-          return mergeFrom((com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.MoneyJournalInfo)other);
+        if (other instanceof MoneyJournalInfo) {
+          return mergeFrom((MoneyJournalInfo)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.MoneyJournalInfo other) {
-        if (other == getDefaultInstance()) return this;
+      public Builder mergeFrom(MoneyJournalInfo other) {
+        if (other == MoneyJournalInfo.getDefaultInstance()) return this;
         if (other.hasAccountId()) {
           bitField0_ |= 0x00000001;
           accountId_ = other.accountId_;
@@ -13886,11 +15244,11 @@ public final class DiyNettyMessage {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.MoneyJournalInfo parsedMessage = null;
+        MoneyJournalInfo parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.MoneyJournalInfo) e.getUnfinishedMessage();
+          parsedMessage = (MoneyJournalInfo) e.getUnfinishedMessage();
           throw e;
         } finally {
           if (parsedMessage != null) {
@@ -14692,14 +16050,14 @@ public final class DiyNettyMessage {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return internal_static_com_ryd_protocol_protobuf_TradeRecordInfo_descriptor;
+      return DiyNettyMessage.internal_static_com_ryd_protocol_protobuf_TradeRecordInfo_descriptor;
     }
 
     protected FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return internal_static_com_ryd_protocol_protobuf_TradeRecordInfo_fieldAccessorTable
+      return DiyNettyMessage.internal_static_com_ryd_protocol_protobuf_TradeRecordInfo_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-                  com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.TradeRecordInfo.class, com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.TradeRecordInfo.Builder.class);
+              TradeRecordInfo.class, Builder.class);
     }
 
     public static com.google.protobuf.Parser<TradeRecordInfo> PARSER =
@@ -15119,53 +16477,53 @@ public final class DiyNettyMessage {
       return super.writeReplace();
     }
 
-    public static com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.TradeRecordInfo parseFrom(
+    public static TradeRecordInfo parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.TradeRecordInfo parseFrom(
+    public static TradeRecordInfo parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.TradeRecordInfo parseFrom(byte[] data)
+    public static TradeRecordInfo parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.TradeRecordInfo parseFrom(
+    public static TradeRecordInfo parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.TradeRecordInfo parseFrom(java.io.InputStream input)
+    public static TradeRecordInfo parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.TradeRecordInfo parseFrom(
+    public static TradeRecordInfo parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return PARSER.parseFrom(input, extensionRegistry);
     }
-    public static com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.TradeRecordInfo parseDelimitedFrom(java.io.InputStream input)
+    public static TradeRecordInfo parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input);
     }
-    public static com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.TradeRecordInfo parseDelimitedFrom(
+    public static TradeRecordInfo parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
-    public static com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.TradeRecordInfo parseFrom(
+    public static TradeRecordInfo parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.TradeRecordInfo parseFrom(
+    public static TradeRecordInfo parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -15174,7 +16532,7 @@ public final class DiyNettyMessage {
 
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.TradeRecordInfo prototype) {
+    public static Builder newBuilder(TradeRecordInfo prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
@@ -15191,17 +16549,17 @@ public final class DiyNettyMessage {
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder> implements
         // @@protoc_insertion_point(builder_implements:com.ryd.protocol.protobuf.TradeRecordInfo)
-        com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.TradeRecordInfoOrBuilder {
+        TradeRecordInfoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return internal_static_com_ryd_protocol_protobuf_TradeRecordInfo_descriptor;
+        return DiyNettyMessage.internal_static_com_ryd_protocol_protobuf_TradeRecordInfo_descriptor;
       }
 
       protected FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return internal_static_com_ryd_protocol_protobuf_TradeRecordInfo_fieldAccessorTable
+        return DiyNettyMessage.internal_static_com_ryd_protocol_protobuf_TradeRecordInfo_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                    com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.TradeRecordInfo.class, com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.TradeRecordInfo.Builder.class);
+                TradeRecordInfo.class, Builder.class);
       }
 
       // Construct using com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.TradeRecordInfo.newBuilder()
@@ -15253,23 +16611,23 @@ public final class DiyNettyMessage {
 
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return internal_static_com_ryd_protocol_protobuf_TradeRecordInfo_descriptor;
+        return DiyNettyMessage.internal_static_com_ryd_protocol_protobuf_TradeRecordInfo_descriptor;
       }
 
-      public com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.TradeRecordInfo getDefaultInstanceForType() {
-        return getDefaultInstance();
+      public TradeRecordInfo getDefaultInstanceForType() {
+        return TradeRecordInfo.getDefaultInstance();
       }
 
-      public com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.TradeRecordInfo build() {
-        com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.TradeRecordInfo result = buildPartial();
+      public TradeRecordInfo build() {
+        TradeRecordInfo result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      public com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.TradeRecordInfo buildPartial() {
-        com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.TradeRecordInfo result = new com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.TradeRecordInfo(this);
+      public TradeRecordInfo buildPartial() {
+        TradeRecordInfo result = new TradeRecordInfo(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
@@ -15318,16 +16676,16 @@ public final class DiyNettyMessage {
       }
 
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.TradeRecordInfo) {
-          return mergeFrom((com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.TradeRecordInfo)other);
+        if (other instanceof TradeRecordInfo) {
+          return mergeFrom((TradeRecordInfo)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.TradeRecordInfo other) {
-        if (other == getDefaultInstance()) return this;
+      public Builder mergeFrom(TradeRecordInfo other) {
+        if (other == TradeRecordInfo.getDefaultInstance()) return this;
         if (other.hasAccountId()) {
           bitField0_ |= 0x00000001;
           accountId_ = other.accountId_;
@@ -15380,11 +16738,11 @@ public final class DiyNettyMessage {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.TradeRecordInfo parsedMessage = null;
+        TradeRecordInfo parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.TradeRecordInfo) e.getUnfinishedMessage();
+          parsedMessage = (TradeRecordInfo) e.getUnfinishedMessage();
           throw e;
         } finally {
           if (parsedMessage != null) {
@@ -15952,6 +17310,11 @@ public final class DiyNettyMessage {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_ryd_protocol_protobuf_NettyMessage_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_ryd_protocol_protobuf_StockConfigInfo_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_ryd_protocol_protobuf_StockConfigInfo_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_ryd_protocol_protobuf_StockInfo_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -15996,7 +17359,7 @@ public final class DiyNettyMessage {
   static {
     String[] descriptorData = {
       "\n\020DiyMessage.proto\022\031com.ryd.protocol.pro" +
-      "tobuf\"\377\004\n\014NettyMessage\022\n\n\002id\030\001 \002(\005\022\016\n\006st" +
+      "tobuf\"\304\005\n\014NettyMessage\022\n\n\002id\030\001 \002(\005\022\016\n\006st" +
       "atus\030\002 \002(\005\022\013\n\003key\030\003 \002(\t\022\014\n\004type\030\004 \001(\005\022\021\n" +
       "\taccountId\030\005 \001(\t\022\021\n\tstartTime\030\006 \001(\004\022\017\n\007e" +
       "ndTime\030\007 \001(\004\022\017\n\007content\030\010 \001(\t\0227\n\tstockIn" +
@@ -16012,56 +17375,60 @@ public final class DiyNettyMessage {
       "RecordInfo\030\021 \003(\0132*.com.ryd.protocol.prot" +
       "obuf.TradeRecordInfo\022A\n\016stockPriceInfo\030\022" +
       " \003(\0132).com.ryd.protocol.protobuf.StockPr" +
-      "iceInfo\"\376\005\n\tStockInfo\022\n\n\002id\030\001 \001(\t\022\021\n\tsto" +
-      "ckName\030\002 \001(\t\022\021\n\tstockCode\030\003 \001(\t\022\022\n\nstock" +
-      "Price\030\004 \001(\001\022\021\n\topenPrice\030\005 \001(\001\022\024\n\014bfclos",
-      "ePrice\030\006 \001(\001\022\024\n\014currentPrice\030\007 \001(\001\022\020\n\010ma" +
-      "xPrice\030\010 \001(\001\022\020\n\010minPrice\030\t \001(\001\022\027\n\017biddin" +
-      "gBuyPrice\030\n \001(\001\022\030\n\020biddingSellPrice\030\013 \001(" +
-      "\001\022\023\n\013tradeAmount\030\014 \001(\004\022\022\n\ntradeMoney\030\r \001" +
-      "(\001\022\023\n\013buyOnePrice\030\016 \001(\001\022\024\n\014buyOneAmount\030" +
-      "\017 \001(\005\022\023\n\013buyTwoPrice\030\020 \001(\001\022\024\n\014buyTwoAmou" +
-      "nt\030\021 \001(\005\022\025\n\rbuyThreePrice\030\022 \001(\001\022\026\n\016buyTh" +
-      "reeAmount\030\023 \001(\005\022\024\n\014buyFourPrice\030\024 \001(\001\022\025\n" +
-      "\rbuyFourAmount\030\025 \001(\005\022\024\n\014buyFivePrice\030\026 \001" +
-      "(\001\022\025\n\rbuyFiveAmount\030\027 \001(\005\022\024\n\014sellOnePric",
-      "e\030\030 \001(\001\022\025\n\rsellOneAmount\030\031 \001(\005\022\024\n\014sellTw" +
-      "oPrice\030\032 \001(\001\022\025\n\rsellTwoAmount\030\033 \001(\005\022\026\n\016s" +
-      "ellThreePrice\030\034 \001(\001\022\027\n\017sellThreeAmount\030\035" +
-      " \001(\005\022\025\n\rsellFourPrice\030\036 \001(\001\022\026\n\016sellFourA" +
-      "mount\030\037 \001(\005\022\025\n\rsellFivePrice\030  \001(\001\022\026\n\016se" +
-      "llFiveAmount\030! \001(\005\022\021\n\tstockDate\030\" \001(\t\022\021\n" +
-      "\tstockTime\030# \001(\t\"C\n\016StockPriceInfo\022\n\n\002id" +
-      "\030\001 \002(\t\022\022\n\nstockPrice\030\004 \002(\001\022\021\n\tstockTime\030" +
-      "# \002(\t\"\353\001\n\013AccountInfo\022\021\n\taccountId\030\001 \001(\t" +
-      "\022\020\n\010realName\030\002 \001(\t\022\023\n\013accountName\030\003 \001(\t\022",
-      "\022\n\naccountNum\030\004 \001(\t\022\023\n\013totalAssets\030\005 \001(\022" +
-      "\022\020\n\010useMoney\030\006 \001(\022\022\024\n\014accountLevel\030\007 \001(\005" +
-      "\022\016\n\006mobile\030\010 \001(\t\022\013\n\003sex\030\t \001(\005\022\016\n\006remark\030" +
-      "\n \001(\t\022\022\n\ncreatetime\030\013 \001(\022\022\020\n\010password\030\014 " +
-      "\001(\t\"\356\001\n\tQuoteInfo\022\017\n\007stockId\030\001 \001(\t\022\021\n\tac" +
-      "countId\030\002 \001(\t\022\016\n\006amount\030\003 \001(\005\022\021\n\tstockNa" +
-      "me\030\004 \001(\t\022\022\n\nstockPrice\030\005 \001(\001\022\025\n\rcurrentA" +
-      "mount\030\006 \001(\005\022\021\n\tquoteType\030\007 \001(\005\022\022\n\nfrozeM" +
-      "oney\030\010 \001(\001\022\025\n\rcommissionFee\030\t \001(\001\022\016\n\006sta" +
-      "tus\030\n \001(\001\022\020\n\010dateTime\030\013 \001(\022\022\017\n\007quoteId\030\014",
-      " \001(\t\"\265\001\n\014PositionInfo\022\017\n\007stockId\030\001 \001(\t\022\021" +
-      "\n\tstockName\030\002 \001(\t\022\021\n\taccountId\030\003 \001(\t\022\022\n\n" +
-      "stockPrice\030\004 \001(\001\022\016\n\006amount\030\005 \001(\005\022\024\n\014mark" +
-      "etAmount\030\006 \001(\005\022\020\n\010avgPrice\030\007 \001(\001\022\016\n\006stat" +
-      "us\030\010 \001(\001\022\022\n\npositionId\030\t \001(\t\"\306\001\n\020MoneyJo" +
-      "urnalInfo\022\021\n\taccountId\030\001 \001(\t\022\021\n\tstockCod" +
-      "e\030\002 \001(\t\022\021\n\tstockName\030\003 \001(\t\022\016\n\006amount\030\004 \001" +
-      "(\005\022\020\n\010dealType\030\005 \001(\005\022\021\n\tdealMoney\030\006 \001(\001\022" +
-      "\017\n\007dealFee\030\007 \001(\001\022\017\n\007dealTax\030\010 \001(\001\022\020\n\010dea" +
-      "lDate\030\t \001(\t\022\020\n\010dealTime\030\n \001(\t\"\305\001\n\017TradeR",
-      "ecordInfo\022\021\n\taccountId\030\001 \001(\t\022\021\n\tstockCod" +
-      "e\030\002 \001(\t\022\021\n\tstockName\030\003 \001(\t\022\016\n\006amount\030\004 \001" +
-      "(\005\022\020\n\010dealType\030\005 \001(\005\022\021\n\tdealMoney\030\006 \001(\001\022" +
-      "\017\n\007dealFee\030\007 \001(\001\022\017\n\007dealTax\030\010 \001(\001\022\020\n\010dea" +
-      "lDate\030\t \001(\t\022\020\n\010dealTime\030\n \001(\tB7\n$com.ryd" +
-      ".basecommon.protocol.protobufB\017DiyNettyM" +
-      "essage"
+      "iceInfo\022C\n\017stockConfigInfo\030\023 \003(\0132*.com.r" +
+      "yd.protocol.protobuf.StockConfigInfo\"i\n\017" +
+      "StockConfigInfo\022\n\n\002id\030\001 \002(\t\022\021\n\tstockName",
+      "\030\002 \002(\t\022\021\n\tstockCode\030\003 \002(\t\022\021\n\tstockType\030\004" +
+      " \002(\005\022\021\n\tboardType\030\005 \002(\005\"\376\005\n\tStockInfo\022\n\n" +
+      "\002id\030\001 \001(\t\022\021\n\tstockName\030\002 \001(\t\022\021\n\tstockCod" +
+      "e\030\003 \001(\t\022\022\n\nstockPrice\030\004 \001(\001\022\021\n\topenPrice" +
+      "\030\005 \001(\001\022\024\n\014bfclosePrice\030\006 \001(\001\022\024\n\014currentP" +
+      "rice\030\007 \001(\001\022\020\n\010maxPrice\030\010 \001(\001\022\020\n\010minPrice" +
+      "\030\t \001(\001\022\027\n\017biddingBuyPrice\030\n \001(\001\022\030\n\020biddi" +
+      "ngSellPrice\030\013 \001(\001\022\023\n\013tradeAmount\030\014 \001(\004\022\022" +
+      "\n\ntradeMoney\030\r \001(\001\022\023\n\013buyOnePrice\030\016 \001(\001\022" +
+      "\024\n\014buyOneAmount\030\017 \001(\005\022\023\n\013buyTwoPrice\030\020 \001",
+      "(\001\022\024\n\014buyTwoAmount\030\021 \001(\005\022\025\n\rbuyThreePric" +
+      "e\030\022 \001(\001\022\026\n\016buyThreeAmount\030\023 \001(\005\022\024\n\014buyFo" +
+      "urPrice\030\024 \001(\001\022\025\n\rbuyFourAmount\030\025 \001(\005\022\024\n\014" +
+      "buyFivePrice\030\026 \001(\001\022\025\n\rbuyFiveAmount\030\027 \001(" +
+      "\005\022\024\n\014sellOnePrice\030\030 \001(\001\022\025\n\rsellOneAmount" +
+      "\030\031 \001(\005\022\024\n\014sellTwoPrice\030\032 \001(\001\022\025\n\rsellTwoA" +
+      "mount\030\033 \001(\005\022\026\n\016sellThreePrice\030\034 \001(\001\022\027\n\017s" +
+      "ellThreeAmount\030\035 \001(\005\022\025\n\rsellFourPrice\030\036 " +
+      "\001(\001\022\026\n\016sellFourAmount\030\037 \001(\005\022\025\n\rsellFiveP" +
+      "rice\030  \001(\001\022\026\n\016sellFiveAmount\030! \001(\005\022\021\n\tst",
+      "ockDate\030\" \001(\t\022\021\n\tstockTime\030# \001(\t\"C\n\016Stoc" +
+      "kPriceInfo\022\n\n\002id\030\001 \002(\t\022\022\n\nstockPrice\030\004 \002" +
+      "(\001\022\021\n\tstockTime\030# \002(\t\"\353\001\n\013AccountInfo\022\021\n" +
+      "\taccountId\030\001 \001(\t\022\020\n\010realName\030\002 \001(\t\022\023\n\013ac" +
+      "countName\030\003 \001(\t\022\022\n\naccountNum\030\004 \001(\t\022\023\n\013t" +
+      "otalAssets\030\005 \001(\022\022\020\n\010useMoney\030\006 \001(\022\022\024\n\014ac" +
+      "countLevel\030\007 \001(\005\022\016\n\006mobile\030\010 \001(\t\022\013\n\003sex\030" +
+      "\t \001(\005\022\016\n\006remark\030\n \001(\t\022\022\n\ncreatetime\030\013 \001(" +
+      "\022\022\020\n\010password\030\014 \001(\t\"\356\001\n\tQuoteInfo\022\017\n\007sto" +
+      "ckId\030\001 \001(\t\022\021\n\taccountId\030\002 \001(\t\022\016\n\006amount\030",
+      "\003 \001(\005\022\021\n\tstockName\030\004 \001(\t\022\022\n\nstockPrice\030\005" +
+      " \001(\001\022\025\n\rcurrentAmount\030\006 \001(\005\022\021\n\tquoteType" +
+      "\030\007 \001(\005\022\022\n\nfrozeMoney\030\010 \001(\001\022\025\n\rcommission" +
+      "Fee\030\t \001(\001\022\016\n\006status\030\n \001(\001\022\020\n\010dateTime\030\013 " +
+      "\001(\022\022\017\n\007quoteId\030\014 \001(\t\"\265\001\n\014PositionInfo\022\017\n" +
+      "\007stockId\030\001 \001(\t\022\021\n\tstockName\030\002 \001(\t\022\021\n\tacc" +
+      "ountId\030\003 \001(\t\022\022\n\nstockPrice\030\004 \001(\001\022\016\n\006amou" +
+      "nt\030\005 \001(\005\022\024\n\014marketAmount\030\006 \001(\005\022\020\n\010avgPri" +
+      "ce\030\007 \001(\001\022\016\n\006status\030\010 \001(\001\022\022\n\npositionId\030\t" +
+      " \001(\t\"\306\001\n\020MoneyJournalInfo\022\021\n\taccountId\030\001",
+      " \001(\t\022\021\n\tstockCode\030\002 \001(\t\022\021\n\tstockName\030\003 \001" +
+      "(\t\022\016\n\006amount\030\004 \001(\005\022\020\n\010dealType\030\005 \001(\005\022\021\n\t" +
+      "dealMoney\030\006 \001(\001\022\017\n\007dealFee\030\007 \001(\001\022\017\n\007deal" +
+      "Tax\030\010 \001(\001\022\020\n\010dealDate\030\t \001(\t\022\020\n\010dealTime\030" +
+      "\n \001(\t\"\305\001\n\017TradeRecordInfo\022\021\n\taccountId\030\001" +
+      " \001(\t\022\021\n\tstockCode\030\002 \001(\t\022\021\n\tstockName\030\003 \001" +
+      "(\t\022\016\n\006amount\030\004 \001(\005\022\020\n\010dealType\030\005 \001(\005\022\021\n\t" +
+      "dealMoney\030\006 \001(\001\022\017\n\007dealFee\030\007 \001(\001\022\017\n\007deal" +
+      "Tax\030\010 \001(\001\022\020\n\010dealDate\030\t \001(\t\022\020\n\010dealTime\030" +
+      "\n \001(\tB7\n$com.ryd.basecommon.protocol.pro",
+      "tobufB\017DiyNettyMessage"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -16080,45 +17447,51 @@ public final class DiyNettyMessage {
     internal_static_com_ryd_protocol_protobuf_NettyMessage_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_ryd_protocol_protobuf_NettyMessage_descriptor,
-        new String[] { "Id", "Status", "Key", "Type", "AccountId", "StartTime", "EndTime", "Content", "StockInfo", "AccountInfo", "QuoteInfo", "PositionInfo", "MoneyJournalInfo", "VersionNumber", "Offset", "Size", "TradeRecordInfo", "StockPriceInfo", });
-    internal_static_com_ryd_protocol_protobuf_StockInfo_descriptor =
+        new String[] { "Id", "Status", "Key", "Type", "AccountId", "StartTime", "EndTime", "Content", "StockInfo", "AccountInfo", "QuoteInfo", "PositionInfo", "MoneyJournalInfo", "VersionNumber", "Offset", "Size", "TradeRecordInfo", "StockPriceInfo", "StockConfigInfo", });
+    internal_static_com_ryd_protocol_protobuf_StockConfigInfo_descriptor =
       getDescriptor().getMessageTypes().get(1);
+    internal_static_com_ryd_protocol_protobuf_StockConfigInfo_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_ryd_protocol_protobuf_StockConfigInfo_descriptor,
+        new String[] { "Id", "StockName", "StockCode", "StockType", "BoardType", });
+    internal_static_com_ryd_protocol_protobuf_StockInfo_descriptor =
+      getDescriptor().getMessageTypes().get(2);
     internal_static_com_ryd_protocol_protobuf_StockInfo_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_ryd_protocol_protobuf_StockInfo_descriptor,
         new String[] { "Id", "StockName", "StockCode", "StockPrice", "OpenPrice", "BfclosePrice", "CurrentPrice", "MaxPrice", "MinPrice", "BiddingBuyPrice", "BiddingSellPrice", "TradeAmount", "TradeMoney", "BuyOnePrice", "BuyOneAmount", "BuyTwoPrice", "BuyTwoAmount", "BuyThreePrice", "BuyThreeAmount", "BuyFourPrice", "BuyFourAmount", "BuyFivePrice", "BuyFiveAmount", "SellOnePrice", "SellOneAmount", "SellTwoPrice", "SellTwoAmount", "SellThreePrice", "SellThreeAmount", "SellFourPrice", "SellFourAmount", "SellFivePrice", "SellFiveAmount", "StockDate", "StockTime", });
     internal_static_com_ryd_protocol_protobuf_StockPriceInfo_descriptor =
-      getDescriptor().getMessageTypes().get(2);
+      getDescriptor().getMessageTypes().get(3);
     internal_static_com_ryd_protocol_protobuf_StockPriceInfo_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_ryd_protocol_protobuf_StockPriceInfo_descriptor,
         new String[] { "Id", "StockPrice", "StockTime", });
     internal_static_com_ryd_protocol_protobuf_AccountInfo_descriptor =
-      getDescriptor().getMessageTypes().get(3);
+      getDescriptor().getMessageTypes().get(4);
     internal_static_com_ryd_protocol_protobuf_AccountInfo_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_ryd_protocol_protobuf_AccountInfo_descriptor,
         new String[] { "AccountId", "RealName", "AccountName", "AccountNum", "TotalAssets", "UseMoney", "AccountLevel", "Mobile", "Sex", "Remark", "Createtime", "Password", });
     internal_static_com_ryd_protocol_protobuf_QuoteInfo_descriptor =
-      getDescriptor().getMessageTypes().get(4);
+      getDescriptor().getMessageTypes().get(5);
     internal_static_com_ryd_protocol_protobuf_QuoteInfo_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_ryd_protocol_protobuf_QuoteInfo_descriptor,
         new String[] { "StockId", "AccountId", "Amount", "StockName", "StockPrice", "CurrentAmount", "QuoteType", "FrozeMoney", "CommissionFee", "Status", "DateTime", "QuoteId", });
     internal_static_com_ryd_protocol_protobuf_PositionInfo_descriptor =
-      getDescriptor().getMessageTypes().get(5);
+      getDescriptor().getMessageTypes().get(6);
     internal_static_com_ryd_protocol_protobuf_PositionInfo_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_ryd_protocol_protobuf_PositionInfo_descriptor,
         new String[] { "StockId", "StockName", "AccountId", "StockPrice", "Amount", "MarketAmount", "AvgPrice", "Status", "PositionId", });
     internal_static_com_ryd_protocol_protobuf_MoneyJournalInfo_descriptor =
-      getDescriptor().getMessageTypes().get(6);
+      getDescriptor().getMessageTypes().get(7);
     internal_static_com_ryd_protocol_protobuf_MoneyJournalInfo_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_ryd_protocol_protobuf_MoneyJournalInfo_descriptor,
         new String[] { "AccountId", "StockCode", "StockName", "Amount", "DealType", "DealMoney", "DealFee", "DealTax", "DealDate", "DealTime", });
     internal_static_com_ryd_protocol_protobuf_TradeRecordInfo_descriptor =
-      getDescriptor().getMessageTypes().get(7);
+      getDescriptor().getMessageTypes().get(8);
     internal_static_com_ryd_protocol_protobuf_TradeRecordInfo_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_ryd_protocol_protobuf_TradeRecordInfo_descriptor,
