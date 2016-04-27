@@ -1,11 +1,15 @@
 package com.ryd.business.service.impl;
 
+import com.ryd.basecommon.util.ArithUtil;
 import com.ryd.business.dao.StAccountDao;
+import com.ryd.business.dto.StAccountDTO;
 import com.ryd.business.model.StAccount;
 import com.ryd.business.service.StAccountService;
+import com.ryd.cache.service.ICacheService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -19,7 +23,10 @@ import java.util.List;
 public class StAccountServiceImpl implements StAccountService {
 
     @Autowired
-    public StAccountDao stAccountDao;
+    private StAccountDao stAccountDao;
+
+    @Autowired
+    private ICacheService cacheService;
 
     @Override
     public boolean addStAccount(StAccount account) {
@@ -28,14 +35,50 @@ public class StAccountServiceImpl implements StAccountService {
 
     @Override
     public boolean updateStAccount(StAccount account) {
+
         return stAccountDao.update(account) > 0;
     }
 
     @Override
+    public boolean updateStAccountMoneyAdd(String accountId, BigDecimal money) {
+        StAccount stAccount = stAccountDao.getTById(accountId);
+
+        if(stAccount == null){
+            return false;
+        }
+        //原有帐户可用资产
+        BigDecimal useMoney = stAccount.getUseMoney();
+
+        stAccount.setUseMoney(ArithUtil.add(useMoney, money));
+
+        return stAccountDao.update(stAccount) > 0;
+    }
+
+    @Override
+    public boolean updateStAccountMoneyReduce(String accountId, BigDecimal money) {
+        StAccount stAccount = stAccountDao.getTById(accountId);
+
+        if(stAccount == null){
+            return false;
+        }
+        //原有帐户可用资产
+        BigDecimal useMoney = stAccount.getUseMoney();
+
+        stAccount.setUseMoney(ArithUtil.add(useMoney, money));
+
+        //交易减少费用
+        if (ArithUtil.compare(useMoney,money)>=0) {
+            stAccount.setUseMoney(ArithUtil.subtract(useMoney, money));
+        } else {
+            return false;
+        }
+
+        return stAccountDao.update(stAccount) > 0;
+    }
+
+    @Override
     public StAccount getStAccountById(String accountId){
-        StAccount account = new StAccount();
-        account.setId(accountId);
-       return stAccountDao.getTById(account);
+       return stAccountDao.getTById(accountId);
     }
 
     @Override
@@ -55,7 +98,7 @@ public class StAccountServiceImpl implements StAccountService {
     }
 
     @Override
-    public boolean deleteStAccountById(StAccount account) {
-        return stAccountDao.deleteTById(account) > 0;
+    public boolean deleteStAccountById(String accountId) {
+        return stAccountDao.deleteTById(accountId) > 0;
     }
 }
