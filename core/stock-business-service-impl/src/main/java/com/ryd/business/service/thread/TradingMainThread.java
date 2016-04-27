@@ -31,6 +31,8 @@ public class TradingMainThread implements Runnable {
             for (String stockId: stockIdList) {
                 // 分线程执行报价交易
                 executorService.execute(new TradingSubThread(stockId, stQuoteService));
+
+
             }
 
 

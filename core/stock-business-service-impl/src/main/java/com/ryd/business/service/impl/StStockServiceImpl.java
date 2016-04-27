@@ -48,10 +48,12 @@ public class StStockServiceImpl implements StStockService {
         // 执行命令
         cdOrder.countDown();
 
+        StringBuffer stockCodeStringBuffer = new StringBuffer();
         for (StStockConfig stock: list) {
-            // 同步股票信息，同时生成马甲订单
-            stockService.execute(new SyncStockThread(stock, iCacheService, cdOrder, cdAnswer, this));
+            stockCodeStringBuffer.append(stock.getStockTypeName()+stock.getStockCode()).append(",");
         }
+        // 同步股票信息，同时生成马甲订单
+        stockService.execute(new SyncStockThread(stockCodeStringBuffer.toString(), iCacheService, cdOrder, cdAnswer, this));
         try {
             // 等待任务执行完成
             cdAnswer.await();
