@@ -59,10 +59,10 @@ public class StPositionServiceImpl implements StPositionService {
             return false;
         }else{
             //原有持仓
-            Long camount = position.getAmount();
+            Long camount = position.getMarketAmount();
             if (camount >= amount) {
                 //减少持仓
-                position.setAmount(camount - amount);
+                position.setMarketAmount(camount - amount);
 
                 return stPositionDao.update(position) > 0;
             } else {
