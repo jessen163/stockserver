@@ -60,4 +60,9 @@ public class StMoneyJournalDaoImpl implements StMoneyJournalDao {
         }
         return stMoneyJournalMapper.deleteByPrimaryKey(id);
     }
+
+    @Override
+    public int addBatch(List<StMoneyJournal> list) {
+        return stMoneyJournalMapper.insertBatch(list);
+    }
 }
