@@ -46,11 +46,11 @@ public class StDateScheduleServiceImpl implements StDateScheduleService {
     }
 
     @Override
-    public boolean deleteSchedule(StDateSchedule schedule) {
+    public boolean deleteSchedule(String id) {
 
         iCacheService.remove(CacheConstant.CACHEKEY_DATE_SCHEDULE_FESTIVALDAY,null);
 
-        return stDateScheduleDao.deleteTById(schedule) > 0;
+        return stDateScheduleDao.deleteTById(id) > 0;
     }
 
     @Override
@@ -92,6 +92,24 @@ public class StDateScheduleServiceImpl implements StDateScheduleService {
         }
         if(getDateAndTimeJudge() == ApplicationConstants.STQUOTE_TRADE_TIMECOMPARE_1.intValue() ||
                 getDateAndTimeJudge() == ApplicationConstants.STQUOTE_TRADE_TIMECOMPARE_2.intValue()){
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean getIsCanSettle(){
+        //如果当前时间是节假日
+        if (getIsFestival()) {
+            return false;
+        }
+
+        String settleTime = stSystemParamService.getParamByKey(CacheConstant.CACHEKEY_SYSTEM_CONFIG_SETTLE_TIME);
+
+        Date settledate = DateUtils.getSetHourTime(settleTime);
+
+        //当前时间晚于结算时间，可以结算
+        if(settledate.getTime() < System.currentTimeMillis()){
             return true;
         }
         return false;
