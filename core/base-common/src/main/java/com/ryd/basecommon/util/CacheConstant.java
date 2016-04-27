@@ -27,6 +27,15 @@ public class CacheConstant {
     public static final String CACHEKEY_SYSTEM_CONFIG_CLOSE_TIME  = "stockMarketCloseTime";
 
     // 缓存key-系统配置参数信息-股市结算时间
+    public static final String CACHEKEY_SYSTEM_COMMINSSION_PERCENT  = "stockCommissionPercent";
+
+    // 缓存key-系统配置参数信息-佣金比例
+    public static final String CACHEKEY_SYSTEM_CONFIG_TAX_PERCENT  = "stockTaxPercent";
+
+    // 缓存key-系统配置参数信息-印花税比例
+    public static final String CACHEKEY_SYSTEM_CONFIG_UPANDDOWN_PERCENT  = "stockUpAndDownPercent";
+
+    // 缓存key-系统配置参数信息-股票涨跌幅度
     public static final String CACHEKEY_SYSTEM_CONFIG_SETTLE_TIME  = "stockMarketSettleTime";
 
     // 缓存key-节假日
