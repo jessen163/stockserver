@@ -3,6 +3,7 @@ package com.ryd.business.dao.impl;
 import com.bugull.mongo.BuguDao;
 import com.mongodb.WriteResult;
 import com.ryd.basecommon.dao.BaseDao;
+import com.ryd.business.dao.StStockDao;
 import com.ryd.business.model.StStock;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Repository;
@@ -17,7 +18,7 @@ import java.util.List;
  * 创建时间：2016/4/22 14:04
  */
 @Repository
-public class StStockDaoImpl extends BuguDao<StStock> implements BaseDao<StStock> {
+public class StStockDaoImpl extends BuguDao<StStock> implements StStockDao {
     public StStockDaoImpl() {
         super(StStock.class);
     }
@@ -56,9 +57,9 @@ public class StStockDaoImpl extends BuguDao<StStock> implements BaseDao<StStock>
         return result.getN();
     }
 
-//    @Override
-//    public boolean saveStockBatch(List<StStock> stStockList) {
-//        WriteResult result = super.insert(stStockList);
-//        return result.getN() == stStockList.size();
-//    }
+    @Override
+    public boolean saveStockBatch(List<StStock> stStockList) {
+        WriteResult result = super.insert(stStockList);
+        return result.getN() == stStockList.size();
+    }
 }
