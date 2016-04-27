@@ -51,7 +51,7 @@ public class StPositionDaoImpl implements StPositionDao {
         if(obj==null){
             obj = new StPosition();
         }
-        return stPositionMapper.selectListByKeySelective(obj,limit,offset);
+        return stPositionMapper.selectListByKeySelective(obj, limit, offset);
     }
 
     @Override
@@ -60,5 +60,10 @@ public class StPositionDaoImpl implements StPositionDao {
             return -1;
         }
         return stPositionMapper.deleteByPrimaryKey(id);
+    }
+
+    @Override
+    public StPosition getPositionByAccountStock(String accountId, String stockId){
+        return stPositionMapper.selectByKey(accountId, stockId);
     }
 }
