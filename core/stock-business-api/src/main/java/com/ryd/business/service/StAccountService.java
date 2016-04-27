@@ -2,6 +2,7 @@ package com.ryd.business.service;
 
 import com.ryd.business.model.StAccount;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -26,6 +27,22 @@ public interface StAccountService {
      * @return
      */
     public boolean updateStAccount(StAccount account);
+
+    /**
+     * 增加资产
+     * @param accountId
+     * @param money
+     * @return
+     */
+    public boolean updateStAccountMoneyAdd(String accountId, BigDecimal money);
+
+    /**
+     * 减少资产
+     * @param accountId
+     * @param money
+     * @return
+     */
+    public boolean updateStAccountMoneyReduce(String accountId, BigDecimal money);
 
     /**
      * 根据ID查询
@@ -60,8 +77,8 @@ public interface StAccountService {
 
     /**
      * 删除用户
-     * @param account
+     * @param accountId
      * @return
      */
-    public boolean deleteStAccountById(StAccount account);
+    public boolean deleteStAccountById(String accountId);
 }

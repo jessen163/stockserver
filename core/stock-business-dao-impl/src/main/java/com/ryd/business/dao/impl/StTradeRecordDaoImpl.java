@@ -3,10 +3,12 @@ package com.ryd.business.dao.impl;
 import com.ryd.business.dao.StTradeRecordDao;
 import com.ryd.business.model.StTradeRecord;
 import com.ryd.business.mybatis.StTradeRecordMapper;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -33,11 +35,11 @@ public class StTradeRecordDaoImpl implements StTradeRecordDao {
     }
 
     @Override
-    public StTradeRecord getTById(StTradeRecord obj) {
-        if(StringUtils.isBlank(obj.getRecordId())){
+    public StTradeRecord getTById(String id) {
+        if(StringUtils.isBlank(id)){
             return null;
         }
-        return stTradeRecordMapper.selectByPrimaryKey(obj.getRecordId());
+        return stTradeRecordMapper.selectByPrimaryKey(id);
     }
 
     @Override
@@ -46,14 +48,38 @@ public class StTradeRecordDaoImpl implements StTradeRecordDao {
         if(obj==null){
             obj = new StTradeRecord();
         }
-        return stTradeRecordMapper.selectListByKeySelective(obj,limit,offset);
+        return stTradeRecordMapper.selectListByKeySelective(obj, limit, offset);
     }
 
     @Override
-    public int deleteTById(StTradeRecord obj) {
-        if(StringUtils.isBlank(obj.getRecordId())){
+    public int deleteTById(String id) {
+        if(StringUtils.isBlank(id)){
             return -1;
         }
-        return stTradeRecordMapper.deleteByPrimaryKey(obj.getRecordId());
+        return stTradeRecordMapper.deleteByPrimaryKey(id);
+    }
+
+    @Override
+    public int addBatch(List<StTradeRecord> list){
+        if(CollectionUtils.isEmpty(list)){
+            return 0;
+        }
+        return stTradeRecordMapper.insertBatch(list);
+    }
+
+    @Override
+    public int updateBatch(List<StTradeRecord> list){
+        if(CollectionUtils.isEmpty(list)){
+            return 0;
+        }
+        return stTradeRecordMapper.updateBatchSelective(list);
+    }
+
+    @Override
+    public int deleteBatch(List<String> list){
+        if(CollectionUtils.isEmpty(list)){
+            return 0;
+        }
+        return stTradeRecordMapper.deleteBatch(list);
     }
 }

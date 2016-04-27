@@ -19,6 +19,12 @@
     from st_position
     where position_id = #{positionId,jdbcType=CHAR}
   </select>
+  <select id="selectByKey" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from st_position
+    where account_id = #{accountId,jdbcType=CHAR} and stock_id = #{stockId,jdbcType=CHAR}
+  </select>
   <select id="selectListByKeySelective" resultType="java.util.List" resultMap="BaseResultMap">
     select * from st_position
     limit #{offset, jdbcType=INTEGER},#{limit, jdbcType=INTEGER}

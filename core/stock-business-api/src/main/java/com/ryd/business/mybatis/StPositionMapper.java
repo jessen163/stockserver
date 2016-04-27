@@ -19,6 +19,9 @@ public interface StPositionMapper {
 
     StPosition selectByPrimaryKey(String positionId);
 
+    StPosition selectByKey(@Param(value = "accountId") String accountId,
+                           @Param(value = "stockId") String stockId);
+
     int updateByPrimaryKeySelective(StPosition record);
 
     int updateByPrimaryKey(StPosition record);

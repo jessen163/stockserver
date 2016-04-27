@@ -26,7 +26,7 @@ public class StOperateLogDaoImpl implements StOperateLogDao {
     }
 
     @Override
-    public StOperateLog getTById(StOperateLog obj) {
+    public StOperateLog getTById(String id) {
         return null;
     }
 
@@ -36,7 +36,7 @@ public class StOperateLogDaoImpl implements StOperateLogDao {
     }
 
     @Override
-    public int deleteTById(StOperateLog obj) {
+    public int deleteTById(String id) {
         return 0;
     }
 }

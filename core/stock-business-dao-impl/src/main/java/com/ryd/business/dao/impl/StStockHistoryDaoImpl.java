@@ -33,11 +33,11 @@ public class StStockHistoryDaoImpl implements StStockHistoryDao {
     }
 
     @Override
-    public StStockHistory getTById(StStockHistory obj) {
-        if(StringUtils.isBlank(obj.getStockId())){
+    public StStockHistory getTById(String id) {
+        if(StringUtils.isBlank(id)){
             return null;
         }
-        return stStockHistoryMapper.selectByPrimaryKey(obj.getStockId());
+        return stStockHistoryMapper.selectByPrimaryKey(id);
     }
 
     @Override
@@ -50,10 +50,10 @@ public class StStockHistoryDaoImpl implements StStockHistoryDao {
     }
 
     @Override
-    public int deleteTById(StStockHistory obj) {
-        if(StringUtils.isBlank(obj.getStockId())){
+    public int deleteTById(String id) {
+        if(StringUtils.isBlank(id)){
             return -1;
         }
-        return stStockHistoryMapper.deleteByPrimaryKey(obj.getStockId());
+        return stStockHistoryMapper.deleteByPrimaryKey(id);
     }
 }

@@ -36,11 +36,11 @@ public class StSettleRecordDaoImpl implements StSettleRecordDao {
     }
 
     @Override
-    public StSettleRecord getTById(StSettleRecord obj) {
-        if(StringUtils.isBlank(obj.getSettleRecordId())){
+    public StSettleRecord getTById(String id) {
+        if(StringUtils.isBlank(id)){
             return null;
         }
-        return stSettleRecordMapper.selectByPrimaryKey(obj.getSettleRecordId());
+        return stSettleRecordMapper.selectByPrimaryKey(id);
     }
 
     @Override
@@ -53,10 +53,10 @@ public class StSettleRecordDaoImpl implements StSettleRecordDao {
     }
 
     @Override
-    public int deleteTById(StSettleRecord obj) {
-        if(StringUtils.isBlank(obj.getSettleRecordId())){
+    public int deleteTById(String id) {
+        if(StringUtils.isBlank(id)){
             return -1;
         }
-        return stSettleRecordMapper.deleteByPrimaryKey(obj.getSettleRecordId());
+        return stSettleRecordMapper.deleteByPrimaryKey(id);
     }
 }

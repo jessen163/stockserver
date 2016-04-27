@@ -38,11 +38,11 @@ public class StPositionDaoImpl implements StPositionDao {
     }
 
     @Override
-    public StPosition getTById(StPosition obj) {
-        if(StringUtils.isBlank(obj.getPositionId())){
+    public StPosition getTById(String id) {
+        if(StringUtils.isBlank(id)){
             return null;
         }
-        return stPositionMapper.selectByPrimaryKey(obj.getPositionId());
+        return stPositionMapper.selectByPrimaryKey(id);
     }
 
     @Override
@@ -51,14 +51,19 @@ public class StPositionDaoImpl implements StPositionDao {
         if(obj==null){
             obj = new StPosition();
         }
-        return stPositionMapper.selectListByKeySelective(obj,limit,offset);
+        return stPositionMapper.selectListByKeySelective(obj, limit, offset);
     }
 
     @Override
-    public int deleteTById(StPosition obj) {
-        if(StringUtils.isBlank(obj.getPositionId())){
+    public int deleteTById(String id) {
+        if(StringUtils.isBlank(id)){
             return -1;
         }
-        return stPositionMapper.deleteByPrimaryKey(obj.getPositionId());
+        return stPositionMapper.deleteByPrimaryKey(id);
+    }
+
+    @Override
+    public StPosition getPositionByAccountStock(String accountId, String stockId){
+        return stPositionMapper.selectByKey(accountId, stockId);
     }
 }

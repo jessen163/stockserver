@@ -40,10 +40,10 @@ public interface BaseDao<T> {
 
     /**
      * 根据ID查询
-     * @param obj
+     * @param id
      * @return
      */
-    public T getTById(T obj);
+    public T getTById(String id);
 
     /**
      * 根据条件查询
@@ -56,10 +56,10 @@ public interface BaseDao<T> {
 
     /**
      * 删除
-     * @param obj
+     * @param id
      * @return
      */
-    public int deleteTById(T obj);
+    public int deleteTById(String id);
 
     /**
      * 批量删除

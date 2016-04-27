@@ -11,4 +11,12 @@ import com.ryd.business.model.StPosition;
  * 创建时间：2016/4/22 13:52
  */
 public interface StPositionDao extends BaseDao<StPosition> {
+
+    /**
+     * 根据帐户ID和股票ID查询仓位
+     * @param accountId
+     * @param stockId
+     * @return
+     */
+    public StPosition getPositionByAccountStock(String accountId, String stockId);
 }

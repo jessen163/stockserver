@@ -20,6 +20,24 @@ public interface StPositionService {
      */
     public boolean savePositionList(List<StPosition> positionList);
 
+
+    /**
+     * 增加仓位
+     * @param accountId
+     * @param stockId
+     * @param amount
+     * @return
+     */
+    public boolean updatePositionAdd(String accountId, String stockId, Long amount);
+
+    /**
+     * 减仓
+     * @param accountId
+     * @param stockId
+     * @param amount
+     * @return
+     */
+    public boolean updatePositionReduce(String accountId, String stockId, Long amount);
     /**
      * 查询仓位信息，接收参数
      * @param searchPositionDTO

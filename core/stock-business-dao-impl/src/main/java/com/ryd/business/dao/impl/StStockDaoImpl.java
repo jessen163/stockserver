@@ -35,8 +35,8 @@ public class StStockDaoImpl extends BuguDao<StStock> implements BaseDao<StStock>
     }
 
     @Override
-    public StStock getTById(StStock obj) {
-        return super.findOne(obj.getId());
+    public StStock getTById(String id) {
+        return super.findOne(id);
     }
 
     @Override
@@ -47,12 +47,12 @@ public class StStockDaoImpl extends BuguDao<StStock> implements BaseDao<StStock>
     }
 
     @Override
-    public int deleteTById(StStock obj) {
-        if(StringUtils.isBlank(obj.getStockId())){
+    public int deleteTById(String id) {
+        if(StringUtils.isBlank(id)){
             return -1;
         }
 //        return stStockMapper.deleteByPrimaryKey(obj.getStockId());
-        WriteResult result = super.remove(obj.getId());
+        WriteResult result = super.remove(id);
         return result.getN();
     }
 

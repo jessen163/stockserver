@@ -37,11 +37,11 @@ public class StDateScheduleDaoImpl implements StDateScheduleDao {
     }
 
     @Override
-    public StDateSchedule getTById(StDateSchedule obj) {
-        if(StringUtils.isBlank(obj.getId())){
+    public StDateSchedule getTById(String id) {
+        if(StringUtils.isBlank(id)){
             return null;
         }
-        return stDateScheduleMapper.selectByPrimaryKey(obj.getId());
+        return stDateScheduleMapper.selectByPrimaryKey(id);
     }
 
     @Override
@@ -53,11 +53,11 @@ public class StDateScheduleDaoImpl implements StDateScheduleDao {
     }
 
     @Override
-    public int deleteTById(StDateSchedule obj) {
-        if(StringUtils.isBlank(obj.getId())){
+    public int deleteTById(String id) {
+        if(StringUtils.isBlank(id)){
             return -1;
         }
-        return stDateScheduleMapper.deleteByPrimaryKey(obj.getId());
+        return stDateScheduleMapper.deleteByPrimaryKey(id);
     }
 
     @Override

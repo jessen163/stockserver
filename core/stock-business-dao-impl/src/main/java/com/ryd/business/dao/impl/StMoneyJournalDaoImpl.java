@@ -37,11 +37,11 @@ public class StMoneyJournalDaoImpl implements StMoneyJournalDao {
     }
 
     @Override
-    public StMoneyJournal getTById(StMoneyJournal obj) {
-        if(StringUtils.isBlank(obj.getRecordId())){
+    public StMoneyJournal getTById(String id) {
+        if(StringUtils.isBlank(id)){
             return null;
         }
-        return stMoneyJournalMapper.selectByPrimaryKey(obj.getRecordId());
+        return stMoneyJournalMapper.selectByPrimaryKey(id);
     }
 
     @Override
@@ -54,10 +54,10 @@ public class StMoneyJournalDaoImpl implements StMoneyJournalDao {
     }
 
     @Override
-    public int deleteTById(StMoneyJournal obj) {
-        if(StringUtils.isBlank(obj.getRecordId())){
+    public int deleteTById(String id) {
+        if(StringUtils.isBlank(id)){
             return -1;
         }
-        return stMoneyJournalMapper.deleteByPrimaryKey(obj.getRecordId());
+        return stMoneyJournalMapper.deleteByPrimaryKey(id);
     }
 }

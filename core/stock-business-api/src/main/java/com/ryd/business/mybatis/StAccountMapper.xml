@@ -33,7 +33,7 @@
     from st_account
     where account_num = #{accountNum,jdbcType=VARCHAR}
   </select>
-  <select id="selectByNamePassword" resultMap="BaseResultMap">
+  <select id="selectByNamePassword" resultType="com.ryd.business.model.StAccount" resultMap="BaseResultMap">
     select * from st_account where account_num = #{accountNum,jdbcType=VARCHAR} and password = #{password,jdbcType=VARCHAR}
   </select>
   <select id="selectListByKeySelective" resultType="java.util.List" resultMap="BaseResultMap">
