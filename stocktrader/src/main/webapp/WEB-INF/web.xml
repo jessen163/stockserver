@@ -10,6 +10,29 @@
         <param-value>classpath:spring-context.xml</param-value>
     </context-param>
 
+    <!-- mongo 数据库连接参数 start -->
+    <context-param>
+        <param-name>mongo.ip</param-name>
+        <param-value>192.168.5.61</param-value>
+    </context-param>
+    <context-param>
+        <param-name>mongo.port</param-name>
+        <param-value>27017</param-value>
+    </context-param>
+    <context-param>
+        <param-name>mongo.dbname</param-name>
+        <param-value>ryd_stocktrader</param-value>
+    </context-param>
+    <context-param>
+        <param-name>mongo.username</param-name>
+        <param-value>test</param-value>
+    </context-param>
+    <context-param>
+        <param-name>mongo.password</param-name>
+        <param-value>test</param-value>
+    </context-param>
+    <!-- mongo 数据库连接参数 end -->
+
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
