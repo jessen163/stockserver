@@ -31,10 +31,10 @@ public interface StDateScheduleService {
 
     /**
      * 删除日期
-     * @param schedule
+     * @param id
      * @return
      */
-    public boolean deleteSchedule(StDateSchedule schedule);
+    public boolean deleteSchedule(String id);
 
     /**
      * 是否是节假日
@@ -62,6 +62,12 @@ public interface StDateScheduleService {
      * @return
      */
     public boolean getIsCanQuote();
+
+    /**
+     * 是否可以结算
+     * @return
+     */
+    public boolean getIsCanSettle();
 
     /**
      * 当前时间是否可以报价
