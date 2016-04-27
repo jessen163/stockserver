@@ -36,11 +36,11 @@ public class StSystemParamDaoImpl implements StSystemParamDao {
     }
 
     @Override
-    public StSystemParam getTById(StSystemParam obj) {
-        if(StringUtils.isBlank(obj.getId())){
+    public StSystemParam getTById(String id) {
+        if(StringUtils.isBlank(id)){
             return null;
         }
-        return stSystemParamMapper.selectByPrimaryKey(obj.getId());
+        return stSystemParamMapper.selectByPrimaryKey(id);
     }
 
     @Override
@@ -52,11 +52,11 @@ public class StSystemParamDaoImpl implements StSystemParamDao {
     }
 
     @Override
-    public int deleteTById(StSystemParam obj) {
-        if(StringUtils.isBlank(obj.getId())){
+    public int deleteTById(String id) {
+        if(StringUtils.isBlank(id)){
             return -1;
         }
-        return stSystemParamMapper.deleteByPrimaryKey(obj.getId());
+        return stSystemParamMapper.deleteByPrimaryKey(id);
     }
 
     @Override
