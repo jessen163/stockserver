@@ -1,12 +1,10 @@
 package com.ryd.business.service.impl;
 
-import com.ryd.basecommon.util.ApplicationConstants;
-import com.ryd.basecommon.util.ArithUtil;
-import com.ryd.basecommon.util.CacheConstant;
-import com.ryd.basecommon.util.UUIDUtils;
+import com.ryd.basecommon.util.*;
 import com.ryd.business.dao.StTradeRecordDao;
 import com.ryd.business.dto.SearchStockDTO;
 import com.ryd.business.dto.SearchTradeRecordDTO;
+import com.ryd.business.model.StMoneyJournal;
 import com.ryd.business.model.StQuote;
 import com.ryd.business.model.StStock;
 import com.ryd.business.model.StTradeRecord;
@@ -19,6 +17,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
@@ -48,6 +48,8 @@ public class StTradeRecordServiceImpl implements StTradeRecordService {
     private StSystemParamService stSystemParamService;
     @Autowired
     private StAccountService stAccountService;
+    @Autowired
+    private StMoneyJournalService stMoneyJournalService;
 
     @Override
     public boolean saveTradeRecordBatch(List<StTradeRecord> tradeRecordList) {
@@ -175,21 +177,26 @@ public class StTradeRecordServiceImpl implements StTradeRecordService {
         //交易成功，交易买家持仓增加
         brs = stPositionService.updatePositionAdd(buyQuote.getAccountId(), buyQuote.getStockId(), tradeStockAmount);
 
-        //卖家新增费用计算
         //佣金比例
         String commissionPercent = stSystemParamService.getParamByKey(CacheConstant.CACHEKEY_SYSTEM_COMMINSSION_PERCENT);
         //印花税比例
         String taxPercent = stSystemParamService.getParamByKey(CacheConstant.CACHEKEY_SYSTEM_CONFIG_TAX_PERCENT);
-        //计算佣金
-        BigDecimal commissionFee = null;
+
+        //买家购买股票消费资产
+        BigDecimal buyerCommissionFee = null;
+        BigDecimal buyerCostMoney = null;
+        Utils.calculate(tradeStockQuotePrice, tradeStockAmount, buyQuote.getQuoteType(), commissionPercent, null, buyerCostMoney, buyerCommissionFee, null);
+
+        //卖家新增费用计算
+        BigDecimal sellerCommissionFee = null;
         BigDecimal taxFee = null;
         //减掉佣金和税
-        BigDecimal getMoney = null;
+        BigDecimal sellerGetMoney = null;
 
-        Utils.calculate(tradeStockQuotePrice, tradeStockAmount, sellQuote.getQuoteType(), commissionPercent, taxPercent, getMoney, commissionFee, taxFee);
+        Utils.calculate(tradeStockQuotePrice, tradeStockAmount, sellQuote.getQuoteType(), commissionPercent, taxPercent, sellerGetMoney, sellerCommissionFee, taxFee);
 
         //交易成功，交易卖家资产增加
-        srs = stAccountService.updateStAccountMoneyAdd(sellQuote.getAccountId(), getMoney);
+        srs = stAccountService.updateStAccountMoneyAdd(sellQuote.getAccountId(), sellerGetMoney);
 
         if(brs&&srs) {
             //添加交易记录
@@ -200,12 +207,48 @@ public class StTradeRecordServiceImpl implements StTradeRecordService {
             record.setStockId(buyQuote.getStockId());
             record.setQuotePrice(tradeStockQuotePrice);
             record.setAmount(tradeStockAmount);
-            record.setBuyFee(commissionFee);
-            record.setSellFee(commissionFee);
+            record.setBuyFee(buyerCommissionFee);
+            record.setSellFee(sellerCommissionFee);
             record.setDealTax(taxFee);
             record.setDateTime(System.currentTimeMillis());
 
-            rs = stTradeRecordDao.add(record) > 0;
+            stTradeRecordDao.add(record);
+
+            //添加资金流水
+            List<StMoneyJournal> moneyJournals = new ArrayList<StMoneyJournal>();
+
+            StMoneyJournal buyMoneyJournal = new StMoneyJournal();
+            buyMoneyJournal.setRecordId(UUIDUtils.uuidTrimLine());
+            buyMoneyJournal.setStockId(buyQuote.getStockId());
+            buyMoneyJournal.setAccountId(buyQuote.getAccountId());
+            buyMoneyJournal.setQuoteId(buyQuote.getQuoteId());
+            buyMoneyJournal.setAmount(tradeStockAmount);
+            buyMoneyJournal.setQuotePrice(tradeStockQuotePrice);
+            buyMoneyJournal.setDealMoney(buyerCostMoney);
+            buyMoneyJournal.setDealType(buyQuote.getQuoteType());
+            buyMoneyJournal.setDealFee(buyerCommissionFee);
+            buyMoneyJournal.setDealDate(new Date());
+            buyMoneyJournal.setDealTime(new Date());
+
+            moneyJournals.add(buyMoneyJournal);
+
+            StMoneyJournal sellMoneyJournal = new StMoneyJournal();
+            sellMoneyJournal.setRecordId(UUIDUtils.uuidTrimLine());
+            sellMoneyJournal.setStockId(sellQuote.getStockId());
+            sellMoneyJournal.setAccountId(sellQuote.getAccountId());
+            sellMoneyJournal.setQuoteId(sellQuote.getQuoteId());
+            sellMoneyJournal.setAmount(tradeStockAmount);
+            sellMoneyJournal.setQuotePrice(tradeStockQuotePrice);
+            sellMoneyJournal.setDealMoney(sellerGetMoney);
+            sellMoneyJournal.setDealType(sellQuote.getQuoteType());
+            sellMoneyJournal.setDealFee(sellerCommissionFee);
+            sellMoneyJournal.setDealTax(taxFee);
+            sellMoneyJournal.setDealDate(new Date());
+            sellMoneyJournal.setDealTime(new Date());
+
+            moneyJournals.add(sellMoneyJournal);
+
+            rs = stMoneyJournalService.saveMoneyJournalList(moneyJournals);
         }
 
         return rs;
