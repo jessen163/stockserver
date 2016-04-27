@@ -42,17 +42,20 @@ public class ApplicationConstants {
     public final static int NETTYMESSAGE_STATUS_RESPONSE_SERVER_ERROR = 3;
 
     // 1、买，2、卖
-    public static final Integer STOCK_QUOTETYPE_BUY = 1;
-    public static final Integer STOCK_QUOTETYPE_SELL = 2;
+    public static final Short STOCK_QUOTETYPE_BUY = 1;
+    public static final Short STOCK_QUOTETYPE_SELL = 2;
 
     //1、增加，2、减少
     public static final Integer STOCK_STQUOTE_ACCOUNTMONEY_TYPE_ADD=1;
     public static final Integer STOCK_STQUOTE_ACCOUNTMONEY_TYPE_REDUSE=2;
 
-    //报价状态 1、托管 2、成交 3、过期
-    public static final Integer STOCK_STQUOTE_STATUS_TRUSTEE=1;
-    public static final Integer STOCK_STQUOTE_STATUS_DEAL=2;
-    public static final Integer STOCK_STQUOTE_STATUS_OUTDATE=3;
+    //报价状态 1.托管  2.交易中 3.已成交 4.撤单  5. 结算未成交 6.结算部分股票成交
+    public static final Short STOCK_STQUOTE_STATUS_TRUSTEE=1;
+    public static final Short STOCK_STQUOTE_STATUS_DEALING=2;
+    public static final Short STOCK_STQUOTE_STATUS_ALREADYDEAL=3;
+    public static final Short STOCK_STQUOTE_STATUS_REVOKE=4;
+    public static final Short STOCK_STQUOTE_STATUS_NOTDEAL=5;
+    public static final Short STOCK_STQUOTE_STATUS_PARTDEAL=6;
 
     //持仓状态 1、托管 2、成交 3、过期
     public static final Integer STOCK_STPOSITION_STATUS_TRUSTEE=1;
