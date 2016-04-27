@@ -31,6 +31,6 @@ public class StStockConfigServiceImpl implements StStockConfigService {
     @Override
     public StStockConfig findStockConfigById(StStockConfig stStockConfig) {
         // TODO 从缓存获取
-        return stStockConfigDao.getTById(stStockConfig);
+        return stStockConfigDao.getTById(stStockConfig.getId());
     }
 }
