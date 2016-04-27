@@ -3,6 +3,7 @@ package com.ryd.business.service.thread;
 import com.ryd.basecommon.util.ApplicationConstants;
 import com.ryd.business.service.StQuoteService;
 import com.ryd.business.service.StStockService;
+import com.ryd.business.service.StTradeRecordService;
 
 import java.util.List;
 import java.util.concurrent.ExecutorService;
@@ -16,11 +17,12 @@ public class TradingMainThread implements Runnable {
     private StStockService stStockService;
     private StQuoteService stQuoteService;
     private ExecutorService executorService;
-
-    public TradingMainThread(ExecutorService tradingservice, StStockService stStockService, StQuoteService stQuoteService) {
+    private StTradeRecordService stTradeRecordService;
+    public TradingMainThread(ExecutorService tradingservice, StStockService stStockService, StQuoteService stQuoteService, StTradeRecordService stTradeRecordService) {
         this.stStockService = stStockService;
         this.stQuoteService = stQuoteService;
         this.executorService = tradingservice;
+        this.stTradeRecordService = stTradeRecordService;
     }
 
     @Override
@@ -30,7 +32,7 @@ public class TradingMainThread implements Runnable {
             List<String> stockIdList = stQuoteService.findQuoteStockIdList();
             for (String stockId: stockIdList) {
                 // 分线程执行报价交易
-                executorService.execute(new TradingSubThread(stockId, stQuoteService));
+                executorService.execute(new TradingSubThread(stockId, stQuoteService, stTradeRecordService));
 
 
             }
