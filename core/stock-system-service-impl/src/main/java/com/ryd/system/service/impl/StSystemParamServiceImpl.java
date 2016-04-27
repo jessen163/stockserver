@@ -48,7 +48,7 @@ public class StSystemParamServiceImpl implements StSystemParamService {
         }
         iCacheService.remove(CacheConstant.CACHEKEY_SYSTEM_CONFIG_MAP, param.getKeyName());
 
-        return stSystemParamDao.deleteTById(param) > 0;
+        return stSystemParamDao.deleteTById(param.getId()) > 0;
     }
 
     @Override
