@@ -5,8 +5,13 @@ package com.ryd.basecommon.util;
  * Created by Administrator on 2016/4/19.
  */
 public class ApplicationConstants {
-    // 股票服务器url
-    public static final String STOCK_SERVER_URL = "http://hq.sinajs.cn/list=";
+    // 股票服务器-股票基本信息url 参数为字符串，碰到多只股票使用“,”分隔 如：sh600094,sh600095
+    public static final String STOCK_SERVER_STOCKBASE_URL = "http://hq.sinajs.cn/list=";
+    // 股票服务器-股票成交量信息url 参数同上
+    public static final String STOCK_SERVER_STOCKTURNOVER_URL = "http://hq.sinajs.cn/rn=sdrah&list=";
+
+//    http://vip.stock.finance.sina.com.cn/quotes_service/api/json_v2.php/Market_Center.getHQNodeData?page=1&num=40&sort=turnoverratio&asc=0&node=sz_a&symbol=&_s_r_a=sort
+
     /** 消息接口ID 心跳 id=1 **/
     public final static int NETTYMESSAGE_ID_HEARTBEAT = 1;
     /** 消息接口ID 股票信息 id=5 **/

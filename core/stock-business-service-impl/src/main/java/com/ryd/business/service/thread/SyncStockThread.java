@@ -1,17 +1,16 @@
 package com.ryd.business.service.thread;
 
 import com.ryd.basecommon.util.ApplicationConstants;
-import com.ryd.basecommon.util.CacheConstant;
 import com.ryd.basecommon.util.HttpclientUtil;
 import com.ryd.business.model.StStock;
-import com.ryd.business.model.StStockConfig;
+import com.ryd.business.service.StQuoteService;
 import com.ryd.business.service.StStockService;
 import com.ryd.cache.service.ICacheService;
 import org.apache.log4j.Logger;
 
 import java.math.BigDecimal;
-import java.util.Arrays;
-import java.util.LinkedList;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.CountDownLatch;
 
 /**
@@ -23,7 +22,7 @@ public class SyncStockThread implements Runnable {
 
     private static Logger logger = Logger.getLogger(SyncStockThread.class);
 
-    private final StStockConfig stock;
+    private String stockCodeStr;
 
     private ICacheService cacheService;
 
@@ -33,8 +32,8 @@ public class SyncStockThread implements Runnable {
 
     private CountDownLatch cdAnswer;
 
-    public SyncStockThread(StStockConfig stStock, ICacheService cacheService, CountDownLatch cdOrder, CountDownLatch cdAnswer, StStockService stStockService) {
-        this.stock = stStock;
+    public SyncStockThread(String stockCodeStr, ICacheService cacheService, CountDownLatch cdOrder, CountDownLatch cdAnswer, StStockService stStockService) {
+        this.stockCodeStr = stockCodeStr;
         this.cacheService = cacheService;
         this.stStockService = stStockService;
         this.cdOrder = cdOrder;
@@ -45,34 +44,55 @@ public class SyncStockThread implements Runnable {
     public void run() {
 //            logger.info("更新股票实时信息.............start...........");
         try {
-            LinkedList<StStock> stStockList = null;
-            Object obj = cacheService.getObjectByKey(CacheConstant.CACHEKEY_STOCK_PRICELIST, stock.getStockCode(), null);
-            if (obj != null) {
-                stStockList = (LinkedList<StStock>) obj;
-            }
+//            StringBuffer stockCodeStringBuffer = new StringBuffer();
+//            for (StStockConfig stStockConfig: stStockConfigList) {
+//                stockCodeStringBuffer.append(stStockConfig.getStockTypeName()+stStockConfig.getStockCode()).append(",");
+//            }
 
-            if (stStockList == null) {
-                stStockList = new LinkedList<StStock>();
-            }
+//            LinkedList<StStock> stStockList = null;
+//            Object obj = cacheService.getObjectByKey(CacheConstant.CACHEKEY_STOCK_PRICELIST, stock.getStockCode(), null);
+//            if (obj != null) {
+//                stStockList = (LinkedList<StStock>) obj;
+//            }
+//
+//            if (stStockList == null) {
+//                stStockList = new LinkedList<StStock>();
+//            }
             cdOrder.await();
             // 下载单只股票信息
-            String stockStr = HttpclientUtil.doGet(ApplicationConstants.STOCK_SERVER_URL + (stock.getStockType().intValue() == 1 ? "sh" : "sz") + stock.getStockCode());
-            StStock newStock = getStockByStr(stock.getStockCode(), stockStr);
+            String stockInfoStr = HttpclientUtil.doGet(ApplicationConstants.STOCK_SERVER_STOCKBASE_URL + stockCodeStr);
+//            String stockStr = HttpclientUtil.doGet(ApplicationConstants.STOCK_SERVER_STOCKBASE_URL + (stock.getStockType().intValue() == 1 ? "sh" : "sz") + stock.getStockCode());
+//            StStock newStock = getStockByStr(stock.getStockCode(), stockStr);
             // stockGetInfoFromApiI.getStStockInfo(stock.getStockType(), stock.getStockCode());
-            // 保存股票价格等信息
-            stStockService.saveStockBatch(Arrays.asList(newStock));
-            if (stStockList.size() == 5) {
-                stStockList.removeFirst();
-            }
-            stStockList.add(newStock);
+            // 通过字符串转换成股票信息
+            List<StStock> stockList = getStockInfoByStr(stockCodeStr, stockInfoStr);
 
-            cacheService.setObjectByKey(CacheConstant.CACHEKEY_STOCK_PRICELIST, stock.getStockCode(), stStockList, 60 * 60 * 1000);
-            // TODO 生成马甲订单
+            // 保存股票价格等信息
+            stStockService.saveStockBatch(stockList);
+//            if (stStockList.size() == 5) {
+//                stStockList.removeFirst();
+//            }
+//            stStockList.add(newStock);
+
+//            cacheService.setObjectByKey(CacheConstant.CACHEKEY_STOCK_PRICELIST, stock.getStockCode(), stStockList, 60 * 60 * 1000);
+
         } catch (InterruptedException e) {
             e.printStackTrace();
         } finally {
             cdAnswer.countDown();
         }
+    }
+
+    private List<StStock> getStockInfoByStr(String stockCodeStr, String stockListStr) {
+        List<StStock> stockList = new ArrayList<StStock>();
+
+        String[] stockCodeStrArr = stockCodeStr.split(";");
+        String[] stockListStrArr = stockListStr.split(";");
+        for (int i = 0; i < stockCodeStrArr.length; i++) {
+            stockList.add(getStockByStr(stockCodeStrArr[i], stockListStrArr[i].trim()));
+        }
+
+        return stockList;
     }
 
     private StStock getStockByStr(String stockCode, String stockStr) {
@@ -89,7 +109,7 @@ public class SyncStockThread implements Runnable {
 
             sts = new StStock();
 //            sts.setStockId(stockCode);
-            sts.setStockCode(stockCode);
+            sts.setStockCode(stockCode.substring(2));// 获取股票代码
             sts.setStockName(sk[0]);
             sts.setOpenPrice(BigDecimal.valueOf(Double.parseDouble(sk[1])));
             sts.setBfclosePrice(BigDecimal.valueOf(Double.parseDouble(sk[2])));
@@ -125,4 +145,64 @@ public class SyncStockThread implements Runnable {
         }
         return sts;
     }
+
+    /**
+     * 生成马甲盘
+     */
+    /*public boolean quotePriceBySimulation(List<StAccount> stAccountList, StStock stStock) {
+        if (stAccountList.isEmpty()) return false;
+        StAccount account = stAccountList.get(0);
+
+        double[] priceArr = new double[10];
+        int[] amountArr = new int[10];
+        int[] typeArr = new int[10];
+
+        priceArr[0]=stStock.getBuyOnePrice();
+        priceArr[1]=stStock.getBuyTwoPrice();
+        priceArr[2]=stStock.getBuyThreePrice();
+        priceArr[3]=stStock.getBuyFourPrice();
+        priceArr[4]=stStock.getBuyFivePrice();
+        priceArr[5]=stStock.getSellOnePrice();
+        priceArr[6]=stStock.getSellTwoPrice();
+        priceArr[7]=stStock.getSellThreePrice();
+        priceArr[8]=stStock.getSellFourPrice();
+        priceArr[9]=stStock.getSellFivePrice();
+
+        amountArr[0]=stStock.getBuyOneAmount();
+        amountArr[1]=stStock.getBuyTwoAmount();
+        amountArr[2]=stStock.getBuyThreeAmount();
+        amountArr[3]=stStock.getBuyFourAmount();
+        amountArr[4]=stStock.getBuyFiveAmount();
+        amountArr[5]=stStock.getSellOneAmount();
+        amountArr[6]=stStock.getSellTwoAmount();
+        amountArr[7]=stStock.getSellThreeAmount();
+        amountArr[8]=stStock.getSellFourAmount();
+        amountArr[9]=stStock.getSellFiveAmount();
+
+        typeArr[0] = Constant.STOCK_STQUOTE_TYPE_BUY;
+        typeArr[1] = Constant.STOCK_STQUOTE_TYPE_BUY;
+        typeArr[2] = Constant.STOCK_STQUOTE_TYPE_BUY;
+        typeArr[3] = Constant.STOCK_STQUOTE_TYPE_BUY;
+        typeArr[4] = Constant.STOCK_STQUOTE_TYPE_BUY;
+        typeArr[5] = Constant.STOCK_STQUOTE_TYPE_SELL;
+        typeArr[6] = Constant.STOCK_STQUOTE_TYPE_SELL;
+        typeArr[7] = Constant.STOCK_STQUOTE_TYPE_SELL;
+        typeArr[8] = Constant.STOCK_STQUOTE_TYPE_SELL;
+        typeArr[9] = Constant.STOCK_STQUOTE_TYPE_SELL;
+
+        for (int i = 0; i< priceArr.length; i++) {
+            if (amountArr[i]==0||priceArr[i]==0||typeArr[i]==0) continue;
+
+            StQuote s = new StQuote();
+            s.setAccountId(account.getAccountId());
+            s.setStockId(stStock.getStockId());
+            s.setQuotePrice(priceArr[i]);
+            s.setAmount(amountArr[i]);
+            s.setType(typeArr[i]);
+            s.setDateTime(System.currentTimeMillis());
+            this.quotePrice(s);
+        }
+
+        return true;
+    }*/
 }
