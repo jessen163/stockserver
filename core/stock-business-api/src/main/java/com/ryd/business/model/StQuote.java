@@ -31,7 +31,7 @@ public class StQuote  implements Serializable {
     private BigDecimal frozeMoney;
     //佣金
     private BigDecimal commissionFee;
-    //状态 1.托管  2.交易中 3.已成交 4.撤单  5. 结算未成交
+    //状态 1.托管  2.交易中 3.已成交 4.撤单  5. 结算未成交 6.结算部分股票成交
     private Short status;
     //报价用户类型 1.真实用户 2.马甲用户
     private Short userType;

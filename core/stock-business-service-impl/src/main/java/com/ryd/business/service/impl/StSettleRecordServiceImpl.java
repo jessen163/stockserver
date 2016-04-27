@@ -64,7 +64,13 @@ public class StSettleRecordServiceImpl implements StSettleRecordService {
                                continue;
                            }
                           //撤回托管买股票费用,帐户增加资产
-                           stAccountService.updateStAccountMoneyAdd(quote.getAccountId(),quote.getFrozeMoney());
+                          boolean rs = stAccountService.updateStAccountMoneyAdd(quote.getAccountId(),quote.getFrozeMoney());
+                          if(rs){
+                              //修改报价状态
+                              updateQuoteStatus(quote);
+                              //从队列清除报价
+                              stQuoteService.deleteQuoteFromQueue(quote);
+                          }
                        }
                    }
 
@@ -75,11 +81,35 @@ public class StSettleRecordServiceImpl implements StSettleRecordService {
                                continue;
                            }
                            //撤回托管为卖的股票，持仓数量增加
-                           stPositionService.updatePositionAdd(squote.getAccountId(), squote.getStockId(), squote.getCurrentAmount());
+                           boolean srs = stPositionService.updatePositionAdd(squote.getAccountId(), squote.getStockId(), squote.getCurrentAmount());
+                           if(srs){
+                               //修改报价状态
+                               updateQuoteStatus(squote);
+                               //从队列清除报价
+                               stQuoteService.deleteQuoteFromQueue(squote);
+                           }
                        }
                    }
                }
            }
        }
+    }
+
+    /**
+     * 修改报价状态
+     * @param quote
+     */
+    private void updateQuoteStatus(StQuote quote){
+        switch (quote.getStatus()){
+            case 1:
+                quote.setStatus(ApplicationConstants.STOCK_STQUOTE_STATUS_NOTDEAL);
+                break;
+            case 2:
+                quote.setStatus(ApplicationConstants.STOCK_STQUOTE_STATUS_PARTDEAL);
+                break;
+            default:
+                break;
+        }
+        stQuoteService.updateQuote(quote);
     }
 }

@@ -10,8 +10,18 @@ import java.io.Serializable;
  * 创建时间：2016/4/24 10:11
  */
 public class SearchStockDTO implements Serializable {
+
+    private String stockId;
     // 账户
     // 开始时间
     // 结束时间
     // 等参数
+
+    public String getStockId() {
+        return stockId;
+    }
+
+    public void setStockId(String stockId) {
+        this.stockId = stockId;
+    }
 }

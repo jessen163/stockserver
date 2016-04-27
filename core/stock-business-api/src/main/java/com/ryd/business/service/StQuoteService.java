@@ -18,7 +18,7 @@ public interface StQuoteService {
      * @param quoteList
      * @return
      */
-    public Integer saveQuoteList(List<StQuote> quoteList);
+    public Integer saveQuoteList(List<StQuote> quoteList) throws Exception;
 
     /**
      * 撤销报价信息
@@ -26,6 +26,13 @@ public interface StQuoteService {
      * @return
      */
     public Integer updateQuoteList(List<StQuote> quoteList);
+
+    /**
+     * 修改报价
+     * @param quote
+     * @return
+     */
+    public Integer updateQuote(StQuote quote);
 
     /**
      * 查询报价队列信息，接收参数(队列为有序)
