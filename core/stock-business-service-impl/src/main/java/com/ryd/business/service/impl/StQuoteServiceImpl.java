@@ -35,7 +35,7 @@ public class StQuoteServiceImpl implements StQuoteService {
     private ICacheService iCacheService;
 
     @Override
-    public Integer saveQuoteList(List<StQuote> quoteList) {
+    public Integer saveQuoteList(List<StQuote> quoteList) throws Exception{
         Integer quoteFlag = 0;
         // 验证报价参数
         // 验证报价状态（是否可以报价）

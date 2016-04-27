@@ -1,7 +1,13 @@
 package com.ryd.business.service.thread;
 
 import com.ryd.basecommon.util.ApplicationConstants;
+import com.ryd.basecommon.util.ArithUtil;
+import com.ryd.business.dto.SearchQuoteDTO;
+import com.ryd.business.model.StQuote;
+import com.ryd.business.service.StQuoteService;
+import com.ryd.business.service.StStockService;
 
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -10,35 +16,37 @@ import java.util.concurrent.Executors;
  * Created by chenji on 2016/4/26.
  */
 public class TradingMainThread implements Runnable {
-    public TradingMainThread() {
+    private StStockService stStockService;
+    private StQuoteService stQuoteService;
+    private ExecutorService executorService;
+
+    public TradingMainThread(ExecutorService tradingservice, StStockService stStockService, StQuoteService stQuoteService) {
+        this.stStockService = stStockService;
+        this.stQuoteService = stQuoteService;
+        this.executorService = tradingservice;
     }
 
     @Override
     public void run() {
         while (!ApplicationConstants.isMainThreadStop) {
             System.out.println("TradingMainThread is Running!");
-            try {
-                Thread.sleep(10000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+            List<String> stockIdList = stQuoteService.findQuoteStockIdList();
+            for (String stockId: stockIdList) {
+                // 分线程执行报价交易
+                executorService.execute(new TradingSubThread(stockId, stQuoteService));
             }
-            ApplicationConstants.isSubThreadWait=true;
-            try {
-                Thread.sleep(10000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            ApplicationConstants.isSubThreadWait=false;
+
+
         }
     }
 
     public static void main(String[] args) {
         ExecutorService tradingservice = Executors.newFixedThreadPool(10);
 
-        tradingservice.execute(new TradingMainThread());
+//        tradingservice.execute(new TradingMainThread());
 
-        for (int i =0;i < 100;i++) {
-            tradingservice.execute(new TradingSubThread());
-        }
+//        for (int i =0;i < 100;i++) {
+//            tradingservice.execute(new TradingSubThread());
+//        }
     }
 }

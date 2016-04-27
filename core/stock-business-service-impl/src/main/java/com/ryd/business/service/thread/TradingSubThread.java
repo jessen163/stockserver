@@ -1,6 +1,10 @@
 package com.ryd.business.service.thread;
 
 import com.ryd.basecommon.util.ApplicationConstants;
+import com.ryd.basecommon.util.ArithUtil;
+import com.ryd.business.dto.SearchQuoteDTO;
+import com.ryd.business.model.StQuote;
+import com.ryd.business.service.StQuoteService;
 
 import java.util.concurrent.TimeUnit;
 
@@ -9,6 +13,13 @@ import java.util.concurrent.TimeUnit;
  * Created by chenji on 2016/4/26.
  */
 public class TradingSubThread implements Runnable {
+    private String stockId;
+    private StQuoteService stQuoteService;
+    public TradingSubThread(String stockId, StQuoteService stQuoteService) {
+        this.stockId = stockId;
+        this.stQuoteService = stQuoteService;
+    }
+
     @Override
     public void run() {
         while (!ApplicationConstants.isSubThreadStop) {
@@ -19,6 +30,21 @@ public class TradingSubThread implements Runnable {
                     System.out.println("TradingSubThread is Waiting!");
                 }
                 System.out.println("TradingSubThread is Running!");
+                SearchQuoteDTO searchQuoteDTO = new SearchQuoteDTO();
+                searchQuoteDTO.setStockCode(stockId);
+                searchQuoteDTO.setQuoteType(ApplicationConstants.STOCK_QUOTETYPE_BUY);
+                StQuote buyQuote = stQuoteService.findFirstQuoteByStock(searchQuoteDTO);
+                searchQuoteDTO.setQuoteType(ApplicationConstants.STOCK_QUOTETYPE_SELL);
+                StQuote sellQuote = stQuoteService.findFirstQuoteByStock(searchQuoteDTO);
+                if (buyQuote!=null&&sellQuote!=null) {
+                    // 如果撮合成功, 执行交易, 同时更新买入、卖出队列
+                    if (ArithUtil.compare(buyQuote.getQuotePrice(), sellQuote.getQuotePrice()) >= 0 && !buyQuote.getAccountId().equals(sellQuote.getAccountId())) {
+                        // 调用交易接口
+
+                    }
+                } else {
+                    break;
+                }
                 TimeUnit.MILLISECONDS.sleep(200);
             } catch (InterruptedException e) {
                 e.printStackTrace();
