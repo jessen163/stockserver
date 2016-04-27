@@ -1,17 +1,26 @@
 package com.ryd.business.service.impl;
 
+import com.ryd.basecommon.util.ApplicationConstants;
+import com.ryd.basecommon.util.ArithUtil;
+import com.ryd.basecommon.util.CacheConstant;
+import com.ryd.basecommon.util.UUIDUtils;
 import com.ryd.business.dao.StTradeRecordDao;
+import com.ryd.business.dto.SearchStockDTO;
 import com.ryd.business.dto.SearchTradeRecordDTO;
+import com.ryd.business.model.StQuote;
+import com.ryd.business.model.StStock;
 import com.ryd.business.model.StTradeRecord;
-import com.ryd.business.service.StQuoteService;
-import com.ryd.business.service.StStockService;
-import com.ryd.business.service.StTradeRecordService;
+import com.ryd.business.service.*;
 import com.ryd.business.service.thread.TradingMainThread;
+import com.ryd.business.service.util.Utils;
 import com.ryd.cache.service.ICacheService;
+import com.ryd.system.service.StSystemParamService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -33,10 +42,21 @@ public class StTradeRecordServiceImpl implements StTradeRecordService {
     private StQuoteService stQuoteService;
     @Autowired
     private StStockService stStockService;
+    @Autowired
+    private StPositionService stPositionService;
+    @Autowired
+    private StSystemParamService stSystemParamService;
+    @Autowired
+    private StAccountService stAccountService;
 
     @Override
     public boolean saveTradeRecordBatch(List<StTradeRecord> tradeRecordList) {
         return false;
+    }
+
+    @Override
+    public boolean addTradeRecord(StTradeRecord record){
+        return stTradeRecordDao.add(record) > 0;
     }
 
     @Override
@@ -48,12 +68,84 @@ public class StTradeRecordServiceImpl implements StTradeRecordService {
         // 记录资金流水，更新双方报价信息
         // 操作过程中（每分钟）停止交易，获取股票信息（调用股票更新方法），生成马甲订单，完成后重新启动交易方法
         ExecutorService tradingservice = Executors.newCachedThreadPool();
-        tradingservice.execute(new TradingMainThread(tradingservice, stStockService, stQuoteService));
+        tradingservice.execute(new TradingMainThread(tradingservice, stStockService, stQuoteService, this));
     }
 
     @Override
-    public void updateStockSettling() {
-        // 结算
+    public void updateTradeSettling(StQuote buyQuote, StQuote sellQuote) {
+        //交易股票
+        SearchStockDTO sdto = new SearchStockDTO();
+        sdto.setStockId(buyQuote.getStockId());
+        StStock sts = stStockService.findStockListByStock(sdto);
+
+        //股票交易数量
+        long tradeStockAmount = 0;
+
+        //买少卖多
+        if (buyQuote.getCurrentAmount().longValue() < sellQuote.getCurrentAmount().longValue()) {
+
+            //股票交易数量为买家购买数量
+            tradeStockAmount = buyQuote.getCurrentAmount();
+
+            //处理交易
+            trading(buyQuote, sellQuote, tradeStockAmount);
+
+            //交易成功，交易卖家持仓减少
+            sellQuote.setCurrentAmount(sellQuote.getCurrentAmount() - tradeStockAmount);
+
+            //买家移出队列
+            stQuoteService.deleteQuoteFromQueue(buyQuote);
+            //修改买家卖家报价状态
+            buyQuote.setStatus(ApplicationConstants.STOCK_STQUOTE_STATUS_ALREADYDEAL);
+            stQuoteService.updateQuote(buyQuote);
+            sellQuote.setStatus(ApplicationConstants.STOCK_STQUOTE_STATUS_DEALING);
+            stQuoteService.updateQuote(sellQuote);
+        } else if (buyQuote.getCurrentAmount().longValue() == sellQuote.getCurrentAmount().longValue()) {//买卖相等
+
+            tradeStockAmount = buyQuote.getCurrentAmount();
+            //处理交易
+            trading(buyQuote, sellQuote, tradeStockAmount);
+
+            //买家卖家移出队列
+            stQuoteService.deleteQuoteFromQueue(buyQuote);
+            stQuoteService.deleteQuoteFromQueue(sellQuote);
+            //修改买家卖家报价状态
+            buyQuote.setStatus(ApplicationConstants.STOCK_STQUOTE_STATUS_ALREADYDEAL);
+            stQuoteService.updateQuote(buyQuote);
+            sellQuote.setStatus(ApplicationConstants.STOCK_STQUOTE_STATUS_ALREADYDEAL);
+            stQuoteService.updateQuote(sellQuote);
+        }else if(buyQuote.getCurrentAmount().longValue() > sellQuote.getCurrentAmount().longValue()){//买多卖少
+
+            //股票交易数量为卖家卖掉数量
+            tradeStockAmount = sellQuote.getCurrentAmount();
+            //处理交易
+            trading(buyQuote, sellQuote, tradeStockAmount);
+
+            //买家报价剩余股票数量
+            long remainAmount = buyQuote.getCurrentAmount()-tradeStockAmount;
+
+            //佣金比例
+            String commissionPercent = stSystemParamService.getParamByKey(CacheConstant.CACHEKEY_SYSTEM_COMMINSSION_PERCENT);
+            //计算佣金
+            BigDecimal commissionFee = null;
+            //减掉佣金和税
+            BigDecimal rsMoney = null;
+
+            Utils.calculate(buyQuote.getQuotePrice(), remainAmount, buyQuote.getQuoteType(), commissionPercent, null, rsMoney, commissionFee, null);
+
+            buyQuote.setFrozeMoney(rsMoney);
+            buyQuote.setCommissionFee(commissionFee);
+            //交易成功，股票交易数量减少
+            buyQuote.setCurrentAmount(remainAmount);
+
+            //卖家移出队列
+            stQuoteService.deleteQuoteFromQueue(sellQuote);
+            //修改买家卖家报价状态
+            buyQuote.setStatus(ApplicationConstants.STOCK_STQUOTE_STATUS_ALREADYDEAL);
+            stQuoteService.updateQuote(buyQuote);
+            sellQuote.setStatus(ApplicationConstants.STOCK_STQUOTE_STATUS_ALREADYDEAL);
+            stQuoteService.updateQuote(sellQuote);
+        }
     }
 
     @Override
@@ -64,5 +156,101 @@ public class StTradeRecordServiceImpl implements StTradeRecordService {
     @Override
     public List<StTradeRecord> findTradeRecordList(SearchTradeRecordDTO searchTradeRecordDTO) {
         return null;
+    }
+
+    /**
+     * 交易处理
+     * @param buyQuote
+     * @param sellQuote
+     * @param tradeStockAmount
+     */
+    private synchronized boolean trading(StQuote buyQuote, StQuote sellQuote, long tradeStockAmount){
+
+        boolean brs = false, srs = false, rs = false;
+        //股票交易价格
+        BigDecimal tradeStockQuotePrice = null;
+
+        tradeStockQuotePrice = judgeQuotePrice(buyQuote, sellQuote, tradeStockAmount);
+
+        //交易成功，交易买家持仓增加
+        brs = stPositionService.updatePositionAdd(buyQuote.getAccountId(), buyQuote.getStockId(), tradeStockAmount);
+
+        //卖家新增费用计算
+        //佣金比例
+        String commissionPercent = stSystemParamService.getParamByKey(CacheConstant.CACHEKEY_SYSTEM_COMMINSSION_PERCENT);
+        //印花税比例
+        String taxPercent = stSystemParamService.getParamByKey(CacheConstant.CACHEKEY_SYSTEM_CONFIG_TAX_PERCENT);
+        //计算佣金
+        BigDecimal commissionFee = null;
+        BigDecimal taxFee = null;
+        //减掉佣金和税
+        BigDecimal getMoney = null;
+
+        Utils.calculate(tradeStockQuotePrice, tradeStockAmount, sellQuote.getQuoteType(), commissionPercent, taxPercent, getMoney, commissionFee, taxFee);
+
+        //交易成功，交易卖家资产增加
+        srs = stAccountService.updateStAccountMoneyAdd(sellQuote.getAccountId(), getMoney);
+
+        if(brs&&srs) {
+            //添加交易记录
+            StTradeRecord record = new StTradeRecord();
+            record.setRecordId(UUIDUtils.uuidTrimLine());
+            record.setSellerAccountId(sellQuote.getAccountId());
+            record.setBuyerAccountId(buyQuote.getAccountId());
+            record.setStockId(buyQuote.getStockId());
+            record.setQuotePrice(tradeStockQuotePrice);
+            record.setAmount(tradeStockAmount);
+            record.setBuyFee(commissionFee);
+            record.setSellFee(commissionFee);
+            record.setDealTax(taxFee);
+            record.setDateTime(System.currentTimeMillis());
+
+            rs = stTradeRecordDao.add(record) > 0;
+        }
+
+        return rs;
+    }
+
+
+    /**
+     * 判断买家卖家报价
+     * @param buyQuote
+     * @param sellQuote
+     * @param tradeStockAmount
+     */
+    private BigDecimal judgeQuotePrice(StQuote buyQuote, StQuote sellQuote, long tradeStockAmount){
+
+        BigDecimal tradeStockQuotePrice = null;
+        //买家报价大于卖家报价
+        if(ArithUtil.compare(buyQuote.getQuotePrice(), sellQuote.getQuotePrice())==1){
+            //如果卖家报价早于买家报价
+            if(sellQuote.getDateTime().longValue() < buyQuote.getDateTime().longValue()){
+                //交易价格取卖家报价
+                tradeStockQuotePrice = sellQuote.getQuotePrice();
+
+                //节省成本
+                BigDecimal saveMoney = null;
+                //以买家报价计算交易成本
+                BigDecimal buyCost = null;
+                //佣金比例
+                String commissionPercent = stSystemParamService.getParamByKey(CacheConstant.CACHEKEY_SYSTEM_COMMINSSION_PERCENT);
+                Utils.calculate(buyQuote.getQuotePrice(), tradeStockAmount, buyQuote.getQuoteType(), commissionPercent, null, buyCost, null, null);
+                //以交易价格计算交易成本
+                BigDecimal dealCost = null;
+                Utils.calculate(tradeStockQuotePrice, tradeStockAmount, buyQuote.getQuoteType(), commissionPercent, null, dealCost, null, null);
+
+                //节省成本
+                saveMoney = ArithUtil.subtract(buyCost, dealCost);
+                //将节省成本归还买家
+                stAccountService.updateStAccountMoneyAdd(buyQuote.getAccountId(), saveMoney);
+
+            }else if(sellQuote.getDateTime().longValue() >= buyQuote.getDateTime().longValue()){ //如果买家报价早于或等于卖家报价
+                //交易价格取买家报价
+                tradeStockQuotePrice = buyQuote.getQuotePrice();
+            }
+        }else{//买家报价等于卖家报价
+            tradeStockQuotePrice = buyQuote.getQuotePrice();
+        }
+        return tradeStockQuotePrice;
     }
 }
