@@ -1,5 +1,7 @@
 package com.ryd.business.model;
 
+import com.ryd.basecommon.util.ApplicationConstants;
+
 import java.io.Serializable;
 
 /**
@@ -31,6 +33,13 @@ public class StStockConfig implements Serializable {
     private String updatedBy;
 
     private Long updatedOn;
+
+    //股票类型 1.上海 2。深圳
+    private String stockTypeName;
+
+    public String getStockTypeName() {
+        return this.getStockType() == 1? "sh":"sz";
+    }
 
     public String getId() {
         return id;
