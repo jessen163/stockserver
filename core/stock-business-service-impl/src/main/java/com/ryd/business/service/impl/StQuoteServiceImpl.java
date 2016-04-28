@@ -95,6 +95,8 @@ public class StQuoteServiceImpl implements StQuoteService {
         for (StQuote quote: quoteList) {
             boolean rs=false;
             quote.setCurrentAmount(quote.getAmount());
+            quote.setStatus(ApplicationConstants.STOCK_STQUOTE_STATUS_TRUSTEE);
+            quote.setUserType(quote.getUserType()==null?ApplicationConstants.ACCOUNT_TYPE_REAL:quote.getUserType());
             //买股票
             if (quote.getQuoteType().shortValue() == ApplicationConstants.STOCK_QUOTETYPE_BUY.shortValue()) {
 
