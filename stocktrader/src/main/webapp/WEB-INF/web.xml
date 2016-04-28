@@ -34,13 +34,16 @@
     <!-- mongo 数据库连接参数 end -->
 
     <listener>
-        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-    </listener>
-    <listener>
         <listener-class>com.ryd.server.stocktrader.listener.InitMongoDBListener</listener-class>
     </listener>
     <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+    <listener>
         <listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
+    </listener>
+    <listener>
+        <listener-class>com.ryd.server.stocktrader.listener.InitNettyServerListener</listener-class>
     </listener>
     <servlet>
         <servlet-name>manager</servlet-name>
