@@ -5,7 +5,6 @@ import com.bugull.mongo.annotations.Entity;
 import com.bugull.mongo.annotations.Id;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -27,61 +26,61 @@ public class StStock implements Serializable,BuguEntity {
     //股票代码
     private String stockCode;
     //今日开盘价
-    private BigDecimal openPrice;
+    private Double openPrice;
     //昨日收盘价
-    private BigDecimal bfclosePrice;
+    private Double bfclosePrice;
     //现价
-    private BigDecimal currentPrice;
+    private Double currentPrice;
     //今日最高价
-    private BigDecimal maxPrice;
+    private Double maxPrice;
     //今日最低价
-    private BigDecimal minPrice;
+    private Double minPrice;
     //竞买价
-    private BigDecimal biddingBuyPrice;
+    private Double biddingBuyPrice;
     //竞卖价
-    private BigDecimal biddingSellPrice;
+    private Double biddingSellPrice;
     //成交量
     private Long tradeAmount;
     //成交金额
-    private BigDecimal tradeMoney;
+    private Double tradeMoney;
     //买一报价
-    private BigDecimal buyOnePrice;
+    private Double buyOnePrice;
     //买一股票数
     private Long buyOneAmount;
 
-    private BigDecimal buyTwoPrice;
+    private Double buyTwoPrice;
 
     private Long buyTwoAmount;
 
-    private BigDecimal buyThreePrice;
+    private Double buyThreePrice;
 
     private Long buyThreeAmount;
 
-    private BigDecimal buyFourPrice;
+    private Double buyFourPrice;
 
     private Long buyFourAmount;
 
-    private BigDecimal buyFivePrice;
+    private Double buyFivePrice;
 
     private Long buyFiveAmount;
     //卖一价格
-    private BigDecimal sellOnePrice;
+    private Double sellOnePrice;
     //卖一股票数
     private Long sellOneAmount;
 
-    private BigDecimal sellTwoPrice;
+    private Double sellTwoPrice;
 
     private Long sellTwoAmount;
 
-    private BigDecimal sellThreePrice;
+    private Double sellThreePrice;
 
     private Long sellThreeAmount;
 
-    private BigDecimal sellFourPrice;
+    private Double sellFourPrice;
 
     private Long sellFourAmount;
 
-    private BigDecimal sellFivePrice;
+    private Double sellFivePrice;
 
     private Long sellFiveAmount;
 
@@ -113,59 +112,59 @@ public class StStock implements Serializable,BuguEntity {
         this.stockCode = stockCode == null ? null : stockCode.trim();
     }
 
-    public BigDecimal getOpenPrice() {
+    public Double getOpenPrice() {
         return openPrice;
     }
 
-    public void setOpenPrice(BigDecimal openPrice) {
+    public void setOpenPrice(Double openPrice) {
         this.openPrice = openPrice;
     }
 
-    public BigDecimal getBfclosePrice() {
+    public Double getBfclosePrice() {
         return bfclosePrice;
     }
 
-    public void setBfclosePrice(BigDecimal bfclosePrice) {
+    public void setBfclosePrice(Double bfclosePrice) {
         this.bfclosePrice = bfclosePrice;
     }
 
-    public BigDecimal getCurrentPrice() {
+    public Double getCurrentPrice() {
         return currentPrice;
     }
 
-    public void setCurrentPrice(BigDecimal currentPrice) {
+    public void setCurrentPrice(Double currentPrice) {
         this.currentPrice = currentPrice;
     }
 
-    public BigDecimal getMaxPrice() {
+    public Double getMaxPrice() {
         return maxPrice;
     }
 
-    public void setMaxPrice(BigDecimal maxPrice) {
+    public void setMaxPrice(Double maxPrice) {
         this.maxPrice = maxPrice;
     }
 
-    public BigDecimal getMinPrice() {
+    public Double getMinPrice() {
         return minPrice;
     }
 
-    public void setMinPrice(BigDecimal minPrice) {
+    public void setMinPrice(Double minPrice) {
         this.minPrice = minPrice;
     }
 
-    public BigDecimal getBiddingBuyPrice() {
+    public Double getBiddingBuyPrice() {
         return biddingBuyPrice;
     }
 
-    public void setBiddingBuyPrice(BigDecimal biddingBuyPrice) {
+    public void setBiddingBuyPrice(Double biddingBuyPrice) {
         this.biddingBuyPrice = biddingBuyPrice;
     }
 
-    public BigDecimal getBiddingSellPrice() {
+    public Double getBiddingSellPrice() {
         return biddingSellPrice;
     }
 
-    public void setBiddingSellPrice(BigDecimal biddingSellPrice) {
+    public void setBiddingSellPrice(Double biddingSellPrice) {
         this.biddingSellPrice = biddingSellPrice;
     }
 
@@ -177,19 +176,19 @@ public class StStock implements Serializable,BuguEntity {
         this.tradeAmount = tradeAmount;
     }
 
-    public BigDecimal getTradeMoney() {
+    public Double getTradeMoney() {
         return tradeMoney;
     }
 
-    public void setTradeMoney(BigDecimal tradeMoney) {
+    public void setTradeMoney(Double tradeMoney) {
         this.tradeMoney = tradeMoney;
     }
 
-    public BigDecimal getBuyOnePrice() {
+    public Double getBuyOnePrice() {
         return buyOnePrice;
     }
 
-    public void setBuyOnePrice(BigDecimal buyOnePrice) {
+    public void setBuyOnePrice(Double buyOnePrice) {
         this.buyOnePrice = buyOnePrice;
     }
 
@@ -201,11 +200,11 @@ public class StStock implements Serializable,BuguEntity {
         this.buyOneAmount = buyOneAmount;
     }
 
-    public BigDecimal getBuyTwoPrice() {
+    public Double getBuyTwoPrice() {
         return buyTwoPrice;
     }
 
-    public void setBuyTwoPrice(BigDecimal buyTwoPrice) {
+    public void setBuyTwoPrice(Double buyTwoPrice) {
         this.buyTwoPrice = buyTwoPrice;
     }
 
@@ -217,11 +216,11 @@ public class StStock implements Serializable,BuguEntity {
         this.buyTwoAmount = buyTwoAmount;
     }
 
-    public BigDecimal getBuyThreePrice() {
+    public Double getBuyThreePrice() {
         return buyThreePrice;
     }
 
-    public void setBuyThreePrice(BigDecimal buyThreePrice) {
+    public void setBuyThreePrice(Double buyThreePrice) {
         this.buyThreePrice = buyThreePrice;
     }
 
@@ -233,11 +232,11 @@ public class StStock implements Serializable,BuguEntity {
         this.buyThreeAmount = buyThreeAmount;
     }
 
-    public BigDecimal getBuyFourPrice() {
+    public Double getBuyFourPrice() {
         return buyFourPrice;
     }
 
-    public void setBuyFourPrice(BigDecimal buyFourPrice) {
+    public void setBuyFourPrice(Double buyFourPrice) {
         this.buyFourPrice = buyFourPrice;
     }
 
@@ -249,11 +248,11 @@ public class StStock implements Serializable,BuguEntity {
         this.buyFourAmount = buyFourAmount;
     }
 
-    public BigDecimal getBuyFivePrice() {
+    public Double getBuyFivePrice() {
         return buyFivePrice;
     }
 
-    public void setBuyFivePrice(BigDecimal buyFivePrice) {
+    public void setBuyFivePrice(Double buyFivePrice) {
         this.buyFivePrice = buyFivePrice;
     }
 
@@ -265,11 +264,11 @@ public class StStock implements Serializable,BuguEntity {
         this.buyFiveAmount = buyFiveAmount;
     }
 
-    public BigDecimal getSellOnePrice() {
+    public Double getSellOnePrice() {
         return sellOnePrice;
     }
 
-    public void setSellOnePrice(BigDecimal sellOnePrice) {
+    public void setSellOnePrice(Double sellOnePrice) {
         this.sellOnePrice = sellOnePrice;
     }
 
@@ -281,11 +280,11 @@ public class StStock implements Serializable,BuguEntity {
         this.sellOneAmount = sellOneAmount;
     }
 
-    public BigDecimal getSellTwoPrice() {
+    public Double getSellTwoPrice() {
         return sellTwoPrice;
     }
 
-    public void setSellTwoPrice(BigDecimal sellTwoPrice) {
+    public void setSellTwoPrice(Double sellTwoPrice) {
         this.sellTwoPrice = sellTwoPrice;
     }
 
@@ -297,11 +296,11 @@ public class StStock implements Serializable,BuguEntity {
         this.sellTwoAmount = sellTwoAmount;
     }
 
-    public BigDecimal getSellThreePrice() {
+    public Double getSellThreePrice() {
         return sellThreePrice;
     }
 
-    public void setSellThreePrice(BigDecimal sellThreePrice) {
+    public void setSellThreePrice(Double sellThreePrice) {
         this.sellThreePrice = sellThreePrice;
     }
 
@@ -313,11 +312,11 @@ public class StStock implements Serializable,BuguEntity {
         this.sellThreeAmount = sellThreeAmount;
     }
 
-    public BigDecimal getSellFourPrice() {
+    public Double getSellFourPrice() {
         return sellFourPrice;
     }
 
-    public void setSellFourPrice(BigDecimal sellFourPrice) {
+    public void setSellFourPrice(Double sellFourPrice) {
         this.sellFourPrice = sellFourPrice;
     }
 
@@ -329,11 +328,11 @@ public class StStock implements Serializable,BuguEntity {
         this.sellFourAmount = sellFourAmount;
     }
 
-    public BigDecimal getSellFivePrice() {
+    public Double getSellFivePrice() {
         return sellFivePrice;
     }
 
-    public void setSellFivePrice(BigDecimal sellFivePrice) {
+    public void setSellFivePrice(Double sellFivePrice) {
         this.sellFivePrice = sellFivePrice;
     }
 
