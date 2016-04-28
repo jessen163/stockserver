@@ -97,7 +97,6 @@ public class MessageHandle {
                 q.setQuotePrice(BigDecimal.valueOf(quote.getStockPrice()));
                 q.setQuoteType((short) quote.getQuoteType());
                 q.setAmount(Long.valueOf(quote.getAmount()));
-                q.setCurrentAmount(q.getAmount());
 
                 int rs = stQuoteService.saveQuoteList(q);
                 if(rs >= 0 ){
@@ -208,7 +207,6 @@ public class MessageHandle {
                 racc.setTotalAssets(BigDecimal.valueOf(ainfo.getTotalAssets()));
                 racc.setUseMoney(BigDecimal.valueOf(ainfo.getUseMoney()));
                 racc.setAccountLevel((short) ainfo.getAccountLevel());
-                racc.setAccountType(ApplicationConstants.ACCOUNT_TYPE_REAL);
                 racc.setMobile(ainfo.getMobile());
                 racc.setSex((short)ainfo.getSex());
                 racc.setRemark(ainfo.getRemark());
