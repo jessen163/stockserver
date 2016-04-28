@@ -1,6 +1,7 @@
 package com.ryd.business.dao;
 
 import com.ryd.basecommon.dao.BaseDao;
+import com.ryd.business.dto.SearchStockDTO;
 import com.ryd.business.model.StStock;
 
 import java.util.List;
@@ -19,4 +20,12 @@ public interface StStockDao extends BaseDao<StStock> {
      * @return
      */
     public boolean saveStockBatch(List<StStock> stStockList);
+
+    /**
+     * 查询股票价格-实时
+     * 最新的一条
+     * @param searchStockDTO
+     * @return
+     */
+    public List<StStock> findStStockListCurrentTime(SearchStockDTO searchStockDTO);
 }
