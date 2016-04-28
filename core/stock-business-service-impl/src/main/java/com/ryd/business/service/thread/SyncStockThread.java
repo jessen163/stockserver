@@ -38,8 +38,8 @@ public class SyncStockThread implements Runnable {
         this.stockCodeStr = stockCodeStr;
         this.cacheService = cacheService;
         this.stStockService = stStockService;
-        this.cdOrder = cdOrder;
-        this.cdAnswer = cdAnswer;
+//        this.cdOrder = cdOrder;
+//        this.cdAnswer = cdAnswer;
     }
 
     @Override
@@ -60,7 +60,7 @@ public class SyncStockThread implements Runnable {
 //            if (stStockList == null) {
 //                stStockList = new LinkedList<StStock>();
 //            }
-            cdOrder.await();
+//            cdOrder.await();
             // 下载单只股票信息
             String stockInfoStr = HttpclientUtil.doGet(ApplicationConstants.STOCK_SERVER_STOCKBASE_URL + stockCodeStr);
 //            String stockStr = HttpclientUtil.doGet(ApplicationConstants.STOCK_SERVER_STOCKBASE_URL + (stock.getStockType().intValue() == 1 ? "sh" : "sz") + stock.getStockCode());
@@ -79,8 +79,8 @@ public class SyncStockThread implements Runnable {
 
 //            cacheService.setObjectByKey(CacheConstant.CACHEKEY_STOCK_PRICELIST, stock.getStockCode(), stStockList, 60 * 60 * 1000);
 
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
         } finally {
             cdAnswer.countDown();
         }
@@ -158,9 +158,11 @@ public class SyncStockThread implements Runnable {
         short[] typeArr = new short[10];
         // 模拟订单
         List<SimulationQuoteDTO> simulationQuoteDTOList = new ArrayList<SimulationQuoteDTO>();
+        List<StStock> stStockCacheList = new ArrayList<StStock>();
         for (StStock stStock : stockList) {
             // 将实时价格放入缓存  6分钟
-            cacheService.setObjectByKey(CacheConstant.CACHEKEY_STOCK_PRICELIST, stStock.getStockCode(), stStock, 60*10);
+            cacheService.setObjectByKey(CacheConstant.CACHEKEY_STOCK_PRICEMAP, stStock.getStockCode(), stStock, 60*10);
+            stStockCacheList.add(stStock);
             priceArr[0]=stStock.getBuyOnePrice();
             priceArr[1]=stStock.getBuyTwoPrice();
             priceArr[2]=stStock.getBuyThreePrice();
@@ -202,10 +204,12 @@ public class SyncStockThread implements Runnable {
                 s.setAmount(amountArr[i]);
                 s.setQuoteType(typeArr[i]);
                 s.setDateTime(System.currentTimeMillis());
+                simulationQuoteDTOList.add(s);
             }
         }
         // 模拟订单
         cacheService.setObjectByKey(CacheConstant.CACHEKEY_SIMULATIONQUOTELIST, simulationQuoteDTOList);
+        cacheService.setObjectByKey(CacheConstant.CACHEKEY_STOCK_PRICELIST, stStockCacheList, 60*5);
 
         return true;
     }

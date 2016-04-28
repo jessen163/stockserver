@@ -39,13 +39,13 @@ public class StStockConfigServiceImpl implements StStockConfigService {
 
             if (!StringUtils.isEmpty(stStockConfigList)) {
                 iCacheService.setObjectByKey(CacheConstant.CACHEKEY_STOCKCONFIGLIST, stStockConfigList);
-                Map<String, StStockConfig> stockMap = new HashMap<String, StStockConfig>();
+//                Map<String, StStockConfig> stockMap = new HashMap<String, StStockConfig>();
                 List<String> stockIdList = new ArrayList<String>();
                 for (StStockConfig stock: stStockConfigList) {
-                    stockMap.put(stock.getId(), stock);
-                    stockIdList.add(stock.getStockCode()+":"+stock.getStockTypeName());
+//                    stockMap.put(stock.getId(), stock);
+                    stockIdList.add(stock.getStockCode() + ":" + stock.getStockTypeName());
+                    iCacheService.setObjectByKey(CacheConstant.CACHEKEY_STOCKCONFIGLIST_MAP, stock.getId(), stock, 60*60*8);
                 }
-                iCacheService.setObjectByKey(CacheConstant.CACHEKEY_STOCKCONFIGLIST_MAP, stockMap);
                 iCacheService.setObjectByKey(CacheConstant.CACHEKEY_QUEUE_STOCKID_LIST, stockIdList);
             }
         }

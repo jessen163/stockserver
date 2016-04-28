@@ -8,14 +8,13 @@ import com.ryd.business.dao.StQuoteDao;
 import com.ryd.business.dto.SearchQuoteDTO;
 import com.ryd.business.dto.SearchStockDTO;
 import com.ryd.business.dto.SimulationQuoteDTO;
+import com.ryd.business.exception.QuoteBusinessException;
 import com.ryd.business.model.StQuote;
 import com.ryd.business.model.StStock;
-import com.ryd.business.model.StStockConfig;
 import com.ryd.business.service.StAccountService;
 import com.ryd.business.service.StPositionService;
 import com.ryd.business.service.StQuoteService;
 import com.ryd.business.service.StStockService;
-import com.ryd.business.service.thread.SyncStockThread;
 import com.ryd.cache.service.ICacheService;
 import com.ryd.system.service.StDateScheduleService;
 import com.ryd.system.service.StSystemParamService;
@@ -100,6 +99,11 @@ public class StQuoteServiceImpl implements StQuoteService {
         // 账户金额是否够用
         for (StQuote quote: quoteList) {
             boolean rs=false;
+            quote.setQuoteId(UUID.randomUUID().toString());
+            // 用于排序的字段
+            long timeSort = Integer.parseInt(String.valueOf(System.currentTimeMillis()).substring(7));
+            quote.setTimeSort(timeSort);
+
             quote.setCurrentAmount(quote.getAmount());
             quote.setStatus(ApplicationConstants.STOCK_STQUOTE_STATUS_TRUSTEE);
             quote.setUserType(quote.getUserType() == null ? ApplicationConstants.ACCOUNT_TYPE_REAL : quote.getUserType());
@@ -246,8 +250,8 @@ public class StQuoteServiceImpl implements StQuoteService {
             quoteobj = iCacheService.getObjectByKey(CacheConstant.CACHEKEY_STOCK_QUOTE_SELLQUEUE, searchQuoteDTO.getStockCode(), null);
         }
         quoteList = (ConcurrentSkipListMap<Long, StQuote>) quoteobj;
-//        return quoteList.higherEntry();
-        return null;
+        Map.Entry<Long, StQuote> sellMap = quoteList.higherEntry(Long.MIN_VALUE);
+        return sellMap==null?null:sellMap.getValue();
     }
 
     @Override
@@ -259,20 +263,29 @@ public class StQuoteServiceImpl implements StQuoteService {
         ConcurrentSkipListMap<Long, StQuote> quoteList = null;
         if (quote.getQuoteType().intValue() == ApplicationConstants.STOCK_QUOTETYPE_BUY) {
             quoteobj = iCacheService.getObjectByKey(CacheConstant.CACHEKEY_STOCK_QUOTE_BUYQUEUE, quote.getStockId(), null);
-            // TODO 冻结资金
+            if (quoteobj!=null) {
+                quoteList = (ConcurrentSkipListMap<Long, StQuote>)iCacheService.getObjectByKey(CacheConstant.CACHEKEY_STOCK_QUOTE_BUYQUEUE, quote.getStockId(), null);
+            } else {
+                quoteList = new ConcurrentSkipListMap<Long, StQuote>();
+            }
+            Long quotePriceForSort = -1 * Long.parseLong("100000000") * (long)(quote.getQuotePrice().doubleValue()*100) + quote.getTimeSort();
+            quote.setQuotePriceForSort(quotePriceForSort);
+            quoteList.put(quotePriceForSort, quote);
+            // 存入缓存
+            iCacheService.setObjectByKey(CacheConstant.CACHEKEY_STOCK_QUOTE_BUYQUEUE, quote.getStockId(), quoteList, 8 * 60 * 60);
         } else {
+            if (quoteobj!=null) {
+                quoteList = (ConcurrentSkipListMap<Long, StQuote>)iCacheService.getObjectByKey(CacheConstant.CACHEKEY_STOCK_QUOTE_BUYQUEUE, quote.getStockId(), null);
+            } else {
+                quoteList = new ConcurrentSkipListMap<Long, StQuote>();
+            }
             quoteobj = iCacheService.getObjectByKey(CacheConstant.CACHEKEY_STOCK_QUOTE_SELLQUEUE, quote.getStockId(), null);
-            // TODO 冻结股票
+            Long quotePriceForSort = Long.parseLong("100000000") * (long)(quote.getQuotePrice().doubleValue()*100) + quote.getTimeSort();
+            quote.setQuotePriceForSort(quotePriceForSort);
+            quoteList.put(quotePriceForSort, quote);
+            // 存入缓存
+            iCacheService.setObjectByKey(CacheConstant.CACHEKEY_STOCK_QUOTE_SELLQUEUE, quote.getStockId(), quoteList, 8 * 60 * 60);
         }
-        if (quoteobj == null) {
-            return false;
-        }
-
-        quoteList = (ConcurrentSkipListMap<Long, StQuote>) quoteobj;
-        // 入队列 TODO 待修改
-        quoteList.put(quote.getDateTime() + quote.getQuotePrice().longValue(), quote);
-        // 存入缓存
-        iCacheService.setObjectByKey(CacheConstant.CACHEKEY_STOCK_QUOTE_BUYQUEUE, quote.getStockId(), quoteList, 8 * 60 * 60);
 
         Object stockIdListObj = iCacheService.getObjectByKey(CacheConstant.CACHEKEY_QUEUE_STOCKID_LIST, null);
         if (stockIdListObj != null) {
@@ -289,9 +302,36 @@ public class StQuoteServiceImpl implements StQuoteService {
     }
 
     @Override
-    public boolean deleteQuoteFromQueue(StQuote stQuote) {
-        // 从队列中删除报价，同时修改报价状态 TODO 待实现
-        return false;
+    public boolean deleteQuoteFromQueue(StQuote quote) {
+        // 从队列中删除报价，同时修改报价状态
+        Object quoteobj = null;
+        ConcurrentSkipListMap<Long, StQuote> quoteList = null;
+        if (quote.getQuoteType().intValue() == ApplicationConstants.STOCK_QUOTETYPE_BUY) {
+            quoteobj = iCacheService.getObjectByKey(CacheConstant.CACHEKEY_STOCK_QUOTE_BUYQUEUE, quote.getStockId(), null);
+            if (quoteobj!=null) {
+                quoteList = (ConcurrentSkipListMap<Long, StQuote>)iCacheService.getObjectByKey(CacheConstant.CACHEKEY_STOCK_QUOTE_BUYQUEUE, quote.getStockId(), null);
+            } else {
+                quoteList = new ConcurrentSkipListMap<Long, StQuote>();
+            }
+            Long quotePriceForSort = -1 * Long.parseLong("100000000") * (long)(quote.getQuotePrice().doubleValue()*100) + quote.getTimeSort();
+//            quote.setQuotePriceForSort(quotePriceForSort);
+            quoteList.remove(quotePriceForSort);
+            // 存入缓存
+            iCacheService.setObjectByKey(CacheConstant.CACHEKEY_STOCK_QUOTE_BUYQUEUE, quote.getStockId(), quoteList, 8 * 60 * 60);
+        } else {
+            if (quoteobj!=null) {
+                quoteList = (ConcurrentSkipListMap<Long, StQuote>)iCacheService.getObjectByKey(CacheConstant.CACHEKEY_STOCK_QUOTE_BUYQUEUE, quote.getStockId(), null);
+            } else {
+                quoteList = new ConcurrentSkipListMap<Long, StQuote>();
+            }
+            quoteobj = iCacheService.getObjectByKey(CacheConstant.CACHEKEY_STOCK_QUOTE_SELLQUEUE, quote.getStockId(), null);
+            Long quotePriceForSort = Long.parseLong("100000000") * (long)(quote.getQuotePrice().doubleValue()*100) + quote.getTimeSort();
+            quote.setQuotePriceForSort(quotePriceForSort);
+            quoteList.remove(quotePriceForSort);
+            // 存入缓存
+            iCacheService.setObjectByKey(CacheConstant.CACHEKEY_STOCK_QUOTE_SELLQUEUE, quote.getStockId(), quoteList, 8 * 60 * 60);
+        }
+        return true;
     }
 
     @Override

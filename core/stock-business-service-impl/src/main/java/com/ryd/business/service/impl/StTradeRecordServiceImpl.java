@@ -17,10 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -152,12 +149,16 @@ public class StTradeRecordServiceImpl implements StTradeRecordService {
 
     @Override
     public List<StTradeRecord> findTradeRecordListByStock(SearchTradeRecordDTO searchTradeRecordDTO) {
-        return null;
+        List<StTradeRecord> stTradeRecordList = null;
+        // 单只股票的交易记录列表
+        if (iCacheService.getObjectByKey(CacheConstant.CACHEKEY_TRADERECORDLIST_STOCKID, searchTradeRecordDTO.getStockId(), null)!=null) {
+            stTradeRecordList = (LinkedList<StTradeRecord>)iCacheService.getObjectByKey(CacheConstant.CACHEKEY_TRADERECORDLIST_STOCKID, searchTradeRecordDTO.getStockId(), null);
+        }
+        return stTradeRecordList;
     }
 
     @Override
     public List<StTradeRecord> findTradeRecordList(SearchTradeRecordDTO searchTradeRecordDTO) {
-
         StTradeRecord record = new StTradeRecord();
         record.setSellerAccountId(searchTradeRecordDTO.getAccountId());
         record.setStockId(searchTradeRecordDTO.getStockId());
@@ -220,6 +221,26 @@ public class StTradeRecordServiceImpl implements StTradeRecordService {
             record.setDateTime(System.currentTimeMillis());
 
             stTradeRecordDao.add(record);
+
+            // 更新交易记录到缓存,总的交易记录列表
+            LinkedList<StTradeRecord> stTradeRecordList = null;
+            if (iCacheService.getObjectByKey(CacheConstant.CACHEKEY_TRADERECORDLIST, null)!=null) {
+                stTradeRecordList = (LinkedList<StTradeRecord>)iCacheService.getObjectByKey(CacheConstant.CACHEKEY_TRADERECORDLIST, null);
+                if (stTradeRecordList.size()>20) {
+                    stTradeRecordList.removeFirst();
+                }
+                stTradeRecordList.add(record);
+                iCacheService.setObjectByKey(CacheConstant.CACHEKEY_TRADERECORDLIST, stTradeRecordList);
+            }
+            // 单只股票的交易记录列表
+            if (iCacheService.getObjectByKey(CacheConstant.CACHEKEY_TRADERECORDLIST_STOCKID, record.getStockId(), null)!=null) {
+                stTradeRecordList = (LinkedList<StTradeRecord>)iCacheService.getObjectByKey(CacheConstant.CACHEKEY_TRADERECORDLIST_STOCKID, record.getStockId(), null);
+                if (stTradeRecordList.size()>20) {
+                    stTradeRecordList.removeFirst();
+                }
+                stTradeRecordList.add(record);
+                iCacheService.setObjectByKey(CacheConstant.CACHEKEY_TRADERECORDLIST, record.getStockId(), stTradeRecordList, 60*60);
+            }
 
             //添加资金流水
             List<StMoneyJournal> moneyJournals = new ArrayList<StMoneyJournal>();

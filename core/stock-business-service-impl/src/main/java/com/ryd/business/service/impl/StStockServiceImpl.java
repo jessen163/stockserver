@@ -1,5 +1,7 @@
 package com.ryd.business.service.impl;
 
+import com.ryd.basecommon.util.CacheConstant;
+import com.ryd.basecommon.util.StringUtils;
 import com.ryd.business.dao.StStockDao;
 import com.ryd.business.dto.SearchStockDTO;
 import com.ryd.business.dto.StStockDetailDTO;
@@ -13,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -45,38 +48,51 @@ public class StStockServiceImpl implements StStockService {
 
         List<StStockConfig> list = stStockConfigService.findStockConfig(null, 1, Integer.MAX_VALUE);
         final CountDownLatch cdAnswer = new CountDownLatch(list.size());
-
-        // 执行命令
-        cdOrder.countDown();
-
         StringBuffer stockCodeStringBuffer = new StringBuffer();
         for (StStockConfig stock: list) {
             stockCodeStringBuffer.append(stock.getStockTypeName()+stock.getStockCode()).append(",");
         }
-        // 同步股票信息，同时生成马甲订单
+        // 同步股票信息
         stockService.execute(new SyncStockThread(stockCodeStringBuffer.toString(), iCacheService, cdOrder, cdAnswer, this));
-        try {
-            // 等待任务执行完成
-            cdAnswer.await();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        return false;
+        return true;
     }
 
     @Override
     public List<StStock> findStockList(SearchStockDTO searchStockDTO) {
-        return null;
+        List<StStock> stockList = null;
+        if (iCacheService.getObjectByKey(CacheConstant.CACHEKEY_STOCK_PRICELIST, null)!=null) {
+            stockList = (List<StStock>)iCacheService.getObjectByKey(CacheConstant.CACHEKEY_STOCK_PRICELIST, null);
+        }
+        if (stockList==null) {
+            stockList = stStockDao.findStStockListCurrentTime(searchStockDTO);
+        }
+        return stockList;
     }
 
     @Override
     public StStock findStockListByStock(SearchStockDTO searchStockDTO) {
-        // 返回前一天的收盘价
-        return null;
+        StStock stStock = null;
+        StStockConfig stockConfig = null;
+        if (iCacheService.getObjectByKey(CacheConstant.CACHEKEY_STOCKCONFIGLIST_MAP, searchStockDTO.getStockId(), null)!=null) {
+            stockConfig = (StStockConfig)iCacheService.getObjectByKey(CacheConstant.CACHEKEY_STOCKCONFIGLIST_MAP, searchStockDTO.getStockId(), null);
+        }
+        if (stockConfig!=null&&stockConfig.getStockCode()!=null) {
+            // 返回前一天的收盘价
+            if (iCacheService.getObjectByKey(CacheConstant.CACHEKEY_STOCK_PRICEMAP, searchStockDTO.getStockId(), null)!=null) {
+                stStock = (StStock)iCacheService.getObjectByKey(CacheConstant.CACHEKEY_STOCK_PRICEMAP, searchStockDTO.getStockId(), null);
+            }
+        }
+        return stStock;
     }
 
     @Override
     public StStockDetailDTO findStockDetailByStock(SearchStockDTO searchStockDTO) {
-        return null;
+        StStockDetailDTO stStockDetailDTO = new StStockDetailDTO();
+        StStock stStock = this.findStockListByStock(searchStockDTO);
+        if (!StringUtils.isEmpty(stStock)) {
+            stStockDetailDTO.setStStock(stStock);
+        }
+        // TODO 增加股票价格、增加股票成交量
+        return stStockDetailDTO;
     }
 }
