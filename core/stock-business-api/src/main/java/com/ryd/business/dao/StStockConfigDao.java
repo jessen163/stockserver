@@ -3,6 +3,8 @@ package com.ryd.business.dao;
 import com.ryd.basecommon.dao.BaseDao;
 import com.ryd.business.model.StStockConfig;
 
+import java.util.List;
+
 /**
  * <p>标题:股票配置Dao</p>
  * <p>描述:股票配置Dao</p>
@@ -12,4 +14,5 @@ import com.ryd.business.model.StStockConfig;
  */
 public interface StStockConfigDao extends BaseDao<StStockConfig>{
 
+    public int addBatch(List<StStockConfig> list);
 }
