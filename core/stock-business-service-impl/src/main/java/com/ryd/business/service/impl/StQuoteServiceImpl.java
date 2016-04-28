@@ -174,7 +174,7 @@ public class StQuoteServiceImpl implements StQuoteService {
 
         Long startTime = searchQuoteDTO.getQuoteStartDate().getTime();
         Long endTime = searchQuoteDTO.getQuoteEndDate().getTime();
-        List<StQuote> quoteList = stQuoteDao.getStQuoteList(stQuote, startTime, endTime, searchQuoteDTO.getLimit(), searchQuoteDTO.getOffset());
+        List<StQuote> quoteList = stQuoteDao.getTList(stQuote, startTime, endTime, searchQuoteDTO.getLimit(), searchQuoteDTO.getOffset());
         return quoteList;
     }
 
