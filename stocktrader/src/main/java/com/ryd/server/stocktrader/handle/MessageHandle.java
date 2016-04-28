@@ -2,6 +2,7 @@ package com.ryd.server.stocktrader.handle;
 
 import com.ryd.basecommon.protocol.protobuf.DiyNettyMessage;
 import com.ryd.basecommon.util.ApplicationConstants;
+import com.ryd.basecommon.util.SpringUtils;
 import com.ryd.business.model.StAccount;
 import com.ryd.business.service.StAccountService;
 import com.ryd.business.service.impl.StAccountServiceImpl;
@@ -15,7 +16,12 @@ import io.netty.channel.ChannelHandlerContext;
 public class MessageHandle {
     public static ChannelHandlerContext ctx;
 
-    private static StAccountService stAccountService = new StAccountServiceImpl();
+    private static StAccountService stAccountService = null;
+
+    static {
+        stAccountService = SpringUtils.getBean(StAccountService.class, "stAccountServiceImpl");
+    }
+
     /**
      * 处理客户端消息
      * @param request
@@ -23,10 +29,12 @@ public class MessageHandle {
      */
     public static DiyNettyMessage.NettyMessage handleClientRequestInfo(DiyNettyMessage.NettyMessage request) {
         DiyNettyMessage.NettyMessage.Builder builder = DiyNettyMessage.NettyMessage.newBuilder();
+        builder.setKey("0");
         switch (request.getId()){
             case ApplicationConstants.NETTYMESSAGE_ID_HEARTBEAT:
                 builder.setId(request.getId());
                 builder.setStatus(ApplicationConstants.NETTYMESSAGE_STATUS_RESPONSE_SUCCESS);
+                StAccount account = stAccountService.findStAccount("test", "1234");
                 break;
             case ApplicationConstants.NETTYMESSAGE_ID_STOCKINFO:
                 break;
@@ -34,7 +42,7 @@ public class MessageHandle {
                 break;
             case ApplicationConstants.NETTYMESSAGE_ID_LOGIN:
                 DiyNettyMessage.AccountInfo acc = request.getAccountInfoList().get(0);
-                StAccount account = stAccountService.findStAccount(acc.getAccountNum(), acc.getPassword());
+                account = stAccountService.findStAccount(acc.getAccountNum(), acc.getPassword());
 
                 builder.setId(request.getId());
                 builder.addAccountInfo(DiyNettyMessage.AccountInfo.newBuilder().setAccountId(account.getId()).setAccountNum(account.getAccountNum()));
