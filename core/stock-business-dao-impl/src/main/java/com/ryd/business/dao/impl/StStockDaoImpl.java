@@ -4,6 +4,7 @@ import com.bugull.mongo.BuguDao;
 import com.mongodb.WriteResult;
 import com.ryd.basecommon.dao.BaseDao;
 import com.ryd.business.dao.StStockDao;
+import com.ryd.business.dto.SearchStockDTO;
 import com.ryd.business.model.StStock;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Repository;
@@ -61,5 +62,11 @@ public class StStockDaoImpl extends BuguDao<StStock> implements StStockDao {
     public boolean saveStockBatch(List<StStock> stStockList) {
         WriteResult result = super.insert(stStockList);
         return result.getN() == stStockList.size();
+    }
+
+    @Override
+    public List<StStock> findStStockListCurrentTime(SearchStockDTO searchStockDTO) {
+        // TODO 待修改
+        return super.findAll(1, Integer.MAX_VALUE);
     }
 }
