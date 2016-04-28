@@ -91,7 +91,7 @@ public class StQuoteServiceImpl implements StQuoteService {
             SearchStockDTO sdto = new SearchStockDTO();
             sdto.setStockId(quote.getStockId());
             StStock stock = stStockService.findStockListByStock(sdto);
-            if (!isStockQuotePriceInScope(stock.getBfclosePrice(), quote.getQuotePrice())) {
+            if (!isStockQuotePriceInScope(BigDecimal.valueOf(stock.getBfclosePrice()), quote.getQuotePrice())) {
                 // 超出涨跌幅
                 return -3;
             }

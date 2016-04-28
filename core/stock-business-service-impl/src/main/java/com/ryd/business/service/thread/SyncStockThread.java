@@ -82,7 +82,7 @@ public class SyncStockThread implements Runnable {
 //        } catch (InterruptedException e) {
 //            e.printStackTrace();
         } finally {
-            cdAnswer.countDown();
+//            cdAnswer.countDown();
         }
     }
 
@@ -114,37 +114,37 @@ public class SyncStockThread implements Runnable {
 //            sts.setStockId(stockCode);
             sts.setStockCode(stockCode.substring(2));// 获取股票代码
             sts.setStockName(sk[0]);
-            sts.setOpenPrice(BigDecimal.valueOf(Double.parseDouble(sk[1])));
-            sts.setBfclosePrice(BigDecimal.valueOf(Double.parseDouble(sk[2])));
-            sts.setCurrentPrice(BigDecimal.valueOf(Double.parseDouble(sk[3])));
-            sts.setMaxPrice(BigDecimal.valueOf(Double.parseDouble(sk[4])));
-            sts.setMinPrice(BigDecimal.valueOf(Double.parseDouble(sk[5])));
-            sts.setBiddingBuyPrice(BigDecimal.valueOf(Double.parseDouble(sk[6])));
-            sts.setBiddingSellPrice(BigDecimal.valueOf(Double.parseDouble(sk[7])));
+            sts.setOpenPrice(Double.parseDouble(sk[1]));
+            sts.setBfclosePrice(Double.parseDouble(sk[2]));
+            sts.setCurrentPrice(Double.parseDouble(sk[3]));
+            sts.setMaxPrice(Double.parseDouble(sk[4]));
+            sts.setMinPrice(Double.parseDouble(sk[5]));
+            sts.setBiddingBuyPrice(Double.parseDouble(sk[6]));
+            sts.setBiddingSellPrice(Double.parseDouble(sk[7]));
             sts.setTradeAmount(Long.valueOf(sk[8]));
-            sts.setTradeMoney(BigDecimal.valueOf(Double.parseDouble(sk[9])));
+            sts.setTradeMoney(Double.parseDouble(sk[9]));
 
             sts.setBuyOneAmount(Long.valueOf(sk[10]));
-            sts.setBuyOnePrice(BigDecimal.valueOf(Double.parseDouble(sk[11])));
+            sts.setBuyOnePrice(Double.parseDouble(sk[11]));
             sts.setBuyTwoAmount(Long.valueOf(sk[12]));
-            sts.setBuyTwoPrice(BigDecimal.valueOf(Double.parseDouble(sk[13])));
+            sts.setBuyTwoPrice(Double.parseDouble(sk[13]));
             sts.setBuyThreeAmount(Long.valueOf(sk[14]));
-            sts.setBuyThreePrice(BigDecimal.valueOf(Double.parseDouble(sk[15])));
+            sts.setBuyThreePrice(Double.parseDouble(sk[15]));
             sts.setBuyFourAmount(Long.valueOf(sk[16]));
-            sts.setBuyFourPrice(BigDecimal.valueOf(Double.parseDouble(sk[17])));
+            sts.setBuyFourPrice(Double.parseDouble(sk[17]));
             sts.setBuyFiveAmount(Long.valueOf(sk[18]));
-            sts.setBuyFivePrice(BigDecimal.valueOf(Double.parseDouble(sk[19])));
+            sts.setBuyFivePrice(Double.parseDouble(sk[19]));
 
             sts.setSellOneAmount(Long.valueOf(sk[20]));
-            sts.setSellOnePrice(BigDecimal.valueOf(Double.parseDouble(sk[21])));
+            sts.setSellOnePrice(Double.parseDouble(sk[21]));
             sts.setSellTwoAmount(Long.valueOf(sk[22]));
-            sts.setSellTwoPrice(BigDecimal.valueOf(Double.parseDouble(sk[23])));
+            sts.setSellTwoPrice(Double.parseDouble(sk[23]));
             sts.setSellThreeAmount(Long.valueOf(sk[24]));
-            sts.setSellThreePrice(BigDecimal.valueOf(Double.parseDouble(sk[25])));
+            sts.setSellThreePrice(Double.parseDouble(sk[25]));
             sts.setSellFourAmount(Long.valueOf(sk[26]));
-            sts.setSellFourPrice(BigDecimal.valueOf(Double.parseDouble(sk[27])));
+            sts.setSellFourPrice(Double.parseDouble(sk[27]));
             sts.setSellFiveAmount(Long.valueOf(sk[28]));
-            sts.setSellFivePrice(BigDecimal.valueOf(Double.parseDouble(sk[29])));
+            sts.setSellFivePrice(Double.parseDouble(sk[29]));
         }
         return sts;
     }
@@ -153,7 +153,7 @@ public class SyncStockThread implements Runnable {
      * 生成马甲盘,同时将实时价格放入缓存，缓存10分钟
      */
     public boolean addSimulationQuote(List<StStock> stockList) {
-        BigDecimal[] priceArr = new BigDecimal[10];
+        double[] priceArr = new double[10];
         long[] amountArr = new long[10];
         short[] typeArr = new short[10];
         // 模拟订单
@@ -197,7 +197,7 @@ public class SyncStockThread implements Runnable {
             typeArr[9] = ApplicationConstants.STOCK_QUOTETYPE_SELL;
 
             for (int i = 0; i< priceArr.length; i++) {
-                if (amountArr[i]==0||priceArr[i]==null||typeArr[i]==0) continue;
+                if (amountArr[i]==0||priceArr[i]==0||typeArr[i]==0) continue;
                 SimulationQuoteDTO s = new SimulationQuoteDTO();
                 s.setStockId(stStock.getStockId());
                 s.setQuotePrice(priceArr[i]);
