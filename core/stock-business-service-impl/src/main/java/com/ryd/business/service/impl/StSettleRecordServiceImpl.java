@@ -10,6 +10,7 @@ import com.ryd.cache.service.ICacheService;
 import com.ryd.system.service.StDateScheduleService;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.concurrent.ConcurrentSkipListMap;
@@ -21,6 +22,7 @@ import java.util.concurrent.ConcurrentSkipListMap;
  * 创建人：songby
  * 创建时间：2016/4/26 15:20
  */
+@Service
 public class StSettleRecordServiceImpl implements StSettleRecordService {
 
     @Autowired

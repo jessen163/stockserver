@@ -5,6 +5,7 @@ import com.ryd.business.dto.SearchMoneyJournalDTO;
 import com.ryd.business.model.StMoneyJournal;
 import com.ryd.business.service.StMoneyJournalService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -15,6 +16,7 @@ import java.util.List;
  * 创建人：songby
  * 创建时间：2016/4/27 18:00
  */
+@Service
 public class StMoneyJournalServiceImpl implements StMoneyJournalService {
 
     @Autowired

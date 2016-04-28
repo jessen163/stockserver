@@ -24,7 +24,7 @@ public class InitMongoDBListener implements ServletContextListener {
 
         //连接数据库
         BuguConnection conn = BuguFramework.getInstance().createConnection();
-        conn.connect(mongoIp, mongoPort, mongoDBName, mongoUsername, mongoPassword);
+        conn.connect(mongoIp, mongoPort, mongoDBName); // , mongoUsername, mongoPassword
     }
 
     @Override
