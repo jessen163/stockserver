@@ -94,6 +94,7 @@ public class StQuoteServiceImpl implements StQuoteService {
         // 账户金额是否够用
         for (StQuote quote: quoteList) {
             boolean rs=false;
+            quote.setCurrentAmount(quote.getAmount());
             //买股票
             if (quote.getQuoteType().shortValue() == ApplicationConstants.STOCK_QUOTETYPE_BUY.shortValue()) {
 
