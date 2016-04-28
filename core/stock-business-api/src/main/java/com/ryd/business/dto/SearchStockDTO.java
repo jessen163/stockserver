@@ -12,10 +12,20 @@ import java.io.Serializable;
 public class SearchStockDTO implements Serializable {
 
     private String stockId;
+    // 板块
+    private int boardType;
     // 账户
     // 开始时间
     // 结束时间
     // 等参数
+
+    public int getBoardType() {
+        return boardType;
+    }
+
+    public void setBoardType(int boardType) {
+        this.boardType = boardType;
+    }
 
     public String getStockId() {
         return stockId;
