@@ -1,6 +1,7 @@
 package com.ryd.business.service;
 
 import com.ryd.business.dto.SearchStockDTO;
+import com.ryd.business.dto.StStockDetailDTO;
 import com.ryd.business.model.StStock;
 
 import java.util.List;
@@ -39,4 +40,12 @@ public interface StStockService {
      * @return
      */
     public StStock findStockListByStock(SearchStockDTO searchStockDTO);
+
+    /**
+     * 获取单只股票的信息-分时股价列表、实时资金流入流出列表、当日成交价、成交量
+     *
+     * @param searchStockDTO
+     * @return
+     */
+    public StStockDetailDTO findStockDetailByStock(SearchStockDTO searchStockDTO);
 }
