@@ -2,6 +2,9 @@ package com.ryd.server.stocktrader.handle;
 
 import com.ryd.basecommon.protocol.protobuf.DiyNettyMessage;
 import com.ryd.basecommon.util.ApplicationConstants;
+import com.ryd.business.model.StAccount;
+import com.ryd.business.service.StAccountService;
+import com.ryd.business.service.impl.StAccountServiceImpl;
 import io.netty.channel.ChannelHandlerContext;
 
 /**
@@ -12,6 +15,7 @@ import io.netty.channel.ChannelHandlerContext;
 public class MessageHandle {
     public static ChannelHandlerContext ctx;
 
+    private static StAccountService stAccountService = new StAccountServiceImpl();
     /**
      * 处理客户端消息
      * @param request
@@ -29,6 +33,11 @@ public class MessageHandle {
             case ApplicationConstants.NETTYMESSAGE_ID_STOCKPRICEDETAIL:
                 break;
             case ApplicationConstants.NETTYMESSAGE_ID_LOGIN:
+                DiyNettyMessage.AccountInfo acc = request.getAccountInfoList().get(0);
+                StAccount account = stAccountService.findStAccount(acc.getAccountNum(), acc.getPassword());
+
+                builder.setId(request.getId());
+                builder.addAccountInfo(DiyNettyMessage.AccountInfo.newBuilder().setAccountId(account.getId()).setAccountNum(account.getAccountNum()));
                 break;
             case ApplicationConstants.NETTYMESSAGE_ID_QUOTE:
                 break;
