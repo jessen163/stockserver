@@ -1,12 +1,18 @@
 package com.ryd.business.service.impl;
 
+import com.ryd.basecommon.util.CacheConstant;
+import com.ryd.basecommon.util.StringUtils;
 import com.ryd.business.dao.StStockConfigDao;
 import com.ryd.business.model.StStockConfig;
 import com.ryd.business.service.StStockConfigService;
+import com.ryd.cache.service.ICacheService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>标题:股票配置业务实现类</p>
@@ -19,18 +25,45 @@ import java.util.List;
 public class StStockConfigServiceImpl implements StStockConfigService {
     @Autowired
     private StStockConfigDao stStockConfigDao;
+    @Autowired
+    private ICacheService iCacheService;
 
     @Override
     public List<StStockConfig> findStockConfig(StStockConfig stStockConfig, int pageIndex, int limit) {
-        // TODO 放入缓存
-        int offset = (pageIndex-1)*limit;
-        List<StStockConfig> stStockConfigList = stStockConfigDao.getTList(stStockConfig, null, null, limit, offset);
+        List<StStockConfig> stStockConfigList = null;
+        if (iCacheService.getObjectByKey(CacheConstant.CACHEKEY_STOCKCONFIGLIST, null)!=null) {
+            stStockConfigList = (List<StStockConfig>)iCacheService.getObjectByKey(CacheConstant.CACHEKEY_STOCKCONFIGLIST, null);
+        } else {
+            int offset = (pageIndex-1)*limit;
+            stStockConfigList = stStockConfigDao.getTList(null, null, null, limit, offset);
+
+            if (!StringUtils.isEmpty(stStockConfigList)) {
+                iCacheService.setObjectByKey(CacheConstant.CACHEKEY_STOCKCONFIGLIST, stStockConfigList);
+                Map<String, StStockConfig> stockMap = new HashMap<String, StStockConfig>();
+                List<String> stockIdList = new ArrayList<String>();
+                for (StStockConfig stock: stStockConfigList) {
+                    stockMap.put(stock.getId(), stock);
+                    stockIdList.add(stock.getStockCode()+":"+stock.getStockTypeName());
+                }
+                iCacheService.setObjectByKey(CacheConstant.CACHEKEY_STOCKCONFIGLIST_MAP, stockMap);
+                iCacheService.setObjectByKey(CacheConstant.CACHEKEY_QUEUE_STOCKID_LIST, stockIdList);
+            }
+        }
+
         return stStockConfigList;
     }
 
     @Override
     public StStockConfig findStockConfigById(StStockConfig stStockConfig) {
-        // TODO 从缓存获取
-        return stStockConfigDao.getTById(stStockConfig.getId());
+        Map<String, StStockConfig> stockMap = null;
+        if (iCacheService.getObjectByKey(CacheConstant.CACHEKEY_STOCKCONFIGLIST_MAP, null)!=null) {
+            stockMap = (Map<String, StStockConfig>)iCacheService.getObjectByKey(CacheConstant.CACHEKEY_STOCKCONFIGLIST, null);
+        }
+        if (stockMap==null||stockMap.get(stStockConfig.getId())==null){
+            this.findStockConfig(null, 0, Integer.MAX_VALUE);
+            stStockConfig = stStockConfigDao.getTById(stStockConfig.getId());
+        }
+
+        return stStockConfig;
     }
 }

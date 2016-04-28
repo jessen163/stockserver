@@ -53,4 +53,12 @@ public class CacheConstant {
     // 缓存key-队列中的股票信息
     public static final String CACHEKEY_QUEUE_STOCKID_LIST  = "queueStockIdList_";
 
+
+    // 缓存key-股票列表信息
+    public static final String CACHEKEY_STOCKCONFIGLIST  = "stockConfigList";
+    // 缓存key-股票列表信息-MAP集合
+    public static final String CACHEKEY_STOCKCONFIGLIST_MAP  = "stockConfigListMap";
+    // 缓存key-股票ID信息-MAP集合
+    public static final String CACHEKEY_STOCKCONFIGID_LIST  = "stockConfigIdList";
+
 }
