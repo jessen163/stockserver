@@ -10,7 +10,7 @@ import java.math.BigDecimal;
 public class SimulationQuoteDTO implements Serializable {
     private String stockId;
     //申报价格
-    private BigDecimal quotePrice;
+    private double quotePrice;
     //申报股票数量
     private Long amount;
     //报价类型 1。买入 2。卖出
@@ -28,11 +28,11 @@ public class SimulationQuoteDTO implements Serializable {
         this.stockId = stockId;
     }
 
-    public BigDecimal getQuotePrice() {
+    public double getQuotePrice() {
         return quotePrice;
     }
 
-    public void setQuotePrice(BigDecimal quotePrice) {
+    public void setQuotePrice(double quotePrice) {
         this.quotePrice = quotePrice;
     }
 

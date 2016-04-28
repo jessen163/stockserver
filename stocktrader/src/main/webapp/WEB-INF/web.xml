@@ -13,7 +13,7 @@
     <!-- mongo 数据库连接参数 start -->
     <context-param>
         <param-name>mongo.ip</param-name>
-        <param-value>192.168.5.61</param-value>
+        <param-value>101.200.167.122</param-value>
     </context-param>
     <context-param>
         <param-name>mongo.port</param-name>

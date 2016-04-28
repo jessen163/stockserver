@@ -37,6 +37,24 @@ public class StQuote  implements Serializable {
     private Short userType;
     //报价时间
     private Long dateTime;
+    private Long timeSort; // 用于时间排序
+    private Long quotePriceForSort; // 用于排序
+
+    public Long getTimeSort() {
+        return timeSort;
+    }
+
+    public void setTimeSort(Long timeSort) {
+        this.timeSort = timeSort;
+    }
+
+    public Long getQuotePriceForSort() {
+        return quotePriceForSort;
+    }
+
+    public void setQuotePriceForSort(Long quotePriceForSort) {
+        this.quotePriceForSort = quotePriceForSort;
+    }
 
     public String getQuoteId() {
         return quoteId;
