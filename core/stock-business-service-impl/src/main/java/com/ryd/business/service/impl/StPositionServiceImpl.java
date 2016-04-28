@@ -73,6 +73,11 @@ public class StPositionServiceImpl implements StPositionService {
 
     @Override
     public List<StPosition> findPositionList(SearchPositionDTO searchPositionDTO) {
-        return null;
+        StPosition stPosition = new StPosition();
+        stPosition.setAccountId(searchPositionDTO.getAccountId());
+        stPosition.setStockId(searchPositionDTO.getStockId());
+        stPosition.setStatus(searchPositionDTO.getStatus());
+
+        return stPositionDao.getTList(stPosition,null,null, searchPositionDTO.getLimit(), searchPositionDTO.getOffset());
     }
 }
