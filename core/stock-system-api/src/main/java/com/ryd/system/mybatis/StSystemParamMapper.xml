@@ -21,7 +21,7 @@
     from st_system_param
     where id = #{id,jdbcType=CHAR}
   </select>
-  <select id="selectByKey" parameterType="java.lang.String" resultMap="java.lang.String">
+  <select id="selectByKey" parameterType="java.lang.String" resultType="java.lang.String">
     select key_value from st_system_param
     where key_name = #{key,jdbcType=VARCHAR}
   </select>
