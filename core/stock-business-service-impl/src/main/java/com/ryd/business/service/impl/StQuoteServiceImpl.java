@@ -122,12 +122,17 @@ public class StQuoteServiceImpl implements StQuoteService {
             }
             if(rs) {
                 // 添加报价到队列，同时保存到数据库 失败后回滚
-                this.addQuoteToQueue(quote);
-            }
+                boolean ars = addQuoteToQueue(quote);
 
+                if(ars) {
+                    quoteFlag = 1;
+                }else{
+                    quoteFlag = -9;
+                }
+            }
         }
 
-        return quoteList.size();
+        return quoteFlag;
     }
 
     @Override
