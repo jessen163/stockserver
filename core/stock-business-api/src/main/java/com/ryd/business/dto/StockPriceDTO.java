@@ -8,15 +8,15 @@ import java.io.Serializable;
  */
 public class StockPriceDTO implements Serializable {
     // 交易价格
-    private long tradePrice;
+    private double tradePrice;
     // 交易时间 格式 HH:mm:ss
     private String tradeTime;
 
-    public long getTradePrice() {
+    public double getTradePrice() {
         return tradePrice;
     }
 
-    public void setTradePrice(long tradePrice) {
+    public void setTradePrice(double tradePrice) {
         this.tradePrice = tradePrice;
     }
 
