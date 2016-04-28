@@ -1,7 +1,9 @@
 package com.ryd.business.service.thread;
 
 import com.ryd.basecommon.util.ApplicationConstants;
+import com.ryd.basecommon.util.CacheConstant;
 import com.ryd.basecommon.util.HttpclientUtil;
+import com.ryd.business.dto.SimulationQuoteDTO;
 import com.ryd.business.model.StStock;
 import com.ryd.business.service.StQuoteService;
 import com.ryd.business.service.StStockService;
@@ -69,6 +71,7 @@ public class SyncStockThread implements Runnable {
 
             // 保存股票价格等信息
             stStockService.saveStockBatch(stockList);
+            addSimulationQuote(stockList);
 //            if (stStockList.size() == 5) {
 //                stStockList.removeFirst();
 //            }
@@ -147,62 +150,63 @@ public class SyncStockThread implements Runnable {
     }
 
     /**
-     * 生成马甲盘
+     * 生成马甲盘,同时将实时价格放入缓存，缓存10分钟
      */
-    /*public boolean quotePriceBySimulation(List<StAccount> stAccountList, StStock stStock) {
-        if (stAccountList.isEmpty()) return false;
-        StAccount account = stAccountList.get(0);
+    public boolean addSimulationQuote(List<StStock> stockList) {
+        BigDecimal[] priceArr = new BigDecimal[10];
+        long[] amountArr = new long[10];
+        short[] typeArr = new short[10];
+        // 模拟订单
+        List<SimulationQuoteDTO> simulationQuoteDTOList = new ArrayList<SimulationQuoteDTO>();
+        for (StStock stStock : stockList) {
+            // 将实时价格放入缓存  6分钟
+            cacheService.setObjectByKey(CacheConstant.CACHEKEY_STOCK_PRICELIST, stStock.getStockCode(), stStock, 60*10);
+            priceArr[0]=stStock.getBuyOnePrice();
+            priceArr[1]=stStock.getBuyTwoPrice();
+            priceArr[2]=stStock.getBuyThreePrice();
+            priceArr[3]=stStock.getBuyFourPrice();
+            priceArr[4]=stStock.getBuyFivePrice();
+            priceArr[5]=stStock.getSellOnePrice();
+            priceArr[6]=stStock.getSellTwoPrice();
+            priceArr[7]=stStock.getSellThreePrice();
+            priceArr[8]=stStock.getSellFourPrice();
+            priceArr[9]=stStock.getSellFivePrice();
 
-        double[] priceArr = new double[10];
-        int[] amountArr = new int[10];
-        int[] typeArr = new int[10];
+            amountArr[0]=stStock.getBuyOneAmount();
+            amountArr[1]=stStock.getBuyTwoAmount();
+            amountArr[2]=stStock.getBuyThreeAmount();
+            amountArr[3]=stStock.getBuyFourAmount();
+            amountArr[4]=stStock.getBuyFiveAmount();
+            amountArr[5]=stStock.getSellOneAmount();
+            amountArr[6]=stStock.getSellTwoAmount();
+            amountArr[7]=stStock.getSellThreeAmount();
+            amountArr[8]=stStock.getSellFourAmount();
+            amountArr[9]=stStock.getSellFiveAmount();
 
-        priceArr[0]=stStock.getBuyOnePrice();
-        priceArr[1]=stStock.getBuyTwoPrice();
-        priceArr[2]=stStock.getBuyThreePrice();
-        priceArr[3]=stStock.getBuyFourPrice();
-        priceArr[4]=stStock.getBuyFivePrice();
-        priceArr[5]=stStock.getSellOnePrice();
-        priceArr[6]=stStock.getSellTwoPrice();
-        priceArr[7]=stStock.getSellThreePrice();
-        priceArr[8]=stStock.getSellFourPrice();
-        priceArr[9]=stStock.getSellFivePrice();
+            typeArr[0] = ApplicationConstants.STOCK_QUOTETYPE_BUY;
+            typeArr[1] = ApplicationConstants.STOCK_QUOTETYPE_BUY;;
+            typeArr[2] = ApplicationConstants.STOCK_QUOTETYPE_BUY;;
+            typeArr[3] = ApplicationConstants.STOCK_QUOTETYPE_BUY;;
+            typeArr[4] = ApplicationConstants.STOCK_QUOTETYPE_BUY;;
+            typeArr[5] = ApplicationConstants.STOCK_QUOTETYPE_SELL;
+            typeArr[6] = ApplicationConstants.STOCK_QUOTETYPE_SELL;
+            typeArr[7] = ApplicationConstants.STOCK_QUOTETYPE_SELL;
+            typeArr[8] = ApplicationConstants.STOCK_QUOTETYPE_SELL;
+            typeArr[9] = ApplicationConstants.STOCK_QUOTETYPE_SELL;
 
-        amountArr[0]=stStock.getBuyOneAmount();
-        amountArr[1]=stStock.getBuyTwoAmount();
-        amountArr[2]=stStock.getBuyThreeAmount();
-        amountArr[3]=stStock.getBuyFourAmount();
-        amountArr[4]=stStock.getBuyFiveAmount();
-        amountArr[5]=stStock.getSellOneAmount();
-        amountArr[6]=stStock.getSellTwoAmount();
-        amountArr[7]=stStock.getSellThreeAmount();
-        amountArr[8]=stStock.getSellFourAmount();
-        amountArr[9]=stStock.getSellFiveAmount();
-
-        typeArr[0] = Constant.STOCK_STQUOTE_TYPE_BUY;
-        typeArr[1] = Constant.STOCK_STQUOTE_TYPE_BUY;
-        typeArr[2] = Constant.STOCK_STQUOTE_TYPE_BUY;
-        typeArr[3] = Constant.STOCK_STQUOTE_TYPE_BUY;
-        typeArr[4] = Constant.STOCK_STQUOTE_TYPE_BUY;
-        typeArr[5] = Constant.STOCK_STQUOTE_TYPE_SELL;
-        typeArr[6] = Constant.STOCK_STQUOTE_TYPE_SELL;
-        typeArr[7] = Constant.STOCK_STQUOTE_TYPE_SELL;
-        typeArr[8] = Constant.STOCK_STQUOTE_TYPE_SELL;
-        typeArr[9] = Constant.STOCK_STQUOTE_TYPE_SELL;
-
-        for (int i = 0; i< priceArr.length; i++) {
-            if (amountArr[i]==0||priceArr[i]==0||typeArr[i]==0) continue;
-
-            StQuote s = new StQuote();
-            s.setAccountId(account.getAccountId());
-            s.setStockId(stStock.getStockId());
-            s.setQuotePrice(priceArr[i]);
-            s.setAmount(amountArr[i]);
-            s.setType(typeArr[i]);
-            s.setDateTime(System.currentTimeMillis());
-            this.quotePrice(s);
+            for (int i = 0; i< priceArr.length; i++) {
+                if (amountArr[i]==0||priceArr[i]==null||typeArr[i]==0) continue;
+                SimulationQuoteDTO s = new SimulationQuoteDTO();
+                s.setStockId(stStock.getStockId());
+                s.setQuotePrice(priceArr[i]);
+                s.setAmount(amountArr[i]);
+                s.setQuoteType(typeArr[i]);
+                s.setDateTime(System.currentTimeMillis());
+            }
         }
+        // 模拟订单
+        cacheService.setObjectByKey(CacheConstant.CACHEKEY_SIMULATIONQUOTELIST, simulationQuoteDTOList);
 
         return true;
-    }*/
+    }
 }

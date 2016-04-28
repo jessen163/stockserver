@@ -7,12 +7,15 @@ import com.ryd.basecommon.util.StringUtils;
 import com.ryd.business.dao.StQuoteDao;
 import com.ryd.business.dto.SearchQuoteDTO;
 import com.ryd.business.dto.SearchStockDTO;
+import com.ryd.business.dto.SimulationQuoteDTO;
 import com.ryd.business.model.StQuote;
 import com.ryd.business.model.StStock;
+import com.ryd.business.model.StStockConfig;
 import com.ryd.business.service.StAccountService;
 import com.ryd.business.service.StPositionService;
 import com.ryd.business.service.StQuoteService;
 import com.ryd.business.service.StStockService;
+import com.ryd.business.service.thread.SyncStockThread;
 import com.ryd.cache.service.ICacheService;
 import com.ryd.system.service.StDateScheduleService;
 import com.ryd.system.service.StSystemParamService;
@@ -22,6 +25,9 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.util.*;
 import java.util.concurrent.ConcurrentSkipListMap;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * <p>标题:报价业务实现类</p>
@@ -145,8 +151,6 @@ public class StQuoteServiceImpl implements StQuoteService {
         if (StringUtils.isEmpty(quoteList)) {
             ConcurrentSkipListMap<Long, StQuote> quoteQueueList = null;
             for (StQuote quote : quoteList) {
-                //
-
                 Object quoteobj = null;
                 if (quote.getQuoteType().intValue() == ApplicationConstants.STOCK_QUOTETYPE_BUY) {
                     quoteobj = iCacheService.getObjectByKey(CacheConstant.CACHEKEY_STOCK_QUOTE_BUYQUEUE, quote.getStockId(), null);
@@ -295,6 +299,31 @@ public class StQuoteServiceImpl implements StQuoteService {
         // 1、获取最新一次的股票价格-买一、买二、卖一、卖二
         // 2、获取模拟马甲用户
         // 3、多线程生成马甲订单
+        ExecutorService stockService = Executors.newFixedThreadPool(10);
+        final CountDownLatch cdOrder = new CountDownLatch(1);//指挥官的命令，设置为1，指挥官一下达命令，则cutDown,变为0，战士们执行任务
+
+        List<SimulationQuoteDTO> simulationQuoteDTOList = null;
+        if (iCacheService.getObjectByKey(CacheConstant.CACHEKEY_SIMULATIONQUOTELIST, null)!=null) {
+            simulationQuoteDTOList=(List<SimulationQuoteDTO>)iCacheService.getObjectByKey(CacheConstant.CACHEKEY_SIMULATIONQUOTELIST, null);
+        }
+        if (!StringUtils.isEmpty(simulationQuoteDTOList)) {
+            List<StQuote> stQuoteList = new ArrayList<StQuote>();
+            for (SimulationQuoteDTO simulationQuoteDTO : simulationQuoteDTOList) {
+                StQuote quote = new StQuote();
+                quote.setAccountId("1");
+                quote.setStockId(simulationQuoteDTO.getStockId());
+                quote.setUserType(Short.parseShort("2")); // 马甲用户
+                quote.setQuoteType(simulationQuoteDTO.getQuoteType());
+                quote.setAmount(simulationQuoteDTO.getAmount());
+                stQuoteList.add(quote);
+            }
+            try {
+                this.saveQuoteList(stQuoteList);
+            }catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
         // 4、完成后模拟单后启动报价
         ApplicationConstants.isSubThreadWait = false;
     }
