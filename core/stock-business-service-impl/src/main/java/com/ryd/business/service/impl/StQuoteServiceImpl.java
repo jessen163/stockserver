@@ -281,6 +281,15 @@ public class StQuoteServiceImpl implements StQuoteService {
         return false;
     }
 
+    @Override
+    public void addSimulationQuote() {
+        // 1、获取最新一次的股票价格-买一、买二、卖一、卖二
+        // 2、获取模拟马甲用户
+        // 3、多线程生成马甲订单
+        // 4、完成后模拟单后启动报价
+        ApplicationConstants.isSubThreadWait = false;
+    }
+
     /**
      * 是否在范围内报价
      * @param closePrice 昨日收盘价

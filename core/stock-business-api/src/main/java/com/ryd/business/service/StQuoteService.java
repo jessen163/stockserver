@@ -99,4 +99,9 @@ public interface StQuoteService {
      * @return
      */
     public boolean deleteQuoteFromQueue(StQuote stQuote);
+
+    /**
+     * 添加模拟单报价
+     */
+    public void addSimulationQuote();
 }
