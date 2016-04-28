@@ -22,6 +22,10 @@ public class SearchQuoteDTO implements Serializable {
     // 报价时间
     private Date quoteEndDate;
 
+    private int offset;
+
+    private int limit;
+
     public String getAccountId() {
         return accountId;
     }
@@ -62,14 +66,32 @@ public class SearchQuoteDTO implements Serializable {
         this.stockCode = stockCode;
     }
 
+    public int getOffset() {
+        return offset;
+    }
+
+    public void setOffset(int offset) {
+        this.offset = offset;
+    }
+
+    public int getLimit() {
+        return limit;
+    }
+
+    public void setLimit(int limit) {
+        this.limit = limit;
+    }
+
     @Override
     public String toString() {
         return "SearchQuoteDTO{" +
-                "stockId='" + stockCode + '\'' +
+                "stockCode='" + stockCode + '\'' +
                 ", accountId='" + accountId + '\'' +
                 ", quoteType=" + quoteType +
                 ", quoteStartDate=" + quoteStartDate +
                 ", quoteEndDate=" + quoteEndDate +
+                ", offset=" + offset +
+                ", limit=" + limit +
                 '}';
     }
 }
