@@ -2,6 +2,7 @@ package com.ryd.business.service.impl;
 
 import com.ryd.business.dao.StStockDao;
 import com.ryd.business.dto.SearchStockDTO;
+import com.ryd.business.dto.StStockDetailDTO;
 import com.ryd.business.model.StStock;
 import com.ryd.business.model.StStockConfig;
 import com.ryd.business.service.StStockConfigService;
@@ -57,7 +58,6 @@ public class StStockServiceImpl implements StStockService {
         try {
             // 等待任务执行完成
             cdAnswer.await();
-            // 任务执行完成，TODO 通知交易引擎运行
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -72,6 +72,11 @@ public class StStockServiceImpl implements StStockService {
     @Override
     public StStock findStockListByStock(SearchStockDTO searchStockDTO) {
         // 返回前一天的收盘价
+        return null;
+    }
+
+    @Override
+    public StStockDetailDTO findStockDetailByStock(SearchStockDTO searchStockDTO) {
         return null;
     }
 }
