@@ -85,6 +85,10 @@ public class ApplicationConstants {
     public static final Short ACCOUNT_TYPE_REAL = 1;
     public static final Short ACCOUNT_TYPE_VIRTUAL = 2;
 
+    //状态 1.正常 2.禁用
+    public static final Short MODEL_ATRRIBUTE_NORMAL = 1;
+    public static final Short MODEL_ATRRIBUTE_DISABLED = 2;
+
     // 交易主线程是否停止
     public static volatile boolean isMainThreadStop = false;
 
