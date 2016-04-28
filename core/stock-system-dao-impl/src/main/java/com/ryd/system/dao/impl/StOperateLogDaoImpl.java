@@ -31,7 +31,7 @@ public class StOperateLogDaoImpl implements StOperateLogDao {
     }
 
     @Override
-    public List<StOperateLog> getTList(StOperateLog obj, int limit, int offset) {
+    public List<StOperateLog> getTList(StOperateLog obj, Long startTime, Long endTime, int limit, int offset) {
         return null;
     }
 
