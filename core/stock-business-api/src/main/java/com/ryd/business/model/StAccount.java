@@ -33,7 +33,7 @@ public class StAccount implements Serializable {
     private Short accountType;
     //手机号
     private String mobile;
-    //性别
+    //性别 0.女 1.男
     private Short sex;
     //备注
     private String remark;
