@@ -65,4 +65,8 @@ public class CacheConstant {
 
     // 缓存key-股票ID信息-马甲订单集合
     public static final String CACHEKEY_SIMULATIONQUOTELIST = "simulationQuoteList";
+    // 缓存key-交易记录信息-所有股票
+    public static final String CACHEKEY_TRADERECORDLIST = "traderecordList";
+    // 缓存key-交易记录信息-单只股票
+    public static final String CACHEKEY_TRADERECORDLIST_STOCKID = "traderecordListStockId_";
 }
