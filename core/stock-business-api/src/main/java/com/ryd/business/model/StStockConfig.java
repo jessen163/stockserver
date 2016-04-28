@@ -21,7 +21,7 @@ public class StStockConfig implements Serializable {
     private Short stockType;
     //股票状态 1.正常 2.禁用
     private Short status;
-    //板块类型 1.中小 2.创业
+    //板块类型 0.默认 1.中小 2.创业
     private Short boardType;
     //备注
     private String remark;

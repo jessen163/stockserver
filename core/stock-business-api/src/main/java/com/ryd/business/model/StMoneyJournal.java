@@ -35,10 +35,8 @@ public class StMoneyJournal implements Serializable {
     private BigDecimal dealFee;
     //印花税
     private BigDecimal dealTax;
-    //交易日期
-    private Date dealDate;
     //交易时间
-    private Date dealTime;
+    private Long dateTime;
 
     public String getRecordId() {
         return recordId;
@@ -120,19 +118,11 @@ public class StMoneyJournal implements Serializable {
         this.dealTax = dealTax;
     }
 
-    public Date getDealDate() {
-        return dealDate;
+    public Long getDateTime() {
+        return dateTime;
     }
 
-    public void setDealDate(Date dealDate) {
-        this.dealDate = dealDate;
-    }
-
-    public Date getDealTime() {
-        return dealTime;
-    }
-
-    public void setDealTime(Date dealTime) {
-        this.dealTime = dealTime;
+    public void setDateTime(Long dateTime) {
+        this.dateTime = dateTime;
     }
 }
