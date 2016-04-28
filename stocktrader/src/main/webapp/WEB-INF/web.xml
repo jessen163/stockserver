@@ -33,6 +33,13 @@
     </context-param>
     <!-- mongo 数据库连接参数 end -->
 
+    <!-- netty 服务端口 start -->
+    <context-param>
+        <param-name>stockserver.port</param-name>
+        <param-value>9999</param-value>
+    </context-param>
+    <!-- netty 服务端口 end -->
+
     <listener>
         <listener-class>com.ryd.server.stocktrader.listener.InitMongoDBListener</listener-class>
     </listener>

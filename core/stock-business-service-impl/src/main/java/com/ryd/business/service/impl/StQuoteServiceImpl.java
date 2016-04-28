@@ -20,10 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.ConcurrentSkipListMap;
 
 /**
@@ -49,6 +46,24 @@ public class StQuoteServiceImpl implements StQuoteService {
     private StStockService stStockService;
     @Autowired
     private ICacheService iCacheService;
+
+    @Override
+    public StQuote findQuoteById(StQuote quote) {
+        if (StringUtils.isEmpty(quote)&&StringUtils.isEmpty(quote.getQuoteId())) {
+            return null;
+        }
+        return stQuoteDao.getTById(quote.getQuoteId());
+    }
+
+    @Override
+    public Integer saveQuoteList(StQuote quote) throws Exception {
+        return this.saveQuoteList(Arrays.asList(quote));
+    }
+
+    @Override
+    public Integer updateWithDrawQuote(StQuote quote) {
+        return this.updateQuoteList(Arrays.asList(quote));
+    }
 
     @Override
     public Integer saveQuoteList(List<StQuote> quoteList) throws Exception{
@@ -264,6 +279,15 @@ public class StQuoteServiceImpl implements StQuoteService {
     public boolean deleteQuoteFromQueue(StQuote stQuote) {
         // 从队列中删除报价，同时修改报价状态 TODO 待实现
         return false;
+    }
+
+    @Override
+    public void addSimulationQuote() {
+        // 1、获取最新一次的股票价格-买一、买二、卖一、卖二
+        // 2、获取模拟马甲用户
+        // 3、多线程生成马甲订单
+        // 4、完成后模拟单后启动报价
+        ApplicationConstants.isSubThreadWait = false;
     }
 
     /**
