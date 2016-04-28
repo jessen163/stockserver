@@ -24,7 +24,7 @@ public class StStockConfigServiceImpl implements StStockConfigService {
     public List<StStockConfig> findStockConfig(StStockConfig stStockConfig, int pageIndex, int limit) {
         // TODO 放入缓存
         int offset = (pageIndex-1)*limit;
-        List<StStockConfig> stStockConfigList = stStockConfigDao.getTList(stStockConfig, limit, offset);
+        List<StStockConfig> stStockConfigList = stStockConfigDao.getTList(stStockConfig, null, null, limit, offset);
         return stStockConfigList;
     }
 
