@@ -14,6 +14,28 @@ import java.util.List;
  */
 public interface StQuoteService {
     /**
+     * 通过id查询报价
+     * @param quote
+     * @return
+     */
+    public StQuote findQuoteById(StQuote quote);
+
+    /**
+     * 报价-客户端
+     * @param quote
+     * @return
+     * @throws Exception
+     */
+    public Integer saveQuoteList(StQuote quote) throws Exception;
+
+    /**
+     * 撤销报价信息-客户端
+     * @param quote
+     * @return
+     */
+    public Integer updateWithDrawQuote(StQuote quote);
+
+    /**
      * 批量保存报价信息
      * @param quoteList
      * @return

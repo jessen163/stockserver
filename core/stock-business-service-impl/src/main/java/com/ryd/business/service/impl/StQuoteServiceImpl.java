@@ -20,10 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.ConcurrentSkipListMap;
 
 /**
@@ -49,6 +46,24 @@ public class StQuoteServiceImpl implements StQuoteService {
     private StStockService stStockService;
     @Autowired
     private ICacheService iCacheService;
+
+    @Override
+    public StQuote findQuoteById(StQuote quote) {
+        if (StringUtils.isEmpty(quote)&&StringUtils.isEmpty(quote.getQuoteId())) {
+            return null;
+        }
+        return stQuoteDao.getTById(quote.getQuoteId());
+    }
+
+    @Override
+    public Integer saveQuoteList(StQuote quote) throws Exception {
+        return this.saveQuoteList(Arrays.asList(quote));
+    }
+
+    @Override
+    public Integer updateWithDrawQuote(StQuote quote) {
+        return this.updateQuoteList(Arrays.asList(quote));
+    }
 
     @Override
     public Integer saveQuoteList(List<StQuote> quoteList) throws Exception{
