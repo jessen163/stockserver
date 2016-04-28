@@ -125,8 +125,8 @@ public class MessageHandle {
             case ApplicationConstants.NETTYMESSAGE_ID_MYPOSITION:
                 SearchPositionDTO searchPositionDTO = new SearchPositionDTO();
                 searchPositionDTO.setAccountId(request.getAccountId());
-                searchPositionDTO.setOffset(0);
-                searchPositionDTO.setLimit(Integer.MAX_VALUE);
+                searchPositionDTO.setOffset(request.getOffset());
+                searchPositionDTO.setLimit(request.getSize());
                 List<StPosition> positions = stPositionService.findPositionList(searchPositionDTO);
 
                 for(StPosition sp : positions) {
@@ -137,8 +137,12 @@ public class MessageHandle {
             case ApplicationConstants.NETTYMESSAGE_ID_MYQUOTELIST:
                 SearchQuoteDTO searchQuoteDTO = new SearchQuoteDTO();
                 searchQuoteDTO.setAccountId(request.getAccountId());
-                searchQuoteDTO.setOffset(0);
-                searchQuoteDTO.setLimit(Integer.MAX_VALUE);
+                String start = DateUtils.formatLongToStr(request.getStartTime(), DateUtils.TIME_FORMAT);
+                String end = DateUtils.formatLongToStr(request.getEndTime(), DateUtils.TIME_FORMAT);
+                searchQuoteDTO.setQuoteStartDate(DateUtils.formatStrToDate(start,DateUtils.TIME_FORMAT));
+                searchQuoteDTO.setQuoteEndDate(DateUtils.formatStrToDate(end,DateUtils.TIME_FORMAT));
+                searchQuoteDTO.setOffset(request.getOffset());
+                searchQuoteDTO.setLimit(request.getSize());
                 List<StQuote> quotes1 = stQuoteService.findQuoteList(searchQuoteDTO);
 
                 for(StQuote q1:quotes1){
@@ -149,8 +153,12 @@ public class MessageHandle {
             case ApplicationConstants.NETTYMESSAGE_ID_MYTRADERECORD:
                 SearchTradeRecordDTO searchTradeRecordDTO = new SearchTradeRecordDTO();
                 searchTradeRecordDTO.setAccountId(request.getAccountId());
-                searchTradeRecordDTO.setOffset(0);
-                searchTradeRecordDTO.setLimit(Integer.MAX_VALUE);
+                String startr = DateUtils.formatLongToStr(request.getStartTime(), DateUtils.TIME_FORMAT);
+                String endr = DateUtils.formatLongToStr(request.getEndTime(), DateUtils.TIME_FORMAT);
+                searchTradeRecordDTO.setStartDate(DateUtils.formatStrToDate(startr, DateUtils.TIME_FORMAT));
+                searchTradeRecordDTO.setEndDate(DateUtils.formatStrToDate(endr, DateUtils.TIME_FORMAT));
+                searchTradeRecordDTO.setOffset(request.getOffset());
+                searchTradeRecordDTO.setLimit(request.getSize());
                 List<StTradeRecord> records = stTradeRecordService.findTradeRecordList(searchTradeRecordDTO);
 
                 for(StTradeRecord r1:records){
@@ -162,8 +170,12 @@ public class MessageHandle {
             case ApplicationConstants.NETTYMESSAGE_ID_MYMONEYJOURNAL:
                 SearchMoneyJournalDTO searchMoneyJournalDTO = new SearchMoneyJournalDTO();
                 searchMoneyJournalDTO.setAccountId(request.getAccountId());
-                searchMoneyJournalDTO.setOffset(0);
-                searchMoneyJournalDTO.setLimit(Integer.MAX_VALUE);
+                String startm = DateUtils.formatLongToStr(request.getStartTime(), DateUtils.TIME_FORMAT);
+                String endm = DateUtils.formatLongToStr(request.getEndTime(), DateUtils.TIME_FORMAT);
+                searchMoneyJournalDTO.setStartDate(DateUtils.formatStrToDate(startm,DateUtils.TIME_FORMAT));
+                searchMoneyJournalDTO.setEndDate(DateUtils.formatStrToDate(endm, DateUtils.TIME_FORMAT));
+                searchMoneyJournalDTO.setOffset(request.getOffset());
+                searchMoneyJournalDTO.setLimit(request.getSize());
                 List<StMoneyJournal> journals = stMoneyJournalService.findMoneyJournalList(searchMoneyJournalDTO);
 
                 for(StMoneyJournal journal : journals) {
@@ -203,6 +215,7 @@ public class MessageHandle {
                 racc.setId(UUIDUtils.uuidTrimLine());
                 racc.setRealName(ainfo.getRealName());
                 racc.setAccountName(ainfo.getAccountName());
+                racc.setPassword(ainfo.getPassword());
                 racc.setAccountNum(ainfo.getAccountNum());
                 racc.setTotalAssets(BigDecimal.valueOf(ainfo.getTotalAssets()));
                 racc.setUseMoney(BigDecimal.valueOf(ainfo.getUseMoney()));
