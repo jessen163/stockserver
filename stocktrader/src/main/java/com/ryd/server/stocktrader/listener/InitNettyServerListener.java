@@ -6,6 +6,7 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
 /**
+ * 初始化netty服务器
  * Created by Administrator on 2016/4/28.
  */
 public class InitNettyServerListener implements ServletContextListener {
