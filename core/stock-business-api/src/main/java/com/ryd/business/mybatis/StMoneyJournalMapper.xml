@@ -12,12 +12,11 @@
     <result column="deal_money" jdbcType="DECIMAL" property="dealMoney" />
     <result column="deal_fee" jdbcType="DECIMAL" property="dealFee" />
     <result column="deal_tax" jdbcType="DECIMAL" property="dealTax" />
-    <result column="deal_date" jdbcType="DATE" property="dealDate" />
-    <result column="deal_time" jdbcType="TIME" property="dealTime" />
+    <result column="date_time" jdbcType="BIGINT" property="dateTime" />
   </resultMap>
   <sql id="Base_Column_List">
     record_id, quote_id, account_id, stock_id, quote_price, amount, deal_type, deal_money, 
-    deal_fee, deal_tax, deal_date, deal_time
+    deal_fee, deal_tax, date_time
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
@@ -60,26 +59,26 @@
     insert into st_money_journal (record_id, quote_id, account_id, 
       stock_id, quote_price, amount, 
       deal_type, deal_money, deal_fee, 
-      deal_tax, deal_date, deal_time
+      deal_tax, date_time
       )
     values (#{recordId,jdbcType=CHAR}, #{quoteId,jdbcType=CHAR}, #{accountId,jdbcType=CHAR}, 
       #{stockId,jdbcType=CHAR}, #{quotePrice,jdbcType=DECIMAL}, #{amount,jdbcType=BIGINT}, 
       #{dealType,jdbcType=SMALLINT}, #{dealMoney,jdbcType=DECIMAL}, #{dealFee,jdbcType=DECIMAL}, 
-      #{dealTax,jdbcType=DECIMAL}, #{dealDate,jdbcType=DATE}, #{dealTime,jdbcType=TIME}
+      #{dealTax,jdbcType=DECIMAL}, #{dateTime,jdbcType=BIGINT}
       )
   </insert>
   <insert id ="insertBatch" parameterType="java.util.List" >
     insert into st_money_journal (record_id, quote_id, account_id,
     stock_id, quote_price, amount,
     deal_type, deal_money, deal_fee,
-    deal_tax, deal_date, deal_time
+    deal_tax, date_time
     )
     values
     <foreach collection ="list" item ="item" index ="index" separator =",">
       (#{item.recordId,jdbcType=CHAR}, #{item.quoteId,jdbcType=CHAR}, #{item.accountId,jdbcType=CHAR},
       #{item.stockId,jdbcType=CHAR}, #{item.quotePrice,jdbcType=DECIMAL}, #{item.amount,jdbcType=BIGINT},
       #{item.dealType,jdbcType=SMALLINT}, #{item.dealMoney,jdbcType=DECIMAL}, #{item.dealFee,jdbcType=DECIMAL},
-      #{item.dealTax,jdbcType=DECIMAL}, #{item.dealDate,jdbcType=DATE}, #{item.dealTime,jdbcType=TIME}
+      #{item.dealTax,jdbcType=DECIMAL}, #{item.dateTime,jdbcType=BIGINT}
       )
     </foreach>
   </insert>
@@ -116,11 +115,8 @@
       <if test="dealTax != null">
         deal_tax,
       </if>
-      <if test="dealDate != null">
-        deal_date,
-      </if>
-      <if test="dealTime != null">
-        deal_time,
+      <if test="dateTime != null">
+        date_time,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -154,11 +150,8 @@
       <if test="dealTax != null">
         #{dealTax,jdbcType=DECIMAL},
       </if>
-      <if test="dealDate != null">
-        #{dealDate,jdbcType=DATE},
-      </if>
-      <if test="dealTime != null">
-        #{dealTime,jdbcType=TIME},
+      <if test="dateTime != null">
+        #{dateTime,jdbcType=BIGINT},
       </if>
     </trim>
   </insert>
@@ -192,11 +185,8 @@
       <if test="dealTax != null">
         deal_tax = #{dealTax,jdbcType=DECIMAL},
       </if>
-      <if test="dealDate != null">
-        deal_date = #{dealDate,jdbcType=DATE},
-      </if>
-      <if test="dealTime != null">
-        deal_time = #{dealTime,jdbcType=TIME},
+      <if test="dateTime != null">
+        date_time = #{dateTime,jdbcType=BIGINT},
       </if>
     </set>
     where record_id = #{recordId,jdbcType=CHAR}
@@ -212,8 +202,7 @@
       deal_money = #{dealMoney,jdbcType=DECIMAL},
       deal_fee = #{dealFee,jdbcType=DECIMAL},
       deal_tax = #{dealTax,jdbcType=DECIMAL},
-      deal_date = #{dealDate,jdbcType=DATE},
-      deal_time = #{dealTime,jdbcType=TIME}
+      date_time = #{dateTime,jdbcType=BIGINT}
     where record_id = #{recordId,jdbcType=CHAR}
   </update>
   <update id="updateBatch" parameterType="java.util.List">
@@ -229,8 +218,7 @@
         deal_money = #{item.dealMoney,jdbcType=DECIMAL},
         deal_fee = #{item.dealFee,jdbcType=DECIMAL},
         deal_tax = #{item.dealTax,jdbcType=DECIMAL},
-        deal_date = #{item.dealDate,jdbcType=DATE},
-        deal_time = #{item.dealTime,jdbcType=TIME}
+        date_time = #{item.dateTime,jdbcType=BIGINT}
       </set>
       where record_id = #{item.recordId,jdbcType=CHAR}
     </foreach>
@@ -266,11 +254,8 @@
         <if test="item.dealTax != null">
           deal_tax = #{item.dealTax,jdbcType=DECIMAL},
         </if>
-        <if test="item.dealDate != null">
-          deal_date = #{item.dealDate,jdbcType=DATE},
-        </if>
-        <if test="item.dealTime != null">
-          deal_time = #{item.dealTime,jdbcType=TIME},
+        <if test="item.dateTime != null">
+          date_time = #{item.dateTime,jdbcType=BIGINT},
         </if>
       </set>
       where record_id = #{item.recordId,jdbcType=CHAR}

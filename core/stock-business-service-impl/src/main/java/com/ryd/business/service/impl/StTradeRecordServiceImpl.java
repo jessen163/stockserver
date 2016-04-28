@@ -234,8 +234,7 @@ public class StTradeRecordServiceImpl implements StTradeRecordService {
             buyMoneyJournal.setDealMoney(buyerCostMoney);
             buyMoneyJournal.setDealType(buyQuote.getQuoteType());
             buyMoneyJournal.setDealFee(buyerCommissionFee);
-            buyMoneyJournal.setDealDate(new Date());
-            buyMoneyJournal.setDealTime(new Date());
+            buyMoneyJournal.setDateTime(System.currentTimeMillis());
 
             moneyJournals.add(buyMoneyJournal);
 
@@ -250,8 +249,7 @@ public class StTradeRecordServiceImpl implements StTradeRecordService {
             sellMoneyJournal.setDealType(sellQuote.getQuoteType());
             sellMoneyJournal.setDealFee(sellerCommissionFee);
             sellMoneyJournal.setDealTax(taxFee);
-            sellMoneyJournal.setDealDate(new Date());
-            sellMoneyJournal.setDealTime(new Date());
+            sellMoneyJournal.setDateTime(System.currentTimeMillis());
 
             moneyJournals.add(sellMoneyJournal);
 
