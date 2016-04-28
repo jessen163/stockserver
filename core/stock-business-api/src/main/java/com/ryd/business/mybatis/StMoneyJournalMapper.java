@@ -28,6 +28,8 @@ public interface StMoneyJournalMapper {
     int updateBatchSelective(List<StMoneyJournal> list);
 
     List<StMoneyJournal> selectListByKeySelective(@Param(value = "record") StMoneyJournal record,
+                                                  @Param(value = "startTime") Long startTime,
+                                                  @Param(value = "endTime") Long endTime,
                                                   @Param(value = "limit") Integer limit,
                                                   @Param(value = "offset") Integer offset);
 }
