@@ -11,7 +11,8 @@
             http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
 
     <context:property-placeholder  location="file:///${configuration.path}/*.properties" />
-
+    <!-- 激活自动代理功能 -->
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
         <property name="driverClassName" value="${jdbc.mysql.driver}"></property>
         <property name="url"  value="${jdbc.mysql.master.url}"></property>
@@ -36,7 +37,6 @@
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
     </bean>
 
-
     <!-- 事务管理 -->
     <bean id="transactionManager"
           class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
@@ -45,12 +45,14 @@
     <tx:advice id="txAdvice" transaction-manager="transactionManager">
         <tx:attributes>
             <tx:method name="save*" propagation="REQUIRED" isolation="DEFAULT" />
+            <tx:method name="add*" propagation="REQUIRED" isolation="DEFAULT" />
             <tx:method name="update*" propagation="REQUIRED" isolation="DEFAULT" />
+            <tx:method name="edit*" propagation="REQUIRED" isolation="DEFAULT" />
             <tx:method name="delete*" propagation="REQUIRED" isolation="DEFAULT" />
-            <tx:method name="*" propagation="REQUIRED" isolation="DEFAULT" read-only="true"/>
+            <tx:method name="*" propagation="REQUIRED" isolation="DEFAULT" />
         </tx:attributes>
     </tx:advice>
     <aop:config>
-        <aop:advisor pointcut="execution(* *..*Service*.*(..))" advice-ref="txAdvice" />
+        <aop:advisor pointcut="execution(* com.ryd.*.service.impl.*.*(..))" advice-ref="txAdvice" />
     </aop:config>
 </beans>
