@@ -49,6 +49,8 @@ public class CacheConstant {
     // 缓存key-股票报价队列-卖
     public static final String CACHEKEY_STOCK_QUOTE_SELLQUEUE  = "stockQuoteSellQueue_";
     // 缓存key-股票价格信息
+    public static final String CACHEKEY_STOCK_PRICEMAP  = "stockPriceMap_";
+    // 缓存key-股票价格信息
     public static final String CACHEKEY_STOCK_PRICELIST  = "stockPriceList_";
     // 缓存key-队列中的股票信息
     public static final String CACHEKEY_QUEUE_STOCKID_LIST  = "queueStockIdList_";
