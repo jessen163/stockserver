@@ -7,6 +7,7 @@ import com.ryd.business.dto.SearchPositionDTO;
 import com.ryd.business.model.StPosition;
 import com.ryd.business.service.StPositionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -17,6 +18,7 @@ import java.util.List;
  * 创建人：songby
  * 创建时间：2016/4/27 10:43
  */
+@Service
 public class StPositionServiceImpl implements StPositionService {
 
     @Autowired
