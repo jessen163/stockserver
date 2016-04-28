@@ -47,10 +47,10 @@ public class MessageHandle {
      */
     public static DiyNettyMessage.NettyMessage handleClientRequestInfo(DiyNettyMessage.NettyMessage request) throws Exception {
         DiyNettyMessage.NettyMessage.Builder builder = DiyNettyMessage.NettyMessage.newBuilder();
+        builder.setId(request.getId());
         builder.setKey("0");
         switch (request.getId()){
             case ApplicationConstants.NETTYMESSAGE_ID_HEARTBEAT:
-                builder.setId(request.getId());
                 builder.setStatus(ApplicationConstants.NETTYMESSAGE_STATUS_RESPONSE_SUCCESS);
                 StAccount account = stAccountService.findStAccount("test", "1234");
                 break;
@@ -62,21 +62,19 @@ public class MessageHandle {
                 for(StStock stc : stStocks) {
                     builder.addStockInfo(ParamBuilderUtil.getStockInfoBuilder(stc));
                 }
-                builder.setId(request.getId());
-                builder.setStatus(0);
-                builder.setKey("1");
+
+                builder.setStatus(1);
                 break;
             case ApplicationConstants.NETTYMESSAGE_ID_STOCKPRICEDETAIL:
+                DiyNettyMessage.StockInfo sinfo = request.getStockInfoList().get(0);
                 SearchStockDTO searchStock = new SearchStockDTO();
-                searchStock.setStockId("");
+                searchStock.setStockId(sinfo.getId());
                 StStock st = stStockService.findStockListByStock(searchStock);
 
                 builder.addStockInfo(ParamBuilderUtil.getStockInfoBuilder(st));
                 builder.addStockPriceInfo(ParamBuilderUtil.getStockPriceInfoBuilder(st));
 
-                builder.setId(request.getId());
-                builder.setStatus(0);
-                builder.setKey("1");
+                builder.setStatus(1);
                 break;
             case ApplicationConstants.NETTYMESSAGE_ID_LOGIN:
                 DiyNettyMessage.AccountInfo acc = request.getAccountInfoList().get(0);
@@ -87,8 +85,6 @@ public class MessageHandle {
                 }else{
                     builder.setStatus(2);
                 }
-                builder.setId(request.getId());
-                builder.setKey("1");
                 builder.addAccountInfo(DiyNettyMessage.AccountInfo.newBuilder().setAccountId(account.getId()).setAccountNum(account.getAccountNum()));
                 break;
             case ApplicationConstants.NETTYMESSAGE_ID_QUOTE:
@@ -101,7 +97,6 @@ public class MessageHandle {
                 q.setQuotePrice(BigDecimal.valueOf(quote.getStockPrice()));
                 q.setQuoteType((short) quote.getQuoteType());
                 q.setAmount(Long.valueOf(quote.getAmount()));
-                q.setCurrentAmount(q.getAmount());
 
                 int rs = stQuoteService.saveQuoteList(q);
                 if(rs >= 0 ){
@@ -109,8 +104,6 @@ public class MessageHandle {
                 }else{
                     builder.setStatus(2);
                 }
-                builder.setId(request.getId());
-                builder.setKey("1");
                 break;
             case ApplicationConstants.NETTYMESSAGE_ID_WITHDRAWORDER:
                 DiyNettyMessage.QuoteInfo revokeQuote = request.getQuoteInfoList().get(0);
@@ -123,15 +116,11 @@ public class MessageHandle {
                 }else{
                     builder.setStatus(2);
                 }
-                builder.setId(request.getId());
-                builder.setKey("1");
                 break;
             case ApplicationConstants.NETTYMESSAGE_ID_MYCAPITAL:
                 StAccount stAcc = stAccountService.getStAccountById(request.getAccountId());
-                builder.setId(request.getId());
-                builder.setStatus(0);
-                builder.setKey("1");
                 builder.addAccountInfo(ParamBuilderUtil.getAccountInfoBuilder(stAcc));
+                builder.setStatus(1);
                 break;
             case ApplicationConstants.NETTYMESSAGE_ID_MYPOSITION:
                 SearchPositionDTO searchPositionDTO = new SearchPositionDTO();
@@ -143,9 +132,7 @@ public class MessageHandle {
                 for(StPosition sp : positions) {
                     builder.addPositionInfo(ParamBuilderUtil.getPositionInfoBuilder(sp));
                 }
-                builder.setId(request.getId());
-                builder.setStatus(0);
-                builder.setKey("1");
+                builder.setStatus(1);
                 break;
             case ApplicationConstants.NETTYMESSAGE_ID_MYQUOTELIST:
                 SearchQuoteDTO searchQuoteDTO = new SearchQuoteDTO();
@@ -157,9 +144,7 @@ public class MessageHandle {
                 for(StQuote q1:quotes1){
                     builder.addQuoteInfo(ParamBuilderUtil.getQuoteInfoBuilder(q1));
                 }
-                builder.setId(request.getId());
-                builder.setStatus(0);
-                builder.setKey("1");
+                builder.setStatus(1);
                 break;
             case ApplicationConstants.NETTYMESSAGE_ID_MYTRADERECORD:
                 SearchTradeRecordDTO searchTradeRecordDTO = new SearchTradeRecordDTO();
@@ -172,9 +157,7 @@ public class MessageHandle {
 
                     builder.addTradeRecordInfo(ParamBuilderUtil.getTradeRecordInfoBuilder(r1,request.getAccountId()));
                 }
-                builder.setId(request.getId());
-                builder.setStatus(0);
-                builder.setKey("1");
+                builder.setStatus(1);
                 break;
             case ApplicationConstants.NETTYMESSAGE_ID_MYMONEYJOURNAL:
                 SearchMoneyJournalDTO searchMoneyJournalDTO = new SearchMoneyJournalDTO();
@@ -187,9 +170,53 @@ public class MessageHandle {
 
                     builder.addMoneyJournalInfo(ParamBuilderUtil.getMoneyJournalInfoBuilder(journal));
                 }
-                builder.setId(request.getId());
-                builder.setStatus(0);
-                builder.setKey("1");
+                builder.setStatus(1);
+                break;
+            case ApplicationConstants.NETTYMESSAGE_ID_SINGLESTOCKTRADEQUEUE:
+                DiyNettyMessage.StockInfo ssinfo = request.getStockInfoList().get(0);
+                SearchQuoteDTO ssSearchQuoteDTO = new SearchQuoteDTO();
+                ssSearchQuoteDTO.setStockCode(ssinfo.getStockCode());
+                ssSearchQuoteDTO.setQuoteType(request.getType());
+
+                List<StQuote> ssQuoteList = stQuoteService.findQuoteQueueByStock(ssSearchQuoteDTO);
+
+                for(StQuote ssq:ssQuoteList){
+                    builder.addQuoteInfo(ParamBuilderUtil.getQuoteInfoBuilder(ssq));
+                }
+
+                builder.setStatus(1);
+                break;
+            case ApplicationConstants.NETTYMESSAGE_ID_SINGLESTOCKTRADERECORD:
+                DiyNettyMessage.StockInfo sqinfo = request.getStockInfoList().get(0);
+                SearchTradeRecordDTO sqSearchTradeRecordDTO = new SearchTradeRecordDTO();
+
+                List<StTradeRecord> sqRecordList = stTradeRecordService.findTradeRecordListByStock(sqSearchTradeRecordDTO);
+
+                for(StTradeRecord sqr:sqRecordList){
+                    builder.addTradeRecordInfo(ParamBuilderUtil.getTradeRecordInfoBuilder(sqr,""));
+                }
+                break;
+            case ApplicationConstants.NETTYMESSAGE_ID_REGISTER:
+                DiyNettyMessage.AccountInfo ainfo = request.getAccountInfoList().get(0);
+
+                StAccount racc = new StAccount();
+                racc.setId(UUIDUtils.uuidTrimLine());
+                racc.setRealName(ainfo.getRealName());
+                racc.setAccountName(ainfo.getAccountName());
+                racc.setAccountNum(ainfo.getAccountNum());
+                racc.setTotalAssets(BigDecimal.valueOf(ainfo.getTotalAssets()));
+                racc.setUseMoney(BigDecimal.valueOf(ainfo.getUseMoney()));
+                racc.setAccountLevel((short) ainfo.getAccountLevel());
+                racc.setMobile(ainfo.getMobile());
+                racc.setSex((short)ainfo.getSex());
+                racc.setRemark(ainfo.getRemark());
+
+                boolean rars = stAccountService.addStAccount(racc);
+                if(rars){
+                    builder.setStatus(1);
+                }else{
+                    builder.setStatus(2);
+                }
                 break;
             default:
                 // 默认状态
