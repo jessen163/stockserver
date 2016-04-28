@@ -46,7 +46,7 @@ public class StPositionDaoImpl implements StPositionDao {
     }
 
     @Override
-    public List<StPosition> getTList(StPosition obj, int limit, int offset) {
+    public List<StPosition> getTList(StPosition obj, Long startTime,Long endTime, int limit, int offset) {
 
         if(obj==null){
             obj = new StPosition();

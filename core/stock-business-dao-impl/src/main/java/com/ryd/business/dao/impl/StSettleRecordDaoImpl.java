@@ -44,7 +44,7 @@ public class StSettleRecordDaoImpl implements StSettleRecordDao {
     }
 
     @Override
-    public List<StSettleRecord> getTList(StSettleRecord obj, int limit, int offset) {
+    public List<StSettleRecord> getTList(StSettleRecord obj, Long startTime,Long endTime, int limit, int offset) {
 
         if(obj==null){
             obj = new StSettleRecord();

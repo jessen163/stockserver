@@ -45,7 +45,7 @@ public class StStockConfigDaoImpl implements StStockConfigDao {
     }
 
     @Override
-    public List<StStockConfig> getTList(StStockConfig obj, int limit, int offset) {
+    public List<StStockConfig> getTList(StStockConfig obj, Long startTime,Long endTime, int limit, int offset) {
 
         if(obj==null){
             obj = new StStockConfig();

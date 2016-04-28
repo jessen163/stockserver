@@ -47,7 +47,7 @@ public class StAccountDaoImpl implements StAccountDao {
     }
 
     @Override
-    public List<StAccount> getTList(StAccount obj, int limit,int offset) {
+    public List<StAccount> getTList(StAccount obj, Long startTime,Long endTime, int limit,int offset) {
 
         if(obj==null){
             obj = new StAccount();

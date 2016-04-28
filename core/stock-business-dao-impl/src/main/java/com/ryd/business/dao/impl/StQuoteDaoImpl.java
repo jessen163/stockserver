@@ -44,12 +44,12 @@ public class StQuoteDaoImpl implements StQuoteDao {
     }
 
     @Override
-    public List<StQuote> getTList(StQuote obj, int limit, int offset) {
+    public List<StQuote> getTList(StQuote obj, Long startTime,Long endTime, int limit, int offset) {
 
         if(obj==null){
             obj = new StQuote();
         }
-        return stQuoteMapper.selectListByKeySelective(obj,limit,offset);
+        return stQuoteMapper.selectListByKeySelective(obj, startTime, endTime, limit, offset);
     }
 
     @Override
