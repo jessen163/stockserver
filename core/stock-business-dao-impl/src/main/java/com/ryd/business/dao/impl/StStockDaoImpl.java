@@ -41,7 +41,7 @@ public class StStockDaoImpl extends BuguDao<StStock> implements StStockDao {
     }
 
     @Override
-    public List<StStock> getTList(StStock obj, int limit, int offset) {
+    public List<StStock> getTList(StStock obj, Long startTime,Long endTime, int limit, int offset) {
         int pageNum = limit/offset+1;
         int pageSize = offset;
         return super.findAll(pageNum, pageSize);

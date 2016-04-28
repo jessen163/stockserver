@@ -52,7 +52,7 @@ public interface BaseDao<T> {
      * @param offset
      * @return
      */
-    public List<T> getTList(T obj, int limit,int offset);
+    public List<T> getTList(T obj, Long startTime, Long endTime, int limit,int offset);
 
     /**
      * 删除

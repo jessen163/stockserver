@@ -25,6 +25,20 @@
   </select>
   <select id="selectListByKeySelective" resultType="java.util.List" resultMap="BaseResultMap">
     select * from st_trade_record
+    <trim prefix="WHERE" prefixOverrides="AND|OR">
+      <if test="record.accountId != null and record.accountId != ''" >
+        account_id = #{record.accountId,jdbcType=VARCHAR}
+      </if>
+      <if test="record.stockId != null and record.stockId != ''" >
+        and stock_id = #{record.stockId,jdbcType=VARCHAR}
+      </if>
+      <if test="startTime != null" >
+        and date_time &gt;= #{startTime,jdbcType=BIGINT}
+      </if>
+      <if test="endTime != null" >
+        and date_time &lt;= #{endTime,jdbcType=BIGINT}
+      </if>
+    </trim>
     limit #{offset, jdbcType=INTEGER},#{limit, jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">

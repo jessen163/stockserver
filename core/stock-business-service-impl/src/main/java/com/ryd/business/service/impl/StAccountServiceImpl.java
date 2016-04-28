@@ -93,7 +93,7 @@ public class StAccountServiceImpl implements StAccountService {
     @Override
     public List<StAccount> findStAccountList(StAccount account, int pageIndex, int limit) {
         Integer offset = (pageIndex-1)*limit;
-        return stAccountDao.getTList(account,limit,offset);
+        return stAccountDao.getTList(account,null,null,limit,offset);
     }
 
     @Override

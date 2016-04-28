@@ -43,12 +43,12 @@ public class StTradeRecordDaoImpl implements StTradeRecordDao {
     }
 
     @Override
-    public List<StTradeRecord> getTList(StTradeRecord obj, int limit, int offset) {
+    public List<StTradeRecord> getTList(StTradeRecord obj, Long startTime, Long endTime, int limit, int offset) {
 
         if(obj==null){
             obj = new StTradeRecord();
         }
-        return stTradeRecordMapper.selectListByKeySelective(obj, limit, offset);
+        return stTradeRecordMapper.selectListByKeySelective(obj, startTime, endTime, limit, offset);
     }
 
     @Override
@@ -82,4 +82,5 @@ public class StTradeRecordDaoImpl implements StTradeRecordDao {
         }
         return stTradeRecordMapper.deleteBatch(list);
     }
+
 }

@@ -45,12 +45,12 @@ public class StMoneyJournalDaoImpl implements StMoneyJournalDao {
     }
 
     @Override
-    public List<StMoneyJournal> getTList(StMoneyJournal obj, int limit, int offset) {
+    public List<StMoneyJournal> getTList(StMoneyJournal obj, Long startTime,Long endTime, int limit, int offset) {
 
         if(obj==null){
             obj = new StMoneyJournal();
         }
-        return stMoneyJournalMapper.selectListByKeySelective(obj,limit,offset);
+        return stMoneyJournalMapper.selectListByKeySelective(obj,startTime,endTime,limit,offset);
     }
 
     @Override

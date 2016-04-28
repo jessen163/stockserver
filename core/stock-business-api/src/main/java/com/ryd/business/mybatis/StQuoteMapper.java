@@ -28,6 +28,8 @@ public interface StQuoteMapper {
     int updateBatchSelective(List<StQuote> list);
 
     List<StQuote> selectListByKeySelective(@Param(value = "record") StQuote record,
-                                                  @Param(value = "limit") Integer limit,
-                                                  @Param(value = "offset") Integer offset);
+                                           @Param(value = "startTime") Long startTime,
+                                           @Param(value = "endTime") Long endTime,
+                                           @Param(value = "limit") Integer limit,
+                                           @Param(value = "offset") Integer offset);
 }

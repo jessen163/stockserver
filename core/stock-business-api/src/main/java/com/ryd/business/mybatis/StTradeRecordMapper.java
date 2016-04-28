@@ -26,6 +26,8 @@ public interface StTradeRecordMapper {
     int updateBatchSelective(List<StTradeRecord> list);
 
     List<StTradeRecord> selectListByKeySelective(@Param(value = "record") StTradeRecord record,
+                                                 @Param(value = "startTime") Long startTime,
+                                                 @Param(value = "endTime") Long endTime,
                                                   @Param(value = "limit") Integer limit,
                                                   @Param(value = "offset") Integer offset);
 

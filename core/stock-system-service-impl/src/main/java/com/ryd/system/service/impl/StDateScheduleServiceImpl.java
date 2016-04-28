@@ -73,7 +73,7 @@ public class StDateScheduleServiceImpl implements StDateScheduleService {
     @Override
     public List<StDateSchedule> getScheduleList(StDateSchedule schedule, int pageIndex, int limit) {
         int offset = (pageIndex - 1)*limit;
-        return stDateScheduleDao.getTList(schedule,limit,offset);
+        return stDateScheduleDao.getTList(schedule,null,null,limit,offset);
     }
 
     @Override

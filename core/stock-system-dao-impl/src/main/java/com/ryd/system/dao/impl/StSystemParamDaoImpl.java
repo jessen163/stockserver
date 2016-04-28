@@ -44,7 +44,7 @@ public class StSystemParamDaoImpl implements StSystemParamDao {
     }
 
     @Override
-    public List<StSystemParam> getTList(StSystemParam obj, int limit, int offset) {
+    public List<StSystemParam> getTList(StSystemParam obj, Long startTime, Long endTime, int limit, int offset) {
         if (obj == null){
             obj = new StSystemParam();
         }

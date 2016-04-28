@@ -169,10 +169,12 @@ public class StQuoteServiceImpl implements StQuoteService {
 
     @Override
     public List<StQuote> findQuoteList(SearchQuoteDTO searchQuoteDTO) {
-        // TODO 待修改
         StQuote stQuote = new StQuote();
         stQuote.setAccountId(searchQuoteDTO.getAccountId());
-        List<StQuote> quoteList = stQuoteDao.getTList(stQuote, 0, Integer.MAX_VALUE);
+
+        Long startTime = searchQuoteDTO.getQuoteStartDate().getTime();
+        Long endTime = searchQuoteDTO.getQuoteEndDate().getTime();
+        List<StQuote> quoteList = stQuoteDao.getTList(stQuote, startTime, endTime, searchQuoteDTO.getLimit(), searchQuoteDTO.getOffset());
         return quoteList;
     }
 

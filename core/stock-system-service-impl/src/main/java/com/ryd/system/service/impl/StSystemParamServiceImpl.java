@@ -67,7 +67,7 @@ public class StSystemParamServiceImpl implements StSystemParamService {
     @Override
     public List<StSystemParam> getParamList(StSystemParam param, int pageIndex, int limit) {
         int offset = (pageIndex - 1)*limit;
-        return stSystemParamDao.getTList(param,limit,offset);
+        return stSystemParamDao.getTList(param,null,null,limit,offset);
     }
 
 }

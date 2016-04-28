@@ -41,7 +41,7 @@ public class StStockHistoryDaoImpl implements StStockHistoryDao {
     }
 
     @Override
-    public List<StStockHistory> getTList(StStockHistory obj, int limit, int offset) {
+    public List<StStockHistory> getTList(StStockHistory obj, Long startTime,Long endTime, int limit, int offset) {
 
         if(obj==null){
             obj = new StStockHistory();

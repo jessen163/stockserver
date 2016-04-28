@@ -45,7 +45,7 @@ public class StDateScheduleDaoImpl implements StDateScheduleDao {
     }
 
     @Override
-    public List<StDateSchedule> getTList(StDateSchedule obj, int limit, int offset) {
+    public List<StDateSchedule> getTList(StDateSchedule obj, Long startTime, Long endTime, int limit, int offset) {
         if(obj == null){
             obj = new StDateSchedule();
         }

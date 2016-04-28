@@ -29,6 +29,14 @@ public class StMoneyJournalServiceImpl implements StMoneyJournalService {
 
     @Override
     public List<StMoneyJournal> findMoneyJournalList(SearchMoneyJournalDTO searchMoneyJournalDTO) {
-        return null;
+
+        StMoneyJournal moneyJournal = new StMoneyJournal();
+        moneyJournal.setAccountId(searchMoneyJournalDTO.getAccountId());
+        moneyJournal.setStockId(searchMoneyJournalDTO.getStockId());
+        moneyJournal.setDealType(searchMoneyJournalDTO.getDealType());
+
+        Long startTime = searchMoneyJournalDTO.getStartDate().getTime();
+        Long endTime = searchMoneyJournalDTO.getEndDate().getTime();
+        return stMoneyJournalDao.getTList(moneyJournal, startTime, endTime, searchMoneyJournalDTO.getLimit(), searchMoneyJournalDTO.getOffset());
     }
 }
