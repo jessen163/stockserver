@@ -34,7 +34,12 @@ public class ApplicationConstants {
     public final static int NETTYMESSAGE_ID_MYTRADERECORD = 13;
     /** 消息接口ID 我的资金流水 id=14 **/
     public final static int NETTYMESSAGE_ID_MYMONEYJOURNAL = 14;
-
+    /** 消息接口ID 单只股票买卖队列 id=15 **/
+    public final static int NETTYMESSAGE_ID_SINGLESTOCKTRADEQUEUE = 15;
+    /** 消息接口ID 单只股票匹配记录 id=16 **/
+    public final static int NETTYMESSAGE_ID_SINGLESTOCKTRADERECORD = 16;
+    /** 消息接口ID 注册 id=17 **/
+    public final static int NETTYMESSAGE_ID_REGISTER = 17;
 
     /** 消息接口状态-status 请求 status=0 **/
     public final static int NETTYMESSAGE_STATUS_REQUEST = 0;
@@ -75,6 +80,10 @@ public class ApplicationConstants {
     //1.节假日 2.特殊工作日
     public static final Short DATE_SCHEDULE_FESTIVALDAY = 1;
     public static final Short DATE_SCHEDULE_SEPCIAL_WORKDAY = 2;
+
+    //帐户类型 1.真实账户 2.马甲帐户
+    public static final Short ACCOUNT_TYPE_REAL = 1;
+    public static final Short ACCOUNT_TYPE_VIRTUAL = 2;
 
     // 交易主线程是否停止
     public static volatile boolean isMainThreadStop = false;
