@@ -29,10 +29,10 @@
     select * from st_quote
     <trim prefix="WHERE" prefixOverrides="AND|OR">
       <if test="record.accountId != null and record.accountId != ''" >
-        account_id = #{record.accountId,jdbcType=VARCHAR}
+        account_id = #{record.accountId,jdbcType=CHAR}
       </if>
       <if test="record.stockId != null and record.stockId != ''" >
-        and stock_id = #{record.stockId,jdbcType=VARCHAR}
+        and stock_id = #{record.stockId,jdbcType=CHAR}
       </if>
       <if test="record.quoteType != null" >
         and quote_type = #{record.quoteType,jdbcType=SMALLINT}
