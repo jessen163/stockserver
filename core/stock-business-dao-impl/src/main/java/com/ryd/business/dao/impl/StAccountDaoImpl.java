@@ -52,7 +52,7 @@ public class StAccountDaoImpl implements StAccountDao {
         if(obj==null){
             obj = new StAccount();
         }
-        return stAccountMapper.selectListByKeySelective(obj, limit, offset);
+        return stAccountMapper.selectListByKeySelective(obj, startTime, endTime, limit, offset);
     }
 
     @Override
