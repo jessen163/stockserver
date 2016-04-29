@@ -184,6 +184,44 @@ public class MessageHandle {
                 }
                 builder.setStatus(1);
                 break;
+            case ApplicationConstants.NETTYMESSAGE_ID_ACCOUNTLIST:
+                SearchAccountDTO searchAccountDTO = new SearchAccountDTO();
+                searchAccountDTO.setAccountId(request.getAccountId());
+                String starta = DateUtils.formatLongToStr(request.getStartTime(), DateUtils.TIME_FORMAT);
+                String enda = DateUtils.formatLongToStr(request.getEndTime(), DateUtils.TIME_FORMAT);
+                searchAccountDTO.setStartDate(DateUtils.formatStrToDate(starta,DateUtils.TIME_FORMAT));
+                searchAccountDTO.setEndDate(DateUtils.formatStrToDate(enda, DateUtils.TIME_FORMAT));
+                searchAccountDTO.setOffset(request.getOffset());
+                searchAccountDTO.setLimit(request.getSize());
+                List<StAccount> alist =  stAccountService.findStAccountList(searchAccountDTO);
+
+                for(StAccount asc:alist){
+                    builder.addAccountInfo(ParamBuilderUtil.getAccountInfoBuilder(asc));
+                }
+                builder.setStatus(1);
+                break;
+            case ApplicationConstants.NETTYMESSAGE_ID_ACCOUNTUPDATE:
+                DiyNettyMessage.AccountInfo accu = request.getAccountInfoList().get(0);
+                StAccount sacc = new StAccount();
+                sacc.setId(accu.getAccountId());
+                sacc.setRealName(accu.getRealName());
+                sacc.setAccountName(accu.getAccountName());
+                sacc.setPassword(accu.getPassword());
+                sacc.setAccountNum(accu.getAccountNum());
+                sacc.setTotalAssets(BigDecimal.valueOf(accu.getTotalAssets()));
+                sacc.setUseMoney(BigDecimal.valueOf(accu.getUseMoney()));
+                sacc.setAccountLevel((short) accu.getAccountLevel());
+                sacc.setMobile(accu.getMobile());
+                sacc.setSex((short) accu.getSex());
+                sacc.setRemark(accu.getRemark());
+
+                boolean sars = stAccountService.updateStAccount(sacc);
+                if(sars){
+                    builder.setStatus(1);
+                }else{
+                    builder.setStatus(2);
+                }
+                break;
             case ApplicationConstants.NETTYMESSAGE_ID_SINGLESTOCKTRADEQUEUE:
                 DiyNettyMessage.StockInfo ssinfo = request.getStockInfoList().get(0);
                 SearchQuoteDTO ssSearchQuoteDTO = new SearchQuoteDTO();
