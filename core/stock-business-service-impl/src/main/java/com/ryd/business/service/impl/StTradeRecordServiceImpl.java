@@ -163,8 +163,8 @@ public class StTradeRecordServiceImpl implements StTradeRecordService {
         record.setSellerAccountId(searchTradeRecordDTO.getAccountId());
         record.setStockId(searchTradeRecordDTO.getStockId());
 
-        Long startTime = searchTradeRecordDTO.getStartDate().getTime();
-        Long endTime = searchTradeRecordDTO.getEndDate().getTime();
+        Long startTime = searchTradeRecordDTO.getStartDate()==null?null:searchTradeRecordDTO.getStartDate().getTime();
+        Long endTime = searchTradeRecordDTO.getEndDate()==null?null:searchTradeRecordDTO.getEndDate().getTime();
         return stTradeRecordDao.getTList(record, startTime, endTime, searchTradeRecordDTO.getLimit(), searchTradeRecordDTO.getOffset());
     }
 

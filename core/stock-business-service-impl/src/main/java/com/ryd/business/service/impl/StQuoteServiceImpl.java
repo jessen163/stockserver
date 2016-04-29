@@ -8,10 +8,8 @@ import com.ryd.business.dto.SimulationQuoteDTO;
 import com.ryd.business.exception.QuoteBusinessException;
 import com.ryd.business.model.StQuote;
 import com.ryd.business.model.StStock;
-import com.ryd.business.service.StAccountService;
-import com.ryd.business.service.StPositionService;
-import com.ryd.business.service.StQuoteService;
-import com.ryd.business.service.StStockService;
+import com.ryd.business.model.StStockConfig;
+import com.ryd.business.service.*;
 import com.ryd.cache.service.ICacheService;
 import com.ryd.system.service.StDateScheduleService;
 import com.ryd.system.service.StSystemParamService;
@@ -46,6 +44,8 @@ public class StQuoteServiceImpl implements StQuoteService {
     private StPositionService stPositionService;
     @Autowired
     private StStockService stStockService;
+    @Autowired
+    private StStockConfigService stStockConfigService;
     @Autowired
     private ICacheService iCacheService;
 
@@ -136,6 +136,9 @@ public class StQuoteServiceImpl implements StQuoteService {
                 }
             }
             if(rs) {
+                //把股票stockCode换成stockId
+                String sid = stStockConfigService.getStockIdByStockCode(quote.getStockId());
+                quote.setStockId(sid);
                 // 添加报价到队列，同时保存到数据库 失败后回滚
                 boolean ars = addQuoteToQueue(quote);
 
@@ -205,8 +208,8 @@ public class StQuoteServiceImpl implements StQuoteService {
         StQuote stQuote = new StQuote();
         stQuote.setAccountId(searchQuoteDTO.getAccountId());
 
-        Long startTime = searchQuoteDTO.getQuoteStartDate().getTime();
-        Long endTime = searchQuoteDTO.getQuoteEndDate().getTime();
+        Long startTime = searchQuoteDTO.getQuoteStartDate()==null?null:searchQuoteDTO.getQuoteStartDate().getTime();
+        Long endTime = searchQuoteDTO.getQuoteEndDate()==null?null:searchQuoteDTO.getQuoteEndDate().getTime();
         List<StQuote> quoteList = stQuoteDao.getTList(stQuote, startTime, endTime, searchQuoteDTO.getLimit(), searchQuoteDTO.getOffset());
         return quoteList;
     }
