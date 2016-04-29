@@ -82,10 +82,10 @@ public class ListToArray {
         SimpleDateFormat format=new SimpleDateFormat("MM/dd HH:mm");
         for(int i=0;i<stQuoteList.size();i++){
             StQuote stq = stQuoteList.get(i);
-            StStock stock = ClientConstants.stStockMap.get(stq.getStockId());
+//            StStock stock = ClientConstants.stStockMap.get(stq.getStockId());
 
-            arr[i][0] = stock.getStockCode();
-            arr[i][1] = stock.getStockName();
+            arr[i][0] = "";//stock.getStockCode();
+            arr[i][1] = "";//stock.getStockName();
             arr[i][2] = stq.getQuotePrice();
             arr[i][3] = stq.getAmount();
             arr[i][4] = stq.getQuoteType()==1?"买":"卖";
