@@ -132,9 +132,10 @@ public class TestParamBuilderUtil {
         builder.setAccountId(accountId);
         builder.setOffset(0);
         builder.setSize(Integer.MAX_VALUE);
-        builder.setStartTime(startTime);
-        builder.setEndTime(endTime);
-
+        if(startTime!=null && endTime!=null) {
+            builder.setStartTime(startTime);
+            builder.setEndTime(endTime);
+        }
         return builder;
     }
 }

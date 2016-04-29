@@ -1,6 +1,7 @@
 package com.ryd.server.stocktrader.swing.frame;
 
 import com.ryd.basecommon.protocol.protobuf.DiyNettyMessage;
+import com.ryd.basecommon.util.ApplicationConstants;
 import com.ryd.business.model.StAccount;
 import com.ryd.business.model.StPosition;
 import com.ryd.business.model.StStock;
@@ -192,6 +193,22 @@ public class MainFrame extends JFrame {
 		 QuoteListListener quoteListListener = new QuoteListListener();
 		 quoteListButton.addActionListener(quoteListListener);
 
+		 JButton recordButton = new JButton("我的成交记录");
+		 recordButton.addActionListener(new ActionListener() {
+			 public void actionPerformed(ActionEvent e) {
+				 DiyNettyMessage.NettyMessage.Builder builder = TestParamBuilderUtil.getAccount(ApplicationConstants.NETTYMESSAGE_ID_MYTRADERECORD, ClientConstants.stAccount.getId(),0l,System.currentTimeMillis());
+				 MessageServiceImpl.sendMessage(builder.build());
+			 }
+		 });
+
+		 JButton journalButton = new JButton("我的资金流水");
+		 journalButton.addActionListener(new ActionListener() {
+			 public void actionPerformed(ActionEvent e) {
+				 DiyNettyMessage.NettyMessage.Builder builder = TestParamBuilderUtil.getAccount(ApplicationConstants.NETTYMESSAGE_ID_MYMONEYJOURNAL, ClientConstants.stAccount.getId(), 0l, System.currentTimeMillis());
+				 MessageServiceImpl.sendMessage(builder.build());
+			 }
+		 });
+
 		 JButton refreshButton = new JButton("刷新");
 		 refreshButton.addActionListener(new ActionListener() {
 			 public void actionPerformed(ActionEvent e) {
@@ -217,6 +234,10 @@ public class MainFrame extends JFrame {
 		 buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
 
 		 buttonPanel.add(quoteListButton);
+
+		 buttonPanel.add(recordButton);
+
+		 buttonPanel.add(journalButton);
 	      
 		 buttonPanel.add(Box.createHorizontalGlue ());
 

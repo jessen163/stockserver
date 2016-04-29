@@ -130,13 +130,23 @@ public class ParamBuilderDtoUtil {
     /**
      * 成交记录信息
      * @param r1
-     * @param accountId
      * @return
      */
-    public static StTradeRecord getStTradeRecord(DiyNettyMessage.TradeRecordInfo r1, String accountId){
+    public static StTradeRecord getStTradeRecord(DiyNettyMessage.TradeRecordInfo r1){
 
         StTradeRecord tbuiler = new StTradeRecord();
-
+        tbuiler.setStockId(r1.getStockCode());
+        tbuiler.setAmount((long) r1.getAmount());
+        tbuiler.setQuotePrice(BigDecimal.valueOf(r1.getDealMoney()));
+        if(r1.getDealType()==ApplicationConstants.STOCK_QUOTETYPE_BUY){
+            tbuiler.setBuyerAccountId(r1.getAccountId());
+            tbuiler.setBuyFee(BigDecimal.valueOf(r1.getDealFee()));
+        }else {
+            tbuiler.setSellerAccountId(r1.getAccountId());
+            tbuiler.setSellFee(BigDecimal.valueOf(r1.getDealFee()));
+            tbuiler.setDealTax(BigDecimal.valueOf(r1.getDealTax()));
+        }
+        tbuiler.setDateTime(DateUtils.formatStrToDate(r1.getDealDate()+" "+r1.getDealTime(),DateUtils.TIME_FORMAT).getTime());
         return tbuiler;
     }
 
@@ -158,5 +168,6 @@ public class ParamBuilderDtoUtil {
 
         return mbuiler;
     }
+
 
 }

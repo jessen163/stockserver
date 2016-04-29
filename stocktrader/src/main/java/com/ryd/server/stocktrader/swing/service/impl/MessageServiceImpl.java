@@ -4,17 +4,14 @@ package com.ryd.server.stocktrader.swing.service.impl;
 import com.ryd.basecommon.protocol.protobuf.DiyNettyMessage;
 import com.ryd.basecommon.util.ApplicationConstants;
 import com.ryd.basecommon.util.UUIDUtils;
-import com.ryd.business.model.StAccount;
-import com.ryd.business.model.StPosition;
-import com.ryd.business.model.StQuote;
-import com.ryd.business.model.StStock;
+import com.ryd.business.model.*;
 import com.ryd.server.stocktrader.swing.common.ClientConstants;
-import com.ryd.server.stocktrader.swing.frame.MainFrame;
-import com.ryd.server.stocktrader.swing.frame.QuotePriceJDialog;
+import com.ryd.server.stocktrader.swing.frame.*;
 import com.ryd.server.stocktrader.swing.service.MessageServiceI;
 import com.ryd.server.stocktrader.utils.ParamBuilderDtoUtil;
 import com.ryd.server.stocktrader.utils.TestParamBuilderUtil;
 import io.netty.channel.ChannelHandlerContext;
+import org.apache.ibatis.javassist.compiler.ast.Stmnt;
 
 import javax.swing.*;
 import java.math.BigDecimal;
@@ -125,10 +122,30 @@ public class MessageServiceImpl extends MessageServiceI {
                     ClientConstants.stQuoteList.add(sqi);
                 }
                 ClientConstants.quoteListToMap();
+
+                QuoteListDialog.instance().open();
                 break;
             case ApplicationConstants.NETTYMESSAGE_ID_MYTRADERECORD:
+                List<DiyNettyMessage.TradeRecordInfo> tradeRecordInfos = request.getTradeRecordInfoList();
+                ClientConstants.stTradeRecordList = new ArrayList<StTradeRecord>();
+                for(DiyNettyMessage.TradeRecordInfo tri : tradeRecordInfos){
+                    StTradeRecord stri = ParamBuilderDtoUtil.getStTradeRecord(tri);
+                    ClientConstants.stTradeRecordList.add(stri);
+                }
+                ClientConstants.tradeRecordListToMap();
+
+                RecordListDialog.instance().open();
                 break;
             case ApplicationConstants.NETTYMESSAGE_ID_MYMONEYJOURNAL:
+                List<DiyNettyMessage.MoneyJournalInfo> moneyJournalInfos = request.getMoneyJournalInfoList();
+                ClientConstants.stMoneyJournalList = new ArrayList<StMoneyJournal>();
+                for(DiyNettyMessage.MoneyJournalInfo ml : moneyJournalInfos){
+                    StMoneyJournal smj = ParamBuilderDtoUtil.getStMoneyJournal(ml);
+                    ClientConstants.stMoneyJournalList.add(smj);
+                }
+                ClientConstants.journalListToMap();
+
+                MoneyJournalListDialog.instance().open();
                 break;
             default:
                 // 默认状态

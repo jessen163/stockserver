@@ -89,10 +89,10 @@ public class StStockServiceImpl implements StStockService {
     public StStock findStockListByStock(SearchStockDTO searchStockDTO) {
         StStock stStock = null;
         StStockConfig stockConfig = null;
-        if (iCacheService.getObjectByKey(CacheConstant.CACHEKEY_STOCKCONFIGLIST_MAP, searchStockDTO.getStockId(), null)!=null) {
-            stockConfig = (StStockConfig)iCacheService.getObjectByKey(CacheConstant.CACHEKEY_STOCKCONFIGLIST_MAP, searchStockDTO.getStockId(), null);
-        }
-        if (stockConfig!=null&&stockConfig.getStockCode()!=null) {
+//        if (iCacheService.getObjectByKey(CacheConstant.CACHEKEY_STOCKCONFIGLIST_MAP, searchStockDTO.getStockId(), null)!=null) {
+//            stockConfig = (StStockConfig)iCacheService.getObjectByKey(CacheConstant.CACHEKEY_STOCKCONFIGLIST_MAP, searchStockDTO.getStockId(), null);
+//        }
+        if (stockConfig!=null&&searchStockDTO.getStockId()!=null) {
             // 返回前一天的收盘价
             if (iCacheService.getObjectByKey(CacheConstant.CACHEKEY_STOCK_PRICEMAP, searchStockDTO.getStockId(), null)!=null) {
                 stStock = (StStock)iCacheService.getObjectByKey(CacheConstant.CACHEKEY_STOCK_PRICEMAP, searchStockDTO.getStockId(), null);
