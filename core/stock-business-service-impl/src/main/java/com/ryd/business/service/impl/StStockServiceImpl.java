@@ -59,6 +59,9 @@ public class StStockServiceImpl implements StStockService {
                 stockCodeStringBuffer = new StringBuffer();
             }
         }
+        if (!stockCodeStringBuffer.toString().isEmpty()) {
+            stockService.execute(new SyncStockThread(stockCodeStringBuffer.toString(), iCacheService, cdOrder, cdAnswer, this));
+        }
 
         try {
             // 等待任务执行完成

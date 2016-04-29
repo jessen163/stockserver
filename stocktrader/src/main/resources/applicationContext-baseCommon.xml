@@ -18,11 +18,11 @@
         <property name="url"  value="${jdbc.mysql.master.url}"></property>
         <property name="username"  value="${jdbc.mysql.master.username}"></property>
         <property name="password"  value="${jdbc.mysql.master.password}"></property>
-        <property name="initialSize" value="3"></property>
-        <property name="maxActive" value="50"></property>
-        <property name="maxIdle" value="20"></property>
-        <property name="minIdle" value="5"></property>
-        <property name="maxWait" value="10"></property>
+        <property name="initialSize" value="20"></property>
+        <property name="maxActive" value="500"></property>
+        <property name="maxIdle" value="100"></property>
+        <property name="minIdle" value="50"></property>
+        <property name="maxWait" value="50"></property>
     </bean>
 
     <!-- myBatis文件 -->
