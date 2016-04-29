@@ -91,6 +91,10 @@ public class StQuoteServiceImpl implements StQuoteService {
             SearchStockDTO sdto = new SearchStockDTO();
             sdto.setStockId(quote.getStockId());
             StStock stock = stStockService.findStockListByStock(sdto);
+            if (stock==null) {
+                // 股票价格信息不存在
+                throw new QuoteBusinessException("股票价格信息不存在");
+            }
             if (!isStockQuotePriceInScope(BigDecimal.valueOf(stock.getBfclosePrice()), quote.getQuotePrice())) {
                 // 超出涨跌幅
                 return -3;
@@ -249,6 +253,7 @@ public class StQuoteServiceImpl implements StQuoteService {
         } else if (searchQuoteDTO.getQuoteType() == ApplicationConstants.STOCK_QUOTETYPE_SELL){
             quoteobj = iCacheService.getObjectByKey(CacheConstant.CACHEKEY_STOCK_QUOTE_SELLQUEUE, searchQuoteDTO.getStockCode(), null);
         }
+        if (quoteobj==null) return null;
         quoteList = (ConcurrentSkipListMap<Long, StQuote>) quoteobj;
         Map.Entry<Long, StQuote> sellMap = quoteList.higherEntry(Long.MIN_VALUE);
         return sellMap==null?null:sellMap.getValue();
@@ -350,7 +355,7 @@ public class StQuoteServiceImpl implements StQuoteService {
             List<StQuote> stQuoteList = new ArrayList<StQuote>();
             for (SimulationQuoteDTO simulationQuoteDTO : simulationQuoteDTOList) {
                 StQuote quote = new StQuote();
-                quote.setAccountId("1");
+                quote.setAccountId("800891cdc704462ab0c2335460a91684");
                 quote.setStockId(simulationQuoteDTO.getStockId());
                 quote.setUserType(Short.parseShort("2")); // 马甲用户
                 quote.setQuoteType(simulationQuoteDTO.getQuoteType());
