@@ -30,6 +30,9 @@ public class ArithUtil {
 
 
     public static BigDecimal add(BigDecimal b1,BigDecimal b2){
+        if(b1==null || b2==null){
+            return null;
+        }
         return b1.add(b2);
     }
 
@@ -46,6 +49,9 @@ public class ArithUtil {
     }
 
     public static BigDecimal subtract(BigDecimal b1,BigDecimal b2){
+        if(b1==null || b2==null){
+            return null;
+        }
         return b1.subtract(b2);
     }
 
@@ -63,6 +69,9 @@ public class ArithUtil {
     }
 
     public static BigDecimal multiply(BigDecimal b1,BigDecimal b2){
+        if(b1==null || b2==null){
+            return null;
+        }
         return b1.multiply(b2);
     }
 
@@ -79,6 +88,9 @@ public class ArithUtil {
     }
 
     public static BigDecimal divide(BigDecimal b1,BigDecimal b2){
+        if(b1==null || b2==null){
+            return null;
+        }
         return div(b1, b2, DEF_DIV_SCALE);
     }
 
@@ -104,6 +116,9 @@ public class ArithUtil {
     }
 
     public static int compare(BigDecimal b1,BigDecimal b2){
+        if(b1==null || b2==null){
+            return -1;
+        }
         return b1.compareTo(b2);
     }
 

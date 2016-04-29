@@ -39,6 +39,8 @@ public class StAccount implements Serializable {
     private String remark;
     //创建时间
     private Long createtime;
+    //修改时间
+    private Long updatetime;
     //状态 1.正常 2.禁用
     private Short status;
 
@@ -144,6 +146,14 @@ public class StAccount implements Serializable {
 
     public void setCreatetime(Long createtime) {
         this.createtime = createtime;
+    }
+
+    public Long getUpdatetime() {
+        return updatetime;
+    }
+
+    public void setUpdatetime(Long updatetime) {
+        this.updatetime = updatetime;
     }
 
     public Short getStatus() {
