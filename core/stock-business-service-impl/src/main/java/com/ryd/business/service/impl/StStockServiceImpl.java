@@ -46,9 +46,11 @@ public class StStockServiceImpl implements StStockService {
         ExecutorService stockService = Executors.newFixedThreadPool(10);
         final CountDownLatch cdOrder = new CountDownLatch(1);//指挥官的命令，设置为1，指挥官一下达命令，则cutDown,变为0，战士们执行任务
 
-        List<StStockConfig> list = stStockConfigService.findStockConfig(null, 1, 50);
+        List<StStockConfig> list = stStockConfigService.findStockConfig(null, 1, Integer.MAX_VALUE);
         int count = list.size()/10+1;
         cdOrder.countDown();
+        // TODO 问题
+        count = count - 35;
         final CountDownLatch cdAnswer = new CountDownLatch(count);
         StringBuffer stockCodeStringBuffer = new StringBuffer();;
         for (StStockConfig stock: list) {
