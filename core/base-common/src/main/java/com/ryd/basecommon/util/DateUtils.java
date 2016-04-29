@@ -102,7 +102,7 @@ public class DateUtils {
      * @return String
      */
     public static String formatLongToStr(Long date, String strFormat) {
-        if (date == null)
+        if (date == null || date == 0)
             return null;
         SimpleDateFormat format1 = new SimpleDateFormat(strFormat);
         String str = null;
