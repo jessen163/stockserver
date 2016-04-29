@@ -1,6 +1,7 @@
 package com.ryd.basecommon.util;
 
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
 
 /**
  * <p>标题:精确度计算</p>
@@ -12,6 +13,8 @@ import java.math.BigDecimal;
 public class ArithUtil {
 
     private static final int DEF_DIV_SCALE=10;
+
+    private static final DecimalFormat df = new DecimalFormat("0.00");
 
     private ArithUtil(){}
 
@@ -72,7 +75,9 @@ public class ArithUtil {
         if(b1==null || b2==null){
             return null;
         }
-        return b1.multiply(b2);
+        BigDecimal rs = b1.multiply(b2);
+
+        return new BigDecimal(df.format(rs));
     }
 
     /**
