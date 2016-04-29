@@ -39,15 +39,15 @@ public class SyncStockThread implements Runnable {
         this.stockCodeStr = stockCodeStr;
         this.cacheService = cacheService;
         this.stStockService = stStockService;
-        this.cdOrder = cdOrder;
-        this.cdAnswer = cdAnswer;
+//        this.cdOrder = cdOrder;
+//        this.cdAnswer = cdAnswer;
     }
 
     @Override
     public void run() {
         logger.info("更新股票实时信息.............start...........");
         try {
-            cdOrder.await();
+//            cdOrder.await();
             // 下载单只股票信息
             String stockInfoStr = HttpclientUtil.doGet(ApplicationConstants.STOCK_SERVER_STOCKBASE_URL + stockCodeStr);
 
@@ -57,10 +57,12 @@ public class SyncStockThread implements Runnable {
             // 保存股票价格等信息
             stStockService.saveStockBatch(stockList);
             addSimulationQuote(stockList);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
         } finally {
-            cdAnswer.countDown();
+//            cdAnswer.countDown();
+//            System.out.println("countDown:" +  cdAnswer.getCount());
+//            ApplicationConstants.downloadStockThreadCount--;
         }
     }
 
@@ -184,7 +186,7 @@ public class SyncStockThread implements Runnable {
             for (int i = 0; i< priceArr.length; i++) {
                 if (amountArr[i]==0||priceArr[i]==0||typeArr[i]==0) continue;
                 SimulationQuoteDTO s = new SimulationQuoteDTO();
-                s.setStockId(stStock.getStockId());
+                s.setStockId(stStock.getStockCode());
                 s.setQuotePrice(priceArr[i]);
                 s.setAmount(amountArr[i]);
                 s.setQuoteType(typeArr[i]);
@@ -192,7 +194,7 @@ public class SyncStockThread implements Runnable {
                 simulationQuoteDTOList.add(s);
             }
         }
-        // 模拟订单
+//        // 模拟订单
         cacheService.setObjectByKey(CacheConstant.CACHEKEY_SIMULATIONQUOTELIST, simulationQuoteDTOList);
         cacheService.setObjectByKey(CacheConstant.CACHEKEY_STOCK_PRICELIST, stStockCacheList, 60*5);
 
