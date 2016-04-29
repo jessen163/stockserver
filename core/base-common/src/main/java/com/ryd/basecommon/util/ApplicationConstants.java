@@ -94,10 +94,10 @@ public class ApplicationConstants {
     public static final Short MODEL_ATRRIBUTE_DISABLED = 2;
 
     // 交易主线程是否停止
-    public static volatile boolean isMainThreadStop = false;
+    public static volatile boolean isMainThreadStop = true;
 
     // 交易子线程是否停止
-    public static volatile boolean isSubThreadStop = false;
+    public static volatile boolean isSubThreadStop = true;
 
     // 交易子线程是否等待
     public static volatile boolean isSubThreadWait = false;

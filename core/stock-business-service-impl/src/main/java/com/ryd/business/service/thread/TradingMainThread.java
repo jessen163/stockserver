@@ -1,6 +1,7 @@
 package com.ryd.business.service.thread;
 
 import com.ryd.basecommon.util.ApplicationConstants;
+import com.ryd.basecommon.util.StringUtils;
 import com.ryd.business.service.StQuoteService;
 import com.ryd.business.service.StStockService;
 import com.ryd.business.service.StTradeRecordService;
@@ -8,6 +9,7 @@ import com.ryd.business.service.StTradeRecordService;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 /**
  * 交易引擎主线程-----用户匹配报价-更新股票信息、生成马甲订单
@@ -30,11 +32,16 @@ public class TradingMainThread implements Runnable {
         while (!ApplicationConstants.isMainThreadStop) {
             System.out.println("TradingMainThread is Running!");
             List<String> stockIdList = stQuoteService.findQuoteStockIdList();
-            for (String stockId: stockIdList) {
-                // 分线程执行报价交易
-                executorService.execute(new TradingSubThread(stockId, stQuoteService, stTradeRecordService));
-
-
+            if (!StringUtils.isEmpty(stockIdList)) {
+                for (String stockId: stockIdList) {
+                    // 分线程执行报价交易
+                    executorService.execute(new TradingSubThread(stockId, stQuoteService, stTradeRecordService));
+                }
+            }
+            try {
+                TimeUnit.SECONDS.sleep(1);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
 
 

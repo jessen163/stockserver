@@ -46,14 +46,27 @@ public class StStockServiceImpl implements StStockService {
         ExecutorService stockService = Executors.newFixedThreadPool(10);
         final CountDownLatch cdOrder = new CountDownLatch(1);//指挥官的命令，设置为1，指挥官一下达命令，则cutDown,变为0，战士们执行任务
 
-        List<StStockConfig> list = stStockConfigService.findStockConfig(null, 1, 10);
-        final CountDownLatch cdAnswer = new CountDownLatch(list.size());
-        StringBuffer stockCodeStringBuffer = new StringBuffer();
+        List<StStockConfig> list = stStockConfigService.findStockConfig(null, 1, 50);
+        int count = list.size()/10+1;
+        cdOrder.countDown();
+        final CountDownLatch cdAnswer = new CountDownLatch(count);
+        StringBuffer stockCodeStringBuffer = new StringBuffer();;
         for (StStockConfig stock: list) {
             stockCodeStringBuffer.append(stock.getStockTypeName()+stock.getStockCode()).append(",");
+            if (stockCodeStringBuffer.toString().split(",").length==11) {
+                // 同步股票信息
+                stockService.execute(new SyncStockThread(stockCodeStringBuffer.toString(), iCacheService, cdOrder, cdAnswer, this));
+                stockCodeStringBuffer = new StringBuffer();
+            }
         }
-        // 同步股票信息
-        stockService.execute(new SyncStockThread(stockCodeStringBuffer.toString(), iCacheService, cdOrder, cdAnswer, this));
+
+        try {
+            // 等待任务执行完成
+            cdAnswer.await();
+            // 股票下载任务执行完成，通知交易引擎停止运行
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         return true;
     }
 

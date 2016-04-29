@@ -3,6 +3,7 @@ package com.ryd.server.stocktrader.quartz;
 import com.ryd.basecommon.util.ApplicationConstants;
 import com.ryd.business.service.StQuoteService;
 import com.ryd.business.service.StStockService;
+import com.ryd.business.service.StTradeRecordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -21,18 +22,28 @@ public class StockTraderTask {
     @Autowired
     private StQuoteService stQuoteService;
 
+    @Autowired
+    private StTradeRecordService stTradeRecordService;
+
     /**
      * 运行股票交易
      * 周一到周五 运行
+     * TODO 每天早上8：30（提前一个小时）启动交易引擎
      */
     @Scheduled(cron = "0 * * ? * MON-FRI")
     public void runStockTrader() {
-        // TODO 每天早上8：30（提前一个小时）启动交易引擎
+        if (ApplicationConstants.isMainThreadStop||ApplicationConstants.isSubThreadStop) {
+            ApplicationConstants.isMainThreadStop = false;
+            ApplicationConstants.isSubThreadStop = false;
+            stTradeRecordService.updateStockTrading();
+        }
         // 每天下午4：00停止交易引擎
         // 每分钟停止交易业务，启动股票价格更新线程
         stStockService.updateRealTimeStockInfo();
         ApplicationConstants.isSubThreadWait = true;
         // 生成马甲订单
         stQuoteService.addSimulationQuote();
+        // 4、完成后模拟单后启动报价
+        ApplicationConstants.isSubThreadWait = false;
     }
 }
