@@ -39,51 +39,28 @@ public class SyncStockThread implements Runnable {
         this.stockCodeStr = stockCodeStr;
         this.cacheService = cacheService;
         this.stStockService = stStockService;
-//        this.cdOrder = cdOrder;
-//        this.cdAnswer = cdAnswer;
+        this.cdOrder = cdOrder;
+        this.cdAnswer = cdAnswer;
     }
 
     @Override
     public void run() {
-//            logger.info("更新股票实时信息.............start...........");
+        logger.info("更新股票实时信息.............start...........");
         try {
-//            StringBuffer stockCodeStringBuffer = new StringBuffer();
-//            for (StStockConfig stStockConfig: stStockConfigList) {
-//                stockCodeStringBuffer.append(stStockConfig.getStockTypeName()+stStockConfig.getStockCode()).append(",");
-//            }
-
-//            LinkedList<StStock> stStockList = null;
-//            Object obj = cacheService.getObjectByKey(CacheConstant.CACHEKEY_STOCK_PRICELIST, stock.getStockCode(), null);
-//            if (obj != null) {
-//                stStockList = (LinkedList<StStock>) obj;
-//            }
-//
-//            if (stStockList == null) {
-//                stStockList = new LinkedList<StStock>();
-//            }
-//            cdOrder.await();
+            cdOrder.await();
             // 下载单只股票信息
             String stockInfoStr = HttpclientUtil.doGet(ApplicationConstants.STOCK_SERVER_STOCKBASE_URL + stockCodeStr);
-//            String stockStr = HttpclientUtil.doGet(ApplicationConstants.STOCK_SERVER_STOCKBASE_URL + (stock.getStockType().intValue() == 1 ? "sh" : "sz") + stock.getStockCode());
-//            StStock newStock = getStockByStr(stock.getStockCode(), stockStr);
-            // stockGetInfoFromApiI.getStStockInfo(stock.getStockType(), stock.getStockCode());
+
             // 通过字符串转换成股票信息
             List<StStock> stockList = getStockInfoByStr(stockCodeStr, stockInfoStr);
 
             // 保存股票价格等信息
             stStockService.saveStockBatch(stockList);
             addSimulationQuote(stockList);
-//            if (stStockList.size() == 5) {
-//                stStockList.removeFirst();
-//            }
-//            stStockList.add(newStock);
-
-//            cacheService.setObjectByKey(CacheConstant.CACHEKEY_STOCK_PRICELIST, stock.getStockCode(), stStockList, 60 * 60 * 1000);
-
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         } finally {
-//            cdAnswer.countDown();
+            cdAnswer.countDown();
         }
     }
 
