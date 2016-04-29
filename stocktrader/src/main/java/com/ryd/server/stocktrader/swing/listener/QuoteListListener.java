@@ -26,7 +26,7 @@ public class QuoteListListener extends MouseAdapter implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
-		DiyNettyMessage.NettyMessage.Builder builder = TestParamBuilderUtil.getAccount(ApplicationConstants.NETTYMESSAGE_ID_QUOTE,ClientConstants.stAccount.getId(),null,null);
+		DiyNettyMessage.NettyMessage.Builder builder = TestParamBuilderUtil.getAccount(ApplicationConstants.NETTYMESSAGE_ID_MYQUOTELIST,ClientConstants.stAccount.getId(),null,null);
 		MessageServiceImpl.sendMessage(builder.build());
 	}
 }

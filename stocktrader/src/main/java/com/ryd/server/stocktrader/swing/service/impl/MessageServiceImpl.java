@@ -90,7 +90,7 @@ public class MessageServiceImpl extends MessageServiceI {
                 DiyNettyMessage.AccountInfo ainfo = request.getAccountInfoList().get(0);
 
                 StAccount racc = new StAccount();
-                racc.setId(UUIDUtils.uuidTrimLine());
+                racc.setId(ainfo.getAccountId());
                 racc.setRealName(ainfo.getRealName());
                 racc.setAccountName(ainfo.getAccountName());
                 racc.setPassword(ainfo.getPassword());
