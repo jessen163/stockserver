@@ -56,8 +56,8 @@ public class ParamBuilderUtil {
         builder.setSellFourAmount(stStock.getSellFourAmount().intValue());
         builder.setSellFivePrice(stStock.getSellFivePrice().doubleValue());
         builder.setSellFiveAmount(stStock.getSellFiveAmount().intValue());
-        builder.setStockDate(DateUtils.formatDateToStr(stStock.getStockDate(), DateUtils.DATE_FORMAT));
-        builder.setStockTime(DateUtils.formatDateToStr(stStock.getStockTime(), "HH:mm:ss"));
+//        builder.setStockDate(DateUtils.formatDateToStr(stStock.getStockDate(), DateUtils.DATE_FORMAT));
+//        builder.setStockTime(DateUtils.formatDateToStr(stStock.getStockTime(), "HH:mm:ss"));
 
         return builder;
     }

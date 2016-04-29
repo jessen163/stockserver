@@ -5,6 +5,7 @@ import com.ryd.basecommon.util.ApplicationConstants;
 import com.ryd.basecommon.util.DateUtils;
 import com.ryd.basecommon.util.UUIDUtils;
 import com.ryd.business.model.*;
+import org.apache.commons.lang.StringUtils;
 
 import java.math.BigDecimal;
 
@@ -68,11 +69,13 @@ public class TestParamBuilderUtil {
         builder.setKey("1");
         builder.setType(type);
 
-        DiyNettyMessage.StockInfo.Builder paramBuilder = DiyNettyMessage.StockInfo.newBuilder();
-        paramBuilder.setId(stockId);
-        paramBuilder.setStockCode(stockId);
+        if(StringUtils.isNotBlank(stockId)) {
+            DiyNettyMessage.StockInfo.Builder paramBuilder = DiyNettyMessage.StockInfo.newBuilder();
+            paramBuilder.setId(stockId);
+            paramBuilder.setStockCode(stockId);
 
-        builder.addStockInfo(paramBuilder);
+            builder.addStockInfo(paramBuilder);
+        }
 
         return builder;
     }
@@ -85,6 +88,7 @@ public class TestParamBuilderUtil {
         builder.setId(ApplicationConstants.NETTYMESSAGE_ID_QUOTE);
         builder.setStatus(0);
         builder.setKey("1");
+        builder.setAccountId(accountId);
 
         DiyNettyMessage.QuoteInfo.Builder paramBuilder =  DiyNettyMessage.QuoteInfo.newBuilder();
         paramBuilder.setStockId(stockId);
@@ -130,11 +134,6 @@ public class TestParamBuilderUtil {
         builder.setSize(Integer.MAX_VALUE);
         builder.setStartTime(startTime);
         builder.setEndTime(endTime);
-
-        DiyNettyMessage.AccountInfo.Builder paramBuilder =  DiyNettyMessage.AccountInfo.newBuilder();
-        paramBuilder.setAccountId(accountId);
-
-        builder.addAccountInfo(paramBuilder);
 
         return builder;
     }
