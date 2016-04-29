@@ -363,9 +363,6 @@ public class StQuoteServiceImpl implements StQuoteService {
                 e.printStackTrace();
             }
         }
-
-        // 4、完成后模拟单后启动报价
-        ApplicationConstants.isSubThreadWait = false;
     }
 
     /**
