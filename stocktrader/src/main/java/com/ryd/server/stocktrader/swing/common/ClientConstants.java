@@ -1,9 +1,6 @@
 package com.ryd.server.stocktrader.swing.common;
 
-import com.ryd.business.model.StAccount;
-import com.ryd.business.model.StPosition;
-import com.ryd.business.model.StQuote;
-import com.ryd.business.model.StStock;
+import com.ryd.business.model.*;
 import org.apache.commons.collections.CollectionUtils;
 
 import java.util.HashMap;
@@ -32,6 +29,16 @@ public class ClientConstants {
     // 仓位报价信息
     public static Map<String, StQuote> stQuoteMap = new HashMap<String, StQuote>();
 
+    // 交易记录信息
+    public static List<StTradeRecord> stTradeRecordList = null;
+    // 交易记录信息
+    public static Map<String, StTradeRecord> stTradeRecordMap = new HashMap<String, StTradeRecord>();
+
+    // 资金流水信息
+    public static List<StMoneyJournal> stMoneyJournalList = null;
+    // 资金流水信息
+    public static Map<String, StMoneyJournal> stMoneyJournalMap = new HashMap<String, StMoneyJournal>();
+
     public static void stockListToMap() {
         if (CollectionUtils.isNotEmpty(stStockList)) {
             stStockMap.clear();
@@ -56,6 +63,24 @@ public class ClientConstants {
             stQuoteMap.clear();
             for (StQuote sq : stQuoteList) {
                 stQuoteMap.put(sq.getQuoteId(),sq);
+            }
+        }
+    }
+
+    public static void tradeRecordListToMap(){
+        if(CollectionUtils.isNotEmpty(stTradeRecordList)) {
+            stTradeRecordMap.clear();
+            for (StTradeRecord rt : stTradeRecordList) {
+                stTradeRecordMap.put(rt.getRecordId(),rt);
+            }
+        }
+    }
+
+    public static void journalListToMap(){
+        if(CollectionUtils.isNotEmpty(stMoneyJournalList)) {
+            stMoneyJournalMap.clear();
+            for (StMoneyJournal mj : stMoneyJournalList) {
+                stMoneyJournalMap.put(mj.getRecordId(),mj);
             }
         }
     }
