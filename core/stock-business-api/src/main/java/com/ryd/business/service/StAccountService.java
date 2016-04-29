@@ -1,5 +1,6 @@
 package com.ryd.business.service;
 
+import com.ryd.business.dto.SearchAccountDTO;
 import com.ryd.business.model.StAccount;
 
 import java.math.BigDecimal;
@@ -68,12 +69,10 @@ public interface StAccountService {
 
     /**
      * 查询用户列表
-     * @param account
-     * @param pageIndex
-     * @param limit
+     * @param searchAccountDTO
      * @return
      */
-    public List<StAccount> findStAccountList(StAccount account, int pageIndex, int limit);
+    public List<StAccount> findStAccountList(SearchAccountDTO searchAccountDTO);
 
     /**
      * 删除用户
