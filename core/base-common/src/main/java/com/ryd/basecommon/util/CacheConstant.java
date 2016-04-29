@@ -62,6 +62,8 @@ public class CacheConstant {
     public static final String CACHEKEY_STOCKCONFIGLIST_MAP  = "stockConfigListMap";
     // 缓存key-股票ID信息-MAP集合
     public static final String CACHEKEY_STOCKCONFIGID_LIST  = "stockConfigIdList";
+    // 缓存key-股票ID名称信息-MAP集合
+    public static final String CACHEKEY_STOCKCONFIGIDNAME_MAP  = "stockConfigIdNameMap";
 
     // 缓存key-股票ID信息-马甲订单集合
     public static final String CACHEKEY_SIMULATIONQUOTELIST = "simulationQuoteList";

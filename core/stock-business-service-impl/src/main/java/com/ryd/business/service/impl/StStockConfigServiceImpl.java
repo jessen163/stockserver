@@ -45,7 +45,8 @@ public class StStockConfigServiceImpl implements StStockConfigService {
                 for (StStockConfig stock: stStockConfigList) {
 //                    stockMap.put(stock.getId(), stock);
                     stockIdList.add(stock.getStockCode() + ":" + stock.getStockTypeName());
-                    iCacheService.setObjectByKey(CacheConstant.CACHEKEY_STOCKCONFIGLIST_MAP, stock.getId(), stock, 60*60*8);
+                    iCacheService.setObjectByKey(CacheConstant.CACHEKEY_STOCKCONFIGLIST_MAP, stock.getId(), stock, 60 * 60 * 8);
+                    iCacheService.setStringByKey(CacheConstant.CACHEKEY_STOCKCONFIGIDNAME_MAP, stock.getStockCode(), stock.getId(), Integer.MAX_VALUE);
                 }
                 iCacheService.setObjectByKey(CacheConstant.CACHEKEY_QUEUE_STOCKID_LIST, stockIdList);
             }
@@ -67,5 +68,15 @@ public class StStockConfigServiceImpl implements StStockConfigService {
         }
 
         return stStockConfig;
+    }
+
+    @Override
+    public String getStockIdByStockCode(String stockCode) {
+        String str = iCacheService.getStringByKey(CacheConstant.CACHEKEY_STOCKCONFIGIDNAME_MAP, stockCode, null);
+        if (str == null) {
+            this.findStockConfig(null, 1, Integer.MAX_VALUE);
+        }
+        str = iCacheService.getStringByKey(CacheConstant.CACHEKEY_STOCKCONFIGIDNAME_MAP, stockCode, null);
+        return str;
     }
 }
