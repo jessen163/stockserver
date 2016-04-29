@@ -57,8 +57,9 @@ public class StStockConfigServiceImpl implements StStockConfigService {
     @Override
     public StStockConfig findStockConfigById(StStockConfig stStockConfig) {
         Map<String, StStockConfig> stockMap = null;
-        if (iCacheService.getObjectByKey(CacheConstant.CACHEKEY_STOCKCONFIGLIST_MAP, null)!=null) {
-            stockMap = (Map<String, StStockConfig>)iCacheService.getObjectByKey(CacheConstant.CACHEKEY_STOCKCONFIGLIST, null);
+        Object stockObj = iCacheService.getObjectByKey(CacheConstant.CACHEKEY_STOCKCONFIGLIST_MAP, null);
+        if (stockObj!=null) {
+            stockMap = (Map<String, StStockConfig>)stockObj;
         }
         if (stockMap==null||stockMap.get(stStockConfig.getId())==null){
             this.findStockConfig(null, 0, Integer.MAX_VALUE);
