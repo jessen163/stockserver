@@ -3,6 +3,7 @@ package com.ryd.business.service.impl;
 import com.ryd.basecommon.util.ApplicationConstants;
 import com.ryd.basecommon.util.ArithUtil;
 import com.ryd.business.dao.StAccountDao;
+import com.ryd.business.dto.SearchAccountDTO;
 import com.ryd.business.model.StAccount;
 import com.ryd.business.service.StAccountService;
 import com.ryd.cache.service.ICacheService;
@@ -95,9 +96,13 @@ public class StAccountServiceImpl implements StAccountService {
     }
 
     @Override
-    public List<StAccount> findStAccountList(StAccount account, int pageIndex, int limit) {
-        Integer offset = (pageIndex-1)*limit;
-        return stAccountDao.getTList(account,null,null,limit,offset);
+    public List<StAccount> findStAccountList(SearchAccountDTO searchAccountDTO) {
+        StAccount account = new StAccount();
+        account.setId(searchAccountDTO.getAccountId());
+
+        Long startTime = searchAccountDTO.getStartDate().getTime();
+        Long endTime = searchAccountDTO.getEndDate().getTime();
+        return stAccountDao.getTList(account,startTime,endTime,searchAccountDTO.getLimit(),searchAccountDTO.getOffset());
     }
 
     @Override
