@@ -1,9 +1,6 @@
 package com.ryd.business.service.impl;
 
-import com.ryd.basecommon.util.ApplicationConstants;
-import com.ryd.basecommon.util.ArithUtil;
-import com.ryd.basecommon.util.CacheConstant;
-import com.ryd.basecommon.util.StringUtils;
+import com.ryd.basecommon.util.*;
 import com.ryd.business.dao.StQuoteDao;
 import com.ryd.business.dto.SearchQuoteDTO;
 import com.ryd.business.dto.SearchStockDTO;
@@ -103,7 +100,7 @@ public class StQuoteServiceImpl implements StQuoteService {
         // 账户金额是否够用
         for (StQuote quote: quoteList) {
             boolean rs=false;
-            quote.setQuoteId(UUID.randomUUID().toString());
+            quote.setQuoteId(UUIDUtils.uuidTrimLine());
             // 用于排序的字段
             long timeSort = Integer.parseInt(String.valueOf(System.currentTimeMillis()).substring(7));
             quote.setTimeSort(timeSort);

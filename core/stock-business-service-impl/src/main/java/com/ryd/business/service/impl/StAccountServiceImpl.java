@@ -2,6 +2,7 @@ package com.ryd.business.service.impl;
 
 import com.ryd.basecommon.util.ApplicationConstants;
 import com.ryd.basecommon.util.ArithUtil;
+import com.ryd.basecommon.util.UUIDUtils;
 import com.ryd.business.dao.StAccountDao;
 import com.ryd.business.dto.SearchAccountDTO;
 import com.ryd.business.model.StAccount;
@@ -31,6 +32,7 @@ public class StAccountServiceImpl implements StAccountService {
 
     @Override
     public boolean addStAccount(StAccount account) {
+        account.setId(UUIDUtils.uuidTrimLine());
         account.setAccountType(ApplicationConstants.ACCOUNT_TYPE_REAL);
         account.setCreatetime(System.currentTimeMillis());
         account.setStatus(ApplicationConstants.MODEL_ATRRIBUTE_NORMAL);
