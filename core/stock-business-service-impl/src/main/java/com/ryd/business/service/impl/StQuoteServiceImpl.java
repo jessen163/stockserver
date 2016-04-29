@@ -82,7 +82,7 @@ public class StQuoteServiceImpl implements StQuoteService {
         // 将报价放入Kafka 失败后不回滚
         if (StringUtils.isEmpty(quoteList)) return -1; // 参数不匹配
         // 交易时间内
-        if (stDateScheduleService.getIsCanQuote()) {
+        if (!stDateScheduleService.getIsCanQuote()) {
             // 非交易时间
             return -2;
         }
