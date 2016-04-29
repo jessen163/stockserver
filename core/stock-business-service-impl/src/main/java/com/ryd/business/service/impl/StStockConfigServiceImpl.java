@@ -31,7 +31,7 @@ public class StStockConfigServiceImpl implements StStockConfigService {
     @Override
     public List<StStockConfig> findStockConfig(StStockConfig stStockConfig, int pageIndex, int limit) {
         List<StStockConfig> stStockConfigList = null;
-        Object stockConfigListObj = iCacheService.getObjectByKey(CacheConstant.CACHEKEY_STOCKCONFIGLIST, null);
+        Object stockConfigListObj = iCacheService.getObjectByKey(CacheConstant.CACHEKEY_STOCKCONFIGLIST+pageIndex+limit, null);
         if (stockConfigListObj!=null) {
             stStockConfigList = (List<StStockConfig>)stockConfigListObj;
         } else {
@@ -39,7 +39,7 @@ public class StStockConfigServiceImpl implements StStockConfigService {
             stStockConfigList = stStockConfigDao.getTList(null, null, null, limit, offset);
 
             if (!StringUtils.isEmpty(stStockConfigList)) {
-                iCacheService.setObjectByKey(CacheConstant.CACHEKEY_STOCKCONFIGLIST, stStockConfigList);
+                iCacheService.setObjectByKey(CacheConstant.CACHEKEY_STOCKCONFIGLIST+pageIndex+limit, stStockConfigList);
 //                Map<String, StStockConfig> stockMap = new HashMap<String, StStockConfig>();
                 List<String> stockIdList = new ArrayList<String>();
                 for (StStockConfig stock: stStockConfigList) {

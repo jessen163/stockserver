@@ -299,7 +299,7 @@ public class StQuoteServiceImpl implements StQuoteService {
                 stockIdList.add(quote.getStockId());
 
                 // 存入缓存
-                iCacheService.setObjectByKey(CacheConstant.CACHEKEY_QUEUE_STOCKID_LIST, quote.getQuoteId());
+                iCacheService.setObjectByKey(CacheConstant.CACHEKEY_QUEUE_STOCKID_LIST, stockIdList);
             }
         }
 
