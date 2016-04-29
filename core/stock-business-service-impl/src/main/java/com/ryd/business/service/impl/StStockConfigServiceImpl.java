@@ -31,8 +31,9 @@ public class StStockConfigServiceImpl implements StStockConfigService {
     @Override
     public List<StStockConfig> findStockConfig(StStockConfig stStockConfig, int pageIndex, int limit) {
         List<StStockConfig> stStockConfigList = null;
-        if (iCacheService.getObjectByKey(CacheConstant.CACHEKEY_STOCKCONFIGLIST, null)!=null) {
-            stStockConfigList = (List<StStockConfig>)iCacheService.getObjectByKey(CacheConstant.CACHEKEY_STOCKCONFIGLIST, null);
+        Object stockConfigListObj = iCacheService.getObjectByKey(CacheConstant.CACHEKEY_STOCKCONFIGLIST, null);
+        if (stockConfigListObj!=null) {
+            stStockConfigList = (List<StStockConfig>)stockConfigListObj;
         } else {
             int offset = (pageIndex-1)*limit;
             stStockConfigList = stStockConfigDao.getTList(null, null, null, limit, offset);
