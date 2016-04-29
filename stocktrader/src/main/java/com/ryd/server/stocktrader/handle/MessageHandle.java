@@ -4,7 +4,6 @@ import com.ryd.basecommon.protocol.protobuf.DiyNettyMessage;
 import com.ryd.basecommon.util.ApplicationConstants;
 import com.ryd.basecommon.util.DateUtils;
 import com.ryd.basecommon.util.SpringUtils;
-import com.ryd.basecommon.util.UUIDUtils;
 import com.ryd.business.dto.*;
 import com.ryd.business.model.*;
 import com.ryd.business.service.*;
@@ -91,7 +90,6 @@ public class MessageHandle {
                 DiyNettyMessage.QuoteInfo quote = request.getQuoteInfoList().get(0);
 
                 StQuote q = new StQuote();
-                q.setQuoteId(UUIDUtils.uuidTrimLine());
                 q.setStockId(quote.getStockId());
                 q.setAccountId(request.getAccountId());
                 q.setQuotePrice(BigDecimal.valueOf(quote.getStockPrice()));
@@ -251,7 +249,6 @@ public class MessageHandle {
                 DiyNettyMessage.AccountInfo ainfo = request.getAccountInfoList().get(0);
 
                 StAccount racc = new StAccount();
-                racc.setId(UUIDUtils.uuidTrimLine());
                 racc.setRealName(ainfo.getRealName());
                 racc.setAccountName(ainfo.getAccountName());
                 racc.setPassword(ainfo.getPassword());
