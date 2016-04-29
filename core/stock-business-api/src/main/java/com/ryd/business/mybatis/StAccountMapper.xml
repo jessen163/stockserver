@@ -15,11 +15,12 @@
     <result column="sex" property="sex" jdbcType="SMALLINT" />
     <result column="remark" property="remark" jdbcType="VARCHAR" />
     <result column="createtime" property="createtime" jdbcType="BIGINT" />
+    <result column="updatetime" property="updatetime" jdbcType="BIGINT" />
     <result column="status" property="status" jdbcType="SMALLINT" />
   </resultMap>
   <sql id="Base_Column_List" >
     id, real_name, account_name, account_num, password, total_assets, use_money, account_level, 
-    account_type, mobile, sex, remark, createtime, status
+    account_type, mobile, sex, remark, createtime, updatetime, status
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
@@ -55,7 +56,13 @@
         and account_type = #{account.accountType,jdbcType=SMALLINT}
       </if>
       <if test="account.status != null" >
-        and status = #{account.status,jdbcType=SMALLINT},
+        and status = #{account.status,jdbcType=SMALLINT}
+      </if>
+      <if test="startTime != null" >
+        and createtime &gt;= #{startTime,jdbcType=BIGINT}
+      </if>
+      <if test="endTime != null" >
+        and createtime &lt;= #{endTime,jdbcType=BIGINT}
       </if>
     </trim>
     limit #{offset, jdbcType=INTEGER},#{limit, jdbcType=INTEGER}
@@ -75,26 +82,26 @@
       account_num, password, total_assets, 
       use_money, account_level, account_type, 
       mobile, sex, remark, 
-      createtime, status)
+      createtime, updatetime, status)
     values (#{id,jdbcType=CHAR}, #{realName,jdbcType=VARCHAR}, #{accountName,jdbcType=VARCHAR}, 
       #{accountNum,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{totalAssets,jdbcType=DECIMAL}, 
       #{useMoney,jdbcType=DECIMAL}, #{accountLevel,jdbcType=SMALLINT}, #{accountType,jdbcType=SMALLINT}, 
       #{mobile,jdbcType=VARCHAR}, #{sex,jdbcType=SMALLINT}, #{remark,jdbcType=VARCHAR}, 
-      #{createtime,jdbcType=BIGINT}, #{status,jdbcType=SMALLINT})
+      #{createtime,jdbcType=BIGINT}, #{updatetime,jdbcType=BIGINT}, #{status,jdbcType=SMALLINT})
   </insert>
   <insert id ="insertBatch" parameterType="java.util.List" >
     insert into  st_account (id, real_name, account_name,
     account_num, password, total_assets,
     use_money, account_level, account_type,
     mobile, sex, remark,
-    createtime, status)
+    createtime, updatetime, status)
     values
     <foreach collection ="list" item ="item" index ="index" separator =",">
       (#{item.id,jdbcType=CHAR}, #{item.realName,jdbcType=VARCHAR}, #{item.accountName,jdbcType=VARCHAR},
       #{item.accountNum,jdbcType=VARCHAR}, #{item.password,jdbcType=VARCHAR}, #{item.totalAssets,jdbcType=DECIMAL},
       #{item.useMoney,jdbcType=DECIMAL}, #{item.accountLevel,jdbcType=SMALLINT}, #{item.accountType,jdbcType=SMALLINT},
       #{item.mobile,jdbcType=VARCHAR}, #{item.sex,jdbcType=SMALLINT}, #{item.remark,jdbcType=VARCHAR},
-      #{item.createtime,jdbcType=BIGINT}, #{item.status,jdbcType=SMALLINT})
+      #{item.createtime,jdbcType=BIGINT}, #{item.updatetime,jdbcType=BIGINT}, #{item.status,jdbcType=SMALLINT})
     </foreach>
   </insert>
   <insert id="insertSelective" parameterType="com.ryd.business.model.StAccount" >
@@ -138,6 +145,9 @@
       </if>
       <if test="createtime != null" >
         createtime,
+      </if>
+      <if test="updatetime != null" >
+        updatetime,
       </if>
       <if test="status != null" >
         status,
@@ -183,6 +193,9 @@
       <if test="createtime != null" >
         #{createtime,jdbcType=BIGINT},
       </if>
+      <if test="updatetime != null" >
+        #{updatetime,jdbcType=BIGINT},
+      </if>
       <if test="status != null" >
         #{status,jdbcType=SMALLINT},
       </if>
@@ -227,6 +240,9 @@
       <if test="createtime != null" >
         createtime = #{createtime,jdbcType=BIGINT},
       </if>
+      <if test="updatetime != null" >
+        updatetime = #{updatetime,jdbcType=BIGINT},
+      </if>
       <if test="status != null" >
         status = #{status,jdbcType=SMALLINT},
       </if>
@@ -247,6 +263,7 @@
       sex = #{sex,jdbcType=SMALLINT},
       remark = #{remark,jdbcType=VARCHAR},
       createtime = #{createtime,jdbcType=BIGINT},
+      updatetime = #{updatetime,jdbcType=BIGINT},
       status = #{status,jdbcType=SMALLINT}
     where id = #{id,jdbcType=CHAR}
   </update>
@@ -266,6 +283,7 @@
         sex = #{item.sex,jdbcType=SMALLINT},
         remark = #{item.remark,jdbcType=VARCHAR},
         createtime = #{item.createtime,jdbcType=BIGINT},
+        updatetime = #{item.updatetime,jdbcType=BIGINT},
         status = #{item.status,jdbcType=SMALLINT}
       </set>
       where id = #{item.id,jdbcType=CHAR}
@@ -310,6 +328,9 @@
         </if>
         <if test="item.createtime != null" >
           createtime = #{item.createtime,jdbcType=BIGINT},
+        </if>
+        <if test="item.updatetime != null" >
+          updatetime = #{item.updatetime,jdbcType=BIGINT},
         </if>
         <if test="item.status != null" >
           status = #{item.status,jdbcType=SMALLINT},

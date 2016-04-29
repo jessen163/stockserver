@@ -30,6 +30,8 @@ public interface StAccountMapper {
     int updateBatchSelective(List<StAccount> list);
 
     List<StAccount> selectListByKeySelective(@Param(value = "account") StAccount account,
+                                             @Param(value = "startTime") Long startTime,
+                                             @Param(value = "endTime") Long endTime,
                                              @Param(value = "limit") Integer limit,
                                              @Param(value = "offset") Integer offset);
 
