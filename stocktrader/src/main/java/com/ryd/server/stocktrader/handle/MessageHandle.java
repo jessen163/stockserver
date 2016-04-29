@@ -82,10 +82,10 @@ public class MessageHandle {
 
                 if(account !=null ){
                     builder.setStatus(1);
+                    builder.addAccountInfo(DiyNettyMessage.AccountInfo.newBuilder().setAccountId(account.getId()).setAccountNum(account.getAccountNum()));
                 }else{
                     builder.setStatus(2);
                 }
-                builder.addAccountInfo(DiyNettyMessage.AccountInfo.newBuilder().setAccountId(account.getId()).setAccountNum(account.getAccountNum()));
                 break;
             case ApplicationConstants.NETTYMESSAGE_ID_QUOTE:
                 DiyNettyMessage.QuoteInfo quote = request.getQuoteInfoList().get(0);
@@ -218,6 +218,7 @@ public class MessageHandle {
                 boolean sars = stAccountService.updateStAccount(sacc);
                 if(sars){
                     builder.setStatus(1);
+                    builder.addAccountInfo(DiyNettyMessage.AccountInfo.newBuilder().setAccountId(sacc.getId()));
                 }else{
                     builder.setStatus(2);
                 }
@@ -265,6 +266,7 @@ public class MessageHandle {
                 boolean rars = stAccountService.addStAccount(racc);
                 if(rars){
                     builder.setStatus(1);
+                    builder.addAccountInfo(DiyNettyMessage.AccountInfo.newBuilder().setAccountId(racc.getId()));
                 }else{
                     builder.setStatus(2);
                 }
