@@ -58,8 +58,10 @@ public class MessageHandle {
                 searchStockDTO.setBoardType(request.getType());
                 List<StStock> stStocks = stStockService.findStockList(searchStockDTO);
 
-                for(StStock stc : stStocks) {
-                    builder.addStockInfo(ParamBuilderUtil.getStockInfoBuilder(stc));
+                if (stStocks!=null) {
+                    for(StStock stc : stStocks) {
+                        builder.addStockInfo(ParamBuilderUtil.getStockInfoBuilder(stc));
+                    }
                 }
 
                 builder.setStatus(1);
