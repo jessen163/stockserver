@@ -67,22 +67,22 @@ public class StTradeRecordServiceImpl implements StTradeRecordService {
         // 记录资金流水，更新双方报价信息
         // 操作过程中（每分钟）停止交易，获取股票信息（调用股票更新方法），生成马甲订单，完成后重新启动交易方法
         ExecutorService tradingservice = Executors.newCachedThreadPool();
+
         tradingservice.execute(new TradingMainThread(tradingservice, stStockService, stQuoteService, this));
     }
 
     @Override
     public void updateTradeSettling(StQuote buyQuote, StQuote sellQuote) {
         //交易股票
-        SearchStockDTO sdto = new SearchStockDTO();
-        sdto.setStockId(buyQuote.getStockId());
-        StStock sts = stStockService.findStockListByStock(sdto);
+//        SearchStockDTO sdto = new SearchStockDTO();
+//        sdto.setStockId(buyQuote.getStockId());
+//        StStock sts = stStockService.findStockListByStock(sdto);
 
         //股票交易数量
         long tradeStockAmount = 0;
 
         //买少卖多
         if (buyQuote.getCurrentAmount().longValue() < sellQuote.getCurrentAmount().longValue()) {
-
             //股票交易数量为买家购买数量
             tradeStockAmount = buyQuote.getCurrentAmount();
 
@@ -99,8 +99,8 @@ public class StTradeRecordServiceImpl implements StTradeRecordService {
             stQuoteService.updateQuote(buyQuote);
             sellQuote.setStatus(ApplicationConstants.STOCK_STQUOTE_STATUS_DEALING);
             stQuoteService.updateQuote(sellQuote);
-        } else if (buyQuote.getCurrentAmount().longValue() == sellQuote.getCurrentAmount().longValue()) {//买卖相等
-
+        } else if (buyQuote.getCurrentAmount().longValue() == sellQuote.getCurrentAmount().longValue()) {
+            //买卖相等
             tradeStockAmount = buyQuote.getCurrentAmount();
             //处理交易
             trading(buyQuote, sellQuote, tradeStockAmount);
@@ -113,8 +113,8 @@ public class StTradeRecordServiceImpl implements StTradeRecordService {
             stQuoteService.updateQuote(buyQuote);
             sellQuote.setStatus(ApplicationConstants.STOCK_STQUOTE_STATUS_ALREADYDEAL);
             stQuoteService.updateQuote(sellQuote);
-        }else if(buyQuote.getCurrentAmount().longValue() > sellQuote.getCurrentAmount().longValue()){//买多卖少
-
+        }else if(buyQuote.getCurrentAmount().longValue() > sellQuote.getCurrentAmount().longValue()){
+            //买多卖少
             //股票交易数量为卖家卖掉数量
             tradeStockAmount = sellQuote.getCurrentAmount();
             //处理交易

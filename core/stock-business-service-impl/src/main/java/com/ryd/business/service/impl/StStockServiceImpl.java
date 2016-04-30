@@ -78,11 +78,12 @@ public class StStockServiceImpl implements StStockService {
     @Override
     public List<StStock> findStockList(SearchStockDTO searchStockDTO) {
         List<StStock> stockList = null;
-        if (iCacheService.getObjectByKey(CacheConstant.CACHEKEY_STOCK_PRICELIST, null)!=null) {
-            stockList = (List<StStock>)iCacheService.getObjectByKey(CacheConstant.CACHEKEY_STOCK_PRICELIST, null);
-        }
-        if (stockList==null) {
-            stockList = stStockDao.findStStockListCurrentTime(searchStockDTO);
+        Object stockObj = iCacheService.getObjectByKey(CacheConstant.CACHEKEY_STOCK_PRICELIST, null);
+        if (stockObj != null) {
+            stockList = (List<StStock>)stockObj;
+        } else {
+//            stockList = stStockDao.findStStockListCurrentTime(searchStockDTO);
+            // TODO 缓存没有，暂时不取
         }
         return stockList;
     }
@@ -90,14 +91,17 @@ public class StStockServiceImpl implements StStockService {
     @Override
     public StStock findStockListByStock(SearchStockDTO searchStockDTO) {
         StStock stStock = null;
-        StStockConfig stockConfig = null;
+//        StStockConfig stockConfig = null;
 //        if (iCacheService.getObjectByKey(CacheConstant.CACHEKEY_STOCKCONFIGLIST_MAP, searchStockDTO.getStockId(), null)!=null) {
 //            stockConfig = (StStockConfig)iCacheService.getObjectByKey(CacheConstant.CACHEKEY_STOCKCONFIGLIST_MAP, searchStockDTO.getStockId(), null);
 //        }
         if (searchStockDTO!=null&&searchStockDTO.getStockId()!=null) {
+            Object stockPriceObj = iCacheService.getObjectByKey(CacheConstant.CACHEKEY_STOCK_PRICEMAP, searchStockDTO.getStockId(), null);
             // 返回前一天的收盘价
-            if (iCacheService.getObjectByKey(CacheConstant.CACHEKEY_STOCK_PRICEMAP, searchStockDTO.getStockId(), null)!=null) {
-                stStock = (StStock)iCacheService.getObjectByKey(CacheConstant.CACHEKEY_STOCK_PRICEMAP, searchStockDTO.getStockId(), null);
+            if (stockPriceObj != null) {
+                stStock = (StStock) stockPriceObj;
+            } else {
+                // TODO 从数据库获取最新的报价信息
             }
         }
         return stStock;

@@ -25,10 +25,10 @@ import java.util.concurrent.ConcurrentSkipListMap;
 @Service
 public class StSettleRecordServiceImpl implements StSettleRecordService {
 
-    @Autowired
-    private StSettleRecordDao stSettleRecordDao;
-    @Autowired
-    private StStockService stStockService;
+//    @Autowired
+//    private StSettleRecordDao stSettleRecordDao;
+//    @Autowired
+//    private StStockService stStockService;
     @Autowired
     private StAccountService stAccountService;
     @Autowired
@@ -37,8 +37,8 @@ public class StSettleRecordServiceImpl implements StSettleRecordService {
     private StQuoteService stQuoteService;
     @Autowired
     private StPositionService stPositionService;
-    @Autowired
-    private ICacheService iCacheService;
+//    @Autowired
+//    private ICacheService iCacheService;
 
     @Override
     public void updateStockSettling() {

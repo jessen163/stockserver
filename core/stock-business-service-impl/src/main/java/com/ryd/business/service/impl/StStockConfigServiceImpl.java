@@ -63,7 +63,7 @@ public class StStockConfigServiceImpl implements StStockConfigService {
             stockMap = (Map<String, StStockConfig>)stockObj;
         }
         if (stockMap==null||stockMap.get(stStockConfig.getId())==null){
-            this.findStockConfig(null, 0, Integer.MAX_VALUE);
+            this.findStockConfig(null, 1, Integer.MAX_VALUE);
             stStockConfig = stStockConfigDao.getTById(stStockConfig.getId());
         }
 
