@@ -42,7 +42,7 @@ public class StStockServiceImpl implements StStockService {
     }
 
     @Override
-    public boolean updateRealTimeStockInfo() {
+    public boolean executeRealTimeStockInfo() {
         ExecutorService stockService = Executors.newFixedThreadPool(10);
         final CountDownLatch cdOrder = new CountDownLatch(1);//指挥官的命令，设置为1，指挥官一下达命令，则cutDown,变为0，战士们执行任务
 
