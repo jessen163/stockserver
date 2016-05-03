@@ -88,10 +88,10 @@ public interface StQuoteService {
 
     /**
      * 添加
-     * @param stQuote
+     * @param stQuoteList
      * @return
      */
-    public boolean addQuoteToQueue(StQuote stQuote);
+    public boolean addQuoteToQueue(List<StQuote> stQuoteList);
 
     /**
      * 从队列中删除报价，同时修改报价状态
