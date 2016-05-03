@@ -54,7 +54,7 @@ public class StSystemParamServiceImpl implements StSystemParamService {
     @Override
     public String getParamByKey(String key) {
         String value = null;
-        value = iCacheService.getStringByKey(CacheConstant.CACHEKEY_SYSTEM_CONFIG_MAP+key,null);
+        value = iCacheService.getStringByKey(CacheConstant.CACHEKEY_SYSTEM_CONFIG_MAP, key,null);
         if(StringUtils.isNotBlank(value)){
             return value;
         }
