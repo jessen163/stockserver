@@ -11,6 +11,7 @@ import com.ryd.business.model.StQuote;
 import com.ryd.business.model.StStock;
 import com.ryd.business.model.StStockConfig;
 import com.ryd.business.service.*;
+import com.ryd.business.service.util.Utils;
 import com.ryd.cache.service.ICacheService;
 import com.ryd.system.service.StDateScheduleService;
 import com.ryd.system.service.StSystemParamService;
@@ -342,6 +343,26 @@ public class StQuoteServiceImpl implements StQuoteService {
             iCacheService.setObjectByKey(CacheConstant.CACHEKEY_STOCK_QUOTE_SELLQUEUE, quote.getStockId(), quoteList, 8 * 60 * 60);
         }
         return true;
+    }
+
+    /**
+     * 从队列中删除报价
+     * @param quote
+     * @return
+     */
+    private boolean removeByQuote(StQuote quote) {
+        Utils.getQuoteKeyByQuote(quote);
+        ConcurrentSkipListMap<Long, StQuote> quoteQueueList = null;
+        Object quoteobj = null;
+        if (quote.getQuoteType().intValue() == ApplicationConstants.STOCK_QUOTETYPE_BUY) {
+            quoteobj = iCacheService.getObjectByKey(CacheConstant.CACHEKEY_STOCK_QUOTE_BUYQUEUE, quote.getStockId(), null);
+        } else if (quote.getQuoteType().intValue() == ApplicationConstants.STOCK_QUOTETYPE_SELL){
+            quoteobj = iCacheService.getObjectByKey(CacheConstant.CACHEKEY_STOCK_QUOTE_SELLQUEUE, quote.getStockId(), null);
+        }
+
+        quoteQueueList = (ConcurrentSkipListMap<Long, StQuote>) quoteobj;
+        StQuote stQuote = quoteQueueList.remove(Utils.getQuoteKeyByQuote(quote));
+        return stQuote==null?false:true;
     }
 
     @Override
