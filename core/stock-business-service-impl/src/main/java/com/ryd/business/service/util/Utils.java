@@ -3,6 +3,7 @@ package com.ryd.business.service.util;
 import com.ryd.basecommon.util.ApplicationConstants;
 import com.ryd.basecommon.util.ArithUtil;
 import com.ryd.basecommon.util.CacheConstant;
+import com.ryd.business.model.StQuote;
 
 import java.math.BigDecimal;
 
@@ -49,4 +50,20 @@ public class Utils {
 
     }
 
+    /**
+     * 通过quote实体生成key
+     * @param quote
+     * @return
+     */
+    public static Long getQuoteKeyByQuote(StQuote quote) {
+        long timeSort = Integer.parseInt(String.valueOf(quote.getDateTime()).substring(7));
+        Long quotePriceForSort = 0L;
+        if (quote.getQuoteType()==ApplicationConstants.STOCK_QUOTETYPE_BUY) {
+            quotePriceForSort = -1 * Long.parseLong("100000000") * (long)(quote.getQuotePrice().doubleValue()*100) + timeSort;
+        } else {
+            quotePriceForSort = Long.parseLong("100000000") * (long)(quote.getQuotePrice().doubleValue()*100) + timeSort;
+        }
+
+        return quotePriceForSort;
+    }
 }
