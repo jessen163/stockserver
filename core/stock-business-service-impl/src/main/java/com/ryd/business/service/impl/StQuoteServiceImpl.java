@@ -1,6 +1,7 @@
 package com.ryd.business.service.impl;
 
 import com.ryd.basecommon.util.*;
+import com.ryd.basecommon.util.StringUtils;
 import com.ryd.business.dao.StQuoteDao;
 import com.ryd.business.dto.SearchQuoteDTO;
 import com.ryd.business.dto.SearchStockDTO;
@@ -13,6 +14,7 @@ import com.ryd.business.service.*;
 import com.ryd.cache.service.ICacheService;
 import com.ryd.system.service.StDateScheduleService;
 import com.ryd.system.service.StSystemParamService;
+import org.apache.commons.lang.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -138,6 +140,9 @@ public class StQuoteServiceImpl implements StQuoteService {
             if(rs) {
                 //把股票stockCode换成stockId
                 String sid = stStockConfigService.getStockIdByStockCode(quote.getStockId());
+                if(StringUtils.isEmpty(sid)){
+                    return -6;
+                }
                 quote.setStockId(sid);
                 // 添加报价到队列，同时保存到数据库 失败后回滚
                 boolean ars = addQuoteToQueue(quote);
