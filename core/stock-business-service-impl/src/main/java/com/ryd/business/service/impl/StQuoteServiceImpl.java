@@ -345,6 +345,8 @@ public class StQuoteServiceImpl implements StQuoteService {
         return true;
     }
 
+
+
     /**
      * 从队列中删除报价
      * @param quote
@@ -359,10 +361,13 @@ public class StQuoteServiceImpl implements StQuoteService {
         } else if (quote.getQuoteType().intValue() == ApplicationConstants.STOCK_QUOTETYPE_SELL){
             quoteobj = iCacheService.getObjectByKey(CacheConstant.CACHEKEY_STOCK_QUOTE_SELLQUEUE, quote.getStockId(), null);
         }
+        if (quoteobj!=null) {
+            quoteQueueList = (ConcurrentSkipListMap<Long, StQuote>) quoteobj;
+            StQuote stQuote = quoteQueueList.remove(Utils.getQuoteKeyByQuote(quote));
+            return stQuote==null?false:true;
+        }
 
-        quoteQueueList = (ConcurrentSkipListMap<Long, StQuote>) quoteobj;
-        StQuote stQuote = quoteQueueList.remove(Utils.getQuoteKeyByQuote(quote));
-        return stQuote==null?false:true;
+        return false;
     }
 
     @Override
