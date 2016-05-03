@@ -66,7 +66,7 @@ public class StTradeRecordServiceImpl implements StTradeRecordService {
         // 匹配买卖报价成功，记录交易日志，更新买、卖双方账户信息，更新仓位信息
         // 记录资金流水，更新双方报价信息
         // 操作过程中（每分钟）停止交易，获取股票信息（调用股票更新方法），生成马甲订单，完成后重新启动交易方法
-        ExecutorService tradingservice = Executors.newCachedThreadPool();
+        ExecutorService tradingservice = Executors.newFixedThreadPool(10);
 
         tradingservice.execute(new TradingMainThread(tradingservice, stStockService, stQuoteService, this));
     }
