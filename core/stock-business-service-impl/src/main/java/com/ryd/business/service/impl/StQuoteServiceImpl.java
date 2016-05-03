@@ -346,10 +346,10 @@ public class StQuoteServiceImpl implements StQuoteService {
         } else if (quote.getQuoteType().intValue() == ApplicationConstants.STOCK_QUOTETYPE_SELL){
             quoteobj = iCacheService.getObjectByKey(CacheConstant.CACHEKEY_STOCK_QUOTE_SELLQUEUE, quote.getStockId(), null);
         }
+        StQuote stQuote = null;
         if (quoteobj!=null) {
             quoteQueueList = (ConcurrentSkipListMap<Long, StQuote>) quoteobj;
-            StQuote stQuote = quoteQueueList.remove(Utils.getQuoteKeyByQuote(quote));
-            return stQuote==null?false:true;
+            stQuote = quoteQueueList.remove(Utils.getQuoteKeyByQuote(quote));
         }
 
         if (quote.getQuoteType().intValue() == ApplicationConstants.STOCK_QUOTETYPE_BUY) {
@@ -357,8 +357,7 @@ public class StQuoteServiceImpl implements StQuoteService {
         } else if (quote.getQuoteType().intValue() == ApplicationConstants.STOCK_QUOTETYPE_SELL){
             iCacheService.setObjectByKey(CacheConstant.CACHEKEY_STOCK_QUOTE_SELLQUEUE, quote.getStockId(), quoteQueueList, 8 * 60 * 60);
         }
-
-        return false;
+        return stQuote==null?false:true;
     }
 
     @Override
