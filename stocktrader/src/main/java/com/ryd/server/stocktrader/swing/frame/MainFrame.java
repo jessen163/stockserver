@@ -28,7 +28,7 @@ import java.util.List;
  */
 public class MainFrame extends JFrame {
 
-	public static String[] columnName = {"股票代码", "股票名称","现价", "持仓" };
+	public static String[] columnName = {"股票代码", "股票名称","现价", "持仓", "可卖数量" };
 
 	public static String[] columnName2 = {"股票代码", "股票名称", "现价", "今开", "昨收", "最高", "最低", "总手", "买一","卖一"};
 
@@ -100,23 +100,27 @@ public class MainFrame extends JFrame {
         JScrollPane scrollPane = new JScrollPane(table);
 		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 
-		panel1.add(scrollPane);
+		JPanel panel3 = new JPanel();
+		panel3.setLayout(new BoxLayout(panel3, BoxLayout.X_AXIS));
 
-//		JPanel panel3 = new JPanel();
-//		panel3.setLayout(new BoxLayout(panel3, BoxLayout.X_AXIS));
-//
-//		JButton positionBtn = new JButton("持仓明细");
-//		positionBtn.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent e) {
-//				int selectedRow = table.getSelectedRow();
-//				if (selectedRow != -1) {
-//					String stockCode = (String) table.getValueAt(selectedRow, 0);
-//					QuotePriceJDialog.instance().open(stockCode);
-//				}
-//			}
-//		});
-//
-//		panel1.add(positionBtn);
+		JButton positionSellBtn = new JButton("卖出");
+		positionSellBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int selectedRow = table.getSelectedRow();
+				if (selectedRow != -1) {
+					String stockCode = (String) table.getValueAt(selectedRow, 0);
+					QuotePriceJDialog.instance().open(stockCode,2);
+				}else{
+					JOptionPane.showMessageDialog(null, "请选择对应股票持仓", "提示",
+							JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		});
+
+		panel3.add(positionSellBtn);
+		panel3.add(Box.createHorizontalGlue());
+		panel1.add(panel3);
+		panel1.add(scrollPane);
 
         middlePanel.add(panel1);
         //-------------------------------------------------------------1
@@ -138,13 +142,13 @@ public class MainFrame extends JFrame {
 
 		panel4.add(search);
 
-		JButton quoteButton = new JButton("报价");
+		JButton quoteButton = new JButton("买入");
 		quoteButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int selectedRow = table2.getSelectedRow();
 				if (selectedRow != -1) {
 					String stockCode = (String) table2.getValueAt(selectedRow, 0);
-					QuotePriceJDialog.instance().open(stockCode);
+					QuotePriceJDialog.instance().open(stockCode,1);
 				}else{
 					JOptionPane.showMessageDialog(null, "请选择对应股票", "提示",
 							JOptionPane.ERROR_MESSAGE);

@@ -4,7 +4,9 @@ import com.ryd.basecommon.util.ApplicationConstants;
 import com.ryd.basecommon.util.UUIDUtils;
 import com.ryd.business.dao.StPositionDao;
 import com.ryd.business.dto.SearchPositionDTO;
+import com.ryd.business.model.StAccount;
 import com.ryd.business.model.StPosition;
+import com.ryd.business.service.StAccountService;
 import com.ryd.business.service.StPositionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,6 +25,9 @@ public class StPositionServiceImpl implements StPositionService {
 
     @Autowired
     private StPositionDao stPositionDao;
+
+    @Autowired
+    private StAccountService stAccountService;
 
     @Override
     public boolean savePositionList(List<StPosition> positionList) {
@@ -52,6 +57,11 @@ public class StPositionServiceImpl implements StPositionService {
     public boolean updatePositionAdd(String accountId, String stockId, Long amount) {
         int rs = -1;
         StPosition position = stPositionDao.getPositionByAccountStock(accountId, stockId);
+        StAccount stAccount = stAccountService.getStAccountById(accountId);
+        //如果是马甲帐户，帐户持仓不做处理
+        if(stAccount!=null && stAccount.getAccountType() == ApplicationConstants.ACCOUNT_TYPE_VIRTUAL){
+            return true;
+        }
         if(position == null){
             position = new StPosition();
             position.setPositionId(UUIDUtils.uuidTrimLine());
@@ -75,6 +85,11 @@ public class StPositionServiceImpl implements StPositionService {
     @Override
     public boolean updatePositionReduce(String accountId, String stockId, Long amount) {
         StPosition position = stPositionDao.getPositionByAccountStock(accountId, stockId);
+        StAccount stAccount = stAccountService.getStAccountById(accountId);
+        //如果是马甲帐户，帐户持仓不做处理
+        if(stAccount!=null && stAccount.getAccountType() == ApplicationConstants.ACCOUNT_TYPE_VIRTUAL){
+            return true;
+        }
         //没有对应股票持仓
         if (position == null) {
             return false;

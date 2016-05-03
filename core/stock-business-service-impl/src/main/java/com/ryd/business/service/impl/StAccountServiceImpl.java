@@ -52,6 +52,10 @@ public class StAccountServiceImpl implements StAccountService {
         if(stAccount == null){
             return false;
         }
+        //如果是马甲帐户，帐户资金不做处理
+        if(stAccount.getAccountType() == ApplicationConstants.ACCOUNT_TYPE_VIRTUAL){
+            return true;
+        }
         //原有帐户可用资产
         BigDecimal useMoney = stAccount.getUseMoney();
 
@@ -67,6 +71,12 @@ public class StAccountServiceImpl implements StAccountService {
         if(stAccount == null){
             return false;
         }
+
+        //如果是马甲帐户，帐户资金不做处理
+        if(stAccount.getAccountType() == ApplicationConstants.ACCOUNT_TYPE_VIRTUAL){
+            return true;
+        }
+
         //原有帐户可用资产
         BigDecimal useMoney = stAccount.getUseMoney();
 

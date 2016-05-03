@@ -1,5 +1,6 @@
 package com.ryd.server.stocktrader.swing.common;
 
+import com.ryd.basecommon.util.ApplicationConstants;
 import com.ryd.basecommon.util.DateUtils;
 import com.ryd.business.model.*;
 import org.apache.commons.collections.CollectionUtils;
@@ -47,7 +48,7 @@ public class ListToArray {
 
 
     /**
-     * {"股票代码", "股票名称", "现价", "持仓"};
+     * {"股票代码", "股票名称", "现价", "持仓", "可卖数量"};
      * @param stPositionList
      * @return
      */
@@ -55,22 +56,23 @@ public class ListToArray {
         if(CollectionUtils.isEmpty(stPositionList)){
             return null;
         }
-        Object[][] arr = new Object[stPositionList.size()][4];
+        Object[][] arr = new Object[stPositionList.size()][5];
         for(int i=0;i<stPositionList.size();i++){
             StPosition stq = stPositionList.get(i);
-            StStock stock = ClientConstants.stStockMap.get(stq.getStockId());
-
-            arr[i][0] = stock.getStockCode();
-            arr[i][1] = stock.getStockName();
-            arr[i][2] = stock.getCurrentPrice();
+            StStockConfig stockConfig = ClientConstants.stStockConfigMap.get(stq.getStockId());
+            StStock stStock = ClientConstants.stStockMap.get(stockConfig.getStockCode());
+            arr[i][0] = stockConfig.getStockCode();
+            arr[i][1] = stockConfig.getStockName();
+            arr[i][2] = stStock.getCurrentPrice();
             arr[i][3] = stq.getAmount();
+            arr[i][4] = stq.getMarketAmount();
         }
 
         return arr;
     }
 
     /**
-     * {"股票代码", "股票名称","报价", "申报数量", "类型", "冻结资金", "报价时间"}
+     * {"股票代码", "股票名称","报价", "申报数量", "类型", "冻结资金", "状态","报价时间"}
      * @param stQuoteList
      * @return
      */
@@ -78,27 +80,41 @@ public class ListToArray {
         if(CollectionUtils.isEmpty(stQuoteList)){
             return null;
         }
-        Object[][] arr = new Object[stQuoteList.size()][8];
+        Object[][] arr = new Object[stQuoteList.size()][9];
         SimpleDateFormat format=new SimpleDateFormat("MM/dd HH:mm");
         for(int i=0;i<stQuoteList.size();i++){
             StQuote stq = stQuoteList.get(i);
-//            StStock stock = ClientConstants.stStockMap.get(stq.getStockId());
+            StStockConfig stock = ClientConstants.stStockConfigMap.get(stq.getStockId());
 
-            arr[i][0] = "";//stock.getStockCode();
-            arr[i][1] = "";//stock.getStockName();
+            arr[i][0] = stock.getStockCode();
+            arr[i][1] = stock.getStockName();
             arr[i][2] = stq.getQuotePrice();
             arr[i][3] = stq.getAmount();
             arr[i][4] = stq.getQuoteType()==1?"买":"卖";
             arr[i][5] = stq.getFrozeMoney()==null?0d:stq.getFrozeMoney();
-            arr[i][6] = format.format(stq.getDateTime());
-            arr[i][7] = stq.getQuoteId();
+            //1.托管  2.交易中 3.已成交 4.撤单  5. 结算未成交 6.结算部分股票成交
+            if(stq.getStatus()== ApplicationConstants.STOCK_STQUOTE_STATUS_TRUSTEE){
+                arr[i][6] = "托管";
+            }else if(stq.getStatus()== ApplicationConstants.STOCK_STQUOTE_STATUS_DEALING){
+                arr[i][6] = "交易中";
+            }else if((stq.getStatus()== ApplicationConstants.STOCK_STQUOTE_STATUS_ALREADYDEAL)){
+                arr[i][6] = "已成交";
+            }else if((stq.getStatus()== ApplicationConstants.STOCK_STQUOTE_STATUS_REVOKE)){
+                arr[i][6] = "撤单";
+            }else if((stq.getStatus()== ApplicationConstants.STOCK_STQUOTE_STATUS_NOTDEAL)){
+                arr[i][6] = "未成交";
+            }else{
+                arr[i][6] = "部分成交";
+            }
+            arr[i][7] = format.format(stq.getDateTime());
+            arr[i][8] = stq.getQuoteId();
         }
 
         return arr;
     }
 
     /**
-     * {"帐户", "股票","报价", "交易数量", "类型", "交易金额", "佣金","印花税","交易时间"}
+     * {"帐户", "股票代码","股票名称","报价", "交易数量", "类型", "交易金额", "佣金","印花税","交易时间"}
      * @param moneyJournals
      * @return
      */
@@ -106,27 +122,28 @@ public class ListToArray {
         if(CollectionUtils.isEmpty(moneyJournals)){
             return null;
         }
-        Object[][] arr = new Object[moneyJournals.size()][9];
+        Object[][] arr = new Object[moneyJournals.size()][10];
         SimpleDateFormat format=new SimpleDateFormat("MM/dd HH:mm");
         for(int i=0;i<moneyJournals.size();i++){
             StMoneyJournal stq = moneyJournals.get(i);
-//            StStock stock = ClientConstants.stStockMap.get(stq.getStockId());
+            StStockConfig stock = ClientConstants.stStockConfigMap.get(stq.getStockId());
             arr[i][0] = stq.getAccountId();
-            arr[i][1] = stq.getStockId();
-            arr[i][2] = stq.getQuotePrice().doubleValue();
-            arr[i][3] = stq.getAmount();
-            arr[i][4] = stq.getDealType()==1?"买":"卖";
-            arr[i][5] = stq.getDealMoney()==null?0d:stq.getDealMoney().doubleValue();
-            arr[i][6] = stq.getDealFee().doubleValue();
-            arr[i][7] = stq.getDealTax()==null?0:stq.getDealTax();
-            arr[i][8] = format.format(stq.getDateTime());
+            arr[i][1] = stock.getStockCode();
+            arr[i][2] = stock.getStockName();
+            arr[i][3] = stq.getQuotePrice().doubleValue();
+            arr[i][4] = stq.getAmount();
+            arr[i][5] = stq.getDealType()==1?"买":"卖";
+            arr[i][6] = stq.getDealMoney()==null?0d:stq.getDealMoney().doubleValue();
+            arr[i][7] = stq.getDealFee().doubleValue();
+            arr[i][8] = stq.getDealTax()==null?0:stq.getDealTax();
+            arr[i][9] = format.format(stq.getDateTime());
         }
 
         return arr;
     }
 
     /**
-     * {"股票ID", "股票名称","报价", "数量", "类型",  "交易时间"}
+     * {"股票代码", "股票名称","报价", "数量", "类型",  "交易时间"}
      * @param stTradeRecords
      * @return
      */
@@ -134,12 +151,12 @@ public class ListToArray {
         if(CollectionUtils.isEmpty(stTradeRecords)){
             return null;
         }
-        Object[][] arr = new Object[stTradeRecords.size()][6];
+        Object[][] arr = new Object[stTradeRecords.size()][7];
         for(int i=0;i<stTradeRecords.size();i++){
             StTradeRecord stq = stTradeRecords.get(i);
-//            StStock stock = ClientConstants.stStockMap.get(stq.getStockId());
-            arr[i][1] = stq.getStockId();
-            arr[i][2] = "";
+            StStockConfig stock = ClientConstants.stStockConfigMap.get(stq.getStockId());
+            arr[i][1] = stock.getStockCode();
+            arr[i][2] = stock.getStockName();
             arr[i][3] = stq.getQuotePrice().doubleValue();
             arr[i][4] = stq.getAmount();
             if(StringUtils.isNotBlank(stq.getSellerAccountId())){

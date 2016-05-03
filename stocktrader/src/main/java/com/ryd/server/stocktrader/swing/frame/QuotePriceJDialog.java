@@ -96,11 +96,14 @@ public class QuotePriceJDialog extends JDialog {
 		add(cancel);
 	}
 
-	public void open(String stockCode) {
+	public void open(String stockCode, int type) {
 		textAmount.setText("");
 		textQuotePrice.setText("");
-		buyOrSellBuy.setSelected(true);
-
+		if(type==1) {
+			buyOrSellBuy.setSelected(true);
+		}else{
+			buyOrSellSell.setSelected(true);
+		}
 		StStock stStock = ClientConstants.stStockMap.get(stockCode);
 		textAccountName.setText(ClientConstants.stAccount.getAccountName());
 		textStockName.setText(stStock.getStockName());
