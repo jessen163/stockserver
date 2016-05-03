@@ -1,10 +1,8 @@
 package com.ryd.server.stocktrader.quartz;
 
 import com.ryd.basecommon.util.ApplicationConstants;
-import com.ryd.business.service.StQuoteService;
-import com.ryd.business.service.StSettleRecordService;
-import com.ryd.business.service.StStockService;
-import com.ryd.business.service.StTradeRecordService;
+import com.ryd.business.model.StPosition;
+import com.ryd.business.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -26,6 +24,8 @@ public class StockTraderTask {
     private StTradeRecordService stTradeRecordService;
     @Autowired
     private StSettleRecordService stSettleRecordService;
+    @Autowired
+    private StPositionService stPositionService;
 
     /**
      * 运行股票交易
@@ -76,6 +76,7 @@ public class StockTraderTask {
     public void runUpdateStockSettling() {
         System.out.println("结算开始..........start............");
         stSettleRecordService.updateStockSettling();
+        stPositionService.updatePosition(1000);
         System.out.println("结算开始..........end............");
     }
 }
