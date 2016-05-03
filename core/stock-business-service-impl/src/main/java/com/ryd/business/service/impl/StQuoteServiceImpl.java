@@ -165,15 +165,6 @@ public class StQuoteServiceImpl implements StQuoteService {
         if (StringUtils.isEmpty(quoteList)) {
             ConcurrentSkipListMap<Long, StQuote> quoteQueueList = null;
             for (StQuote quote : quoteList) {
-                Object quoteobj = null;
-                if (quote.getQuoteType().intValue() == ApplicationConstants.STOCK_QUOTETYPE_BUY) {
-                    quoteobj = iCacheService.getObjectByKey(CacheConstant.CACHEKEY_STOCK_QUOTE_BUYQUEUE, quote.getStockId(), null);
-                } else if (quote.getQuoteType().intValue() == ApplicationConstants.STOCK_QUOTETYPE_SELL){
-                    quoteobj = iCacheService.getObjectByKey(CacheConstant.CACHEKEY_STOCK_QUOTE_SELLQUEUE, quote.getStockId(), null);
-                }
-
-                quoteQueueList = (ConcurrentSkipListMap<Long, StQuote>) quoteobj;
-
                 //状态为托管报价-撤单
                 if(quote.getStatus().shortValue() == ApplicationConstants.STOCK_STQUOTE_STATUS_TRUSTEE.shortValue()){
                     boolean rs = false;
@@ -188,16 +179,10 @@ public class StQuoteServiceImpl implements StQuoteService {
                         //修改报价状态
                         quote.setStatus(ApplicationConstants.STOCK_STQUOTE_STATUS_NOTDEAL);
                         updateQuote(quote);
-                        quoteQueueList.remove(quote);
+                        this.removeByQuote(quote);
                     }
                 }else{
                     return -1;
-                }
-
-                if (quote.getQuoteType().intValue() == ApplicationConstants.STOCK_QUOTETYPE_BUY) {
-                    iCacheService.setObjectByKey(CacheConstant.CACHEKEY_STOCK_QUOTE_BUYQUEUE, quote.getStockId(), quoteQueueList, 8 * 60 * 60);
-                } else if (quote.getQuoteType().intValue() == ApplicationConstants.STOCK_QUOTETYPE_SELL){
-                    iCacheService.setObjectByKey(CacheConstant.CACHEKEY_STOCK_QUOTE_SELLQUEUE, quote.getStockId(), quoteQueueList, 8 * 60 * 60);
                 }
             }
         }
@@ -365,6 +350,12 @@ public class StQuoteServiceImpl implements StQuoteService {
             quoteQueueList = (ConcurrentSkipListMap<Long, StQuote>) quoteobj;
             StQuote stQuote = quoteQueueList.remove(Utils.getQuoteKeyByQuote(quote));
             return stQuote==null?false:true;
+        }
+
+        if (quote.getQuoteType().intValue() == ApplicationConstants.STOCK_QUOTETYPE_BUY) {
+            iCacheService.setObjectByKey(CacheConstant.CACHEKEY_STOCK_QUOTE_BUYQUEUE, quote.getStockId(), quoteQueueList, 8 * 60 * 60);
+        } else if (quote.getQuoteType().intValue() == ApplicationConstants.STOCK_QUOTETYPE_SELL){
+            iCacheService.setObjectByKey(CacheConstant.CACHEKEY_STOCK_QUOTE_SELLQUEUE, quote.getStockId(), quoteQueueList, 8 * 60 * 60);
         }
 
         return false;
