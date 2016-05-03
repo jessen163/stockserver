@@ -3,6 +3,7 @@ package com.ryd.business.dao.impl;
 import com.ryd.business.dao.StSettleRecordDao;
 import com.ryd.business.model.StSettleRecord;
 import com.ryd.business.mybatis.StSettleRecordMapper;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -58,5 +59,29 @@ public class StSettleRecordDaoImpl implements StSettleRecordDao {
             return -1;
         }
         return stSettleRecordMapper.deleteByPrimaryKey(id);
+    }
+
+    @Override
+    public int addBatch(List<StSettleRecord> list) {
+        if(CollectionUtils.isNotEmpty(list)){
+            return stSettleRecordMapper.insertBatch(list);
+        }
+        return -1;
+    }
+
+    @Override
+    public int updateBatch(List<StSettleRecord> list) {
+        if(CollectionUtils.isNotEmpty(list)){
+            return stSettleRecordMapper.updateBatch(list);
+        }
+        return -1;
+    }
+
+    @Override
+    public int deleteBatch(List<String> list) {
+        if(CollectionUtils.isNotEmpty(list)){
+            return stSettleRecordMapper.deleteBatch(list);
+        }
+        return -1;
     }
 }

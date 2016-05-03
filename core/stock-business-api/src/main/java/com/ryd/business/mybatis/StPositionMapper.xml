@@ -25,6 +25,9 @@
     from st_position
     where account_id = #{accountId,jdbcType=CHAR} and stock_id = #{stockId,jdbcType=CHAR}
   </select>
+  <select id="selectCount" resultType="java.lang.Integer">
+    select count(position_id) from st_position
+  </select>
   <select id="selectListByKeySelective" resultType="java.util.List" resultMap="BaseResultMap">
     select * from st_position
     <trim prefix="WHERE" prefixOverrides="AND|OR">

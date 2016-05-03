@@ -61,26 +61,26 @@ public class StTradeRecordDaoImpl implements StTradeRecordDao {
 
     @Override
     public int addBatch(List<StTradeRecord> list){
-        if(CollectionUtils.isEmpty(list)){
-            return 0;
+        if(CollectionUtils.isNotEmpty(list)){
+            return stTradeRecordMapper.insertBatch(list);
         }
-        return stTradeRecordMapper.insertBatch(list);
+        return -1;
     }
 
     @Override
     public int updateBatch(List<StTradeRecord> list){
-        if(CollectionUtils.isEmpty(list)){
-            return 0;
+        if(CollectionUtils.isNotEmpty(list)){
+            return stTradeRecordMapper.updateBatchSelective(list);
         }
-        return stTradeRecordMapper.updateBatchSelective(list);
+        return -1;
     }
 
     @Override
     public int deleteBatch(List<String> list){
-        if(CollectionUtils.isEmpty(list)){
-            return 0;
+        if(CollectionUtils.isNotEmpty(list)){
+            return stTradeRecordMapper.deleteBatch(list);
         }
-        return stTradeRecordMapper.deleteBatch(list);
+        return -1;
     }
 
 }

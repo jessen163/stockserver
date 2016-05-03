@@ -4,6 +4,7 @@ import com.ryd.business.dao.StPositionDao;
 import com.ryd.business.model.StMoneyJournal;
 import com.ryd.business.model.StPosition;
 import com.ryd.business.mybatis.StPositionMapper;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -65,5 +66,34 @@ public class StPositionDaoImpl implements StPositionDao {
     @Override
     public StPosition getPositionByAccountStock(String accountId, String stockId){
         return stPositionMapper.selectByKey(accountId, stockId);
+    }
+
+    @Override
+    public int getCount() {
+        return stPositionMapper.selectCount();
+    }
+
+    @Override
+    public int addBatch(List<StPosition> list) {
+        if(CollectionUtils.isNotEmpty(list)){
+            return stPositionMapper.insertBatch(list);
+        }
+        return -1;
+    }
+
+    @Override
+    public int updateBatch(List<StPosition> list) {
+        if(CollectionUtils.isNotEmpty(list)){
+            return stPositionMapper.updateBatch(list);
+        }
+        return -1;
+    }
+
+    @Override
+    public int deleteBatch(List<String> list) {
+        if(CollectionUtils.isNotEmpty(list)){
+            return stPositionMapper.deleteBatch(list);
+        }
+        return -1;
     }
 }

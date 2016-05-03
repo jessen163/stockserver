@@ -17,6 +17,8 @@ public interface StPositionMapper {
 
     int insertBatch(List<StPosition> list);
 
+    int selectCount();
+
     StPosition selectByPrimaryKey(String positionId);
 
     StPosition selectByKey(@Param(value = "accountId") String accountId,

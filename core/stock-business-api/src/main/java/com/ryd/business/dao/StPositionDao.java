@@ -3,6 +3,8 @@ package com.ryd.business.dao;
 import com.ryd.basecommon.dao.BaseDao;
 import com.ryd.business.model.StPosition;
 
+import java.util.List;
+
 /**
  * <p>标题:持仓Dao</p>
  * <p>描述:持仓Dao</p>
@@ -19,4 +21,17 @@ public interface StPositionDao extends BaseDao<StPosition> {
      * @return
      */
     public StPosition getPositionByAccountStock(String accountId, String stockId);
+
+    /**
+     * 查询数量
+     * @return
+     */
+    public int getCount();
+
+
+    public int addBatch(List<StPosition> list);
+
+    public int updateBatch(List<StPosition> list);
+
+    public int deleteBatch(List<String> list);
 }
