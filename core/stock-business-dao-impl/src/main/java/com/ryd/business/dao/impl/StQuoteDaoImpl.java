@@ -28,6 +28,11 @@ public class StQuoteDaoImpl implements StQuoteDao {
     }
 
     @Override
+    public int addBatch(List<StQuote> list) {
+        return stQuoteMapper.insertBatch(list);
+    }
+
+    @Override
     public int update(StQuote obj) {
         if(StringUtils.isBlank(obj.getQuoteId())){
             return -1;

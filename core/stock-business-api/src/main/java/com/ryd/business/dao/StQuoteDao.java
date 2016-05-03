@@ -3,6 +3,8 @@ package com.ryd.business.dao;
 import com.ryd.basecommon.dao.BaseDao;
 import com.ryd.business.model.StQuote;
 
+import java.util.List;
+
 /**
  * <p>标题:报价Dao</p>
  * <p>描述:报价Dao</p>
@@ -11,4 +13,6 @@ import com.ryd.business.model.StQuote;
  * 创建时间：2016/4/22 13:52
  */
 public interface StQuoteDao extends BaseDao<StQuote> {
+
+    public int addBatch(List<StQuote> list);
 }
