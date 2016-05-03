@@ -357,7 +357,7 @@ public class StQuoteServiceImpl implements StQuoteService {
                 StQuote quote = new StQuote();
                 quote.setAccountId("800891cdc704462ab0c2335460a91684");
                 quote.setStockId(simulationQuoteDTO.getStockId());
-                quote.setUserType(Short.parseShort("2")); // 马甲用户
+                quote.setUserType(ApplicationConstants.ACCOUNT_TYPE_VIRTUAL); // 马甲用户
                 quote.setQuoteType(simulationQuoteDTO.getQuoteType());
                 quote.setAmount(simulationQuoteDTO.getAmount());
                 stQuoteList.add(quote);
