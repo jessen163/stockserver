@@ -22,6 +22,13 @@ public interface StPositionService {
 
 
     /**
+     * 仓位结算
+     * @param size 执行记录数
+     * @return
+     */
+    public boolean updatePosition(int size);
+
+    /**
      * 增加仓位
      * @param accountId
      * @param stockId
