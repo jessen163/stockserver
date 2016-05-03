@@ -23,7 +23,7 @@ import java.util.List;
  */
 public class MoneyJournalListDialog extends JDialog {
 
-	public static String[] columnName = {"帐户", "股票","报价", "交易数量", "类型", "交易金额", "佣金","印花税","交易时间"};
+	public static String[] columnName = {"帐户", "股票代码","股票名称","报价", "交易数量", "类型", "交易金额", "佣金","印花税","交易时间"};
 
 	private static MoneyJournalListDialog moneyJournalListDialog;
 

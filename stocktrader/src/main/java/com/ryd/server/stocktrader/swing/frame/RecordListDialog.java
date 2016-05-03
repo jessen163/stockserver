@@ -23,7 +23,7 @@ import java.util.List;
  */
 public class RecordListDialog extends JDialog {
 
-	public static String[] columnName = {"股票ID", "股票名称","报价", "数量", "类型",  "交易时间"};
+	public static String[] columnName = {"股票代码", "股票名称","报价", "数量", "类型",  "交易时间"};
 
 	private static RecordListDialog quoteListDialog;
 
