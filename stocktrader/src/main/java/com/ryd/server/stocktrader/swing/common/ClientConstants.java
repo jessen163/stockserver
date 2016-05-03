@@ -17,6 +17,10 @@ public class ClientConstants {
     public static List<StStock> stStockList = null;
     // 股票信息
     public static Map<String, StStock> stStockMap = new HashMap<String, StStock>();
+    // 股票信息
+    public static List<StStockConfig> stStockConfigList = null;
+    // 股票信息
+    public static Map<String, StStockConfig> stStockConfigMap = new HashMap<String, StStockConfig>();
     // 账户信息
     public static StAccount stAccount = null;
     // 仓位信息
@@ -81,6 +85,15 @@ public class ClientConstants {
             stMoneyJournalMap.clear();
             for (StMoneyJournal mj : stMoneyJournalList) {
                 stMoneyJournalMap.put(mj.getRecordId(),mj);
+            }
+        }
+    }
+
+    public static void stockConfigListToMap(){
+        if(CollectionUtils.isNotEmpty(stStockConfigList)) {
+            stStockConfigMap.clear();
+            for (StStockConfig cj : stStockConfigList) {
+                stStockConfigMap.put(cj.getId(),cj);
             }
         }
     }

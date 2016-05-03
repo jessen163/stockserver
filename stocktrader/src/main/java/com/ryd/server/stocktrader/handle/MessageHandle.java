@@ -10,6 +10,7 @@ import com.ryd.business.service.*;
 import com.ryd.business.service.impl.StAccountServiceImpl;
 import com.ryd.server.stocktrader.utils.ParamBuilderUtil;
 import io.netty.channel.ChannelHandlerContext;
+import org.apache.commons.collections.CollectionUtils;
 import scala.Int;
 
 import java.math.BigDecimal;
@@ -30,6 +31,7 @@ public class MessageHandle {
     private static StTradeRecordService stTradeRecordService = null;
     private static StPositionService stPositionService = null;
     private static StStockService stStockService = null;
+    private static StStockConfigService stStockConfigService = null;
     static {
         stAccountService = SpringUtils.getBean(StAccountService.class, "stAccountServiceImpl");
         stQuoteService = SpringUtils.getBean(StQuoteService.class, "stQuoteServiceImpl");
@@ -37,6 +39,7 @@ public class MessageHandle {
         stTradeRecordService = SpringUtils.getBean(StTradeRecordService.class, "stTradeRecordServiceImpl");
         stPositionService = SpringUtils.getBean(StPositionService.class, "stPositionServiceImpl");
         stStockService = SpringUtils.getBean(StStockService.class, "stStockServiceImpl");
+        stStockConfigService = SpringUtils.getBean(StStockConfigService.class, "stStockConfigServiceImpl");
     }
 
     /**
@@ -52,6 +55,17 @@ public class MessageHandle {
             case ApplicationConstants.NETTYMESSAGE_ID_HEARTBEAT:
                 builder.setStatus(ApplicationConstants.NETTYMESSAGE_STATUS_RESPONSE_SUCCESS);
                 StAccount account = stAccountService.findStAccount("test", "1234");
+                break;
+            case ApplicationConstants.NETTYMESSAGE_ID_STOCKCONFIGINFO:
+
+                List<StStockConfig> stockConfigs = stStockConfigService.findStockConfig(null, 1,Integer.MAX_VALUE);
+                if (CollectionUtils.isNotEmpty(stockConfigs)) {
+                    for(StStockConfig sstc : stockConfigs) {
+                        builder.addStockConfigInfo(ParamBuilderUtil.getStockConfigInfoBuilder(sstc));
+                    }
+                }
+
+                builder.setStatus(1);
                 break;
             case ApplicationConstants.NETTYMESSAGE_ID_STOCKINFO:
                 SearchStockDTO searchStockDTO = new SearchStockDTO();

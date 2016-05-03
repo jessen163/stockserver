@@ -14,6 +14,18 @@ import com.ryd.business.model.*;
  */
 public class ParamBuilderUtil {
 
+    public static DiyNettyMessage.StockConfigInfo.Builder getStockConfigInfoBuilder(StStockConfig stStockConfig){
+
+        DiyNettyMessage.StockConfigInfo.Builder builder = DiyNettyMessage.StockConfigInfo.newBuilder();
+        builder.setId(stStockConfig.getId());
+        builder.setStockName(stStockConfig.getStockName());
+        builder.setStockCode(stStockConfig.getStockCode());
+        builder.setStockType(stStockConfig.getStockType());
+        builder.setBoardType(stStockConfig.getBoardType());
+
+        return builder;
+    }
+
     /**
      * 股票信息
      * @param stStock
