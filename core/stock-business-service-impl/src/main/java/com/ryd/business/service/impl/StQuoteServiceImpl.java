@@ -99,19 +99,22 @@ public class StQuoteServiceImpl implements StQuoteService {
                 // 超出涨跌幅
                 return -3;
             }
+            if (quote.getDateTime()==null||quote.getDateTime()==0L) {
+                quote.setDateTime(System.currentTimeMillis());
+            }
         }
         // 账户金额是否够用
         for (StQuote quote: quoteList) {
             boolean rs=false;
             quote.setQuoteId(UUIDUtils.uuidTrimLine());
             // 用于排序的字段
-            long timeSort = Integer.parseInt(String.valueOf(System.currentTimeMillis()).substring(7));
+            long timeSort = Integer.parseInt(String.valueOf(quote.getDateTime()).substring(7));
             quote.setTimeSort(timeSort);
 
             quote.setCurrentAmount(quote.getAmount());
             quote.setStatus(ApplicationConstants.STOCK_STQUOTE_STATUS_TRUSTEE);
             quote.setUserType(quote.getUserType() == null ? ApplicationConstants.ACCOUNT_TYPE_REAL : quote.getUserType());
-            quote.setDateTime(System.currentTimeMillis());
+//            quote.setDateTime(System.currentTimeMillis());
             //买股票
             if (quote.getQuoteType().shortValue() == ApplicationConstants.STOCK_QUOTETYPE_BUY.shortValue()) {
 
@@ -381,6 +384,7 @@ public class StQuoteServiceImpl implements StQuoteService {
                 quote.setUserType(ApplicationConstants.ACCOUNT_TYPE_VIRTUAL); // 马甲用户
                 quote.setQuoteType(simulationQuoteDTO.getQuoteType());
                 quote.setAmount(simulationQuoteDTO.getAmount());
+                quote.setQuotePrice(BigDecimal.valueOf(simulationQuoteDTO.getQuotePrice()));
                 stQuoteList.add(quote);
             }
             try {
