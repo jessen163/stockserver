@@ -10,12 +10,15 @@ import com.ryd.business.model.StStockConfig;
 import com.ryd.business.service.StStockConfigService;
 import com.ryd.business.service.StStockService;
 import com.ryd.business.service.thread.SyncStockThread;
+import com.ryd.business.service.util.BusinessConstants;
 import com.ryd.cache.service.ICacheService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -52,6 +55,11 @@ public class StStockServiceImpl implements StStockService {
         // TODO 问题
         count = count - 35;
         final CountDownLatch cdAnswer = new CountDownLatch(count);
+//        iCacheService.remove(CacheConstant.CACHEKEY_STOCK_PRICELIST);
+        // 清除模拟报价
+        BusinessConstants.simulateQuoteMap.clear();
+        // 清除最近的股票实时价格信息
+        BusinessConstants.stockPriceMap.clear();
         StringBuffer stockCodeStringBuffer = new StringBuffer();;
         for (StStockConfig stock: list) {
             stockCodeStringBuffer.append(stock.getStockTypeName()+stock.getStockCode()).append(",");
@@ -72,18 +80,26 @@ public class StStockServiceImpl implements StStockService {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        System.out.println(BusinessConstants.simulateQuoteMap.size());
+        System.out.println(BusinessConstants.stockPriceMap.size());
+        stockService.shutdownNow();
         return true;
     }
 
     @Override
     public List<StStock> findStockList(SearchStockDTO searchStockDTO) {
         List<StStock> stockList = null;
-        Object stockObj = iCacheService.getObjectByKey(CacheConstant.CACHEKEY_STOCK_PRICELIST, null);
-        if (stockObj != null) {
-            stockList = (List<StStock>)stockObj;
-        } else {
-//            stockList = stStockDao.findStStockListCurrentTime(searchStockDTO);
-            // TODO 缓存没有，暂时不取
+//        Object stockObj = iCacheService.getObjectByKey(CacheConstant.CACHEKEY_STOCK_PRICELIST, null);
+//        if (stockObj != null) {
+//            stockList = (List<StStock>)stockObj;
+//        } else {
+////            stockList = stStockDao.findStStockListCurrentTime(searchStockDTO);
+//            // TODO 缓存没有，暂时不取
+//        }
+        ConcurrentHashMap<String, List<StStock>> stockPriceMap = BusinessConstants.stockPriceMap;
+        Collection<List<StStock>> list = stockPriceMap.values();
+        for (List<StStock> sList : list) {
+            stockList.addAll(sList);
         }
         return stockList;
     }

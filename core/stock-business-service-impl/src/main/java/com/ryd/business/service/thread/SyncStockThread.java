@@ -8,6 +8,7 @@ import com.ryd.business.dto.SimulationQuoteDTO;
 import com.ryd.business.model.StStock;
 import com.ryd.business.service.StQuoteService;
 import com.ryd.business.service.StStockService;
+import com.ryd.business.service.util.BusinessConstants;
 import com.ryd.cache.service.ICacheService;
 import org.apache.log4j.Logger;
 
@@ -192,11 +193,19 @@ public class SyncStockThread implements Runnable {
                 s.setQuoteType(typeArr[i]);
                 s.setDateTime(System.currentTimeMillis());
                 simulationQuoteDTOList.add(s);
+                // 模拟订单
+//                cacheService.setObjectByKey(CacheConstant.CACHEKEY_SIMULATIONQUOTELIST , s.getStockId(), simulationQuoteDTOList, 60*10);
+                BusinessConstants.simulateQuoteMap.put(s.getStockId(), simulationQuoteDTOList);
             }
         }
-//        // 模拟订单
-        cacheService.setObjectByKey(CacheConstant.CACHEKEY_SIMULATIONQUOTELIST, simulationQuoteDTOList);
-        cacheService.setObjectByKey(CacheConstant.CACHEKEY_STOCK_PRICELIST, stStockCacheList, 60*5);
+//        Object priceListObj = cacheService.getObjectByKey(CacheConstant.CACHEKEY_STOCK_PRICELIST, null);
+//        List<StStock> priceList = null;
+//        if (priceListObj!=null) {
+//            priceList = (List<StStock>) priceListObj;
+//        }
+//        priceList.addAll(stStockCacheList);
+//        cacheService.setObjectByKey(CacheConstant.CACHEKEY_STOCK_PRICELIST, priceList, 60 * 5);
+        BusinessConstants.stockPriceMap.put(stockCodeStr, stStockCacheList);
 
         return true;
     }
