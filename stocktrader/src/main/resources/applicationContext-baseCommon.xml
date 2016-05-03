@@ -44,11 +44,12 @@
     </bean>
     <tx:advice id="txAdvice" transaction-manager="transactionManager">
         <tx:attributes>
-            <tx:method name="save*" propagation="REQUIRED" isolation="DEFAULT" />
-            <tx:method name="add*" propagation="REQUIRED" isolation="DEFAULT" />
-            <tx:method name="update*" propagation="REQUIRED" isolation="DEFAULT" />
-            <tx:method name="edit*" propagation="REQUIRED" isolation="DEFAULT" />
-            <tx:method name="delete*" propagation="REQUIRED" isolation="DEFAULT" />
+            <tx:method name="save*" propagation="REQUIRED" isolation="DEFAULT" rollback-for="Exception" />
+            <tx:method name="add*" propagation="REQUIRED" isolation="DEFAULT" rollback-for="Exception" />
+            <tx:method name="update*" propagation="REQUIRED" isolation="DEFAULT" rollback-for="Exception" />
+            <tx:method name="edit*" propagation="REQUIRED" isolation="DEFAULT" rollback-for="Exception" />
+            <tx:method name="delete*" propagation="REQUIRED" isolation="DEFAULT" rollback-for="Exception" />
+            <tx:method name="execute*" propagation="REQUIRES_NEW" isolation="DEFAULT" rollback-for="Exception" />
             <tx:method name="*" read-only="true" />
         </tx:attributes>
     </tx:advice>

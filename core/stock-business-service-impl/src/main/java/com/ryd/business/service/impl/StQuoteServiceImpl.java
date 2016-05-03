@@ -363,7 +363,7 @@ public class StQuoteServiceImpl implements StQuoteService {
     }
 
     @Override
-    public void addSimulationQuote() {
+    public void executeSimulationQuote() {
         // 1、获取最新一次的股票价格-买一、买二、卖一、卖二
         // 2、获取模拟马甲用户
         // 3、多线程生成马甲订单

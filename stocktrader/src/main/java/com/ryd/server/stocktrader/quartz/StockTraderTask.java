@@ -49,12 +49,15 @@ public class StockTraderTask {
      */
     @Scheduled(cron = "0 * 9-22 ? * MON-FRI")
     public void runUpdateStockData() {
+        if (ApplicationConstants.isMainThreadStop||ApplicationConstants.isSubThreadStop) {
+            runStockTraderEngine();
+        }
         // 每天下午4：00停止交易引擎
         // 每分钟停止交易业务，启动股票价格更新线程
-        stStockService.updateRealTimeStockInfo();
+        stStockService.executeRealTimeStockInfo();
         ApplicationConstants.isSubThreadWait = true;
         // 生成马甲订单
-        stQuoteService.addSimulationQuote();
+        stQuoteService.executeSimulationQuote();
         // 4、完成后模拟单后启动报价
         ApplicationConstants.isSubThreadWait = false;
     }

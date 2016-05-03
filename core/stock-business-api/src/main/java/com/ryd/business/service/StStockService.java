@@ -25,7 +25,7 @@ public interface StStockService {
      * 更新股票信息
      * @return
      */
-    public boolean updateRealTimeStockInfo();
+    public boolean executeRealTimeStockInfo();
 
     /**
      * 获取股票信息
