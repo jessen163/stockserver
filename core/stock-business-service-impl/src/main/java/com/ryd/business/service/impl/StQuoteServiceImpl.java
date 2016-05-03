@@ -66,7 +66,7 @@ public class StQuoteServiceImpl implements StQuoteService {
     }
 
     @Override
-    public Integer updateWithDrawQuote(StQuote quote) {
+    public Integer updateWithDrawQuote(StQuote quote) throws Exception {
         return this.updateQuoteList(Arrays.asList(quote));
     }
 
@@ -127,7 +127,7 @@ public class StQuoteServiceImpl implements StQuoteService {
                 rs = stAccountService.updateStAccountMoneyReduce(quote.getAccountId(), quote.getFrozeMoney());
                 if(!rs){
                     //用户金额不足
-                    return -4;
+                    throw new QuoteBusinessException("用户资金不足");
                 }
             }else if (quote.getQuoteType().shortValue() == ApplicationConstants.STOCK_QUOTETYPE_SELL.shortValue()){ //卖股票
 
@@ -135,14 +135,14 @@ public class StQuoteServiceImpl implements StQuoteService {
                 rs = stPositionService.updatePositionReduce(quote.getAccountId(), quote.getStockId(), quote.getAmount());
                 if(!rs){
                     //用户持仓不足
-                    return -5;
+                    throw new QuoteBusinessException("用户持仓不足");
                 }
             }
             if(rs) {
                 //把股票stockCode换成stockId
                 String sid = stStockConfigService.getStockIdByStockCode(quote.getStockId());
                 if(StringUtils.isEmpty(sid)){
-                    return -6;
+                    throw new QuoteBusinessException("股票价格信息不存在");
                 }
                 quote.setStockId(sid);
                 // 添加报价到队列，同时保存到数据库 失败后回滚
@@ -160,33 +160,35 @@ public class StQuoteServiceImpl implements StQuoteService {
     }
 
     @Override
-    public Integer updateQuoteList(List<StQuote> quoteList) {
-        // TODO 撤销报价 交易时间以外不允许撤单，涨跌停股票允许报价、交易 在涨停或跌停以前报价成功的股票允许撮合
+    public Integer updateQuoteList(List<StQuote> quoteList) throws Exception{
         if (StringUtils.isEmpty(quoteList)) {
-            ConcurrentSkipListMap<Long, StQuote> quoteQueueList = null;
-            for (StQuote quote : quoteList) {
-                //状态为托管报价-撤单
-                if(quote.getStatus().shortValue() == ApplicationConstants.STOCK_STQUOTE_STATUS_TRUSTEE.shortValue()){
-                    boolean rs = false;
-                    if (quote.getQuoteType().intValue() == ApplicationConstants.STOCK_QUOTETYPE_BUY) {
-                        //撤回托管买股票费用,帐户增加资产
-                        rs = stAccountService.updateStAccountMoneyAdd(quote.getAccountId(),quote.getFrozeMoney());
-                    } else if (quote.getQuoteType().intValue() == ApplicationConstants.STOCK_QUOTETYPE_SELL){
-                        //撤回托管为卖的股票，持仓数量增加
-                        rs = stPositionService.updatePositionAdd(quote.getAccountId(), quote.getStockId(), quote.getCurrentAmount());
-                    }
-                    if(rs){
-                        //修改报价状态
-                        quote.setStatus(ApplicationConstants.STOCK_STQUOTE_STATUS_NOTDEAL);
-                        updateQuote(quote);
-                        this.removeByQuote(quote);
-                    }
-                }else{
-                    return -1;
+            return -1;
+        }
+        for (StQuote quote : quoteList) {
+            //状态为托管报价-撤单
+            if(quote.getStatus().shortValue() == ApplicationConstants.STOCK_STQUOTE_STATUS_TRUSTEE.shortValue()){
+                boolean rs = false;
+                if (quote.getQuoteType().intValue() == ApplicationConstants.STOCK_QUOTETYPE_BUY) {
+                    //撤回托管买股票费用,帐户增加资产
+                    rs = stAccountService.updateStAccountMoneyAdd(quote.getAccountId(),quote.getFrozeMoney());
+                } else if (quote.getQuoteType().intValue() == ApplicationConstants.STOCK_QUOTETYPE_SELL){
+                    //撤回托管为卖的股票，持仓数量增加
+                    rs = stPositionService.updatePositionAdd(quote.getAccountId(), quote.getStockId(), quote.getCurrentAmount());
                 }
+                if(rs){
+                    //修改报价状态
+                    quote.setStatus(ApplicationConstants.STOCK_STQUOTE_STATUS_NOTDEAL);
+                    updateQuote(quote);
+                    if(!this.removeByQuote(quote)){
+                        throw new QuoteBusinessException("撤单删除失败");
+                    }
+                }
+            }else{
+                return -3;
             }
         }
-        return null;
+
+        return 1;
     }
 
     @Override
