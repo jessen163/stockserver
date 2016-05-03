@@ -2,9 +2,11 @@ package com.ryd.business.service.impl;
 
 import com.ryd.basecommon.util.ApplicationConstants;
 import com.ryd.basecommon.util.CacheConstant;
+import com.ryd.basecommon.util.UUIDUtils;
 import com.ryd.business.dao.StSettleRecordDao;
 import com.ryd.business.dto.SearchQuoteDTO;
 import com.ryd.business.model.StQuote;
+import com.ryd.business.model.StSettleRecord;
 import com.ryd.business.service.*;
 import com.ryd.cache.service.ICacheService;
 import com.ryd.system.service.StDateScheduleService;
@@ -12,6 +14,7 @@ import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ConcurrentSkipListMap;
 
@@ -25,8 +28,8 @@ import java.util.concurrent.ConcurrentSkipListMap;
 @Service
 public class StSettleRecordServiceImpl implements StSettleRecordService {
 
-//    @Autowired
-//    private StSettleRecordDao stSettleRecordDao;
+    @Autowired
+    private StSettleRecordDao stSettleRecordDao;
 //    @Autowired
 //    private StStockService stStockService;
     @Autowired
@@ -59,6 +62,7 @@ public class StSettleRecordServiceImpl implements StSettleRecordService {
                if(CollectionUtils.isEmpty(buyList) && CollectionUtils.isEmpty(sellList)){
                    continue;
                }else{
+                   List<StSettleRecord> settlers = new ArrayList<StSettleRecord>();
                    //买家结算
                    if(CollectionUtils.isNotEmpty(buyList)){
                        for(StQuote quote : buyList){
@@ -72,6 +76,18 @@ public class StSettleRecordServiceImpl implements StSettleRecordService {
                               updateQuoteStatus(quote);
                               //从队列清除报价
                               stQuoteService.deleteQuoteFromQueue(quote);
+
+                              //添加结算记录
+                              StSettleRecord ssrb = new StSettleRecord();
+                              ssrb.setSettleRecordId(UUIDUtils.uuidTrimLine());
+                              ssrb.setSettleAccountId(quote.getAccountId());
+                              ssrb.setStockId(quote.getStockId());
+                              ssrb.setAmount(quote.getAmount());
+                              ssrb.setQuotePrice(quote.getQuotePrice());
+                              ssrb.setDealType(quote.getQuoteType());
+                              ssrb.setDealFee(quote.getCommissionFee());
+                              ssrb.setDateTime(System.currentTimeMillis());
+                              settlers.add(ssrb);
                           }
                        }
                    }
@@ -89,9 +105,23 @@ public class StSettleRecordServiceImpl implements StSettleRecordService {
                                updateQuoteStatus(squote);
                                //从队列清除报价
                                stQuoteService.deleteQuoteFromQueue(squote);
+
+                               //添加结算记录
+                               StSettleRecord ssrs = new StSettleRecord();
+                               ssrs.setSettleRecordId(UUIDUtils.uuidTrimLine());
+                               ssrs.setSettleAccountId(squote.getAccountId());
+                               ssrs.setStockId(squote.getStockId());
+                               ssrs.setAmount(squote.getAmount());
+                               ssrs.setQuotePrice(squote.getQuotePrice());
+                               ssrs.setDealType(squote.getQuoteType());
+                               ssrs.setDealFee(squote.getCommissionFee());
+                               ssrs.setDateTime(System.currentTimeMillis());
+                               settlers.add(ssrs);
                            }
                        }
                    }
+
+                   stSettleRecordDao.addBatch(settlers);
                }
            }
        }

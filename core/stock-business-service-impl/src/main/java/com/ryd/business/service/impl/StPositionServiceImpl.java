@@ -30,6 +30,25 @@ public class StPositionServiceImpl implements StPositionService {
     }
 
     @Override
+    public boolean updatePosition(int size){
+        if(size==0){return false;}
+        int count = stPositionDao.getCount();
+        double a = (double) count / size;
+        int limit = (int) Math.ceil(a);
+        // 2.每次循环limit条
+        for(int i=1;i <= limit;i++) {//有几页循环几次
+            int offset = (i - 1) * limit;
+            List<StPosition> positions = stPositionDao.getTList(null,null,null,limit,offset);
+            //T+1 可卖数量置成和持仓数量相等
+            for(StPosition stp:positions){
+                   stp.setMarketAmount(stp.getAmount());
+            }
+            stPositionDao.updateBatch(positions);
+        }
+        return true;
+    }
+
+    @Override
     public boolean updatePositionAdd(String accountId, String stockId, Long amount) {
         int rs = -1;
         StPosition position = stPositionDao.getPositionByAccountStock(accountId, stockId);
