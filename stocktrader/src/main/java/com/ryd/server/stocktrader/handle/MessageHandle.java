@@ -47,7 +47,7 @@ public class MessageHandle {
      * @param request
      * @return
      */
-    public static DiyNettyMessage.NettyMessage handleClientRequestInfo(DiyNettyMessage.NettyMessage request) throws Exception {
+    public static DiyNettyMessage.NettyMessage handleClientRequestInfo(DiyNettyMessage.NettyMessage request) {
         DiyNettyMessage.NettyMessage.Builder builder = DiyNettyMessage.NettyMessage.newBuilder();
         builder.setId(request.getId());
         builder.setKey("0");
@@ -112,8 +112,13 @@ public class MessageHandle {
                 q.setQuoteType((short) quote.getQuoteType());
                 q.setAmount(Long.valueOf(quote.getAmount()));
 
-                int rs = stQuoteService.saveQuoteList(q);
-                if(rs >= 0 ){
+                int rs = -1;
+                try {
+                    rs = stQuoteService.saveQuoteList(q);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                if(rs > 0 ){
                     builder.setStatus(1);
                 }else{
                     builder.setStatus(2);
@@ -124,8 +129,13 @@ public class MessageHandle {
                 StQuote searchQuote = new StQuote();
                 searchQuote.setQuoteId(revokeQuote.getQuoteId());
                 StQuote rQuote = stQuoteService.findQuoteById(searchQuote);
-                int qrs = stQuoteService.updateWithDrawQuote(rQuote);
-                if(qrs >= 0 ){
+                int qrs = -1;
+                try {
+                    qrs = stQuoteService.updateWithDrawQuote(rQuote);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                if(qrs > 0 ){
                     builder.setStatus(1);
                 }else{
                     builder.setStatus(2);
