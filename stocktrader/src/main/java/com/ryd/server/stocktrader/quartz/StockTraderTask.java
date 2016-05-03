@@ -44,8 +44,10 @@ public class StockTraderTask {
     /**
      * 更新股票信息、生成马甲报价
      * 9点-15点
+     * TODO 每天早上9点-15点更新（提前一个小时）启动交易引擎 下方为测试配置
+     *
      */
-    @Scheduled(cron = "0 * 9-15 ? * MON-FRI")
+    @Scheduled(cron = "0 * 9-22 ? * MON-FRI")
     public void runUpdateStockData() {
         // 每天下午4：00停止交易引擎
         // 每分钟停止交易业务，启动股票价格更新线程
