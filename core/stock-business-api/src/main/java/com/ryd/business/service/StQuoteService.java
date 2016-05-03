@@ -33,7 +33,7 @@ public interface StQuoteService {
      * @param quote
      * @return
      */
-    public Integer updateWithDrawQuote(StQuote quote);
+    public Integer updateWithDrawQuote(StQuote quote) throws Exception;
 
     /**
      * 批量保存报价信息
@@ -47,7 +47,7 @@ public interface StQuoteService {
      * @param quoteList
      * @return
      */
-    public Integer updateQuoteList(List<StQuote> quoteList);
+    public Integer updateQuoteList(List<StQuote> quoteList) throws Exception;
 
     /**
      * 修改报价
