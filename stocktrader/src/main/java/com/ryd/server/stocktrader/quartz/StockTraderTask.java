@@ -32,7 +32,7 @@ public class StockTraderTask {
      * 周一到周五 运行
      * TODO 每天早上8：30（提前一个小时）启动交易引擎
      */
-    @Scheduled(cron = "0 0 * ? * MON-FRI")
+    @Scheduled(cron = "0 * 8-15 ? * MON-FRI")
     public void runStockTraderEngine() {
         if (ApplicationConstants.isMainThreadStop||ApplicationConstants.isSubThreadStop) {
             ApplicationConstants.isMainThreadStop = false;
