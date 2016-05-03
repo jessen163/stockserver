@@ -17,6 +17,22 @@ import java.math.BigDecimal;
 public class ParamBuilderDtoUtil {
 
     /**
+     * 股票配置信息
+     * @param stockConfigInfo
+     * @return
+     */
+    public static StStockConfig getStStockConfig(DiyNettyMessage.StockConfigInfo stockConfigInfo){
+        StStockConfig builder = new StStockConfig();
+        builder.setId(stockConfigInfo.getId());
+        builder.setStockName(stockConfigInfo.getStockName());
+        builder.setStockCode(stockConfigInfo.getStockCode());
+        builder.setStockType((short) stockConfigInfo.getStockType());
+        builder.setBoardType((short) stockConfigInfo.getBoardType());
+
+        return builder;
+    }
+
+    /**
      * 股票信息
      * @param stStock
      * @return

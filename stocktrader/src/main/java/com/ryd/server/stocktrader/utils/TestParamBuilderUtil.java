@@ -138,4 +138,17 @@ public class TestParamBuilderUtil {
         }
         return builder;
     }
+
+    //我的股票配置
+    public static DiyNettyMessage.NettyMessage.Builder getStockConfig(int type){
+
+        DiyNettyMessage.NettyMessage.Builder builder = DiyNettyMessage.NettyMessage.newBuilder();
+
+        builder.setId(ApplicationConstants.NETTYMESSAGE_ID_STOCKCONFIGINFO);
+        builder.setStatus(0);
+        builder.setKey("1");
+        builder.setType(type);
+
+        return builder;
+    }
 }

@@ -14,6 +14,8 @@ public class ApplicationConstants {
 
     /** 消息接口ID 心跳 id=1 **/
     public final static int NETTYMESSAGE_ID_HEARTBEAT = 1;
+    /** 消息接口ID 股票配置信息 id=4 **/
+    public final static int NETTYMESSAGE_ID_STOCKCONFIGINFO = 4;
     /** 消息接口ID 股票信息 id=5 **/
     public final static int NETTYMESSAGE_ID_STOCKINFO = 5;
     /** 消息接口ID 股票价格详情 id=6 **/
@@ -34,15 +36,15 @@ public class ApplicationConstants {
     public final static int NETTYMESSAGE_ID_MYTRADERECORD = 13;
     /** 消息接口ID 我的资金流水 id=14 **/
     public final static int NETTYMESSAGE_ID_MYMONEYJOURNAL = 14;
-    /** 消息接口ID 账户列表信息 id=16 **/
+    /** 消息接口ID 账户列表信息 id=21 **/
     public final static int NETTYMESSAGE_ID_ACCOUNTLIST = 21;
-    /** 消息接口ID 修改账户信息: id=15 **/
+    /** 消息接口ID 修改账户信息: id=22 **/
     public final static int NETTYMESSAGE_ID_ACCOUNTUPDATE = 22;
-    /** 消息接口ID 单只股票买卖队列 id=15 **/
+    /** 消息接口ID 单只股票买卖队列 id=23 **/
     public final static int NETTYMESSAGE_ID_SINGLESTOCKTRADEQUEUE = 23;
-    /** 消息接口ID 单只股票匹配记录 id=16 **/
+    /** 消息接口ID 单只股票匹配记录 id=24 **/
     public final static int NETTYMESSAGE_ID_SINGLESTOCKTRADERECORD = 24;
-    /** 消息接口ID 注册 id=17 **/
+    /** 消息接口ID 注册 id=25 **/
     public final static int NETTYMESSAGE_ID_REGISTER = 25;
 
     /** 消息接口状态-status 请求 status=0 **/

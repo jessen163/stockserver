@@ -35,6 +35,15 @@ public class MessageServiceImpl extends MessageServiceI {
                 builder.setId(request.getId());
                 builder.setStatus(ApplicationConstants.NETTYMESSAGE_STATUS_RESPONSE_SUCCESS);
                 break;
+            case ApplicationConstants.NETTYMESSAGE_ID_STOCKCONFIGINFO:
+                List<DiyNettyMessage.StockConfigInfo> configInfos = request.getStockConfigInfoList();
+                ClientConstants.stStockConfigList = new ArrayList<StStockConfig>();
+                for(DiyNettyMessage.StockConfigInfo scti : configInfos){
+                    StStockConfig sst = ParamBuilderDtoUtil.getStStockConfig(scti);
+                    ClientConstants.stStockConfigList.add(sst);
+                }
+                ClientConstants.stockConfigListToMap();
+                break;
             case ApplicationConstants.NETTYMESSAGE_ID_STOCKINFO:
                 List<DiyNettyMessage.StockInfo> infoList = request.getStockInfoList();
                 ClientConstants.stStockList = new ArrayList<StStock>();
@@ -50,6 +59,9 @@ public class MessageServiceImpl extends MessageServiceI {
             case ApplicationConstants.NETTYMESSAGE_ID_LOGIN:
                 if(request.getStatus()==1){
                     DiyNettyMessage.AccountInfo ainfo = request.getAccountInfoList().get(0);
+
+                    DiyNettyMessage.NettyMessage.Builder builderc = TestParamBuilderUtil.getStockConfig(1);
+                    MessageServiceImpl.sendMessage(builderc.build());
 
                     DiyNettyMessage.NettyMessage.Builder buildera = TestParamBuilderUtil.getAccount(ApplicationConstants.NETTYMESSAGE_ID_MYCAPITAL, ainfo.getAccountId(), 0L, System.currentTimeMillis());
                     MessageServiceImpl.sendMessage(buildera.build());
