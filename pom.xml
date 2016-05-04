@@ -50,6 +50,8 @@
     <commons-httpclient.version>3.1</commons-httpclient.version>
     <servlet-api.version>2.5</servlet-api.version>
     <commons-collections.version>3.2.1</commons-collections.version>
+    <commons-fileupload.version>1.2.1</commons-fileupload.version>
+    <httpcomponents.version>4.2.5</httpcomponents.version>
   </properties>
 
   <dependencies>

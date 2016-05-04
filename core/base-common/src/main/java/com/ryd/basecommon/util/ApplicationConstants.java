@@ -105,4 +105,7 @@ public class ApplicationConstants {
     public static volatile boolean isSubThreadWait = false;
     // 交易子线程是否等待
     public static volatile int downloadStockThreadCount = 0;
+
+    // 自动化交易主线程是否停止
+    public static volatile boolean isAutoTradeMainThreadStop = true;
 }
