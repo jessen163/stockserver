@@ -1,5 +1,6 @@
 package com.ryd.business.service.impl;
 
+import com.ryd.basecommon.util.ApplicationConstants;
 import com.ryd.basecommon.util.CacheConstant;
 import com.ryd.basecommon.util.StringUtils;
 import com.ryd.business.dao.StStockDao;
@@ -82,6 +83,8 @@ public class StStockServiceImpl implements StStockService {
         }
         System.out.println(BusinessConstants.simulateQuoteMap.size());
         System.out.println(BusinessConstants.stockPriceMap.size());
+        iCacheService.setObjectByKey(CacheConstant.CACHEKEY_STOCK_PRICELIST, BusinessConstants.stockPriceMap);
+//        iCacheService.setObjectByKey(CacheConstant.CACHEKEY_SIMULATIONQUOTELIST, BusinessConstants.simulateQuoteMap);
         stockService.shutdownNow();
         return true;
     }
@@ -96,10 +99,21 @@ public class StStockServiceImpl implements StStockService {
 ////            stockList = stStockDao.findStStockListCurrentTime(searchStockDTO);
 //            // TODO 缓存没有，暂时不取
 //        }
-        ConcurrentHashMap<String, List<StStock>> stockPriceMap = BusinessConstants.stockPriceMap;
-        Collection<List<StStock>> list = stockPriceMap.values();
-        for (List<StStock> sList : list) {
-            stockList.addAll(sList);
+        ConcurrentHashMap<String, List<StStock>> stockPriceMap = null;
+        if (BusinessConstants.stockPriceMap != null && BusinessConstants.stockPriceMap.size()>0) {
+            stockPriceMap = BusinessConstants.stockPriceMap;
+        } else {
+            Object stockPriceMapObj = iCacheService.setObjectByKey(CacheConstant.CACHEKEY_STOCK_PRICELIST, null);
+            if (stockPriceMapObj!=null) {
+                stockPriceMap = (ConcurrentHashMap<String, List<StStock>>) stockPriceMapObj;
+            }
+        }
+
+        if (stockPriceMap!=null&&stockPriceMap.size()>0) {
+            Collection<List<StStock>> list = stockPriceMap.values();
+            for (List<StStock> sList : list) {
+                stockList.addAll(sList);
+            }
         }
         return stockList;
     }
