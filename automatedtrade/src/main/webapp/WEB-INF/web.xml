@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.4"
+         xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee
+	http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+
+    <display-name>automatedtrade_web</display-name>
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>classpath:spring-context.xml</param-value>
+    </context-param>
+
+    <!-- mongo 数据库连接参数 start -->
+    <context-param>
+        <param-name>mongo.ip</param-name>
+        <param-value>101.200.167.122</param-value>
+    </context-param>
+    <context-param>
+        <param-name>mongo.port</param-name>
+        <param-value>27017</param-value>
+    </context-param>
+    <context-param>
+        <param-name>mongo.dbname</param-name>
+        <param-value>ryd_stocktrader</param-value>
+    </context-param>
+    <context-param>
+        <param-name>mongo.username</param-name>
+        <param-value>test</param-value>
+    </context-param>
+    <context-param>
+        <param-name>mongo.password</param-name>
+        <param-value>test</param-value>
+    </context-param>
+    <!-- mongo 数据库连接参数 end -->
+
+    <!-- netty 服务端口 start -->
+    <context-param>
+        <param-name>stockserver.port</param-name>
+        <param-value>9999</param-value>
+    </context-param>
+    <!-- netty 服务端口 end -->
+
+    <listener>
+        <listener-class>com.ryd.server.automatedtrade.listener.InitMongoDBListener</listener-class>
+    </listener>
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+    <listener>
+        <listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
+    </listener>
+    <servlet>
+        <servlet-name>manager</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>classpath*:web/*servlet.xml</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+    <filter>
+        <filter-name>encodingFilter</filter-name>
+        <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+        <init-param>
+            <param-name>forceEncoding</param-name>
+            <param-value>true</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>encodingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <servlet-mapping>
+        <servlet-name>manager</servlet-name>
+        <url-pattern>*.htm</url-pattern>
+    </servlet-mapping>
+
+    <session-config>
+        <session-timeout>180</session-timeout>
+    </session-config>
+
+    <welcome-file-list>
+        <welcome-file></welcome-file>
+    </welcome-file-list>
+
+
+</web-app>
