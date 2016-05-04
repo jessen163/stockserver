@@ -51,14 +51,9 @@ public class StStockServiceImpl implements StStockService {
         final CountDownLatch cdOrder = new CountDownLatch(1);//指挥官的命令，设置为1，指挥官一下达命令，则cutDown,变为0，战士们执行任务
 
         List<StStockConfig> list = stStockConfigService.findStockConfig(null, 1, Integer.MAX_VALUE);
-        System.out.println("total:" + list.size());
         int count = list.size()/10+1;
         cdOrder.countDown();
-        System.out.println("total:" + list.size());
-        // TODO 问题
-//        count = count - 35;
         final CountDownLatch cdAnswer = new CountDownLatch(count);
-//        iCacheService.remove(CacheConstant.CACHEKEY_STOCK_PRICELIST);
         // 清除模拟报价
         BusinessConstants.simulateQuoteMap.clear();
         // 清除最近的股票实时价格信息
