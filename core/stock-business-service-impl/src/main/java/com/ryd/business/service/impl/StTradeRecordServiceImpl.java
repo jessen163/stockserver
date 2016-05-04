@@ -18,8 +18,7 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.*;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.concurrent.*;
 
 
 /**
@@ -66,9 +65,17 @@ public class StTradeRecordServiceImpl implements StTradeRecordService {
         // 匹配买卖报价成功，记录交易日志，更新买、卖双方账户信息，更新仓位信息
         // 记录资金流水，更新双方报价信息
         // 操作过程中（每分钟）停止交易，获取股票信息（调用股票更新方法），生成马甲订单，完成后重新启动交易方法
-        ExecutorService tradingservice = Executors.newFixedThreadPool(2);
+//        ExecutorService tradingservice = Executors.newFixedThreadPool(2);
+        ThreadPoolExecutor tradingservice = null;
+        try {
+            BlockingQueue<Runnable> stockQueue = new LinkedBlockingQueue<Runnable>();
+            tradingservice = new ThreadPoolExecutor(2, 10, 1, TimeUnit.DAYS, stockQueue);
 
-        tradingservice.execute(new TradingMainThread(tradingservice, stStockService, stQuoteService, this));
+            tradingservice.execute(new TradingMainThread(tradingservice, stStockService, stQuoteService, this));
+        } catch (Exception e){
+            e.printStackTrace();
+            tradingservice.shutdownNow();
+        }
     }
 
     @Override
