@@ -11,9 +11,10 @@
 
   <modules>
     <module>core</module>
-    <module>serverdemo</module>
+<!--    <module>serverdemo</module>-->
     <module>stockmonitor</module>
     <module>stocktrader</module>
+    <module>automatedtrade</module>
   </modules>
 
   <properties>
