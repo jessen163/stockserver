@@ -5,6 +5,8 @@ import com.ryd.business.dto.AutomatedTradingDTO;
 import com.ryd.business.service.AutomatedTradingService;
 import org.apache.log4j.Logger;
 
+import java.util.concurrent.ScheduledExecutorService;
+
 /**
  * <p>标题:</p>
  * <p>描述:</p>
@@ -20,12 +22,12 @@ public class AutoTradeThread implements Runnable {
 
     private  AutomatedTradingDTO automatedTradingDTO;
 
-    public AutoTradeThread(AutomatedTradingService automatedTradingService){
-        this.automatedTradingService = automatedTradingService;
-    }
+    private ScheduledExecutorService autoService;
 
-    public void setData(AutomatedTradingDTO automatedTradingDTO){
+    public AutoTradeThread(ScheduledExecutorService autoService, AutomatedTradingService automatedTradingService, AutomatedTradingDTO automatedTradingDTO){
+        this.automatedTradingService = automatedTradingService;
         this.automatedTradingDTO = automatedTradingDTO;
+        this.autoService = autoService;
     }
 
     @Override
@@ -33,6 +35,8 @@ public class AutoTradeThread implements Runnable {
         if(!ApplicationConstants.isAutoTradeMainThreadStop) {
             logger.info("自动化交易.............start...........");
             automatedTradingService.addAutomatedTradingByStock(automatedTradingDTO);
+        }else{
+            autoService.shutdownNow();
         }
     }
 }
