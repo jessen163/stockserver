@@ -29,10 +29,10 @@ public class TradingSubThread implements Runnable {
             try {
                 // 等待
                 while (ApplicationConstants.isSubThreadWait) {
-                    TimeUnit.MILLISECONDS.sleep(200);
+                    TimeUnit.MILLISECONDS.sleep(5000);
                     System.out.println("TradingSubThread is Waiting!");
                 }
-                System.out.println("TradingSubThread is Running!");
+//                System.out.println("TradingSubThread is Running!");
                 SearchQuoteDTO searchQuoteDTO = new SearchQuoteDTO();
                 searchQuoteDTO.setStockCode(stockId);
                 searchQuoteDTO.setQuoteType(ApplicationConstants.STOCK_QUOTETYPE_BUY);
@@ -48,7 +48,7 @@ public class TradingSubThread implements Runnable {
                 } else {
                     break;
                 }
-                TimeUnit.MILLISECONDS.sleep(200);
+//                TimeUnit.MILLISECONDS.sleep(200);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
