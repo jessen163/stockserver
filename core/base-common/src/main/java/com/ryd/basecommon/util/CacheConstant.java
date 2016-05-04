@@ -32,6 +32,9 @@ public class CacheConstant {
     // 缓存key-系统配置参数信息-印花税比例
     public static final String CACHEKEY_SYSTEM_CONFIG_TAX_PERCENT  = "stockTaxPercent";
 
+    // 缓存key-系统配置参数信息-自动化交易时间间隔
+    public static final String CACHEKEY_SYSTEM_CONFIG_AUTOTRADE_INTERVAL  = "autoTradeInterval";
+
     // 缓存key-系统配置参数信息-股票涨跌幅度
     public static final String CACHEKEY_SYSTEM_CONFIG_UPANDDOWN_PERCENT  = "stockUpAndDownPercent";
 
