@@ -16,13 +16,11 @@ import com.ryd.cache.service.ICacheService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.concurrent.*;
 
 /**
  * <p>标题:股票业务实现类</p>
@@ -47,28 +45,41 @@ public class StStockServiceImpl implements StStockService {
 
     @Override
     public boolean executeRealTimeStockInfo() {
-        ExecutorService stockService = Executors.newFixedThreadPool(10);
+//        ExecutorService stockService = Executors.newFixedThreadPool(10);
+        BlockingQueue<Runnable> stockQueue = new LinkedBlockingQueue<Runnable>();
+        ThreadPoolExecutor stockService = new ThreadPoolExecutor(50, 50, 1, TimeUnit.MINUTES, stockQueue);
         final CountDownLatch cdOrder = new CountDownLatch(1);//指挥官的命令，设置为1，指挥官一下达命令，则cutDown,变为0，战士们执行任务
 
         List<StStockConfig> list = stStockConfigService.findStockConfig(null, 1, Integer.MAX_VALUE);
+        System.out.println("total:" + list.size());
         int count = list.size()/10+1;
         cdOrder.countDown();
+        System.out.println("total:" + list.size());
         // TODO 问题
-        count = count - 35;
+//        count = count - 35;
         final CountDownLatch cdAnswer = new CountDownLatch(count);
 //        iCacheService.remove(CacheConstant.CACHEKEY_STOCK_PRICELIST);
         // 清除模拟报价
         BusinessConstants.simulateQuoteMap.clear();
         // 清除最近的股票实时价格信息
-        BusinessConstants.stockPriceMap.clear();
-        StringBuffer stockCodeStringBuffer = new StringBuffer();;
+        BusinessConstants.tempStockPriceMap.clear();
+        StringBuffer stockCodeStringBuffer = new StringBuffer();
+        int i = 1;
+        int j = 1;
         for (StStockConfig stock: list) {
             stockCodeStringBuffer.append(stock.getStockTypeName()+stock.getStockCode()).append(",");
-            if (stockCodeStringBuffer.toString().split(",").length==11) {
+            int length = stockCodeStringBuffer.toString().split(",").length;
+            if (length==10) {
                 // 同步股票信息
                 stockService.execute(new SyncStockThread(stockCodeStringBuffer.toString(), iCacheService, cdOrder, cdAnswer, this));
                 stockCodeStringBuffer = new StringBuffer();
+                int threadSize = stockQueue.size();
+                System.out.println("线程队列大小为-->"+threadSize);
+                System.out.println("current thread index:" + j);
+                j++;
             }
+            System.out.println("current index:" + i);
+            i++;
         }
         if (!stockCodeStringBuffer.toString().isEmpty()) {
             stockService.execute(new SyncStockThread(stockCodeStringBuffer.toString(), iCacheService, cdOrder, cdAnswer, this));
@@ -82,6 +93,8 @@ public class StStockServiceImpl implements StStockService {
             e.printStackTrace();
         }
         System.out.println(BusinessConstants.simulateQuoteMap.size());
+        BusinessConstants.stockPriceMap.clear();
+        BusinessConstants.stockPriceMap.putAll(BusinessConstants.tempStockPriceMap);
         System.out.println(BusinessConstants.stockPriceMap.size());
         iCacheService.setObjectByKey(CacheConstant.CACHEKEY_STOCK_PRICELIST, BusinessConstants.stockPriceMap);
 //        iCacheService.setObjectByKey(CacheConstant.CACHEKEY_SIMULATIONQUOTELIST, BusinessConstants.simulateQuoteMap);
@@ -103,7 +116,7 @@ public class StStockServiceImpl implements StStockService {
         if (BusinessConstants.stockPriceMap != null && BusinessConstants.stockPriceMap.size()>0) {
             stockPriceMap = BusinessConstants.stockPriceMap;
         } else {
-            Object stockPriceMapObj = iCacheService.setObjectByKey(CacheConstant.CACHEKEY_STOCK_PRICELIST, null);
+            Object stockPriceMapObj = iCacheService.getObjectByKey(CacheConstant.CACHEKEY_STOCK_PRICELIST, null);
             if (stockPriceMapObj!=null) {
                 stockPriceMap = (ConcurrentHashMap<String, List<StStock>>) stockPriceMapObj;
             }
@@ -111,8 +124,12 @@ public class StStockServiceImpl implements StStockService {
 
         if (stockPriceMap!=null&&stockPriceMap.size()>0) {
             Collection<List<StStock>> list = stockPriceMap.values();
-            for (List<StStock> sList : list) {
-                stockList.addAll(sList);
+            if (list!=null&&list.size()>0) {
+                stockList = new ArrayList<StStock>();
+                for (List<StStock> sList : list) {
+                    if (sList==null) continue;
+                    stockList.addAll(sList);
+                }
             }
         }
         return stockList;
