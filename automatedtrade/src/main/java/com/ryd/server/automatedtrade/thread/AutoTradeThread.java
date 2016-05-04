@@ -22,12 +22,9 @@ public class AutoTradeThread implements Runnable {
 
     private  AutomatedTradingDTO automatedTradingDTO;
 
-    private ScheduledExecutorService autoService;
-
-    public AutoTradeThread(ScheduledExecutorService autoService, AutomatedTradingService automatedTradingService, AutomatedTradingDTO automatedTradingDTO){
+    public AutoTradeThread(AutomatedTradingService automatedTradingService, AutomatedTradingDTO automatedTradingDTO){
         this.automatedTradingService = automatedTradingService;
         this.automatedTradingDTO = automatedTradingDTO;
-        this.autoService = autoService;
     }
 
     @Override
@@ -35,8 +32,6 @@ public class AutoTradeThread implements Runnable {
         if(!ApplicationConstants.isAutoTradeMainThreadStop) {
             logger.info("自动化交易.............start...........");
             automatedTradingService.addAutomatedTradingByStock(automatedTradingDTO);
-        }else{
-            autoService.shutdownNow();
         }
     }
 }

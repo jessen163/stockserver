@@ -31,6 +31,9 @@ public class TradeController {
     @Autowired
     private StSystemParamService stSystemParamService;
 
+
+    private ScheduledExecutorService autoService;
+
     public TradeController() {
 
     }
@@ -67,8 +70,8 @@ public class TradeController {
             automatedTradingDTO.setAccountId(accountNum);
             automatedTradingDTO.setStockId(stockCode);
 
-            ScheduledExecutorService autoService = Executors.newSingleThreadScheduledExecutor();
-            autoService.scheduleAtFixedRate(new AutoTradeThread(autoService, automatedTradingService, automatedTradingDTO), 0, interval, TimeUnit.SECONDS);
+            autoService = Executors.newSingleThreadScheduledExecutor();
+            autoService.scheduleAtFixedRate(new AutoTradeThread(automatedTradingService, automatedTradingDTO), 0, interval, TimeUnit.SECONDS);
 
             return "开始成功";
         }else{
@@ -84,6 +87,7 @@ public class TradeController {
     @ResponseBody
     public String stopTrading() {
         ApplicationConstants.isAutoTradeMainThreadStop = true;
+        autoService.shutdownNow();
         return "结束成功";
     }
 }
