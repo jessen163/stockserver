@@ -31,20 +31,23 @@ public class TradingMainThread implements Runnable {
     public void run() {
         while (!ApplicationConstants.isMainThreadStop) {
             System.out.println("TradingMainThread is Running!");
-            List<String> stockIdList = stQuoteService.findQuoteStockIdList();
-            if (!StringUtils.isEmpty(stockIdList)) {
-                for (String stockId: stockIdList) {
-                    // 分线程执行报价交易
-                    executorService.execute(new TradingSubThread(stockId, stQuoteService, stTradeRecordService));
-                }
-            }
             try {
+                List<String> stockIdList = stQuoteService.findQuoteStockIdList();
+                if (!StringUtils.isEmpty(stockIdList)) {
+                    for (String stockId: stockIdList) {
+                        // 分线程执行报价交易
+                        executorService.execute(new TradingSubThread(stockId, stQuoteService, stTradeRecordService));
+                    }
+                }
+                // 等待
+                while (ApplicationConstants.isSubThreadWait) {
+                    TimeUnit.SECONDS.sleep(5);
+                    System.out.println("TradingSubThread is Waiting!");
+                }
                 TimeUnit.SECONDS.sleep(1);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-
-
         }
     }
 
