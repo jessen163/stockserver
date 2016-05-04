@@ -6,6 +6,7 @@ import com.ryd.business.dao.StQuoteDao;
 import com.ryd.business.dto.SearchQuoteDTO;
 import com.ryd.business.dto.SearchStockDTO;
 import com.ryd.business.dto.SimulationQuoteDTO;
+import com.ryd.business.dto.StTradeQueueDTO;
 import com.ryd.business.exception.QuoteBusinessException;
 import com.ryd.business.model.StQuote;
 import com.ryd.business.model.StStock;
@@ -13,6 +14,7 @@ import com.ryd.business.model.StStockConfig;
 import com.ryd.business.service.*;
 import com.ryd.business.service.thread.GenerateSimulationQuoteThread;
 import com.ryd.business.service.thread.SyncStockThread;
+import com.ryd.business.service.util.BusinessConstants;
 import com.ryd.business.service.util.Utils;
 import com.ryd.cache.service.ICacheService;
 import com.ryd.system.service.StDateScheduleService;
@@ -64,7 +66,12 @@ public class StQuoteServiceImpl implements StQuoteService {
 
     @Override
     public Integer saveQuoteList(StQuote quote) throws Exception {
-        return this.saveQuoteList(Arrays.asList(quote));
+        return this.saveQuoteList(Arrays.asList(quote), ApplicationConstants.ACCOUNT_TYPE_REAL);
+    }
+
+    @Override
+    public Integer saveQuoteList(List<StQuote> quoteList) throws Exception {
+        return this.saveQuoteList(quoteList, ApplicationConstants.ACCOUNT_TYPE_REAL);
     }
 
     @Override
@@ -73,8 +80,10 @@ public class StQuoteServiceImpl implements StQuoteService {
     }
 
     @Override
-    public Integer saveQuoteList(List<StQuote> quoteList) throws Exception{
+    public Integer saveQuoteList(List<StQuote> quoteList, int type) throws Exception{
         Integer quoteFlag = 0;
+        boolean rs = false;
+        StQuote stQuote = null;
         // 验证报价参数
         // 验证报价状态（是否可以报价）
 //        1、是否节假日getIsFestival 2、是否交易时间
@@ -82,83 +91,92 @@ public class StQuoteServiceImpl implements StQuoteService {
         // 将报价加入队列 失败后回滚
 
         // 将报价放入Kafka 失败后不回滚
-        if (StringUtils.isEmpty(quoteList)) return -1; // 参数不匹配
-        // 交易时间内
-        if (!stDateScheduleService.getIsCanQuote()) {
-            // 非交易时间
-            return -2;
-        }
-        // 价格是否匹配涨跌幅
-        for (StQuote quote: quoteList) {
-            SearchStockDTO sdto = new SearchStockDTO();
-            sdto.setStockId(quote.getStockId());
-            StStock stock = stStockService.findStockListByStock(sdto);
-            if (stock==null) {
-                // 股票价格信息不存在
-                throw new QuoteBusinessException("股票价格信息不存在");
+        if (type==ApplicationConstants.ACCOUNT_TYPE_REAL) {
+            if (StringUtils.isEmpty(quoteList)) return -1; // 参数不匹配
+            // 交易时间内
+            if (!stDateScheduleService.getIsCanQuote()) {
+                // 非交易时间
+                return -2;
             }
-            if (!isStockQuotePriceInScope(BigDecimal.valueOf(stock.getBfclosePrice()), quote.getQuotePrice())) {
-                // 超出涨跌幅
-                return -3;
-            }
-            if (quote.getDateTime()==null||quote.getDateTime()==0L) {
-                quote.setDateTime(System.currentTimeMillis());
-            }
-        }
-        // 账户金额是否够用
-        for (StQuote quote: quoteList) {
-            boolean rs=false;
-            quote.setQuoteId(UUIDUtils.uuidTrimLine());
-            // 用于排序的字段
-            long timeSort = Integer.parseInt(String.valueOf(quote.getDateTime()).substring(7));
-            quote.setTimeSort(timeSort);
-
-            quote.setCurrentAmount(quote.getAmount());
-            quote.setStatus(ApplicationConstants.STOCK_STQUOTE_STATUS_TRUSTEE);
-            quote.setUserType(quote.getUserType() == null ? ApplicationConstants.ACCOUNT_TYPE_REAL : quote.getUserType());
-//            quote.setDateTime(System.currentTimeMillis());
-            //买股票
-            if (quote.getQuoteType().shortValue() == ApplicationConstants.STOCK_QUOTETYPE_BUY.shortValue()) {
-
-                BigDecimal money = ArithUtil.multiply(quote.getQuotePrice(),new BigDecimal(quote.getAmount().toString()));
-                //佣金比例
-                String commissionPercent = stSystemParamService.getParamByKey(CacheConstant.CACHEKEY_SYSTEM_COMMINSSION_PERCENT);
-                //计算佣金
-                BigDecimal commissionFee = ArithUtil.multiply(money, new BigDecimal(commissionPercent));
-
-                quote.setFrozeMoney(ArithUtil.add(money, commissionFee));
-                quote.setCommissionFee(commissionFee);
-                //买家减少资产
-                rs = stAccountService.updateStAccountMoneyReduce(quote.getAccountId(), quote.getFrozeMoney());
-                if(!rs){
-                    //用户金额不足
-                    throw new QuoteBusinessException("用户资金不足");
+            // 价格是否匹配涨跌幅
+            for (StQuote quote: quoteList) {
+                SearchStockDTO sdto = new SearchStockDTO();
+                sdto.setStockId(quote.getStockId());
+                StStock stock = stStockService.findStockListByStock(sdto);
+                if (stock==null) {
+                    // 股票价格信息不存在
+                    throw new QuoteBusinessException("股票价格信息不存在");
                 }
-            }else if (quote.getQuoteType().shortValue() == ApplicationConstants.STOCK_QUOTETYPE_SELL.shortValue()){ //卖股票
-
-                //委托卖股票，减少股票持仓数量
-                rs = stPositionService.updatePositionReduce(quote.getAccountId(), quote.getStockId(), quote.getAmount());
-                if(!rs){
-                    //用户持仓不足
-                    throw new QuoteBusinessException("用户持仓不足");
+                if (!isStockQuotePriceInScope(BigDecimal.valueOf(stock.getBfclosePrice()), quote.getQuotePrice())) {
+                    // 超出涨跌幅
+                    return -3;
                 }
+                if (quote.getDateTime()==null||quote.getDateTime()==0L) {
+                    quote.setDateTime(System.currentTimeMillis());
+                }
+            }
+            // 账户金额是否够用
+            for (StQuote quote: quoteList) {
+                rs = false;
+                quote.setQuoteId(UUIDUtils.uuidTrimLine());
+                // 用于排序的字段
+                long timeSort = Integer.parseInt(String.valueOf(quote.getDateTime()).substring(7));
+                quote.setTimeSort(timeSort);
+
+                quote.setCurrentAmount(quote.getAmount());
+                quote.setStatus(ApplicationConstants.STOCK_STQUOTE_STATUS_TRUSTEE);
+                quote.setUserType(quote.getUserType() == null ? ApplicationConstants.ACCOUNT_TYPE_REAL : quote.getUserType());
+    //            quote.setDateTime(System.currentTimeMillis());
+                //买股票
+                if (quote.getQuoteType().shortValue() == ApplicationConstants.STOCK_QUOTETYPE_BUY.shortValue()) {
+
+                    BigDecimal money = ArithUtil.multiply(quote.getQuotePrice(), new BigDecimal(quote.getAmount().toString()));
+                    //佣金比例
+                    String commissionPercent = stSystemParamService.getParamByKey(CacheConstant.CACHEKEY_SYSTEM_COMMINSSION_PERCENT);
+                    //计算佣金
+                    BigDecimal commissionFee = ArithUtil.multiply(money, new BigDecimal(commissionPercent));
+
+                    quote.setFrozeMoney(ArithUtil.add(money, commissionFee));
+                    quote.setCommissionFee(commissionFee);
+                    //买家减少资产
+                    rs = stAccountService.updateStAccountMoneyReduce(quote.getAccountId(), quote.getFrozeMoney());
+                    if (!rs) {
+                        //用户金额不足
+                        throw new QuoteBusinessException("用户资金不足");
+                    }
+                } else if (quote.getQuoteType().shortValue() == ApplicationConstants.STOCK_QUOTETYPE_SELL.shortValue()) { //卖股票
+
+                    //委托卖股票，减少股票持仓数量
+                    rs = stPositionService.updatePositionReduce(quote.getAccountId(), quote.getStockId(), quote.getAmount());
+                    if (!rs) {
+                        //用户持仓不足
+                        throw new QuoteBusinessException("用户持仓不足");
+                    }
+                }
+                stQuote = quote;
             }
             if(rs) {
                 //把股票stockCode换成stockId
-                String sid = stStockConfigService.getStockIdByStockCode(quote.getStockId());
+                String sid = stStockConfigService.getStockIdByStockCode(stQuote.getStockId());
                 if(StringUtils.isEmpty(sid)){
                     throw new QuoteBusinessException("股票价格信息不存在");
                 }
-                quote.setStockId(sid);
+                stQuote.setStockId(sid);
             }
         }
         // 添加报价到队列，同时保存到数据库 失败后回滚
-        boolean ars = addQuoteToQueue(quoteList);
+        boolean ars = false;
+
+        if (type==ApplicationConstants.ACCOUNT_TYPE_REAL) {
+            ars = addQuoteToQueue(quoteList);
+        } else {
+            ars = addSimulationQuoteToQueue(quoteList);
+        }
 
         if(ars) {
             quoteFlag = 1;
         }else{
-            quoteFlag = -9;
+            throw new QuoteBusinessException("添加队列不成功");
         }
 
         return quoteFlag;
@@ -260,7 +278,7 @@ public class StQuoteServiceImpl implements StQuoteService {
     @Override
     public boolean addQuoteToQueue(List<StQuote> addQuoteList) {
         // 入库
-        stQuoteDao.addBatch(addQuoteList);
+//        stQuoteDao.addBatch(addQuoteList);
 
         for (StQuote quote : addQuoteList) {
             Object quoteobj = null;
@@ -275,6 +293,7 @@ public class StQuoteServiceImpl implements StQuoteService {
                 Long quotePriceForSort = -1 * Long.parseLong("100000000") * (long)(quote.getQuotePrice().doubleValue()*100) + quote.getTimeSort();
                 quote.setQuotePriceForSort(quotePriceForSort);
                 quoteList.put(quotePriceForSort, quote);
+
 
                 // 存入缓存
                 iCacheService.setObjectByKey(CacheConstant.CACHEKEY_STOCK_QUOTE_BUYQUEUE, quote.getStockId(), quoteList, 8 * 60 * 60);
@@ -304,6 +323,80 @@ public class StQuoteServiceImpl implements StQuoteService {
             }
         }
 
+        return true;
+    }
+
+    @Override
+    public boolean addSimulationQuoteToQueue(List<StQuote> addQuoteList) {
+        // 入库
+//        stQuoteDao.addBatch(addQuoteList);
+        int quoteType= 0;
+
+//        ConcurrentSkipListMap<Long, StQuote> quoteListTemp = null;
+        StTradeQueueDTO tradeQueueDTO = null;
+        for (StQuote quote : addQuoteList) {
+            if (quoteType==0) {
+                quoteType = quote.getQuoteType();
+            }
+            tradeQueueDTO = BusinessConstants.stTradeQueueMap.get(quote.getStockId());
+            if (tradeQueueDTO==null) {
+                tradeQueueDTO = new StTradeQueueDTO();
+            }
+            if (quoteType==ApplicationConstants.STOCK_QUOTETYPE_BUY) {
+                tradeQueueDTO.addBuyStQuote(quote);
+            } else {
+                tradeQueueDTO.addSellStQuote(quote);
+            }
+            BusinessConstants.stTradeQueueMap.put(quote.getStockId(), tradeQueueDTO);
+        }
+
+        /*ConcurrentSkipListMap<Long, StQuote> quoteList = new ConcurrentSkipListMap<Long, StQuote>();
+        for (StQuote quote : addQuoteList) {
+            if (quoteType==0) {
+                quoteType = quote.getQuoteType();
+                stockId = quote.getStockId();
+            }
+            Long quotePriceForSort = -1 * Long.parseLong("100000000") * (long)(quote.getQuotePrice().doubleValue()*100) + quote.getTimeSort();
+            quote.setQuotePriceForSort(quotePriceForSort);
+            quoteList.put(quotePriceForSort, quote);
+        }
+
+        ConcurrentSkipListMap<Long, StQuote> quoteListTemp = null;
+        Object quoteobj = null;
+        if (quoteType == ApplicationConstants.STOCK_QUOTETYPE_BUY) {
+            quoteobj = iCacheService.getObjectByKey(CacheConstant.CACHEKEY_STOCK_QUOTE_BUYQUEUE, stockId, null);
+            if (quoteobj!=null) {
+                quoteListTemp = (ConcurrentSkipListMap<Long, StQuote>)quoteobj;
+            } else {
+                quoteListTemp = new ConcurrentSkipListMap<Long, StQuote>();
+            }
+            quoteListTemp.putAll(quoteList);
+
+            // 存入缓存
+            iCacheService.setObjectByKey(CacheConstant.CACHEKEY_STOCK_QUOTE_BUYQUEUE, stockId, quoteListTemp, 8 * 60 * 60);
+        } else {
+            quoteobj = iCacheService.getObjectByKey(CacheConstant.CACHEKEY_STOCK_QUOTE_SELLQUEUE, stockId, null);
+            if (quoteobj!=null) {
+                quoteListTemp = (ConcurrentSkipListMap<Long, StQuote>)quoteobj;
+            } else {
+                quoteListTemp = new ConcurrentSkipListMap<Long, StQuote>();
+            }
+            quoteListTemp.putAll(quoteList);
+
+            // 存入缓存
+            iCacheService.setObjectByKey(CacheConstant.CACHEKEY_STOCK_QUOTE_SELLQUEUE, stockId, quoteListTemp, 8 * 60 * 60);
+        }*/
+
+        /*Object stockIdListObj = iCacheService.getObjectByKey(CacheConstant.CACHEKEY_QUEUE_STOCKID_LIST, null);
+        if (stockIdListObj != null) {
+            List<String> stockIdList = (List<String>) stockIdListObj;
+            if (!stockIdList.contains(quote.getStockId())) {
+                stockIdList.add(quote.getStockId());
+
+                // 存入缓存
+                iCacheService.setObjectByKey(CacheConstant.CACHEKEY_QUEUE_STOCKID_LIST, stockIdList);
+            }
+        }*/
         return true;
     }
 
@@ -340,8 +433,6 @@ public class StQuoteServiceImpl implements StQuoteService {
         return true;
     }
 
-
-
     /**
      * 从队列中删除报价
      * @param quote
@@ -375,40 +466,62 @@ public class StQuoteServiceImpl implements StQuoteService {
         // 1、获取最新一次的股票价格-买一、买二、卖一、卖二
         // 2、获取模拟马甲用户
         // 3、多线程生成马甲订单
-//        ExecutorService stockService = Executors.newFixedThreadPool(10);
-//        final CountDownLatch cdOrder = new CountDownLatch(1);//指挥官的命令，设置为1，指挥官一下达命令，则cutDown,变为0，战士们执行任务
+        long simulationCount = 0;
+        List<StQuote> newStQuoteList = new ArrayList<StQuote>();
+        for (String stockCode : BusinessConstants.simulateQuoteMap.keySet()) {
+            List<SimulationQuoteDTO> simulationQuoteDTOList = BusinessConstants.simulateQuoteMap.get(stockCode);
+            if (!StringUtils.isEmpty(simulationQuoteDTOList)) {
+                List<StQuote> stQuoteList = new ArrayList<StQuote>();
+                for (SimulationQuoteDTO simulationQuoteDTO : simulationQuoteDTOList) {
+                    StQuote quote = new StQuote();
+                    quote.setAccountId("800891cdc704462ab0c2335460a91684");
+                    quote.setStockId(simulationQuoteDTO.getStockId());
+                    quote.setUserType(ApplicationConstants.ACCOUNT_TYPE_VIRTUAL); // 马甲用户
+                    quote.setQuoteType(simulationQuoteDTO.getQuoteType());
+                    quote.setAmount(simulationQuoteDTO.getAmount());
+                    quote.setQuotePrice(BigDecimal.valueOf(simulationQuoteDTO.getQuotePrice()));
+                    quote.setQuoteId(UUIDUtils.uuidTrimLine());
+                    // 用于排序的字段
+                    long timeSort = Integer.parseInt(String.valueOf(simulationQuoteDTO.getDateTime()).substring(7));
+                    quote.setTimeSort(timeSort);
 
-//        List<SimulationQuoteDTO> simulationQuoteDTOList = null;
-//        if (iCacheService.getObjectByKey(CacheConstant.CACHEKEY_SIMULATIONQUOTELIST, null)!=null) {
-//            simulationQuoteDTOList=(List<SimulationQuoteDTO>)iCacheService.getObjectByKey(CacheConstant.CACHEKEY_SIMULATIONQUOTELIST, null);
-//        }
-//        if (!StringUtils.isEmpty(simulationQuoteDTOList)) {
-//            List<StQuote> stQuoteList = new ArrayList<StQuote>();
-//            for (SimulationQuoteDTO simulationQuoteDTO : simulationQuoteDTOList) {
-//                StQuote quote = new StQuote();
-//                quote.setAccountId("800891cdc704462ab0c2335460a91684");
-//                quote.setStockId(simulationQuoteDTO.getStockId());
-//                quote.setUserType(ApplicationConstants.ACCOUNT_TYPE_VIRTUAL); // 马甲用户
-//                quote.setQuoteType(simulationQuoteDTO.getQuoteType());
-//                quote.setAmount(simulationQuoteDTO.getAmount());
-//                quote.setQuotePrice(BigDecimal.valueOf(simulationQuoteDTO.getQuotePrice()));
-//                stQuoteList.add(quote);
-//            }
-//            try {
-//                this.saveQuoteList(stQuoteList);
-//            }catch (Exception e) {
-//                e.printStackTrace();
-//            }
-//        }
+                    quote.setCurrentAmount(quote.getAmount());
+                    quote.setStatus(ApplicationConstants.STOCK_STQUOTE_STATUS_TRUSTEE);
+                    stQuoteList.add(quote);
+                }
+                newStQuoteList.addAll(stQuoteList);
+                stQuoteList.clear();
+                try {
+//                    cdOrder.await();
+                    if (newStQuoteList!=null&&newStQuoteList.size()>=100) {
+                        simulationCount += newStQuoteList.size();
+                        this.saveQuoteList(newStQuoteList, ApplicationConstants.ACCOUNT_TYPE_VIRTUAL);
+                        newStQuoteList.clear();
+                    }
+                }catch (Exception e) {
+                    e.printStackTrace();
+                } finally {
+//                    cdAddQuote.countDown();
+                }
+            }
+        }
+        if (newStQuoteList!=null&&newStQuoteList.size()>0) {
+            try {
+                simulationCount += newStQuoteList.size();
+                this.saveQuoteList(newStQuoteList, ApplicationConstants.ACCOUNT_TYPE_VIRTUAL);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        System.out.println("simulationCount:"+simulationCount);
 
-        ExecutorService stockService = Executors.newFixedThreadPool(10);
+
+        /*ExecutorService stockService = Executors.newFixedThreadPool(10);
         final CountDownLatch cdOrder = new CountDownLatch(1);//指挥官的命令，设置为1，指挥官一下达命令，则cutDown,变为0，战士们执行任务
 
         List<StStockConfig> list = stStockConfigService.findStockConfig(null, 1, Integer.MAX_VALUE);
         int count = list.size();
         cdOrder.countDown();
-        // TODO 问题
-        count = count - 35;
         final CountDownLatch cdAnswer = new CountDownLatch(count);
         StringBuffer stockCodeStringBuffer = new StringBuffer();;
         for (StStockConfig stock: list) {
@@ -422,7 +535,7 @@ public class StQuoteServiceImpl implements StQuoteService {
             // 股票下载任务执行完成，通知交易引擎停止运行
         } catch (InterruptedException e) {
             e.printStackTrace();
-        }
+        }*/
     }
 
     /**

@@ -36,11 +36,21 @@ public interface StQuoteService {
     public Integer updateWithDrawQuote(StQuote quote) throws Exception;
 
     /**
-     * 批量保存报价信息
+     * 批量保存报价信息 真实账户
      * @param quoteList
      * @return
+     * @throws Exception
      */
     public Integer saveQuoteList(List<StQuote> quoteList) throws Exception;
+
+    /**
+     * 批量保存报价信息
+     * @param quoteList
+     * @param type 帐户类型 1.真实账户 2.马甲帐户
+     * @return
+     * @throws Exception
+     */
+    public Integer saveQuoteList(List<StQuote> quoteList, int type) throws Exception;
 
     /**
      * 撤销报价信息
@@ -92,6 +102,13 @@ public interface StQuoteService {
      * @return
      */
     public boolean addQuoteToQueue(List<StQuote> stQuoteList);
+
+    /**
+     * 添加模拟报价到队列
+     * @param addQuoteList
+     * @return
+     */
+    public boolean addSimulationQuoteToQueue(List<StQuote> addQuoteList);
 
     /**
      * 从队列中删除报价，同时修改报价状态
