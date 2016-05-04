@@ -15,8 +15,6 @@ import java.util.concurrent.ConcurrentSkipListMap;
 public class StTradeQueueDTO implements Serializable {
     private static final long serialVersionUID = 1531524722654988278L;
 
-    static final int INIT_CAPACITY = 2000;
-
     //买卖家报价
     public ConcurrentSkipListMap<Long, StQuote> sellList = new ConcurrentSkipListMap<Long, StQuote>();
     public ConcurrentSkipListMap<Long, StQuote> buyList = new ConcurrentSkipListMap<Long, StQuote>();
@@ -24,36 +22,39 @@ public class StTradeQueueDTO implements Serializable {
     private Map.Entry<Long, StQuote> sellMap = null;
 
     public boolean addSellStQuote(StQuote stQuote) {
-        // TODO 待实现
-//        Long quotePriceForSort = Long.parseLong("100000000") * (long)(stQuote.getQuotePrice()*100) + stQuote.getTimeSort();
-//        stQuote.setQuotePriceForSort(quotePriceForSort);
-//        return sellList.put(quotePriceForSort, stQuote) != null;
-        return false;
+        Long quotePriceForSort = Long.parseLong("100000000") * (long)(stQuote.getQuotePrice().doubleValue()*100) + stQuote.getTimeSort();
+        stQuote.setQuotePriceForSort(quotePriceForSort);
+        return sellList.put(quotePriceForSort, stQuote) != null;
+//        return false;
     }
 
     public boolean addBuyStQuote(StQuote stQuote) {
-        // TODO 待实现
-//        Long quotePriceForSort = -1 * Long.parseLong("100000000") * (long)(stQuote.getQuotePrice()*100) + stQuote.getTimeSort();
-//        stQuote.setQuotePriceForSort(quotePriceForSort);
-//        return buyList.put(quotePriceForSort, stQuote) != null;
-        return false;
+        Long quotePriceForSort = -1 * Long.parseLong("100000000") * (long)(stQuote.getQuotePrice().doubleValue()*100) + stQuote.getTimeSort();
+        stQuote.setQuotePriceForSort(quotePriceForSort);
+        return buyList.put(quotePriceForSort, stQuote) != null;
+//        return false;
     }
 
     public boolean removeSellStQuote(StQuote stQuote) {
-        // TODO 待实现
-//        Long quotePriceForSort = Long.parseLong("100000000") * (long)(stQuote.getQuotePrice()*100) + stQuote.getTimeSort();
-//        return sellList.remove(quotePriceForSort) != null;
-        return false;
+        Long quotePriceForSort = Long.parseLong("100000000") * (long)(stQuote.getQuotePrice().doubleValue()*100) + stQuote.getTimeSort();
+        return sellList.remove(quotePriceForSort) != null;
+//        return false;
     }
 
     public boolean removeBuyStQuote(StQuote stQuote) {
-        // TODO 待实现
-//        Long quotePriceForSort = -1 * Long.parseLong("100000000") * (long)(stQuote.getQuotePrice()*100) + stQuote.getTimeSort();
-//        return buyList.remove(quotePriceForSort) != null;
-        return false;
+        Long quotePriceForSort = -1 * Long.parseLong("100000000") * (long)(stQuote.getQuotePrice().doubleValue()*100) + stQuote.getTimeSort();
+        return buyList.remove(quotePriceForSort) != null;
+//        return false;
     }
 
-    public StQuote getStQuote(Long key, int type) {
+    /**
+     * 返回队列中的第一条报价
+     * 按队列的顺序
+     * @param type
+     * @return
+     */
+    public StQuote getFristStQuoteFromQueue(int type) {
+        long key = Long.MIN_VALUE;
         if (type == ApplicationConstants.STOCK_QUOTETYPE_BUY) {
             sellMap = buyList.higherEntry(key);
         } else if (type == ApplicationConstants.STOCK_QUOTETYPE_SELL) {
