@@ -14,6 +14,7 @@ import org.apache.log4j.Logger;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
 
@@ -62,12 +63,10 @@ public class SyncStockThread implements Runnable {
             e.printStackTrace();
         } finally {
             cdAnswer.countDown();
-//            System.out.println("countDown:" +  cdAnswer.getCount());
-//            ApplicationConstants.downloadStockThreadCount--;
         }
     }
 
-    private List<StStock> getStockInfoByStr(String stockCodeStr, String stockListStr) {
+    private synchronized List<StStock> getStockInfoByStr(String stockCodeStr, String stockListStr) {
         List<StStock> stockList = new ArrayList<StStock>();
 
         String[] stockCodeStrArr = stockCodeStr.split(",");
@@ -81,7 +80,7 @@ public class SyncStockThread implements Runnable {
         return stockList;
     }
 
-    private StStock getStockByStr(String stockCode, String stockStr) {
+    private synchronized StStock getStockByStr(String stockCode, String stockStr) {
         if (stockStr==null) return null;
         String[] s = stockStr.split("\"");
         if (s==null || s.length!=2) return null;
@@ -132,7 +131,9 @@ public class SyncStockThread implements Runnable {
             sts.setSellFivePrice(Double.parseDouble(sk[29]));
 
             sts.setStockDate(DateUtils.formatStrToDate(sk[30], DateUtils.DATE_FORMAT));
-            sts.setStockTime(DateUtils.formatStrToDate(sk[30]+" "+sk[31], DateUtils.TIME_FORMAT));
+            sts.setStockTime(DateUtils.formatStrToDate(sk[30] + " " + sk[31], DateUtils.TIME_FORMAT));
+            // 放入缓存 - TODO 放入kafka
+            BusinessConstants.tempStockPriceMap.put(sts.getStockCode(), Arrays.asList(sts));
         }
         return sts;
     }
@@ -140,7 +141,7 @@ public class SyncStockThread implements Runnable {
     /**
      * 生成马甲盘,同时将实时价格放入缓存，缓存10分钟
      */
-    public boolean addSimulationQuote(List<StStock> stockList) {
+    public synchronized boolean addSimulationQuote(List<StStock> stockList) {
         double[] priceArr = new double[10];
         long[] amountArr = new long[10];
         short[] typeArr = new short[10];
@@ -193,10 +194,9 @@ public class SyncStockThread implements Runnable {
                 s.setQuoteType(typeArr[i]);
                 s.setDateTime(System.currentTimeMillis());
                 simulationQuoteDTOList.add(s);
-                // 模拟订单
-//                cacheService.setObjectByKey(CacheConstant.CACHEKEY_SIMULATIONQUOTELIST , s.getStockId(), simulationQuoteDTOList, 60*10);
-                BusinessConstants.simulateQuoteMap.put(s.getStockId(), simulationQuoteDTOList);
             }
+            // 存储马甲订单到缓存--虚拟机缓存 TODO 待优化 放入kafka队列 memcached
+            BusinessConstants.simulateQuoteMap.put(stStock.getStockCode(), simulationQuoteDTOList);
         }
 //        Object priceListObj = cacheService.getObjectByKey(CacheConstant.CACHEKEY_STOCK_PRICELIST, null);
 //        List<StStock> priceList = null;
@@ -205,7 +205,6 @@ public class SyncStockThread implements Runnable {
 //        }
 //        priceList.addAll(stStockCacheList);
 //        cacheService.setObjectByKey(CacheConstant.CACHEKEY_STOCK_PRICELIST, priceList, 60 * 5);
-        BusinessConstants.stockPriceMap.put(stockCodeStr, stStockCacheList);
 
         return true;
     }
