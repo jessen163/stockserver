@@ -3,6 +3,7 @@ package com.ryd.business.service.thread;
 import com.ryd.basecommon.util.ApplicationConstants;
 import com.ryd.basecommon.util.CacheConstant;
 import com.ryd.basecommon.util.StringUtils;
+import com.ryd.basecommon.util.UUIDUtils;
 import com.ryd.business.dto.SimulationQuoteDTO;
 import com.ryd.business.model.StQuote;
 import com.ryd.business.service.StQuoteService;
@@ -51,11 +52,19 @@ public class GenerateSimulationQuoteThread implements Runnable {
                 quote.setQuoteType(simulationQuoteDTO.getQuoteType());
                 quote.setAmount(simulationQuoteDTO.getAmount());
                 quote.setQuotePrice(BigDecimal.valueOf(simulationQuoteDTO.getQuotePrice()));
+                quote.setQuoteId(UUIDUtils.uuidTrimLine());
+                quote.setDateTime(System.currentTimeMillis());
+                // 用于排序的字段
+                long timeSort = Integer.parseInt(String.valueOf(quote.getDateTime()).substring(7));
+                quote.setTimeSort(timeSort);
+
+                quote.setCurrentAmount(quote.getAmount());
+                quote.setStatus(ApplicationConstants.STOCK_STQUOTE_STATUS_TRUSTEE);
                 stQuoteList.add(quote);
             }
             try {
                 cdOrder.await();
-                stQuoteService.saveQuoteList(stQuoteList);
+                stQuoteService.saveQuoteList(stQuoteList, ApplicationConstants.ACCOUNT_TYPE_VIRTUAL);
             }catch (Exception e) {
                 e.printStackTrace();
             } finally {
