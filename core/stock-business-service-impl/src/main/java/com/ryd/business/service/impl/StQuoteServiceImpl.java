@@ -120,8 +120,8 @@ public class StQuoteServiceImpl implements StQuoteService {
                 rs = false;
                 quote.setQuoteId(UUIDUtils.uuidTrimLine());
                 // 用于排序的字段
-                long timeSort = Integer.parseInt(String.valueOf(quote.getDateTime()).substring(7));
-                quote.setTimeSort(timeSort);
+//                long timeSort = Integer.parseInt(String.valueOf(quote.getDateTime()).substring(7));
+//                quote.setTimeSort(timeSort);
 
                 quote.setCurrentAmount(quote.getAmount());
                 quote.setStatus(ApplicationConstants.STOCK_STQUOTE_STATUS_TRUSTEE);
@@ -242,6 +242,7 @@ public class StQuoteServiceImpl implements StQuoteService {
 
     @Override
     public List<StQuote> findQuoteQueueByStock(SearchQuoteDTO searchQuoteDTO) {
+        // TODO 缓存问题
         // 从缓存中获取
         ConcurrentSkipListMap<Long, StQuote> quoteList = null;
 
@@ -260,9 +261,15 @@ public class StQuoteServiceImpl implements StQuoteService {
 
     @Override
     public StQuote findFirstQuoteByStock(SearchQuoteDTO searchQuoteDTO) {
+        StTradeQueueDTO tradeQueueDTO = BusinessConstants.stTradeQueueMap.get(searchQuoteDTO.getStockCode());
+        if (tradeQueueDTO==null) {
+            return null;
+        }
+        // 获取队列中的第一条买/卖报价
+        StQuote quote = tradeQueueDTO.getFristStQuoteFromQueue(searchQuoteDTO.getQuoteType());
+        return quote;
         // 从缓存中获取
-        ConcurrentSkipListMap<Long, StQuote> quoteList = null;
-
+        /*ConcurrentSkipListMap<Long, StQuote> quoteList = null;
         Object quoteobj = null;
         if (searchQuoteDTO.getQuoteType() == ApplicationConstants.STOCK_QUOTETYPE_BUY) {
             quoteobj = iCacheService.getObjectByKey(CacheConstant.CACHEKEY_STOCK_QUOTE_BUYQUEUE, searchQuoteDTO.getStockCode(), null);
@@ -272,15 +279,16 @@ public class StQuoteServiceImpl implements StQuoteService {
         if (quoteobj==null) return null;
         quoteList = (ConcurrentSkipListMap<Long, StQuote>) quoteobj;
         Map.Entry<Long, StQuote> sellMap = quoteList.higherEntry(Long.MIN_VALUE);
-        return sellMap==null?null:sellMap.getValue();
+        return sellMap==null?null:sellMap.getValue();*/
     }
 
     @Override
     public boolean addQuoteToQueue(List<StQuote> addQuoteList) {
         // 入库
-//        stQuoteDao.addBatch(addQuoteList);
-
-        for (StQuote quote : addQuoteList) {
+        stQuoteDao.addBatch(addQuoteList);
+        // 添加模拟报价
+        this.addSimulationQuoteToQueue(addQuoteList);
+        /*for (StQuote quote : addQuoteList) {
             Object quoteobj = null;
             ConcurrentSkipListMap<Long, StQuote> quoteList = null;
             if (quote.getQuoteType().intValue() == ApplicationConstants.STOCK_QUOTETYPE_BUY) {
@@ -309,9 +317,9 @@ public class StQuoteServiceImpl implements StQuoteService {
                 quoteList.put(quotePriceForSort, quote);
                 // 存入缓存
                 iCacheService.setObjectByKey(CacheConstant.CACHEKEY_STOCK_QUOTE_SELLQUEUE, quote.getStockId(), quoteList, 8 * 60 * 60);
-            }
+            }*/
 
-            Object stockIdListObj = iCacheService.getObjectByKey(CacheConstant.CACHEKEY_QUEUE_STOCKID_LIST, null);
+            /*Object stockIdListObj = iCacheService.getObjectByKey(CacheConstant.CACHEKEY_QUEUE_STOCKID_LIST, null);
             if (stockIdListObj != null) {
                 List<String> stockIdList = (List<String>) stockIdListObj;
                 if (!stockIdList.contains(quote.getStockId())) {
@@ -321,7 +329,7 @@ public class StQuoteServiceImpl implements StQuoteService {
                     iCacheService.setObjectByKey(CacheConstant.CACHEKEY_QUEUE_STOCKID_LIST, stockIdList);
                 }
             }
-        }
+        }*/
 
         return true;
     }
@@ -403,7 +411,18 @@ public class StQuoteServiceImpl implements StQuoteService {
     @Override
     public boolean deleteQuoteFromQueue(StQuote quote) {
         // 从队列中删除报价，同时修改报价状态
-        Object quoteobj = null;
+        StTradeQueueDTO tradeQueueDTO = BusinessConstants.stTradeQueueMap.get(quote.getStockId());
+        if (tradeQueueDTO==null) {
+            return false;
+        }
+        if (quote.getQuoteType() == ApplicationConstants.STOCK_QUOTETYPE_BUY) {
+            tradeQueueDTO.removeBuyStQuote(quote);
+        } else {
+            tradeQueueDTO.removeSellStQuote(quote);
+        }
+        BusinessConstants.stTradeQueueMap.put(quote.getStockId(), tradeQueueDTO);
+
+        /*Object quoteobj = null;
         ConcurrentSkipListMap<Long, StQuote> quoteList = null;
         if (quote.getQuoteType().intValue() == ApplicationConstants.STOCK_QUOTETYPE_BUY) {
             quoteobj = iCacheService.getObjectByKey(CacheConstant.CACHEKEY_STOCK_QUOTE_BUYQUEUE, quote.getStockId(), null);
@@ -429,7 +448,7 @@ public class StQuoteServiceImpl implements StQuoteService {
             quoteList.remove(quotePriceForSort);
             // 存入缓存
             iCacheService.setObjectByKey(CacheConstant.CACHEKEY_STOCK_QUOTE_SELLQUEUE, quote.getStockId(), quoteList, 8 * 60 * 60);
-        }
+        }*/
         return true;
     }
 
@@ -439,8 +458,8 @@ public class StQuoteServiceImpl implements StQuoteService {
      * @return
      */
     private boolean removeByQuote(StQuote quote) {
-        Utils.getQuoteKeyByQuote(quote);
-        ConcurrentSkipListMap<Long, StQuote> quoteQueueList = null;
+        return deleteQuoteFromQueue(quote);
+        /*ConcurrentSkipListMap<Long, StQuote> quoteQueueList = null;
         Object quoteobj = null;
         if (quote.getQuoteType().intValue() == ApplicationConstants.STOCK_QUOTETYPE_BUY) {
             quoteobj = iCacheService.getObjectByKey(CacheConstant.CACHEKEY_STOCK_QUOTE_BUYQUEUE, quote.getStockId(), null);
@@ -458,7 +477,7 @@ public class StQuoteServiceImpl implements StQuoteService {
         } else if (quote.getQuoteType().intValue() == ApplicationConstants.STOCK_QUOTETYPE_SELL){
             iCacheService.setObjectByKey(CacheConstant.CACHEKEY_STOCK_QUOTE_SELLQUEUE, quote.getStockId(), quoteQueueList, 8 * 60 * 60);
         }
-        return stQuote==null?false:true;
+        return stQuote==null?false:true;*/
     }
 
     @Override
@@ -481,9 +500,10 @@ public class StQuoteServiceImpl implements StQuoteService {
                     quote.setAmount(simulationQuoteDTO.getAmount());
                     quote.setQuotePrice(BigDecimal.valueOf(simulationQuoteDTO.getQuotePrice()));
                     quote.setQuoteId(UUIDUtils.uuidTrimLine());
+                    quote.setDateTime(System.currentTimeMillis());
                     // 用于排序的字段
-                    long timeSort = Integer.parseInt(String.valueOf(simulationQuoteDTO.getDateTime()).substring(7));
-                    quote.setTimeSort(timeSort);
+//                    long timeSort = Integer.parseInt(String.valueOf(simulationQuoteDTO.getDateTime()).substring(7));
+//                    quote.setTimeSort(timeSort);
 
                     quote.setCurrentAmount(quote.getAmount());
                     quote.setStatus(ApplicationConstants.STOCK_STQUOTE_STATUS_TRUSTEE);
@@ -492,7 +512,6 @@ public class StQuoteServiceImpl implements StQuoteService {
                 newStQuoteList.addAll(stQuoteList);
                 stQuoteList.clear();
                 try {
-//                    cdOrder.await();
                     if (newStQuoteList!=null&&newStQuoteList.size()>=100) {
                         simulationCount += newStQuoteList.size();
                         this.saveQuoteList(newStQuoteList, ApplicationConstants.ACCOUNT_TYPE_VIRTUAL);
@@ -500,8 +519,6 @@ public class StQuoteServiceImpl implements StQuoteService {
                     }
                 }catch (Exception e) {
                     e.printStackTrace();
-                } finally {
-//                    cdAddQuote.countDown();
                 }
             }
         }
