@@ -145,10 +145,11 @@ public class SyncStockThread implements Runnable {
         double[] priceArr = new double[10];
         long[] amountArr = new long[10];
         short[] typeArr = new short[10];
-        // 模拟订单
-        List<SimulationQuoteDTO> simulationQuoteDTOList = new ArrayList<SimulationQuoteDTO>();
+        List<SimulationQuoteDTO> simulationQuoteDTOList = null;
         List<StStock> stStockCacheList = new ArrayList<StStock>();
         for (StStock stStock : stockList) {
+            // 模拟订单
+            simulationQuoteDTOList = new ArrayList<SimulationQuoteDTO>();
             // 将实时价格放入缓存  6分钟
             cacheService.setObjectByKey(CacheConstant.CACHEKEY_STOCK_PRICEMAP, stStock.getStockCode(), stStock, 60*10);
             stStockCacheList.add(stStock);

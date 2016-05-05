@@ -29,7 +29,7 @@ public class TradingSubThread implements Runnable {
             try {
                 // 等待
                 while (ApplicationConstants.isSubThreadWait) {
-                    TimeUnit.MILLISECONDS.sleep(5000);
+                    TimeUnit.MILLISECONDS.sleep(500);
                     System.out.println("TradingSubThread is Waiting!");
                 }
 //                System.out.println("TradingSubThread is Running!");
