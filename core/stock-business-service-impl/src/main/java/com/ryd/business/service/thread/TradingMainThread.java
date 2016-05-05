@@ -30,7 +30,7 @@ public class TradingMainThread implements Runnable {
     @Override
     public void run() {
         while (!ApplicationConstants.isMainThreadStop) {
-            System.out.println("TradingMainThread is Running!");
+//            System.out.println("TradingMainThread is Running!");
             try {
                 List<String> stockIdList = stQuoteService.findQuoteStockIdList();
                 if (!StringUtils.isEmpty(stockIdList)) {
