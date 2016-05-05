@@ -154,4 +154,13 @@ public class StStockServiceImpl implements StStockService {
         // TODO 增加股票价格、增加股票成交量
         return stStockDetailDTO;
     }
+
+    @Override
+    public boolean findStockListToCache() {
+        Object obj = iCacheService.getObjectByKey(CacheConstant.CACHEKEY_STOCK_PRICELIST, null);
+        if (obj != null) {
+            BusinessConstants.stockPriceMap = (ConcurrentHashMap<String, StStock>) obj;
+        }
+        return false;
+    }
 }
