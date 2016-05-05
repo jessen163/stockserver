@@ -38,6 +38,7 @@ public class StStockConfigServiceImpl implements StStockConfigService {
             for (StStockConfig stock: stStockConfigList) {
                 BusinessConstants.stockConfigMap.put(stock.getId(), stock);
                 BusinessConstants.stockCodeStockIdMap.put(stock.getStockCode(), stock.getId());
+                BusinessConstants.stockIdStockCodeMap.put(stock.getId(), stock.getStockCode());
             }
         } else {
             stStockConfigList = new ArrayList<StStockConfig>(BusinessConstants.stockConfigMap.values());
@@ -95,5 +96,14 @@ public class StStockConfigServiceImpl implements StStockConfigService {
             this.findStockConfig(null, 1, Integer.MAX_VALUE);
         }
         return BusinessConstants.stockCodeStockIdMap.get(stockCode);
+    }
+
+    @Override
+    public String getStockCodeByStockId(String stockId) {
+        String str = BusinessConstants.stockIdStockCodeMap.get(stockId);
+        if (StringUtils.isEmpty(str)) {
+            this.findStockConfig(null, 1, Integer.MAX_VALUE);
+        }
+        return BusinessConstants.stockIdStockCodeMap.get(stockId);
     }
 }

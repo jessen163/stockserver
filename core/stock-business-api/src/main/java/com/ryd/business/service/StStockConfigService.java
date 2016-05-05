@@ -34,4 +34,11 @@ public interface StStockConfigService {
      * @return
      */
     public String getStockIdByStockCode(String stockCode);
+
+    /**
+     * 通过股票ID查询股票代码
+     * @param stockId
+     * @return
+     */
+    public String getStockCodeByStockId(String stockId);
 }
