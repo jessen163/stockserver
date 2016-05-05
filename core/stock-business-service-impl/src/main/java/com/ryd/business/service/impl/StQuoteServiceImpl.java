@@ -156,14 +156,6 @@ public class StQuoteServiceImpl implements StQuoteService {
                 }
                 stQuote = quote;
             }
-            if(rs) {
-                //把股票stockCode换成stockId
-                String sid = stStockConfigService.getStockIdByStockCode(stQuote.getStockId());
-                if(StringUtils.isEmpty(sid)){
-                    throw new QuoteBusinessException("股票价格信息不存在");
-                }
-                stQuote.setStockId(sid);
-            }
         }
         // 添加报价到队列，同时保存到数据库 失败后回滚
         boolean ars = false;
