@@ -23,7 +23,7 @@ import java.util.List;
  */
 public class RecordListDialog extends JDialog {
 
-	public static String[] columnName = {"股票代码", "股票名称","报价", "数量", "类型",  "交易时间"};
+	public static String[] columnName = {"股票代码", "股票名称","报价", "数量", "类型",  "交易时间", "ID"};
 
 	private static RecordListDialog quoteListDialog;
 
@@ -38,7 +38,7 @@ public class RecordListDialog extends JDialog {
 	public RecordListDialog() {
 		super(MainFrame.instance(), "成交记录列表", true);
 		setLayout(new BorderLayout());
-		setSize(600, 450);
+		setSize(800, 450);
 		setLocationRelativeTo(null);
         setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 
@@ -64,11 +64,6 @@ public class RecordListDialog extends JDialog {
 		JPanel buttonPanel = new JPanel();
 		buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
 
-
-		JButton canelQuoteBtn = new JButton("撤单");
-		QuoteCancelListener quoteCancelListener = new QuoteCancelListener(table);
-		canelQuoteBtn.addActionListener(quoteCancelListener);
-
 		JButton jcloseButton = new JButton("退出");
 		jcloseButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -76,7 +71,6 @@ public class RecordListDialog extends JDialog {
 			}
 		});
 
-		buttonPanel.add(canelQuoteBtn);
 		buttonPanel.add(Box.createHorizontalGlue());
 		buttonPanel.add(jcloseButton);
 
@@ -97,7 +91,7 @@ public class RecordListDialog extends JDialog {
 		table.removeAll();
 		DefaultTableModel tableModel = new DefaultTableModel(ListToArray.recordListToArray(stTradeRecords), columnName);
 		table.setModel(tableModel);
-		hideColumn(table,7);
+		hideColumn(table,6);
 	}
 
 	/**

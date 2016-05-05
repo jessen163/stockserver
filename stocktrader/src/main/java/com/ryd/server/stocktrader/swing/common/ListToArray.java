@@ -6,7 +6,6 @@ import com.ryd.business.model.*;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 /**
@@ -63,7 +62,7 @@ public class ListToArray {
             StStock stStock = ClientConstants.stStockMap.get(stockConfig.getStockCode());
             arr[i][0] = stockConfig.getStockCode();
             arr[i][1] = stockConfig.getStockName();
-            arr[i][2] = stStock.getCurrentPrice();
+            arr[i][2] = "13"; //stStock.getCurrentPrice();
             arr[i][3] = stq.getAmount();
             arr[i][4] = stq.getMarketAmount();
         }
@@ -81,7 +80,6 @@ public class ListToArray {
             return null;
         }
         Object[][] arr = new Object[stQuoteList.size()][9];
-        SimpleDateFormat format=new SimpleDateFormat("MM/dd HH:mm");
         for(int i=0;i<stQuoteList.size();i++){
             StQuote stq = stQuoteList.get(i);
             StStockConfig stock = ClientConstants.stStockConfigMap.get(stq.getStockId());
@@ -106,7 +104,7 @@ public class ListToArray {
             }else{
                 arr[i][6] = "部分成交";
             }
-            arr[i][7] = format.format(stq.getDateTime());
+            arr[i][7] = DateUtils.formatLongToStr(stq.getDateTime(), DateUtils.TIME_FORMAT);
             arr[i][8] = stq.getQuoteId();
         }
 
@@ -123,7 +121,6 @@ public class ListToArray {
             return null;
         }
         Object[][] arr = new Object[moneyJournals.size()][10];
-        SimpleDateFormat format=new SimpleDateFormat("MM/dd HH:mm");
         for(int i=0;i<moneyJournals.size();i++){
             StMoneyJournal stq = moneyJournals.get(i);
             StStockConfig stock = ClientConstants.stStockConfigMap.get(stq.getStockId());
@@ -136,7 +133,7 @@ public class ListToArray {
             arr[i][6] = stq.getDealMoney()==null?0d:stq.getDealMoney().doubleValue();
             arr[i][7] = stq.getDealFee().doubleValue();
             arr[i][8] = stq.getDealTax()==null?0:stq.getDealTax();
-            arr[i][9] = format.format(stq.getDateTime());
+            arr[i][9] = DateUtils.formatLongToStr(stq.getDateTime(), DateUtils.TIME_FORMAT);
         }
 
         return arr;
@@ -151,20 +148,21 @@ public class ListToArray {
         if(CollectionUtils.isEmpty(stTradeRecords)){
             return null;
         }
-        Object[][] arr = new Object[stTradeRecords.size()][7];
+        Object[][] arr = new Object[stTradeRecords.size()][8];
         for(int i=0;i<stTradeRecords.size();i++){
             StTradeRecord stq = stTradeRecords.get(i);
             StStockConfig stock = ClientConstants.stStockConfigMap.get(stq.getStockId());
-            arr[i][1] = stock.getStockCode();
-            arr[i][2] = stock.getStockName();
-            arr[i][3] = stq.getQuotePrice().doubleValue();
-            arr[i][4] = stq.getAmount();
+            arr[i][0] = stock.getStockCode();
+            arr[i][1] = stock.getStockName();
+            arr[i][2] = stq.getQuotePrice().doubleValue();
+            arr[i][3] = stq.getAmount();
             if(StringUtils.isNotBlank(stq.getSellerAccountId())){
-                arr[i][5] = "买入";
+                arr[i][4] = "买入";
             }else if(StringUtils.isNotBlank(stq.getBuyerAccountId())){
-                arr[i][5] = "卖出";
+                arr[i][4] = "卖出";
             }
-            arr[i][6] = DateUtils.formatLongToStr(stq.getDateTime(),DateUtils.TIME_FORMAT);
+            arr[i][5] = DateUtils.formatLongToStr(stq.getDateTime(),DateUtils.TIME_FORMAT);
+            arr[i][6] = "";
         }
 
         return arr;

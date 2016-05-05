@@ -35,8 +35,8 @@ public class StMoneyJournalServiceImpl implements StMoneyJournalService {
         moneyJournal.setStockId(searchMoneyJournalDTO.getStockId());
         moneyJournal.setDealType(searchMoneyJournalDTO.getDealType());
 
-        Long startTime = searchMoneyJournalDTO.getStartDate().getTime();
-        Long endTime = searchMoneyJournalDTO.getEndDate().getTime();
+        Long startTime = searchMoneyJournalDTO.getStartDate()==null?null:searchMoneyJournalDTO.getStartDate().getTime();
+        Long endTime = searchMoneyJournalDTO.getEndDate()==null?null:searchMoneyJournalDTO.getEndDate().getTime();
         return stMoneyJournalDao.getTList(moneyJournal, startTime, endTime, searchMoneyJournalDTO.getLimit(), searchMoneyJournalDTO.getOffset());
     }
 }

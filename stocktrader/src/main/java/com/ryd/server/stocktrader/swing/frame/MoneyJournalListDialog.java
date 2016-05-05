@@ -38,7 +38,7 @@ public class MoneyJournalListDialog extends JDialog {
 	public MoneyJournalListDialog() {
 		super(MainFrame.instance(), "资金流水列表", true);
 		setLayout(new BorderLayout());
-		setSize(600, 450);
+		setSize(800, 450);
 		setLocationRelativeTo(null);
         setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 

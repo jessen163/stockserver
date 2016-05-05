@@ -193,11 +193,14 @@ public class ParamBuilderUtil {
         mbuiler.setAccountId(journal.getAccountId());
         mbuiler.setStockCode(journal.getStockId());
         mbuiler.setStockName("");
+        mbuiler.setStockPrice(journal.getQuotePrice().doubleValue());
         mbuiler.setAmount(journal.getAmount().intValue());
         mbuiler.setDealType(journal.getDealType().intValue());
         mbuiler.setDealMoney(journal.getDealMoney().doubleValue());
         mbuiler.setDealFee(journal.getDealFee().doubleValue());
-        mbuiler.setDealTax(journal.getDealTax().doubleValue());
+        if(journal.getDealType() == ApplicationConstants.STOCK_QUOTETYPE_SELL) {
+            mbuiler.setDealTax(journal.getDealTax().doubleValue());
+        }
         mbuiler.setDealDate(DateUtils.formatLongToStr(journal.getDateTime(), DateUtils.DATE_FORMAT));
         mbuiler.setDealTime(DateUtils.formatLongToStr(journal.getDateTime(), "HH:mm:ss"));
 
