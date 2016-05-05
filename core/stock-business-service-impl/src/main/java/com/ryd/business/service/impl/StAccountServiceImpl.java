@@ -6,6 +6,7 @@ import com.ryd.basecommon.util.CacheConstant;
 import com.ryd.basecommon.util.UUIDUtils;
 import com.ryd.business.dao.StAccountDao;
 import com.ryd.business.dto.SearchAccountDTO;
+import com.ryd.business.exception.AccountBusinessException;
 import com.ryd.business.model.StAccount;
 import com.ryd.business.service.StAccountService;
 import com.ryd.cache.service.ICacheService;
@@ -47,11 +48,16 @@ public class StAccountServiceImpl implements StAccountService {
     }
 
     @Override
-    public boolean updateStAccountMoneyAdd(String accountId, BigDecimal money) {
-        StAccount stAccount = stAccountDao.getTById(accountId);
+    public boolean updateStAccountMoneyAdd(String accountId, BigDecimal money) throws Exception{
+        boolean rs = false;
 
+        StAccount stAccount = stAccountDao.getTById(accountId);
         if(stAccount == null){
-            return false;
+            rs = false;
+            if(!rs){
+                throw new AccountBusinessException("帐户不存在，增加资产失败");
+            }
+            return rs;
         }
         //如果是马甲帐户，帐户资金不做处理
         if(stAccount.getAccountType() == ApplicationConstants.ACCOUNT_TYPE_VIRTUAL){
@@ -59,18 +65,25 @@ public class StAccountServiceImpl implements StAccountService {
         }
         //原有帐户可用资产
         BigDecimal useMoney = stAccount.getUseMoney();
-
         stAccount.setUseMoney(ArithUtil.add(useMoney, money));
-
-        return stAccountDao.update(stAccount) > 0;
+        rs = stAccountDao.update(stAccount) > 0;
+        if(!rs){
+            throw new AccountBusinessException("帐户增加资产失败");
+        }
+        return rs;
     }
 
     @Override
-    public boolean updateStAccountMoneyReduce(String accountId, BigDecimal money) {
+    public boolean updateStAccountMoneyReduce(String accountId, BigDecimal money) throws Exception{
+        boolean rs = false;
         StAccount stAccount = stAccountDao.getTById(accountId);
 
         if(stAccount == null){
-            return false;
+            rs = false;
+            if(!rs){
+                throw new AccountBusinessException("帐户不存在，增加资产失败");
+            }
+            return rs;
         }
 
         //如果是马甲帐户，帐户资金不做处理
@@ -80,17 +93,22 @@ public class StAccountServiceImpl implements StAccountService {
 
         //原有帐户可用资产
         BigDecimal useMoney = stAccount.getUseMoney();
-
         stAccount.setUseMoney(ArithUtil.add(useMoney, money));
-
         //交易减少费用
         if (ArithUtil.compare(useMoney,money)>=0) {
             stAccount.setUseMoney(ArithUtil.subtract(useMoney, money));
+            rs = stAccountDao.update(stAccount) > 0;
         } else {
-            return false;
+            rs = false;
+            if(!rs){
+                throw new AccountBusinessException("帐户资金不足，减少资产失败");
+            }
+            return rs;
         }
-
-        return stAccountDao.update(stAccount) > 0;
+        if(!rs){
+            throw new AccountBusinessException("帐户减少资产失败");
+        }
+        return rs;
     }
 
     @Override

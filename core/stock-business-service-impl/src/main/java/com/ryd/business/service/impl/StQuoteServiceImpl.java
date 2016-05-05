@@ -141,18 +141,11 @@ public class StQuoteServiceImpl implements StQuoteService {
                     quote.setCommissionFee(commissionFee);
                     //买家减少资产
                     rs = stAccountService.updateStAccountMoneyReduce(quote.getAccountId(), quote.getFrozeMoney());
-                    if (!rs) {
-                        //用户金额不足
-                        throw new QuoteBusinessException("用户资金不足");
-                    }
+
                 } else if (quote.getQuoteType().shortValue() == ApplicationConstants.STOCK_QUOTETYPE_SELL.shortValue()) { //卖股票
 
                     //委托卖股票，减少股票持仓数量
                     rs = stPositionService.updatePositionReduce(quote.getAccountId(), quote.getStockId(), quote.getAmount());
-                    if (!rs) {
-                        //用户持仓不足
-                        throw new QuoteBusinessException("用户持仓不足");
-                    }
                 }
                 stQuote = quote;
             }
@@ -208,8 +201,12 @@ public class StQuoteServiceImpl implements StQuoteService {
     }
 
     @Override
-    public Integer updateQuote(StQuote quote) {
-        return stQuoteDao.update(quote);
+    public boolean updateQuote(StQuote quote) throws Exception{
+        boolean rs = stQuoteDao.update(quote) > 0;
+        if(!rs){
+            throw new QuoteBusinessException("报价修改失败");
+        }
+        return rs;
     }
 
     @Override

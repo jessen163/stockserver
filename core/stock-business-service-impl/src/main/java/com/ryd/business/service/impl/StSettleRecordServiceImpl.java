@@ -6,6 +6,7 @@ import com.ryd.basecommon.util.CacheConstant;
 import com.ryd.basecommon.util.UUIDUtils;
 import com.ryd.business.dao.StSettleRecordDao;
 import com.ryd.business.dto.SearchQuoteDTO;
+import com.ryd.business.exception.SettleBusinessException;
 import com.ryd.business.model.StQuote;
 import com.ryd.business.model.StSettleRecord;
 import com.ryd.business.service.*;
@@ -46,9 +47,11 @@ public class StSettleRecordServiceImpl implements StSettleRecordService {
 //    private ICacheService iCacheService;
 
     @Override
-    public void updateStockSettling() {
+    public boolean updateStockSettling() throws Exception{
         //判断是否可以结算
        if(stDateScheduleService.getIsCanSettle()){
+           //仓位结算
+           stPositionService.updatePosition(1000);
            // 结算
            List<String> stockCodeList = stQuoteService.findQuoteStockIdList();
            for(String stockCode : stockCodeList) {
@@ -123,17 +126,26 @@ public class StSettleRecordServiceImpl implements StSettleRecordService {
                        }
                    }
 
-                   stSettleRecordDao.addBatch(settlers);
+                   this.addSettleRecorBatch(settlers);
                }
            }
        }
+        return true;
     }
 
+    @Override
+    public boolean addSettleRecorBatch(List<StSettleRecord> stSettleRecords) throws Exception{
+        boolean rs = stSettleRecordDao.addBatch(stSettleRecords) > 0;
+        if(!rs){
+            throw new SettleBusinessException("批量添加结算记录失败");
+        }
+        return rs;
+    }
     /**
      * 修改报价状态
      * @param quote
      */
-    private void updateQuoteStatus(StQuote quote){
+    private void updateQuoteStatus(StQuote quote) throws Exception{
         switch (quote.getStatus()){
             case 1:
                 quote.setStatus(ApplicationConstants.STOCK_STQUOTE_STATUS_NOTDEAL);

@@ -4,6 +4,7 @@ import com.ryd.basecommon.util.ApplicationConstants;
 import com.ryd.basecommon.util.UUIDUtils;
 import com.ryd.business.dao.StPositionDao;
 import com.ryd.business.dto.SearchPositionDTO;
+import com.ryd.business.exception.PositionBusinessException;
 import com.ryd.business.model.StAccount;
 import com.ryd.business.model.StPosition;
 import com.ryd.business.service.StAccountService;
@@ -35,7 +36,7 @@ public class StPositionServiceImpl implements StPositionService {
     }
 
     @Override
-    public boolean updatePosition(int size){
+    public boolean updatePosition(int size) throws Exception{
         if(size==0){return false;}
         int count = stPositionDao.getCount();
         double a = (double) count / size;
@@ -48,14 +49,17 @@ public class StPositionServiceImpl implements StPositionService {
             for(StPosition stp:positions){
                    stp.setMarketAmount(stp.getAmount());
             }
-            stPositionDao.updateBatch(positions);
+            boolean rs = stPositionDao.updateBatch(positions) > 0;
+            if(!rs){
+                throw new PositionBusinessException("仓位结算失败");
+            }
         }
         return true;
     }
 
     @Override
-    public boolean updatePositionAdd(String accountId, String stockId, Long amount) {
-        int rs = -1;
+    public boolean updatePositionAdd(String accountId, String stockId, Long amount) throws Exception {
+        boolean rs = false;
         StPosition position = stPositionDao.getPositionByAccountStock(accountId, stockId);
         StAccount stAccount = stAccountService.getStAccountById(accountId);
         //如果是马甲帐户，帐户持仓不做处理
@@ -71,19 +75,24 @@ public class StPositionServiceImpl implements StPositionService {
 
             position.setStatus(ApplicationConstants.STOCK_STPOSITION_STATUS_TRUSTEE.shortValue());
 
-            rs = stPositionDao.add(position);
+            rs = stPositionDao.add(position) > 0;
         }else{
             //原有持仓
             Long camount = position.getAmount();
             //增加持仓
             position.setAmount(camount+amount);
-            rs = stPositionDao.update(position);
+            rs = stPositionDao.update(position) > 0;
         }
-        return rs > 0;
+
+        if(!rs){
+            throw new PositionBusinessException("持仓增加失败");
+        }
+        return rs;
     }
 
     @Override
-    public boolean updatePositionReduce(String accountId, String stockId, Long amount) {
+    public boolean updatePositionReduce(String accountId, String stockId, Long amount) throws Exception {
+        boolean rs = false;
         StPosition position = stPositionDao.getPositionByAccountStock(accountId, stockId);
         StAccount stAccount = stAccountService.getStAccountById(accountId);
         //如果是马甲帐户，帐户持仓不做处理
@@ -92,7 +101,10 @@ public class StPositionServiceImpl implements StPositionService {
         }
         //没有对应股票持仓
         if (position == null) {
-            return false;
+            rs = false;
+            if(!rs){
+                throw new PositionBusinessException("无对应股票持仓，持仓减少失败");
+            }
         }else{
             //原有持仓
             Long camount = position.getMarketAmount();
@@ -100,11 +112,20 @@ public class StPositionServiceImpl implements StPositionService {
                 //减少持仓
                 position.setMarketAmount(camount - amount);
 
-                return stPositionDao.update(position) > 0;
+                rs = stPositionDao.update(position) > 0;
+                if(!rs){
+                    throw new PositionBusinessException("持仓减少失败");
+                }
             } else {
-                return false;
+                rs = false;
+                if(!rs){
+                    throw new PositionBusinessException("持仓不足，持仓减少失败");
+                }
+                return rs;
             }
         }
+
+        return rs;
     }
 
     @Override

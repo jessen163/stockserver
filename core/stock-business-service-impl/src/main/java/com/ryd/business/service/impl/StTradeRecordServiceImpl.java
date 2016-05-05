@@ -4,6 +4,7 @@ import com.ryd.basecommon.util.*;
 import com.ryd.business.dao.StTradeRecordDao;
 import com.ryd.business.dto.SearchStockDTO;
 import com.ryd.business.dto.SearchTradeRecordDTO;
+import com.ryd.business.exception.TradeBusinessException;
 import com.ryd.business.model.StMoneyJournal;
 import com.ryd.business.model.StQuote;
 import com.ryd.business.model.StStock;
@@ -53,8 +54,12 @@ public class StTradeRecordServiceImpl implements StTradeRecordService {
     }
 
     @Override
-    public boolean addTradeRecord(StTradeRecord record){
-        return stTradeRecordDao.add(record) > 0;
+    public boolean addTradeRecord(StTradeRecord record) throws Exception{
+        boolean rs = stTradeRecordDao.add(record) > 0;
+        if(!rs){
+            throw new TradeBusinessException("交易记录添加失败");
+        }
+        return rs;
     }
 
     @Override
@@ -79,7 +84,7 @@ public class StTradeRecordServiceImpl implements StTradeRecordService {
     }
 
     @Override
-    public void updateTradeSettling(StQuote buyQuote, StQuote sellQuote) {
+    public void updateTradeSettling(StQuote buyQuote, StQuote sellQuote) throws Exception{
         //交易股票
 //        SearchStockDTO sdto = new SearchStockDTO();
 //        sdto.setStockId(buyQuote.getStockId());
@@ -100,7 +105,11 @@ public class StTradeRecordServiceImpl implements StTradeRecordService {
             sellQuote.setCurrentAmount(sellQuote.getCurrentAmount() - tradeStockAmount);
 
             //买家移出队列
-            stQuoteService.deleteQuoteFromQueue(buyQuote);
+            boolean drsb = stQuoteService.deleteQuoteFromQueue(buyQuote);
+            if(!drsb){
+                throw new TradeBusinessException("交易买家移出队列失败");
+            }
+
             //修改买家卖家报价状态
             buyQuote.setStatus(ApplicationConstants.STOCK_STQUOTE_STATUS_ALREADYDEAL);
             stQuoteService.updateQuote(buyQuote);
@@ -113,8 +122,13 @@ public class StTradeRecordServiceImpl implements StTradeRecordService {
             trading(buyQuote, sellQuote, tradeStockAmount);
 
             //买家卖家移出队列
-            stQuoteService.deleteQuoteFromQueue(buyQuote);
-            stQuoteService.deleteQuoteFromQueue(sellQuote);
+            boolean desb = stQuoteService.deleteQuoteFromQueue(buyQuote);
+            boolean dess = stQuoteService.deleteQuoteFromQueue(sellQuote);
+
+            if((!desb)||(!dess)){
+                throw new TradeBusinessException("交易买家或卖家移出队列失败");
+            }
+
             //修改买家卖家报价状态
             buyQuote.setStatus(ApplicationConstants.STOCK_STQUOTE_STATUS_ALREADYDEAL);
             stQuoteService.updateQuote(buyQuote);
@@ -145,7 +159,11 @@ public class StTradeRecordServiceImpl implements StTradeRecordService {
             buyQuote.setCurrentAmount(remainAmount);
 
             //卖家移出队列
-            stQuoteService.deleteQuoteFromQueue(sellQuote);
+            boolean sgrs = stQuoteService.deleteQuoteFromQueue(sellQuote);
+
+            if(!sgrs){
+                throw new TradeBusinessException("交易卖家移出队列失败");
+            }
             //修改买家卖家报价状态
             buyQuote.setStatus(ApplicationConstants.STOCK_STQUOTE_STATUS_ALREADYDEAL);
             stQuoteService.updateQuote(buyQuote);
@@ -182,7 +200,7 @@ public class StTradeRecordServiceImpl implements StTradeRecordService {
      * @param sellQuote
      * @param tradeStockAmount
      */
-    private synchronized boolean trading(StQuote buyQuote, StQuote sellQuote, long tradeStockAmount){
+    private boolean trading(StQuote buyQuote, StQuote sellQuote, long tradeStockAmount) throws Exception {
 
         boolean brs = false, srs = false, rs = false;
         //股票交易价格
@@ -192,7 +210,6 @@ public class StTradeRecordServiceImpl implements StTradeRecordService {
 
         //交易成功，交易买家持仓增加
         brs = stPositionService.updatePositionAdd(buyQuote.getAccountId(), buyQuote.getStockId(), tradeStockAmount);
-
         //佣金比例
         String commissionPercent = stSystemParamService.getParamByKey(CacheConstant.CACHEKEY_SYSTEM_COMMINSSION_PERCENT);
         //印花税比例
@@ -228,7 +245,7 @@ public class StTradeRecordServiceImpl implements StTradeRecordService {
             record.setDealTax(new BigDecimal(ArithUtil.df.format(taxFee)));
             record.setDateTime(System.currentTimeMillis());
 
-            stTradeRecordDao.add(record);
+            this.addTradeRecord(record);
 
             // 更新交易记录到缓存,总的交易记录列表
             LinkedList<StTradeRecord> stTradeRecordList = null;
@@ -295,7 +312,7 @@ public class StTradeRecordServiceImpl implements StTradeRecordService {
      * @param sellQuote
      * @param tradeStockAmount
      */
-    private BigDecimal judgeQuotePrice(StQuote buyQuote, StQuote sellQuote, long tradeStockAmount){
+    private BigDecimal judgeQuotePrice(StQuote buyQuote, StQuote sellQuote, long tradeStockAmount) throws Exception{
 
         BigDecimal tradeStockQuotePrice = null;
         //买家报价大于卖家报价

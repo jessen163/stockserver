@@ -2,6 +2,7 @@ package com.ryd.business.service.impl;
 
 import com.ryd.business.dao.StMoneyJournalDao;
 import com.ryd.business.dto.SearchMoneyJournalDTO;
+import com.ryd.business.exception.MoneyJournalBusinessException;
 import com.ryd.business.model.StMoneyJournal;
 import com.ryd.business.service.StMoneyJournalService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +24,12 @@ public class StMoneyJournalServiceImpl implements StMoneyJournalService {
     private StMoneyJournalDao stMoneyJournalDao;
 
     @Override
-    public boolean saveMoneyJournalList(List<StMoneyJournal> moneyJournalList) {
-        return stMoneyJournalDao.addBatch(moneyJournalList) > 0;
+    public boolean saveMoneyJournalList(List<StMoneyJournal> moneyJournalList) throws Exception{
+        boolean rs = stMoneyJournalDao.addBatch(moneyJournalList) > 0;
+        if(!rs){
+            throw new MoneyJournalBusinessException("资金流水添加失败");
+        }
+        return rs;
     }
 
     @Override
