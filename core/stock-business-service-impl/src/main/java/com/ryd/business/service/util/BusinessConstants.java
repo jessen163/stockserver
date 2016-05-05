@@ -17,7 +17,8 @@ public class BusinessConstants {
     public static ConcurrentHashMap<String, StStockConfig> stockConfigMap = new ConcurrentHashMap<String, StStockConfig>();
     // 股票配置信息-key:stockCode value:stockId
     public static ConcurrentHashMap<String, String> stockCodeStockIdMap = new ConcurrentHashMap<String, String>();
-
+    // 股票配置信息-key:stockId value:stockCode
+    public static ConcurrentHashMap<String, String> stockIdStockCodeMap = new ConcurrentHashMap<String, String>();
     // 模拟订单信息
     public static ConcurrentHashMap<String, List<SimulationQuoteDTO>> simulateQuoteMap = new ConcurrentHashMap();
     // 股票实时价格信息
