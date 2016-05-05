@@ -74,4 +74,7 @@ public class CacheConstant {
     public static final String CACHEKEY_TRADERECORDLIST = "traderecordList";
     // 缓存key-交易记录信息-单只股票
     public static final String CACHEKEY_TRADERECORDLIST_STOCKID = "traderecordListStockId_";
+
+    // 缓存key-帐户信息-模拟帐户列表
+    public static final String CACHEKEY_ACCOUNT_VIRTUALLIST = "virtualAccountList";
 }
