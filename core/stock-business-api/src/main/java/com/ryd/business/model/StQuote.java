@@ -37,8 +37,17 @@ public class StQuote  implements Serializable {
     private Short userType;
     //报价时间
     private Long dateTime;
-    private Long timeSort; // 用于时间排序
-    private Long quotePriceForSort; // 用于排序
+    private Long timeSort; // 用于时间排序-冗余传值用
+    private Long quotePriceForSort; // 用于排序-冗余传值用
+    private String stockCode; // 股票代码-冗余传值用
+
+    public String getStockCode() {
+        return stockCode;
+    }
+
+    public void setStockCode(String stockCode) {
+        this.stockCode = stockCode;
+    }
 
     public Long getTimeSort() {
         return timeSort;
