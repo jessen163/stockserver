@@ -5,6 +5,7 @@ import com.ryd.basecommon.util.StringUtils;
 import com.ryd.business.dao.StStockConfigDao;
 import com.ryd.business.model.StStockConfig;
 import com.ryd.business.service.StStockConfigService;
+import com.ryd.business.service.util.BusinessConstants;
 import com.ryd.cache.service.ICacheService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,7 +32,17 @@ public class StStockConfigServiceImpl implements StStockConfigService {
     @Override
     public List<StStockConfig> findStockConfig(StStockConfig stStockConfig, int pageIndex, int limit) {
         List<StStockConfig> stStockConfigList = null;
-        Object stockConfigListObj = iCacheService.getObjectByKey(CacheConstant.CACHEKEY_STOCKCONFIGLIST+pageIndex+limit, null);
+        if (BusinessConstants.stockCodeStockIdMap==null||BusinessConstants.stockCodeStockIdMap.size()==0) {
+            int offset = (pageIndex-1)*limit;
+            stStockConfigList = stStockConfigDao.getTList(null, null, null, limit, offset);
+            for (StStockConfig stock: stStockConfigList) {
+                BusinessConstants.stockConfigMap.put(stock.getId(), stock);
+                BusinessConstants.stockCodeStockIdMap.put(stock.getStockCode(), stock.getId());
+            }
+        } else {
+            stStockConfigList = new ArrayList<StStockConfig>(BusinessConstants.stockConfigMap.values());
+        }
+        /*Object stockConfigListObj = iCacheService.getObjectByKey(CacheConstant.CACHEKEY_STOCKCONFIGLIST+pageIndex+limit, null);
         if (stockConfigListObj!=null) {
             stStockConfigList = (List<StStockConfig>)stockConfigListObj;
         } else {
@@ -50,7 +61,7 @@ public class StStockConfigServiceImpl implements StStockConfigService {
                 }
                 iCacheService.setObjectByKey(CacheConstant.CACHEKEY_QUEUE_STOCKID_LIST, stockIdList);
             }
-        }
+        }*/
 
         return stStockConfigList;
     }
@@ -72,11 +83,17 @@ public class StStockConfigServiceImpl implements StStockConfigService {
 
     @Override
     public String getStockIdByStockCode(String stockCode) {
-        String str = iCacheService.getStringByKey(CacheConstant.CACHEKEY_STOCKCONFIGIDNAME_MAP, stockCode, null);
+        /*String str = iCacheService.getStringByKey(CacheConstant.CACHEKEY_STOCKCONFIGIDNAME_MAP, stockCode, null);
         if (str == null) {
             this.findStockConfig(null, 1, Integer.MAX_VALUE);
         }
         str = iCacheService.getStringByKey(CacheConstant.CACHEKEY_STOCKCONFIGIDNAME_MAP, stockCode, null);
-        return str;
+        return str;*/
+//        BusinessConstants.stockConfigMap.get()
+        String str = BusinessConstants.stockCodeStockIdMap.get(stockCode);
+        if (StringUtils.isEmpty(str)) {
+            this.findStockConfig(null, 1, Integer.MAX_VALUE);
+        }
+        return BusinessConstants.stockCodeStockIdMap.get(stockCode);
     }
 }

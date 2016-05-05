@@ -59,8 +59,8 @@ public class StStockServiceImpl implements StStockService {
         // 清除最近的股票实时价格信息
         BusinessConstants.tempStockPriceMap.clear();
         StringBuffer stockCodeStringBuffer = new StringBuffer();
-        int i = 1;
-        int j = 1;
+//        int i = 1;
+//        int j = 1;
         for (StStockConfig stock: list) {
             stockCodeStringBuffer.append(stock.getStockTypeName()+stock.getStockCode()).append(",");
             int length = stockCodeStringBuffer.toString().split(",").length;
@@ -69,12 +69,12 @@ public class StStockServiceImpl implements StStockService {
                 stockService.execute(new SyncStockThread(stockCodeStringBuffer.toString(), iCacheService, cdOrder, cdAnswer, this));
                 stockCodeStringBuffer = new StringBuffer();
                 int threadSize = stockQueue.size();
-                System.out.println("线程队列大小为-->"+threadSize);
-                System.out.println("current thread index:" + j);
-                j++;
+//                System.out.println("线程队列大小为-->"+threadSize);
+//                System.out.println("current thread index:" + j);
+//                j++;
             }
-            System.out.println("current index:" + i);
-            i++;
+//            System.out.println("current index:" + i);
+//            i++;
         }
         if (!stockCodeStringBuffer.toString().isEmpty()) {
             stockService.execute(new SyncStockThread(stockCodeStringBuffer.toString(), iCacheService, cdOrder, cdAnswer, this));
@@ -87,10 +87,10 @@ public class StStockServiceImpl implements StStockService {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        System.out.println(BusinessConstants.simulateQuoteMap.size());
+        System.out.println("模拟订单数：" + BusinessConstants.simulateQuoteMap.size());
         BusinessConstants.stockPriceMap.clear();
         BusinessConstants.stockPriceMap.putAll(BusinessConstants.tempStockPriceMap);
-        System.out.println(BusinessConstants.stockPriceMap.size());
+        System.out.println("股票实时价格-数量：" + BusinessConstants.stockPriceMap.size());
         iCacheService.setObjectByKey(CacheConstant.CACHEKEY_STOCK_PRICELIST, BusinessConstants.stockPriceMap);
 //        iCacheService.setObjectByKey(CacheConstant.CACHEKEY_SIMULATIONQUOTELIST, BusinessConstants.simulateQuoteMap);
         stockService.shutdownNow();
