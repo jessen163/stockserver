@@ -176,12 +176,14 @@ public class ParamBuilderDtoUtil {
         StMoneyJournal mbuiler = new StMoneyJournal();
         mbuiler.setAccountId(journal.getAccountId());
         mbuiler.setStockId(journal.getStockCode());
+        mbuiler.setQuotePrice(BigDecimal.valueOf(journal.getStockPrice()));
         mbuiler.setAmount((long) journal.getAmount());
         mbuiler.setDealType((short) journal.getDealType());
         mbuiler.setDealMoney(BigDecimal.valueOf(journal.getDealMoney()));
         mbuiler.setDealFee(BigDecimal.valueOf(journal.getDealFee()));
         mbuiler.setDealTax(BigDecimal.valueOf(journal.getDealTax()));
-
+        String date = journal.getDealDate()+" "+journal.getDealTime();
+        mbuiler.setDateTime(DateUtils.formatStrToDate(date,DateUtils.TIME_FORMAT).getTime());
         return mbuiler;
     }
 

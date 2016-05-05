@@ -168,6 +168,7 @@ public class StTradeRecordServiceImpl implements StTradeRecordService {
     public List<StTradeRecord> findTradeRecordList(SearchTradeRecordDTO searchTradeRecordDTO) {
         StTradeRecord record = new StTradeRecord();
         record.setSellerAccountId(searchTradeRecordDTO.getAccountId());
+        record.setBuyerAccountId(searchTradeRecordDTO.getAccountId());
         record.setStockId(searchTradeRecordDTO.getStockId());
 
         Long startTime = searchTradeRecordDTO.getStartDate()==null?null:searchTradeRecordDTO.getStartDate().getTime();

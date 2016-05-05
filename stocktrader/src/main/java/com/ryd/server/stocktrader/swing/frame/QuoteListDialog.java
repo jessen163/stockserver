@@ -37,7 +37,7 @@ public class QuoteListDialog extends JDialog {
 	public QuoteListDialog() {
 		super(MainFrame.instance(), "报价列表", true);
 		setLayout(new BorderLayout());
-		setSize(600, 450);
+		setSize(800, 450);
 		setLocationRelativeTo(null);
         setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 
