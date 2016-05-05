@@ -6,15 +6,12 @@ import com.ryd.basecommon.util.DateUtils;
 import com.ryd.basecommon.util.HttpclientUtil;
 import com.ryd.business.dto.SimulationQuoteDTO;
 import com.ryd.business.model.StStock;
-import com.ryd.business.service.StQuoteService;
 import com.ryd.business.service.StStockService;
 import com.ryd.business.service.util.BusinessConstants;
 import com.ryd.cache.service.ICacheService;
 import org.apache.log4j.Logger;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
 
@@ -73,7 +70,10 @@ public class SyncStockThread implements Runnable {
         String[] stockListStrArr = stockListStr.split(";\\n");
         for (int i = 0; i < stockCodeStrArr.length; i++) {
             StStock stock = getStockByStr(stockCodeStrArr[i], stockListStrArr[i].trim());
-            if (stock==null)continue;
+            if (stock==null) {
+                System.out.println("异常股票代码：" + stockCodeStrArr[i]);
+                continue;
+            }
             stockList.add(stock);
         }
 
