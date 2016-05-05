@@ -2,6 +2,7 @@ package com.ryd.business.service.impl;
 
 import com.ryd.basecommon.util.ApplicationConstants;
 import com.ryd.basecommon.util.ArithUtil;
+import com.ryd.basecommon.util.CacheConstant;
 import com.ryd.basecommon.util.UUIDUtils;
 import com.ryd.business.dao.StAccountDao;
 import com.ryd.business.dto.SearchAccountDTO;
@@ -28,7 +29,7 @@ public class StAccountServiceImpl implements StAccountService {
     private StAccountDao stAccountDao;
 
     @Autowired
-    private ICacheService cacheService;
+    private ICacheService iCacheService;
 
     @Override
     public boolean addStAccount(StAccount account) {
@@ -112,9 +113,33 @@ public class StAccountServiceImpl implements StAccountService {
         StAccount account = new StAccount();
         account.setId(searchAccountDTO.getAccountId());
 
-        Long startTime = searchAccountDTO.getStartDate().getTime();
-        Long endTime = searchAccountDTO.getEndDate().getTime();
+        Long startTime = searchAccountDTO.getStartDate()==null?null:searchAccountDTO.getStartDate().getTime();
+        Long endTime = searchAccountDTO.getEndDate()==null?null:searchAccountDTO.getEndDate().getTime();
         return stAccountDao.getTList(account,startTime,endTime,searchAccountDTO.getLimit(),searchAccountDTO.getOffset());
+    }
+
+    @Override
+    public List<StAccount> findStAccontByAccountType(Short accountType) {
+        List<StAccount> accounts = null;
+
+        if(accountType == ApplicationConstants.ACCOUNT_TYPE_VIRTUAL){
+            Object virtualAccounts = iCacheService.getObjectByKey(CacheConstant.CACHEKEY_ACCOUNT_VIRTUALLIST, null);
+            if(virtualAccounts != null){
+                accounts = (List<StAccount>) virtualAccounts;
+                return accounts;
+            }
+        }
+        StAccount account = new StAccount();
+        account.setAccountType(accountType);
+        account.setStatus(ApplicationConstants.MODEL_ATRRIBUTE_NORMAL);
+
+        accounts = stAccountDao.getTList(account, null, null, Integer.MAX_VALUE, 0);
+
+        if(accountType == ApplicationConstants.ACCOUNT_TYPE_VIRTUAL){
+            iCacheService.setObjectByKey(CacheConstant.CACHEKEY_ACCOUNT_VIRTUALLIST, accounts);
+        }
+
+        return accounts;
     }
 
     @Override

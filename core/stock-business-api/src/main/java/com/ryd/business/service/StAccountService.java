@@ -74,6 +74,14 @@ public interface StAccountService {
      */
     public List<StAccount> findStAccountList(SearchAccountDTO searchAccountDTO);
 
+
+    /**
+     * 根据类型获取帐户
+     * @param accountType
+     * @return
+     */
+    public List<StAccount> findStAccontByAccountType(Short accountType);
+
     /**
      * 删除用户
      * @param accountId
