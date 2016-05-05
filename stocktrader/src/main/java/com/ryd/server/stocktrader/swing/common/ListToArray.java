@@ -62,7 +62,7 @@ public class ListToArray {
             StStock stStock = ClientConstants.stStockMap.get(stockConfig.getStockCode());
             arr[i][0] = stockConfig.getStockCode();
             arr[i][1] = stockConfig.getStockName();
-            arr[i][2] = "13"; //stStock.getCurrentPrice();
+            arr[i][2] = stStock.getCurrentPrice();
             arr[i][3] = stq.getAmount();
             arr[i][4] = stq.getMarketAmount();
         }
