@@ -22,6 +22,9 @@ public class StTradeQueueDTO implements Serializable {
     private Map.Entry<Long, StQuote> sellMap = null;
 
     public boolean addSellStQuote(StQuote stQuote) {
+        if (stQuote.getTimeSort()==null||stQuote.getTimeSort()==0L) {
+            stQuote.setTimeSort(Long.parseLong(String.valueOf(stQuote.getDateTime()).substring(7)));
+        }
         Long quotePriceForSort = Long.parseLong("100000000") * (long)(stQuote.getQuotePrice().doubleValue()*100) + stQuote.getTimeSort();
         stQuote.setQuotePriceForSort(quotePriceForSort);
         return sellList.put(quotePriceForSort, stQuote) != null;
@@ -29,6 +32,9 @@ public class StTradeQueueDTO implements Serializable {
     }
 
     public boolean addBuyStQuote(StQuote stQuote) {
+        if (stQuote.getTimeSort()==null||stQuote.getTimeSort()==0L) {
+            stQuote.setTimeSort(Long.parseLong(String.valueOf(stQuote.getDateTime()).substring(7)));
+        }
         Long quotePriceForSort = -1 * Long.parseLong("100000000") * (long)(stQuote.getQuotePrice().doubleValue()*100) + stQuote.getTimeSort();
         stQuote.setQuotePriceForSort(quotePriceForSort);
         return buyList.put(quotePriceForSort, stQuote) != null;
@@ -36,12 +42,18 @@ public class StTradeQueueDTO implements Serializable {
     }
 
     public boolean removeSellStQuote(StQuote stQuote) {
+        if (stQuote.getTimeSort()==null||stQuote.getTimeSort()==0L) {
+            stQuote.setTimeSort(Long.parseLong(String.valueOf(stQuote.getDateTime()).substring(7)));
+        }
         Long quotePriceForSort = Long.parseLong("100000000") * (long)(stQuote.getQuotePrice().doubleValue()*100) + stQuote.getTimeSort();
         return sellList.remove(quotePriceForSort) != null;
 //        return false;
     }
 
     public boolean removeBuyStQuote(StQuote stQuote) {
+        if (stQuote.getTimeSort()==null||stQuote.getTimeSort()==0L) {
+            stQuote.setTimeSort(Long.parseLong(String.valueOf(stQuote.getDateTime()).substring(7)));
+        }
         Long quotePriceForSort = -1 * Long.parseLong("100000000") * (long)(stQuote.getQuotePrice().doubleValue()*100) + stQuote.getTimeSort();
         return buyList.remove(quotePriceForSort) != null;
 //        return false;

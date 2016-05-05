@@ -133,7 +133,7 @@ public class SyncStockThread implements Runnable {
             sts.setStockDate(DateUtils.formatStrToDate(sk[30], DateUtils.DATE_FORMAT));
             sts.setStockTime(DateUtils.formatStrToDate(sk[30] + " " + sk[31], DateUtils.TIME_FORMAT));
             // 放入缓存 - TODO 放入kafka
-            BusinessConstants.tempStockPriceMap.put(sts.getStockCode(), Arrays.asList(sts));
+            BusinessConstants.tempStockPriceMap.put(sts.getStockCode(), sts);
         }
         return sts;
     }

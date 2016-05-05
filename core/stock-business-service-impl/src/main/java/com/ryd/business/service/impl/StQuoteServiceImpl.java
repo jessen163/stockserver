@@ -107,6 +107,7 @@ public class StQuoteServiceImpl implements StQuoteService {
                     // 股票价格信息不存在
                     throw new QuoteBusinessException("股票价格信息不存在");
                 }
+                quote.setStockCode(stock.getStockCode());
                 if (!isStockQuotePriceInScope(BigDecimal.valueOf(stock.getBfclosePrice()), quote.getQuotePrice())) {
                     // 超出涨跌幅
                     return -3;
@@ -232,12 +233,14 @@ public class StQuoteServiceImpl implements StQuoteService {
 
     @Override
     public List<String> findQuoteStockIdList() {
-        Object stockIdListObj = iCacheService.getObjectByKey(CacheConstant.CACHEKEY_QUEUE_STOCKID_LIST, null);
-        if (stockIdListObj == null) {
-            return null;
-        }
-        List<String> stockIdList = (List<String>) stockIdListObj;
-        return stockIdList;
+//        Object stockIdListObj = iCacheService.getObjectByKey(CacheConstant.CACHEKEY_QUEUE_STOCKID_LIST, null);
+//        if (stockIdListObj == null) {
+//            return null;
+//        }
+//        List<String> stockIdList = (List<String>) stockIdListObj;
+        Collection<String> stockIdList = BusinessConstants.stTradeQueueMap.keySet();
+        List<String> stockIdListNew = new ArrayList<String>(stockIdList);
+        return stockIdListNew;
     }
 
     @Override
@@ -338,24 +341,19 @@ public class StQuoteServiceImpl implements StQuoteService {
     public boolean addSimulationQuoteToQueue(List<StQuote> addQuoteList) {
         // 入库
 //        stQuoteDao.addBatch(addQuoteList);
-        int quoteType= 0;
 
-//        ConcurrentSkipListMap<Long, StQuote> quoteListTemp = null;
         StTradeQueueDTO tradeQueueDTO = null;
         for (StQuote quote : addQuoteList) {
-            if (quoteType==0) {
-                quoteType = quote.getQuoteType();
-            }
-            tradeQueueDTO = BusinessConstants.stTradeQueueMap.get(quote.getStockId());
-            if (tradeQueueDTO==null) {
+            tradeQueueDTO = BusinessConstants.stTradeQueueMap.get(quote.getStockCode());
+            if (tradeQueueDTO == null) {
                 tradeQueueDTO = new StTradeQueueDTO();
             }
-            if (quoteType==ApplicationConstants.STOCK_QUOTETYPE_BUY) {
+            if (quote.getQuoteType().intValue() == ApplicationConstants.STOCK_QUOTETYPE_BUY.intValue()) {
                 tradeQueueDTO.addBuyStQuote(quote);
             } else {
                 tradeQueueDTO.addSellStQuote(quote);
             }
-            BusinessConstants.stTradeQueueMap.put(quote.getStockId(), tradeQueueDTO);
+            BusinessConstants.stTradeQueueMap.put(quote.getStockCode(), tradeQueueDTO);
         }
 
         /*ConcurrentSkipListMap<Long, StQuote> quoteList = new ConcurrentSkipListMap<Long, StQuote>();
@@ -420,7 +418,7 @@ public class StQuoteServiceImpl implements StQuoteService {
         } else {
             tradeQueueDTO.removeSellStQuote(quote);
         }
-        BusinessConstants.stTradeQueueMap.put(quote.getStockId(), tradeQueueDTO);
+        BusinessConstants.stTradeQueueMap.put(quote.getStockCode(), tradeQueueDTO);
 
         /*Object quoteobj = null;
         ConcurrentSkipListMap<Long, StQuote> quoteList = null;
@@ -494,13 +492,15 @@ public class StQuoteServiceImpl implements StQuoteService {
                 for (SimulationQuoteDTO simulationQuoteDTO : simulationQuoteDTOList) {
                     StQuote quote = new StQuote();
                     quote.setAccountId("800891cdc704462ab0c2335460a91684");
-                    quote.setStockId(simulationQuoteDTO.getStockId());
+                    String stockId = stStockConfigService.getStockIdByStockCode(stockCode);
+                    quote.setStockId(stockId);
+                    quote.setStockCode(stockCode);
                     quote.setUserType(ApplicationConstants.ACCOUNT_TYPE_VIRTUAL); // 马甲用户
                     quote.setQuoteType(simulationQuoteDTO.getQuoteType());
                     quote.setAmount(simulationQuoteDTO.getAmount());
                     quote.setQuotePrice(BigDecimal.valueOf(simulationQuoteDTO.getQuotePrice()));
                     quote.setQuoteId(UUIDUtils.uuidTrimLine());
-                    quote.setDateTime(System.currentTimeMillis());
+                    quote.setDateTime(simulationQuoteDTO.getDateTime());
                     // 用于排序的字段
 //                    long timeSort = Integer.parseInt(String.valueOf(simulationQuoteDTO.getDateTime()).substring(7));
 //                    quote.setTimeSort(timeSort);

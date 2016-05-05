@@ -39,16 +39,14 @@ public class TradingSubThread implements Runnable {
                 StQuote buyQuote = stQuoteService.findFirstQuoteByStock(searchQuoteDTO);
                 searchQuoteDTO.setQuoteType(ApplicationConstants.STOCK_QUOTETYPE_SELL);
                 StQuote sellQuote = stQuoteService.findFirstQuoteByStock(searchQuoteDTO);
-                if (buyQuote!=null&&sellQuote!=null) {
-                    // 如果撮合成功, 执行交易, 同时更新买入、卖出队列
-                    if (ArithUtil.compare(buyQuote.getQuotePrice(), sellQuote.getQuotePrice()) >= 0 && !buyQuote.getAccountId().equals(sellQuote.getAccountId())) {
-                        // 调用交易接口
-                        stTradeRecordService.updateTradeSettling(buyQuote, sellQuote);
-                    }
-                } else {
-                    break;
+                if (buyQuote==null||sellQuote==null) break;
+
+                // 如果撮合成功, 执行交易, 同时更新买入、卖出队列
+                if (buyQuote.getQuotePrice().doubleValue() >= sellQuote.getQuotePrice().doubleValue() && !buyQuote.getAccountId().equals(sellQuote.getAccountId())) {
+                    // 调用交易接口
+                    stTradeRecordService.updateTradeSettling(buyQuote, sellQuote);
                 }
-//                TimeUnit.MILLISECONDS.sleep(200);
+//              TimeUnit.MILLISECONDS.sleep(200);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

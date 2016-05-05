@@ -100,6 +100,8 @@ public class StStockServiceImpl implements StStockService {
     @Override
     public List<StStock> findStockList(SearchStockDTO searchStockDTO) {
         List<StStock> stockList = null;
+        stockList = new ArrayList<StStock>(BusinessConstants.stockPriceMap.values());
+
 //        Object stockObj = iCacheService.getObjectByKey(CacheConstant.CACHEKEY_STOCK_PRICELIST, null);
 //        if (stockObj != null) {
 //            stockList = (List<StStock>)stockObj;
@@ -107,7 +109,7 @@ public class StStockServiceImpl implements StStockService {
 ////            stockList = stStockDao.findStStockListCurrentTime(searchStockDTO);
 //            // TODO 缓存没有，暂时不取
 //        }
-        ConcurrentHashMap<String, List<StStock>> stockPriceMap = null;
+        /*ConcurrentHashMap<String, List<StStock>> stockPriceMap = null;
         if (BusinessConstants.stockPriceMap != null && BusinessConstants.stockPriceMap.size()>0) {
             stockPriceMap = BusinessConstants.stockPriceMap;
         } else {
@@ -126,7 +128,7 @@ public class StStockServiceImpl implements StStockService {
                     stockList.addAll(sList);
                 }
             }
-        }
+        }*/
         return stockList;
     }
 
