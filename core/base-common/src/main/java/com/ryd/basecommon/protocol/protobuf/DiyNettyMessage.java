@@ -14434,6 +14434,15 @@ public final class DiyNettyMessage {
      */
     com.google.protobuf.ByteString
         getDealTimeBytes();
+
+    /**
+     * <code>optional double stockPrice = 11;</code>
+     */
+    boolean hasStockPrice();
+    /**
+     * <code>optional double stockPrice = 11;</code>
+     */
+    double getStockPrice();
   }
   /**
    * Protobuf type {@code com.ryd.protocol.protobuf.MoneyJournalInfo}
@@ -14540,6 +14549,11 @@ public final class DiyNettyMessage {
               com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000200;
               dealTime_ = bs;
+              break;
+            }
+            case 89: {
+              bitField0_ |= 0x00000400;
+              stockPrice_ = input.readDouble();
               break;
             }
           }
@@ -14867,6 +14881,21 @@ public final class DiyNettyMessage {
       }
     }
 
+    public static final int STOCKPRICE_FIELD_NUMBER = 11;
+    private double stockPrice_;
+    /**
+     * <code>optional double stockPrice = 11;</code>
+     */
+    public boolean hasStockPrice() {
+      return ((bitField0_ & 0x00000400) == 0x00000400);
+    }
+    /**
+     * <code>optional double stockPrice = 11;</code>
+     */
+    public double getStockPrice() {
+      return stockPrice_;
+    }
+
     private void initFields() {
       accountId_ = "";
       stockCode_ = "";
@@ -14878,6 +14907,7 @@ public final class DiyNettyMessage {
       dealTax_ = 0D;
       dealDate_ = "";
       dealTime_ = "";
+      stockPrice_ = 0D;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -14921,6 +14951,9 @@ public final class DiyNettyMessage {
       }
       if (((bitField0_ & 0x00000200) == 0x00000200)) {
         output.writeBytes(10, getDealTimeBytes());
+      }
+      if (((bitField0_ & 0x00000400) == 0x00000400)) {
+        output.writeDouble(11, stockPrice_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -14970,6 +15003,10 @@ public final class DiyNettyMessage {
       if (((bitField0_ & 0x00000200) == 0x00000200)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(10, getDealTimeBytes());
+      }
+      if (((bitField0_ & 0x00000400) == 0x00000400)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeDoubleSize(11, stockPrice_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -15108,6 +15145,8 @@ public final class DiyNettyMessage {
         bitField0_ = (bitField0_ & ~0x00000100);
         dealTime_ = "";
         bitField0_ = (bitField0_ & ~0x00000200);
+        stockPrice_ = 0D;
+        bitField0_ = (bitField0_ & ~0x00000400);
         return this;
       }
 
@@ -15176,6 +15215,10 @@ public final class DiyNettyMessage {
           to_bitField0_ |= 0x00000200;
         }
         result.dealTime_ = dealTime_;
+        if (((from_bitField0_ & 0x00000400) == 0x00000400)) {
+          to_bitField0_ |= 0x00000400;
+        }
+        result.stockPrice_ = stockPrice_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -15231,6 +15274,9 @@ public final class DiyNettyMessage {
           bitField0_ |= 0x00000200;
           dealTime_ = other.dealTime_;
           onChanged();
+        }
+        if (other.hasStockPrice()) {
+          setStockPrice(other.getStockPrice());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -15795,6 +15841,38 @@ public final class DiyNettyMessage {
   }
   bitField0_ |= 0x00000200;
         dealTime_ = value;
+        onChanged();
+        return this;
+      }
+
+      private double stockPrice_ ;
+      /**
+       * <code>optional double stockPrice = 11;</code>
+       */
+      public boolean hasStockPrice() {
+        return ((bitField0_ & 0x00000400) == 0x00000400);
+      }
+      /**
+       * <code>optional double stockPrice = 11;</code>
+       */
+      public double getStockPrice() {
+        return stockPrice_;
+      }
+      /**
+       * <code>optional double stockPrice = 11;</code>
+       */
+      public Builder setStockPrice(double value) {
+        bitField0_ |= 0x00000400;
+        stockPrice_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional double stockPrice = 11;</code>
+       */
+      public Builder clearStockPrice() {
+        bitField0_ = (bitField0_ & ~0x00000400);
+        stockPrice_ = 0D;
         onChanged();
         return this;
       }
@@ -17417,18 +17495,19 @@ public final class DiyNettyMessage {
       "ountId\030\003 \001(\t\022\022\n\nstockPrice\030\004 \001(\001\022\016\n\006amou" +
       "nt\030\005 \001(\005\022\024\n\014marketAmount\030\006 \001(\005\022\020\n\010avgPri" +
       "ce\030\007 \001(\001\022\016\n\006status\030\010 \001(\001\022\022\n\npositionId\030\t" +
-      " \001(\t\"\306\001\n\020MoneyJournalInfo\022\021\n\taccountId\030\001",
+      " \001(\t\"\332\001\n\020MoneyJournalInfo\022\021\n\taccountId\030\001",
       " \001(\t\022\021\n\tstockCode\030\002 \001(\t\022\021\n\tstockName\030\003 \001" +
       "(\t\022\016\n\006amount\030\004 \001(\005\022\020\n\010dealType\030\005 \001(\005\022\021\n\t" +
       "dealMoney\030\006 \001(\001\022\017\n\007dealFee\030\007 \001(\001\022\017\n\007deal" +
       "Tax\030\010 \001(\001\022\020\n\010dealDate\030\t \001(\t\022\020\n\010dealTime\030" +
-      "\n \001(\t\"\305\001\n\017TradeRecordInfo\022\021\n\taccountId\030\001" +
-      " \001(\t\022\021\n\tstockCode\030\002 \001(\t\022\021\n\tstockName\030\003 \001" +
-      "(\t\022\016\n\006amount\030\004 \001(\005\022\020\n\010dealType\030\005 \001(\005\022\021\n\t" +
-      "dealMoney\030\006 \001(\001\022\017\n\007dealFee\030\007 \001(\001\022\017\n\007deal" +
-      "Tax\030\010 \001(\001\022\020\n\010dealDate\030\t \001(\t\022\020\n\010dealTime\030" +
-      "\n \001(\tB7\n$com.ryd.basecommon.protocol.pro",
-      "tobufB\017DiyNettyMessage"
+      "\n \001(\t\022\022\n\nstockPrice\030\013 \001(\001\"\305\001\n\017TradeRecor" +
+      "dInfo\022\021\n\taccountId\030\001 \001(\t\022\021\n\tstockCode\030\002 " +
+      "\001(\t\022\021\n\tstockName\030\003 \001(\t\022\016\n\006amount\030\004 \001(\005\022\020" +
+      "\n\010dealType\030\005 \001(\005\022\021\n\tdealMoney\030\006 \001(\001\022\017\n\007d" +
+      "ealFee\030\007 \001(\001\022\017\n\007dealTax\030\010 \001(\001\022\020\n\010dealDat" +
+      "e\030\t \001(\t\022\020\n\010dealTime\030\n \001(\tB7\n$com.ryd.bas",
+      "ecommon.protocol.protobufB\017DiyNettyMessa" +
+      "ge"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -17489,7 +17568,7 @@ public final class DiyNettyMessage {
     internal_static_com_ryd_protocol_protobuf_MoneyJournalInfo_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_ryd_protocol_protobuf_MoneyJournalInfo_descriptor,
-        new String[] { "AccountId", "StockCode", "StockName", "Amount", "DealType", "DealMoney", "DealFee", "DealTax", "DealDate", "DealTime", });
+        new String[] { "AccountId", "StockCode", "StockName", "Amount", "DealType", "DealMoney", "DealFee", "DealTax", "DealDate", "DealTime", "StockPrice", });
     internal_static_com_ryd_protocol_protobuf_TradeRecordInfo_descriptor =
       getDescriptor().getMessageTypes().get(8);
     internal_static_com_ryd_protocol_protobuf_TradeRecordInfo_fieldAccessorTable = new
