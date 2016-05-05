@@ -32,8 +32,10 @@ public class Utils {
                                   BigDecimal rsMoney, BigDecimal commissionFee, BigDecimal taxFee){
 
         BigDecimal volMoney = ArithUtil.multiply(quotePrice, new BigDecimal(amount));
+
+        BigDecimal cpercent = new BigDecimal(commissionPercent);
         //计算佣金
-        commissionFee = ArithUtil.multiply(rsMoney, new BigDecimal(commissionPercent));
+        commissionFee = ArithUtil.multiply(volMoney, cpercent);
 
         //买股票
         if (type == ApplicationConstants.STOCK_QUOTETYPE_BUY.shortValue()) {
@@ -41,8 +43,9 @@ public class Utils {
             rsMoney = ArithUtil.add(volMoney, commissionFee);
 
         }else if (type == ApplicationConstants.STOCK_QUOTETYPE_SELL.shortValue()) {//卖股票
+            BigDecimal tpercent = new BigDecimal(taxPercent);
             //计算印花税
-            taxFee =  ArithUtil.multiply(volMoney, new BigDecimal(taxPercent));
+            taxFee =  ArithUtil.multiply(volMoney, tpercent);
 
             rsMoney =  ArithUtil.subtract(volMoney, ArithUtil.add(commissionFee, taxFee));
 

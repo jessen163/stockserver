@@ -221,11 +221,11 @@ public class StTradeRecordServiceImpl implements StTradeRecordService {
             record.setSellerAccountId(sellQuote.getAccountId());
             record.setBuyerAccountId(buyQuote.getAccountId());
             record.setStockId(buyQuote.getStockId());
-            record.setQuotePrice(tradeStockQuotePrice);
+            record.setQuotePrice(new BigDecimal(ArithUtil.df.format(tradeStockQuotePrice)));
             record.setAmount(tradeStockAmount);
-            record.setBuyFee(buyerCommissionFee);
-            record.setSellFee(sellerCommissionFee);
-            record.setDealTax(taxFee);
+            record.setBuyFee(new BigDecimal(ArithUtil.df.format(buyerCommissionFee)));
+            record.setSellFee(new BigDecimal(ArithUtil.df.format(sellerCommissionFee)));
+            record.setDealTax(new BigDecimal(ArithUtil.df.format(taxFee)));
             record.setDateTime(System.currentTimeMillis());
 
             stTradeRecordDao.add(record);
@@ -259,10 +259,10 @@ public class StTradeRecordServiceImpl implements StTradeRecordService {
             buyMoneyJournal.setAccountId(buyQuote.getAccountId());
             buyMoneyJournal.setQuoteId(buyQuote.getQuoteId());
             buyMoneyJournal.setAmount(tradeStockAmount);
-            buyMoneyJournal.setQuotePrice(tradeStockQuotePrice);
-            buyMoneyJournal.setDealMoney(buyerCostMoney);
+            buyMoneyJournal.setQuotePrice(new BigDecimal(ArithUtil.df.format(tradeStockQuotePrice)));
+            buyMoneyJournal.setDealMoney(new BigDecimal(ArithUtil.df.format(buyerCostMoney)));
             buyMoneyJournal.setDealType(buyQuote.getQuoteType());
-            buyMoneyJournal.setDealFee(buyerCommissionFee);
+            buyMoneyJournal.setDealFee(new BigDecimal(ArithUtil.df.format(buyerCommissionFee)));
             buyMoneyJournal.setDateTime(System.currentTimeMillis());
 
             moneyJournals.add(buyMoneyJournal);
@@ -273,11 +273,11 @@ public class StTradeRecordServiceImpl implements StTradeRecordService {
             sellMoneyJournal.setAccountId(sellQuote.getAccountId());
             sellMoneyJournal.setQuoteId(sellQuote.getQuoteId());
             sellMoneyJournal.setAmount(tradeStockAmount);
-            sellMoneyJournal.setQuotePrice(tradeStockQuotePrice);
-            sellMoneyJournal.setDealMoney(sellerGetMoney);
+            sellMoneyJournal.setQuotePrice(new BigDecimal(ArithUtil.df.format(tradeStockQuotePrice)));
+            sellMoneyJournal.setDealMoney(new BigDecimal(ArithUtil.df.format(sellerGetMoney)));
             sellMoneyJournal.setDealType(sellQuote.getQuoteType());
-            sellMoneyJournal.setDealFee(sellerCommissionFee);
-            sellMoneyJournal.setDealTax(taxFee);
+            sellMoneyJournal.setDealFee(new BigDecimal(ArithUtil.df.format(sellerCommissionFee)));
+            sellMoneyJournal.setDealTax(new BigDecimal(ArithUtil.df.format(taxFee)));
             sellMoneyJournal.setDateTime(System.currentTimeMillis());
 
             moneyJournals.add(sellMoneyJournal);

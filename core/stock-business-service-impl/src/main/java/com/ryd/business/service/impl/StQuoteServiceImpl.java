@@ -491,7 +491,7 @@ public class StQuoteServiceImpl implements StQuoteService {
                     quote.setUserType(ApplicationConstants.ACCOUNT_TYPE_VIRTUAL); // 马甲用户
                     quote.setQuoteType(simulationQuoteDTO.getQuoteType());
                     quote.setAmount(simulationQuoteDTO.getAmount());
-                    quote.setQuotePrice(BigDecimal.valueOf(simulationQuoteDTO.getQuotePrice()));
+                    quote.setQuotePrice(new BigDecimal(ArithUtil.df.format(simulationQuoteDTO.getQuotePrice())));
                     quote.setQuoteId(UUIDUtils.uuidTrimLine());
                     quote.setDateTime(simulationQuoteDTO.getDateTime());
                     // 用于排序的字段

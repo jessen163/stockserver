@@ -1,6 +1,7 @@
 package com.ryd.business.service.impl;
 
 import com.ryd.basecommon.util.ApplicationConstants;
+import com.ryd.basecommon.util.ArithUtil;
 import com.ryd.basecommon.util.CacheConstant;
 import com.ryd.basecommon.util.UUIDUtils;
 import com.ryd.business.dao.StSettleRecordDao;
@@ -14,6 +15,7 @@ import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ConcurrentSkipListMap;
@@ -83,9 +85,9 @@ public class StSettleRecordServiceImpl implements StSettleRecordService {
                               ssrb.setSettleAccountId(quote.getAccountId());
                               ssrb.setStockId(quote.getStockId());
                               ssrb.setAmount(quote.getAmount());
-                              ssrb.setQuotePrice(quote.getQuotePrice());
+                              ssrb.setQuotePrice(new BigDecimal(ArithUtil.df.format(quote.getQuotePrice())));
                               ssrb.setDealType(quote.getQuoteType());
-                              ssrb.setDealFee(quote.getCommissionFee());
+                              ssrb.setDealFee(new BigDecimal(ArithUtil.df.format(quote.getCommissionFee())));
                               ssrb.setDateTime(System.currentTimeMillis());
                               settlers.add(ssrb);
                           }
