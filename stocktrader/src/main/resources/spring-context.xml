@@ -19,4 +19,6 @@
     <context:annotation-config />
     <task:annotation-driven/>
     <import resource="applicationContext-baseCommon.xml"/>
+    <!-- 启用AspectJ对Annotation的支持 -->
+    <aop:aspectj-autoproxy/>
 </beans>
