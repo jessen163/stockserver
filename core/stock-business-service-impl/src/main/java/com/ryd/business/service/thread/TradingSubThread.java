@@ -40,6 +40,8 @@ public class TradingSubThread implements Runnable {
                 searchQuoteDTO.setQuoteType(ApplicationConstants.STOCK_QUOTETYPE_SELL);
                 StQuote sellQuote = stQuoteService.findFirstQuoteByStock(searchQuoteDTO);
                 if (buyQuote==null||sellQuote==null) break;
+                //买家和卖家同为马甲不能交易
+                if (buyQuote.getUserType()==ApplicationConstants.ACCOUNT_TYPE_VIRTUAL && sellQuote.getUserType()==ApplicationConstants.ACCOUNT_TYPE_VIRTUAL)break;
 
                 // 如果撮合成功, 执行交易, 同时更新买入、卖出队列
                 if (buyQuote.getQuotePrice().doubleValue() >= sellQuote.getQuotePrice().doubleValue() && !buyQuote.getAccountId().equals(sellQuote.getAccountId())) {
