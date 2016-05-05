@@ -27,8 +27,6 @@ public class MessageServiceImpl extends MessageServiceI {
     public static ChannelHandlerContext ctx;
 
     public static void createResponseInfo(DiyNettyMessage.NettyMessage request){
-        System.out.println(request.getId() + "---" + request.getStatus());
-
         switch (request.getId()){
             case ApplicationConstants.NETTYMESSAGE_ID_HEARTBEAT:
                 DiyNettyMessage.NettyMessage.Builder builder = DiyNettyMessage.NettyMessage.newBuilder();
@@ -52,7 +50,10 @@ public class MessageServiceImpl extends MessageServiceI {
                     ClientConstants.stStockList.add(st);
                 }
                 ClientConstants.stockListToMap();
-                MainFrame.instance().open();
+
+                DiyNettyMessage.NettyMessage.Builder builderp = TestParamBuilderUtil.getAccount(ApplicationConstants.NETTYMESSAGE_ID_MYPOSITION, ClientConstants.stAccount.getId(), 0L, System.currentTimeMillis());
+                MessageServiceImpl.sendMessage(builderp.build());
+
                 break;
             case ApplicationConstants.NETTYMESSAGE_ID_STOCKPRICEDETAIL:
                 break;
@@ -66,11 +67,6 @@ public class MessageServiceImpl extends MessageServiceI {
                     DiyNettyMessage.NettyMessage.Builder buildera = TestParamBuilderUtil.getAccount(ApplicationConstants.NETTYMESSAGE_ID_MYCAPITAL, ainfo.getAccountId(), 0L, System.currentTimeMillis());
                     MessageServiceImpl.sendMessage(buildera.build());
 
-                    DiyNettyMessage.NettyMessage.Builder builderp = TestParamBuilderUtil.getAccount(ApplicationConstants.NETTYMESSAGE_ID_MYPOSITION,ainfo.getAccountId(),0L,System.currentTimeMillis());
-                    MessageServiceImpl.sendMessage(builderp.build());
-
-                    DiyNettyMessage.NettyMessage.Builder builderq = TestParamBuilderUtil.getStockInfoBuilder(ApplicationConstants.NETTYMESSAGE_ID_STOCKINFO, 0, null);
-                    MessageServiceImpl.sendMessage(builderq.build());
                 }else{
                     JOptionPane.showMessageDialog(null, "帐号信息错误，没有该用户", "提示",
                             JOptionPane.ERROR_MESSAGE);
@@ -116,6 +112,8 @@ public class MessageServiceImpl extends MessageServiceI {
 
                 ClientConstants.stAccount = racc;
 
+                DiyNettyMessage.NettyMessage.Builder builderq = TestParamBuilderUtil.getStockInfoBuilder(ApplicationConstants.NETTYMESSAGE_ID_STOCKINFO, 0, null);
+                MessageServiceImpl.sendMessage(builderq.build());
                 break;
             case ApplicationConstants.NETTYMESSAGE_ID_MYPOSITION:
                 List<DiyNettyMessage.PositionInfo> positionInfos = request.getPositionInfoList();
@@ -125,6 +123,7 @@ public class MessageServiceImpl extends MessageServiceI {
                     ClientConstants.stPositionList.add(stp);
                 }
                 ClientConstants.positionListToMap();
+                MainFrame.instance().open();
                 break;
             case ApplicationConstants.NETTYMESSAGE_ID_MYQUOTELIST:
                 List<DiyNettyMessage.QuoteInfo> quoteInfos = request.getQuoteInfoList();

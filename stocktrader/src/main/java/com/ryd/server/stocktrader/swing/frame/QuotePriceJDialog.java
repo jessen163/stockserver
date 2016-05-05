@@ -1,6 +1,7 @@
 package com.ryd.server.stocktrader.swing.frame;
 
 import com.ryd.business.model.StStock;
+import com.ryd.business.model.StStockConfig;
 import com.ryd.server.stocktrader.swing.common.ClientConstants;
 import com.ryd.server.stocktrader.swing.listener.QuotePriceListener;
 
@@ -17,7 +18,7 @@ public class QuotePriceJDialog extends JDialog {
 
 	private static QuotePriceJDialog quotePriceJDialog;
 
-	public String stockCode,accountId;
+	public String stockId,accountId;
 
 	JTextField textAccountName, textStockName, textAmount, textQuotePrice;
 	JRadioButton buyOrSellBuy, buyOrSellSell;
@@ -104,10 +105,10 @@ public class QuotePriceJDialog extends JDialog {
 		}else{
 			buyOrSellSell.setSelected(true);
 		}
-		StStock stStock = ClientConstants.stStockMap.get(stockCode);
+		StStockConfig stStock = ClientConstants.stStockConfigMapKeyCode.get(stockCode);
 		textAccountName.setText(ClientConstants.stAccount.getAccountName());
 		textStockName.setText(stStock.getStockName());
-		this.stockCode = stStock.getStockCode();
+		this.stockId = stStock.getId();
 		this.accountId = ClientConstants.stAccount.getId();
 		setVisible(true);
 	}
