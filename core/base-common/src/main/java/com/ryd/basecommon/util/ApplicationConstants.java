@@ -95,6 +95,9 @@ public class ApplicationConstants {
     public static final Short MODEL_ATRRIBUTE_NORMAL = 1;
     public static final Short MODEL_ATRRIBUTE_DISABLED = 2;
 
+    // 消息key-模拟订单
+    public static final String PUSHMESSAGE_SIMULATIONQUOTE = "simulationQuote";
+
     // 交易主线程是否停止
     public static volatile boolean isMainThreadStop = true;
 

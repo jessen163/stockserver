@@ -135,18 +135,11 @@ public class StStockServiceImpl implements StStockService {
     @Override
     public StStock findStockListByStock(SearchStockDTO searchStockDTO) {
         StStock stStock = null;
-//        StStockConfig stockConfig = null;
-//        if (iCacheService.getObjectByKey(CacheConstant.CACHEKEY_STOCKCONFIGLIST_MAP, searchStockDTO.getStockId(), null)!=null) {
-//            stockConfig = (StStockConfig)iCacheService.getObjectByKey(CacheConstant.CACHEKEY_STOCKCONFIGLIST_MAP, searchStockDTO.getStockId(), null);
-//        }
-        if (searchStockDTO!=null&&searchStockDTO.getStockId()!=null) {
-            Object stockPriceObj = iCacheService.getObjectByKey(CacheConstant.CACHEKEY_STOCK_PRICEMAP, searchStockDTO.getStockId(), null);
-            // 返回前一天的收盘价
-            if (stockPriceObj != null) {
-                stStock = (StStock) stockPriceObj;
-            } else {
-                // TODO 从数据库获取最新的报价信息
-            }
+        String stockCode = stStockConfigService.getStockCodeByStockId(searchStockDTO.getStockId());
+        stStock = BusinessConstants.stockPriceMap.get(stockCode);
+        if (stStock==null) {
+            this.findStockListToCache();
+            stStock = BusinessConstants.stockPriceMap.get(stockCode);
         }
         return stStock;
     }
@@ -160,5 +153,14 @@ public class StStockServiceImpl implements StStockService {
         }
         // TODO 增加股票价格、增加股票成交量
         return stStockDetailDTO;
+    }
+
+    @Override
+    public boolean findStockListToCache() {
+        Object obj = iCacheService.getObjectByKey(CacheConstant.CACHEKEY_STOCK_PRICELIST, null);
+        if (obj != null) {
+            BusinessConstants.stockPriceMap = (ConcurrentHashMap<String, StStock>) obj;
+        }
+        return false;
     }
 }

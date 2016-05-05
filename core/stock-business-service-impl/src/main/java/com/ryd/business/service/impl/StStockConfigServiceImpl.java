@@ -90,7 +90,7 @@ public class StStockConfigServiceImpl implements StStockConfigService {
         }
         str = iCacheService.getStringByKey(CacheConstant.CACHEKEY_STOCKCONFIGIDNAME_MAP, stockCode, null);
         return str;*/
-//        BusinessConstants.stockConfigMap.get()
+
         String str = BusinessConstants.stockCodeStockIdMap.get(stockCode);
         if (StringUtils.isEmpty(str)) {
             this.findStockConfig(null, 1, Integer.MAX_VALUE);

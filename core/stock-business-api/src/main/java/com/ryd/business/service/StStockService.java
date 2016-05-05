@@ -3,6 +3,7 @@ package com.ryd.business.service;
 import com.ryd.business.dto.SearchStockDTO;
 import com.ryd.business.dto.StStockDetailDTO;
 import com.ryd.business.model.StStock;
+import com.ryd.business.model.StStockConfig;
 
 import java.util.List;
 
@@ -48,4 +49,10 @@ public interface StStockService {
      * @return
      */
     public StStockDetailDTO findStockDetailByStock(SearchStockDTO searchStockDTO);
+
+    /**
+     * 从缓存中获取股票价格信息
+     * @return
+     */
+    public boolean findStockListToCache();
 }

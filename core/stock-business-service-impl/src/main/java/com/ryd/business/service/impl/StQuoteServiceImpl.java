@@ -224,6 +224,7 @@ public class StQuoteServiceImpl implements StQuoteService {
     public List<StQuote> findQuoteList(SearchQuoteDTO searchQuoteDTO) {
         StQuote stQuote = new StQuote();
         stQuote.setAccountId(searchQuoteDTO.getAccountId());
+        stQuote.setStatus(searchQuoteDTO.getStatus());
 
         Long startTime = searchQuoteDTO.getQuoteStartDate()==null?null:searchQuoteDTO.getQuoteStartDate().getTime();
         Long endTime = searchQuoteDTO.getQuoteEndDate()==null?null:searchQuoteDTO.getQuoteEndDate().getTime();
@@ -553,6 +554,25 @@ public class StQuoteServiceImpl implements StQuoteService {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }*/
+    }
+
+    public boolean findStQuoteToCache(int limit) {
+        SearchQuoteDTO searchQuoteDTO = new SearchQuoteDTO();
+        searchQuoteDTO.setStatus(ApplicationConstants.STOCK_STQUOTE_STATUS_TRUSTEE);
+        List<StQuote> stQuoteList = this.findQuoteList(searchQuoteDTO);
+        if (StringUtils.isEmpty(stQuoteList)) return true;
+        for (StQuote quote : stQuoteList) {
+            String stockCode = stStockConfigService.getStockCodeByStockId(quote.getStockId());
+            StTradeQueueDTO tradeQueueDTO = BusinessConstants.stTradeQueueMap.get(stockCode);
+            if (quote.getQuoteType().intValue()==ApplicationConstants.STOCK_QUOTETYPE_BUY.intValue()) {
+                tradeQueueDTO.addBuyStQuote(quote);
+            } else if (quote.getQuoteType().intValue()==ApplicationConstants.STOCK_QUOTETYPE_SELL.intValue()) {
+                tradeQueueDTO.addSellStQuote(quote);
+            }
+            BusinessConstants.stTradeQueueMap.put(stockCode, tradeQueueDTO);
+        }
+
+        return true;
     }
 
     /**

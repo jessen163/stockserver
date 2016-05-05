@@ -121,4 +121,11 @@ public interface StQuoteService {
      * 添加模拟单报价
      */
     public void executeSimulationQuote();
+
+    /**
+     * 将报价放入队列
+     * @param limit
+     * @return
+     */
+    public boolean findStQuoteToCache(int limit);
 }

@@ -21,10 +21,20 @@ public class SearchQuoteDTO implements Serializable {
     private Date quoteStartDate;
     // 报价时间
     private Date quoteEndDate;
+    // 托管状态
+    private Short status;
 
     private int offset;
 
     private int limit;
+
+    public Short getStatus() {
+        return status;
+    }
+
+    public void setStatus(Short status) {
+        this.status = status;
+    }
 
     public String getAccountId() {
         return accountId;
