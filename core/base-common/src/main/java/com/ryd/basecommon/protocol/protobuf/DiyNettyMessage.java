@@ -9661,22 +9661,22 @@ public final class DiyNettyMessage {
         getAccountNumBytes();
 
     /**
-     * <code>optional sint64 totalAssets = 5;</code>
+     * <code>optional double totalAssets = 5;</code>
      */
     boolean hasTotalAssets();
     /**
-     * <code>optional sint64 totalAssets = 5;</code>
+     * <code>optional double totalAssets = 5;</code>
      */
-    long getTotalAssets();
+    double getTotalAssets();
 
     /**
-     * <code>optional sint64 useMoney = 6;</code>
+     * <code>optional double useMoney = 6;</code>
      */
     boolean hasUseMoney();
     /**
-     * <code>optional sint64 useMoney = 6;</code>
+     * <code>optional double useMoney = 6;</code>
      */
-    long getUseMoney();
+    double getUseMoney();
 
     /**
      * <code>optional int32 accountLevel = 7;</code>
@@ -9823,14 +9823,14 @@ public final class DiyNettyMessage {
               accountNum_ = bs;
               break;
             }
-            case 40: {
+            case 41: {
               bitField0_ |= 0x00000010;
-              totalAssets_ = input.readSInt64();
+              totalAssets_ = input.readDouble();
               break;
             }
-            case 48: {
+            case 49: {
               bitField0_ |= 0x00000020;
-              useMoney_ = input.readSInt64();
+              useMoney_ = input.readDouble();
               break;
             }
             case 56: {
@@ -10075,32 +10075,32 @@ public final class DiyNettyMessage {
     }
 
     public static final int TOTALASSETS_FIELD_NUMBER = 5;
-    private long totalAssets_;
+    private double totalAssets_;
     /**
-     * <code>optional sint64 totalAssets = 5;</code>
+     * <code>optional double totalAssets = 5;</code>
      */
     public boolean hasTotalAssets() {
       return ((bitField0_ & 0x00000010) == 0x00000010);
     }
     /**
-     * <code>optional sint64 totalAssets = 5;</code>
+     * <code>optional double totalAssets = 5;</code>
      */
-    public long getTotalAssets() {
+    public double getTotalAssets() {
       return totalAssets_;
     }
 
     public static final int USEMONEY_FIELD_NUMBER = 6;
-    private long useMoney_;
+    private double useMoney_;
     /**
-     * <code>optional sint64 useMoney = 6;</code>
+     * <code>optional double useMoney = 6;</code>
      */
     public boolean hasUseMoney() {
       return ((bitField0_ & 0x00000020) == 0x00000020);
     }
     /**
-     * <code>optional sint64 useMoney = 6;</code>
+     * <code>optional double useMoney = 6;</code>
      */
-    public long getUseMoney() {
+    public double getUseMoney() {
       return useMoney_;
     }
 
@@ -10280,8 +10280,8 @@ public final class DiyNettyMessage {
       realName_ = "";
       accountName_ = "";
       accountNum_ = "";
-      totalAssets_ = 0L;
-      useMoney_ = 0L;
+      totalAssets_ = 0D;
+      useMoney_ = 0D;
       accountLevel_ = 0;
       mobile_ = "";
       sex_ = 0;
@@ -10315,10 +10315,10 @@ public final class DiyNettyMessage {
         output.writeBytes(4, getAccountNumBytes());
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        output.writeSInt64(5, totalAssets_);
+        output.writeDouble(5, totalAssets_);
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
-        output.writeSInt64(6, useMoney_);
+        output.writeDouble(6, useMoney_);
       }
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
         output.writeInt32(7, accountLevel_);
@@ -10365,11 +10365,11 @@ public final class DiyNettyMessage {
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeSInt64Size(5, totalAssets_);
+          .computeDoubleSize(5, totalAssets_);
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeSInt64Size(6, useMoney_);
+          .computeDoubleSize(6, useMoney_);
       }
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
         size += com.google.protobuf.CodedOutputStream
@@ -10520,9 +10520,9 @@ public final class DiyNettyMessage {
         bitField0_ = (bitField0_ & ~0x00000004);
         accountNum_ = "";
         bitField0_ = (bitField0_ & ~0x00000008);
-        totalAssets_ = 0L;
+        totalAssets_ = 0D;
         bitField0_ = (bitField0_ & ~0x00000010);
-        useMoney_ = 0L;
+        useMoney_ = 0D;
         bitField0_ = (bitField0_ & ~0x00000020);
         accountLevel_ = 0;
         bitField0_ = (bitField0_ & ~0x00000040);
@@ -11009,66 +11009,66 @@ public final class DiyNettyMessage {
         return this;
       }
 
-      private long totalAssets_ ;
+      private double totalAssets_ ;
       /**
-       * <code>optional sint64 totalAssets = 5;</code>
+       * <code>optional double totalAssets = 5;</code>
        */
       public boolean hasTotalAssets() {
         return ((bitField0_ & 0x00000010) == 0x00000010);
       }
       /**
-       * <code>optional sint64 totalAssets = 5;</code>
+       * <code>optional double totalAssets = 5;</code>
        */
-      public long getTotalAssets() {
+      public double getTotalAssets() {
         return totalAssets_;
       }
       /**
-       * <code>optional sint64 totalAssets = 5;</code>
+       * <code>optional double totalAssets = 5;</code>
        */
-      public Builder setTotalAssets(long value) {
+      public Builder setTotalAssets(double value) {
         bitField0_ |= 0x00000010;
         totalAssets_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional sint64 totalAssets = 5;</code>
+       * <code>optional double totalAssets = 5;</code>
        */
       public Builder clearTotalAssets() {
         bitField0_ = (bitField0_ & ~0x00000010);
-        totalAssets_ = 0L;
+        totalAssets_ = 0D;
         onChanged();
         return this;
       }
 
-      private long useMoney_ ;
+      private double useMoney_ ;
       /**
-       * <code>optional sint64 useMoney = 6;</code>
+       * <code>optional double useMoney = 6;</code>
        */
       public boolean hasUseMoney() {
         return ((bitField0_ & 0x00000020) == 0x00000020);
       }
       /**
-       * <code>optional sint64 useMoney = 6;</code>
+       * <code>optional double useMoney = 6;</code>
        */
-      public long getUseMoney() {
+      public double getUseMoney() {
         return useMoney_;
       }
       /**
-       * <code>optional sint64 useMoney = 6;</code>
+       * <code>optional double useMoney = 6;</code>
        */
-      public Builder setUseMoney(long value) {
+      public Builder setUseMoney(double value) {
         bitField0_ |= 0x00000020;
         useMoney_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional sint64 useMoney = 6;</code>
+       * <code>optional double useMoney = 6;</code>
        */
       public Builder clearUseMoney() {
         bitField0_ = (bitField0_ & ~0x00000020);
-        useMoney_ = 0L;
+        useMoney_ = 0D;
         onChanged();
         return this;
       }
@@ -17481,7 +17481,7 @@ public final class DiyNettyMessage {
       "(\001\022\021\n\tstockTime\030# \002(\t\"\353\001\n\013AccountInfo\022\021\n" +
       "\taccountId\030\001 \001(\t\022\020\n\010realName\030\002 \001(\t\022\023\n\013ac" +
       "countName\030\003 \001(\t\022\022\n\naccountNum\030\004 \001(\t\022\023\n\013t" +
-      "otalAssets\030\005 \001(\022\022\020\n\010useMoney\030\006 \001(\022\022\024\n\014ac" +
+      "otalAssets\030\005 \001(\001\022\020\n\010useMoney\030\006 \001(\001\022\024\n\014ac" +
       "countLevel\030\007 \001(\005\022\016\n\006mobile\030\010 \001(\t\022\013\n\003sex\030" +
       "\t \001(\005\022\016\n\006remark\030\n \001(\t\022\022\n\ncreatetime\030\013 \001(" +
       "\022\022\020\n\010password\030\014 \001(\t\"\356\001\n\tQuoteInfo\022\017\n\007sto" +
