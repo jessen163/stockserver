@@ -146,12 +146,14 @@ public class StTradeRecordServiceImpl implements StTradeRecordService {
 
             //佣金比例
             String commissionPercent = stSystemParamService.getParamByKey(CacheConstant.CACHEKEY_SYSTEM_COMMINSSION_PERCENT);
+            //最小佣金值
+            String minCommissionFee = stSystemParamService.getParamByKey(CacheConstant.CACHEKEY_SYSTEM_CONFIG_COMMISIONFEE_MIN);
 
-            BigDecimal[] rsArr = Utils.calculate(buyQuote.getQuotePrice(), remainAmount, buyQuote.getQuoteType(), commissionPercent, null);
+            BigDecimal[] rsArr = Utils.calculate(buyQuote.getQuotePrice(), remainAmount, buyQuote.getQuoteType(), commissionPercent, null,minCommissionFee,null);
             //计算佣金
-            BigDecimal commissionFee = rsArr[0];
+            BigDecimal commissionFee = ArithUtil.scale(rsArr[0]);
             //减掉佣金和税
-            BigDecimal rsMoney = rsArr[1];
+            BigDecimal rsMoney = ArithUtil.scale(rsArr[1]);
 
             buyQuote.setFrozeMoney(rsMoney);
             buyQuote.setCommissionFee(commissionFee);
@@ -210,22 +212,27 @@ public class StTradeRecordServiceImpl implements StTradeRecordService {
 
         //交易成功，交易买家持仓增加
         brs = stPositionService.updatePositionAdd(buyQuote.getAccountId(), buyQuote.getStockId(), tradeStockAmount);
+
         //佣金比例
         String commissionPercent = stSystemParamService.getParamByKey(CacheConstant.CACHEKEY_SYSTEM_COMMINSSION_PERCENT);
         //印花税比例
         String taxPercent = stSystemParamService.getParamByKey(CacheConstant.CACHEKEY_SYSTEM_CONFIG_TAX_PERCENT);
+        //最小佣金值
+        String minCommissionFee = stSystemParamService.getParamByKey(CacheConstant.CACHEKEY_SYSTEM_CONFIG_COMMISIONFEE_MIN);
+        //最小印花税值
+        String minTaxFee = stSystemParamService.getParamByKey(CacheConstant.CACHEKEY_SYSTEM_CONFIG_TAXFEE_MIN);
 
         //买家购买股票消费资产
-        BigDecimal[] brsArr = Utils.calculate(tradeStockQuotePrice, tradeStockAmount, buyQuote.getQuoteType(), commissionPercent, null);
-        BigDecimal buyerCommissionFee = brsArr[0];
-        BigDecimal buyerCostMoney = brsArr[1];
+        BigDecimal[] brsArr = Utils.calculate(tradeStockQuotePrice, tradeStockAmount, buyQuote.getQuoteType(), commissionPercent, null,minCommissionFee,null);
+        BigDecimal buyerCommissionFee = ArithUtil.scale(brsArr[0]);
+        BigDecimal buyerCostMoney = ArithUtil.scale(brsArr[1]);
 
         //卖家新增费用计算
-        BigDecimal[] srsArr = Utils.calculate(tradeStockQuotePrice, tradeStockAmount, sellQuote.getQuoteType(), commissionPercent, taxPercent);
-        BigDecimal sellerCommissionFee = srsArr[0];
-        BigDecimal taxFee = srsArr[2];
+        BigDecimal[] srsArr = Utils.calculate(tradeStockQuotePrice, tradeStockAmount, sellQuote.getQuoteType(), commissionPercent, taxPercent, minCommissionFee, minTaxFee);
+        BigDecimal sellerCommissionFee = ArithUtil.scale(srsArr[0]);
+        BigDecimal taxFee = ArithUtil.scale(srsArr[2]);
         //减掉佣金和税
-        BigDecimal sellerGetMoney = srsArr[1];
+        BigDecimal sellerGetMoney = ArithUtil.scale(srsArr[1]);
 
         //交易成功，交易卖家资产增加
         srs = stAccountService.updateStAccountMoneyAdd(sellQuote.getAccountId(), sellerGetMoney);
@@ -237,11 +244,11 @@ public class StTradeRecordServiceImpl implements StTradeRecordService {
             record.setSellerAccountId(sellQuote.getAccountId());
             record.setBuyerAccountId(buyQuote.getAccountId());
             record.setStockId(buyQuote.getStockId());
-            record.setQuotePrice(new BigDecimal(ArithUtil.df.format(tradeStockQuotePrice)));
+            record.setQuotePrice(tradeStockQuotePrice);
             record.setAmount(tradeStockAmount);
-            record.setBuyFee(new BigDecimal(ArithUtil.df.format(buyerCommissionFee)));
-            record.setSellFee(new BigDecimal(ArithUtil.df.format(sellerCommissionFee)));
-            record.setDealTax(new BigDecimal(ArithUtil.df.format(taxFee)));
+            record.setBuyFee(buyerCommissionFee);
+            record.setSellFee(sellerCommissionFee);
+            record.setDealTax(taxFee);
             record.setDateTime(System.currentTimeMillis());
 
             this.addTradeRecord(record);
@@ -275,10 +282,10 @@ public class StTradeRecordServiceImpl implements StTradeRecordService {
             buyMoneyJournal.setAccountId(buyQuote.getAccountId());
             buyMoneyJournal.setQuoteId(buyQuote.getQuoteId());
             buyMoneyJournal.setAmount(tradeStockAmount);
-            buyMoneyJournal.setQuotePrice(new BigDecimal(ArithUtil.df.format(tradeStockQuotePrice)));
-            buyMoneyJournal.setDealMoney(new BigDecimal(ArithUtil.df.format(buyerCostMoney)));
+            buyMoneyJournal.setQuotePrice(tradeStockQuotePrice);
+            buyMoneyJournal.setDealMoney(buyerCostMoney);
             buyMoneyJournal.setDealType(buyQuote.getQuoteType());
-            buyMoneyJournal.setDealFee(new BigDecimal(ArithUtil.df.format(buyerCommissionFee)));
+            buyMoneyJournal.setDealFee(buyerCommissionFee);
             buyMoneyJournal.setDateTime(System.currentTimeMillis());
 
             moneyJournals.add(buyMoneyJournal);
@@ -289,11 +296,11 @@ public class StTradeRecordServiceImpl implements StTradeRecordService {
             sellMoneyJournal.setAccountId(sellQuote.getAccountId());
             sellMoneyJournal.setQuoteId(sellQuote.getQuoteId());
             sellMoneyJournal.setAmount(tradeStockAmount);
-            sellMoneyJournal.setQuotePrice(new BigDecimal(ArithUtil.df.format(tradeStockQuotePrice)));
-            sellMoneyJournal.setDealMoney(new BigDecimal(ArithUtil.df.format(sellerGetMoney)));
+            sellMoneyJournal.setQuotePrice(tradeStockQuotePrice);
+            sellMoneyJournal.setDealMoney(sellerGetMoney);
             sellMoneyJournal.setDealType(sellQuote.getQuoteType());
-            sellMoneyJournal.setDealFee(new BigDecimal(ArithUtil.df.format(sellerCommissionFee)));
-            sellMoneyJournal.setDealTax(new BigDecimal(ArithUtil.df.format(taxFee)));
+            sellMoneyJournal.setDealFee(sellerCommissionFee);
+            sellMoneyJournal.setDealTax(taxFee);
             sellMoneyJournal.setDateTime(System.currentTimeMillis());
 
             moneyJournals.add(sellMoneyJournal);
@@ -326,13 +333,16 @@ public class StTradeRecordServiceImpl implements StTradeRecordService {
 
                 //佣金比例
                 String commissionPercent = stSystemParamService.getParamByKey(CacheConstant.CACHEKEY_SYSTEM_COMMINSSION_PERCENT);
-                BigDecimal[] brsArr = Utils.calculate(buyQuote.getQuotePrice(), tradeStockAmount, buyQuote.getQuoteType(), commissionPercent, null);
-                //以买家报价计算交易成本
-                BigDecimal buyCost = brsArr[1];
+                //最小佣金值
+                String minCommissionFee = stSystemParamService.getParamByKey(CacheConstant.CACHEKEY_SYSTEM_CONFIG_COMMISIONFEE_MIN);
 
-                BigDecimal[] drsArr = Utils.calculate(tradeStockQuotePrice, tradeStockAmount, buyQuote.getQuoteType(), commissionPercent, null);
+                BigDecimal[] brsArr = Utils.calculate(buyQuote.getQuotePrice(), tradeStockAmount, buyQuote.getQuoteType(), commissionPercent, null, minCommissionFee, null);
+                //以买家报价计算交易成本
+                BigDecimal buyCost = ArithUtil.scale(brsArr[1]);
+
+                BigDecimal[] drsArr = Utils.calculate(tradeStockQuotePrice, tradeStockAmount, buyQuote.getQuoteType(), commissionPercent, null, minCommissionFee, null);
                 //以交易价格计算交易成本
-                BigDecimal dealCost = drsArr[1];
+                BigDecimal dealCost = ArithUtil.scale(drsArr[1]);
 
                 //节省成本
                 saveMoney = ArithUtil.subtract(buyCost, dealCost);

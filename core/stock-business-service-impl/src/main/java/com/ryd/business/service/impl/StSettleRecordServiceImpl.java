@@ -88,9 +88,9 @@ public class StSettleRecordServiceImpl implements StSettleRecordService {
                               ssrb.setSettleAccountId(quote.getAccountId());
                               ssrb.setStockId(quote.getStockId());
                               ssrb.setAmount(quote.getAmount());
-                              ssrb.setQuotePrice(new BigDecimal(ArithUtil.df.format(quote.getQuotePrice())));
+                              ssrb.setQuotePrice(ArithUtil.scale(quote.getQuotePrice()));
                               ssrb.setDealType(quote.getQuoteType());
-                              ssrb.setDealFee(new BigDecimal(ArithUtil.df.format(quote.getCommissionFee())));
+                              ssrb.setDealFee(ArithUtil.scale(quote.getCommissionFee()));
                               ssrb.setDateTime(System.currentTimeMillis());
                               settlers.add(ssrb);
                           }
