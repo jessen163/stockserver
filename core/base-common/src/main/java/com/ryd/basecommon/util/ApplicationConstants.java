@@ -97,6 +97,8 @@ public class ApplicationConstants {
 
     // 消息key-模拟订单
     public static final String PUSHMESSAGE_SIMULATIONQUOTE = "simulationQuote";
+    // 消息key-股票价格信息
+    public static final String PUSHMESSAGE_STOCKPRICELIST = "stockPriceList";
 
     // 交易主线程是否停止
     public static volatile boolean isMainThreadStop = true;
