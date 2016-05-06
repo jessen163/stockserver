@@ -193,7 +193,7 @@ public class StQuoteServiceImpl implements StQuoteService {
                     //修改报价状态
                     quote.setStatus(ApplicationConstants.STOCK_STQUOTE_STATUS_NOTDEAL);
                     updateQuote(quote);
-                    if(!this.removeByQuote(quote)){
+                    if(!this.deleteQuoteFromQueue(quote)){
                         throw new QuoteBusinessException("撤单删除失败");
                     }
                 }
@@ -419,7 +419,7 @@ public class StQuoteServiceImpl implements StQuoteService {
             isRemove = tradeQueueDTO.removeSellStQuote(quote);
         }
         if (!isRemove) return false;
-        BusinessConstants.stTradeQueueMap.put(quote.getStockCode(), tradeQueueDTO);
+        BusinessConstants.stTradeQueueMap.put(stockCode, tradeQueueDTO);
 
         /*Object quoteobj = null;
         ConcurrentSkipListMap<Long, StQuote> quoteList = null;
