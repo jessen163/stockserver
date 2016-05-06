@@ -46,7 +46,11 @@ public class TradingSubThread implements Runnable {
                 // 如果撮合成功, 执行交易, 同时更新买入、卖出队列
                 if (buyQuote.getQuotePrice().doubleValue() >= sellQuote.getQuotePrice().doubleValue() && !buyQuote.getAccountId().equals(sellQuote.getAccountId())) {
                     // 调用交易接口
-                    stTradeRecordService.updateTradeSettling(buyQuote, sellQuote);
+                    try {
+                        stTradeRecordService.updateTradeSettling(buyQuote, sellQuote);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
 //              TimeUnit.MILLISECONDS.sleep(200);
             } catch (InterruptedException e) {

@@ -58,7 +58,7 @@ public class ListToArray {
         Object[][] arr = new Object[stPositionList.size()][5];
         for(int i=0;i<stPositionList.size();i++){
             StPosition stq = stPositionList.get(i);
-            StStockConfig stockConfig = ClientConstants.stStockConfigMap.get(stq.getStockId());
+            StStockConfig stockConfig = ClientConstants.stStockConfigMapKeyId.get(stq.getStockId());
             StStock stStock = ClientConstants.stStockMap.get(stockConfig.getStockCode());
             arr[i][0] = stockConfig.getStockCode();
             arr[i][1] = stockConfig.getStockName();
@@ -82,7 +82,7 @@ public class ListToArray {
         Object[][] arr = new Object[stQuoteList.size()][9];
         for(int i=0;i<stQuoteList.size();i++){
             StQuote stq = stQuoteList.get(i);
-            StStockConfig stock = ClientConstants.stStockConfigMap.get(stq.getStockId());
+            StStockConfig stock = ClientConstants.stStockConfigMapKeyId.get(stq.getStockId());
 
             arr[i][0] = stock.getStockCode();
             arr[i][1] = stock.getStockName();
@@ -123,7 +123,7 @@ public class ListToArray {
         Object[][] arr = new Object[moneyJournals.size()][10];
         for(int i=0;i<moneyJournals.size();i++){
             StMoneyJournal stq = moneyJournals.get(i);
-            StStockConfig stock = ClientConstants.stStockConfigMap.get(stq.getStockId());
+            StStockConfig stock = ClientConstants.stStockConfigMapKeyId.get(stq.getStockId());
             arr[i][0] = stq.getAccountId();
             arr[i][1] = stock.getStockCode();
             arr[i][2] = stock.getStockName();
@@ -151,7 +151,7 @@ public class ListToArray {
         Object[][] arr = new Object[stTradeRecords.size()][8];
         for(int i=0;i<stTradeRecords.size();i++){
             StTradeRecord stq = stTradeRecords.get(i);
-            StStockConfig stock = ClientConstants.stStockConfigMap.get(stq.getStockId());
+            StStockConfig stock = ClientConstants.stStockConfigMapKeyId.get(stq.getStockId());
             arr[i][0] = stock.getStockCode();
             arr[i][1] = stock.getStockName();
             arr[i][2] = stq.getQuotePrice().doubleValue();

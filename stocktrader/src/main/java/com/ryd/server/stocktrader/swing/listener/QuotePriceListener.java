@@ -45,7 +45,7 @@ public class QuotePriceListener extends MouseAdapter implements ActionListener {
 		
 		if (e.getSource() == ensure) {
 
-			DiyNettyMessage.NettyMessage.Builder builder = TestParamBuilderUtil.getQuote(QuotePriceJDialog.instance().stockCode, ClientConstants.stAccount.getId(),
+			DiyNettyMessage.NettyMessage.Builder builder = TestParamBuilderUtil.getQuote(QuotePriceJDialog.instance().stockId, ClientConstants.stAccount.getId(),
 					Double.valueOf(textQuotePrice.getText()), (buyOrSellBuy.isSelected() == true ? 1 : 2), Integer.valueOf(textAmount.getText()));
 			MessageServiceImpl.sendMessage(builder.build());
 

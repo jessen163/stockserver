@@ -80,8 +80,11 @@ public class StockTraderTask {
     @Scheduled(cron = "0 30 23 ? * MON-FRI")
     public void runUpdateStockSettling() {
         System.out.println("结算开始..........start............");
-        stSettleRecordService.updateStockSettling();
-        stPositionService.updatePosition(1000);
+        try {
+            stSettleRecordService.updateStockSettling();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         System.out.println("结算开始..........end............");
     }
 }

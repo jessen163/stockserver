@@ -24,30 +24,31 @@ public class Utils {
      * @param type
      * @param commissionPercent //佣金比例
      * @param taxPercent //税比例
-     * @param rsMoney
-     * @param commissionFee
-     * @param taxFee
+     * @return rsArr[0] 佣金 rsArr[1] 资金数额 rsArr[2] 印花税
      */
-    public static void calculate(BigDecimal quotePrice, long amount, short type, String commissionPercent, String taxPercent,
-                                  BigDecimal rsMoney, BigDecimal commissionFee, BigDecimal taxFee){
+    public static BigDecimal[] calculate(BigDecimal quotePrice, long amount, short type, String commissionPercent, String taxPercent) {
+
+        BigDecimal[] rsArr = new BigDecimal[3];
 
         BigDecimal volMoney = ArithUtil.multiply(quotePrice, new BigDecimal(amount));
         //计算佣金
-        commissionFee = ArithUtil.multiply(rsMoney, new BigDecimal(commissionPercent));
+        rsArr[0] = ArithUtil.multiply(volMoney, new BigDecimal(commissionPercent));
 
         //买股票
         if (type == ApplicationConstants.STOCK_QUOTETYPE_BUY.shortValue()) {
 
-            rsMoney = ArithUtil.add(volMoney, commissionFee);
+            rsArr[1] = ArithUtil.add(volMoney, rsArr[0]);
 
         }else if (type == ApplicationConstants.STOCK_QUOTETYPE_SELL.shortValue()) {//卖股票
             //计算印花税
-            taxFee =  ArithUtil.multiply(volMoney, new BigDecimal(taxPercent));
+            BigDecimal taxFee =  ArithUtil.multiply(volMoney,  new BigDecimal(taxPercent));
 
-            rsMoney =  ArithUtil.subtract(volMoney, ArithUtil.add(commissionFee, taxFee));
+            rsArr[1] =  ArithUtil.subtract(volMoney, ArithUtil.add(rsArr[0], taxFee));
 
+            rsArr[2] = taxFee;
         }else{}
 
+        return rsArr;
     }
 
     /**

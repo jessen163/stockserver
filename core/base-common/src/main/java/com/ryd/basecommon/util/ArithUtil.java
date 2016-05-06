@@ -14,7 +14,7 @@ public class ArithUtil {
 
     private static final int DEF_DIV_SCALE=10;
 
-    private static final DecimalFormat df = new DecimalFormat("0.00");
+    public static final DecimalFormat df = new DecimalFormat("0.00");
 
     private ArithUtil(){}
 
@@ -77,7 +77,7 @@ public class ArithUtil {
         }
         BigDecimal rs = b1.multiply(b2);
 
-        return new BigDecimal(df.format(rs));
+        return rs;
     }
 
     /**
