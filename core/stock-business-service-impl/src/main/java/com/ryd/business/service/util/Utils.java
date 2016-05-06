@@ -22,29 +22,42 @@ public class Utils {
      * @param quotePrice
      * @param amount
      * @param type
-     * @param commissionPercent //佣金比例
-     * @param taxPercent //税比例
+     * @param commissionPercentStr //佣金比例
+     * @param taxPercentStr //税比例
+     * @param minCommissionFeeStr //最小佣金
+     * @param minTaxPercentStr //最小税
      * @return rsArr[0] 佣金 rsArr[1] 资金数额 rsArr[2] 印花税
      */
-    public static BigDecimal[] calculate(BigDecimal quotePrice, long amount, short type, String commissionPercent, String taxPercent) {
+    public static BigDecimal[] calculate(BigDecimal quotePrice, long amount, short type, String commissionPercentStr, String taxPercentStr, String minCommissionFeeStr, String minTaxFeeStr) {
 
         BigDecimal[] rsArr = new BigDecimal[3];
+        BigDecimal minCommissionFee = new BigDecimal(minCommissionFeeStr);
+        BigDecimal minTaxFee = new BigDecimal(minTaxFeeStr);
+        BigDecimal commissionPercent = new BigDecimal(commissionPercentStr);
+        BigDecimal taxPercent = new BigDecimal(taxPercentStr);
 
-        BigDecimal volMoney = ArithUtil.multiply(quotePrice, new BigDecimal(amount));
+        BigDecimal volMoney = ArithUtil.multiply(quotePrice, BigDecimal.valueOf(amount));
         //计算佣金
-        rsArr[0] = ArithUtil.multiply(volMoney, new BigDecimal(commissionPercent));
+        BigDecimal commisstionFee = ArithUtil.multiply(volMoney, commissionPercent);
 
+        //如果佣金小于最小佣金，取最小佣金值
+        if(ArithUtil.compare(commisstionFee, minCommissionFee) == -1){
+            commisstionFee = minCommissionFee;
+        }
+        rsArr[0] = commisstionFee;
         //买股票
         if (type == ApplicationConstants.STOCK_QUOTETYPE_BUY.shortValue()) {
 
-            rsArr[1] = ArithUtil.add(volMoney, rsArr[0]);
+            rsArr[1] = ArithUtil.add(volMoney, commisstionFee);
 
         }else if (type == ApplicationConstants.STOCK_QUOTETYPE_SELL.shortValue()) {//卖股票
             //计算印花税
-            BigDecimal taxFee =  ArithUtil.multiply(volMoney,  new BigDecimal(taxPercent));
-
-            rsArr[1] =  ArithUtil.subtract(volMoney, ArithUtil.add(rsArr[0], taxFee));
-
+            BigDecimal taxFee =  ArithUtil.multiply(volMoney,  taxPercent);
+            //如果印花税小于最小印花税，取最小印花税值
+            if(ArithUtil.compare(taxFee, minTaxFee) == -1){
+                taxFee = minTaxFee;
+            }
+            rsArr[1] =  ArithUtil.subtract(volMoney, ArithUtil.add(commisstionFee, taxFee));
             rsArr[2] = taxFee;
         }else{}
 

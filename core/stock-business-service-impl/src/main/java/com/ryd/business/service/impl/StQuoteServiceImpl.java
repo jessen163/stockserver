@@ -13,6 +13,7 @@ import com.ryd.business.model.StStock;
 import com.ryd.business.service.*;
 import com.ryd.business.service.thread.GenerateSimulationQuoteThread;
 import com.ryd.business.service.util.BusinessConstants;
+import com.ryd.business.service.util.Utils;
 import com.ryd.cache.service.ICacheService;
 import com.ryd.messagequeue.service.IMessageQueue;
 import com.ryd.system.service.StDateScheduleService;
@@ -128,14 +129,16 @@ public class StQuoteServiceImpl implements StQuoteService {
                 //买股票
                 if (quote.getQuoteType().shortValue() == ApplicationConstants.STOCK_QUOTETYPE_BUY.shortValue()) {
 
-                    BigDecimal money = ArithUtil.multiply(quote.getQuotePrice(), new BigDecimal(quote.getAmount().toString()));
                     //佣金比例
                     String commissionPercent = stSystemParamService.getParamByKey(CacheConstant.CACHEKEY_SYSTEM_COMMINSSION_PERCENT);
-                    //计算佣金
-                    BigDecimal commissionFee = ArithUtil.multiply(money, new BigDecimal(commissionPercent));
+                    //最小佣金值
+                    String minCommissionFee = stSystemParamService.getParamByKey(CacheConstant.CACHEKEY_SYSTEM_CONFIG_COMMISIONFEE_MIN);
 
-                    quote.setFrozeMoney(ArithUtil.add(money, commissionFee));
-                    quote.setCommissionFee(commissionFee);
+                    //买家购买股票消费资产
+                    BigDecimal[] rsArr = Utils.calculate(quote.getQuotePrice(), quote.getAmount(), quote.getQuoteType(), commissionPercent, null, minCommissionFee, null);
+
+                    quote.setFrozeMoney(ArithUtil.scale(rsArr[1]));
+                    quote.setCommissionFee(ArithUtil.scale(rsArr[0]));
                     //买家减少资产
                     rs = stAccountService.updateStAccountMoneyReduce(quote.getAccountId(), quote.getFrozeMoney());
 
@@ -469,7 +472,7 @@ public class StQuoteServiceImpl implements StQuoteService {
                     quote.setUserType(ApplicationConstants.ACCOUNT_TYPE_VIRTUAL); // 马甲用户
                     quote.setQuoteType(simulationQuoteDTO.getQuoteType());
                     quote.setAmount(simulationQuoteDTO.getAmount());
-                    quote.setQuotePrice(new BigDecimal(ArithUtil.df.format(simulationQuoteDTO.getQuotePrice())));
+                    quote.setQuotePrice(ArithUtil.scale(BigDecimal.valueOf(simulationQuoteDTO.getQuotePrice())));
                     quote.setQuoteId(UUIDUtils.uuidTrimLine());
                     quote.setDateTime(simulationQuoteDTO.getDateTime());
                     // 用于排序的字段
