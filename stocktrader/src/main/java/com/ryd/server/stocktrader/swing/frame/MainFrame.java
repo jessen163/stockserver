@@ -264,7 +264,9 @@ public class MainFrame extends JFrame {
         
         JPanel panelContainer = new JPanel();
 
-        setSize(880, 650);
+		Toolkit kit = Toolkit.getDefaultToolkit(); //定义工具包
+		Dimension screenSize = kit.getScreenSize(); //获取屏幕的尺寸
+        setSize(screenSize.width, screenSize.height-30);
 		setLayout(new BorderLayout());
 		add(topPanel, BorderLayout.NORTH);
 		add(middlePanel, BorderLayout.CENTER);

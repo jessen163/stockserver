@@ -38,7 +38,9 @@ public class RecordListDialog extends JDialog {
 	public RecordListDialog() {
 		super(MainFrame.instance(), "成交记录列表", true);
 		setLayout(new BorderLayout());
-		setSize(800, 450);
+		Toolkit kit = Toolkit.getDefaultToolkit(); //定义工具包
+		Dimension screenSize = kit.getScreenSize(); //获取屏幕的尺寸
+		setSize(screenSize.width - 10, screenSize.height - 30);
 		setLocationRelativeTo(null);
         setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 
