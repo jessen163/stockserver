@@ -68,8 +68,8 @@ public class ParamBuilderUtil {
         builder.setSellFourAmount(stStock.getSellFourAmount().intValue());
         builder.setSellFivePrice(stStock.getSellFivePrice().doubleValue());
         builder.setSellFiveAmount(stStock.getSellFiveAmount().intValue());
-//        builder.setStockDate(DateUtils.formatDateToStr(stStock.getStockDate(), DateUtils.DATE_FORMAT));
-//        builder.setStockTime(DateUtils.formatDateToStr(stStock.getStockTime(), "HH:mm:ss"));
+        builder.setStockDate(DateUtils.formatDateToStr(stStock.getStockDate(), DateUtils.DATE_FORMAT));
+        builder.setStockTime(DateUtils.formatDateToStr(stStock.getStockTime(), "HH:mm:ss"));
 
         return builder;
     }
@@ -121,9 +121,9 @@ public class ParamBuilderUtil {
         pbuilder.setStockName("");
         pbuilder.setAccountId(sp.getAccountId());
 //      pbuilder.setStockPrice();
-        pbuilder.setAmount(sp.getAmount().intValue());
-        pbuilder.setMarketAmount(sp.getMarketAmount().intValue());
-        pbuilder.setAvgPrice(sp.getAvgPrice().doubleValue());
+        pbuilder.setAmount(sp.getAmount() == null ? 0 : sp.getAmount().intValue());
+        pbuilder.setMarketAmount(sp.getMarketAmount() == null ? 0 : sp.getMarketAmount().intValue());
+        pbuilder.setAvgPrice(sp.getAvgPrice() == null ? 0 : sp.getAvgPrice().doubleValue());
         pbuilder.setStatus(sp.getStatus().intValue());
         pbuilder.setPositionId(sp.getPositionId());
 
@@ -142,13 +142,13 @@ public class ParamBuilderUtil {
         qbuiler.setStockName("");
         qbuiler.setAccountId(q1.getAccountId());
         qbuiler.setQuoteId(q1.getQuoteId());
-        qbuiler.setStockPrice(q1.getQuotePrice().doubleValue());
+        qbuiler.setStockPrice(q1.getQuotePrice() == null ? 0 : q1.getQuotePrice().doubleValue());
         qbuiler.setQuoteType(q1.getQuoteType());
-        qbuiler.setAmount(q1.getAmount().intValue());
-        qbuiler.setCurrentAmount(q1.getCurrentAmount().intValue());
+        qbuiler.setAmount(q1.getAmount() == null ? 0 : q1.getAmount().intValue());
+        qbuiler.setCurrentAmount(q1.getCurrentAmount() == null ? 0 : q1.getCurrentAmount().intValue());
         qbuiler.setStatus(q1.getStatus());
-        qbuiler.setFrozeMoney(q1.getFrozeMoney().doubleValue());
-        qbuiler.setCommissionFee(q1.getCommissionFee().doubleValue());
+        qbuiler.setFrozeMoney(q1.getFrozeMoney() == null ? 0 : q1.getFrozeMoney().doubleValue());
+        qbuiler.setCommissionFee(q1.getCommissionFee() == null ? 0 : q1.getCommissionFee().doubleValue());
         qbuiler.setDateTime(q1.getDateTime());
 
         return qbuiler;
@@ -169,11 +169,11 @@ public class ParamBuilderUtil {
         tbuiler.setAmount(r1.getAmount().intValue());
         if(accountId.equals(r1.getSellerAccountId())){
             tbuiler.setDealType(ApplicationConstants.STOCK_QUOTETYPE_SELL);
-            tbuiler.setDealFee(r1.getSellFee().doubleValue());
-            tbuiler.setDealTax(r1.getDealTax().doubleValue());
+            tbuiler.setDealFee(r1.getSellFee() == null ? 0 : r1.getSellFee().doubleValue());
+            tbuiler.setDealTax(r1.getDealTax() == null ? 0 : r1.getDealTax().doubleValue());
         } else {
             tbuiler.setDealType(ApplicationConstants.STOCK_QUOTETYPE_BUY);
-            tbuiler.setDealFee(r1.getBuyFee().doubleValue());
+            tbuiler.setDealFee(r1.getBuyFee() == null ? 0 : r1.getBuyFee().doubleValue());
         }
 
         tbuiler.setDealDate(DateUtils.formatLongToStr(r1.getDateTime(), DateUtils.DATE_FORMAT));
@@ -193,13 +193,13 @@ public class ParamBuilderUtil {
         mbuiler.setAccountId(journal.getAccountId());
         mbuiler.setStockCode(journal.getStockId());
         mbuiler.setStockName("");
-        mbuiler.setStockPrice(journal.getQuotePrice().doubleValue());
-        mbuiler.setAmount(journal.getAmount().intValue());
-        mbuiler.setDealType(journal.getDealType().intValue());
-        mbuiler.setDealMoney(journal.getDealMoney().doubleValue());
-        mbuiler.setDealFee(journal.getDealFee().doubleValue());
+        mbuiler.setStockPrice(journal.getQuotePrice() == null ? 0 : journal.getQuotePrice().doubleValue());
+        mbuiler.setAmount(journal.getAmount() == null ? 0 : journal.getAmount().intValue());
+        mbuiler.setDealType(journal.getDealType() == null ? 1 : journal.getDealType().intValue());
+        mbuiler.setDealMoney(journal.getDealMoney() == null ? 0 : journal.getDealMoney().doubleValue());
+        mbuiler.setDealFee(journal.getDealFee()==null?0 : journal.getDealFee().doubleValue());
         if(journal.getDealType() == ApplicationConstants.STOCK_QUOTETYPE_SELL) {
-            mbuiler.setDealTax(journal.getDealTax().doubleValue());
+            mbuiler.setDealTax(journal.getDealTax()==null?0:journal.getDealTax().doubleValue());
         }
         mbuiler.setDealDate(DateUtils.formatLongToStr(journal.getDateTime(), DateUtils.DATE_FORMAT));
         mbuiler.setDealTime(DateUtils.formatLongToStr(journal.getDateTime(), "HH:mm:ss"));
