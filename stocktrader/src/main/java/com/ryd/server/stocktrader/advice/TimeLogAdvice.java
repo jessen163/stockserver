@@ -80,6 +80,7 @@ public class TimeLogAdvice {
 //        logger.debug("耗时：" + (end-start) + "ms");
         if ((end-start)/1000>1) {
             logger.warn(pjp.getTarget().getClass()+":"+pjp.getSignature().getName()+" 耗时超过(待优化)："+(end-start)+"ms");
+            System.out.println(pjp.getTarget().getClass()+":"+pjp.getSignature().getName()+" 耗时超过(待优化)："+(end-start)+"ms");
         }
 //        logger.debug(pjp.getSignature().getName()+" 返回值：" + retVal);
         return retVal;
