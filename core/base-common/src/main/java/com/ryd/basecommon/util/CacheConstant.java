@@ -41,6 +41,12 @@ public class CacheConstant {
     // 缓存key-系统配置参数信息-股市结算时间
     public static final String CACHEKEY_SYSTEM_CONFIG_SETTLE_TIME  = "stockMarketSettleTime";
 
+    // 缓存key-系统配置参数信息-佣金最小值
+    public static final String CACHEKEY_SYSTEM_CONFIG_COMMISIONFEE_MIN  = "minCommisionFee";
+
+    // 缓存key-系统配置参数信息-印花税最小值
+    public static final String CACHEKEY_SYSTEM_CONFIG_TAXFEE_MIN  = "minTaxFee";
+
     // 缓存key-节假日
     public static final String CACHEKEY_DATE_SCHEDULE_FESTIVALDAY  = "dateScheduleFestivalDayList";
 
