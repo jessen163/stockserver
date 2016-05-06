@@ -146,12 +146,12 @@ public class StTradeRecordServiceImpl implements StTradeRecordService {
 
             //佣金比例
             String commissionPercent = stSystemParamService.getParamByKey(CacheConstant.CACHEKEY_SYSTEM_COMMINSSION_PERCENT);
-            //计算佣金
-            BigDecimal commissionFee = null;
-            //减掉佣金和税
-            BigDecimal rsMoney = null;
 
-            Utils.calculate(buyQuote.getQuotePrice(), remainAmount, buyQuote.getQuoteType(), commissionPercent, null, rsMoney, commissionFee, null);
+            BigDecimal[] rsArr = Utils.calculate(buyQuote.getQuotePrice(), remainAmount, buyQuote.getQuoteType(), commissionPercent, null);
+            //计算佣金
+            BigDecimal commissionFee = rsArr[0];
+            //减掉佣金和税
+            BigDecimal rsMoney = rsArr[1];
 
             buyQuote.setFrozeMoney(rsMoney);
             buyQuote.setCommissionFee(commissionFee);
@@ -216,17 +216,16 @@ public class StTradeRecordServiceImpl implements StTradeRecordService {
         String taxPercent = stSystemParamService.getParamByKey(CacheConstant.CACHEKEY_SYSTEM_CONFIG_TAX_PERCENT);
 
         //买家购买股票消费资产
-        BigDecimal buyerCommissionFee = null;
-        BigDecimal buyerCostMoney = null;
-        Utils.calculate(tradeStockQuotePrice, tradeStockAmount, buyQuote.getQuoteType(), commissionPercent, null, buyerCostMoney, buyerCommissionFee, null);
+        BigDecimal[] brsArr = Utils.calculate(tradeStockQuotePrice, tradeStockAmount, buyQuote.getQuoteType(), commissionPercent, null);
+        BigDecimal buyerCommissionFee = brsArr[0];
+        BigDecimal buyerCostMoney = brsArr[1];
 
         //卖家新增费用计算
-        BigDecimal sellerCommissionFee = null;
-        BigDecimal taxFee = null;
+        BigDecimal[] srsArr = Utils.calculate(tradeStockQuotePrice, tradeStockAmount, sellQuote.getQuoteType(), commissionPercent, taxPercent);
+        BigDecimal sellerCommissionFee = srsArr[0];
+        BigDecimal taxFee = srsArr[2];
         //减掉佣金和税
-        BigDecimal sellerGetMoney = null;
-
-        Utils.calculate(tradeStockQuotePrice, tradeStockAmount, sellQuote.getQuoteType(), commissionPercent, taxPercent, sellerGetMoney, sellerCommissionFee, taxFee);
+        BigDecimal sellerGetMoney = srsArr[1];
 
         //交易成功，交易卖家资产增加
         srs = stAccountService.updateStAccountMoneyAdd(sellQuote.getAccountId(), sellerGetMoney);
@@ -324,14 +323,16 @@ public class StTradeRecordServiceImpl implements StTradeRecordService {
 
                 //节省成本
                 BigDecimal saveMoney = null;
-                //以买家报价计算交易成本
-                BigDecimal buyCost = null;
+
                 //佣金比例
                 String commissionPercent = stSystemParamService.getParamByKey(CacheConstant.CACHEKEY_SYSTEM_COMMINSSION_PERCENT);
-                Utils.calculate(buyQuote.getQuotePrice(), tradeStockAmount, buyQuote.getQuoteType(), commissionPercent, null, buyCost, null, null);
+                BigDecimal[] brsArr = Utils.calculate(buyQuote.getQuotePrice(), tradeStockAmount, buyQuote.getQuoteType(), commissionPercent, null);
+                //以买家报价计算交易成本
+                BigDecimal buyCost = brsArr[1];
+
+                BigDecimal[] drsArr = Utils.calculate(tradeStockQuotePrice, tradeStockAmount, buyQuote.getQuoteType(), commissionPercent, null);
                 //以交易价格计算交易成本
-                BigDecimal dealCost = null;
-                Utils.calculate(tradeStockQuotePrice, tradeStockAmount, buyQuote.getQuoteType(), commissionPercent, null, dealCost, null, null);
+                BigDecimal dealCost = drsArr[1];
 
                 //节省成本
                 saveMoney = ArithUtil.subtract(buyCost, dealCost);
