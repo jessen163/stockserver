@@ -23,6 +23,24 @@
   </select>
   <select id="selectListByKeySelective" resultType="java.util.List" resultMap="BaseResultMap">
     select * from st_settle_record
+    <trim prefix="WHERE" prefixOverrides="AND|OR">
+      <if test="record.settleAccountId != null and record.settleAccountId != ''" >
+        settle_account_id = #{record.settleAccountId,jdbcType=CHAR}
+      </if>
+      <if test="record.stockId != null and record.stockId != ''" >
+        and stock_id = #{record.stockId,jdbcType=CHAR}
+      </if>
+      <if test="record.dealType != null" >
+        and deal_type = #{record.dealType,jdbcType=SMALLINT}
+      </if>
+      <if test="startTime != null" >
+        and date_time &gt;= #{startTime,jdbcType=BIGINT}
+      </if>
+      <if test="endTime != null" >
+        and date_time &lt;= #{endTime,jdbcType=BIGINT}
+      </if>
+    </trim>
+    order by date_time desc
     limit #{offset, jdbcType=INTEGER},#{limit, jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">

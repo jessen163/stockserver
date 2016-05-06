@@ -50,6 +50,7 @@
         and date_time &lt;= #{endTime,jdbcType=BIGINT}
       </if>
     </trim>
+    order by date_time desc
     limit #{offset, jdbcType=INTEGER},#{limit, jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
