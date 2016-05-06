@@ -10,25 +10,20 @@ import com.ryd.business.dto.StTradeQueueDTO;
 import com.ryd.business.exception.QuoteBusinessException;
 import com.ryd.business.model.StQuote;
 import com.ryd.business.model.StStock;
-import com.ryd.business.model.StStockConfig;
 import com.ryd.business.service.*;
 import com.ryd.business.service.thread.GenerateSimulationQuoteThread;
-import com.ryd.business.service.thread.SyncStockThread;
 import com.ryd.business.service.util.BusinessConstants;
-import com.ryd.business.service.util.Utils;
 import com.ryd.cache.service.ICacheService;
+import com.ryd.messagequeue.service.IMessageQueue;
 import com.ryd.system.service.StDateScheduleService;
 import com.ryd.system.service.StSystemParamService;
-import org.apache.commons.lang.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.File;
 import java.math.BigDecimal;
 import java.util.*;
-import java.util.concurrent.ConcurrentSkipListMap;
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.concurrent.*;
 
 /**
  * <p>标题:报价业务实现类</p>
@@ -55,6 +50,8 @@ public class StQuoteServiceImpl implements StQuoteService {
     private StStockConfigService stStockConfigService;
     @Autowired
     private ICacheService iCacheService;
+    @Autowired
+    private IMessageQueue iMessageQueue;
 
     @Override
     public StQuote findQuoteById(StQuote quote) {
@@ -447,25 +444,6 @@ public class StQuoteServiceImpl implements StQuoteService {
      */
     private boolean removeByQuote(StQuote quote) {
         return deleteQuoteFromQueue(quote);
-        /*ConcurrentSkipListMap<Long, StQuote> quoteQueueList = null;
-        Object quoteobj = null;
-        if (quote.getQuoteType().intValue() == ApplicationConstants.STOCK_QUOTETYPE_BUY) {
-            quoteobj = iCacheService.getObjectByKey(CacheConstant.CACHEKEY_STOCK_QUOTE_BUYQUEUE, quote.getStockId(), null);
-        } else if (quote.getQuoteType().intValue() == ApplicationConstants.STOCK_QUOTETYPE_SELL){
-            quoteobj = iCacheService.getObjectByKey(CacheConstant.CACHEKEY_STOCK_QUOTE_SELLQUEUE, quote.getStockId(), null);
-        }
-        StQuote stQuote = null;
-        if (quoteobj!=null) {
-            quoteQueueList = (ConcurrentSkipListMap<Long, StQuote>) quoteobj;
-            stQuote = quoteQueueList.remove(Utils.getQuoteKeyByQuote(quote));
-        }
-
-        if (quote.getQuoteType().intValue() == ApplicationConstants.STOCK_QUOTETYPE_BUY) {
-            iCacheService.setObjectByKey(CacheConstant.CACHEKEY_STOCK_QUOTE_BUYQUEUE, quote.getStockId(), quoteQueueList, 8 * 60 * 60);
-        } else if (quote.getQuoteType().intValue() == ApplicationConstants.STOCK_QUOTETYPE_SELL){
-            iCacheService.setObjectByKey(CacheConstant.CACHEKEY_STOCK_QUOTE_SELLQUEUE, quote.getStockId(), quoteQueueList, 8 * 60 * 60);
-        }
-        return stQuote==null?false:true;*/
     }
 
     @Override
@@ -475,12 +453,15 @@ public class StQuoteServiceImpl implements StQuoteService {
         // 3、多线程生成马甲订单
         long simulationCount = 0;
         List<StQuote> newStQuoteList = new ArrayList<StQuote>();
+        BlockingQueue<Runnable> quoteQueue = new LinkedBlockingQueue<Runnable>();
+        ThreadPoolExecutor quoteService = new ThreadPoolExecutor(50, 50, 1, TimeUnit.MINUTES, quoteQueue);
         for (String stockCode : BusinessConstants.simulateQuoteMap.keySet()) {
             List<SimulationQuoteDTO> simulationQuoteDTOList = BusinessConstants.simulateQuoteMap.get(stockCode);
             if (!StringUtils.isEmpty(simulationQuoteDTOList)) {
                 List<StQuote> stQuoteList = new ArrayList<StQuote>();
                 for (SimulationQuoteDTO simulationQuoteDTO : simulationQuoteDTOList) {
                     StQuote quote = new StQuote();
+                    quote.setQuoteId(UUIDUtils.uuidTrimLine());
                     quote.setAccountId("800891cdc704462ab0c2335460a91684");
                     String stockId = stStockConfigService.getStockIdByStockCode(stockCode);
                     quote.setStockId(stockId);
@@ -498,6 +479,8 @@ public class StQuoteServiceImpl implements StQuoteService {
                     quote.setCurrentAmount(quote.getAmount());
                     quote.setStatus(ApplicationConstants.STOCK_STQUOTE_STATUS_TRUSTEE);
                     stQuoteList.add(quote);
+//                    iMessageQueue.sendMessage(ApplicationConstants.PUSHMESSAGE_SIMULATIONQUOTE, FileUtils.objectToByte(quote));
+                    quoteService.execute(new GenerateSimulationQuoteThread(iMessageQueue, quote));
                 }
                 newStQuoteList.addAll(stQuoteList);
                 stQuoteList.clear();
