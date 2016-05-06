@@ -38,6 +38,15 @@ public interface StPositionService {
     public boolean updatePositionAdd(String accountId, String stockId, Long amount) throws Exception;
 
     /**
+     * 增加仓位-撤单
+     * @param accountId
+     * @param stockId
+     * @param amount
+     * @return
+     */
+    public boolean updatePositionRevokeAdd(String accountId, String stockId, Long amount) throws Exception;
+
+    /**
      * 减仓
      * @param accountId
      * @param stockId
