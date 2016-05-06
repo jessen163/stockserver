@@ -98,6 +98,11 @@ public class StQuoteServiceImpl implements StQuoteService {
             }
             // 价格是否匹配涨跌幅
             for (StQuote quote: quoteList) {
+
+                if(quote.getAmount()%100 == 1){
+                    //数量必须为100的整数倍
+                    return -3;
+                }
                 SearchStockDTO sdto = new SearchStockDTO();
                 sdto.setStockId(quote.getStockId());
                 StStock stock = stStockService.findStockListByStock(sdto);
@@ -108,7 +113,7 @@ public class StQuoteServiceImpl implements StQuoteService {
                 quote.setStockCode(stock.getStockCode());
                 if (!isStockQuotePriceInScope(BigDecimal.valueOf(stock.getBfclosePrice()), quote.getQuotePrice())) {
                     // 超出涨跌幅
-                    return -3;
+                    return -4;
                 }
                 if (quote.getDateTime()==null||quote.getDateTime()==0L) {
                     quote.setDateTime(System.currentTimeMillis());
