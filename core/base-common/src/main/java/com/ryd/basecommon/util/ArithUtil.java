@@ -120,7 +120,7 @@ public class ArithUtil {
 
     public static int compare(BigDecimal b1,BigDecimal b2){
         if(b1==null || b2==null){
-            return -1;
+            return -3;
         }
         return b1.compareTo(b2);
     }
