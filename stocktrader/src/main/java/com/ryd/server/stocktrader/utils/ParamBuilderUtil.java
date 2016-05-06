@@ -99,8 +99,9 @@ public class ParamBuilderUtil {
         accbuilder.setRealName(stAcc.getRealName());
         accbuilder.setAccountName(stAcc.getAccountName());
         accbuilder.setAccountNum(stAcc.getAccountNum());
-        accbuilder.setTotalAssets(stAcc.getTotalAssets().longValue());
-        accbuilder.setUseMoney(stAcc.getUseMoney().intValue());
+        accbuilder.setPassword(stAcc.getPassword());
+        accbuilder.setTotalAssets(stAcc.getTotalAssets() == null ? 0 : stAcc.getTotalAssets().doubleValue());
+        accbuilder.setUseMoney(stAcc.getUseMoney() == null ? 0 : stAcc.getUseMoney().doubleValue());
         accbuilder.setAccountLevel(stAcc.getAccountLevel());
         accbuilder.setMobile(stAcc.getMobile());
         accbuilder.setSex(stAcc.getSex());
@@ -166,7 +167,8 @@ public class ParamBuilderUtil {
         tbuiler.setAccountId(accountId);
         tbuiler.setStockCode(r1.getStockId());
         tbuiler.setStockName("");
-        tbuiler.setAmount(r1.getAmount().intValue());
+        tbuiler.setAmount(r1.getAmount()==null?0:r1.getAmount().intValue());
+        tbuiler.setStockPrice(r1.getQuotePrice() == null ? 0 : r1.getQuotePrice().doubleValue());
         if(accountId.equals(r1.getSellerAccountId())){
             tbuiler.setDealType(ApplicationConstants.STOCK_QUOTETYPE_SELL);
             tbuiler.setDealFee(r1.getSellFee() == null ? 0 : r1.getSellFee().doubleValue());

@@ -32,7 +32,7 @@ public class QuoteCancelListener extends MouseAdapter implements ActionListener 
 
 		int selectedRow = table.getSelectedRow();
 		if (selectedRow != -1) {
-			String quoteId = (String) table.getValueAt(selectedRow,7);
+			String quoteId = (String) table.getValueAt(selectedRow,8);
 
 			DiyNettyMessage.NettyMessage.Builder builder = TestParamBuilderUtil.getRevoke(quoteId, ClientConstants.stAccount.getId());
 			MessageServiceImpl.sendMessage(builder.build());

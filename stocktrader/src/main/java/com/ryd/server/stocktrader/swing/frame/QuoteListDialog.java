@@ -96,7 +96,7 @@ public class QuoteListDialog extends JDialog {
 		table.removeAll();
 		DefaultTableModel tableModel = new DefaultTableModel(ListToArray.quoteListToArray(stQuoteList), columnName);
 		table.setModel(tableModel);
-		hideColumn(table,7);
+		hideColumn(table,8);
 	}
 
 	/**

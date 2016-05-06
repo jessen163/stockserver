@@ -153,7 +153,7 @@ public class ParamBuilderDtoUtil {
         StTradeRecord tbuiler = new StTradeRecord();
         tbuiler.setStockId(r1.getStockCode());
         tbuiler.setAmount((long) r1.getAmount());
-        tbuiler.setQuotePrice(BigDecimal.valueOf(r1.getDealMoney()));
+        tbuiler.setQuotePrice(BigDecimal.valueOf(r1.getStockPrice()));
         if(r1.getDealType()==ApplicationConstants.STOCK_QUOTETYPE_BUY){
             tbuiler.setBuyerAccountId(r1.getAccountId());
             tbuiler.setBuyFee(BigDecimal.valueOf(r1.getDealFee()));
