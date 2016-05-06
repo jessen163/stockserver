@@ -398,16 +398,22 @@ public class StQuoteServiceImpl implements StQuoteService {
 
     @Override
     public boolean deleteQuoteFromQueue(StQuote quote) {
+        String stockCode = stStockConfigService.getStockCodeByStockId(quote.getStockId());
+        if (StringUtils.isEmpty(stockCode)) {
+            return false;
+        }
         // 从队列中删除报价，同时修改报价状态
-        StTradeQueueDTO tradeQueueDTO = BusinessConstants.stTradeQueueMap.get(quote.getStockId());
+        StTradeQueueDTO tradeQueueDTO = BusinessConstants.stTradeQueueMap.get(stockCode);
         if (tradeQueueDTO==null) {
             return false;
         }
+        boolean isRemove = false;
         if (quote.getQuoteType() == ApplicationConstants.STOCK_QUOTETYPE_BUY) {
-            tradeQueueDTO.removeBuyStQuote(quote);
+            isRemove = tradeQueueDTO.removeBuyStQuote(quote);
         } else {
-            tradeQueueDTO.removeSellStQuote(quote);
+            isRemove = tradeQueueDTO.removeSellStQuote(quote);
         }
+        if (!isRemove) return false;
         BusinessConstants.stTradeQueueMap.put(quote.getStockCode(), tradeQueueDTO);
 
         /*Object quoteobj = null;
@@ -483,7 +489,7 @@ public class StQuoteServiceImpl implements StQuoteService {
                     quote.setStatus(ApplicationConstants.STOCK_STQUOTE_STATUS_TRUSTEE);
                     stQuoteList.add(quote);
 //                    iMessageQueue.sendMessage(ApplicationConstants.PUSHMESSAGE_SIMULATIONQUOTE, FileUtils.objectToByte(quote));
-                    quoteService.execute(new GenerateSimulationQuoteThread(iMessageQueue, quote));
+//                    quoteService.execute(new GenerateSimulationQuoteThread(iMessageQueue, quote));
                 }
                 newStQuoteList.addAll(stQuoteList);
                 stQuoteList.clear();
