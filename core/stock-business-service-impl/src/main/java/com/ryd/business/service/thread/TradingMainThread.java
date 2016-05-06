@@ -32,11 +32,11 @@ public class TradingMainThread implements Runnable {
         while (!ApplicationConstants.isMainThreadStop) {
 //            System.out.println("TradingMainThread is Running!");
             try {
-                List<String> stockIdList = stQuoteService.findQuoteStockIdList();
-                if (!StringUtils.isEmpty(stockIdList)) {
-                    for (String stockId: stockIdList) {
+                List<String> stockCodeList = stQuoteService.findQuoteStockIdList();
+                if (!StringUtils.isEmpty(stockCodeList)) {
+                    for (String stockCode: stockCodeList) {
                         // 分线程执行报价交易
-                        executorService.execute(new TradingSubThread(stockId, stQuoteService, stTradeRecordService));
+                        executorService.execute(new TradingSubThread(stockCode, stQuoteService, stTradeRecordService));
                     }
                 }
                 // 等待

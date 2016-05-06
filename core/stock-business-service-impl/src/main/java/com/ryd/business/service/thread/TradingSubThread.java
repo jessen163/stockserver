@@ -14,11 +14,11 @@ import java.util.concurrent.TimeUnit;
  * Created by chenji on 2016/4/26.
  */
 public class TradingSubThread implements Runnable {
-    private String stockId;
+    private String stockCode;
     private StQuoteService stQuoteService;
     private StTradeRecordService stTradeRecordService;
-    public TradingSubThread(String stockId, StQuoteService stQuoteService, StTradeRecordService stTradeRecordService) {
-        this.stockId = stockId;
+    public TradingSubThread(String stockCode, StQuoteService stQuoteService, StTradeRecordService stTradeRecordService) {
+        this.stockCode = stockCode;
         this.stQuoteService = stQuoteService;
         this.stTradeRecordService = stTradeRecordService;
     }
@@ -34,7 +34,7 @@ public class TradingSubThread implements Runnable {
                 }
 //                System.out.println("TradingSubThread is Running!");
                 SearchQuoteDTO searchQuoteDTO = new SearchQuoteDTO();
-                searchQuoteDTO.setStockCode(stockId);
+                searchQuoteDTO.setStockCode(stockCode);
                 searchQuoteDTO.setQuoteType(ApplicationConstants.STOCK_QUOTETYPE_BUY);
                 StQuote buyQuote = stQuoteService.findFirstQuoteByStock(searchQuoteDTO);
                 searchQuoteDTO.setQuoteType(ApplicationConstants.STOCK_QUOTETYPE_SELL);
