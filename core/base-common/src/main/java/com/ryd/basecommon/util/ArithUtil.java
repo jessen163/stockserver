@@ -14,8 +14,6 @@ public class ArithUtil {
 
     private static final int DEF_DIV_SCALE=10;
 
-    public static final DecimalFormat df = new DecimalFormat("0.00");
-
     private ArithUtil(){}
 
     /**
@@ -125,6 +123,19 @@ public class ArithUtil {
             return -1;
         }
         return b1.compareTo(b2);
+    }
+
+    /**
+     * 取小数点后保留位数
+     * @param b1
+     * @return
+     */
+    public static BigDecimal scale(BigDecimal b1){
+        if(b1==null){
+            return null;
+        }
+        b1.setScale(2, BigDecimal.ROUND_HALF_UP);
+        return b1;
     }
 
 }
