@@ -1,6 +1,5 @@
 package com.ryd.business.service.impl;
 
-import com.ryd.basecommon.util.ApplicationConstants;
 import com.ryd.basecommon.util.CacheConstant;
 import com.ryd.basecommon.util.StringUtils;
 import com.ryd.business.dao.StStockDao;
@@ -17,9 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.*;
 
 /**
@@ -47,7 +44,7 @@ public class StStockServiceImpl implements StStockService {
     public boolean executeRealTimeStockInfo() {
 //        ExecutorService stockService = Executors.newFixedThreadPool(10);
         BlockingQueue<Runnable> stockQueue = new LinkedBlockingQueue<Runnable>();
-        ThreadPoolExecutor stockService = new ThreadPoolExecutor(50, 50, 1, TimeUnit.MINUTES, stockQueue);
+        ThreadPoolExecutor stockService = new ThreadPoolExecutor(20, 20, 1, TimeUnit.MINUTES, stockQueue);
         final CountDownLatch cdOrder = new CountDownLatch(1);//指挥官的命令，设置为1，指挥官一下达命令，则cutDown,变为0，战士们执行任务
 
         List<StStockConfig> list = stStockConfigService.findStockConfig(null, 1, Integer.MAX_VALUE);
