@@ -87,6 +87,26 @@ public class StStock implements Serializable,BuguEntity {
     private Date stockDate;
 
     private Date stockTime;
+    // 成交总量
+    private Long tradeTotalAmount;
+    // 成交总金额
+    private Double tradeTotalMoney;
+
+    public Long getTradeTotalAmount() {
+        return tradeTotalAmount;
+    }
+
+    public void setTradeTotalAmount(Long tradeTotalAmount) {
+        this.tradeTotalAmount = tradeTotalAmount;
+    }
+
+    public Double getTradeTotalMoney() {
+        return tradeTotalMoney;
+    }
+
+    public void setTradeTotalMoney(Double tradeTotalMoney) {
+        this.tradeTotalMoney = tradeTotalMoney;
+    }
 
     public String getStockId() {
         return stockId;

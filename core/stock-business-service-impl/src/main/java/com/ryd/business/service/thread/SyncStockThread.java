@@ -47,11 +47,13 @@ public class SyncStockThread implements Runnable {
         logger.info("更新股票实时信息.............start...........");
         try {
             cdOrder.await();
-            // 下载单只股票信息
+            // 下载股票价格信息
             String stockInfoStr = HttpclientUtil.doGet(ApplicationConstants.STOCK_SERVER_STOCKBASE_URL + stockCodeStr);
+            // 下载股票成交量信息
+            String stockInfoTurnoverStr = HttpclientUtil.doGet(ApplicationConstants.STOCK_SERVER_STOCKTURNOVER_URL + stockCodeStr);
 
             // 通过字符串转换成股票信息
-            List<StStock> stockList = getStockInfoByStr(stockCodeStr, stockInfoStr);
+            List<StStock> stockList = getStockInfoByStr(stockCodeStr, stockInfoStr, stockInfoTurnoverStr);
 
             // 保存股票价格等信息
             stStockService.saveStockBatch(stockList);
@@ -63,13 +65,16 @@ public class SyncStockThread implements Runnable {
         }
     }
 
-    private synchronized List<StStock> getStockInfoByStr(String stockCodeStr, String stockListStr) {
+    private synchronized List<StStock> getStockInfoByStr(String stockCodeStr, String stockListStr, String stockInfoTurnoverStr) {
         List<StStock> stockList = new ArrayList<StStock>();
 
         String[] stockCodeStrArr = stockCodeStr.split(",");
         String[] stockListStrArr = stockListStr.split(";\\n");
+        // 更新总成交量、总成交额
+        String[] stockInfoTurnoverStrArr = stockInfoTurnoverStr.split(";\\n");
         for (int i = 0; i < stockCodeStrArr.length; i++) {
             StStock stock = getStockByStr(stockCodeStrArr[i], stockListStrArr[i].trim());
+            stock = getStockMoreByStr(stockCodeStrArr[i], stockInfoTurnoverStrArr[i].trim());
             if (stock==null) {
                 System.out.println("异常股票代码：" + stockCodeStrArr[i]);
                 continue;
@@ -132,6 +137,36 @@ public class SyncStockThread implements Runnable {
 
             sts.setStockDate(DateUtils.formatStrToDate(sk[30], DateUtils.DATE_FORMAT));
             sts.setStockTime(DateUtils.formatStrToDate(sk[30] + " " + sk[31], DateUtils.TIME_FORMAT));
+            // 放入缓存 - TODO 放入kafka
+            BusinessConstants.tempStockPriceMap.put(sts.getStockCode(), sts);
+        }
+        return sts;
+    }
+
+    /**
+     * 更新总成交量、总成交额
+     * @param stockCode
+     * @param stockStr
+     * @return
+     */
+    private synchronized StStock getStockMoreByStr(String stockCode, String stockStr) {
+        if (stockStr==null) return null;
+        String[] s = stockStr.split("\"");
+        if (s==null || s.length!=2) return null;
+        String[] sk = null;
+        StStock sts = null;
+        StringBuilder bf = new StringBuilder();
+        if (!s[1].equals("")) {
+            bf.append(s[1]);
+            int n = bf.lastIndexOf(",");
+            String string = bf.substring(0, n);
+            sk = string.split(",");
+
+            if (sk==null || sk.length<32) return null;
+//            sts = new StStock();
+            sts = BusinessConstants.tempStockPriceMap.get(stockCode.substring(2));
+            sts.setTradeTotalAmount(Long.parseLong(sk[8]));
+            sts.setTradeTotalMoney(Double.parseDouble(sk[9]));
             // 放入缓存 - TODO 放入kafka
             BusinessConstants.tempStockPriceMap.put(sts.getStockCode(), sts);
         }
@@ -224,6 +259,9 @@ public class SyncStockThread implements Runnable {
 //        var hq_str_sz002228="合兴包装,17.12,17.20,17.39,17.46,17.02,17.39,17.40,2485525,42949625.05,8400,17.39,27900,17.38,17500,17.37,1500,17.36,6200,17.35,36466,17.40,5500,17.41,3300,17.42,11300,17.43,13500,17.44,2016-04-29,09:56:21,00";
 //        var hq_str_sh600071="凤凰光学,24.530,24.460,24.410,24.530,24.260,24.410,24.430,118888,2902524.000,1100,24.410,1900,24.400,3700,24.350,500,24.340,1100,24.330,4500,24.430,500,24.450,2700,24.460,450,24.490,13787,24.500,2016-04-29,09:56:21,00";
 //        var hq_str_sz002408="齐翔腾达,12.00,12.09,12.15,12.15,11.91,12.15,12.16,945701,11398848.00,8900,12.15,6300,12.13,2600,12.12,1900,12.11,900,12.10,400,12.16,3700,12.17,11900,12.18,15200,12.19,15900,12.20,2016-04-29,09:56:21,00";
+
+        String codeStrs = "波导股份,10.040,10.200,9.400,10.150,9.250,9.380,9.400,69662758,678776363.000,200,9.380,4500,9.370,6500,9.360,173250,9.350,400,9.340,40900,9.400,100,9.410,1500,9.420,2300,9.430,1100,9.440,2016-05-06,13:57:14,00";
+        System.out.println(codeStrs.split(",").length);
     }
 
 }
