@@ -74,7 +74,8 @@ public class SyncStockThread implements Runnable {
         String[] stockInfoTurnoverStrArr = stockInfoTurnoverStr.split(";\\n");
         for (int i = 0; i < stockCodeStrArr.length; i++) {
             StStock stock = getStockByStr(stockCodeStrArr[i], stockListStrArr[i].trim());
-            stock = getStockMoreByStr(stockCodeStrArr[i], stockInfoTurnoverStrArr[i].trim());
+            StStock stockTemp = getStockMoreByStr(stockCodeStrArr[i], stockInfoTurnoverStrArr[i].trim());
+            if (stockTemp != null) stock = stockTemp;
             if (stock==null) {
                 System.out.println("异常股票代码：" + stockCodeStrArr[i]);
                 continue;
@@ -165,10 +166,12 @@ public class SyncStockThread implements Runnable {
             if (sk==null || sk.length<32) return null;
 //            sts = new StStock();
             sts = BusinessConstants.tempStockPriceMap.get(stockCode.substring(2));
-            sts.setTradeTotalAmount(Long.parseLong(sk[8]));
-            sts.setTradeTotalMoney(Double.parseDouble(sk[9]));
-            // 放入缓存 - TODO 放入kafka
-            BusinessConstants.tempStockPriceMap.put(sts.getStockCode(), sts);
+            if (sts!=null) {
+                sts.setTradeTotalAmount(Long.parseLong(sk[8]));
+                sts.setTradeTotalMoney(Double.parseDouble(sk[9]));
+                // 放入缓存 - TODO 放入kafka
+                BusinessConstants.tempStockPriceMap.put(sts.getStockCode(), sts);
+            }
         }
         return sts;
     }
