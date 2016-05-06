@@ -3,6 +3,7 @@ package com.ryd.business.service.util;
 import com.ryd.basecommon.util.ApplicationConstants;
 import com.ryd.basecommon.util.ArithUtil;
 import com.ryd.basecommon.util.CacheConstant;
+import com.ryd.basecommon.util.StringUtils;
 import com.ryd.business.model.StQuote;
 
 import java.math.BigDecimal;
@@ -24,17 +25,15 @@ public class Utils {
      * @param type
      * @param commissionPercentStr //佣金比例
      * @param taxPercentStr //税比例
-     * @param minCommissionFeeStr //最小佣金
-     * @param minTaxPercentStr //最小税
+     * @param minCommissionFeeStr //最小佣金ee
+     * @param minTaxFeeStr //最小税
      * @return rsArr[0] 佣金 rsArr[1] 资金数额 rsArr[2] 印花税
      */
     public static BigDecimal[] calculate(BigDecimal quotePrice, long amount, short type, String commissionPercentStr, String taxPercentStr, String minCommissionFeeStr, String minTaxFeeStr) {
 
         BigDecimal[] rsArr = new BigDecimal[3];
-        BigDecimal minCommissionFee = new BigDecimal(minCommissionFeeStr);
-        BigDecimal minTaxFee = new BigDecimal(minTaxFeeStr);
-        BigDecimal commissionPercent = new BigDecimal(commissionPercentStr);
-        BigDecimal taxPercent = new BigDecimal(taxPercentStr);
+        BigDecimal minCommissionFee = formatStr2Decimal(minCommissionFeeStr);
+        BigDecimal commissionPercent = formatStr2Decimal(commissionPercentStr);
 
         BigDecimal volMoney = ArithUtil.multiply(quotePrice, BigDecimal.valueOf(amount));
         //计算佣金
@@ -51,6 +50,8 @@ public class Utils {
             rsArr[1] = ArithUtil.add(volMoney, commisstionFee);
 
         }else if (type == ApplicationConstants.STOCK_QUOTETYPE_SELL.shortValue()) {//卖股票
+            BigDecimal minTaxFee = formatStr2Decimal(minTaxFeeStr);
+            BigDecimal taxPercent = formatStr2Decimal(taxPercentStr);
             //计算印花税
             BigDecimal taxFee =  ArithUtil.multiply(volMoney,  taxPercent);
             //如果印花税小于最小印花税，取最小印花税值
@@ -79,5 +80,10 @@ public class Utils {
         }
 
         return quotePriceForSort;
+    }
+
+    private static BigDecimal formatStr2Decimal(String str){
+        if(StringUtils.isEmpty(str))return null;
+        return new BigDecimal(str);
     }
 }
