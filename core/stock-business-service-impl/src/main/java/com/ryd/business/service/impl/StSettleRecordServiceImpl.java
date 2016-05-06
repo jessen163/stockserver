@@ -50,8 +50,6 @@ public class StSettleRecordServiceImpl implements StSettleRecordService {
     public boolean updateStockSettling() throws Exception{
         //判断是否可以结算
        if(stDateScheduleService.getIsCanSettle()){
-           //仓位结算
-           stPositionService.updatePosition(1000);
            // 结算
            List<String> stockCodeList = stQuoteService.findQuoteStockIdList();
            for(String stockCode : stockCodeList) {
@@ -129,6 +127,8 @@ public class StSettleRecordServiceImpl implements StSettleRecordService {
                    this.addSettleRecorBatch(settlers);
                }
            }
+           //仓位结算
+           stPositionService.updatePosition(1000);
        }
         return true;
     }

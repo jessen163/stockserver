@@ -188,7 +188,7 @@ public class StQuoteServiceImpl implements StQuoteService {
                     rs = stAccountService.updateStAccountMoneyAdd(quote.getAccountId(),quote.getFrozeMoney());
                 } else if (quote.getQuoteType().intValue() == ApplicationConstants.STOCK_QUOTETYPE_SELL){
                     //撤回托管为卖的股票，持仓数量增加
-                    rs = stPositionService.updatePositionAdd(quote.getAccountId(), quote.getStockId(), quote.getCurrentAmount());
+                    rs = stPositionService.updatePositionRevokeAdd(quote.getAccountId(), quote.getStockId(), quote.getCurrentAmount());
                 }
                 if(rs){
                     //修改报价状态
