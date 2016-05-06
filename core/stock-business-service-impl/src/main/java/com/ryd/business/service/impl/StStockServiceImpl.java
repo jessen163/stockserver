@@ -89,6 +89,7 @@ public class StStockServiceImpl implements StStockService {
         BusinessConstants.stockPriceMap.putAll(BusinessConstants.tempStockPriceMap);
         System.out.println("股票实时价格-数量：" + BusinessConstants.stockPriceMap.size());
         iCacheService.setObjectByKey(CacheConstant.CACHEKEY_STOCK_PRICELIST, BusinessConstants.stockPriceMap);
+        iCacheService.setObjectByKey(CacheConstant.CACHEKEY_SIMULATIONQUOTELIST, BusinessConstants.simulateQuoteMap);
 //        iCacheService.setObjectByKey(CacheConstant.CACHEKEY_SIMULATIONQUOTELIST, BusinessConstants.simulateQuoteMap);
         stockService.shutdownNow();
         return true;
