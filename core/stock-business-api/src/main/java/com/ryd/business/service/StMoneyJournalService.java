@@ -19,7 +19,7 @@ public interface StMoneyJournalService {
      * @param moneyJournalList
      * @return
      */
-    public boolean saveMoneyJournalList(List<StMoneyJournal> moneyJournalList);
+    public boolean saveMoneyJournalList(List<StMoneyJournal> moneyJournalList) throws Exception;
 
     /**
      * 查询资金流水

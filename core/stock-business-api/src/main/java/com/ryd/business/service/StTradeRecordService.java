@@ -26,7 +26,7 @@ public interface StTradeRecordService {
      * @param record
      * @return
      */
-    public boolean addTradeRecord(StTradeRecord record);
+    public boolean addTradeRecord(StTradeRecord record) throws Exception;
     /**
      * 股票交易
      */
@@ -35,7 +35,7 @@ public interface StTradeRecordService {
     /**
      * 交易结算
      */
-    public void updateTradeSettling(StQuote buyQuote, StQuote sellQuote);
+    public void updateTradeSettling(StQuote buyQuote, StQuote sellQuote) throws Exception;
 
     /**
      * 查询单只股票的交易记录

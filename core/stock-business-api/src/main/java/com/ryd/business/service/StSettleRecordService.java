@@ -1,5 +1,9 @@
 package com.ryd.business.service;
 
+import com.ryd.business.model.StSettleRecord;
+
+import java.util.List;
+
 /**
  * <p>标题:结算Service</p>
  * <p>描述:</p>
@@ -11,6 +15,16 @@ public interface StSettleRecordService {
 
     /**
      * 股票结算
+     * @return
+     * @throws Exception
      */
-    public void updateStockSettling();
+    public boolean updateStockSettling() throws Exception;
+
+    /**
+     * 批量添加结算记录
+     * @param stSettleRecords
+     * @return
+     * @throws Exception
+     */
+    public boolean addSettleRecorBatch(List<StSettleRecord> stSettleRecords) throws Exception;
 }

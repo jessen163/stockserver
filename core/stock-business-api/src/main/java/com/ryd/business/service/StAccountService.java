@@ -35,7 +35,7 @@ public interface StAccountService {
      * @param money
      * @return
      */
-    public boolean updateStAccountMoneyAdd(String accountId, BigDecimal money);
+    public boolean updateStAccountMoneyAdd(String accountId, BigDecimal money) throws Exception;
 
     /**
      * 减少资产
@@ -43,7 +43,7 @@ public interface StAccountService {
      * @param money
      * @return
      */
-    public boolean updateStAccountMoneyReduce(String accountId, BigDecimal money);
+    public boolean updateStAccountMoneyReduce(String accountId, BigDecimal money) throws Exception;
 
     /**
      * 根据ID查询

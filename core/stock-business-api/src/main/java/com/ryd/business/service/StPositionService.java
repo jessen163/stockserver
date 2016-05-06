@@ -26,7 +26,7 @@ public interface StPositionService {
      * @param size 执行记录数
      * @return
      */
-    public boolean updatePosition(int size);
+    public boolean updatePosition(int size) throws Exception;
 
     /**
      * 增加仓位
@@ -35,7 +35,7 @@ public interface StPositionService {
      * @param amount
      * @return
      */
-    public boolean updatePositionAdd(String accountId, String stockId, Long amount);
+    public boolean updatePositionAdd(String accountId, String stockId, Long amount) throws Exception;
 
     /**
      * 减仓
@@ -44,7 +44,7 @@ public interface StPositionService {
      * @param amount
      * @return
      */
-    public boolean updatePositionReduce(String accountId, String stockId, Long amount);
+    public boolean updatePositionReduce(String accountId, String stockId, Long amount) throws Exception;
     /**
      * 查询仓位信息，接收参数
      * @param searchPositionDTO

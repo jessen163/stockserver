@@ -64,7 +64,7 @@ public interface StQuoteService {
      * @param quote
      * @return
      */
-    public Integer updateQuote(StQuote quote);
+    public boolean updateQuote(StQuote quote) throws Exception;
 
     /**
      * 查询报价队列信息，接收参数(队列为有序)
