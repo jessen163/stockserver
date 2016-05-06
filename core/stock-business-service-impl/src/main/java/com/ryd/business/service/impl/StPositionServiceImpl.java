@@ -44,7 +44,7 @@ public class StPositionServiceImpl implements StPositionService {
         // 2.每次循环limit条
         for(int i=1;i <= limit;i++) {//有几页循环几次
             int offset = (i - 1) * limit;
-            List<StPosition> positions = stPositionDao.getTList(null,null,null,limit,offset);
+            List<StPosition> positions = stPositionDao.getTList(null,null,null,size,offset);
             //T+1 可卖数量置成和持仓数量相等
             for(StPosition stp:positions){
                    stp.setMarketAmount(stp.getAmount());
@@ -104,7 +104,7 @@ public class StPositionServiceImpl implements StPositionService {
         Long camount = position.getMarketAmount();
         Long aamount = position.getAmount();
         //增加持仓
-        position.setMarketAmount(camount+amount);
+        position.setMarketAmount(camount + amount);
         position.setAmount(aamount+amount);
         rs = stPositionDao.update(position) > 0;
 
