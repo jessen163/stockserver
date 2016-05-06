@@ -10,6 +10,7 @@ import com.ryd.business.dto.StTradeQueueDTO;
 import com.ryd.business.exception.QuoteBusinessException;
 import com.ryd.business.model.StQuote;
 import com.ryd.business.model.StStock;
+import com.ryd.business.model.StTradeRecord;
 import com.ryd.business.service.*;
 import com.ryd.business.service.thread.GenerateSimulationQuoteThread;
 import com.ryd.business.service.util.BusinessConstants;
@@ -233,6 +234,9 @@ public class StQuoteServiceImpl implements StQuoteService {
 //            return null;
 //        }
 //        List<String> stockIdList = (List<String>) stockIdListObj;
+        if (BusinessConstants.stTradeQueueMap.isEmpty()) {
+            this.findStQuoteToCache(1000);
+        }
         Collection<String> stockIdList = BusinessConstants.stTradeQueueMap.keySet();
         List<String> stockIdListNew = new ArrayList<String>(stockIdList);
         return stockIdListNew;
@@ -244,13 +248,23 @@ public class StQuoteServiceImpl implements StQuoteService {
         // 从缓存中获取
         ConcurrentSkipListMap<Long, StQuote> quoteList = null;
 
-        Object quoteobj = null;
+        /*Object quoteobj = null;
         if (searchQuoteDTO.getQuoteType() == ApplicationConstants.STOCK_QUOTETYPE_BUY) {
             quoteobj = iCacheService.getObjectByKey(CacheConstant.CACHEKEY_STOCK_QUOTE_BUYQUEUE, searchQuoteDTO.getStockCode(), null);
         } else if (searchQuoteDTO.getQuoteType() == ApplicationConstants.STOCK_QUOTETYPE_SELL){
             quoteobj = iCacheService.getObjectByKey(CacheConstant.CACHEKEY_STOCK_QUOTE_SELLQUEUE, searchQuoteDTO.getStockCode(), null);
         }
-        quoteList = (ConcurrentSkipListMap<Long, StQuote>) quoteobj;
+        quoteList = (ConcurrentSkipListMap<Long, StQuote>) quoteobj;*/
+        if (BusinessConstants.stTradeQueueMap.isEmpty()) {
+            this.findStQuoteToCache(1000);
+        }
+        StTradeQueueDTO tradeQueueDTO = BusinessConstants.stTradeQueueMap.get(searchQuoteDTO.getStockCode());
+        if (tradeQueueDTO==null) return null;
+        if (searchQuoteDTO.getQuoteType() == ApplicationConstants.STOCK_QUOTETYPE_BUY) {
+            quoteList = tradeQueueDTO.buyList;
+        } else if (searchQuoteDTO.getQuoteType() == ApplicationConstants.STOCK_QUOTETYPE_SELL){
+            quoteList = tradeQueueDTO.sellList;
+        }
         Collection<StQuote> collectionList = quoteList.values();
         List<StQuote> list = new ArrayList<StQuote>();
         list.addAll(collectionList);
@@ -259,6 +273,9 @@ public class StQuoteServiceImpl implements StQuoteService {
 
     @Override
     public StQuote findFirstQuoteByStock(SearchQuoteDTO searchQuoteDTO) {
+        if (BusinessConstants.stTradeQueueMap.isEmpty()) {
+            this.findStQuoteToCache(1000);
+        }
         StTradeQueueDTO tradeQueueDTO = BusinessConstants.stTradeQueueMap.get(searchQuoteDTO.getStockCode());
         if (tradeQueueDTO==null) {
             return null;
@@ -266,18 +283,6 @@ public class StQuoteServiceImpl implements StQuoteService {
         // 获取队列中的第一条买/卖报价
         StQuote quote = tradeQueueDTO.getFristStQuoteFromQueue(searchQuoteDTO.getQuoteType());
         return quote;
-        // 从缓存中获取
-        /*ConcurrentSkipListMap<Long, StQuote> quoteList = null;
-        Object quoteobj = null;
-        if (searchQuoteDTO.getQuoteType() == ApplicationConstants.STOCK_QUOTETYPE_BUY) {
-            quoteobj = iCacheService.getObjectByKey(CacheConstant.CACHEKEY_STOCK_QUOTE_BUYQUEUE, searchQuoteDTO.getStockCode(), null);
-        } else if (searchQuoteDTO.getQuoteType() == ApplicationConstants.STOCK_QUOTETYPE_SELL){
-            quoteobj = iCacheService.getObjectByKey(CacheConstant.CACHEKEY_STOCK_QUOTE_SELLQUEUE, searchQuoteDTO.getStockCode(), null);
-        }
-        if (quoteobj==null) return null;
-        quoteList = (ConcurrentSkipListMap<Long, StQuote>) quoteobj;
-        Map.Entry<Long, StQuote> sellMap = quoteList.higherEntry(Long.MIN_VALUE);
-        return sellMap==null?null:sellMap.getValue();*/
     }
 
     @Override
@@ -336,7 +341,9 @@ public class StQuoteServiceImpl implements StQuoteService {
     public boolean addSimulationQuoteToQueue(List<StQuote> addQuoteList) {
         // 入库
 //        stQuoteDao.addBatch(addQuoteList);
-
+        if (BusinessConstants.stTradeQueueMap.isEmpty()) {
+            this.findStQuoteToCache(1000);
+        }
         StTradeQueueDTO tradeQueueDTO = null;
         for (StQuote quote : addQuoteList) {
             tradeQueueDTO = BusinessConstants.stTradeQueueMap.get(quote.getStockCode());
@@ -349,6 +356,7 @@ public class StQuoteServiceImpl implements StQuoteService {
                 tradeQueueDTO.addSellStQuote(quote);
             }
             BusinessConstants.stTradeQueueMap.put(quote.getStockCode(), tradeQueueDTO);
+            // TODO 放入缓存
         }
 
         /*ConcurrentSkipListMap<Long, StQuote> quoteList = new ConcurrentSkipListMap<Long, StQuote>();
@@ -420,6 +428,8 @@ public class StQuoteServiceImpl implements StQuoteService {
         }
         if (!isRemove) return false;
         BusinessConstants.stTradeQueueMap.put(stockCode, tradeQueueDTO);
+        // TODO 放入缓存
+        iCacheService.setObjectByKey(CacheConstant.CACHEKEY_SIMULATIONQUOTELIST, BusinessConstants.simulateQuoteMap);
 
         /*Object quoteobj = null;
         ConcurrentSkipListMap<Long, StQuote> quoteList = null;
@@ -451,24 +461,19 @@ public class StQuoteServiceImpl implements StQuoteService {
         return true;
     }
 
-    /**
-     * 从队列中删除报价
-     * @param quote
-     * @return
-     */
-    private boolean removeByQuote(StQuote quote) {
-        return deleteQuoteFromQueue(quote);
-    }
-
     @Override
     public void executeSimulationQuote() {
-        // 1、获取最新一次的股票价格-买一、买二、卖一、卖二
-        // 2、获取模拟马甲用户
-        // 3、多线程生成马甲订单
-        long simulationCount = 0;
+        if (BusinessConstants.simulateQuoteMap.isEmpty()) {
+            Object obj = iCacheService.getObjectByKey(CacheConstant.CACHEKEY_SIMULATIONQUOTELIST, null);
+            if (obj != null) {
+                BusinessConstants.simulateQuoteMap = (ConcurrentHashMap<String, List<SimulationQuoteDTO>>) obj;
+            }
+        }
+//        long simulationCount = 0;
         List<StQuote> newStQuoteList = new ArrayList<StQuote>();
         BlockingQueue<Runnable> quoteQueue = new LinkedBlockingQueue<Runnable>();
-        ThreadPoolExecutor quoteService = new ThreadPoolExecutor(50, 50, 1, TimeUnit.MINUTES, quoteQueue);
+        // TODO 用于发消息的线程池
+//        ThreadPoolExecutor quoteService = new ThreadPoolExecutor(50, 50, 1, TimeUnit.MINUTES, quoteQueue);
         for (String stockCode : BusinessConstants.simulateQuoteMap.keySet()) {
             List<SimulationQuoteDTO> simulationQuoteDTOList = BusinessConstants.simulateQuoteMap.get(stockCode);
             if (!StringUtils.isEmpty(simulationQuoteDTOList)) {
@@ -493,6 +498,7 @@ public class StQuoteServiceImpl implements StQuoteService {
                     quote.setCurrentAmount(quote.getAmount());
                     quote.setStatus(ApplicationConstants.STOCK_STQUOTE_STATUS_TRUSTEE);
                     stQuoteList.add(quote);
+                    // TODO 将模拟报价放入消息队列，异步入库
 //                    iMessageQueue.sendMessage(ApplicationConstants.PUSHMESSAGE_SIMULATIONQUOTE, FileUtils.objectToByte(quote));
 //                    quoteService.execute(new GenerateSimulationQuoteThread(iMessageQueue, quote));
                 }
@@ -500,7 +506,7 @@ public class StQuoteServiceImpl implements StQuoteService {
                 stQuoteList.clear();
                 try {
                     if (newStQuoteList!=null&&newStQuoteList.size()>=100) {
-                        simulationCount += newStQuoteList.size();
+//                        simulationCount += newStQuoteList.size();
                         this.saveQuoteList(newStQuoteList, ApplicationConstants.ACCOUNT_TYPE_VIRTUAL);
                         newStQuoteList.clear();
                     }
@@ -511,13 +517,14 @@ public class StQuoteServiceImpl implements StQuoteService {
         }
         if (newStQuoteList!=null&&newStQuoteList.size()>0) {
             try {
-                simulationCount += newStQuoteList.size();
+//                simulationCount += newStQuoteList.size();
                 this.saveQuoteList(newStQuoteList, ApplicationConstants.ACCOUNT_TYPE_VIRTUAL);
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
-        System.out.println("simulationCount:"+simulationCount);
+        System.out.println("simulationCount:"+BusinessConstants.simulateQuoteMap.size());
+        BusinessConstants.simulateQuoteMap.clear();
 
 
         /*ExecutorService stockService = Executors.newFixedThreadPool(10);
