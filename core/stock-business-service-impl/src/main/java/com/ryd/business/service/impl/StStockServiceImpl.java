@@ -161,6 +161,6 @@ public class StStockServiceImpl implements StStockService {
         if (obj != null) {
             BusinessConstants.stockPriceMap = (ConcurrentHashMap<String, StStock>) obj;
         }
-        return false;
+        return true;
     }
 }
