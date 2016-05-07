@@ -248,27 +248,32 @@ public class StQuoteServiceImpl implements StQuoteService {
         // 从缓存中获取
         ConcurrentSkipListMap<Long, StQuote> quoteList = null;
 
-        /*Object quoteobj = null;
-        if (searchQuoteDTO.getQuoteType() == ApplicationConstants.STOCK_QUOTETYPE_BUY) {
-            quoteobj = iCacheService.getObjectByKey(CacheConstant.CACHEKEY_STOCK_QUOTE_BUYQUEUE, searchQuoteDTO.getStockCode(), null);
-        } else if (searchQuoteDTO.getQuoteType() == ApplicationConstants.STOCK_QUOTETYPE_SELL){
-            quoteobj = iCacheService.getObjectByKey(CacheConstant.CACHEKEY_STOCK_QUOTE_SELLQUEUE, searchQuoteDTO.getStockCode(), null);
-        }
-        quoteList = (ConcurrentSkipListMap<Long, StQuote>) quoteobj;*/
         if (BusinessConstants.stTradeQueueMap.isEmpty()) {
             this.findStQuoteToCache(1000);
         }
-        StTradeQueueDTO tradeQueueDTO = BusinessConstants.stTradeQueueMap.get(searchQuoteDTO.getStockCode());
-        if (tradeQueueDTO==null) return null;
-        if (searchQuoteDTO.getQuoteType() == ApplicationConstants.STOCK_QUOTETYPE_BUY) {
-            quoteList = tradeQueueDTO.buyList;
-        } else if (searchQuoteDTO.getQuoteType() == ApplicationConstants.STOCK_QUOTETYPE_SELL){
-            quoteList = tradeQueueDTO.sellList;
+        // 总的报价队列列表
+        if (StringUtils.isEmpty(searchQuoteDTO.getStockCode())) {
+            // TODO 返回总的买/卖队列
+            quoteList = findQuoteQueueByType(searchQuoteDTO);
+        } else {
+            // 单只股票队列
+            StTradeQueueDTO tradeQueueDTO = BusinessConstants.stTradeQueueMap.get(searchQuoteDTO.getStockCode());
+            if (tradeQueueDTO == null) return null;
+            if (searchQuoteDTO.getQuoteType() == ApplicationConstants.STOCK_QUOTETYPE_BUY) {
+                quoteList = tradeQueueDTO.buyList;
+            } else if (searchQuoteDTO.getQuoteType() == ApplicationConstants.STOCK_QUOTETYPE_SELL) {
+                quoteList = tradeQueueDTO.sellList;
+            }
         }
         Collection<StQuote> collectionList = quoteList.values();
         List<StQuote> list = new ArrayList<StQuote>();
         list.addAll(collectionList);
         return list;
+    }
+
+    // 返回总的买卖队列
+    private ConcurrentSkipListMap<Long, StQuote> findQuoteQueueByType(SearchQuoteDTO searchQuoteDTO) {
+        return null;
     }
 
     @Override
