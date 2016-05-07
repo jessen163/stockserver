@@ -322,6 +322,30 @@ public final class DiyNettyMessage {
      */
     StockConfigInfoOrBuilder getStockConfigInfoOrBuilder(
             int index);
+
+    /**
+     * <code>repeated .com.ryd.protocol.protobuf.StockTradeAmountInfo stockTradeAmountInfo = 20;</code>
+     */
+    java.util.List<StockTradeAmountInfo>
+        getStockTradeAmountInfoList();
+    /**
+     * <code>repeated .com.ryd.protocol.protobuf.StockTradeAmountInfo stockTradeAmountInfo = 20;</code>
+     */
+    StockTradeAmountInfo getStockTradeAmountInfo(int index);
+    /**
+     * <code>repeated .com.ryd.protocol.protobuf.StockTradeAmountInfo stockTradeAmountInfo = 20;</code>
+     */
+    int getStockTradeAmountInfoCount();
+    /**
+     * <code>repeated .com.ryd.protocol.protobuf.StockTradeAmountInfo stockTradeAmountInfo = 20;</code>
+     */
+    java.util.List<? extends StockTradeAmountInfoOrBuilder>
+        getStockTradeAmountInfoOrBuilderList();
+    /**
+     * <code>repeated .com.ryd.protocol.protobuf.StockTradeAmountInfo stockTradeAmountInfo = 20;</code>
+     */
+    StockTradeAmountInfoOrBuilder getStockTradeAmountInfoOrBuilder(
+            int index);
   }
   /**
    * Protobuf type {@code com.ryd.protocol.protobuf.NettyMessage}
@@ -498,6 +522,14 @@ public final class DiyNettyMessage {
               stockConfigInfo_.add(input.readMessage(StockConfigInfo.PARSER, extensionRegistry));
               break;
             }
+            case 162: {
+              if (!((mutable_bitField0_ & 0x00080000) == 0x00080000)) {
+                stockTradeAmountInfo_ = new java.util.ArrayList<StockTradeAmountInfo>();
+                mutable_bitField0_ |= 0x00080000;
+              }
+              stockTradeAmountInfo_.add(input.readMessage(StockTradeAmountInfo.PARSER, extensionRegistry));
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -529,6 +561,9 @@ public final class DiyNettyMessage {
         }
         if (((mutable_bitField0_ & 0x00040000) == 0x00040000)) {
           stockConfigInfo_ = java.util.Collections.unmodifiableList(stockConfigInfo_);
+        }
+        if (((mutable_bitField0_ & 0x00080000) == 0x00080000)) {
+          stockTradeAmountInfo_ = java.util.Collections.unmodifiableList(stockTradeAmountInfo_);
         }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -1115,6 +1150,41 @@ public final class DiyNettyMessage {
       return stockConfigInfo_.get(index);
     }
 
+    public static final int STOCKTRADEAMOUNTINFO_FIELD_NUMBER = 20;
+    private java.util.List<StockTradeAmountInfo> stockTradeAmountInfo_;
+    /**
+     * <code>repeated .com.ryd.protocol.protobuf.StockTradeAmountInfo stockTradeAmountInfo = 20;</code>
+     */
+    public java.util.List<StockTradeAmountInfo> getStockTradeAmountInfoList() {
+      return stockTradeAmountInfo_;
+    }
+    /**
+     * <code>repeated .com.ryd.protocol.protobuf.StockTradeAmountInfo stockTradeAmountInfo = 20;</code>
+     */
+    public java.util.List<? extends StockTradeAmountInfoOrBuilder>
+        getStockTradeAmountInfoOrBuilderList() {
+      return stockTradeAmountInfo_;
+    }
+    /**
+     * <code>repeated .com.ryd.protocol.protobuf.StockTradeAmountInfo stockTradeAmountInfo = 20;</code>
+     */
+    public int getStockTradeAmountInfoCount() {
+      return stockTradeAmountInfo_.size();
+    }
+    /**
+     * <code>repeated .com.ryd.protocol.protobuf.StockTradeAmountInfo stockTradeAmountInfo = 20;</code>
+     */
+    public StockTradeAmountInfo getStockTradeAmountInfo(int index) {
+      return stockTradeAmountInfo_.get(index);
+    }
+    /**
+     * <code>repeated .com.ryd.protocol.protobuf.StockTradeAmountInfo stockTradeAmountInfo = 20;</code>
+     */
+    public StockTradeAmountInfoOrBuilder getStockTradeAmountInfoOrBuilder(
+        int index) {
+      return stockTradeAmountInfo_.get(index);
+    }
+
     private void initFields() {
       id_ = 0;
       status_ = 0;
@@ -1135,6 +1205,7 @@ public final class DiyNettyMessage {
       tradeRecordInfo_ = java.util.Collections.emptyList();
       stockPriceInfo_ = java.util.Collections.emptyList();
       stockConfigInfo_ = java.util.Collections.emptyList();
+      stockTradeAmountInfo_ = java.util.Collections.emptyList();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -1162,6 +1233,12 @@ public final class DiyNettyMessage {
       }
       for (int i = 0; i < getStockConfigInfoCount(); i++) {
         if (!getStockConfigInfo(i).isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
+      for (int i = 0; i < getStockTradeAmountInfoCount(); i++) {
+        if (!getStockTradeAmountInfo(i).isInitialized()) {
           memoizedIsInitialized = 0;
           return false;
         }
@@ -1229,6 +1306,9 @@ public final class DiyNettyMessage {
       }
       for (int i = 0; i < stockConfigInfo_.size(); i++) {
         output.writeMessage(19, stockConfigInfo_.get(i));
+      }
+      for (int i = 0; i < stockTradeAmountInfo_.size(); i++) {
+        output.writeMessage(20, stockTradeAmountInfo_.get(i));
       }
       getUnknownFields().writeTo(output);
     }
@@ -1314,6 +1394,10 @@ public final class DiyNettyMessage {
       for (int i = 0; i < stockConfigInfo_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(19, stockConfigInfo_.get(i));
+      }
+      for (int i = 0; i < stockTradeAmountInfo_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(20, stockTradeAmountInfo_.get(i));
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -1432,6 +1516,7 @@ public final class DiyNettyMessage {
           getTradeRecordInfoFieldBuilder();
           getStockPriceInfoFieldBuilder();
           getStockConfigInfoFieldBuilder();
+          getStockTradeAmountInfoFieldBuilder();
         }
       }
       private static Builder create() {
@@ -1509,6 +1594,12 @@ public final class DiyNettyMessage {
           bitField0_ = (bitField0_ & ~0x00040000);
         } else {
           stockConfigInfoBuilder_.clear();
+        }
+        if (stockTradeAmountInfoBuilder_ == null) {
+          stockTradeAmountInfo_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00080000);
+        } else {
+          stockTradeAmountInfoBuilder_.clear();
         }
         return this;
       }
@@ -1653,6 +1744,15 @@ public final class DiyNettyMessage {
           result.stockConfigInfo_ = stockConfigInfo_;
         } else {
           result.stockConfigInfo_ = stockConfigInfoBuilder_.build();
+        }
+        if (stockTradeAmountInfoBuilder_ == null) {
+          if (((bitField0_ & 0x00080000) == 0x00080000)) {
+            stockTradeAmountInfo_ = java.util.Collections.unmodifiableList(stockTradeAmountInfo_);
+            bitField0_ = (bitField0_ & ~0x00080000);
+          }
+          result.stockTradeAmountInfo_ = stockTradeAmountInfo_;
+        } else {
+          result.stockTradeAmountInfo_ = stockTradeAmountInfoBuilder_.build();
         }
         result.bitField0_ = to_bitField0_;
         onBuilt();
@@ -1919,6 +2019,32 @@ public final class DiyNettyMessage {
             }
           }
         }
+        if (stockTradeAmountInfoBuilder_ == null) {
+          if (!other.stockTradeAmountInfo_.isEmpty()) {
+            if (stockTradeAmountInfo_.isEmpty()) {
+              stockTradeAmountInfo_ = other.stockTradeAmountInfo_;
+              bitField0_ = (bitField0_ & ~0x00080000);
+            } else {
+              ensureStockTradeAmountInfoIsMutable();
+              stockTradeAmountInfo_.addAll(other.stockTradeAmountInfo_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.stockTradeAmountInfo_.isEmpty()) {
+            if (stockTradeAmountInfoBuilder_.isEmpty()) {
+              stockTradeAmountInfoBuilder_.dispose();
+              stockTradeAmountInfoBuilder_ = null;
+              stockTradeAmountInfo_ = other.stockTradeAmountInfo_;
+              bitField0_ = (bitField0_ & ~0x00080000);
+              stockTradeAmountInfoBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getStockTradeAmountInfoFieldBuilder() : null;
+            } else {
+              stockTradeAmountInfoBuilder_.addAllMessages(other.stockTradeAmountInfo_);
+            }
+          }
+        }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
@@ -1944,6 +2070,12 @@ public final class DiyNettyMessage {
         }
         for (int i = 0; i < getStockConfigInfoCount(); i++) {
           if (!getStockConfigInfo(i).isInitialized()) {
+            
+            return false;
+          }
+        }
+        for (int i = 0; i < getStockTradeAmountInfoCount(); i++) {
+          if (!getStockTradeAmountInfo(i).isInitialized()) {
             
             return false;
           }
@@ -4418,6 +4550,246 @@ public final class DiyNettyMessage {
         return stockConfigInfoBuilder_;
       }
 
+      private java.util.List<StockTradeAmountInfo> stockTradeAmountInfo_ =
+        java.util.Collections.emptyList();
+      private void ensureStockTradeAmountInfoIsMutable() {
+        if (!((bitField0_ & 0x00080000) == 0x00080000)) {
+          stockTradeAmountInfo_ = new java.util.ArrayList<StockTradeAmountInfo>(stockTradeAmountInfo_);
+          bitField0_ |= 0x00080000;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilder<
+          StockTradeAmountInfo, StockTradeAmountInfo.Builder, StockTradeAmountInfoOrBuilder> stockTradeAmountInfoBuilder_;
+
+      /**
+       * <code>repeated .com.ryd.protocol.protobuf.StockTradeAmountInfo stockTradeAmountInfo = 20;</code>
+       */
+      public java.util.List<StockTradeAmountInfo> getStockTradeAmountInfoList() {
+        if (stockTradeAmountInfoBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(stockTradeAmountInfo_);
+        } else {
+          return stockTradeAmountInfoBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .com.ryd.protocol.protobuf.StockTradeAmountInfo stockTradeAmountInfo = 20;</code>
+       */
+      public int getStockTradeAmountInfoCount() {
+        if (stockTradeAmountInfoBuilder_ == null) {
+          return stockTradeAmountInfo_.size();
+        } else {
+          return stockTradeAmountInfoBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .com.ryd.protocol.protobuf.StockTradeAmountInfo stockTradeAmountInfo = 20;</code>
+       */
+      public StockTradeAmountInfo getStockTradeAmountInfo(int index) {
+        if (stockTradeAmountInfoBuilder_ == null) {
+          return stockTradeAmountInfo_.get(index);
+        } else {
+          return stockTradeAmountInfoBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .com.ryd.protocol.protobuf.StockTradeAmountInfo stockTradeAmountInfo = 20;</code>
+       */
+      public Builder setStockTradeAmountInfo(
+          int index, StockTradeAmountInfo value) {
+        if (stockTradeAmountInfoBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureStockTradeAmountInfoIsMutable();
+          stockTradeAmountInfo_.set(index, value);
+          onChanged();
+        } else {
+          stockTradeAmountInfoBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.ryd.protocol.protobuf.StockTradeAmountInfo stockTradeAmountInfo = 20;</code>
+       */
+      public Builder setStockTradeAmountInfo(
+          int index, StockTradeAmountInfo.Builder builderForValue) {
+        if (stockTradeAmountInfoBuilder_ == null) {
+          ensureStockTradeAmountInfoIsMutable();
+          stockTradeAmountInfo_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          stockTradeAmountInfoBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.ryd.protocol.protobuf.StockTradeAmountInfo stockTradeAmountInfo = 20;</code>
+       */
+      public Builder addStockTradeAmountInfo(StockTradeAmountInfo value) {
+        if (stockTradeAmountInfoBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureStockTradeAmountInfoIsMutable();
+          stockTradeAmountInfo_.add(value);
+          onChanged();
+        } else {
+          stockTradeAmountInfoBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.ryd.protocol.protobuf.StockTradeAmountInfo stockTradeAmountInfo = 20;</code>
+       */
+      public Builder addStockTradeAmountInfo(
+          int index, StockTradeAmountInfo value) {
+        if (stockTradeAmountInfoBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureStockTradeAmountInfoIsMutable();
+          stockTradeAmountInfo_.add(index, value);
+          onChanged();
+        } else {
+          stockTradeAmountInfoBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.ryd.protocol.protobuf.StockTradeAmountInfo stockTradeAmountInfo = 20;</code>
+       */
+      public Builder addStockTradeAmountInfo(
+          StockTradeAmountInfo.Builder builderForValue) {
+        if (stockTradeAmountInfoBuilder_ == null) {
+          ensureStockTradeAmountInfoIsMutable();
+          stockTradeAmountInfo_.add(builderForValue.build());
+          onChanged();
+        } else {
+          stockTradeAmountInfoBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.ryd.protocol.protobuf.StockTradeAmountInfo stockTradeAmountInfo = 20;</code>
+       */
+      public Builder addStockTradeAmountInfo(
+          int index, StockTradeAmountInfo.Builder builderForValue) {
+        if (stockTradeAmountInfoBuilder_ == null) {
+          ensureStockTradeAmountInfoIsMutable();
+          stockTradeAmountInfo_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          stockTradeAmountInfoBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.ryd.protocol.protobuf.StockTradeAmountInfo stockTradeAmountInfo = 20;</code>
+       */
+      public Builder addAllStockTradeAmountInfo(
+          Iterable<? extends StockTradeAmountInfo> values) {
+        if (stockTradeAmountInfoBuilder_ == null) {
+          ensureStockTradeAmountInfoIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, stockTradeAmountInfo_);
+          onChanged();
+        } else {
+          stockTradeAmountInfoBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.ryd.protocol.protobuf.StockTradeAmountInfo stockTradeAmountInfo = 20;</code>
+       */
+      public Builder clearStockTradeAmountInfo() {
+        if (stockTradeAmountInfoBuilder_ == null) {
+          stockTradeAmountInfo_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00080000);
+          onChanged();
+        } else {
+          stockTradeAmountInfoBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.ryd.protocol.protobuf.StockTradeAmountInfo stockTradeAmountInfo = 20;</code>
+       */
+      public Builder removeStockTradeAmountInfo(int index) {
+        if (stockTradeAmountInfoBuilder_ == null) {
+          ensureStockTradeAmountInfoIsMutable();
+          stockTradeAmountInfo_.remove(index);
+          onChanged();
+        } else {
+          stockTradeAmountInfoBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.ryd.protocol.protobuf.StockTradeAmountInfo stockTradeAmountInfo = 20;</code>
+       */
+      public StockTradeAmountInfo.Builder getStockTradeAmountInfoBuilder(
+          int index) {
+        return getStockTradeAmountInfoFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .com.ryd.protocol.protobuf.StockTradeAmountInfo stockTradeAmountInfo = 20;</code>
+       */
+      public StockTradeAmountInfoOrBuilder getStockTradeAmountInfoOrBuilder(
+          int index) {
+        if (stockTradeAmountInfoBuilder_ == null) {
+          return stockTradeAmountInfo_.get(index);  } else {
+          return stockTradeAmountInfoBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .com.ryd.protocol.protobuf.StockTradeAmountInfo stockTradeAmountInfo = 20;</code>
+       */
+      public java.util.List<? extends StockTradeAmountInfoOrBuilder>
+           getStockTradeAmountInfoOrBuilderList() {
+        if (stockTradeAmountInfoBuilder_ != null) {
+          return stockTradeAmountInfoBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(stockTradeAmountInfo_);
+        }
+      }
+      /**
+       * <code>repeated .com.ryd.protocol.protobuf.StockTradeAmountInfo stockTradeAmountInfo = 20;</code>
+       */
+      public StockTradeAmountInfo.Builder addStockTradeAmountInfoBuilder() {
+        return getStockTradeAmountInfoFieldBuilder().addBuilder(
+            StockTradeAmountInfo.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .com.ryd.protocol.protobuf.StockTradeAmountInfo stockTradeAmountInfo = 20;</code>
+       */
+      public StockTradeAmountInfo.Builder addStockTradeAmountInfoBuilder(
+          int index) {
+        return getStockTradeAmountInfoFieldBuilder().addBuilder(
+            index, StockTradeAmountInfo.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .com.ryd.protocol.protobuf.StockTradeAmountInfo stockTradeAmountInfo = 20;</code>
+       */
+      public java.util.List<StockTradeAmountInfo.Builder>
+           getStockTradeAmountInfoBuilderList() {
+        return getStockTradeAmountInfoFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          StockTradeAmountInfo, StockTradeAmountInfo.Builder, StockTradeAmountInfoOrBuilder>
+          getStockTradeAmountInfoFieldBuilder() {
+        if (stockTradeAmountInfoBuilder_ == null) {
+          stockTradeAmountInfoBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              StockTradeAmountInfo, StockTradeAmountInfo.Builder, StockTradeAmountInfoOrBuilder>(
+                  stockTradeAmountInfo_,
+                  ((bitField0_ & 0x00080000) == 0x00080000),
+                  getParentForChildren(),
+                  isClean());
+          stockTradeAmountInfo_ = null;
+        }
+        return stockTradeAmountInfoBuilder_;
+      }
+
       // @@protoc_insertion_point(builder_scope:com.ryd.protocol.protobuf.NettyMessage)
     }
 
@@ -5758,6 +6130,24 @@ public final class DiyNettyMessage {
      */
     com.google.protobuf.ByteString
         getStockTimeBytes();
+
+    /**
+     * <code>optional int32 dealTotalAmount = 36;</code>
+     */
+    boolean hasDealTotalAmount();
+    /**
+     * <code>optional int32 dealTotalAmount = 36;</code>
+     */
+    int getDealTotalAmount();
+
+    /**
+     * <code>optional int32 dealTotalMoney = 37;</code>
+     */
+    boolean hasDealTotalMoney();
+    /**
+     * <code>optional int32 dealTotalMoney = 37;</code>
+     */
+    int getDealTotalMoney();
   }
   /**
    * Protobuf type {@code com.ryd.protocol.protobuf.StockInfo}
@@ -5990,6 +6380,16 @@ public final class DiyNettyMessage {
               com.google.protobuf.ByteString bs = input.readBytes();
               bitField1_ |= 0x00000004;
               stockTime_ = bs;
+              break;
+            }
+            case 288: {
+              bitField1_ |= 0x00000008;
+              dealTotalAmount_ = input.readInt32();
+              break;
+            }
+            case 296: {
+              bitField1_ |= 0x00000010;
+              dealTotalMoney_ = input.readInt32();
               break;
             }
           }
@@ -6693,6 +7093,36 @@ public final class DiyNettyMessage {
       }
     }
 
+    public static final int DEALTOTALAMOUNT_FIELD_NUMBER = 36;
+    private int dealTotalAmount_;
+    /**
+     * <code>optional int32 dealTotalAmount = 36;</code>
+     */
+    public boolean hasDealTotalAmount() {
+      return ((bitField1_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>optional int32 dealTotalAmount = 36;</code>
+     */
+    public int getDealTotalAmount() {
+      return dealTotalAmount_;
+    }
+
+    public static final int DEALTOTALMONEY_FIELD_NUMBER = 37;
+    private int dealTotalMoney_;
+    /**
+     * <code>optional int32 dealTotalMoney = 37;</code>
+     */
+    public boolean hasDealTotalMoney() {
+      return ((bitField1_ & 0x00000010) == 0x00000010);
+    }
+    /**
+     * <code>optional int32 dealTotalMoney = 37;</code>
+     */
+    public int getDealTotalMoney() {
+      return dealTotalMoney_;
+    }
+
     private void initFields() {
       id_ = "";
       stockName_ = "";
@@ -6729,6 +7159,8 @@ public final class DiyNettyMessage {
       sellFiveAmount_ = 0;
       stockDate_ = "";
       stockTime_ = "";
+      dealTotalAmount_ = 0;
+      dealTotalMoney_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -6847,6 +7279,12 @@ public final class DiyNettyMessage {
       }
       if (((bitField1_ & 0x00000004) == 0x00000004)) {
         output.writeBytes(35, getStockTimeBytes());
+      }
+      if (((bitField1_ & 0x00000008) == 0x00000008)) {
+        output.writeInt32(36, dealTotalAmount_);
+      }
+      if (((bitField1_ & 0x00000010) == 0x00000010)) {
+        output.writeInt32(37, dealTotalMoney_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -6996,6 +7434,14 @@ public final class DiyNettyMessage {
       if (((bitField1_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(35, getStockTimeBytes());
+      }
+      if (((bitField1_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(36, dealTotalAmount_);
+      }
+      if (((bitField1_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(37, dealTotalMoney_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -7184,6 +7630,10 @@ public final class DiyNettyMessage {
         bitField1_ = (bitField1_ & ~0x00000002);
         stockTime_ = "";
         bitField1_ = (bitField1_ & ~0x00000004);
+        dealTotalAmount_ = 0;
+        bitField1_ = (bitField1_ & ~0x00000008);
+        dealTotalMoney_ = 0;
+        bitField1_ = (bitField1_ & ~0x00000010);
         return this;
       }
 
@@ -7354,6 +7804,14 @@ public final class DiyNettyMessage {
           to_bitField1_ |= 0x00000004;
         }
         result.stockTime_ = stockTime_;
+        if (((from_bitField1_ & 0x00000008) == 0x00000008)) {
+          to_bitField1_ |= 0x00000008;
+        }
+        result.dealTotalAmount_ = dealTotalAmount_;
+        if (((from_bitField1_ & 0x00000010) == 0x00000010)) {
+          to_bitField1_ |= 0x00000010;
+        }
+        result.dealTotalMoney_ = dealTotalMoney_;
         result.bitField0_ = to_bitField0_;
         result.bitField1_ = to_bitField1_;
         onBuilt();
@@ -7485,6 +7943,12 @@ public final class DiyNettyMessage {
           bitField1_ |= 0x00000004;
           stockTime_ = other.stockTime_;
           onChanged();
+        }
+        if (other.hasDealTotalAmount()) {
+          setDealTotalAmount(other.getDealTotalAmount());
+        }
+        if (other.hasDealTotalMoney()) {
+          setDealTotalMoney(other.getDealTotalMoney());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -8854,6 +9318,70 @@ public final class DiyNettyMessage {
         return this;
       }
 
+      private int dealTotalAmount_ ;
+      /**
+       * <code>optional int32 dealTotalAmount = 36;</code>
+       */
+      public boolean hasDealTotalAmount() {
+        return ((bitField1_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional int32 dealTotalAmount = 36;</code>
+       */
+      public int getDealTotalAmount() {
+        return dealTotalAmount_;
+      }
+      /**
+       * <code>optional int32 dealTotalAmount = 36;</code>
+       */
+      public Builder setDealTotalAmount(int value) {
+        bitField1_ |= 0x00000008;
+        dealTotalAmount_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 dealTotalAmount = 36;</code>
+       */
+      public Builder clearDealTotalAmount() {
+        bitField1_ = (bitField1_ & ~0x00000008);
+        dealTotalAmount_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int dealTotalMoney_ ;
+      /**
+       * <code>optional int32 dealTotalMoney = 37;</code>
+       */
+      public boolean hasDealTotalMoney() {
+        return ((bitField1_ & 0x00000010) == 0x00000010);
+      }
+      /**
+       * <code>optional int32 dealTotalMoney = 37;</code>
+       */
+      public int getDealTotalMoney() {
+        return dealTotalMoney_;
+      }
+      /**
+       * <code>optional int32 dealTotalMoney = 37;</code>
+       */
+      public Builder setDealTotalMoney(int value) {
+        bitField1_ |= 0x00000010;
+        dealTotalMoney_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 dealTotalMoney = 37;</code>
+       */
+      public Builder clearDealTotalMoney() {
+        bitField1_ = (bitField1_ & ~0x00000010);
+        dealTotalMoney_ = 0;
+        onChanged();
+        return this;
+      }
+
       // @@protoc_insertion_point(builder_scope:com.ryd.protocol.protobuf.StockInfo)
     }
 
@@ -8870,38 +9398,24 @@ public final class DiyNettyMessage {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>required string id = 1;</code>
-     */
-    boolean hasId();
-    /**
-     * <code>required string id = 1;</code>
-     */
-    String getId();
-    /**
-     * <code>required string id = 1;</code>
-     */
-    com.google.protobuf.ByteString
-        getIdBytes();
-
-    /**
-     * <code>required double stockPrice = 4;</code>
+     * <code>required double stockPrice = 1;</code>
      */
     boolean hasStockPrice();
     /**
-     * <code>required double stockPrice = 4;</code>
+     * <code>required double stockPrice = 1;</code>
      */
     double getStockPrice();
 
     /**
-     * <code>required string stockTime = 35;</code>
+     * <code>required string stockTime = 2;</code>
      */
     boolean hasStockTime();
     /**
-     * <code>required string stockTime = 35;</code>
+     * <code>required string stockTime = 2;</code>
      */
     String getStockTime();
     /**
-     * <code>required string stockTime = 35;</code>
+     * <code>required string stockTime = 2;</code>
      */
     com.google.protobuf.ByteString
         getStockTimeBytes();
@@ -8958,20 +9472,14 @@ public final class DiyNettyMessage {
               }
               break;
             }
-            case 10: {
-              com.google.protobuf.ByteString bs = input.readBytes();
+            case 9: {
               bitField0_ |= 0x00000001;
-              id_ = bs;
-              break;
-            }
-            case 33: {
-              bitField0_ |= 0x00000002;
               stockPrice_ = input.readDouble();
               break;
             }
-            case 282: {
+            case 18: {
               com.google.protobuf.ByteString bs = input.readBytes();
-              bitField0_ |= 0x00000004;
+              bitField0_ |= 0x00000002;
               stockTime_ = bs;
               break;
             }
@@ -9015,73 +9523,31 @@ public final class DiyNettyMessage {
     }
 
     private int bitField0_;
-    public static final int ID_FIELD_NUMBER = 1;
-    private Object id_;
+    public static final int STOCKPRICE_FIELD_NUMBER = 1;
+    private double stockPrice_;
     /**
-     * <code>required string id = 1;</code>
+     * <code>required double stockPrice = 1;</code>
      */
-    public boolean hasId() {
+    public boolean hasStockPrice() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
-     * <code>required string id = 1;</code>
-     */
-    public String getId() {
-      Object ref = id_;
-      if (ref instanceof String) {
-        return (String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          id_ = s;
-        }
-        return s;
-      }
-    }
-    /**
-     * <code>required string id = 1;</code>
-     */
-    public com.google.protobuf.ByteString
-        getIdBytes() {
-      Object ref = id_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (String) ref);
-        id_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    public static final int STOCKPRICE_FIELD_NUMBER = 4;
-    private double stockPrice_;
-    /**
-     * <code>required double stockPrice = 4;</code>
-     */
-    public boolean hasStockPrice() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
-    }
-    /**
-     * <code>required double stockPrice = 4;</code>
+     * <code>required double stockPrice = 1;</code>
      */
     public double getStockPrice() {
       return stockPrice_;
     }
 
-    public static final int STOCKTIME_FIELD_NUMBER = 35;
+    public static final int STOCKTIME_FIELD_NUMBER = 2;
     private Object stockTime_;
     /**
-     * <code>required string stockTime = 35;</code>
+     * <code>required string stockTime = 2;</code>
      */
     public boolean hasStockTime() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
+      return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>required string stockTime = 35;</code>
+     * <code>required string stockTime = 2;</code>
      */
     public String getStockTime() {
       Object ref = stockTime_;
@@ -9098,7 +9564,7 @@ public final class DiyNettyMessage {
       }
     }
     /**
-     * <code>required string stockTime = 35;</code>
+     * <code>required string stockTime = 2;</code>
      */
     public com.google.protobuf.ByteString
         getStockTimeBytes() {
@@ -9115,7 +9581,6 @@ public final class DiyNettyMessage {
     }
 
     private void initFields() {
-      id_ = "";
       stockPrice_ = 0D;
       stockTime_ = "";
     }
@@ -9125,10 +9590,6 @@ public final class DiyNettyMessage {
       if (isInitialized == 1) return true;
       if (isInitialized == 0) return false;
 
-      if (!hasId()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
       if (!hasStockPrice()) {
         memoizedIsInitialized = 0;
         return false;
@@ -9145,13 +9606,10 @@ public final class DiyNettyMessage {
                         throws java.io.IOException {
       getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeBytes(1, getIdBytes());
+        output.writeDouble(1, stockPrice_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeDouble(4, stockPrice_);
-      }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeBytes(35, getStockTimeBytes());
+        output.writeBytes(2, getStockTimeBytes());
       }
       getUnknownFields().writeTo(output);
     }
@@ -9164,15 +9622,11 @@ public final class DiyNettyMessage {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(1, getIdBytes());
+          .computeDoubleSize(1, stockPrice_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeDoubleSize(4, stockPrice_);
-      }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(35, getStockTimeBytes());
+          .computeBytesSize(2, getStockTimeBytes());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -9291,12 +9745,10 @@ public final class DiyNettyMessage {
 
       public Builder clear() {
         super.clear();
-        id_ = "";
-        bitField0_ = (bitField0_ & ~0x00000001);
         stockPrice_ = 0D;
-        bitField0_ = (bitField0_ & ~0x00000002);
+        bitField0_ = (bitField0_ & ~0x00000001);
         stockTime_ = "";
-        bitField0_ = (bitField0_ & ~0x00000004);
+        bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
 
@@ -9328,13 +9780,9 @@ public final class DiyNettyMessage {
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
           to_bitField0_ |= 0x00000001;
         }
-        result.id_ = id_;
+        result.stockPrice_ = stockPrice_;
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
-        }
-        result.stockPrice_ = stockPrice_;
-        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
-          to_bitField0_ |= 0x00000004;
         }
         result.stockTime_ = stockTime_;
         result.bitField0_ = to_bitField0_;
@@ -9353,16 +9801,11 @@ public final class DiyNettyMessage {
 
       public Builder mergeFrom(StockPriceInfo other) {
         if (other == StockPriceInfo.getDefaultInstance()) return this;
-        if (other.hasId()) {
-          bitField0_ |= 0x00000001;
-          id_ = other.id_;
-          onChanged();
-        }
         if (other.hasStockPrice()) {
           setStockPrice(other.getStockPrice());
         }
         if (other.hasStockTime()) {
-          bitField0_ |= 0x00000004;
+          bitField0_ |= 0x00000002;
           stockTime_ = other.stockTime_;
           onChanged();
         }
@@ -9371,10 +9814,6 @@ public final class DiyNettyMessage {
       }
 
       public final boolean isInitialized() {
-        if (!hasId()) {
-          
-          return false;
-        }
         if (!hasStockPrice()) {
           
           return false;
@@ -9405,109 +9844,33 @@ public final class DiyNettyMessage {
       }
       private int bitField0_;
 
-      private Object id_ = "";
+      private double stockPrice_ ;
       /**
-       * <code>required string id = 1;</code>
+       * <code>required double stockPrice = 1;</code>
        */
-      public boolean hasId() {
+      public boolean hasStockPrice() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
-       * <code>required string id = 1;</code>
-       */
-      public String getId() {
-        Object ref = id_;
-        if (!(ref instanceof String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            id_ = s;
-          }
-          return s;
-        } else {
-          return (String) ref;
-        }
-      }
-      /**
-       * <code>required string id = 1;</code>
-       */
-      public com.google.protobuf.ByteString
-          getIdBytes() {
-        Object ref = id_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (String) ref);
-          id_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>required string id = 1;</code>
-       */
-      public Builder setId(
-          String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000001;
-        id_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>required string id = 1;</code>
-       */
-      public Builder clearId() {
-        bitField0_ = (bitField0_ & ~0x00000001);
-        id_ = getDefaultInstance().getId();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>required string id = 1;</code>
-       */
-      public Builder setIdBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000001;
-        id_ = value;
-        onChanged();
-        return this;
-      }
-
-      private double stockPrice_ ;
-      /**
-       * <code>required double stockPrice = 4;</code>
-       */
-      public boolean hasStockPrice() {
-        return ((bitField0_ & 0x00000002) == 0x00000002);
-      }
-      /**
-       * <code>required double stockPrice = 4;</code>
+       * <code>required double stockPrice = 1;</code>
        */
       public double getStockPrice() {
         return stockPrice_;
       }
       /**
-       * <code>required double stockPrice = 4;</code>
+       * <code>required double stockPrice = 1;</code>
        */
       public Builder setStockPrice(double value) {
-        bitField0_ |= 0x00000002;
+        bitField0_ |= 0x00000001;
         stockPrice_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>required double stockPrice = 4;</code>
+       * <code>required double stockPrice = 1;</code>
        */
       public Builder clearStockPrice() {
-        bitField0_ = (bitField0_ & ~0x00000002);
+        bitField0_ = (bitField0_ & ~0x00000001);
         stockPrice_ = 0D;
         onChanged();
         return this;
@@ -9515,13 +9878,13 @@ public final class DiyNettyMessage {
 
       private Object stockTime_ = "";
       /**
-       * <code>required string stockTime = 35;</code>
+       * <code>required string stockTime = 2;</code>
        */
       public boolean hasStockTime() {
-        return ((bitField0_ & 0x00000004) == 0x00000004);
+        return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>required string stockTime = 35;</code>
+       * <code>required string stockTime = 2;</code>
        */
       public String getStockTime() {
         Object ref = stockTime_;
@@ -9538,7 +9901,7 @@ public final class DiyNettyMessage {
         }
       }
       /**
-       * <code>required string stockTime = 35;</code>
+       * <code>required string stockTime = 2;</code>
        */
       public com.google.protobuf.ByteString
           getStockTimeBytes() {
@@ -9554,36 +9917,36 @@ public final class DiyNettyMessage {
         }
       }
       /**
-       * <code>required string stockTime = 35;</code>
+       * <code>required string stockTime = 2;</code>
        */
       public Builder setStockTime(
           String value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000004;
+  bitField0_ |= 0x00000002;
         stockTime_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>required string stockTime = 35;</code>
+       * <code>required string stockTime = 2;</code>
        */
       public Builder clearStockTime() {
-        bitField0_ = (bitField0_ & ~0x00000004);
+        bitField0_ = (bitField0_ & ~0x00000002);
         stockTime_ = getDefaultInstance().getStockTime();
         onChanged();
         return this;
       }
       /**
-       * <code>required string stockTime = 35;</code>
+       * <code>required string stockTime = 2;</code>
        */
       public Builder setStockTimeBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000004;
+  bitField0_ |= 0x00000002;
         stockTime_ = value;
         onChanged();
         return this;
@@ -9598,6 +9961,576 @@ public final class DiyNettyMessage {
     }
 
     // @@protoc_insertion_point(class_scope:com.ryd.protocol.protobuf.StockPriceInfo)
+  }
+
+  public interface StockTradeAmountInfoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.ryd.protocol.protobuf.StockTradeAmountInfo)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>required double tradeAmount = 1;</code>
+     */
+    boolean hasTradeAmount();
+    /**
+     * <code>required double tradeAmount = 1;</code>
+     */
+    double getTradeAmount();
+
+    /**
+     * <code>required string tradeTime = 2;</code>
+     */
+    boolean hasTradeTime();
+    /**
+     * <code>required string tradeTime = 2;</code>
+     */
+    String getTradeTime();
+    /**
+     * <code>required string tradeTime = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getTradeTimeBytes();
+  }
+  /**
+   * Protobuf type {@code com.ryd.protocol.protobuf.StockTradeAmountInfo}
+   */
+  public static final class StockTradeAmountInfo extends
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.ryd.protocol.protobuf.StockTradeAmountInfo)
+      StockTradeAmountInfoOrBuilder {
+    // Use StockTradeAmountInfo.newBuilder() to construct.
+    private StockTradeAmountInfo(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private StockTradeAmountInfo(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final StockTradeAmountInfo defaultInstance;
+    public static StockTradeAmountInfo getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public StockTradeAmountInfo getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private StockTradeAmountInfo(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 9: {
+              bitField0_ |= 0x00000001;
+              tradeAmount_ = input.readDouble();
+              break;
+            }
+            case 18: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000002;
+              tradeTime_ = bs;
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return DiyNettyMessage.internal_static_com_ryd_protocol_protobuf_StockTradeAmountInfo_descriptor;
+    }
+
+    protected FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return DiyNettyMessage.internal_static_com_ryd_protocol_protobuf_StockTradeAmountInfo_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              StockTradeAmountInfo.class, Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<StockTradeAmountInfo> PARSER =
+        new com.google.protobuf.AbstractParser<StockTradeAmountInfo>() {
+      public StockTradeAmountInfo parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new StockTradeAmountInfo(input, extensionRegistry);
+      }
+    };
+
+    @Override
+    public com.google.protobuf.Parser<StockTradeAmountInfo> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    public static final int TRADEAMOUNT_FIELD_NUMBER = 1;
+    private double tradeAmount_;
+    /**
+     * <code>required double tradeAmount = 1;</code>
+     */
+    public boolean hasTradeAmount() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required double tradeAmount = 1;</code>
+     */
+    public double getTradeAmount() {
+      return tradeAmount_;
+    }
+
+    public static final int TRADETIME_FIELD_NUMBER = 2;
+    private Object tradeTime_;
+    /**
+     * <code>required string tradeTime = 2;</code>
+     */
+    public boolean hasTradeTime() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>required string tradeTime = 2;</code>
+     */
+    public String getTradeTime() {
+      Object ref = tradeTime_;
+      if (ref instanceof String) {
+        return (String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          tradeTime_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>required string tradeTime = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getTradeTimeBytes() {
+      Object ref = tradeTime_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (String) ref);
+        tradeTime_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    private void initFields() {
+      tradeAmount_ = 0D;
+      tradeTime_ = "";
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      if (!hasTradeAmount()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasTradeTime()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeDouble(1, tradeAmount_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeBytes(2, getTradeTimeBytes());
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeDoubleSize(1, tradeAmount_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(2, getTradeTimeBytes());
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @Override
+    protected Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static StockTradeAmountInfo parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static StockTradeAmountInfo parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static StockTradeAmountInfo parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static StockTradeAmountInfo parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static StockTradeAmountInfo parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static StockTradeAmountInfo parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static StockTradeAmountInfo parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static StockTradeAmountInfo parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static StockTradeAmountInfo parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static StockTradeAmountInfo parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(StockTradeAmountInfo prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @Override
+    protected Builder newBuilderForType(
+        BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code com.ryd.protocol.protobuf.StockTradeAmountInfo}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.ryd.protocol.protobuf.StockTradeAmountInfo)
+        StockTradeAmountInfoOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return DiyNettyMessage.internal_static_com_ryd_protocol_protobuf_StockTradeAmountInfo_descriptor;
+      }
+
+      protected FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return DiyNettyMessage.internal_static_com_ryd_protocol_protobuf_StockTradeAmountInfo_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                StockTradeAmountInfo.class, Builder.class);
+      }
+
+      // Construct using com.ryd.basecommon.protocol.protobuf.DiyNettyMessage.StockTradeAmountInfo.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        tradeAmount_ = 0D;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        tradeTime_ = "";
+        bitField0_ = (bitField0_ & ~0x00000002);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return DiyNettyMessage.internal_static_com_ryd_protocol_protobuf_StockTradeAmountInfo_descriptor;
+      }
+
+      public StockTradeAmountInfo getDefaultInstanceForType() {
+        return StockTradeAmountInfo.getDefaultInstance();
+      }
+
+      public StockTradeAmountInfo build() {
+        StockTradeAmountInfo result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public StockTradeAmountInfo buildPartial() {
+        StockTradeAmountInfo result = new StockTradeAmountInfo(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.tradeAmount_ = tradeAmount_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.tradeTime_ = tradeTime_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof StockTradeAmountInfo) {
+          return mergeFrom((StockTradeAmountInfo)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(StockTradeAmountInfo other) {
+        if (other == StockTradeAmountInfo.getDefaultInstance()) return this;
+        if (other.hasTradeAmount()) {
+          setTradeAmount(other.getTradeAmount());
+        }
+        if (other.hasTradeTime()) {
+          bitField0_ |= 0x00000002;
+          tradeTime_ = other.tradeTime_;
+          onChanged();
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (!hasTradeAmount()) {
+          
+          return false;
+        }
+        if (!hasTradeTime()) {
+          
+          return false;
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        StockTradeAmountInfo parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (StockTradeAmountInfo) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private double tradeAmount_ ;
+      /**
+       * <code>required double tradeAmount = 1;</code>
+       */
+      public boolean hasTradeAmount() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required double tradeAmount = 1;</code>
+       */
+      public double getTradeAmount() {
+        return tradeAmount_;
+      }
+      /**
+       * <code>required double tradeAmount = 1;</code>
+       */
+      public Builder setTradeAmount(double value) {
+        bitField0_ |= 0x00000001;
+        tradeAmount_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required double tradeAmount = 1;</code>
+       */
+      public Builder clearTradeAmount() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        tradeAmount_ = 0D;
+        onChanged();
+        return this;
+      }
+
+      private Object tradeTime_ = "";
+      /**
+       * <code>required string tradeTime = 2;</code>
+       */
+      public boolean hasTradeTime() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>required string tradeTime = 2;</code>
+       */
+      public String getTradeTime() {
+        Object ref = tradeTime_;
+        if (!(ref instanceof String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            tradeTime_ = s;
+          }
+          return s;
+        } else {
+          return (String) ref;
+        }
+      }
+      /**
+       * <code>required string tradeTime = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+          getTradeTimeBytes() {
+        Object ref = tradeTime_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (String) ref);
+          tradeTime_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string tradeTime = 2;</code>
+       */
+      public Builder setTradeTime(
+          String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        tradeTime_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required string tradeTime = 2;</code>
+       */
+      public Builder clearTradeTime() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        tradeTime_ = getDefaultInstance().getTradeTime();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required string tradeTime = 2;</code>
+       */
+      public Builder setTradeTimeBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        tradeTime_ = value;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:com.ryd.protocol.protobuf.StockTradeAmountInfo)
+    }
+
+    static {
+      defaultInstance = new StockTradeAmountInfo(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:com.ryd.protocol.protobuf.StockTradeAmountInfo)
   }
 
   public interface AccountInfoOrBuilder extends
@@ -16015,6 +16948,62 @@ public final class DiyNettyMessage {
      * <code>optional double stockPrice = 11;</code>
      */
     double getStockPrice();
+
+    /**
+     * <code>optional string buyAccountId = 12;</code>
+     */
+    boolean hasBuyAccountId();
+    /**
+     * <code>optional string buyAccountId = 12;</code>
+     */
+    String getBuyAccountId();
+    /**
+     * <code>optional string buyAccountId = 12;</code>
+     */
+    com.google.protobuf.ByteString
+        getBuyAccountIdBytes();
+
+    /**
+     * <code>optional string sellAccountId = 13;</code>
+     */
+    boolean hasSellAccountId();
+    /**
+     * <code>optional string sellAccountId = 13;</code>
+     */
+    String getSellAccountId();
+    /**
+     * <code>optional string sellAccountId = 13;</code>
+     */
+    com.google.protobuf.ByteString
+        getSellAccountIdBytes();
+
+    /**
+     * <code>optional string buyAccountNumber = 14;</code>
+     */
+    boolean hasBuyAccountNumber();
+    /**
+     * <code>optional string buyAccountNumber = 14;</code>
+     */
+    String getBuyAccountNumber();
+    /**
+     * <code>optional string buyAccountNumber = 14;</code>
+     */
+    com.google.protobuf.ByteString
+        getBuyAccountNumberBytes();
+
+    /**
+     * <code>optional string sellAccountNumber = 15;</code>
+     */
+    boolean hasSellAccountNumber();
+    /**
+     * <code>optional string sellAccountNumber = 15;</code>
+     */
+    String getSellAccountNumber();
+    /**
+     * <code>optional string sellAccountNumber = 15;</code>
+     */
+    com.google.protobuf.ByteString
+        getSellAccountNumberBytes();
   }
   /**
    * Protobuf type {@code com.ryd.protocol.protobuf.TradeRecordInfo}
@@ -16126,6 +17115,30 @@ public final class DiyNettyMessage {
             case 89: {
               bitField0_ |= 0x00000400;
               stockPrice_ = input.readDouble();
+              break;
+            }
+            case 98: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000800;
+              buyAccountId_ = bs;
+              break;
+            }
+            case 106: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00001000;
+              sellAccountId_ = bs;
+              break;
+            }
+            case 114: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00002000;
+              buyAccountNumber_ = bs;
+              break;
+            }
+            case 122: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00004000;
+              sellAccountNumber_ = bs;
               break;
             }
           }
@@ -16468,6 +17481,174 @@ public final class DiyNettyMessage {
       return stockPrice_;
     }
 
+    public static final int BUYACCOUNTID_FIELD_NUMBER = 12;
+    private Object buyAccountId_;
+    /**
+     * <code>optional string buyAccountId = 12;</code>
+     */
+    public boolean hasBuyAccountId() {
+      return ((bitField0_ & 0x00000800) == 0x00000800);
+    }
+    /**
+     * <code>optional string buyAccountId = 12;</code>
+     */
+    public String getBuyAccountId() {
+      Object ref = buyAccountId_;
+      if (ref instanceof String) {
+        return (String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          buyAccountId_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string buyAccountId = 12;</code>
+     */
+    public com.google.protobuf.ByteString
+        getBuyAccountIdBytes() {
+      Object ref = buyAccountId_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (String) ref);
+        buyAccountId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int SELLACCOUNTID_FIELD_NUMBER = 13;
+    private Object sellAccountId_;
+    /**
+     * <code>optional string sellAccountId = 13;</code>
+     */
+    public boolean hasSellAccountId() {
+      return ((bitField0_ & 0x00001000) == 0x00001000);
+    }
+    /**
+     * <code>optional string sellAccountId = 13;</code>
+     */
+    public String getSellAccountId() {
+      Object ref = sellAccountId_;
+      if (ref instanceof String) {
+        return (String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          sellAccountId_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string sellAccountId = 13;</code>
+     */
+    public com.google.protobuf.ByteString
+        getSellAccountIdBytes() {
+      Object ref = sellAccountId_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (String) ref);
+        sellAccountId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int BUYACCOUNTNUMBER_FIELD_NUMBER = 14;
+    private Object buyAccountNumber_;
+    /**
+     * <code>optional string buyAccountNumber = 14;</code>
+     */
+    public boolean hasBuyAccountNumber() {
+      return ((bitField0_ & 0x00002000) == 0x00002000);
+    }
+    /**
+     * <code>optional string buyAccountNumber = 14;</code>
+     */
+    public String getBuyAccountNumber() {
+      Object ref = buyAccountNumber_;
+      if (ref instanceof String) {
+        return (String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          buyAccountNumber_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string buyAccountNumber = 14;</code>
+     */
+    public com.google.protobuf.ByteString
+        getBuyAccountNumberBytes() {
+      Object ref = buyAccountNumber_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (String) ref);
+        buyAccountNumber_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int SELLACCOUNTNUMBER_FIELD_NUMBER = 15;
+    private Object sellAccountNumber_;
+    /**
+     * <code>optional string sellAccountNumber = 15;</code>
+     */
+    public boolean hasSellAccountNumber() {
+      return ((bitField0_ & 0x00004000) == 0x00004000);
+    }
+    /**
+     * <code>optional string sellAccountNumber = 15;</code>
+     */
+    public String getSellAccountNumber() {
+      Object ref = sellAccountNumber_;
+      if (ref instanceof String) {
+        return (String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          sellAccountNumber_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string sellAccountNumber = 15;</code>
+     */
+    public com.google.protobuf.ByteString
+        getSellAccountNumberBytes() {
+      Object ref = sellAccountNumber_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (String) ref);
+        sellAccountNumber_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
     private void initFields() {
       accountId_ = "";
       stockCode_ = "";
@@ -16480,6 +17661,10 @@ public final class DiyNettyMessage {
       dealDate_ = "";
       dealTime_ = "";
       stockPrice_ = 0D;
+      buyAccountId_ = "";
+      sellAccountId_ = "";
+      buyAccountNumber_ = "";
+      sellAccountNumber_ = "";
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -16526,6 +17711,18 @@ public final class DiyNettyMessage {
       }
       if (((bitField0_ & 0x00000400) == 0x00000400)) {
         output.writeDouble(11, stockPrice_);
+      }
+      if (((bitField0_ & 0x00000800) == 0x00000800)) {
+        output.writeBytes(12, getBuyAccountIdBytes());
+      }
+      if (((bitField0_ & 0x00001000) == 0x00001000)) {
+        output.writeBytes(13, getSellAccountIdBytes());
+      }
+      if (((bitField0_ & 0x00002000) == 0x00002000)) {
+        output.writeBytes(14, getBuyAccountNumberBytes());
+      }
+      if (((bitField0_ & 0x00004000) == 0x00004000)) {
+        output.writeBytes(15, getSellAccountNumberBytes());
       }
       getUnknownFields().writeTo(output);
     }
@@ -16579,6 +17776,22 @@ public final class DiyNettyMessage {
       if (((bitField0_ & 0x00000400) == 0x00000400)) {
         size += com.google.protobuf.CodedOutputStream
           .computeDoubleSize(11, stockPrice_);
+      }
+      if (((bitField0_ & 0x00000800) == 0x00000800)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(12, getBuyAccountIdBytes());
+      }
+      if (((bitField0_ & 0x00001000) == 0x00001000)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(13, getSellAccountIdBytes());
+      }
+      if (((bitField0_ & 0x00002000) == 0x00002000)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(14, getBuyAccountNumberBytes());
+      }
+      if (((bitField0_ & 0x00004000) == 0x00004000)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(15, getSellAccountNumberBytes());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -16719,6 +17932,14 @@ public final class DiyNettyMessage {
         bitField0_ = (bitField0_ & ~0x00000200);
         stockPrice_ = 0D;
         bitField0_ = (bitField0_ & ~0x00000400);
+        buyAccountId_ = "";
+        bitField0_ = (bitField0_ & ~0x00000800);
+        sellAccountId_ = "";
+        bitField0_ = (bitField0_ & ~0x00001000);
+        buyAccountNumber_ = "";
+        bitField0_ = (bitField0_ & ~0x00002000);
+        sellAccountNumber_ = "";
+        bitField0_ = (bitField0_ & ~0x00004000);
         return this;
       }
 
@@ -16791,6 +18012,22 @@ public final class DiyNettyMessage {
           to_bitField0_ |= 0x00000400;
         }
         result.stockPrice_ = stockPrice_;
+        if (((from_bitField0_ & 0x00000800) == 0x00000800)) {
+          to_bitField0_ |= 0x00000800;
+        }
+        result.buyAccountId_ = buyAccountId_;
+        if (((from_bitField0_ & 0x00001000) == 0x00001000)) {
+          to_bitField0_ |= 0x00001000;
+        }
+        result.sellAccountId_ = sellAccountId_;
+        if (((from_bitField0_ & 0x00002000) == 0x00002000)) {
+          to_bitField0_ |= 0x00002000;
+        }
+        result.buyAccountNumber_ = buyAccountNumber_;
+        if (((from_bitField0_ & 0x00004000) == 0x00004000)) {
+          to_bitField0_ |= 0x00004000;
+        }
+        result.sellAccountNumber_ = sellAccountNumber_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -16849,6 +18086,26 @@ public final class DiyNettyMessage {
         }
         if (other.hasStockPrice()) {
           setStockPrice(other.getStockPrice());
+        }
+        if (other.hasBuyAccountId()) {
+          bitField0_ |= 0x00000800;
+          buyAccountId_ = other.buyAccountId_;
+          onChanged();
+        }
+        if (other.hasSellAccountId()) {
+          bitField0_ |= 0x00001000;
+          sellAccountId_ = other.sellAccountId_;
+          onChanged();
+        }
+        if (other.hasBuyAccountNumber()) {
+          bitField0_ |= 0x00002000;
+          buyAccountNumber_ = other.buyAccountNumber_;
+          onChanged();
+        }
+        if (other.hasSellAccountNumber()) {
+          bitField0_ |= 0x00004000;
+          sellAccountNumber_ = other.sellAccountNumber_;
+          onChanged();
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -17449,6 +18706,310 @@ public final class DiyNettyMessage {
         return this;
       }
 
+      private Object buyAccountId_ = "";
+      /**
+       * <code>optional string buyAccountId = 12;</code>
+       */
+      public boolean hasBuyAccountId() {
+        return ((bitField0_ & 0x00000800) == 0x00000800);
+      }
+      /**
+       * <code>optional string buyAccountId = 12;</code>
+       */
+      public String getBuyAccountId() {
+        Object ref = buyAccountId_;
+        if (!(ref instanceof String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            buyAccountId_ = s;
+          }
+          return s;
+        } else {
+          return (String) ref;
+        }
+      }
+      /**
+       * <code>optional string buyAccountId = 12;</code>
+       */
+      public com.google.protobuf.ByteString
+          getBuyAccountIdBytes() {
+        Object ref = buyAccountId_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (String) ref);
+          buyAccountId_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string buyAccountId = 12;</code>
+       */
+      public Builder setBuyAccountId(
+          String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000800;
+        buyAccountId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string buyAccountId = 12;</code>
+       */
+      public Builder clearBuyAccountId() {
+        bitField0_ = (bitField0_ & ~0x00000800);
+        buyAccountId_ = getDefaultInstance().getBuyAccountId();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string buyAccountId = 12;</code>
+       */
+      public Builder setBuyAccountIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000800;
+        buyAccountId_ = value;
+        onChanged();
+        return this;
+      }
+
+      private Object sellAccountId_ = "";
+      /**
+       * <code>optional string sellAccountId = 13;</code>
+       */
+      public boolean hasSellAccountId() {
+        return ((bitField0_ & 0x00001000) == 0x00001000);
+      }
+      /**
+       * <code>optional string sellAccountId = 13;</code>
+       */
+      public String getSellAccountId() {
+        Object ref = sellAccountId_;
+        if (!(ref instanceof String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            sellAccountId_ = s;
+          }
+          return s;
+        } else {
+          return (String) ref;
+        }
+      }
+      /**
+       * <code>optional string sellAccountId = 13;</code>
+       */
+      public com.google.protobuf.ByteString
+          getSellAccountIdBytes() {
+        Object ref = sellAccountId_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (String) ref);
+          sellAccountId_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string sellAccountId = 13;</code>
+       */
+      public Builder setSellAccountId(
+          String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00001000;
+        sellAccountId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string sellAccountId = 13;</code>
+       */
+      public Builder clearSellAccountId() {
+        bitField0_ = (bitField0_ & ~0x00001000);
+        sellAccountId_ = getDefaultInstance().getSellAccountId();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string sellAccountId = 13;</code>
+       */
+      public Builder setSellAccountIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00001000;
+        sellAccountId_ = value;
+        onChanged();
+        return this;
+      }
+
+      private Object buyAccountNumber_ = "";
+      /**
+       * <code>optional string buyAccountNumber = 14;</code>
+       */
+      public boolean hasBuyAccountNumber() {
+        return ((bitField0_ & 0x00002000) == 0x00002000);
+      }
+      /**
+       * <code>optional string buyAccountNumber = 14;</code>
+       */
+      public String getBuyAccountNumber() {
+        Object ref = buyAccountNumber_;
+        if (!(ref instanceof String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            buyAccountNumber_ = s;
+          }
+          return s;
+        } else {
+          return (String) ref;
+        }
+      }
+      /**
+       * <code>optional string buyAccountNumber = 14;</code>
+       */
+      public com.google.protobuf.ByteString
+          getBuyAccountNumberBytes() {
+        Object ref = buyAccountNumber_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (String) ref);
+          buyAccountNumber_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string buyAccountNumber = 14;</code>
+       */
+      public Builder setBuyAccountNumber(
+          String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00002000;
+        buyAccountNumber_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string buyAccountNumber = 14;</code>
+       */
+      public Builder clearBuyAccountNumber() {
+        bitField0_ = (bitField0_ & ~0x00002000);
+        buyAccountNumber_ = getDefaultInstance().getBuyAccountNumber();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string buyAccountNumber = 14;</code>
+       */
+      public Builder setBuyAccountNumberBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00002000;
+        buyAccountNumber_ = value;
+        onChanged();
+        return this;
+      }
+
+      private Object sellAccountNumber_ = "";
+      /**
+       * <code>optional string sellAccountNumber = 15;</code>
+       */
+      public boolean hasSellAccountNumber() {
+        return ((bitField0_ & 0x00004000) == 0x00004000);
+      }
+      /**
+       * <code>optional string sellAccountNumber = 15;</code>
+       */
+      public String getSellAccountNumber() {
+        Object ref = sellAccountNumber_;
+        if (!(ref instanceof String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            sellAccountNumber_ = s;
+          }
+          return s;
+        } else {
+          return (String) ref;
+        }
+      }
+      /**
+       * <code>optional string sellAccountNumber = 15;</code>
+       */
+      public com.google.protobuf.ByteString
+          getSellAccountNumberBytes() {
+        Object ref = sellAccountNumber_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (String) ref);
+          sellAccountNumber_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string sellAccountNumber = 15;</code>
+       */
+      public Builder setSellAccountNumber(
+          String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00004000;
+        sellAccountNumber_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string sellAccountNumber = 15;</code>
+       */
+      public Builder clearSellAccountNumber() {
+        bitField0_ = (bitField0_ & ~0x00004000);
+        sellAccountNumber_ = getDefaultInstance().getSellAccountNumber();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string sellAccountNumber = 15;</code>
+       */
+      public Builder setSellAccountNumberBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00004000;
+        sellAccountNumber_ = value;
+        onChanged();
+        return this;
+      }
+
       // @@protoc_insertion_point(builder_scope:com.ryd.protocol.protobuf.TradeRecordInfo)
     }
 
@@ -17480,6 +19041,11 @@ public final class DiyNettyMessage {
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_ryd_protocol_protobuf_StockPriceInfo_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_ryd_protocol_protobuf_StockTradeAmountInfo_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_ryd_protocol_protobuf_StockTradeAmountInfo_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_ryd_protocol_protobuf_AccountInfo_descriptor;
   private static
@@ -17515,7 +19081,7 @@ public final class DiyNettyMessage {
   static {
     String[] descriptorData = {
       "\n\020DiyMessage.proto\022\031com.ryd.protocol.pro" +
-      "tobuf\"\304\005\n\014NettyMessage\022\n\n\002id\030\001 \002(\005\022\016\n\006st" +
+      "tobuf\"\223\006\n\014NettyMessage\022\n\n\002id\030\001 \002(\005\022\016\n\006st" +
       "atus\030\002 \002(\005\022\013\n\003key\030\003 \002(\t\022\014\n\004type\030\004 \001(\005\022\021\n" +
       "\taccountId\030\005 \001(\t\022\021\n\tstartTime\030\006 \001(\004\022\017\n\007e" +
       "ndTime\030\007 \001(\004\022\017\n\007content\030\010 \001(\t\0227\n\tstockIn" +
@@ -17532,60 +19098,67 @@ public final class DiyNettyMessage {
       "obuf.TradeRecordInfo\022A\n\016stockPriceInfo\030\022" +
       " \003(\0132).com.ryd.protocol.protobuf.StockPr" +
       "iceInfo\022C\n\017stockConfigInfo\030\023 \003(\0132*.com.r" +
-      "yd.protocol.protobuf.StockConfigInfo\"i\n\017" +
-      "StockConfigInfo\022\n\n\002id\030\001 \002(\t\022\021\n\tstockName",
-      "\030\002 \002(\t\022\021\n\tstockCode\030\003 \002(\t\022\021\n\tstockType\030\004" +
-      " \002(\005\022\021\n\tboardType\030\005 \002(\005\"\376\005\n\tStockInfo\022\n\n" +
-      "\002id\030\001 \001(\t\022\021\n\tstockName\030\002 \001(\t\022\021\n\tstockCod" +
-      "e\030\003 \001(\t\022\022\n\nstockPrice\030\004 \001(\001\022\021\n\topenPrice" +
-      "\030\005 \001(\001\022\024\n\014bfclosePrice\030\006 \001(\001\022\024\n\014currentP" +
-      "rice\030\007 \001(\001\022\020\n\010maxPrice\030\010 \001(\001\022\020\n\010minPrice" +
-      "\030\t \001(\001\022\027\n\017biddingBuyPrice\030\n \001(\001\022\030\n\020biddi" +
-      "ngSellPrice\030\013 \001(\001\022\023\n\013tradeAmount\030\014 \001(\004\022\022" +
-      "\n\ntradeMoney\030\r \001(\001\022\023\n\013buyOnePrice\030\016 \001(\001\022" +
-      "\024\n\014buyOneAmount\030\017 \001(\005\022\023\n\013buyTwoPrice\030\020 \001",
-      "(\001\022\024\n\014buyTwoAmount\030\021 \001(\005\022\025\n\rbuyThreePric" +
-      "e\030\022 \001(\001\022\026\n\016buyThreeAmount\030\023 \001(\005\022\024\n\014buyFo" +
-      "urPrice\030\024 \001(\001\022\025\n\rbuyFourAmount\030\025 \001(\005\022\024\n\014" +
-      "buyFivePrice\030\026 \001(\001\022\025\n\rbuyFiveAmount\030\027 \001(" +
-      "\005\022\024\n\014sellOnePrice\030\030 \001(\001\022\025\n\rsellOneAmount" +
-      "\030\031 \001(\005\022\024\n\014sellTwoPrice\030\032 \001(\001\022\025\n\rsellTwoA" +
-      "mount\030\033 \001(\005\022\026\n\016sellThreePrice\030\034 \001(\001\022\027\n\017s" +
-      "ellThreeAmount\030\035 \001(\005\022\025\n\rsellFourPrice\030\036 " +
-      "\001(\001\022\026\n\016sellFourAmount\030\037 \001(\005\022\025\n\rsellFiveP" +
-      "rice\030  \001(\001\022\026\n\016sellFiveAmount\030! \001(\005\022\021\n\tst",
-      "ockDate\030\" \001(\t\022\021\n\tstockTime\030# \001(\t\"C\n\016Stoc" +
-      "kPriceInfo\022\n\n\002id\030\001 \002(\t\022\022\n\nstockPrice\030\004 \002" +
-      "(\001\022\021\n\tstockTime\030# \002(\t\"\353\001\n\013AccountInfo\022\021\n" +
-      "\taccountId\030\001 \001(\t\022\020\n\010realName\030\002 \001(\t\022\023\n\013ac" +
-      "countName\030\003 \001(\t\022\022\n\naccountNum\030\004 \001(\t\022\023\n\013t" +
-      "otalAssets\030\005 \001(\001\022\020\n\010useMoney\030\006 \001(\001\022\024\n\014ac" +
-      "countLevel\030\007 \001(\005\022\016\n\006mobile\030\010 \001(\t\022\013\n\003sex\030" +
-      "\t \001(\005\022\016\n\006remark\030\n \001(\t\022\022\n\ncreatetime\030\013 \001(" +
-      "\022\022\020\n\010password\030\014 \001(\t\"\356\001\n\tQuoteInfo\022\017\n\007sto" +
-      "ckId\030\001 \001(\t\022\021\n\taccountId\030\002 \001(\t\022\016\n\006amount\030",
-      "\003 \001(\005\022\021\n\tstockName\030\004 \001(\t\022\022\n\nstockPrice\030\005" +
-      " \001(\001\022\025\n\rcurrentAmount\030\006 \001(\005\022\021\n\tquoteType" +
-      "\030\007 \001(\005\022\022\n\nfrozeMoney\030\010 \001(\001\022\025\n\rcommission" +
-      "Fee\030\t \001(\001\022\016\n\006status\030\n \001(\001\022\020\n\010dateTime\030\013 " +
-      "\001(\022\022\017\n\007quoteId\030\014 \001(\t\"\265\001\n\014PositionInfo\022\017\n" +
-      "\007stockId\030\001 \001(\t\022\021\n\tstockName\030\002 \001(\t\022\021\n\tacc" +
-      "ountId\030\003 \001(\t\022\022\n\nstockPrice\030\004 \001(\001\022\016\n\006amou" +
-      "nt\030\005 \001(\005\022\024\n\014marketAmount\030\006 \001(\005\022\020\n\010avgPri" +
-      "ce\030\007 \001(\001\022\016\n\006status\030\010 \001(\001\022\022\n\npositionId\030\t" +
-      " \001(\t\"\332\001\n\020MoneyJournalInfo\022\021\n\taccountId\030\001",
+      "yd.protocol.protobuf.StockConfigInfo\022M\n\024" +
+      "stockTradeAmountInfo\030\024 \003(\0132/.com.ryd.pro",
+      "tocol.protobuf.StockTradeAmountInfo\"i\n\017S" +
+      "tockConfigInfo\022\n\n\002id\030\001 \002(\t\022\021\n\tstockName\030" +
+      "\002 \002(\t\022\021\n\tstockCode\030\003 \002(\t\022\021\n\tstockType\030\004 " +
+      "\002(\005\022\021\n\tboardType\030\005 \002(\005\"\257\006\n\tStockInfo\022\n\n\002" +
+      "id\030\001 \001(\t\022\021\n\tstockName\030\002 \001(\t\022\021\n\tstockCode" +
+      "\030\003 \001(\t\022\022\n\nstockPrice\030\004 \001(\001\022\021\n\topenPrice\030" +
+      "\005 \001(\001\022\024\n\014bfclosePrice\030\006 \001(\001\022\024\n\014currentPr" +
+      "ice\030\007 \001(\001\022\020\n\010maxPrice\030\010 \001(\001\022\020\n\010minPrice\030" +
+      "\t \001(\001\022\027\n\017biddingBuyPrice\030\n \001(\001\022\030\n\020biddin" +
+      "gSellPrice\030\013 \001(\001\022\023\n\013tradeAmount\030\014 \001(\004\022\022\n",
+      "\ntradeMoney\030\r \001(\001\022\023\n\013buyOnePrice\030\016 \001(\001\022\024" +
+      "\n\014buyOneAmount\030\017 \001(\005\022\023\n\013buyTwoPrice\030\020 \001(" +
+      "\001\022\024\n\014buyTwoAmount\030\021 \001(\005\022\025\n\rbuyThreePrice" +
+      "\030\022 \001(\001\022\026\n\016buyThreeAmount\030\023 \001(\005\022\024\n\014buyFou" +
+      "rPrice\030\024 \001(\001\022\025\n\rbuyFourAmount\030\025 \001(\005\022\024\n\014b" +
+      "uyFivePrice\030\026 \001(\001\022\025\n\rbuyFiveAmount\030\027 \001(\005" +
+      "\022\024\n\014sellOnePrice\030\030 \001(\001\022\025\n\rsellOneAmount\030" +
+      "\031 \001(\005\022\024\n\014sellTwoPrice\030\032 \001(\001\022\025\n\rsellTwoAm" +
+      "ount\030\033 \001(\005\022\026\n\016sellThreePrice\030\034 \001(\001\022\027\n\017se" +
+      "llThreeAmount\030\035 \001(\005\022\025\n\rsellFourPrice\030\036 \001",
+      "(\001\022\026\n\016sellFourAmount\030\037 \001(\005\022\025\n\rsellFivePr" +
+      "ice\030  \001(\001\022\026\n\016sellFiveAmount\030! \001(\005\022\021\n\tsto" +
+      "ckDate\030\" \001(\t\022\021\n\tstockTime\030# \001(\t\022\027\n\017dealT" +
+      "otalAmount\030$ \001(\005\022\026\n\016dealTotalMoney\030% \001(\005" +
+      "\"7\n\016StockPriceInfo\022\022\n\nstockPrice\030\001 \002(\001\022\021" +
+      "\n\tstockTime\030\002 \002(\t\">\n\024StockTradeAmountInf" +
+      "o\022\023\n\013tradeAmount\030\001 \002(\001\022\021\n\ttradeTime\030\002 \002(" +
+      "\t\"\353\001\n\013AccountInfo\022\021\n\taccountId\030\001 \001(\t\022\020\n\010" +
+      "realName\030\002 \001(\t\022\023\n\013accountName\030\003 \001(\t\022\022\n\na" +
+      "ccountNum\030\004 \001(\t\022\023\n\013totalAssets\030\005 \001(\001\022\020\n\010",
+      "useMoney\030\006 \001(\001\022\024\n\014accountLevel\030\007 \001(\005\022\016\n\006" +
+      "mobile\030\010 \001(\t\022\013\n\003sex\030\t \001(\005\022\016\n\006remark\030\n \001(" +
+      "\t\022\022\n\ncreatetime\030\013 \001(\022\022\020\n\010password\030\014 \001(\t\"" +
+      "\356\001\n\tQuoteInfo\022\017\n\007stockId\030\001 \001(\t\022\021\n\taccoun" +
+      "tId\030\002 \001(\t\022\016\n\006amount\030\003 \001(\005\022\021\n\tstockName\030\004" +
+      " \001(\t\022\022\n\nstockPrice\030\005 \001(\001\022\025\n\rcurrentAmoun" +
+      "t\030\006 \001(\005\022\021\n\tquoteType\030\007 \001(\005\022\022\n\nfrozeMoney" +
+      "\030\010 \001(\001\022\025\n\rcommissionFee\030\t \001(\001\022\016\n\006status\030" +
+      "\n \001(\001\022\020\n\010dateTime\030\013 \001(\022\022\017\n\007quoteId\030\014 \001(\t" +
+      "\"\265\001\n\014PositionInfo\022\017\n\007stockId\030\001 \001(\t\022\021\n\tst",
+      "ockName\030\002 \001(\t\022\021\n\taccountId\030\003 \001(\t\022\022\n\nstoc" +
+      "kPrice\030\004 \001(\001\022\016\n\006amount\030\005 \001(\005\022\024\n\014marketAm" +
+      "ount\030\006 \001(\005\022\020\n\010avgPrice\030\007 \001(\001\022\016\n\006status\030\010" +
+      " \001(\001\022\022\n\npositionId\030\t \001(\t\"\332\001\n\020MoneyJourna" +
+      "lInfo\022\021\n\taccountId\030\001 \001(\t\022\021\n\tstockCode\030\002 " +
+      "\001(\t\022\021\n\tstockName\030\003 \001(\t\022\016\n\006amount\030\004 \001(\005\022\020" +
+      "\n\010dealType\030\005 \001(\005\022\021\n\tdealMoney\030\006 \001(\001\022\017\n\007d" +
+      "ealFee\030\007 \001(\001\022\017\n\007dealTax\030\010 \001(\001\022\020\n\010dealDat" +
+      "e\030\t \001(\t\022\020\n\010dealTime\030\n \001(\t\022\022\n\nstockPrice\030" +
+      "\013 \001(\001\"\273\002\n\017TradeRecordInfo\022\021\n\taccountId\030\001",
       " \001(\t\022\021\n\tstockCode\030\002 \001(\t\022\021\n\tstockName\030\003 \001" +
       "(\t\022\016\n\006amount\030\004 \001(\005\022\020\n\010dealType\030\005 \001(\005\022\021\n\t" +
       "dealMoney\030\006 \001(\001\022\017\n\007dealFee\030\007 \001(\001\022\017\n\007deal" +
       "Tax\030\010 \001(\001\022\020\n\010dealDate\030\t \001(\t\022\020\n\010dealTime\030" +
-      "\n \001(\t\022\022\n\nstockPrice\030\013 \001(\001\"\331\001\n\017TradeRecor" +
-      "dInfo\022\021\n\taccountId\030\001 \001(\t\022\021\n\tstockCode\030\002 " +
-      "\001(\t\022\021\n\tstockName\030\003 \001(\t\022\016\n\006amount\030\004 \001(\005\022\020" +
-      "\n\010dealType\030\005 \001(\005\022\021\n\tdealMoney\030\006 \001(\001\022\017\n\007d" +
-      "ealFee\030\007 \001(\001\022\017\n\007dealTax\030\010 \001(\001\022\020\n\010dealDat" +
-      "e\030\t \001(\t\022\020\n\010dealTime\030\n \001(\t\022\022\n\nstockPrice\030",
-      "\013 \001(\001B7\n$com.ryd.basecommon.protocol.pro" +
-      "tobufB\017DiyNettyMessage"
+      "\n \001(\t\022\022\n\nstockPrice\030\013 \001(\001\022\024\n\014buyAccountI" +
+      "d\030\014 \001(\t\022\025\n\rsellAccountId\030\r \001(\t\022\030\n\020buyAcc" +
+      "ountNumber\030\016 \001(\t\022\031\n\021sellAccountNumber\030\017 " +
+      "\001(\tB7\n$com.ryd.basecommon.protocol.proto" +
+      "bufB\017DiyNettyMessage"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -17604,7 +19177,7 @@ public final class DiyNettyMessage {
     internal_static_com_ryd_protocol_protobuf_NettyMessage_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_ryd_protocol_protobuf_NettyMessage_descriptor,
-        new String[] { "Id", "Status", "Key", "Type", "AccountId", "StartTime", "EndTime", "Content", "StockInfo", "AccountInfo", "QuoteInfo", "PositionInfo", "MoneyJournalInfo", "VersionNumber", "Offset", "Size", "TradeRecordInfo", "StockPriceInfo", "StockConfigInfo", });
+        new String[] { "Id", "Status", "Key", "Type", "AccountId", "StartTime", "EndTime", "Content", "StockInfo", "AccountInfo", "QuoteInfo", "PositionInfo", "MoneyJournalInfo", "VersionNumber", "Offset", "Size", "TradeRecordInfo", "StockPriceInfo", "StockConfigInfo", "StockTradeAmountInfo", });
     internal_static_com_ryd_protocol_protobuf_StockConfigInfo_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_com_ryd_protocol_protobuf_StockConfigInfo_fieldAccessorTable = new
@@ -17616,43 +19189,49 @@ public final class DiyNettyMessage {
     internal_static_com_ryd_protocol_protobuf_StockInfo_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_ryd_protocol_protobuf_StockInfo_descriptor,
-        new String[] { "Id", "StockName", "StockCode", "StockPrice", "OpenPrice", "BfclosePrice", "CurrentPrice", "MaxPrice", "MinPrice", "BiddingBuyPrice", "BiddingSellPrice", "TradeAmount", "TradeMoney", "BuyOnePrice", "BuyOneAmount", "BuyTwoPrice", "BuyTwoAmount", "BuyThreePrice", "BuyThreeAmount", "BuyFourPrice", "BuyFourAmount", "BuyFivePrice", "BuyFiveAmount", "SellOnePrice", "SellOneAmount", "SellTwoPrice", "SellTwoAmount", "SellThreePrice", "SellThreeAmount", "SellFourPrice", "SellFourAmount", "SellFivePrice", "SellFiveAmount", "StockDate", "StockTime", });
+        new String[] { "Id", "StockName", "StockCode", "StockPrice", "OpenPrice", "BfclosePrice", "CurrentPrice", "MaxPrice", "MinPrice", "BiddingBuyPrice", "BiddingSellPrice", "TradeAmount", "TradeMoney", "BuyOnePrice", "BuyOneAmount", "BuyTwoPrice", "BuyTwoAmount", "BuyThreePrice", "BuyThreeAmount", "BuyFourPrice", "BuyFourAmount", "BuyFivePrice", "BuyFiveAmount", "SellOnePrice", "SellOneAmount", "SellTwoPrice", "SellTwoAmount", "SellThreePrice", "SellThreeAmount", "SellFourPrice", "SellFourAmount", "SellFivePrice", "SellFiveAmount", "StockDate", "StockTime", "DealTotalAmount", "DealTotalMoney", });
     internal_static_com_ryd_protocol_protobuf_StockPriceInfo_descriptor =
       getDescriptor().getMessageTypes().get(3);
     internal_static_com_ryd_protocol_protobuf_StockPriceInfo_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_ryd_protocol_protobuf_StockPriceInfo_descriptor,
-        new String[] { "Id", "StockPrice", "StockTime", });
-    internal_static_com_ryd_protocol_protobuf_AccountInfo_descriptor =
+        new String[] { "StockPrice", "StockTime", });
+    internal_static_com_ryd_protocol_protobuf_StockTradeAmountInfo_descriptor =
       getDescriptor().getMessageTypes().get(4);
+    internal_static_com_ryd_protocol_protobuf_StockTradeAmountInfo_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_ryd_protocol_protobuf_StockTradeAmountInfo_descriptor,
+        new String[] { "TradeAmount", "TradeTime", });
+    internal_static_com_ryd_protocol_protobuf_AccountInfo_descriptor =
+      getDescriptor().getMessageTypes().get(5);
     internal_static_com_ryd_protocol_protobuf_AccountInfo_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_ryd_protocol_protobuf_AccountInfo_descriptor,
         new String[] { "AccountId", "RealName", "AccountName", "AccountNum", "TotalAssets", "UseMoney", "AccountLevel", "Mobile", "Sex", "Remark", "Createtime", "Password", });
     internal_static_com_ryd_protocol_protobuf_QuoteInfo_descriptor =
-      getDescriptor().getMessageTypes().get(5);
+      getDescriptor().getMessageTypes().get(6);
     internal_static_com_ryd_protocol_protobuf_QuoteInfo_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_ryd_protocol_protobuf_QuoteInfo_descriptor,
         new String[] { "StockId", "AccountId", "Amount", "StockName", "StockPrice", "CurrentAmount", "QuoteType", "FrozeMoney", "CommissionFee", "Status", "DateTime", "QuoteId", });
     internal_static_com_ryd_protocol_protobuf_PositionInfo_descriptor =
-      getDescriptor().getMessageTypes().get(6);
+      getDescriptor().getMessageTypes().get(7);
     internal_static_com_ryd_protocol_protobuf_PositionInfo_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_ryd_protocol_protobuf_PositionInfo_descriptor,
         new String[] { "StockId", "StockName", "AccountId", "StockPrice", "Amount", "MarketAmount", "AvgPrice", "Status", "PositionId", });
     internal_static_com_ryd_protocol_protobuf_MoneyJournalInfo_descriptor =
-      getDescriptor().getMessageTypes().get(7);
+      getDescriptor().getMessageTypes().get(8);
     internal_static_com_ryd_protocol_protobuf_MoneyJournalInfo_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_ryd_protocol_protobuf_MoneyJournalInfo_descriptor,
         new String[] { "AccountId", "StockCode", "StockName", "Amount", "DealType", "DealMoney", "DealFee", "DealTax", "DealDate", "DealTime", "StockPrice", });
     internal_static_com_ryd_protocol_protobuf_TradeRecordInfo_descriptor =
-      getDescriptor().getMessageTypes().get(8);
+      getDescriptor().getMessageTypes().get(9);
     internal_static_com_ryd_protocol_protobuf_TradeRecordInfo_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_ryd_protocol_protobuf_TradeRecordInfo_descriptor,
-        new String[] { "AccountId", "StockCode", "StockName", "Amount", "DealType", "DealMoney", "DealFee", "DealTax", "DealDate", "DealTime", "StockPrice", });
+        new String[] { "AccountId", "StockCode", "StockName", "Amount", "DealType", "DealMoney", "DealFee", "DealTax", "DealDate", "DealTime", "StockPrice", "BuyAccountId", "SellAccountId", "BuyAccountNumber", "SellAccountNumber", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)
