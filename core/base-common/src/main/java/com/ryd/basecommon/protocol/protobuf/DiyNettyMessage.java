@@ -6141,13 +6141,13 @@ public final class DiyNettyMessage {
     int getDealTotalAmount();
 
     /**
-     * <code>optional int32 dealTotalMoney = 37;</code>
+     * <code>optional double dealTotalMoney = 37;</code>
      */
     boolean hasDealTotalMoney();
     /**
-     * <code>optional int32 dealTotalMoney = 37;</code>
+     * <code>optional double dealTotalMoney = 37;</code>
      */
-    int getDealTotalMoney();
+    double getDealTotalMoney();
   }
   /**
    * Protobuf type {@code com.ryd.protocol.protobuf.StockInfo}
@@ -6387,9 +6387,9 @@ public final class DiyNettyMessage {
               dealTotalAmount_ = input.readInt32();
               break;
             }
-            case 296: {
+            case 297: {
               bitField1_ |= 0x00000010;
-              dealTotalMoney_ = input.readInt32();
+              dealTotalMoney_ = input.readDouble();
               break;
             }
           }
@@ -7109,17 +7109,17 @@ public final class DiyNettyMessage {
     }
 
     public static final int DEALTOTALMONEY_FIELD_NUMBER = 37;
-    private int dealTotalMoney_;
+    private double dealTotalMoney_;
     /**
-     * <code>optional int32 dealTotalMoney = 37;</code>
+     * <code>optional double dealTotalMoney = 37;</code>
      */
     public boolean hasDealTotalMoney() {
       return ((bitField1_ & 0x00000010) == 0x00000010);
     }
     /**
-     * <code>optional int32 dealTotalMoney = 37;</code>
+     * <code>optional double dealTotalMoney = 37;</code>
      */
-    public int getDealTotalMoney() {
+    public double getDealTotalMoney() {
       return dealTotalMoney_;
     }
 
@@ -7160,7 +7160,7 @@ public final class DiyNettyMessage {
       stockDate_ = "";
       stockTime_ = "";
       dealTotalAmount_ = 0;
-      dealTotalMoney_ = 0;
+      dealTotalMoney_ = 0D;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -7284,7 +7284,7 @@ public final class DiyNettyMessage {
         output.writeInt32(36, dealTotalAmount_);
       }
       if (((bitField1_ & 0x00000010) == 0x00000010)) {
-        output.writeInt32(37, dealTotalMoney_);
+        output.writeDouble(37, dealTotalMoney_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -7441,7 +7441,7 @@ public final class DiyNettyMessage {
       }
       if (((bitField1_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(37, dealTotalMoney_);
+          .computeDoubleSize(37, dealTotalMoney_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -7632,7 +7632,7 @@ public final class DiyNettyMessage {
         bitField1_ = (bitField1_ & ~0x00000004);
         dealTotalAmount_ = 0;
         bitField1_ = (bitField1_ & ~0x00000008);
-        dealTotalMoney_ = 0;
+        dealTotalMoney_ = 0D;
         bitField1_ = (bitField1_ & ~0x00000010);
         return this;
       }
@@ -9350,34 +9350,34 @@ public final class DiyNettyMessage {
         return this;
       }
 
-      private int dealTotalMoney_ ;
+      private double dealTotalMoney_ ;
       /**
-       * <code>optional int32 dealTotalMoney = 37;</code>
+       * <code>optional double dealTotalMoney = 37;</code>
        */
       public boolean hasDealTotalMoney() {
         return ((bitField1_ & 0x00000010) == 0x00000010);
       }
       /**
-       * <code>optional int32 dealTotalMoney = 37;</code>
+       * <code>optional double dealTotalMoney = 37;</code>
        */
-      public int getDealTotalMoney() {
+      public double getDealTotalMoney() {
         return dealTotalMoney_;
       }
       /**
-       * <code>optional int32 dealTotalMoney = 37;</code>
+       * <code>optional double dealTotalMoney = 37;</code>
        */
-      public Builder setDealTotalMoney(int value) {
+      public Builder setDealTotalMoney(double value) {
         bitField1_ |= 0x00000010;
         dealTotalMoney_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional int32 dealTotalMoney = 37;</code>
+       * <code>optional double dealTotalMoney = 37;</code>
        */
       public Builder clearDealTotalMoney() {
         bitField1_ = (bitField1_ & ~0x00000010);
-        dealTotalMoney_ = 0;
+        dealTotalMoney_ = 0D;
         onChanged();
         return this;
       }
@@ -9968,13 +9968,13 @@ public final class DiyNettyMessage {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>required double tradeAmount = 1;</code>
+     * <code>required int32 tradeAmount = 1;</code>
      */
     boolean hasTradeAmount();
     /**
-     * <code>required double tradeAmount = 1;</code>
+     * <code>required int32 tradeAmount = 1;</code>
      */
-    double getTradeAmount();
+    int getTradeAmount();
 
     /**
      * <code>required string tradeTime = 2;</code>
@@ -10042,9 +10042,9 @@ public final class DiyNettyMessage {
               }
               break;
             }
-            case 9: {
+            case 8: {
               bitField0_ |= 0x00000001;
-              tradeAmount_ = input.readDouble();
+              tradeAmount_ = input.readInt32();
               break;
             }
             case 18: {
@@ -10094,17 +10094,17 @@ public final class DiyNettyMessage {
 
     private int bitField0_;
     public static final int TRADEAMOUNT_FIELD_NUMBER = 1;
-    private double tradeAmount_;
+    private int tradeAmount_;
     /**
-     * <code>required double tradeAmount = 1;</code>
+     * <code>required int32 tradeAmount = 1;</code>
      */
     public boolean hasTradeAmount() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
-     * <code>required double tradeAmount = 1;</code>
+     * <code>required int32 tradeAmount = 1;</code>
      */
-    public double getTradeAmount() {
+    public int getTradeAmount() {
       return tradeAmount_;
     }
 
@@ -10151,7 +10151,7 @@ public final class DiyNettyMessage {
     }
 
     private void initFields() {
-      tradeAmount_ = 0D;
+      tradeAmount_ = 0;
       tradeTime_ = "";
     }
     private byte memoizedIsInitialized = -1;
@@ -10176,7 +10176,7 @@ public final class DiyNettyMessage {
                         throws java.io.IOException {
       getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeDouble(1, tradeAmount_);
+        output.writeInt32(1, tradeAmount_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         output.writeBytes(2, getTradeTimeBytes());
@@ -10192,7 +10192,7 @@ public final class DiyNettyMessage {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeDoubleSize(1, tradeAmount_);
+          .computeInt32Size(1, tradeAmount_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
@@ -10315,7 +10315,7 @@ public final class DiyNettyMessage {
 
       public Builder clear() {
         super.clear();
-        tradeAmount_ = 0D;
+        tradeAmount_ = 0;
         bitField0_ = (bitField0_ & ~0x00000001);
         tradeTime_ = "";
         bitField0_ = (bitField0_ & ~0x00000002);
@@ -10414,34 +10414,34 @@ public final class DiyNettyMessage {
       }
       private int bitField0_;
 
-      private double tradeAmount_ ;
+      private int tradeAmount_ ;
       /**
-       * <code>required double tradeAmount = 1;</code>
+       * <code>required int32 tradeAmount = 1;</code>
        */
       public boolean hasTradeAmount() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
-       * <code>required double tradeAmount = 1;</code>
+       * <code>required int32 tradeAmount = 1;</code>
        */
-      public double getTradeAmount() {
+      public int getTradeAmount() {
         return tradeAmount_;
       }
       /**
-       * <code>required double tradeAmount = 1;</code>
+       * <code>required int32 tradeAmount = 1;</code>
        */
-      public Builder setTradeAmount(double value) {
+      public Builder setTradeAmount(int value) {
         bitField0_ |= 0x00000001;
         tradeAmount_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>required double tradeAmount = 1;</code>
+       * <code>required int32 tradeAmount = 1;</code>
        */
       public Builder clearTradeAmount() {
         bitField0_ = (bitField0_ & ~0x00000001);
-        tradeAmount_ = 0D;
+        tradeAmount_ = 0;
         onChanged();
         return this;
       }
@@ -19280,10 +19280,10 @@ public final class DiyNettyMessage {
       "(\001\022\026\n\016sellFourAmount\030\037 \001(\005\022\025\n\rsellFivePr" +
       "ice\030  \001(\001\022\026\n\016sellFiveAmount\030! \001(\005\022\021\n\tsto" +
       "ckDate\030\" \001(\t\022\021\n\tstockTime\030# \001(\t\022\027\n\017dealT" +
-      "otalAmount\030$ \001(\005\022\026\n\016dealTotalMoney\030% \001(\005" +
+      "otalAmount\030$ \001(\005\022\026\n\016dealTotalMoney\030% \001(\001" +
       "\"7\n\016StockPriceInfo\022\022\n\nstockPrice\030\001 \002(\001\022\021" +
       "\n\tstockTime\030\002 \002(\t\">\n\024StockTradeAmountInf" +
-      "o\022\023\n\013tradeAmount\030\001 \002(\001\022\021\n\ttradeTime\030\002 \002(" +
+      "o\022\023\n\013tradeAmount\030\001 \002(\005\022\021\n\ttradeTime\030\002 \002(" +
       "\t\"\353\001\n\013AccountInfo\022\021\n\taccountId\030\001 \001(\t\022\020\n\010" +
       "realName\030\002 \001(\t\022\023\n\013accountName\030\003 \001(\t\022\022\n\na" +
       "ccountNum\030\004 \001(\t\022\023\n\013totalAssets\030\005 \001(\001\022\020\n\010",
