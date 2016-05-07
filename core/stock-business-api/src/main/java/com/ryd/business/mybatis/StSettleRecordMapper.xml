@@ -166,7 +166,7 @@
     where settle_record_id = #{settleRecordId,jdbcType=CHAR}
   </update>
   <update id="updateBatch" parameterType="java.util.List">
-    <foreach collection="list" item="item" index="index" separator="," >
+    <foreach collection="list" item="item" index="index" separator=";" >
       update st_settle_record
       <set>
         settle_account_id = #{item.settleAccountId,jdbcType=CHAR},
@@ -181,7 +181,7 @@
     </foreach>
   </update>
   <update id="updateBatchSelective" parameterType="java.util.List">
-    <foreach collection="list" item="item" index="index" separator="," >
+    <foreach collection="list" item="item" index="index" separator=";" >
       update st_settle_record
       <set>
         <if test="item.settleAccountId != null">

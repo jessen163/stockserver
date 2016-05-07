@@ -268,7 +268,7 @@
     where id = #{id,jdbcType=CHAR}
   </update>
   <update id="updateBatch" parameterType="java.util.List">
-    <foreach collection="list" item="item" index="index" separator="," >
+    <foreach collection="list" item="item" index="index" separator=";" >
       update st_account
       <set>
         real_name = #{item.realName,jdbcType=VARCHAR},
@@ -290,7 +290,7 @@
     </foreach>
   </update>
   <update id="updateBatchSelective" parameterType="java.util.List">
-    <foreach collection="list" item="item" index="index" separator="," >
+    <foreach collection="list" item="item" index="index" separator=";" >
       update st_account
       <set >
         <if test="item.realName != null" >

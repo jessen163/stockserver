@@ -156,7 +156,7 @@
     where position_id = #{positionId,jdbcType=CHAR}
   </update>
   <update id="updateBatch" parameterType="java.util.List">
-    <foreach collection="list" item="item" index="index" separator="," >
+    <foreach collection="list" item="item" index="index" separator=";" >
       update st_position
       <set>
         account_id = #{item.accountId,jdbcType=CHAR},
@@ -170,7 +170,7 @@
     </foreach>
   </update>
   <update id="updateBatchSelective" parameterType="java.util.List">
-    <foreach collection="list" item="item" index="index" separator="," >
+    <foreach collection="list" item="item" index="index" separator=";" >
       update st_position
       <set>
         <if test="item.accountId != null">
