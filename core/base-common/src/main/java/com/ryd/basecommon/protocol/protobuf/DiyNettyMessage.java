@@ -12472,6 +12472,20 @@ public final class DiyNettyMessage {
      */
     com.google.protobuf.ByteString
         getQuoteIdBytes();
+
+    /**
+     * <code>optional string accountNum = 13;</code>
+     */
+    boolean hasAccountNum();
+    /**
+     * <code>optional string accountNum = 13;</code>
+     */
+    String getAccountNum();
+    /**
+     * <code>optional string accountNum = 13;</code>
+     */
+    com.google.protobuf.ByteString
+        getAccountNumBytes();
   }
   /**
    * Protobuf type {@code com.ryd.protocol.protobuf.QuoteInfo}
@@ -12587,6 +12601,12 @@ public final class DiyNettyMessage {
               com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000800;
               quoteId_ = bs;
+              break;
+            }
+            case 106: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00001000;
+              accountNum_ = bs;
               break;
             }
           }
@@ -12917,6 +12937,48 @@ public final class DiyNettyMessage {
       }
     }
 
+    public static final int ACCOUNTNUM_FIELD_NUMBER = 13;
+    private Object accountNum_;
+    /**
+     * <code>optional string accountNum = 13;</code>
+     */
+    public boolean hasAccountNum() {
+      return ((bitField0_ & 0x00001000) == 0x00001000);
+    }
+    /**
+     * <code>optional string accountNum = 13;</code>
+     */
+    public String getAccountNum() {
+      Object ref = accountNum_;
+      if (ref instanceof String) {
+        return (String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          accountNum_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string accountNum = 13;</code>
+     */
+    public com.google.protobuf.ByteString
+        getAccountNumBytes() {
+      Object ref = accountNum_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (String) ref);
+        accountNum_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
     private void initFields() {
       stockId_ = "";
       accountId_ = "";
@@ -12930,6 +12992,7 @@ public final class DiyNettyMessage {
       status_ = 0D;
       dateTime_ = 0L;
       quoteId_ = "";
+      accountNum_ = "";
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -12979,6 +13042,9 @@ public final class DiyNettyMessage {
       }
       if (((bitField0_ & 0x00000800) == 0x00000800)) {
         output.writeBytes(12, getQuoteIdBytes());
+      }
+      if (((bitField0_ & 0x00001000) == 0x00001000)) {
+        output.writeBytes(13, getAccountNumBytes());
       }
       getUnknownFields().writeTo(output);
     }
@@ -13036,6 +13102,10 @@ public final class DiyNettyMessage {
       if (((bitField0_ & 0x00000800) == 0x00000800)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(12, getQuoteIdBytes());
+      }
+      if (((bitField0_ & 0x00001000) == 0x00001000)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(13, getAccountNumBytes());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -13178,6 +13248,8 @@ public final class DiyNettyMessage {
         bitField0_ = (bitField0_ & ~0x00000400);
         quoteId_ = "";
         bitField0_ = (bitField0_ & ~0x00000800);
+        accountNum_ = "";
+        bitField0_ = (bitField0_ & ~0x00001000);
         return this;
       }
 
@@ -13254,6 +13326,10 @@ public final class DiyNettyMessage {
           to_bitField0_ |= 0x00000800;
         }
         result.quoteId_ = quoteId_;
+        if (((from_bitField0_ & 0x00001000) == 0x00001000)) {
+          to_bitField0_ |= 0x00001000;
+        }
+        result.accountNum_ = accountNum_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -13312,6 +13388,11 @@ public final class DiyNettyMessage {
         if (other.hasQuoteId()) {
           bitField0_ |= 0x00000800;
           quoteId_ = other.quoteId_;
+          onChanged();
+        }
+        if (other.hasAccountNum()) {
+          bitField0_ |= 0x00001000;
+          accountNum_ = other.accountNum_;
           onChanged();
         }
         this.mergeUnknownFields(other.getUnknownFields());
@@ -13897,6 +13978,82 @@ public final class DiyNettyMessage {
   }
   bitField0_ |= 0x00000800;
         quoteId_ = value;
+        onChanged();
+        return this;
+      }
+
+      private Object accountNum_ = "";
+      /**
+       * <code>optional string accountNum = 13;</code>
+       */
+      public boolean hasAccountNum() {
+        return ((bitField0_ & 0x00001000) == 0x00001000);
+      }
+      /**
+       * <code>optional string accountNum = 13;</code>
+       */
+      public String getAccountNum() {
+        Object ref = accountNum_;
+        if (!(ref instanceof String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            accountNum_ = s;
+          }
+          return s;
+        } else {
+          return (String) ref;
+        }
+      }
+      /**
+       * <code>optional string accountNum = 13;</code>
+       */
+      public com.google.protobuf.ByteString
+          getAccountNumBytes() {
+        Object ref = accountNum_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (String) ref);
+          accountNum_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string accountNum = 13;</code>
+       */
+      public Builder setAccountNum(
+          String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00001000;
+        accountNum_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string accountNum = 13;</code>
+       */
+      public Builder clearAccountNum() {
+        bitField0_ = (bitField0_ & ~0x00001000);
+        accountNum_ = getDefaultInstance().getAccountNum();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string accountNum = 13;</code>
+       */
+      public Builder setAccountNumBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00001000;
+        accountNum_ = value;
         onChanged();
         return this;
       }
@@ -19133,32 +19290,32 @@ public final class DiyNettyMessage {
       "useMoney\030\006 \001(\001\022\024\n\014accountLevel\030\007 \001(\005\022\016\n\006" +
       "mobile\030\010 \001(\t\022\013\n\003sex\030\t \001(\005\022\016\n\006remark\030\n \001(" +
       "\t\022\022\n\ncreatetime\030\013 \001(\022\022\020\n\010password\030\014 \001(\t\"" +
-      "\356\001\n\tQuoteInfo\022\017\n\007stockId\030\001 \001(\t\022\021\n\taccoun" +
+      "\202\002\n\tQuoteInfo\022\017\n\007stockId\030\001 \001(\t\022\021\n\taccoun" +
       "tId\030\002 \001(\t\022\016\n\006amount\030\003 \001(\005\022\021\n\tstockName\030\004" +
       " \001(\t\022\022\n\nstockPrice\030\005 \001(\001\022\025\n\rcurrentAmoun" +
       "t\030\006 \001(\005\022\021\n\tquoteType\030\007 \001(\005\022\022\n\nfrozeMoney" +
       "\030\010 \001(\001\022\025\n\rcommissionFee\030\t \001(\001\022\016\n\006status\030" +
       "\n \001(\001\022\020\n\010dateTime\030\013 \001(\022\022\017\n\007quoteId\030\014 \001(\t" +
-      "\"\265\001\n\014PositionInfo\022\017\n\007stockId\030\001 \001(\t\022\021\n\tst",
-      "ockName\030\002 \001(\t\022\021\n\taccountId\030\003 \001(\t\022\022\n\nstoc" +
-      "kPrice\030\004 \001(\001\022\016\n\006amount\030\005 \001(\005\022\024\n\014marketAm" +
-      "ount\030\006 \001(\005\022\020\n\010avgPrice\030\007 \001(\001\022\016\n\006status\030\010" +
-      " \001(\001\022\022\n\npositionId\030\t \001(\t\"\332\001\n\020MoneyJourna" +
-      "lInfo\022\021\n\taccountId\030\001 \001(\t\022\021\n\tstockCode\030\002 " +
-      "\001(\t\022\021\n\tstockName\030\003 \001(\t\022\016\n\006amount\030\004 \001(\005\022\020" +
-      "\n\010dealType\030\005 \001(\005\022\021\n\tdealMoney\030\006 \001(\001\022\017\n\007d" +
-      "ealFee\030\007 \001(\001\022\017\n\007dealTax\030\010 \001(\001\022\020\n\010dealDat" +
-      "e\030\t \001(\t\022\020\n\010dealTime\030\n \001(\t\022\022\n\nstockPrice\030" +
-      "\013 \001(\001\"\273\002\n\017TradeRecordInfo\022\021\n\taccountId\030\001",
+      "\022\022\n\naccountNum\030\r \001(\t\"\265\001\n\014PositionInfo\022\017\n",
+      "\007stockId\030\001 \001(\t\022\021\n\tstockName\030\002 \001(\t\022\021\n\tacc" +
+      "ountId\030\003 \001(\t\022\022\n\nstockPrice\030\004 \001(\001\022\016\n\006amou" +
+      "nt\030\005 \001(\005\022\024\n\014marketAmount\030\006 \001(\005\022\020\n\010avgPri" +
+      "ce\030\007 \001(\001\022\016\n\006status\030\010 \001(\001\022\022\n\npositionId\030\t" +
+      " \001(\t\"\332\001\n\020MoneyJournalInfo\022\021\n\taccountId\030\001" +
       " \001(\t\022\021\n\tstockCode\030\002 \001(\t\022\021\n\tstockName\030\003 \001" +
       "(\t\022\016\n\006amount\030\004 \001(\005\022\020\n\010dealType\030\005 \001(\005\022\021\n\t" +
       "dealMoney\030\006 \001(\001\022\017\n\007dealFee\030\007 \001(\001\022\017\n\007deal" +
       "Tax\030\010 \001(\001\022\020\n\010dealDate\030\t \001(\t\022\020\n\010dealTime\030" +
-      "\n \001(\t\022\022\n\nstockPrice\030\013 \001(\001\022\024\n\014buyAccountI" +
-      "d\030\014 \001(\t\022\025\n\rsellAccountId\030\r \001(\t\022\030\n\020buyAcc" +
-      "ountNumber\030\016 \001(\t\022\031\n\021sellAccountNumber\030\017 " +
-      "\001(\tB7\n$com.ryd.basecommon.protocol.proto" +
-      "bufB\017DiyNettyMessage"
+      "\n \001(\t\022\022\n\nstockPrice\030\013 \001(\001\"\273\002\n\017TradeRecor",
+      "dInfo\022\021\n\taccountId\030\001 \001(\t\022\021\n\tstockCode\030\002 " +
+      "\001(\t\022\021\n\tstockName\030\003 \001(\t\022\016\n\006amount\030\004 \001(\005\022\020" +
+      "\n\010dealType\030\005 \001(\005\022\021\n\tdealMoney\030\006 \001(\001\022\017\n\007d" +
+      "ealFee\030\007 \001(\001\022\017\n\007dealTax\030\010 \001(\001\022\020\n\010dealDat" +
+      "e\030\t \001(\t\022\020\n\010dealTime\030\n \001(\t\022\022\n\nstockPrice\030" +
+      "\013 \001(\001\022\024\n\014buyAccountId\030\014 \001(\t\022\025\n\rsellAccou" +
+      "ntId\030\r \001(\t\022\030\n\020buyAccountNumber\030\016 \001(\t\022\031\n\021" +
+      "sellAccountNumber\030\017 \001(\tB7\n$com.ryd.basec" +
+      "ommon.protocol.protobufB\017DiyNettyMessage"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -19213,7 +19370,7 @@ public final class DiyNettyMessage {
     internal_static_com_ryd_protocol_protobuf_QuoteInfo_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_ryd_protocol_protobuf_QuoteInfo_descriptor,
-        new String[] { "StockId", "AccountId", "Amount", "StockName", "StockPrice", "CurrentAmount", "QuoteType", "FrozeMoney", "CommissionFee", "Status", "DateTime", "QuoteId", });
+        new String[] { "StockId", "AccountId", "Amount", "StockName", "StockPrice", "CurrentAmount", "QuoteType", "FrozeMoney", "CommissionFee", "Status", "DateTime", "QuoteId", "AccountNum", });
     internal_static_com_ryd_protocol_protobuf_PositionInfo_descriptor =
       getDescriptor().getMessageTypes().get(7);
     internal_static_com_ryd_protocol_protobuf_PositionInfo_fieldAccessorTable = new
