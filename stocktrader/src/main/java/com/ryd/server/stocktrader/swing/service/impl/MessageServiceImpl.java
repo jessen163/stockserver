@@ -37,18 +37,22 @@ public class MessageServiceImpl extends MessageServiceI {
             case ApplicationConstants.NETTYMESSAGE_ID_STOCKCONFIGINFO:
                 List<DiyNettyMessage.StockConfigInfo> configInfos = request.getStockConfigInfoList();
                 ClientConstants.stStockConfigList = new ArrayList<StStockConfig>();
-                for(DiyNettyMessage.StockConfigInfo scti : configInfos){
-                    StStockConfig sst = ParamBuilderDtoUtil.getStStockConfig(scti);
-                    ClientConstants.stStockConfigList.add(sst);
+                if (CollectionUtils.isNotEmpty(configInfos)) {
+                    for (DiyNettyMessage.StockConfigInfo scti : configInfos) {
+                        StStockConfig sst = ParamBuilderDtoUtil.getStStockConfig(scti);
+                        ClientConstants.stStockConfigList.add(sst);
+                    }
                 }
                 ClientConstants.stockConfigListToMap();
                 break;
             case ApplicationConstants.NETTYMESSAGE_ID_STOCKINFO:
                 List<DiyNettyMessage.StockInfo> infoList = request.getStockInfoList();
                 ClientConstants.stStockList = new ArrayList<StStock>();
-                for(DiyNettyMessage.StockInfo sti : infoList){
-                    StStock st = ParamBuilderDtoUtil.getStStock(sti);
-                    ClientConstants.stStockList.add(st);
+                if (CollectionUtils.isNotEmpty(infoList)) {
+                    for (DiyNettyMessage.StockInfo sti : infoList) {
+                        StStock st = ParamBuilderDtoUtil.getStStock(sti);
+                        ClientConstants.stStockList.add(st);
+                    }
                 }
                 ClientConstants.stockListToMap();
 
@@ -113,7 +117,7 @@ public class MessageServiceImpl extends MessageServiceI {
 
                 ClientConstants.stAccount = racc;
 
-                if(racc.getAccountName().equals("1")) {
+                if(racc.getAccountNum().equals("1")) {
                     DiyNettyMessage.NettyMessage.Builder builderq = TestParamBuilderUtil.getStockInfoBuilder(ApplicationConstants.NETTYMESSAGE_ID_MONITOR_STOCKINFO, 0, null);
                     MessageServiceImpl.sendMessage(builderq.build());
                 }else{
@@ -124,19 +128,23 @@ public class MessageServiceImpl extends MessageServiceI {
             case ApplicationConstants.NETTYMESSAGE_ID_MYPOSITION:
                 List<DiyNettyMessage.PositionInfo> positionInfos = request.getPositionInfoList();
                 ClientConstants.stPositionList = new ArrayList<StPosition>();
-                for(DiyNettyMessage.PositionInfo pi : positionInfos){
-                    StPosition stp = ParamBuilderDtoUtil.getStPosition(pi);
-                    ClientConstants.stPositionList.add(stp);
+                if (CollectionUtils.isNotEmpty(positionInfos)) {
+                    for (DiyNettyMessage.PositionInfo pi : positionInfos) {
+                        StPosition stp = ParamBuilderDtoUtil.getStPosition(pi);
+                        ClientConstants.stPositionList.add(stp);
+                    }
+                    ClientConstants.positionListToMap();
                 }
-                ClientConstants.positionListToMap();
                 MainFrame.instance().open();
                 break;
             case ApplicationConstants.NETTYMESSAGE_ID_MYQUOTELIST:
                 List<DiyNettyMessage.QuoteInfo> quoteInfos = request.getQuoteInfoList();
                 ClientConstants.stQuoteList = new ArrayList<StQuote>();
-                for(DiyNettyMessage.QuoteInfo qi : quoteInfos){
-                    StQuote sqi = ParamBuilderDtoUtil.getStQuote(qi);
-                    ClientConstants.stQuoteList.add(sqi);
+                if (CollectionUtils.isNotEmpty(quoteInfos)) {
+                    for (DiyNettyMessage.QuoteInfo qi : quoteInfos) {
+                        StQuote sqi = ParamBuilderDtoUtil.getStQuote(qi);
+                        ClientConstants.stQuoteList.add(sqi);
+                    }
                 }
                 ClientConstants.quoteListToMap();
 
@@ -145,9 +153,11 @@ public class MessageServiceImpl extends MessageServiceI {
             case ApplicationConstants.NETTYMESSAGE_ID_MYTRADERECORD:
                 List<DiyNettyMessage.TradeRecordInfo> tradeRecordInfos = request.getTradeRecordInfoList();
                 ClientConstants.stTradeRecordList = new ArrayList<StTradeRecord>();
-                for(DiyNettyMessage.TradeRecordInfo tri : tradeRecordInfos){
-                    StTradeRecord stri = ParamBuilderDtoUtil.getStTradeRecord(tri);
-                    ClientConstants.stTradeRecordList.add(stri);
+                if (CollectionUtils.isNotEmpty(tradeRecordInfos)) {
+                    for (DiyNettyMessage.TradeRecordInfo tri : tradeRecordInfos) {
+                        StTradeRecord stri = ParamBuilderDtoUtil.getStTradeRecord(tri);
+                        ClientConstants.stTradeRecordList.add(stri);
+                    }
                 }
                 ClientConstants.tradeRecordListToMap();
 
@@ -156,9 +166,11 @@ public class MessageServiceImpl extends MessageServiceI {
             case ApplicationConstants.NETTYMESSAGE_ID_MYMONEYJOURNAL:
                 List<DiyNettyMessage.MoneyJournalInfo> moneyJournalInfos = request.getMoneyJournalInfoList();
                 ClientConstants.stMoneyJournalList = new ArrayList<StMoneyJournal>();
-                for(DiyNettyMessage.MoneyJournalInfo ml : moneyJournalInfos){
-                    StMoneyJournal smj = ParamBuilderDtoUtil.getStMoneyJournal(ml);
-                    ClientConstants.stMoneyJournalList.add(smj);
+                if (CollectionUtils.isNotEmpty(moneyJournalInfos)) {
+                    for (DiyNettyMessage.MoneyJournalInfo ml : moneyJournalInfos) {
+                        StMoneyJournal smj = ParamBuilderDtoUtil.getStMoneyJournal(ml);
+                        ClientConstants.stMoneyJournalList.add(smj);
+                    }
                 }
                 ClientConstants.journalListToMap();
 
@@ -187,18 +199,22 @@ public class MessageServiceImpl extends MessageServiceI {
             case ApplicationConstants.NETTYMESSAGE_ID_SINGLESTOCKTRADERECORD:
                 List<DiyNettyMessage.TradeRecordInfo> mtradeRecordInfos = request.getTradeRecordInfoList();
                 ClientConstants.monitorTradeRecordList = new ArrayList<StTradeRecord>();
-                for(DiyNettyMessage.TradeRecordInfo mtri : mtradeRecordInfos){
-                    StTradeRecord mstri = ParamBuilderDtoUtil.getStTradeRecord(mtri);
-                    ClientConstants.monitorTradeRecordList.add(mstri);
+                if (CollectionUtils.isNotEmpty(mtradeRecordInfos)) {
+                    for (DiyNettyMessage.TradeRecordInfo mtri : mtradeRecordInfos) {
+                        StTradeRecord mstri = ParamBuilderDtoUtil.getStTradeRecord(mtri);
+                        ClientConstants.monitorTradeRecordList.add(mstri);
+                    }
                 }
                 MonitorListDialog.instance().open();
                 break;
             case ApplicationConstants.NETTYMESSAGE_ID_MONITOR_STOCKINFO:
                 List<DiyNettyMessage.StockInfo> mstinfos = request.getStockInfoList();
                 ClientConstants.monitorStockInfoList = new ArrayList<StStock>();
-                for(DiyNettyMessage.StockInfo msri : mstinfos){
-                    StStock mstri = ParamBuilderDtoUtil.getMonitorStStock(msri);
-                    ClientConstants.monitorStockInfoList.add(mstri);
+                if (CollectionUtils.isNotEmpty(mstinfos)) {
+                    for (DiyNettyMessage.StockInfo msri : mstinfos) {
+                        StStock mstri = ParamBuilderDtoUtil.getMonitorStStock(msri);
+                        ClientConstants.monitorStockInfoList.add(mstri);
+                    }
                 }
                 MonitorFrame.instance().open();
                 break;

@@ -174,7 +174,7 @@ public class MainFrame extends JFrame {
 		panel4.add(quoteButton);
 		panel4.add(stockInfoButton);
 
-		panel4.add(Box.createHorizontalStrut(410));
+		panel4.add(Box.createHorizontalStrut(810));
 
 		panel2.add(panel4);
 

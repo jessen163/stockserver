@@ -155,8 +155,10 @@ public class MessageHandle {
                 searchPositionDTO.setLimit(request.getSize());
                 List<StPosition> positions = stPositionService.findPositionList(searchPositionDTO);
 
-                for(StPosition sp : positions) {
-                    builder.addPositionInfo(ParamBuilderUtil.getPositionInfoBuilder(sp));
+                if (CollectionUtils.isNotEmpty(positions)) {
+                    for (StPosition sp : positions) {
+                        builder.addPositionInfo(ParamBuilderUtil.getPositionInfoBuilder(sp));
+                    }
                 }
                 builder.setStatus(1);
                 break;
@@ -170,9 +172,10 @@ public class MessageHandle {
                 searchQuoteDTO.setOffset(request.getOffset());
                 searchQuoteDTO.setLimit(request.getSize());
                 List<StQuote> quotes1 = stQuoteService.findQuoteList(searchQuoteDTO);
-
-                for(StQuote q1:quotes1){
-                    builder.addQuoteInfo(ParamBuilderUtil.getQuoteInfoBuilder(q1));
+                if (CollectionUtils.isNotEmpty(quotes1)) {
+                    for (StQuote q1 : quotes1) {
+                        builder.addQuoteInfo(ParamBuilderUtil.getQuoteInfoBuilder(q1));
+                    }
                 }
                 builder.setStatus(1);
                 break;
@@ -186,10 +189,10 @@ public class MessageHandle {
                 searchTradeRecordDTO.setOffset(request.getOffset());
                 searchTradeRecordDTO.setLimit(request.getSize());
                 List<StTradeRecord> records = stTradeRecordService.findTradeRecordList(searchTradeRecordDTO);
-
-                for(StTradeRecord r1:records){
-
-                    builder.addTradeRecordInfo(ParamBuilderUtil.getTradeRecordInfoBuilder(r1,request.getAccountId()));
+                if (CollectionUtils.isNotEmpty(records)) {
+                    for (StTradeRecord r1 : records) {
+                        builder.addTradeRecordInfo(ParamBuilderUtil.getTradeRecordInfoBuilder(r1, request.getAccountId()));
+                    }
                 }
                 builder.setStatus(1);
                 break;
@@ -204,9 +207,10 @@ public class MessageHandle {
                 searchMoneyJournalDTO.setLimit(request.getSize());
                 List<StMoneyJournal> journals = stMoneyJournalService.findMoneyJournalList(searchMoneyJournalDTO);
 
-                for(StMoneyJournal journal : journals) {
-
-                    builder.addMoneyJournalInfo(ParamBuilderUtil.getMoneyJournalInfoBuilder(journal));
+                if (CollectionUtils.isNotEmpty(journals)) {
+                    for (StMoneyJournal journal : journals) {
+                        builder.addMoneyJournalInfo(ParamBuilderUtil.getMoneyJournalInfoBuilder(journal));
+                    }
                 }
                 builder.setStatus(1);
                 break;
@@ -221,8 +225,10 @@ public class MessageHandle {
                 searchAccountDTO.setLimit(request.getSize());
                 List<StAccount> alist =  stAccountService.findStAccountList(searchAccountDTO);
 
-                for(StAccount asc:alist){
-                    builder.addAccountInfo(ParamBuilderUtil.getAccountInfoBuilder(asc));
+                if (CollectionUtils.isNotEmpty(alist)) {
+                    for (StAccount asc : alist) {
+                        builder.addAccountInfo(ParamBuilderUtil.getAccountInfoBuilder(asc));
+                    }
                 }
                 builder.setStatus(1);
                 break;
@@ -257,10 +263,11 @@ public class MessageHandle {
 
                 List<StQuote> ssQuoteList = stQuoteService.findQuoteQueueByStock(ssSearchQuoteDTO);
 
-                for(StQuote ssq:ssQuoteList){
-                    builder.addQuoteInfo(ParamBuilderUtil.getQuoteInfoBuilder(ssq));
+                if (CollectionUtils.isNotEmpty(ssQuoteList)) {
+                    for (StQuote ssq : ssQuoteList) {
+                        builder.addQuoteInfo(ParamBuilderUtil.getQuoteInfoBuilder(ssq));
+                    }
                 }
-
                 builder.setStatus(1);
                 break;
             case ApplicationConstants.NETTYMESSAGE_ID_SINGLESTOCKTRADERECORD:
@@ -270,10 +277,12 @@ public class MessageHandle {
 
                 List<StTradeRecord> sqRecordList = stTradeRecordService.findTradeRecordListByStock(sqSearchTradeRecordDTO);
 
-                for(StTradeRecord sqr:sqRecordList){
-
-                    builder.addTradeRecordInfo(ParamBuilderUtil.getTradeRecordInfoBuilder(sqr,""));
+                if (CollectionUtils.isNotEmpty(sqRecordList)) {
+                    for (StTradeRecord sqr : sqRecordList) {
+                        builder.addTradeRecordInfo(ParamBuilderUtil.getTradeRecordInfoBuilder(sqr, ""));
+                    }
                 }
+                builder.setStatus(1);
                 break;
             case ApplicationConstants.NETTYMESSAGE_ID_REGISTER:
                 DiyNettyMessage.AccountInfo ainfo = request.getAccountInfoList().get(0);
