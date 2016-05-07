@@ -46,6 +46,10 @@ public class ApplicationConstants {
     public final static int NETTYMESSAGE_ID_SINGLESTOCKTRADERECORD = 24;
     /** 消息接口ID 注册 id=25 **/
     public final static int NETTYMESSAGE_ID_REGISTER = 25;
+    /** 消息接口ID 股票行情 id=26 **/
+    public final static int NETTYMESSAGE_ID_MONITOR_STOCKINFO = 26;
+    /** 消息接口ID 成交量 id=27 **/
+    public final static int NETTYMESSAGE_ID_MONITOR_TRADEAMOUNT = 27;
 
     /** 消息接口状态-status 请求 status=0 **/
     public final static int NETTYMESSAGE_STATUS_REQUEST = 0;
