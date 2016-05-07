@@ -298,9 +298,13 @@ public class MainFrame extends JFrame {
 
 		StAccount acc = ClientConstants.stAccount;
 
+		java.text.NumberFormat nf = java.text.NumberFormat.getInstance();
+		nf.setMaximumFractionDigits(2);
+		nf.setGroupingUsed(false);
+
 		account.setText(acc.getAccountName());
-		totalMoney.setText(acc.getTotalAssets()+"");
-		useMoney.setText(acc.getUseMoney()+"");
+		totalMoney.setText(nf.format(acc.getTotalAssets()));
+		useMoney.setText(nf.format(acc.getUseMoney()));
 		
 		setVisible(true);
 		LoginFrame.instance().dispose();
