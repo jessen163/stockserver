@@ -40,6 +40,7 @@ public class StQuote  implements Serializable {
     private Long timeSort; // 用于时间排序-冗余传值用
     private Long quotePriceForSort; // 用于排序-冗余传值用
     private String stockCode; // 股票代码-冗余传值用
+    private String accountNum;//报价帐号--冗余传值用
 
     public String getStockCode() {
         return stockCode;
@@ -159,5 +160,13 @@ public class StQuote  implements Serializable {
 
     public void setDateTime(Long dateTime) {
         this.dateTime = dateTime;
+    }
+
+    public String getAccountNum() {
+        return accountNum;
+    }
+
+    public void setAccountNum(String accountNum) {
+        this.accountNum = accountNum;
     }
 }

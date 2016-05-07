@@ -34,6 +34,13 @@ public class StTradeRecord implements Serializable {
     //交易印花税
     private BigDecimal dealTax;
 
+    //股票代码--冗余传值用
+    private String stockCode;
+    //卖家帐号--冗余传值用
+    private String sellerAccountNum;
+    //买家帐号--冗余传值用
+    private String buyerAccountNum;
+
     public String getRecordId() {
         return recordId;
     }
@@ -112,5 +119,29 @@ public class StTradeRecord implements Serializable {
 
     public void setDealTax(BigDecimal dealTax) {
         this.dealTax = dealTax;
+    }
+
+    public String getStockCode() {
+        return stockCode;
+    }
+
+    public void setStockCode(String stockCode) {
+        this.stockCode = stockCode;
+    }
+
+    public String getSellerAccountNum() {
+        return sellerAccountNum;
+    }
+
+    public void setSellerAccountNum(String sellerAccountNum) {
+        this.sellerAccountNum = sellerAccountNum;
+    }
+
+    public String getBuyerAccountNum() {
+        return buyerAccountNum;
+    }
+
+    public void setBuyerAccountNum(String buyerAccountNum) {
+        this.buyerAccountNum = buyerAccountNum;
     }
 }
