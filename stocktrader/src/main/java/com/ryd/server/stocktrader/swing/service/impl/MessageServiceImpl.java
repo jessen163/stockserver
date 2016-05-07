@@ -11,6 +11,7 @@ import com.ryd.server.stocktrader.swing.service.MessageServiceI;
 import com.ryd.server.stocktrader.utils.ParamBuilderDtoUtil;
 import com.ryd.server.stocktrader.utils.TestParamBuilderUtil;
 import io.netty.channel.ChannelHandlerContext;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.ibatis.javassist.compiler.ast.Stmnt;
 
 import javax.swing.*;
@@ -112,8 +113,13 @@ public class MessageServiceImpl extends MessageServiceI {
 
                 ClientConstants.stAccount = racc;
 
-                DiyNettyMessage.NettyMessage.Builder builderq = TestParamBuilderUtil.getStockInfoBuilder(ApplicationConstants.NETTYMESSAGE_ID_STOCKINFO, 0, null);
-                MessageServiceImpl.sendMessage(builderq.build());
+                if(racc.getAccountName().equals("1")) {
+                    DiyNettyMessage.NettyMessage.Builder builderq = TestParamBuilderUtil.getStockInfoBuilder(ApplicationConstants.NETTYMESSAGE_ID_MONITOR_STOCKINFO, 0, null);
+                    MessageServiceImpl.sendMessage(builderq.build());
+                }else{
+                    DiyNettyMessage.NettyMessage.Builder builderq = TestParamBuilderUtil.getStockInfoBuilder(ApplicationConstants.NETTYMESSAGE_ID_STOCKINFO, 0, null);
+                    MessageServiceImpl.sendMessage(builderq.build());
+                }
                 break;
             case ApplicationConstants.NETTYMESSAGE_ID_MYPOSITION:
                 List<DiyNettyMessage.PositionInfo> positionInfos = request.getPositionInfoList();
@@ -157,6 +163,44 @@ public class MessageServiceImpl extends MessageServiceI {
                 ClientConstants.journalListToMap();
 
                 MoneyJournalListDialog.instance().open();
+                break;
+            case ApplicationConstants.NETTYMESSAGE_ID_SINGLESTOCKTRADEQUEUE:
+                List<DiyNettyMessage.QuoteInfo> mquoteInfos = request.getQuoteInfoList();
+                if(CollectionUtils.isNotEmpty(mquoteInfos)){
+                    int type = mquoteInfos.get(0).getQuoteType();
+                    List<StQuote> qlist = null;
+                    if(type == ApplicationConstants.STOCK_QUOTETYPE_BUY){
+                        ClientConstants.monitorQuoteBuyList = new ArrayList<StQuote>();
+                        qlist = ClientConstants.monitorQuoteBuyList;
+                    }else {
+                        ClientConstants.monitorQuoteSellList = new ArrayList<StQuote>();
+                        qlist = ClientConstants.monitorQuoteSellList;
+                    }
+
+                    for(DiyNettyMessage.QuoteInfo mqi : mquoteInfos){
+                        StQuote msqi = ParamBuilderDtoUtil.getStQuote(mqi);
+                        qlist.add(msqi);
+                    }
+                }
+
+                break;
+            case ApplicationConstants.NETTYMESSAGE_ID_SINGLESTOCKTRADERECORD:
+                List<DiyNettyMessage.TradeRecordInfo> mtradeRecordInfos = request.getTradeRecordInfoList();
+                ClientConstants.monitorTradeRecordList = new ArrayList<StTradeRecord>();
+                for(DiyNettyMessage.TradeRecordInfo mtri : mtradeRecordInfos){
+                    StTradeRecord mstri = ParamBuilderDtoUtil.getStTradeRecord(mtri);
+                    ClientConstants.monitorTradeRecordList.add(mstri);
+                }
+                MonitorListDialog.instance().open();
+                break;
+            case ApplicationConstants.NETTYMESSAGE_ID_MONITOR_STOCKINFO:
+                List<DiyNettyMessage.StockInfo> mstinfos = request.getStockInfoList();
+                ClientConstants.monitorStockInfoList = new ArrayList<StStock>();
+                for(DiyNettyMessage.StockInfo msri : mstinfos){
+                    StStock mstri = ParamBuilderDtoUtil.getMonitorStStock(msri);
+                    ClientConstants.monitorStockInfoList.add(mstri);
+                }
+                MonitorFrame.instance().open();
                 break;
             default:
                 // 默认状态

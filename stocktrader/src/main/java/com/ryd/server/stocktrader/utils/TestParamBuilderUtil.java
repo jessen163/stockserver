@@ -72,7 +72,6 @@ public class TestParamBuilderUtil {
         if(StringUtils.isNotBlank(stockId)) {
             DiyNettyMessage.StockInfo.Builder paramBuilder = DiyNettyMessage.StockInfo.newBuilder();
             paramBuilder.setId(stockId);
-            paramBuilder.setStockCode(stockId);
 
             builder.addStockInfo(paramBuilder);
         }
@@ -151,4 +150,5 @@ public class TestParamBuilderUtil {
 
         return builder;
     }
+
 }

@@ -72,9 +72,11 @@ public class MessageHandle {
                 searchStockDTO.setBoardType(request.getType());
                 List<StStock> stStocks = stStockService.findStockList(searchStockDTO);
 
-                if (stStocks!=null) {
+                if (CollectionUtils.isNotEmpty(stStocks)) {
                     for(StStock stc : stStocks) {
                         builder.addStockInfo(ParamBuilderUtil.getStockInfoBuilder(stc));
+                        builder.addStockPriceInfo(ParamBuilderUtil.getStockPriceInfoBuilder(stc));
+                        builder.addStockTradeAmountInfo(ParamBuilderUtil.getStockTradeAmountInfoBuilder(stc));
                     }
                 }
 
@@ -250,7 +252,7 @@ public class MessageHandle {
             case ApplicationConstants.NETTYMESSAGE_ID_SINGLESTOCKTRADEQUEUE:
                 DiyNettyMessage.StockInfo ssinfo = request.getStockInfoList().get(0);
                 SearchQuoteDTO ssSearchQuoteDTO = new SearchQuoteDTO();
-                ssSearchQuoteDTO.setStockCode(ssinfo.getStockCode());
+                ssSearchQuoteDTO.setStockCode(ssinfo.getId());
                 ssSearchQuoteDTO.setQuoteType(request.getType());
 
                 List<StQuote> ssQuoteList = stQuoteService.findQuoteQueueByStock(ssSearchQuoteDTO);
@@ -264,10 +266,12 @@ public class MessageHandle {
             case ApplicationConstants.NETTYMESSAGE_ID_SINGLESTOCKTRADERECORD:
                 DiyNettyMessage.StockInfo sqinfo = request.getStockInfoList().get(0);
                 SearchTradeRecordDTO sqSearchTradeRecordDTO = new SearchTradeRecordDTO();
+                sqSearchTradeRecordDTO.setStockId(sqinfo.getId());
 
                 List<StTradeRecord> sqRecordList = stTradeRecordService.findTradeRecordListByStock(sqSearchTradeRecordDTO);
 
                 for(StTradeRecord sqr:sqRecordList){
+
                     builder.addTradeRecordInfo(ParamBuilderUtil.getTradeRecordInfoBuilder(sqr,""));
                 }
                 break;
@@ -293,6 +297,27 @@ public class MessageHandle {
                 }else{
                     builder.setStatus(2);
                 }
+                break;
+            case ApplicationConstants.NETTYMESSAGE_ID_MONITOR_STOCKINFO:
+                SearchStockDTO msearchStockDTO = new SearchStockDTO();
+                msearchStockDTO.setBoardType(request.getType());
+                List<StStock> mstStocks = stStockService.findStockList(msearchStockDTO);
+
+                if (CollectionUtils.isNotEmpty(mstStocks)) {
+                    for(StStock mstc : mstStocks) {
+                        builder.addStockInfo(ParamBuilderUtil.getMonitorStockInfoBuilder(mstc));
+                    }
+                }
+
+                builder.setStatus(1);
+                break;
+            case ApplicationConstants.NETTYMESSAGE_ID_MONITOR_TRADEAMOUNT:
+
+//                if (CollectionUtils.isNotEmpty(mstStocks)) {
+//                    for(StStock mstc : mstStocks) {
+//                        builder.addStockInfo(ParamBuilderUtil.getStockTradeAmountInfoBuilder(mstc));
+//                    }
+//                }
                 break;
             default:
                 // 默认状态

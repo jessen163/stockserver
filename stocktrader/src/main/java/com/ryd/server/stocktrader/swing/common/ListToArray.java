@@ -19,7 +19,7 @@ public class ListToArray {
 
 
     /**
-     * {"股票代码", "股票名称", "现价", "今开", "昨收", "最高", "最低", "总手", "买一","卖一" };
+     * {"股票代码", "股票名称", "现价", "今开", "昨收", "最高", "最低", "总手", "买一","卖一","成交量","成交额" };
      * @param stockList
      * @return
      */
@@ -27,7 +27,7 @@ public class ListToArray {
         if(CollectionUtils.isEmpty(stockList)){
             return null;
         }
-        Object[][] arr = new Object[stockList.size()][10];
+        Object[][] arr = new Object[stockList.size()][12];
         for(int i=0;i<stockList.size();i++){
             StStock st = stockList.get(i);
             arr[i][0] = st.getStockCode();
@@ -40,6 +40,34 @@ public class ListToArray {
             arr[i][7] = st.getTradeAmount();
             arr[i][8] = st.getBuyOnePrice();
             arr[i][9] = st.getSellOnePrice();
+            arr[i][10] = st.getTradeTotalAmount();
+            arr[i][11] = st.getTradeTotalMoney();
+        }
+
+        return arr;
+    }
+
+    /**
+     * {"股票代码", "股票名称", "现价", "今开", "昨收", "最高", "最低","成交量","成交额" };
+     * @param stockList
+     * @return
+     */
+    public static Object[][] monitorStockListToArray(List<StStock> stockList){
+        if(CollectionUtils.isEmpty(stockList)){
+            return null;
+        }
+        Object[][] arr = new Object[stockList.size()][9];
+        for(int i=0;i<stockList.size();i++){
+            StStock st = stockList.get(i);
+            arr[i][0] = st.getStockCode();
+            arr[i][1] = st.getStockName();
+            arr[i][2] = st.getCurrentPrice();
+            arr[i][3] = st.getOpenPrice();
+            arr[i][4] = st.getBfclosePrice();
+            arr[i][5] = st.getMaxPrice();
+            arr[i][6] = st.getMinPrice();
+            arr[i][7] = st.getTradeTotalAmount();
+            arr[i][8] = st.getTradeTotalMoney();
         }
 
         return arr;
@@ -112,6 +140,30 @@ public class ListToArray {
     }
 
     /**
+     * {"帐户","股票代码", "股票名称","报价", "申报数量","quoteId"}
+     * @param stQuoteList
+     * @return
+     */
+    public static Object[][] mquoteListToArray(List<StQuote> stQuoteList){
+        if(CollectionUtils.isEmpty(stQuoteList)){
+            return null;
+        }
+        Object[][] arr = new Object[stQuoteList.size()][6];
+        for(int i=0;i<stQuoteList.size();i++){
+            StQuote stq = stQuoteList.get(i);
+            StStockConfig stock = ClientConstants.stStockConfigMapKeyId.get(stq.getStockId());
+            arr[i][0] = stq.getAccountNum();
+            arr[i][1] = stock.getStockCode();
+            arr[i][2] = stock.getStockName();
+            arr[i][3] = stq.getQuotePrice();
+            arr[i][4] = stq.getAmount();
+            arr[i][5] = stq.getQuoteId();
+        }
+
+        return arr;
+    }
+
+    /**
      * {"帐户", "股票代码","股票名称","报价", "交易数量", "类型", "交易金额", "佣金","印花税","交易时间"}
      * @param moneyJournals
      * @return
@@ -163,6 +215,32 @@ public class ListToArray {
             }
             arr[i][5] = DateUtils.formatLongToStr(stq.getDateTime(),DateUtils.TIME_FORMAT);
             arr[i][6] = "";
+        }
+
+        return arr;
+    }
+
+    /**
+     * {"买入帐户","卖出帐户","股票代码", "股票名称","报价", "数量","交易时间", "ID"}
+     * @param stTradeRecords
+     * @return
+     */
+    public static Object[][] mrecordListToArray(List<StTradeRecord> stTradeRecords){
+        if(CollectionUtils.isEmpty(stTradeRecords)){
+            return null;
+        }
+        Object[][] arr = new Object[stTradeRecords.size()][8];
+        for(int i=0;i<stTradeRecords.size();i++){
+            StTradeRecord stq = stTradeRecords.get(i);
+            StStockConfig stock = ClientConstants.stStockConfigMapKeyId.get(stq.getStockId());
+            arr[i][0] = stq.getBuyerAccountNum();
+            arr[i][1] = stq.getSellerAccountNum();
+            arr[i][2] = stock.getStockCode();
+            arr[i][3] = stock.getStockName();
+            arr[i][4] = stq.getQuotePrice().doubleValue();
+            arr[i][5] = stq.getAmount();
+            arr[i][6] = DateUtils.formatLongToStr(stq.getDateTime(),DateUtils.TIME_FORMAT);
+            arr[i][7] = "";
         }
 
         return arr;

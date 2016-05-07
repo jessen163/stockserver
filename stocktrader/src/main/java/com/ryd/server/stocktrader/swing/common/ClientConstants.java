@@ -46,6 +46,16 @@ public class ClientConstants {
     // 资金流水信息
     public static Map<String, StMoneyJournal> stMoneyJournalMap = new HashMap<String, StMoneyJournal>();
 
+
+    // 监控端交易记录信息
+    public static List<StTradeRecord> monitorTradeRecordList = null;
+    // 监控端买入报价信息
+    public static List<StQuote> monitorQuoteBuyList = null;
+    // 监控端卖出报价信息
+    public static List<StQuote> monitorQuoteSellList = null;
+    //监控端股票信息
+    public static List<StStock> monitorStockInfoList = null;
+
     public static void stockListToMap() {
         if (CollectionUtils.isNotEmpty(stStockList)) {
             stStockMap.clear();

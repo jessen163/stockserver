@@ -37,40 +37,41 @@ public class ParamBuilderUtil {
         builder.setId(stStock.getId());
         builder.setStockName(stStock.getStockName());
         builder.setStockCode(stStock.getStockCode());
-        builder.setStockPrice(stStock.getCurrentPrice().doubleValue());
-        builder.setOpenPrice(stStock.getOpenPrice().doubleValue());
-        builder.setBfclosePrice(stStock.getBfclosePrice().doubleValue());
-        builder.setCurrentPrice(stStock.getCurrentPrice().doubleValue());
-        builder.setMaxPrice(stStock.getMaxPrice().doubleValue());
-        builder.setMinPrice(stStock.getMinPrice().doubleValue());
-        builder.setBiddingBuyPrice(stStock.getBiddingBuyPrice().doubleValue());
-        builder.setBiddingSellPrice(stStock.getBiddingSellPrice().doubleValue());
+        builder.setStockPrice(stStock.getCurrentPrice() == null ? 0 : stStock.getCurrentPrice().doubleValue());
+        builder.setOpenPrice(stStock.getOpenPrice() == null ? 0 : stStock.getOpenPrice().doubleValue());
+        builder.setBfclosePrice(stStock.getBfclosePrice() == null ? 0 : stStock.getBfclosePrice().doubleValue());
+        builder.setCurrentPrice(stStock.getCurrentPrice() == null ? 0 : stStock.getCurrentPrice().doubleValue());
+        builder.setMaxPrice(stStock.getMaxPrice() == null ? 0 : stStock.getMaxPrice().doubleValue());
+        builder.setMinPrice(stStock.getMinPrice() == null ? 0 : stStock.getMinPrice().doubleValue());
+        builder.setBiddingBuyPrice(stStock.getBiddingBuyPrice() == null ? 0 : stStock.getBiddingBuyPrice().doubleValue());
+        builder.setBiddingSellPrice(stStock.getBiddingSellPrice() == null ? 0 : stStock.getBiddingSellPrice().doubleValue());
         builder.setTradeAmount(stStock.getTradeAmount());
-        builder.setTradeMoney(stStock.getTradeMoney().doubleValue());
-        builder.setBuyOnePrice(stStock.getBuyOnePrice().doubleValue());
+        builder.setTradeMoney(stStock.getTradeMoney() == null ? 0 : stStock.getTradeMoney().doubleValue());
+        builder.setBuyOnePrice(stStock.getBuyOnePrice() == null ? 0 : stStock.getBuyOnePrice().doubleValue());
         builder.setBuyOneAmount(stStock.getBuyOneAmount().intValue());
-        builder.setBuyTwoPrice(stStock.getBuyTwoPrice().doubleValue());
+        builder.setBuyTwoPrice(stStock.getBuyTwoPrice() == null ? 0 : stStock.getBuyTwoPrice().doubleValue());
         builder.setBuyTwoAmount(stStock.getBuyTwoAmount().intValue());
-        builder.setBuyThreePrice(stStock.getBuyThreePrice().doubleValue());
+        builder.setBuyThreePrice(stStock.getBuyThreePrice() == null ? 0 : stStock.getBuyThreePrice().doubleValue());
         builder.setBuyThreeAmount(stStock.getBuyThreeAmount().intValue());
-        builder.setBuyFourPrice(stStock.getBuyFourPrice().doubleValue());
+        builder.setBuyFourPrice(stStock.getBuyFourPrice() == null ? 0 : stStock.getBuyFourPrice().doubleValue());
         builder.setBuyFourAmount(stStock.getBuyFourAmount().intValue());
-        builder.setBuyFivePrice(stStock.getBuyFivePrice().doubleValue());
+        builder.setBuyFivePrice(stStock.getBuyFivePrice() == null ? 0 : stStock.getBuyFivePrice().doubleValue());
         builder.setBuyFiveAmount(stStock.getBuyFiveAmount().intValue());
 
-        builder.setSellOnePrice(stStock.getSellOnePrice().doubleValue());
+        builder.setSellOnePrice(stStock.getSellOnePrice() == null ? 0 : stStock.getSellOnePrice().doubleValue());
         builder.setSellOneAmount(stStock.getSellOneAmount().intValue());
-        builder.setSellTwoPrice(stStock.getSellTwoPrice().doubleValue());
+        builder.setSellTwoPrice(stStock.getSellTwoPrice() == null ? 0 : stStock.getSellTwoPrice().doubleValue());
         builder.setSellTwoAmount(stStock.getSellTwoAmount().intValue());
-        builder.setSellThreePrice(stStock.getSellThreePrice().doubleValue());
+        builder.setSellThreePrice(stStock.getSellThreePrice() == null ? 0 : stStock.getSellThreePrice().doubleValue());
         builder.setSellThreeAmount(stStock.getSellThreeAmount().intValue());
-        builder.setSellFourPrice(stStock.getSellFourPrice().doubleValue());
+        builder.setSellFourPrice(stStock.getSellFourPrice() == null ? 0 : stStock.getSellFourPrice().doubleValue());
         builder.setSellFourAmount(stStock.getSellFourAmount().intValue());
-        builder.setSellFivePrice(stStock.getSellFivePrice().doubleValue());
+        builder.setSellFivePrice(stStock.getSellFivePrice() == null ? 0 : stStock.getSellFivePrice().doubleValue());
         builder.setSellFiveAmount(stStock.getSellFiveAmount().intValue());
         builder.setStockDate(DateUtils.formatDateToStr(stStock.getStockDate(), DateUtils.DATE_FORMAT));
         builder.setStockTime(DateUtils.formatDateToStr(stStock.getStockTime(), "HH:mm:ss"));
-
+        builder.setDealTotalAmount(stStock.getTradeTotalAmount() == null ? 0 : stStock.getTradeTotalAmount().intValue());
+        builder.setDealTotalMoney(stStock.getTradeTotalMoney() == null ? 0 : stStock.getTradeTotalMoney().intValue());
         return builder;
     }
 
@@ -81,12 +82,37 @@ public class ParamBuilderUtil {
      */
     public static DiyNettyMessage.StockPriceInfo.Builder getStockPriceInfoBuilder(StStock stStock){
         DiyNettyMessage.StockPriceInfo.Builder builder = DiyNettyMessage.StockPriceInfo.newBuilder();
-        builder.setId(stStock.getId());
-        builder.setStockPrice(stStock.getCurrentPrice().doubleValue());
+        builder.setStockPrice(stStock.getCurrentPrice() == null ? 0 : stStock.getCurrentPrice().doubleValue());
         builder.setStockTime(DateUtils.formatDateToStr(stStock.getStockTime(), "HH:mm:ss"));
         return builder;
     }
 
+    public static DiyNettyMessage.StockTradeAmountInfo.Builder getStockTradeAmountInfoBuilder(StStock stStock){
+        DiyNettyMessage.StockTradeAmountInfo.Builder builder = DiyNettyMessage.StockTradeAmountInfo.newBuilder();
+        builder.setTradeAmount(stStock.getTradeAmount() == null ? 0 : stStock.getTradeAmount().intValue());
+        builder.setTradeTime(DateUtils.formatDateToStr(stStock.getStockTime(), "HH:mm:ss"));
+        return builder;
+    }
+
+
+    public static DiyNettyMessage.StockInfo.Builder getMonitorStockInfoBuilder(StStock stStock) {
+
+        DiyNettyMessage.StockInfo.Builder builder = DiyNettyMessage.StockInfo.newBuilder();
+        builder.setId(stStock.getId());
+        builder.setStockName(stStock.getStockName());
+        builder.setStockCode(stStock.getStockCode());
+        builder.setStockPrice(stStock.getCurrentPrice() == null ? 0 : stStock.getCurrentPrice().doubleValue());
+        builder.setOpenPrice(stStock.getOpenPrice() == null ? 0 : stStock.getOpenPrice().doubleValue());
+        builder.setBfclosePrice(stStock.getBfclosePrice() == null ? 0 : stStock.getBfclosePrice().doubleValue());
+        builder.setCurrentPrice(stStock.getCurrentPrice() == null ? 0 : stStock.getCurrentPrice().doubleValue());
+        builder.setMaxPrice(stStock.getMaxPrice() == null ? 0 : stStock.getMaxPrice().doubleValue());
+        builder.setMinPrice(stStock.getMinPrice() == null ? 0 : stStock.getMinPrice().doubleValue());
+        builder.setStockDate(DateUtils.formatDateToStr(stStock.getStockDate(), DateUtils.DATE_FORMAT));
+        builder.setStockTime(DateUtils.formatDateToStr(stStock.getStockTime(), "HH:mm:ss"));
+        builder.setDealTotalAmount(stStock.getTradeTotalAmount() == null ? 0 : stStock.getTradeTotalAmount().intValue());
+        builder.setDealTotalMoney(stStock.getTradeTotalMoney() == null ? 0 : stStock.getTradeTotalMoney().intValue());
+        return builder;
+    }
     /**
      * 帐户信息
      * @param stAcc
@@ -165,19 +191,22 @@ public class ParamBuilderUtil {
 
         DiyNettyMessage.TradeRecordInfo.Builder tbuiler = DiyNettyMessage.TradeRecordInfo.newBuilder();
         tbuiler.setAccountId(accountId);
+        tbuiler.setSellAccountId(r1.getSellerAccountId());
+        tbuiler.setBuyAccountId(r1.getBuyerAccountId());
+        tbuiler.setSellAccountNumber(r1.getSellerAccountNum());
+        tbuiler.setBuyAccountNumber(r1.getBuyerAccountNum());
         tbuiler.setStockCode(r1.getStockId());
         tbuiler.setStockName("");
-        tbuiler.setAmount(r1.getAmount()==null?0:r1.getAmount().intValue());
+        tbuiler.setAmount(r1.getAmount() == null ? 0 : r1.getAmount().intValue());
         tbuiler.setStockPrice(r1.getQuotePrice() == null ? 0 : r1.getQuotePrice().doubleValue());
         if(accountId.equals(r1.getSellerAccountId())){
             tbuiler.setDealType(ApplicationConstants.STOCK_QUOTETYPE_SELL);
-            tbuiler.setDealFee(r1.getSellFee() == null ? 0 : r1.getSellFee().doubleValue());
-            tbuiler.setDealTax(r1.getDealTax() == null ? 0 : r1.getDealTax().doubleValue());
         } else {
             tbuiler.setDealType(ApplicationConstants.STOCK_QUOTETYPE_BUY);
-            tbuiler.setDealFee(r1.getBuyFee() == null ? 0 : r1.getBuyFee().doubleValue());
         }
-
+        tbuiler.setDealFee(r1.getBuyFee() == null ? 0 : r1.getBuyFee().doubleValue());
+        tbuiler.setDealFee(r1.getSellFee() == null ? 0 : r1.getSellFee().doubleValue());
+        tbuiler.setDealTax(r1.getDealTax() == null ? 0 : r1.getDealTax().doubleValue());
         tbuiler.setDealDate(DateUtils.formatLongToStr(r1.getDateTime(), DateUtils.DATE_FORMAT));
         tbuiler.setDealTime(DateUtils.formatLongToStr(r1.getDateTime(), "HH:mm:ss"));
 
@@ -199,9 +228,9 @@ public class ParamBuilderUtil {
         mbuiler.setAmount(journal.getAmount() == null ? 0 : journal.getAmount().intValue());
         mbuiler.setDealType(journal.getDealType() == null ? 1 : journal.getDealType().intValue());
         mbuiler.setDealMoney(journal.getDealMoney() == null ? 0 : journal.getDealMoney().doubleValue());
-        mbuiler.setDealFee(journal.getDealFee()==null?0 : journal.getDealFee().doubleValue());
+        mbuiler.setDealFee(journal.getDealFee() == null ? 0 : journal.getDealFee().doubleValue());
         if(journal.getDealType() == ApplicationConstants.STOCK_QUOTETYPE_SELL) {
-            mbuiler.setDealTax(journal.getDealTax()==null?0:journal.getDealTax().doubleValue());
+            mbuiler.setDealTax(journal.getDealTax() == null ? 0 : journal.getDealTax().doubleValue());
         }
         mbuiler.setDealDate(DateUtils.formatLongToStr(journal.getDateTime(), DateUtils.DATE_FORMAT));
         mbuiler.setDealTime(DateUtils.formatLongToStr(journal.getDateTime(), "HH:mm:ss"));

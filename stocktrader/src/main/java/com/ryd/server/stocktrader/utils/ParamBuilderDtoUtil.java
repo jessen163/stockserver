@@ -55,27 +55,51 @@ public class ParamBuilderDtoUtil {
         builder.setBuyOnePrice(stStock.getBuyOnePrice());
         builder.setBuyOneAmount((long) stStock.getBuyOneAmount());
         builder.setBuyTwoPrice(stStock.getBuyTwoPrice());
-        builder.setBuyTwoAmount((long)stStock.getBuyTwoAmount());
+        builder.setBuyTwoAmount((long) stStock.getBuyTwoAmount());
         builder.setBuyThreePrice(stStock.getBuyThreePrice());
-        builder.setBuyThreeAmount((long)stStock.getBuyThreeAmount());
+        builder.setBuyThreeAmount((long) stStock.getBuyThreeAmount());
         builder.setBuyFourPrice(stStock.getBuyFourPrice());
-        builder.setBuyFourAmount((long)stStock.getBuyFourAmount());
+        builder.setBuyFourAmount((long) stStock.getBuyFourAmount());
         builder.setBuyFivePrice(stStock.getBuyFivePrice());
-        builder.setBuyFiveAmount((long)stStock.getBuyFiveAmount());
+        builder.setBuyFiveAmount((long) stStock.getBuyFiveAmount());
 
         builder.setSellOnePrice(stStock.getSellOnePrice());
-        builder.setSellOneAmount((long)stStock.getSellOneAmount());
+        builder.setSellOneAmount((long) stStock.getSellOneAmount());
         builder.setSellTwoPrice(stStock.getSellTwoPrice());
-        builder.setSellTwoAmount((long)stStock.getSellTwoAmount());
+        builder.setSellTwoAmount((long) stStock.getSellTwoAmount());
         builder.setSellThreePrice(stStock.getSellThreePrice());
-        builder.setSellThreeAmount((long)stStock.getSellThreeAmount());
+        builder.setSellThreeAmount((long) stStock.getSellThreeAmount());
         builder.setSellFourPrice(stStock.getSellFourPrice());
-        builder.setSellFourAmount((long)stStock.getSellFourAmount());
+        builder.setSellFourAmount((long) stStock.getSellFourAmount());
         builder.setSellFivePrice(stStock.getSellFivePrice());
-        builder.setSellFiveAmount((long)stStock.getSellFiveAmount());
+        builder.setSellFiveAmount((long) stStock.getSellFiveAmount());
         builder.setStockDate(DateUtils.formatStrToDate(stStock.getStockDate(), DateUtils.DATE_FORMAT));
         builder.setStockTime(DateUtils.formatStrToDate(stStock.getStockTime(), "HH:mm:ss"));
+        builder.setTradeTotalAmount((long) stStock.getDealTotalAmount());
+        builder.setTradeTotalMoney((double)stStock.getDealTotalMoney());
+        return builder;
+    }
 
+    /**
+     * 监控端股票信息
+     * @param stStock
+     * @return
+     */
+    public static StStock getMonitorStStock(DiyNettyMessage.StockInfo stStock){
+
+        StStock builder = new StStock();
+        builder.setId(stStock.getId());
+        builder.setStockName(stStock.getStockName());
+        builder.setStockCode(stStock.getStockCode());
+        builder.setOpenPrice(stStock.getOpenPrice());
+        builder.setBfclosePrice(stStock.getBfclosePrice());
+        builder.setCurrentPrice(stStock.getCurrentPrice());
+        builder.setMaxPrice(stStock.getMaxPrice());
+        builder.setMinPrice(stStock.getMinPrice());
+        builder.setStockDate(DateUtils.formatStrToDate(stStock.getStockDate(), DateUtils.DATE_FORMAT));
+        builder.setStockTime(DateUtils.formatStrToDate(stStock.getStockTime(), "HH:mm:ss"));
+        builder.setTradeTotalAmount((long) stStock.getDealTotalAmount());
+        builder.setTradeTotalMoney((double)stStock.getDealTotalMoney());
         return builder;
     }
 
@@ -130,6 +154,7 @@ public class ParamBuilderDtoUtil {
         StQuote qbuiler =  new StQuote();
         qbuiler.setStockId(q1.getStockId());
         qbuiler.setAccountId(q1.getAccountId());
+        qbuiler.setAccountNum(q1.getAccountNum());
         qbuiler.setQuoteId(q1.getQuoteId());
         qbuiler.setQuotePrice(BigDecimal.valueOf(q1.getStockPrice()));
         qbuiler.setQuoteType((short) q1.getQuoteType());
@@ -154,14 +179,20 @@ public class ParamBuilderDtoUtil {
         tbuiler.setStockId(r1.getStockCode());
         tbuiler.setAmount((long) r1.getAmount());
         tbuiler.setQuotePrice(BigDecimal.valueOf(r1.getStockPrice()));
+        tbuiler.setSellerAccountId(r1.getSellAccountId());
+        tbuiler.setBuyerAccountId(r1.getBuyAccountId());
+        tbuiler.setSellerAccountNum(r1.getSellAccountNumber());
+        tbuiler.setBuyerAccountNum(r1.getBuyAccountNumber());
         if(r1.getDealType()==ApplicationConstants.STOCK_QUOTETYPE_BUY){
             tbuiler.setBuyerAccountId(r1.getAccountId());
-            tbuiler.setBuyFee(BigDecimal.valueOf(r1.getDealFee()));
+
         }else {
             tbuiler.setSellerAccountId(r1.getAccountId());
-            tbuiler.setSellFee(BigDecimal.valueOf(r1.getDealFee()));
-            tbuiler.setDealTax(BigDecimal.valueOf(r1.getDealTax()));
+
         }
+        tbuiler.setBuyFee(BigDecimal.valueOf(r1.getDealFee()));
+        tbuiler.setSellFee(BigDecimal.valueOf(r1.getDealFee()));
+        tbuiler.setDealTax(BigDecimal.valueOf(r1.getDealTax()));
         tbuiler.setDateTime(DateUtils.formatStrToDate(r1.getDealDate()+" "+r1.getDealTime(),DateUtils.TIME_FORMAT).getTime());
         return tbuiler;
     }
