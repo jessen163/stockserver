@@ -53,6 +53,13 @@ public interface StAccountService {
     public StAccount getStAccountById(String accountId);
 
     /**
+     * 查找数量
+     * @param searchAccountDTO
+     * @return
+     */
+    public Integer getCount(SearchAccountDTO searchAccountDTO);
+
+    /**
      * 根据帐号密码查找
      * @param accountNum
      * @param password

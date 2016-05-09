@@ -13,6 +13,18 @@ import java.util.Date;
 public class SearchAccountDTO implements Serializable {
     // 账户
     private String accountId;
+    //真实姓名
+    private String realName;
+    //用户名
+    private String accountName;
+    //帐号
+    private String accountNum;
+    //帐户级别 1.普通 2.VIP
+    private Short accountLevel;
+    //帐户类型 1.真实账户 2.马甲帐户
+    private Short accountType;
+    //状态 1.正常 2.禁用
+    private Short status;
     // 开始时间
     private Date startDate;
     // 结束时间
@@ -28,6 +40,62 @@ public class SearchAccountDTO implements Serializable {
 
     public void setAccountId(String accountId) {
         this.accountId = accountId;
+    }
+
+    public int getLimit() {
+        return limit;
+    }
+
+    public void setLimit(int limit) {
+        this.limit = limit;
+    }
+
+    public String getRealName() {
+        return realName;
+    }
+
+    public void setRealName(String realName) {
+        this.realName = realName;
+    }
+
+    public String getAccountName() {
+        return accountName;
+    }
+
+    public void setAccountName(String accountName) {
+        this.accountName = accountName;
+    }
+
+    public String getAccountNum() {
+        return accountNum;
+    }
+
+    public void setAccountNum(String accountNum) {
+        this.accountNum = accountNum;
+    }
+
+    public Short getAccountLevel() {
+        return accountLevel;
+    }
+
+    public void setAccountLevel(Short accountLevel) {
+        this.accountLevel = accountLevel;
+    }
+
+    public Short getAccountType() {
+        return accountType;
+    }
+
+    public void setAccountType(Short accountType) {
+        this.accountType = accountType;
+    }
+
+    public Short getStatus() {
+        return status;
+    }
+
+    public void setStatus(Short status) {
+        this.status = status;
     }
 
     public Date getStartDate() {
@@ -52,13 +120,5 @@ public class SearchAccountDTO implements Serializable {
 
     public void setOffset(int offset) {
         this.offset = offset;
-    }
-
-    public int getLimit() {
-        return limit;
-    }
-
-    public void setLimit(int limit) {
-        this.limit = limit;
     }
 }

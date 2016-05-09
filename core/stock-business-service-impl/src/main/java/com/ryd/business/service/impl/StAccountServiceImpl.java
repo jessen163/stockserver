@@ -117,6 +117,21 @@ public class StAccountServiceImpl implements StAccountService {
     }
 
     @Override
+    public Integer getCount(SearchAccountDTO searchAccountDTO) {
+        StAccount account = new StAccount();
+        account.setRealName(searchAccountDTO.getRealName());
+        account.setAccountName(searchAccountDTO.getAccountName());
+        account.setAccountNum(searchAccountDTO.getAccountNum());
+        account.setAccountLevel(searchAccountDTO.getAccountLevel());
+        account.setAccountType(searchAccountDTO.getAccountType());
+        account.setStatus(searchAccountDTO.getStatus());
+
+        Long startTime = searchAccountDTO.getStartDate()==null?null:searchAccountDTO.getStartDate().getTime();
+        Long endTime = searchAccountDTO.getEndDate()==null?null:searchAccountDTO.getEndDate().getTime();
+        return stAccountDao.getCount(account,startTime,endTime);
+    }
+
+    @Override
     public StAccount findStAccount(String accountNum, String password) {
         return stAccountDao.getStAccountByLogin(accountNum, password);
     }
@@ -129,7 +144,12 @@ public class StAccountServiceImpl implements StAccountService {
     @Override
     public List<StAccount> findStAccountList(SearchAccountDTO searchAccountDTO) {
         StAccount account = new StAccount();
-        account.setId(searchAccountDTO.getAccountId());
+        account.setRealName(searchAccountDTO.getRealName());
+        account.setAccountName(searchAccountDTO.getAccountName());
+        account.setAccountNum(searchAccountDTO.getAccountNum());
+        account.setAccountLevel(searchAccountDTO.getAccountLevel());
+        account.setAccountType(searchAccountDTO.getAccountType());
+        account.setStatus(searchAccountDTO.getStatus());
 
         Long startTime = searchAccountDTO.getStartDate()==null?null:searchAccountDTO.getStartDate().getTime();
         Long endTime = searchAccountDTO.getEndDate()==null?null:searchAccountDTO.getEndDate().getTime();

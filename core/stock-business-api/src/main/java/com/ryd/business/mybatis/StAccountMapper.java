@@ -38,4 +38,12 @@ public interface StAccountMapper {
     StAccount selectByNamePassword(@Param(value = "accountNum") String account_num,
                                    @Param(value = "password") String password);
 
+    int selectCount(@Param(value = "account") StAccount account,
+                    @Param(value = "startTime") Long startTime,
+                    @Param(value = "endTime") Long endTime);
+
+    String selectAccountNumByPrimaryKey(String id);
+
+    List<StAccount> selectAccountNumList();
+
 }
