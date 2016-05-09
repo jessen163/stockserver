@@ -3,6 +3,9 @@ package com.ryd.server.stocktrader.utils;
 import com.ryd.basecommon.protocol.protobuf.DiyNettyMessage;
 import com.ryd.basecommon.util.ApplicationConstants;
 import com.ryd.basecommon.util.DateUtils;
+import com.ryd.business.dto.StStockTurnoverDTO;
+import com.ryd.business.dto.StockPriceDTO;
+import com.ryd.business.dto.StockTradeAmountDTO;
 import com.ryd.business.model.*;
 
 /**
@@ -45,29 +48,29 @@ public class ParamBuilderUtil {
         builder.setMinPrice(stStock.getMinPrice() == null ? 0 : stStock.getMinPrice().doubleValue());
         builder.setBiddingBuyPrice(stStock.getBiddingBuyPrice() == null ? 0 : stStock.getBiddingBuyPrice().doubleValue());
         builder.setBiddingSellPrice(stStock.getBiddingSellPrice() == null ? 0 : stStock.getBiddingSellPrice().doubleValue());
-        builder.setTradeAmount(stStock.getTradeAmount());
+        builder.setTradeAmount(stStock.getTradeAmount() == null ? 0 : stStock.getTradeAmount());
         builder.setTradeMoney(stStock.getTradeMoney() == null ? 0 : stStock.getTradeMoney().doubleValue());
         builder.setBuyOnePrice(stStock.getBuyOnePrice() == null ? 0 : stStock.getBuyOnePrice().doubleValue());
-        builder.setBuyOneAmount(stStock.getBuyOneAmount().intValue());
+        builder.setBuyOneAmount(stStock.getBuyOneAmount() == null ? 0 : stStock.getBuyOneAmount().intValue());
         builder.setBuyTwoPrice(stStock.getBuyTwoPrice() == null ? 0 : stStock.getBuyTwoPrice().doubleValue());
-        builder.setBuyTwoAmount(stStock.getBuyTwoAmount().intValue());
+        builder.setBuyTwoAmount(stStock.getBuyTwoAmount() == null ? 0 : stStock.getBuyTwoAmount().intValue());
         builder.setBuyThreePrice(stStock.getBuyThreePrice() == null ? 0 : stStock.getBuyThreePrice().doubleValue());
-        builder.setBuyThreeAmount(stStock.getBuyThreeAmount().intValue());
+        builder.setBuyThreeAmount(stStock.getBuyThreeAmount() == null ? 0 : stStock.getBuyThreeAmount().intValue());
         builder.setBuyFourPrice(stStock.getBuyFourPrice() == null ? 0 : stStock.getBuyFourPrice().doubleValue());
-        builder.setBuyFourAmount(stStock.getBuyFourAmount().intValue());
+        builder.setBuyFourAmount(stStock.getBuyFourAmount() == null ? 0 : stStock.getBuyFourAmount().intValue());
         builder.setBuyFivePrice(stStock.getBuyFivePrice() == null ? 0 : stStock.getBuyFivePrice().doubleValue());
-        builder.setBuyFiveAmount(stStock.getBuyFiveAmount().intValue());
+        builder.setBuyFiveAmount(stStock.getBuyFiveAmount() == null ? 0 : stStock.getBuyFiveAmount().intValue());
 
         builder.setSellOnePrice(stStock.getSellOnePrice() == null ? 0 : stStock.getSellOnePrice().doubleValue());
-        builder.setSellOneAmount(stStock.getSellOneAmount().intValue());
+        builder.setSellOneAmount(stStock.getSellOneAmount() == null ? 0 : stStock.getSellOneAmount().intValue());
         builder.setSellTwoPrice(stStock.getSellTwoPrice() == null ? 0 : stStock.getSellTwoPrice().doubleValue());
-        builder.setSellTwoAmount(stStock.getSellTwoAmount().intValue());
+        builder.setSellTwoAmount(stStock.getSellTwoAmount() == null ? 0 : stStock.getSellTwoAmount().intValue());
         builder.setSellThreePrice(stStock.getSellThreePrice() == null ? 0 : stStock.getSellThreePrice().doubleValue());
-        builder.setSellThreeAmount(stStock.getSellThreeAmount().intValue());
+        builder.setSellThreeAmount(stStock.getSellThreeAmount() == null ? 0 : stStock.getSellThreeAmount().intValue());
         builder.setSellFourPrice(stStock.getSellFourPrice() == null ? 0 : stStock.getSellFourPrice().doubleValue());
-        builder.setSellFourAmount(stStock.getSellFourAmount().intValue());
+        builder.setSellFourAmount(stStock.getSellFourAmount() == null ? 0 : stStock.getSellFourAmount().intValue());
         builder.setSellFivePrice(stStock.getSellFivePrice() == null ? 0 : stStock.getSellFivePrice().doubleValue());
-        builder.setSellFiveAmount(stStock.getSellFiveAmount().intValue());
+        builder.setSellFiveAmount(stStock.getSellFiveAmount() == null ? 0 : stStock.getSellFiveAmount().intValue());
         builder.setStockDate(DateUtils.formatDateToStr(stStock.getStockDate(), DateUtils.DATE_FORMAT));
         builder.setStockTime(stStock.getStockTime());
         builder.setDealTotalAmount(stStock.getTradeTotalAmount() == null ? 0 : stStock.getTradeTotalAmount().intValue());
@@ -77,20 +80,20 @@ public class ParamBuilderUtil {
 
     /**
      * 股票价格信息
-     * @param stStock
+     * @param stockPriceDTO
      * @return
      */
-    public static DiyNettyMessage.StockPriceInfo.Builder getStockPriceInfoBuilder(StStock stStock){
+    public static DiyNettyMessage.StockPriceInfo.Builder getStockPriceInfoBuilder(StockPriceDTO stockPriceDTO){
         DiyNettyMessage.StockPriceInfo.Builder builder = DiyNettyMessage.StockPriceInfo.newBuilder();
-        builder.setStockPrice(stStock.getCurrentPrice() == null ? 0 : stStock.getCurrentPrice().doubleValue());
-        builder.setStockTime(stStock.getStockTime());
+        builder.setStockPrice(stockPriceDTO.getTradePrice());
+        builder.setStockTime(stockPriceDTO.getTradeTime());
         return builder;
     }
 
-    public static DiyNettyMessage.StockTradeAmountInfo.Builder getStockTradeAmountInfoBuilder(StStock stStock){
+    public static DiyNettyMessage.StockTradeAmountInfo.Builder getStockTradeAmountInfoBuilder(StStockTurnoverDTO stStockTurnoverDTO){
         DiyNettyMessage.StockTradeAmountInfo.Builder builder = DiyNettyMessage.StockTradeAmountInfo.newBuilder();
-        builder.setTradeAmount(stStock.getTradeAmount() == null ? 0 : stStock.getTradeAmount().intValue());
-        builder.setTradeTime(stStock.getStockTime());
+        builder.setTradeAmount((int) stStockTurnoverDTO.getTradeAmount());
+        builder.setTradeTime(stStockTurnoverDTO.getTradeTime());
         return builder;
     }
 

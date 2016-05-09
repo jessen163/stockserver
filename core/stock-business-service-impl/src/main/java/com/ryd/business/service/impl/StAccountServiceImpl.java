@@ -35,7 +35,6 @@ public class StAccountServiceImpl implements StAccountService {
     @Override
     public boolean addStAccount(StAccount account) {
         account.setId(UUIDUtils.uuidTrimLine());
-        account.setAccountType(ApplicationConstants.ACCOUNT_TYPE_REAL);
         account.setCreatetime(System.currentTimeMillis());
         account.setStatus(ApplicationConstants.MODEL_ATRRIBUTE_NORMAL);
         return stAccountDao.add(account) > 0;
