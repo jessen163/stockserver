@@ -59,9 +59,10 @@ public class SyncStockThread implements Runnable {
             // 通过字符串转换成股票信息
             List<StStock> stockQQList = getStockInfoFromQQByStr(stockCodeStr, stockInfoQqServerStr);
 
-//            // 保存股票价格等信息
+            // 保存股票价格等信息
 //            stStockService.saveStockBatch(stockList);
-            addSimulationQuote(stockList);
+            stStockService.saveStockBatch(stockQQList);
+//            addSimulationQuote(stockList);
             addSimulationQuote(stockQQList);
         } catch (InterruptedException e) {
             e.printStackTrace();
