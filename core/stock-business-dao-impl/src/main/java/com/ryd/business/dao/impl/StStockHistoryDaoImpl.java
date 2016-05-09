@@ -1,10 +1,10 @@
 package com.ryd.business.dao.impl;
 
+import com.bugull.mongo.BuguDao;
+import com.mongodb.WriteResult;
 import com.ryd.business.dao.StStockHistoryDao;
 import com.ryd.business.model.StStockHistory;
-import com.ryd.business.mybatis.StStockHistoryMapper;
 import org.apache.commons.lang.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -17,36 +17,33 @@ import java.util.List;
  * 创建时间：2016/4/22 14:05
  */
 @Repository
-public class StStockHistoryDaoImpl implements StStockHistoryDao {
-
-    @Autowired
-    private StStockHistoryMapper stStockHistoryMapper;
+public class StStockHistoryDaoImpl extends BuguDao<StStockHistory> implements StStockHistoryDao {
+    public StStockHistoryDaoImpl() {
+        super(StStockHistory.class);
+    }
 
     @Override
     public int add(StStockHistory obj) {
-        return stStockHistoryMapper.insert(obj);
+        WriteResult result = super.save(obj);
+        return result.getN();
     }
 
     @Override
     public int update(StStockHistory obj) {
-        return 0;
+        WriteResult result = super.save(obj);
+        return result.getN();
     }
 
     @Override
     public StStockHistory getTById(String id) {
-        if(StringUtils.isBlank(id)){
-            return null;
-        }
-        return stStockHistoryMapper.selectByPrimaryKey(id);
+        return super.findOne(id);
     }
 
     @Override
     public List<StStockHistory> getTList(StStockHistory obj, Long startTime,Long endTime, int limit, int offset) {
-
-        if(obj==null){
-            obj = new StStockHistory();
-        }
-        return stStockHistoryMapper.selectListByKeySelective(obj,limit,offset);
+        int pageNum = limit/offset+1;
+        int pageSize = offset;
+        return super.findAll(pageNum, pageSize);
     }
 
     @Override
@@ -54,6 +51,14 @@ public class StStockHistoryDaoImpl implements StStockHistoryDao {
         if(StringUtils.isBlank(id)){
             return -1;
         }
-        return stStockHistoryMapper.deleteByPrimaryKey(id);
+//        return stStockMapper.deleteByPrimaryKey(obj.getStockId());
+        WriteResult result = super.remove(id);
+        return result.getN();
+    }
+
+    @Override
+    public boolean saveStockHistoryBatch(List<StStockHistory> stStockHistoryList) {
+        WriteResult result = super.insert(stStockHistoryList);
+        return result.getN() == stStockHistoryList.size();
     }
 }
