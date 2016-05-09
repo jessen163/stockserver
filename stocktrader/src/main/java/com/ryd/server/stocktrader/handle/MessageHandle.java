@@ -266,7 +266,7 @@ public class MessageHandle {
             case ApplicationConstants.NETTYMESSAGE_ID_SINGLESTOCKTRADEQUEUE:
                 DiyNettyMessage.StockInfo ssinfo = request.getStockInfoList().get(0);
                 SearchQuoteDTO ssSearchQuoteDTO = new SearchQuoteDTO();
-                ssSearchQuoteDTO.setStockCode(ssinfo.getId());
+                ssSearchQuoteDTO.setStockId(ssinfo.getId());
                 ssSearchQuoteDTO.setQuoteType(request.getType());
 
                 List<StQuote> ssQuoteList = stQuoteService.findQuoteQueueByStock(ssSearchQuoteDTO);
