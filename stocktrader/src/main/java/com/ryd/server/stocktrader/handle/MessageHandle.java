@@ -107,7 +107,7 @@ public class MessageHandle {
 
                 if(account !=null ){
                     builder.setStatus(1);
-                    builder.addAccountInfo(DiyNettyMessage.AccountInfo.newBuilder().setAccountId(account.getId()).setAccountNum(account.getAccountNum()));
+                    builder.addAccountInfo(DiyNettyMessage.AccountInfo.newBuilder().setAccountId(account.getId()).setAccountNum(account.getAccountNum()).setAccountLevel(account.getAccountLevel()));
                 }else{
                     builder.setStatus(2);
                 }
