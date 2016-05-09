@@ -69,7 +69,7 @@ public class ParamBuilderUtil {
         builder.setSellFivePrice(stStock.getSellFivePrice() == null ? 0 : stStock.getSellFivePrice().doubleValue());
         builder.setSellFiveAmount(stStock.getSellFiveAmount().intValue());
         builder.setStockDate(DateUtils.formatDateToStr(stStock.getStockDate(), DateUtils.DATE_FORMAT));
-        builder.setStockTime(DateUtils.formatDateToStr(stStock.getStockTime(), "HH:mm:ss"));
+        builder.setStockTime(stStock.getStockTime());
         builder.setDealTotalAmount(stStock.getTradeTotalAmount() == null ? 0 : stStock.getTradeTotalAmount().intValue());
         builder.setDealTotalMoney(stStock.getTradeTotalMoney() == null ? 0 : stStock.getTradeTotalMoney().intValue());
         return builder;
@@ -83,14 +83,14 @@ public class ParamBuilderUtil {
     public static DiyNettyMessage.StockPriceInfo.Builder getStockPriceInfoBuilder(StStock stStock){
         DiyNettyMessage.StockPriceInfo.Builder builder = DiyNettyMessage.StockPriceInfo.newBuilder();
         builder.setStockPrice(stStock.getCurrentPrice() == null ? 0 : stStock.getCurrentPrice().doubleValue());
-        builder.setStockTime(DateUtils.formatDateToStr(stStock.getStockTime(), "HH:mm:ss"));
+        builder.setStockTime(stStock.getStockTime());
         return builder;
     }
 
     public static DiyNettyMessage.StockTradeAmountInfo.Builder getStockTradeAmountInfoBuilder(StStock stStock){
         DiyNettyMessage.StockTradeAmountInfo.Builder builder = DiyNettyMessage.StockTradeAmountInfo.newBuilder();
         builder.setTradeAmount(stStock.getTradeAmount() == null ? 0 : stStock.getTradeAmount().intValue());
-        builder.setTradeTime(DateUtils.formatDateToStr(stStock.getStockTime(), "HH:mm:ss"));
+        builder.setTradeTime(stStock.getStockTime());
         return builder;
     }
 
@@ -108,7 +108,7 @@ public class ParamBuilderUtil {
         builder.setMaxPrice(stStock.getMaxPrice() == null ? 0 : stStock.getMaxPrice().doubleValue());
         builder.setMinPrice(stStock.getMinPrice() == null ? 0 : stStock.getMinPrice().doubleValue());
         builder.setStockDate(DateUtils.formatDateToStr(stStock.getStockDate(), DateUtils.DATE_FORMAT));
-        builder.setStockTime(DateUtils.formatDateToStr(stStock.getStockTime(), "HH:mm:ss"));
+        builder.setStockTime(stStock.getStockTime());
         builder.setDealTotalAmount(stStock.getTradeTotalAmount() == null ? 0 : stStock.getTradeTotalAmount().intValue());
         builder.setDealTotalMoney(stStock.getTradeTotalMoney() == null ? 0 : stStock.getTradeTotalMoney().intValue());
         return builder;

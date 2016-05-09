@@ -14,7 +14,6 @@ import java.util.Date;
  * 创建人：songby
  * 创建时间：2016/4/21 10:29
  */
-@Entity
 public class StStock implements Serializable,BuguEntity {
 
     private static final long serialVersionUID = -5808387262109584648L;
@@ -86,11 +85,141 @@ public class StStock implements Serializable,BuguEntity {
 
     private Date stockDate;
 
-    private Date stockTime;
+    private String stockTime;
     // 成交总量
     private Long tradeTotalAmount;
     // 成交总金额
     private Double tradeTotalMoney;
+    // 最近成交笔数
+    private String recentlyTradeRecord;
+    // 涨跌
+    private double riseFallMoney;
+    // 涨跌百分比
+    private double riseFallPercent;
+    // 换手率
+    private double turnoverRatio;
+    // 市盈率
+    private double priceEarningRatio;
+    // 振幅
+    private double amplitude;
+    // 流通市值
+    private double circulationCapitalization;
+    // 总市值
+    private double marketCapitalization;
+    // 市净率
+    private double pbRatio;
+    // 外盘
+    private int sellVol;
+    // 内盘
+    private int buyVol;
+    // 涨停价
+    private double riseUpPrice;
+    // 跌停价
+    private double fallDownPrice;
+
+    public double getRiseUpPrice() {
+        return riseUpPrice;
+    }
+
+    public void setRiseUpPrice(double riseUpPrice) {
+        this.riseUpPrice = riseUpPrice;
+    }
+
+    public double getFallDownPrice() {
+        return fallDownPrice;
+    }
+
+    public void setFallDownPrice(double fallDownPrice) {
+        this.fallDownPrice = fallDownPrice;
+    }
+
+    public String getRecentlyTradeRecord() {
+        return recentlyTradeRecord;
+    }
+
+    public void setRecentlyTradeRecord(String recentlyTradeRecord) {
+        this.recentlyTradeRecord = recentlyTradeRecord;
+    }
+
+    public double getRiseFallMoney() {
+        return riseFallMoney;
+    }
+
+    public void setRiseFallMoney(double riseFallMoney) {
+        this.riseFallMoney = riseFallMoney;
+    }
+
+    public double getRiseFallPercent() {
+        return riseFallPercent;
+    }
+
+    public void setRiseFallPercent(double riseFallPercent) {
+        this.riseFallPercent = riseFallPercent;
+    }
+
+    public double getTurnoverRatio() {
+        return turnoverRatio;
+    }
+
+    public void setTurnoverRatio(double turnoverRatio) {
+        this.turnoverRatio = turnoverRatio;
+    }
+
+    public double getPriceEarningRatio() {
+        return priceEarningRatio;
+    }
+
+    public void setPriceEarningRatio(double priceEarningRatio) {
+        this.priceEarningRatio = priceEarningRatio;
+    }
+
+    public double getAmplitude() {
+        return amplitude;
+    }
+
+    public void setAmplitude(double amplitude) {
+        this.amplitude = amplitude;
+    }
+
+    public double getCirculationCapitalization() {
+        return circulationCapitalization;
+    }
+
+    public void setCirculationCapitalization(double circulationCapitalization) {
+        this.circulationCapitalization = circulationCapitalization;
+    }
+
+    public double getMarketCapitalization() {
+        return marketCapitalization;
+    }
+
+    public void setMarketCapitalization(double marketCapitalization) {
+        this.marketCapitalization = marketCapitalization;
+    }
+
+    public double getPbRatio() {
+        return pbRatio;
+    }
+
+    public void setPbRatio(double pbRatio) {
+        this.pbRatio = pbRatio;
+    }
+
+    public int getSellVol() {
+        return sellVol;
+    }
+
+    public void setSellVol(int sellVol) {
+        this.sellVol = sellVol;
+    }
+
+    public int getBuyVol() {
+        return buyVol;
+    }
+
+    public void setBuyVol(int buyVol) {
+        this.buyVol = buyVol;
+    }
 
     public Long getTradeTotalAmount() {
         return tradeTotalAmount;
@@ -372,21 +501,21 @@ public class StStock implements Serializable,BuguEntity {
         this.stockDate = stockDate;
     }
 
-    public Date getStockTime() {
+    public String getStockTime() {
         return stockTime;
     }
 
-    public void setStockTime(Date stockTime) {
+    public void setStockTime(String stockTime) {
         this.stockTime = stockTime;
     }
 
     @Override
-    public void setId(String s) {
-        this.stockId = s;
+    public void setId(String stockId) {
+        this.stockId = stockId;
     }
 
     @Override
     public String getId() {
-        return this.stockId;
+        return stockId;
     }
 }

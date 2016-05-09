@@ -51,18 +51,46 @@ public class SyncStockThread implements Runnable {
             String stockInfoStr = HttpclientUtil.doGet(ApplicationConstants.STOCK_SERVER_STOCKBASE_URL + stockCodeStr);
             // 下载股票成交量信息
             String stockInfoTurnoverStr = HttpclientUtil.doGet(ApplicationConstants.STOCK_SERVER_STOCKTURNOVER_URL + stockCodeStr);
+            // 下载股票成交量信息
+            String stockInfoQqServerStr = HttpclientUtil.doGet(ApplicationConstants.STOCK_SERVER_STOCKTURNOVER_QQ_URL + stockCodeStr);
 
             // 通过字符串转换成股票信息
             List<StStock> stockList = getStockInfoByStr(stockCodeStr, stockInfoStr, stockInfoTurnoverStr);
+            // 通过字符串转换成股票信息
+            List<StStock> stockQQList = getStockInfoFromQQByStr(stockCodeStr, stockInfoQqServerStr);
 
-            // 保存股票价格等信息
-            stStockService.saveStockBatch(stockList);
+//            // 保存股票价格等信息
+//            stStockService.saveStockBatch(stockList);
             addSimulationQuote(stockList);
+            addSimulationQuote(stockQQList);
         } catch (InterruptedException e) {
             e.printStackTrace();
         } finally {
             cdAnswer.countDown();
         }
+    }
+
+    /**
+     *
+     * @param stockCodeStr
+     * @param stockListStr
+     * @return
+     */
+    private synchronized List<StStock> getStockInfoFromQQByStr(String stockCodeStr, String stockListStr) {
+        List<StStock> stockList = new ArrayList<StStock>();
+
+        String[] stockCodeStrArr = stockCodeStr.split(",");
+        String[] stockListStrArr = stockListStr.split(";\\n");
+        for (int i = 0; i < stockCodeStrArr.length; i++) {
+            StStock stock = getStockFromQqByStr(stockCodeStrArr[i], stockListStrArr[i].trim());
+            if (stock==null) {
+                System.out.println("异常股票代码：" + stockCodeStrArr[i]);
+                continue;
+            }
+            stockList.add(stock);
+        }
+
+        return stockList;
     }
 
     private synchronized List<StStock> getStockInfoByStr(String stockCodeStr, String stockListStr, String stockInfoTurnoverStr) {
@@ -84,6 +112,94 @@ public class SyncStockThread implements Runnable {
         }
 
         return stockList;
+    }
+
+    private synchronized StStock getStockFromQqByStr(String stockCode, String stockStr) {
+        if (stockStr==null) return null;
+        String[] s = stockStr.split("\"");
+        if (s==null || s.length!=2) return null;
+        String[] sk = null;
+        StStock sts = null;
+        StringBuilder bf = new StringBuilder();
+        if (!s[1].equals("")) {
+            bf.append(s[1]);
+            int n = bf.lastIndexOf("~");
+            String string = bf.substring(0, n);
+            sk = string.split("~");
+
+            if (sk==null || sk.length<32) return null;
+            sts = new StStock();
+//            sts.setStockId(stockCode);
+            sts.setStockCode(stockCode.substring(2));// 获取股票代码
+            sts.setStockName(sk[1]);
+            // 【2】股票代码
+            sts.setCurrentPrice(Double.parseDouble(sk[3]));
+            sts.setBfclosePrice(Double.parseDouble(sk[4]));
+            sts.setOpenPrice(Double.parseDouble(sk[5]));
+            sts.setTradeTotalAmount(Long.parseLong(sk[6]));
+
+            sts.setSellVol(Integer.parseInt(sk[7]));
+            sts.setBuyVol(Integer.parseInt(sk[8]));
+
+            sts.setBuyOneAmount(Long.valueOf(sk[10]));
+            sts.setBuyOnePrice(Double.parseDouble(sk[9]));
+            sts.setBuyTwoAmount(Long.valueOf(sk[12]));
+            sts.setBuyTwoPrice(Double.parseDouble(sk[11]));
+            sts.setBuyThreeAmount(Long.valueOf(sk[14]));
+            sts.setBuyThreePrice(Double.parseDouble(sk[13]));
+            sts.setBuyFourAmount(Long.valueOf(sk[16]));
+            sts.setBuyFourPrice(Double.parseDouble(sk[15]));
+            sts.setBuyFiveAmount(Long.valueOf(sk[18]));
+            sts.setBuyFivePrice(Double.parseDouble(sk[17]));
+
+            sts.setSellOneAmount(Long.valueOf(sk[20]));
+            sts.setSellOnePrice(Double.parseDouble(sk[19]));
+            sts.setSellTwoAmount(Long.valueOf(sk[22]));
+            sts.setSellTwoPrice(Double.parseDouble(sk[21]));
+            sts.setSellThreeAmount(Long.valueOf(sk[24]));
+            sts.setSellThreePrice(Double.parseDouble(sk[23]));
+            sts.setSellFourAmount(Long.valueOf(sk[26]));
+            sts.setSellFourPrice(Double.parseDouble(sk[25]));
+            sts.setSellFiveAmount(Long.valueOf(sk[28]));
+            sts.setSellFivePrice(Double.parseDouble(sk[27]));
+
+            sts.setRecentlyTradeRecord(sk[29]);
+            sts.setStockDate(DateUtils.formatStrToDate(String.valueOf(sk[30].substring(0, 6)), DateUtils.DATE_FORMAT));
+            sts.setStockTime(String.valueOf(sk[30].substring(7)));
+            sts.setRiseFallMoney(Double.valueOf(sk[31]));
+            sts.setRiseFallPercent(Double.valueOf(sk[32]));
+            sts.setMaxPrice(Double.valueOf(sk[33]));
+            sts.setMinPrice(Double.valueOf(sk[34]));
+            // [35]
+            sts.setTradeTotalAmount(Long.parseLong(sk[36]));
+            sts.setTradeTotalMoney(Double.valueOf(sk[37]));
+            if (sk[38]!=null&&!sk[38].equals("")) {
+                sts.setTurnoverRatio(Double.valueOf(sk[38]));
+            }
+            if (sk[39]!=null&&!sk[39].equals("")) {
+                sts.setPriceEarningRatio(Double.valueOf(sk[39]));
+            }
+
+            if (sk[43]!=null&&!sk[43].equals("")) {
+                sts.setAmplitude(Double.valueOf(sk[43]));
+            }
+            if (sk[44]!=null&&!sk[44].equals("")) {
+                sts.setCirculationCapitalization(Double.valueOf(sk[44]));
+            }
+
+            if (sk[45]!=null&&!sk[45].equals("")) {
+                sts.setMarketCapitalization(Double.valueOf(sk[45]));
+            }
+                if (sk[46]!=null&&!sk[46].equals("")) {
+                    sts.setPbRatio(Double.valueOf(sk[46]));
+                }
+            sts.setRiseUpPrice(Double.valueOf(sk[47]));
+            sts.setFallDownPrice(Double.valueOf(sk[48]));
+
+            // 放入缓存 - TODO 放入kafka
+            BusinessConstants.tempStockPriceMap.put(sts.getStockCode(), sts);
+        }
+        return sts;
     }
 
     private synchronized StStock getStockByStr(String stockCode, String stockStr) {
@@ -137,7 +253,7 @@ public class SyncStockThread implements Runnable {
             sts.setSellFivePrice(Double.parseDouble(sk[29]));
 
             sts.setStockDate(DateUtils.formatStrToDate(sk[30], DateUtils.DATE_FORMAT));
-            sts.setStockTime(DateUtils.formatStrToDate(sk[30] + " " + sk[31], DateUtils.TIME_FORMAT));
+            sts.setStockTime(sk[31]);
             // 放入缓存 - TODO 放入kafka
             BusinessConstants.tempStockPriceMap.put(sts.getStockCode(), sts);
         }
@@ -265,6 +381,10 @@ public class SyncStockThread implements Runnable {
 
         String codeStrs = "波导股份,10.040,10.200,9.400,10.150,9.250,9.380,9.400,69662758,678776363.000,200,9.380,4500,9.370,6500,9.360,173250,9.350,400,9.340,40900,9.400,100,9.410,1500,9.420,2300,9.430,1100,9.440,2016-05-06,13:57:14,00";
         System.out.println(codeStrs.split(",").length);
+        String code2Str = "51~五 粮 液~000858~29.31~30.40~30.45~435315~181976~253338~29.30~745~29.29~69~29.28~126~29.26~52~29.25~79~29.31~243~29.32~14~29.33~25~29.34~1308~29.35~11~15:00:21/29.31/11717/S/34343496/34216|14:57:03/29.44/40/B/117710/33887|14:56:59/29.44/88/S/259203/33882|14:56:54/29.46/42/S/123732/33875|14:56:54/29.46/26/M/76596/33865|14:56:48/29.45/20/S/58905/33855~20160506150451~-1.09~-3.59~30.45~29.31~29.44/423598/1263457434~435315~129780~1.15~16.18~~30.45~29.31~3.75~1112.51~1112.60~2.41~33.44~27.36~";
+        for (int i = 1; i <= code2Str.split("~").length;i++) {
+            System.out.println(i+":"+code2Str.split("~")[i-1]);
+        }
     }
 
 }

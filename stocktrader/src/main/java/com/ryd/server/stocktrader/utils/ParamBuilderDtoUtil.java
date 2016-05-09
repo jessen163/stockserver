@@ -74,7 +74,7 @@ public class ParamBuilderDtoUtil {
         builder.setSellFivePrice(stStock.getSellFivePrice());
         builder.setSellFiveAmount((long) stStock.getSellFiveAmount());
         builder.setStockDate(DateUtils.formatStrToDate(stStock.getStockDate(), DateUtils.DATE_FORMAT));
-        builder.setStockTime(DateUtils.formatStrToDate(stStock.getStockTime(), "HH:mm:ss"));
+        builder.setStockTime(stStock.getStockTime());
         builder.setTradeTotalAmount((long) stStock.getDealTotalAmount());
         builder.setTradeTotalMoney((double)stStock.getDealTotalMoney());
         return builder;
@@ -97,7 +97,7 @@ public class ParamBuilderDtoUtil {
         builder.setMaxPrice(stStock.getMaxPrice());
         builder.setMinPrice(stStock.getMinPrice());
         builder.setStockDate(DateUtils.formatStrToDate(stStock.getStockDate(), DateUtils.DATE_FORMAT));
-        builder.setStockTime(DateUtils.formatStrToDate(stStock.getStockTime(), "HH:mm:ss"));
+        builder.setStockTime(stStock.getStockTime());
         builder.setTradeTotalAmount((long) stStock.getDealTotalAmount());
         builder.setTradeTotalMoney((double)stStock.getDealTotalMoney());
         return builder;
