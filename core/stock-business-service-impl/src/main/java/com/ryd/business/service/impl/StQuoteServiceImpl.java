@@ -10,9 +10,7 @@ import com.ryd.business.dto.StTradeQueueDTO;
 import com.ryd.business.exception.QuoteBusinessException;
 import com.ryd.business.model.StQuote;
 import com.ryd.business.model.StStock;
-import com.ryd.business.model.StTradeRecord;
 import com.ryd.business.service.*;
-import com.ryd.business.service.thread.GenerateSimulationQuoteThread;
 import com.ryd.business.service.util.BusinessConstants;
 import com.ryd.business.service.util.Utils;
 import com.ryd.cache.service.ICacheService;
@@ -300,7 +298,7 @@ public class StQuoteServiceImpl implements StQuoteService {
             this.findStQuoteToCache(1000);
         }
         StTradeQueueDTO tradeQueueDTO = BusinessConstants.stTradeQueueMap.get(searchQuoteDTO.getStockCode());
-        if (tradeQueueDTO==null) {
+        if (tradeQueueDTO==null || tradeQueueDTO.buyList.size()==0 || tradeQueueDTO.sellList.size()==0) {
             return null;
         }
         // 获取队列中的第一条买/卖报价
@@ -573,20 +571,25 @@ public class StQuoteServiceImpl implements StQuoteService {
     }
 
     public boolean findStQuoteToCache(int limit) {
+        if (BusinessConstants.isInitQuoteSuccess) {
+            return true;
+        }
         SearchQuoteDTO searchQuoteDTO = new SearchQuoteDTO();
         searchQuoteDTO.setStatus(ApplicationConstants.STOCK_STQUOTE_STATUS_TRUSTEE);
         List<StQuote> stQuoteList = this.findQuoteList(searchQuoteDTO);
-        if (StringUtils.isEmpty(stQuoteList)) return true;
-        for (StQuote quote : stQuoteList) {
-            String stockCode = stStockConfigService.getStockCodeByStockId(quote.getStockId());
-            StTradeQueueDTO tradeQueueDTO = BusinessConstants.stTradeQueueMap.get(stockCode);
-            if (quote.getQuoteType().intValue()==ApplicationConstants.STOCK_QUOTETYPE_BUY.intValue()) {
-                tradeQueueDTO.addBuyStQuote(quote);
-            } else if (quote.getQuoteType().intValue()==ApplicationConstants.STOCK_QUOTETYPE_SELL.intValue()) {
-                tradeQueueDTO.addSellStQuote(quote);
+        if (!StringUtils.isEmpty(stQuoteList)) {
+            for (StQuote quote : stQuoteList) {
+                String stockCode = stStockConfigService.getStockCodeByStockId(quote.getStockId());
+                StTradeQueueDTO tradeQueueDTO = BusinessConstants.stTradeQueueMap.get(stockCode);
+                if (quote.getQuoteType().intValue()==ApplicationConstants.STOCK_QUOTETYPE_BUY.intValue()) {
+                    tradeQueueDTO.addBuyStQuote(quote);
+                } else if (quote.getQuoteType().intValue()==ApplicationConstants.STOCK_QUOTETYPE_SELL.intValue()) {
+                    tradeQueueDTO.addSellStQuote(quote);
+                }
+                BusinessConstants.stTradeQueueMap.put(stockCode, tradeQueueDTO);
             }
-            BusinessConstants.stTradeQueueMap.put(stockCode, tradeQueueDTO);
         }
+        BusinessConstants.isInitQuoteSuccess = true;
 
         return true;
     }
