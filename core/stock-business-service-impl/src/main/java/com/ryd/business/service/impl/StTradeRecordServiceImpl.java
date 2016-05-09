@@ -2,12 +2,10 @@ package com.ryd.business.service.impl;
 
 import com.ryd.basecommon.util.*;
 import com.ryd.business.dao.StTradeRecordDao;
-import com.ryd.business.dto.SearchStockDTO;
 import com.ryd.business.dto.SearchTradeRecordDTO;
 import com.ryd.business.exception.TradeBusinessException;
 import com.ryd.business.model.StMoneyJournal;
 import com.ryd.business.model.StQuote;
-import com.ryd.business.model.StStock;
 import com.ryd.business.model.StTradeRecord;
 import com.ryd.business.service.*;
 import com.ryd.business.service.thread.TradingMainThread;
@@ -37,8 +35,6 @@ public class StTradeRecordServiceImpl implements StTradeRecordService {
     private ICacheService iCacheService;
     @Autowired
     private StQuoteService stQuoteService;
-    @Autowired
-    private StStockService stStockService;
     @Autowired
     private StPositionService stPositionService;
     @Autowired
@@ -74,9 +70,9 @@ public class StTradeRecordServiceImpl implements StTradeRecordService {
         ThreadPoolExecutor tradingservice = null;
         try {
             BlockingQueue<Runnable> stockQueue = new LinkedBlockingQueue<Runnable>();
-            tradingservice = new ThreadPoolExecutor(2, 10, 1, TimeUnit.DAYS, stockQueue);
+            tradingservice = new ThreadPoolExecutor(10, 20, 1, TimeUnit.DAYS, stockQueue);
 
-            tradingservice.execute(new TradingMainThread(tradingservice, stStockService, stQuoteService, this));
+            tradingservice.execute(new TradingMainThread(tradingservice, stQuoteService, this));
         } catch (Exception e){
             e.printStackTrace();
             tradingservice.shutdownNow();
