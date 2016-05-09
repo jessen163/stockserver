@@ -37,9 +37,9 @@ public class ParamBuilderUtil {
     public static DiyNettyMessage.StockInfo.Builder getStockInfoBuilder(StStock stStock){
 
         DiyNettyMessage.StockInfo.Builder builder = DiyNettyMessage.StockInfo.newBuilder();
-        builder.setId(stStock.getId());
-        builder.setStockName(stStock.getStockName());
-        builder.setStockCode(stStock.getStockCode());
+        builder.setId(stStock.getId() == null ? "" : stStock.getId());
+        builder.setStockName(stStock.getStockName() == null ? "" : stStock.getStockName());
+        builder.setStockCode(stStock.getStockCode() == null ? "" : stStock.getStockCode());
         builder.setStockPrice(stStock.getCurrentPrice() == null ? 0 : stStock.getCurrentPrice().doubleValue());
         builder.setOpenPrice(stStock.getOpenPrice() == null ? 0 : stStock.getOpenPrice().doubleValue());
         builder.setBfclosePrice(stStock.getBfclosePrice() == null ? 0 : stStock.getBfclosePrice().doubleValue());
@@ -71,8 +71,8 @@ public class ParamBuilderUtil {
         builder.setSellFourAmount(stStock.getSellFourAmount() == null ? 0 : stStock.getSellFourAmount().intValue());
         builder.setSellFivePrice(stStock.getSellFivePrice() == null ? 0 : stStock.getSellFivePrice().doubleValue());
         builder.setSellFiveAmount(stStock.getSellFiveAmount() == null ? 0 : stStock.getSellFiveAmount().intValue());
-        builder.setStockDate(DateUtils.formatDateToStr(stStock.getStockDate(), DateUtils.DATE_FORMAT));
-        builder.setStockTime(stStock.getStockTime());
+        builder.setStockDate(stStock.getStockDate() == null ? "" : DateUtils.formatDateToStr(stStock.getStockDate(), DateUtils.DATE_FORMAT));
+        builder.setStockTime(stStock.getStockTime() == null ? "" : stStock.getStockTime());
         builder.setDealTotalAmount(stStock.getTradeTotalAmount() == null ? 0 : stStock.getTradeTotalAmount().intValue());
         builder.setDealTotalMoney(stStock.getTradeTotalMoney() == null ? 0 : stStock.getTradeTotalMoney().intValue());
         return builder;
@@ -86,14 +86,14 @@ public class ParamBuilderUtil {
     public static DiyNettyMessage.StockPriceInfo.Builder getStockPriceInfoBuilder(StockPriceDTO stockPriceDTO){
         DiyNettyMessage.StockPriceInfo.Builder builder = DiyNettyMessage.StockPriceInfo.newBuilder();
         builder.setStockPrice(stockPriceDTO.getTradePrice());
-        builder.setStockTime(stockPriceDTO.getTradeTime());
+        builder.setStockTime(stockPriceDTO.getTradeTime() == null ? "" : stockPriceDTO.getTradeTime());
         return builder;
     }
 
     public static DiyNettyMessage.StockTradeAmountInfo.Builder getStockTradeAmountInfoBuilder(StStockTurnoverDTO stStockTurnoverDTO){
         DiyNettyMessage.StockTradeAmountInfo.Builder builder = DiyNettyMessage.StockTradeAmountInfo.newBuilder();
         builder.setTradeAmount((int) stStockTurnoverDTO.getTradeAmount());
-        builder.setTradeTime(stStockTurnoverDTO.getTradeTime());
+        builder.setTradeTime(stStockTurnoverDTO.getTradeTime() == null ? "" : stStockTurnoverDTO.getTradeTime());
         return builder;
     }
 
@@ -101,17 +101,17 @@ public class ParamBuilderUtil {
     public static DiyNettyMessage.StockInfo.Builder getMonitorStockInfoBuilder(StStock stStock) {
 
         DiyNettyMessage.StockInfo.Builder builder = DiyNettyMessage.StockInfo.newBuilder();
-        builder.setId(stStock.getId());
-        builder.setStockName(stStock.getStockName());
-        builder.setStockCode(stStock.getStockCode());
+        builder.setId(stStock.getId() == null ? "" : stStock.getId());
+        builder.setStockName(stStock.getStockName() == null ? "" : stStock.getStockName());
+        builder.setStockCode(stStock.getStockCode() == null ? "" : stStock.getStockCode());
         builder.setStockPrice(stStock.getCurrentPrice() == null ? 0 : stStock.getCurrentPrice().doubleValue());
         builder.setOpenPrice(stStock.getOpenPrice() == null ? 0 : stStock.getOpenPrice().doubleValue());
         builder.setBfclosePrice(stStock.getBfclosePrice() == null ? 0 : stStock.getBfclosePrice().doubleValue());
         builder.setCurrentPrice(stStock.getCurrentPrice() == null ? 0 : stStock.getCurrentPrice().doubleValue());
         builder.setMaxPrice(stStock.getMaxPrice() == null ? 0 : stStock.getMaxPrice().doubleValue());
         builder.setMinPrice(stStock.getMinPrice() == null ? 0 : stStock.getMinPrice().doubleValue());
-        builder.setStockDate(DateUtils.formatDateToStr(stStock.getStockDate(), DateUtils.DATE_FORMAT));
-        builder.setStockTime(stStock.getStockTime());
+        builder.setStockDate(stStock.getStockDate() == null ? "" : DateUtils.formatDateToStr(stStock.getStockDate(), DateUtils.DATE_FORMAT));
+        builder.setStockTime(stStock.getStockTime() == null ? "" : stStock.getStockTime());
         builder.setDealTotalAmount(stStock.getTradeTotalAmount() == null ? 0 : stStock.getTradeTotalAmount().intValue());
         builder.setDealTotalMoney(stStock.getTradeTotalMoney() == null ? 0 : stStock.getTradeTotalMoney().intValue());
         return builder;
@@ -124,17 +124,17 @@ public class ParamBuilderUtil {
     public static DiyNettyMessage.AccountInfo.Builder getAccountInfoBuilder(StAccount stAcc){
 
         DiyNettyMessage.AccountInfo.Builder accbuilder = DiyNettyMessage.AccountInfo.newBuilder();
-        accbuilder.setAccountId(stAcc.getId());
-        accbuilder.setRealName(stAcc.getRealName());
-        accbuilder.setAccountName(stAcc.getAccountName());
-        accbuilder.setAccountNum(stAcc.getAccountNum());
-        accbuilder.setPassword(stAcc.getPassword());
+        accbuilder.setAccountId(stAcc.getId() == null ? "" : stAcc.getId());
+        accbuilder.setRealName(stAcc.getRealName() == null ? "" : stAcc.getRealName());
+        accbuilder.setAccountName(stAcc.getAccountName() == null ? "" : stAcc.getAccountName());
+        accbuilder.setAccountNum(stAcc.getAccountNum() == null ? "" : stAcc.getAccountNum());
+        accbuilder.setPassword(stAcc.getPassword() == null ? "" : stAcc.getPassword());
         accbuilder.setTotalAssets(stAcc.getTotalAssets() == null ? 0 : stAcc.getTotalAssets().doubleValue());
         accbuilder.setUseMoney(stAcc.getUseMoney() == null ? 0 : stAcc.getUseMoney().doubleValue());
         accbuilder.setAccountLevel(stAcc.getAccountLevel());
-        accbuilder.setMobile(stAcc.getMobile());
+        accbuilder.setMobile(stAcc.getMobile() == null ? "" : stAcc.getMobile() );
         accbuilder.setSex(stAcc.getSex());
-        accbuilder.setRemark(stAcc.getRemark());
+        accbuilder.setRemark(stAcc.getRemark() == null ? "" : stAcc.getRemark());
         accbuilder.setCreatetime(stAcc.getCreatetime());
 
         return accbuilder;
@@ -155,7 +155,7 @@ public class ParamBuilderUtil {
         pbuilder.setMarketAmount(sp.getMarketAmount() == null ? 0 : sp.getMarketAmount().intValue());
         pbuilder.setAvgPrice(sp.getAvgPrice() == null ? 0 : sp.getAvgPrice().doubleValue());
         pbuilder.setStatus(sp.getStatus().intValue());
-        pbuilder.setPositionId(sp.getPositionId());
+        pbuilder.setPositionId(sp.getPositionId() == null ? "" : sp.getPositionId());
 
         return pbuilder;
     }
@@ -193,11 +193,11 @@ public class ParamBuilderUtil {
     public static DiyNettyMessage.TradeRecordInfo.Builder getTradeRecordInfoBuilder(StTradeRecord r1, String accountId){
 
         DiyNettyMessage.TradeRecordInfo.Builder tbuiler = DiyNettyMessage.TradeRecordInfo.newBuilder();
-        tbuiler.setAccountId(accountId);
+        tbuiler.setAccountId(accountId == null ? "" : accountId);
         tbuiler.setSellAccountId(r1.getSellerAccountId());
         tbuiler.setBuyAccountId(r1.getBuyerAccountId());
-        tbuiler.setSellAccountNumber(r1.getSellerAccountNum());
-        tbuiler.setBuyAccountNumber(r1.getBuyerAccountNum());
+        tbuiler.setSellAccountNumber(r1.getSellerAccountNum() == null ? "" : r1.getSellerAccountNum());
+        tbuiler.setBuyAccountNumber(r1.getBuyerAccountNum() == null ? "" : r1.getBuyerAccountNum());
         tbuiler.setStockCode(r1.getStockId());
         tbuiler.setStockName("");
         tbuiler.setAmount(r1.getAmount() == null ? 0 : r1.getAmount().intValue());
@@ -210,8 +210,8 @@ public class ParamBuilderUtil {
         tbuiler.setDealFee(r1.getBuyFee() == null ? 0 : r1.getBuyFee().doubleValue());
         tbuiler.setDealFee(r1.getSellFee() == null ? 0 : r1.getSellFee().doubleValue());
         tbuiler.setDealTax(r1.getDealTax() == null ? 0 : r1.getDealTax().doubleValue());
-        tbuiler.setDealDate(DateUtils.formatLongToStr(r1.getDateTime(), DateUtils.DATE_FORMAT));
-        tbuiler.setDealTime(DateUtils.formatLongToStr(r1.getDateTime(), "HH:mm:ss"));
+        tbuiler.setDealDate(r1.getDateTime() == null ? "" : DateUtils.formatLongToStr(r1.getDateTime(), DateUtils.DATE_FORMAT));
+        tbuiler.setDealTime(r1.getDateTime() == null ? "" : DateUtils.formatLongToStr(r1.getDateTime(), "HH:mm:ss"));
 
         return tbuiler;
     }
@@ -235,8 +235,8 @@ public class ParamBuilderUtil {
         if(journal.getDealType() == ApplicationConstants.STOCK_QUOTETYPE_SELL) {
             mbuiler.setDealTax(journal.getDealTax() == null ? 0 : journal.getDealTax().doubleValue());
         }
-        mbuiler.setDealDate(DateUtils.formatLongToStr(journal.getDateTime(), DateUtils.DATE_FORMAT));
-        mbuiler.setDealTime(DateUtils.formatLongToStr(journal.getDateTime(), "HH:mm:ss"));
+        mbuiler.setDealDate(journal.getDateTime() == null ? "" : DateUtils.formatLongToStr(journal.getDateTime(), DateUtils.DATE_FORMAT));
+        mbuiler.setDealTime(journal.getDateTime() == null ? "" : DateUtils.formatLongToStr(journal.getDateTime(), "HH:mm:ss"));
 
         return mbuiler;
     }
