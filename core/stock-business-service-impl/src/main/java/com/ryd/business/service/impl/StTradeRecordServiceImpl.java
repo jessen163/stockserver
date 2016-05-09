@@ -81,11 +81,6 @@ public class StTradeRecordServiceImpl implements StTradeRecordService {
 
     @Override
     public void updateTradeSettling(StQuote buyQuote, StQuote sellQuote) throws Exception{
-        //交易股票
-//        SearchStockDTO sdto = new SearchStockDTO();
-//        sdto.setStockId(buyQuote.getStockId());
-//        StStock sts = stStockService.findStockListByStock(sdto);
-
         //股票交易数量
         long tradeStockAmount = 0;
 
@@ -108,9 +103,17 @@ public class StTradeRecordServiceImpl implements StTradeRecordService {
 
             //修改买家卖家报价状态
             buyQuote.setStatus(ApplicationConstants.STOCK_STQUOTE_STATUS_ALREADYDEAL);
-            stQuoteService.updateQuote(buyQuote);
             sellQuote.setStatus(ApplicationConstants.STOCK_STQUOTE_STATUS_DEALING);
-            stQuoteService.updateQuote(sellQuote);
+            if(buyQuote.getUserType() == ApplicationConstants.ACCOUNT_TYPE_VIRTUAL) {
+//                iMessageQueue.sendMessage(ApplicationConstants.PUSHMESSAGE_SIMULATIONQUOTE, FileUtils.objectToByte(buyQuote));
+            }else if(buyQuote.getUserType() == ApplicationConstants.ACCOUNT_TYPE_REAL){
+                stQuoteService.updateQuote(buyQuote);
+            }
+            if(sellQuote.getUserType() == ApplicationConstants.ACCOUNT_TYPE_VIRTUAL) {
+//                iMessageQueue.sendMessage(ApplicationConstants.PUSHMESSAGE_SIMULATIONQUOTE, FileUtils.objectToByte(sellQuote));
+            }else if(sellQuote.getUserType() == ApplicationConstants.ACCOUNT_TYPE_REAL){
+                stQuoteService.updateQuote(sellQuote);
+            }
         } else if (buyQuote.getCurrentAmount().longValue() == sellQuote.getCurrentAmount().longValue()) {
             //买卖相等
             tradeStockAmount = buyQuote.getCurrentAmount();
@@ -127,9 +130,17 @@ public class StTradeRecordServiceImpl implements StTradeRecordService {
 
             //修改买家卖家报价状态
             buyQuote.setStatus(ApplicationConstants.STOCK_STQUOTE_STATUS_ALREADYDEAL);
-            stQuoteService.updateQuote(buyQuote);
             sellQuote.setStatus(ApplicationConstants.STOCK_STQUOTE_STATUS_ALREADYDEAL);
-            stQuoteService.updateQuote(sellQuote);
+            if(buyQuote.getUserType() == ApplicationConstants.ACCOUNT_TYPE_VIRTUAL) {
+//                iMessageQueue.sendMessage(ApplicationConstants.PUSHMESSAGE_SIMULATIONQUOTE, FileUtils.objectToByte(buyQuote));
+            }else if(buyQuote.getUserType() == ApplicationConstants.ACCOUNT_TYPE_REAL){
+                stQuoteService.updateQuote(buyQuote);
+            }
+            if(sellQuote.getUserType() == ApplicationConstants.ACCOUNT_TYPE_VIRTUAL) {
+//                iMessageQueue.sendMessage(ApplicationConstants.PUSHMESSAGE_SIMULATIONQUOTE, FileUtils.objectToByte(sellQuote));
+            }else if(sellQuote.getUserType() == ApplicationConstants.ACCOUNT_TYPE_REAL){
+                stQuoteService.updateQuote(sellQuote);
+            }
         }else if(buyQuote.getCurrentAmount().longValue() > sellQuote.getCurrentAmount().longValue()){
             //买多卖少
             //股票交易数量为卖家卖掉数量
@@ -164,9 +175,17 @@ public class StTradeRecordServiceImpl implements StTradeRecordService {
             }
             //修改买家卖家报价状态
             buyQuote.setStatus(ApplicationConstants.STOCK_STQUOTE_STATUS_ALREADYDEAL);
-            stQuoteService.updateQuote(buyQuote);
             sellQuote.setStatus(ApplicationConstants.STOCK_STQUOTE_STATUS_ALREADYDEAL);
-            stQuoteService.updateQuote(sellQuote);
+            if(buyQuote.getUserType() == ApplicationConstants.ACCOUNT_TYPE_VIRTUAL) {
+//                iMessageQueue.sendMessage(ApplicationConstants.PUSHMESSAGE_SIMULATIONQUOTE, FileUtils.objectToByte(buyQuote));
+            }else if(buyQuote.getUserType() == ApplicationConstants.ACCOUNT_TYPE_REAL){
+                stQuoteService.updateQuote(buyQuote);
+            }
+            if(sellQuote.getUserType() == ApplicationConstants.ACCOUNT_TYPE_VIRTUAL) {
+//                iMessageQueue.sendMessage(ApplicationConstants.PUSHMESSAGE_SIMULATIONQUOTE, FileUtils.objectToByte(sellQuote));
+            }else if(sellQuote.getUserType() == ApplicationConstants.ACCOUNT_TYPE_REAL){
+                stQuoteService.updateQuote(sellQuote);
+            }
         }
     }
 

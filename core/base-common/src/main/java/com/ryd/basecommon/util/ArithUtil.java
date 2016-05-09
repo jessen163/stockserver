@@ -134,7 +134,7 @@ public class ArithUtil {
         if(b1==null){
             return null;
         }
-        b1.setScale(2, BigDecimal.ROUND_HALF_UP);
+        b1.setScale(2, BigDecimal.ROUND_HALF_DOWN);
         return b1;
     }
 
