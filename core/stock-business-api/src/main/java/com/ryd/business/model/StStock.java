@@ -14,6 +14,7 @@ import java.util.Date;
  * 创建人：songby
  * 创建时间：2016/4/21 10:29
  */
+@Entity
 public class StStock implements Serializable,BuguEntity {
 
     private static final long serialVersionUID = -5808387262109584648L;
