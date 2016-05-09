@@ -11,8 +11,10 @@ import java.util.Date;
  * 创建时间：2016/4/24 10:11
  */
 public class SearchQuoteDTO implements Serializable {
-    // 股票ID
+    // 股票代码
     private String stockCode;
+    // 股票ID
+    private String stockId;
     // 账户ID
     private String accountId;
     // 报价类型： 1、买 2、卖
@@ -27,6 +29,14 @@ public class SearchQuoteDTO implements Serializable {
     private int offset;
 
     private int limit;
+
+    public String getStockId() {
+        return stockId;
+    }
+
+    public void setStockId(String stockId) {
+        this.stockId = stockId;
+    }
 
     public Short getStatus() {
         return status;
