@@ -1,7 +1,6 @@
 package com.ryd.business.service.thread;
 
 import com.ryd.basecommon.util.ApplicationConstants;
-import com.ryd.basecommon.util.ArithUtil;
 import com.ryd.business.dto.SearchQuoteDTO;
 import com.ryd.business.model.StQuote;
 import com.ryd.business.service.StQuoteService;
@@ -46,14 +45,12 @@ public class TradingSubThread implements Runnable {
                 // 如果撮合成功, 执行交易, 同时更新买入、卖出队列
                 if (buyQuote.getQuotePrice().doubleValue() >= sellQuote.getQuotePrice().doubleValue() && !buyQuote.getAccountId().equals(sellQuote.getAccountId())) {
                     // 调用交易接口
-                    try {
-                        stTradeRecordService.updateTradeSettling(buyQuote, sellQuote);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
+                    stTradeRecordService.updateTradeSettling(buyQuote, sellQuote);
                 }
 //              TimeUnit.MILLISECONDS.sleep(200);
             } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
