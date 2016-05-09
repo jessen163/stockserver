@@ -2,6 +2,7 @@ package com.ryd.business.service;
 
 import com.ryd.business.dto.SearchStockDTO;
 import com.ryd.business.dto.StStockDetailDTO;
+import com.ryd.business.dto.StockTradeAmountDTO;
 import com.ryd.business.model.StStock;
 import com.ryd.business.model.StStockConfig;
 
@@ -55,4 +56,11 @@ public interface StStockService {
      * @return
      */
     public boolean findStockListToCache();
+
+    /**
+     * 成交量查询
+     * @param searchStockDTO
+     * @return
+     */
+    public List<StockTradeAmountDTO> findStockTradeAmountList(SearchStockDTO searchStockDTO);
 }

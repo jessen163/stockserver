@@ -5,6 +5,7 @@ import com.ryd.basecommon.util.StringUtils;
 import com.ryd.business.dao.StStockDao;
 import com.ryd.business.dto.SearchStockDTO;
 import com.ryd.business.dto.StStockDetailDTO;
+import com.ryd.business.dto.StockTradeAmountDTO;
 import com.ryd.business.model.StStock;
 import com.ryd.business.model.StStockConfig;
 import com.ryd.business.service.StStockConfigService;
@@ -160,5 +161,11 @@ public class StStockServiceImpl implements StStockService {
             BusinessConstants.stockPriceMap = (ConcurrentHashMap<String, StStock>) obj;
         }
         return true;
+    }
+
+    @Override
+    public List<StockTradeAmountDTO> findStockTradeAmountList(SearchStockDTO searchStockDTO) {
+        List<StockTradeAmountDTO> stockTradeAmountDTOList = new ArrayList<StockTradeAmountDTO>();
+        return stockTradeAmountDTOList;
     }
 }
