@@ -28,6 +28,8 @@ public class BusinessConstants {
 
     //队列-多只股票
     public static ConcurrentHashMap<String,StTradeQueueDTO> stTradeQueueMap = new ConcurrentHashMap<String,StTradeQueueDTO>();
+    // 初始化报价数据 默认未初始化
+    public volatile static boolean isInitQuoteSuccess = false;
 
 
 
