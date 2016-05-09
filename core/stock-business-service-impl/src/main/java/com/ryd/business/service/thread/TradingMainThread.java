@@ -3,12 +3,10 @@ package com.ryd.business.service.thread;
 import com.ryd.basecommon.util.ApplicationConstants;
 import com.ryd.basecommon.util.StringUtils;
 import com.ryd.business.service.StQuoteService;
-import com.ryd.business.service.StStockService;
 import com.ryd.business.service.StTradeRecordService;
 
 import java.util.List;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -16,12 +14,10 @@ import java.util.concurrent.TimeUnit;
  * Created by chenji on 2016/4/26.
  */
 public class TradingMainThread implements Runnable {
-    private StStockService stStockService;
     private StQuoteService stQuoteService;
     private ExecutorService executorService;
     private StTradeRecordService stTradeRecordService;
-    public TradingMainThread(ExecutorService tradingservice, StStockService stStockService, StQuoteService stQuoteService, StTradeRecordService stTradeRecordService) {
-        this.stStockService = stStockService;
+    public TradingMainThread(ExecutorService tradingservice, StQuoteService stQuoteService, StTradeRecordService stTradeRecordService) {
         this.stQuoteService = stQuoteService;
         this.executorService = tradingservice;
         this.stTradeRecordService = stTradeRecordService;
@@ -41,23 +37,16 @@ public class TradingMainThread implements Runnable {
                 }
                 // 等待
                 while (ApplicationConstants.isSubThreadWait) {
-                    TimeUnit.SECONDS.sleep(5);
-                    System.out.println("TradingSubThread is Waiting!");
+                    TimeUnit.MILLISECONDS.sleep(500);
+                    System.out.println("MainThread is Waiting!");
                 }
                 TimeUnit.SECONDS.sleep(1);
             } catch (InterruptedException e) {
                 e.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
-    }
-
-    public static void main(String[] args) {
-        ExecutorService tradingservice = Executors.newFixedThreadPool(10);
-
-//        tradingservice.execute(new TradingMainThread());
-
-//        for (int i =0;i < 100;i++) {
-//            tradingservice.execute(new TradingSubThread());
-//        }
+        executorService.shutdownNow();
     }
 }
