@@ -1,5 +1,7 @@
 package com.ryd.business.model;
 
+import com.ryd.basecommon.util.DateUtils;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 
@@ -39,6 +41,8 @@ public class StAccount implements Serializable {
     private String remark;
     //创建时间
     private Long createtime;
+
+    private String createTimeFormat;
     //修改时间
     private Long updatetime;
     //状态 1.正常 2.禁用
@@ -146,6 +150,7 @@ public class StAccount implements Serializable {
 
     public void setCreatetime(Long createtime) {
         this.createtime = createtime;
+        this.createTimeFormat = DateUtils.formatLongToStr(createtime, DateUtils.TIME_FORMAT);
     }
 
     public Long getUpdatetime() {
@@ -162,5 +167,9 @@ public class StAccount implements Serializable {
 
     public void setStatus(Short status) {
         this.status = status;
+    }
+
+    public String getCreateTimeFormat() {
+        return createTimeFormat;
     }
 }
