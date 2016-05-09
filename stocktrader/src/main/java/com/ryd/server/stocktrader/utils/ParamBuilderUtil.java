@@ -3,6 +3,9 @@ package com.ryd.server.stocktrader.utils;
 import com.ryd.basecommon.protocol.protobuf.DiyNettyMessage;
 import com.ryd.basecommon.util.ApplicationConstants;
 import com.ryd.basecommon.util.DateUtils;
+import com.ryd.business.dto.StStockTurnoverDTO;
+import com.ryd.business.dto.StockPriceDTO;
+import com.ryd.business.dto.StockTradeAmountDTO;
 import com.ryd.business.model.*;
 
 /**
@@ -77,20 +80,20 @@ public class ParamBuilderUtil {
 
     /**
      * 股票价格信息
-     * @param stStock
+     * @param stockPriceDTO
      * @return
      */
-    public static DiyNettyMessage.StockPriceInfo.Builder getStockPriceInfoBuilder(StStock stStock){
+    public static DiyNettyMessage.StockPriceInfo.Builder getStockPriceInfoBuilder(StockPriceDTO stockPriceDTO){
         DiyNettyMessage.StockPriceInfo.Builder builder = DiyNettyMessage.StockPriceInfo.newBuilder();
-        builder.setStockPrice(stStock.getCurrentPrice() == null ? 0 : stStock.getCurrentPrice().doubleValue());
-        builder.setStockTime(stStock.getStockTime());
+        builder.setStockPrice(stockPriceDTO.getTradePrice());
+        builder.setStockTime(stockPriceDTO.getTradeTime());
         return builder;
     }
 
-    public static DiyNettyMessage.StockTradeAmountInfo.Builder getStockTradeAmountInfoBuilder(StStock stStock){
+    public static DiyNettyMessage.StockTradeAmountInfo.Builder getStockTradeAmountInfoBuilder(StStockTurnoverDTO stStockTurnoverDTO){
         DiyNettyMessage.StockTradeAmountInfo.Builder builder = DiyNettyMessage.StockTradeAmountInfo.newBuilder();
-        builder.setTradeAmount(stStock.getTradeAmount() == null ? 0 : stStock.getTradeAmount().intValue());
-        builder.setTradeTime(stStock.getStockTime());
+        builder.setTradeAmount((int) stStockTurnoverDTO.getTradeAmount());
+        builder.setTradeTime(stStockTurnoverDTO.getTradeTime());
         return builder;
     }
 
