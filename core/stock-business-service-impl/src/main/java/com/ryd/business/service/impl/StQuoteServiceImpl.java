@@ -273,7 +273,25 @@ public class StQuoteServiceImpl implements StQuoteService {
 
     // 返回总的买卖队列
     private ConcurrentSkipListMap<Long, StQuote> findQuoteQueueByType(SearchQuoteDTO searchQuoteDTO) {
-        return null;
+        // TODO 待优化
+        ConcurrentSkipListMap<Long, StQuote> quoteList = null;
+        // 单只股票队列
+        for (String key : BusinessConstants.stTradeQueueMap.keySet()) {
+            if (quoteList == null) {
+                quoteList = new ConcurrentSkipListMap<Long, StQuote>();
+            }
+            StTradeQueueDTO tradeQueueDTO = BusinessConstants.stTradeQueueMap.get(key);
+            if (searchQuoteDTO.getQuoteType()==ApplicationConstants.STOCK_QUOTETYPE_BUY) {
+                quoteList.putAll(tradeQueueDTO.buyList);
+            } else if(searchQuoteDTO.getQuoteType()==ApplicationConstants.STOCK_QUOTETYPE_SELL) {
+                quoteList.putAll(tradeQueueDTO.sellList);
+            }
+            if (quoteList.size()>20) {
+                break;
+            }
+        }
+
+        return quoteList;
     }
 
     @Override
