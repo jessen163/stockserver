@@ -2,6 +2,7 @@ package com.ryd.business.service;
 
 import com.ryd.business.dto.SearchStockDTO;
 import com.ryd.business.dto.StStockDetailDTO;
+import com.ryd.business.dto.StStockTurnoverDTO;
 import com.ryd.business.dto.StockTradeAmountDTO;
 import com.ryd.business.model.StStock;
 import com.ryd.business.model.StStockConfig;
@@ -62,5 +63,5 @@ public interface StStockService {
      * @param searchStockDTO
      * @return
      */
-    public List<StockTradeAmountDTO> findStockTradeAmountList(SearchStockDTO searchStockDTO);
+    public List<StStockTurnoverDTO> findStockTradeTurnoverList(SearchStockDTO searchStockDTO);
 }

@@ -5,6 +5,7 @@ import com.ryd.basecommon.util.StringUtils;
 import com.ryd.business.dao.StStockDao;
 import com.ryd.business.dto.SearchStockDTO;
 import com.ryd.business.dto.StStockDetailDTO;
+import com.ryd.business.dto.StStockTurnoverDTO;
 import com.ryd.business.dto.StockTradeAmountDTO;
 import com.ryd.business.model.StStock;
 import com.ryd.business.model.StStockConfig;
@@ -164,8 +165,8 @@ public class StStockServiceImpl implements StStockService {
     }
 
     @Override
-    public List<StockTradeAmountDTO> findStockTradeAmountList(SearchStockDTO searchStockDTO) {
-        List<StockTradeAmountDTO> stockTradeAmountDTOList = new ArrayList<StockTradeAmountDTO>();
+    public List<StStockTurnoverDTO> findStockTradeTurnoverList(SearchStockDTO searchStockDTO) {
+        List<StStockTurnoverDTO> stockTradeAmountDTOList = new ArrayList<StStockTurnoverDTO>();
         return stockTradeAmountDTOList;
     }
 }
