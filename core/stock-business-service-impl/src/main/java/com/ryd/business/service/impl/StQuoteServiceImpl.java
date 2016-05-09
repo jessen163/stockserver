@@ -249,6 +249,8 @@ public class StQuoteServiceImpl implements StQuoteService {
         if (BusinessConstants.stTradeQueueMap.isEmpty()) {
             this.findStQuoteToCache(1000);
         }
+        String stockCode = stStockConfigService.getStockCodeByStockId(searchQuoteDTO.getStockId());
+        searchQuoteDTO.setStockCode(stockCode);
         // 总的报价队列列表
         if (StringUtils.isEmpty(searchQuoteDTO.getStockCode())) {
             // TODO 返回总的买/卖队列
