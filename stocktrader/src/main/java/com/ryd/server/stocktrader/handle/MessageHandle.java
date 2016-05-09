@@ -75,8 +75,6 @@ public class MessageHandle {
                 if (CollectionUtils.isNotEmpty(stStocks)) {
                     for(StStock stc : stStocks) {
                         builder.addStockInfo(ParamBuilderUtil.getStockInfoBuilder(stc));
-                        builder.addStockPriceInfo(ParamBuilderUtil.getStockPriceInfoBuilder(stc));
-                        builder.addStockTradeAmountInfo(ParamBuilderUtil.getStockTradeAmountInfoBuilder(stc));
                     }
                 }
 
@@ -86,11 +84,21 @@ public class MessageHandle {
                 DiyNettyMessage.StockInfo sinfo = request.getStockInfoList().get(0);
                 SearchStockDTO searchStock = new SearchStockDTO();
                 searchStock.setStockId(sinfo.getId());
-                StStock st = stStockService.findStockListByStock(searchStock);
+                StStockDetailDTO std = stStockService.findStockDetailByStock(searchStock);
 
-                builder.addStockInfo(ParamBuilderUtil.getStockInfoBuilder(st));
-                builder.addStockPriceInfo(ParamBuilderUtil.getStockPriceInfoBuilder(st));
-
+                if(std != null) {
+                    builder.addStockInfo(ParamBuilderUtil.getStockInfoBuilder(std.getStStock()));
+                    if (CollectionUtils.isNotEmpty(std.getStockPriceDTOList())) {
+                        for (StockPriceDTO priceDTO : std.getStockPriceDTOList()) {
+                            builder.addStockPriceInfo(ParamBuilderUtil.getStockPriceInfoBuilder(priceDTO));
+                        }
+                    }
+                    if (CollectionUtils.isNotEmpty(std.getStockPriceDTOList())) {
+                        for (StStockTurnoverDTO sst : std.getStStockTurnoverDTOList()) {
+                            builder.addStockTradeAmountInfo(ParamBuilderUtil.getStockTradeAmountInfoBuilder(sst));
+                        }
+                    }
+                }
                 builder.setStatus(1);
                 break;
             case ApplicationConstants.NETTYMESSAGE_ID_LOGIN:
@@ -296,6 +304,7 @@ public class MessageHandle {
                 racc.setUseMoney(BigDecimal.valueOf(ainfo.getUseMoney()));
                 racc.setAccountLevel((short) ainfo.getAccountLevel());
                 racc.setMobile(ainfo.getMobile());
+                racc.setAccountType(ApplicationConstants.ACCOUNT_TYPE_REAL);
                 racc.setSex((short)ainfo.getSex());
                 racc.setRemark(ainfo.getRemark());
 
@@ -321,12 +330,18 @@ public class MessageHandle {
                 builder.setStatus(1);
                 break;
             case ApplicationConstants.NETTYMESSAGE_ID_MONITOR_TRADEAMOUNT:
+                DiyNettyMessage.StockInfo tminfo = request.getStockInfoList().get(0);
+                SearchStockDTO tmsearchStockDto = new SearchStockDTO();
+                tmsearchStockDto.setBoardType(request.getType());
+                tmsearchStockDto.setStockId(tminfo.getId());
 
-//                if (CollectionUtils.isNotEmpty(mstStocks)) {
-//                    for(StStock mstc : mstStocks) {
-//                        builder.addStockInfo(ParamBuilderUtil.getStockTradeAmountInfoBuilder(mstc));
-//                    }
-//                }
+                List<StStockTurnoverDTO> amountDTOs = stStockService.findStockTradeTurnoverList(tmsearchStockDto);
+                if (CollectionUtils.isNotEmpty(amountDTOs)) {
+                    for(StStockTurnoverDTO amd : amountDTOs) {
+                        builder.addStockTradeAmountInfo(ParamBuilderUtil.getStockTradeAmountInfoBuilder(amd));
+                    }
+                }
+                builder.setStatus(1);
                 break;
             default:
                 // 默认状态
