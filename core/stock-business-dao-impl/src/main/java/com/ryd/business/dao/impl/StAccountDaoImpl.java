@@ -68,6 +68,24 @@ public class StAccountDaoImpl implements StAccountDao {
     }
 
     @Override
+    public Integer getCount(StAccount stAccount, Long startTime, Long endTime) {
+        if(stAccount==null){
+            stAccount = new StAccount();
+        }
+        return stAccountMapper.selectCount(stAccount, startTime, endTime);
+    }
+
+    @Override
+    public String getAccountNumByAccountId(String accountId) {
+        return stAccountMapper.selectAccountNumByPrimaryKey(accountId);
+    }
+
+    @Override
+    public List<StAccount> getAccountNumList() {
+        return stAccountMapper.selectAccountNumList();
+    }
+
+    @Override
     public int deleteTById(String id){
         if(StringUtils.isBlank(id)){
             return -1;

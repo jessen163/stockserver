@@ -67,6 +67,43 @@
     </trim>
     limit #{offset, jdbcType=INTEGER},#{limit, jdbcType=INTEGER}
   </select>
+  <select id="selectCount" resultType="java.lang.Integer">
+    select count(id) from st_account
+    <trim prefix="WHERE" prefixOverrides="AND|OR">
+      <if test="account.realName != null and account.realName != ''" >
+        real_name = #{account.realName,jdbcType=VARCHAR}
+      </if>
+      <if test="account.accountName != null and account.accountName != ''" >
+        and account_name like CONCAT(CONCAT('%', #{account.accountName, jdbcType=VARCHAR}),'%')
+      </if>
+      <if test="account.accountNum != null and account.accountNum != ''" >
+        and account_num like CONCAT(CONCAT('%', #{account.accountNum, jdbcType=VARCHAR}),'%')
+      </if>
+      <if test="account.accountLevel != null" >
+        and account_level = #{account.accountLevel,jdbcType=SMALLINT}
+      </if>
+      <if test="account.accountType != null" >
+        and account_type = #{account.accountType,jdbcType=SMALLINT}
+      </if>
+      <if test="account.status != null" >
+        and status = #{account.status,jdbcType=SMALLINT}
+      </if>
+      <if test="startTime != null" >
+        and createtime &gt;= #{startTime,jdbcType=BIGINT}
+      </if>
+      <if test="endTime != null" >
+        and createtime &lt;= #{endTime,jdbcType=BIGINT}
+      </if>
+    </trim>
+  </select>
+  <select id="selectAccountNumByPrimaryKey" resultType="java.lang.String" parameterType="java.lang.String" >
+    select account_num
+    from st_account
+    where id = #{id,jdbcType=CHAR}
+  </select>
+  <select id="selectAccountNumList" resultType="java.util.List" resultMap="BaseResultMap">
+   select id, account_num from st_account
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from st_account
     where id = #{id,jdbcType=CHAR}

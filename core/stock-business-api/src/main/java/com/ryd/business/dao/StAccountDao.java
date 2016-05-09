@@ -4,6 +4,7 @@ import com.ryd.basecommon.dao.BaseDao;
 import com.ryd.business.model.StAccount;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>标题:帐户DAO</p>
@@ -29,5 +30,24 @@ public interface StAccountDao  extends BaseDao<StAccount> {
      * @return
      */
     public StAccount getStAccountByAccountNum(String accountNum);
+
+    /**
+     * 查找数量
+     * @return
+     */
+    public Integer getCount(StAccount stAccount, Long startTime, Long endTime);
+
+    /**
+     * 根据ID查帐号
+     * @param accountId
+     * @return
+     */
+    public String getAccountNumByAccountId(String accountId);
+
+    /**
+     * 查询所有的帐号
+     * @return
+     */
+    public List<StAccount> getAccountNumList();
 
 }
