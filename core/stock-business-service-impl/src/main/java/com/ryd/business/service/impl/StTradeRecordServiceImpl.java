@@ -175,7 +175,7 @@ public class StTradeRecordServiceImpl implements StTradeRecordService {
                 throw new TradeBusinessException("交易卖家移出队列失败");
             }
             //修改买家卖家报价状态
-            buyQuote.setStatus(ApplicationConstants.STOCK_STQUOTE_STATUS_ALREADYDEAL);
+            buyQuote.setStatus(ApplicationConstants.STOCK_STQUOTE_STATUS_DEALING);
             sellQuote.setStatus(ApplicationConstants.STOCK_STQUOTE_STATUS_ALREADYDEAL);
             if(buyQuote.getUserType() == ApplicationConstants.ACCOUNT_TYPE_VIRTUAL) {
 //                iMessageQueue.sendMessage(ApplicationConstants.PUSHMESSAGE_SIMULATIONQUOTE, FileUtils.objectToByte(buyQuote));
