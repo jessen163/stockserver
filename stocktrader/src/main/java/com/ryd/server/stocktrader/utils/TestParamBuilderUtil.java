@@ -69,13 +69,12 @@ public class TestParamBuilderUtil {
         builder.setKey("1");
         builder.setType(type);
 
+        DiyNettyMessage.StockInfo.Builder paramBuilder = DiyNettyMessage.StockInfo.newBuilder();
         if(StringUtils.isNotBlank(stockId)) {
-            DiyNettyMessage.StockInfo.Builder paramBuilder = DiyNettyMessage.StockInfo.newBuilder();
             paramBuilder.setId(stockId);
-
-            builder.addStockInfo(paramBuilder);
         }
 
+        builder.addStockInfo(paramBuilder);
         return builder;
     }
 

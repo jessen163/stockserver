@@ -171,6 +171,7 @@ public class ParamBuilderUtil {
         qbuiler.setStockId(q1.getStockId());
         qbuiler.setStockName("");
         qbuiler.setAccountId(q1.getAccountId());
+        qbuiler.setAccountNum(q1.getAccountNum()==null ? "" : q1.getAccountNum());
         qbuiler.setQuoteId(q1.getQuoteId());
         qbuiler.setStockPrice(q1.getQuotePrice() == null ? 0 : q1.getQuotePrice().doubleValue());
         qbuiler.setQuoteType(q1.getQuoteType());
