@@ -1,11 +1,14 @@
+/*
 package com.ryd.business.dto;
 
 import java.io.Serializable;
 
+*/
 /**
  * 股票成交量
  * Created by chenji on 2016/5/9.
- */
+ *//*
+
 public class StockTradeAmountDTO implements Serializable {
     // 成交量
     private long tradeAmount;
@@ -28,3 +31,4 @@ public class StockTradeAmountDTO implements Serializable {
         this.tradeTime = tradeTime;
     }
 }
+*/
