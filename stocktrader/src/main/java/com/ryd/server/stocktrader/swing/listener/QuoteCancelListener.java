@@ -36,6 +36,7 @@ public class QuoteCancelListener extends MouseAdapter implements ActionListener 
 
 			DiyNettyMessage.NettyMessage.Builder builder = TestParamBuilderUtil.getRevoke(quoteId, ClientConstants.stAccount.getId());
 			MessageServiceImpl.sendMessage(builder.build());
+			QuoteListDialog.instance().dispose();
 		}else{
 			JOptionPane.showMessageDialog(null, "请选择撤单报价", "提示",
 					JOptionPane.ERROR_MESSAGE);
