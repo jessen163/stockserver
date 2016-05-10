@@ -578,11 +578,16 @@ public class StQuoteServiceImpl implements StQuoteService {
         }
         SearchQuoteDTO searchQuoteDTO = new SearchQuoteDTO();
         searchQuoteDTO.setStatus(ApplicationConstants.STOCK_STQUOTE_STATUS_TRUSTEE);
+        searchQuoteDTO.setOffset(0);
+        searchQuoteDTO.setLimit(Integer.MAX_VALUE);
         List<StQuote> stQuoteList = this.findQuoteList(searchQuoteDTO);
         if (!StringUtils.isEmpty(stQuoteList)) {
             for (StQuote quote : stQuoteList) {
                 String stockCode = stStockConfigService.getStockCodeByStockId(quote.getStockId());
                 StTradeQueueDTO tradeQueueDTO = BusinessConstants.stTradeQueueMap.get(stockCode);
+                if (tradeQueueDTO==null) {
+                    tradeQueueDTO = new StTradeQueueDTO();
+                }
                 if (quote.getQuoteType().intValue()==ApplicationConstants.STOCK_QUOTETYPE_BUY.intValue()) {
                     tradeQueueDTO.addBuyStQuote(quote);
                 } else if (quote.getQuoteType().intValue()==ApplicationConstants.STOCK_QUOTETYPE_SELL.intValue()) {
@@ -591,7 +596,6 @@ public class StQuoteServiceImpl implements StQuoteService {
                 BusinessConstants.stTradeQueueMap.put(stockCode, tradeQueueDTO);
             }
         }
-        BusinessConstants.isInitQuoteSuccess = true;
 
         return true;
     }

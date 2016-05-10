@@ -6,7 +6,6 @@ import com.ryd.business.dao.StStockDao;
 import com.ryd.business.dto.SearchStockDTO;
 import com.ryd.business.dto.StStockDetailDTO;
 import com.ryd.business.dto.StStockTurnoverDTO;
-import com.ryd.business.dto.StockTradeAmountDTO;
 import com.ryd.business.model.StStock;
 import com.ryd.business.model.StStockConfig;
 import com.ryd.business.service.StStockConfigService;
