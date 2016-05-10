@@ -53,6 +53,37 @@
     order by date_time desc
     limit #{offset, jdbcType=INTEGER},#{limit, jdbcType=INTEGER}
   </select>
+  <select id="selectListByStatus" resultType="java.util.List" resultMap="BaseResultMap">
+    select * from st_quote
+    <trim prefix="WHERE" prefixOverrides="AND|OR">
+      <if test="record.accountId != null and record.accountId != ''" >
+        account_id = #{record.accountId,jdbcType=CHAR}
+      </if>
+      <if test="record.stockId != null and record.stockId != ''" >
+        and stock_id = #{record.stockId,jdbcType=CHAR}
+      </if>
+      <if test="record.quoteType != null" >
+        and quote_type = #{record.quoteType,jdbcType=SMALLINT}
+      </if>
+      <if test="record.userType != null" >
+        and user_type = #{record.userType,jdbcType=SMALLINT}
+      </if>
+      <if test="startTime != null" >
+        and date_time &gt;= #{startTime,jdbcType=BIGINT}
+      </if>
+      <if test="endTime != null" >
+        and date_time &lt;= #{endTime,jdbcType=BIGINT}
+      </if>
+      <if test="list != null and list.size() > 0" >
+        and status IN
+        <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+          #{item}
+        </foreach>
+      </if>
+    </trim>
+    order by date_time desc
+    limit #{offset, jdbcType=INTEGER},#{limit, jdbcType=INTEGER}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from st_quote
     where quote_id = #{quoteId,jdbcType=CHAR}
