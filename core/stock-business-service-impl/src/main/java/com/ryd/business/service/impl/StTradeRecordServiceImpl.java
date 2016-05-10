@@ -9,6 +9,7 @@ import com.ryd.business.model.StQuote;
 import com.ryd.business.model.StTradeRecord;
 import com.ryd.business.service.*;
 import com.ryd.business.service.thread.TradingMainThread;
+import com.ryd.business.service.util.BusinessConstants;
 import com.ryd.business.service.util.Utils;
 import com.ryd.cache.service.ICacheService;
 import com.ryd.system.service.StSystemParamService;
@@ -83,14 +84,14 @@ public class StTradeRecordServiceImpl implements StTradeRecordService {
     public void updateTradeSettling(StQuote buyQuote, StQuote sellQuote) throws Exception{
         //股票交易数量
         long tradeStockAmount = 0;
-
+        System.out.println(BusinessConstants.stTradeQueueMap);
         //买少卖多
         if (buyQuote.getCurrentAmount().longValue() < sellQuote.getCurrentAmount().longValue()) {
             //股票交易数量为买家购买数量
             tradeStockAmount = buyQuote.getCurrentAmount();
 
             //处理交易
-            trading(buyQuote, sellQuote, tradeStockAmount);
+            this.saveTrading(buyQuote, sellQuote, tradeStockAmount);
 
             //交易成功，交易卖家持仓减少
             sellQuote.setCurrentAmount(sellQuote.getCurrentAmount() - tradeStockAmount);
@@ -118,7 +119,7 @@ public class StTradeRecordServiceImpl implements StTradeRecordService {
             //买卖相等
             tradeStockAmount = buyQuote.getCurrentAmount();
             //处理交易
-            trading(buyQuote, sellQuote, tradeStockAmount);
+            this.saveTrading(buyQuote, sellQuote, tradeStockAmount);
 
             //买家卖家移出队列
             boolean desb = stQuoteService.deleteQuoteFromQueue(buyQuote);
@@ -146,7 +147,7 @@ public class StTradeRecordServiceImpl implements StTradeRecordService {
             //股票交易数量为卖家卖掉数量
             tradeStockAmount = sellQuote.getCurrentAmount();
             //处理交易
-            trading(buyQuote, sellQuote, tradeStockAmount);
+            this.saveTrading(buyQuote, sellQuote, tradeStockAmount);
 
             //买家报价剩余股票数量
             long remainAmount = buyQuote.getCurrentAmount()-tradeStockAmount;
@@ -187,6 +188,7 @@ public class StTradeRecordServiceImpl implements StTradeRecordService {
                 stQuoteService.updateQuote(sellQuote);
             }
         }
+        System.out.println(BusinessConstants.stTradeQueueMap);
     }
 
     @Override
@@ -217,7 +219,7 @@ public class StTradeRecordServiceImpl implements StTradeRecordService {
      * @param sellQuote
      * @param tradeStockAmount
      */
-    private boolean trading(StQuote buyQuote, StQuote sellQuote, long tradeStockAmount) throws Exception {
+    private boolean saveTrading(StQuote buyQuote, StQuote sellQuote, long tradeStockAmount) throws Exception {
 
         boolean brs = false, srs = false, rs = false;
         //股票交易价格
