@@ -5,7 +5,6 @@ import com.ryd.basecommon.util.ApplicationConstants;
 import com.ryd.basecommon.util.DateUtils;
 import com.ryd.business.dto.StStockTurnoverDTO;
 import com.ryd.business.dto.StockPriceDTO;
-import com.ryd.business.dto.StockTradeAmountDTO;
 import com.ryd.business.model.*;
 
 /**
