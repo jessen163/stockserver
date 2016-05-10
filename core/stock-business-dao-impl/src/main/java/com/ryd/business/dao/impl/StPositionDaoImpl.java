@@ -96,4 +96,9 @@ public class StPositionDaoImpl implements StPositionDao {
         }
         return -1;
     }
+
+    @Override
+    public List<StPosition> findAmountListNoEqual(int limit, int offset) {
+        return stPositionMapper.selectListAmountNoEqual(limit,offset);
+    }
 }
