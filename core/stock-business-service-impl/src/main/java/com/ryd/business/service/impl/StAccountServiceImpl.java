@@ -14,7 +14,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>标题:账户业务实现类--基础业务类</p>
@@ -177,6 +179,34 @@ public class StAccountServiceImpl implements StAccountService {
         }
 
         return accounts;
+    }
+
+    @Override
+    public Map<String, String> findAllAccountNum() {
+        Map<String, String> rsMap = null;
+        Object accountNumObj = iCacheService.getStringByKey(CacheConstant.CACHEKEY_ACCOUNT_ACCOUNTNUM_MAP, null);
+        if (accountNumObj!=null) {
+            rsMap = (Map<String, String>)accountNumObj;
+            return rsMap;
+        }
+
+        List<StAccount> accList = stAccountDao.getAccountNumList();
+        rsMap = new HashMap<String, String>();
+        for(StAccount st:accList){
+            rsMap.put(st.getId(), st.getAccountNum());
+            iCacheService.setStringByKey(CacheConstant.CACHEKEY_ACCOUNT_ACCOUNTNUM_MAP, st.getId(), st.getAccountNum(), Integer.MAX_VALUE);
+        }
+        return rsMap;
+    }
+
+    @Override
+    public String findAccountNumByAccountId(String accountId) {
+        String accNum = iCacheService.getStringByKey(CacheConstant.CACHEKEY_ACCOUNT_ACCOUNTNUM_MAP, accountId, null);
+        if(accNum == null){
+            this.findAllAccountNum();
+        }
+        accNum = iCacheService.getStringByKey(CacheConstant.CACHEKEY_ACCOUNT_ACCOUNTNUM_MAP,accountId,null);
+        return accNum;
     }
 
     @Override
