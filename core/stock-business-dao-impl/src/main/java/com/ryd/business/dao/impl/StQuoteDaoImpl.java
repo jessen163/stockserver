@@ -33,6 +33,14 @@ public class StQuoteDaoImpl implements StQuoteDao {
     }
 
     @Override
+    public List<StQuote> findStQuoteListByStatus(StQuote obj, List<Short> statusList, Long startTime,Long endTime, int limit, int offset) {
+        if(obj==null){
+            obj = new StQuote();
+        }
+        return stQuoteMapper.selectListByStatus(obj,statusList, startTime, endTime, limit, offset);
+    }
+
+    @Override
     public int update(StQuote obj) {
         if(StringUtils.isBlank(obj.getQuoteId())){
             return -1;
