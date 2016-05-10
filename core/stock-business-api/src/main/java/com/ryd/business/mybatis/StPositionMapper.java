@@ -35,4 +35,7 @@ public interface StPositionMapper {
     List<StPosition> selectListByKeySelective(@Param(value = "record") StPosition record,
                                                   @Param(value = "limit") Integer limit,
                                                   @Param(value = "offset") Integer offset);
+
+    List<StPosition> selectListAmountNoEqual(@Param(value = "limit") Integer limit,
+                                             @Param(value = "offset") Integer offset);
 }

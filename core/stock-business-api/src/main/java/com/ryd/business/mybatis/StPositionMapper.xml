@@ -43,6 +43,10 @@
     </trim>
     limit #{offset, jdbcType=INTEGER},#{limit, jdbcType=INTEGER}
   </select>
+  <select id="selectListAmountNoEqual" resultType="java.util.List" resultMap="BaseResultMap">
+    select * from st_position where status=1 and amount &lt;&gt; market_amount
+    limit #{offset, jdbcType=INTEGER},#{limit, jdbcType=INTEGER}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from st_position
     where position_id = #{positionId,jdbcType=CHAR}

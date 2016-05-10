@@ -34,4 +34,12 @@ public interface StPositionDao extends BaseDao<StPosition> {
     public int updateBatch(List<StPosition> list);
 
     public int deleteBatch(List<String> list);
+
+    /**
+     * 持有股票数量!=可交易股票数量仓位数
+     * @param limit
+     * @param offset
+     * @return
+     */
+    public List<StPosition> findAmountListNoEqual(int limit,int offset);
 }
