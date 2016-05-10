@@ -37,10 +37,10 @@ public class TradingMainThread implements Runnable {
                 }
                 // 等待
                 while (ApplicationConstants.isSubThreadWait) {
-                    TimeUnit.MILLISECONDS.sleep(500);
+                    TimeUnit.MILLISECONDS.sleep(1000);
                     System.out.println("MainThread is Waiting!");
                 }
-                TimeUnit.SECONDS.sleep(1);
+                TimeUnit.SECONDS.sleep(30);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             } catch (Exception e) {
