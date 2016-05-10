@@ -83,4 +83,7 @@ public class CacheConstant {
 
     // 缓存key-帐户信息-模拟帐户列表
     public static final String CACHEKEY_ACCOUNT_VIRTUALLIST = "virtualAccountList";
+
+    // 缓存key-帐户帐号信息-MAP集合
+    public static final String CACHEKEY_ACCOUNT_ACCOUNTNUM_MAP = "accountAccountNumMap_";
 }
