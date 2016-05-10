@@ -15,4 +15,16 @@ import java.util.List;
 public interface StQuoteDao extends BaseDao<StQuote> {
 
     public int addBatch(List<StQuote> list);
+
+    /**
+     *  根据条件状态查询报价
+     * @param obj
+     * @param statusList
+     * @param startTime
+     * @param endTime
+     * @param limit
+     * @param offset
+     * @return
+     */
+    public List<StQuote> findStQuoteListByStatus(StQuote obj, List<Short> statusList, Long startTime,Long endTime, int limit, int offset);
 }
