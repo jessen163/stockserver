@@ -33,8 +33,6 @@ public class StSettleRecordServiceImpl implements StSettleRecordService {
 
     @Autowired
     private StSettleRecordDao stSettleRecordDao;
-//    @Autowired
-//    private StStockService stStockService;
     @Autowired
     private StAccountService stAccountService;
     @Autowired
@@ -43,8 +41,8 @@ public class StSettleRecordServiceImpl implements StSettleRecordService {
     private StQuoteService stQuoteService;
     @Autowired
     private StPositionService stPositionService;
-//    @Autowired
-//    private ICacheService iCacheService;
+    @Autowired
+    private StStockConfigService stStockConfigService;
 
     @Override
     public boolean updateStockSettling() throws Exception{
@@ -53,9 +51,9 @@ public class StSettleRecordServiceImpl implements StSettleRecordService {
            // 结算
            List<String> stockCodeList = stQuoteService.findQuoteStockIdList();
            for(String stockCode : stockCodeList) {
-
+               String stockId = stStockConfigService.getStockIdByStockCode(stockCode);
                SearchQuoteDTO searchQuoteDTO = new SearchQuoteDTO();
-               searchQuoteDTO.setStockCode(stockCode);
+               searchQuoteDTO.setStockId(stockId);
                searchQuoteDTO.setQuoteType(ApplicationConstants.STOCK_QUOTETYPE_BUY);
 
                List<StQuote> buyList = stQuoteService.findQuoteQueueByStock(searchQuoteDTO);
