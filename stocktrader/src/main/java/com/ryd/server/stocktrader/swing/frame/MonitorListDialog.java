@@ -64,17 +64,18 @@ public class MonitorListDialog extends JDialog {
 		scrollPaneb.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 
 		table2 = new JTable();
-		JScrollPane scrollPanes = new JScrollPane(table);
+		JScrollPane scrollPanes = new JScrollPane(table2);
 		scrollPanes.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 
 		panel1.add(scrollPaneb);
+		panel1.add(Box.createHorizontalStrut(10));
 		panel1.add(scrollPanes);
 
 		JPanel panel2 = new JPanel();
-		panel1.setLayout(new BoxLayout(panel1, BoxLayout.Y_AXIS));
+		panel2.setLayout(new BoxLayout(panel2, BoxLayout.Y_AXIS));
 
-		table = new JTable();
-		JScrollPane scrollPaner = new JScrollPane(table);
+		table3 = new JTable();
+		JScrollPane scrollPaner = new JScrollPane(table3);
 		scrollPaner.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 
 		panel2.add(scrollPaner);
@@ -107,22 +108,19 @@ public class MonitorListDialog extends JDialog {
 	public void setTableData(){
 
 		List<StTradeRecord> monitorTradeRecordList = ClientConstants.monitorTradeRecordList;
-		table.removeAll();
 		DefaultTableModel tableModel = new DefaultTableModel(ListToArray.mrecordListToArray(monitorTradeRecordList), columnNamer);
-		table.setModel(tableModel);
-		hideColumn(table,8);
+		table3.setModel(tableModel);
+		hideColumn(table3,7);
 
 		List<StQuote> monitorQuoteBuyList = ClientConstants.monitorQuoteBuyList;
-		table2.removeAll();
 		DefaultTableModel tableModel2 = new DefaultTableModel(ListToArray.mquoteListToArray(monitorQuoteBuyList), columnNameb);
-		table2.setModel(tableModel2);
-		hideColumn(table2,6);
+		table.setModel(tableModel2);
+		hideColumn(table, 5);
 
 		List<StQuote> monitorQuoteSellList = ClientConstants.monitorQuoteSellList;
-		table3.removeAll();
 		DefaultTableModel tableModel3 = new DefaultTableModel(ListToArray.mquoteListToArray(monitorQuoteSellList), columnNames);
-		table3.setModel(tableModel3);
-		hideColumn(table3,6);
+		table2.setModel(tableModel3);
+		hideColumn(table2,5);
 	}
 
 	/**

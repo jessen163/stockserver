@@ -8,6 +8,7 @@ import com.ryd.business.model.StStock;
 import com.ryd.business.model.StStockConfig;
 import com.ryd.server.stocktrader.swing.common.ClientConstants;
 import com.ryd.server.stocktrader.swing.common.ListToArray;
+import com.ryd.server.stocktrader.swing.listener.MonitorStockSearchListener;
 import com.ryd.server.stocktrader.swing.listener.QuoteListListener;
 import com.ryd.server.stocktrader.swing.listener.StockSearchListener;
 import com.ryd.server.stocktrader.swing.service.impl.MessageServiceImpl;
@@ -129,7 +130,7 @@ public class MonitorFrame extends JFrame {
         JScrollPane scrollPane2 = new JScrollPane(table2);
         scrollPane2.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 
-        StockSearchListener searchListener = new StockSearchListener(stCode, table2, search);
+        MonitorStockSearchListener searchListener = new MonitorStockSearchListener(stCode, table2, search);
         search.addActionListener(searchListener);
 
         middlePanel.add(scrollPane2);

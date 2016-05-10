@@ -94,6 +94,7 @@ public class MessageServiceImpl extends MessageServiceI {
                 if(wrs == 1) {
                     JOptionPane.showMessageDialog(null, "撤单成功", "提示",
                             JOptionPane.ERROR_MESSAGE);
+                    QuoteListDialog.instance().open();
                 }else{
                     JOptionPane.showMessageDialog(null, "撤单失败", "提示",
                             JOptionPane.ERROR_MESSAGE);
@@ -216,6 +217,7 @@ public class MessageServiceImpl extends MessageServiceI {
                         ClientConstants.monitorStockInfoList.add(mstri);
                     }
                 }
+                ClientConstants.monitorStockInfoListToMap();
                 MonitorFrame.instance().open();
                 break;
             default:

@@ -266,13 +266,14 @@ public class MessageHandle {
             case ApplicationConstants.NETTYMESSAGE_ID_SINGLESTOCKTRADEQUEUE:
                 DiyNettyMessage.StockInfo ssinfo = request.getStockInfoList().get(0);
                 SearchQuoteDTO ssSearchQuoteDTO = new SearchQuoteDTO();
-                ssSearchQuoteDTO.setStockCode(ssinfo.getId());
+                ssSearchQuoteDTO.setStockId(ssinfo.getId());
                 ssSearchQuoteDTO.setQuoteType(request.getType());
 
                 List<StQuote> ssQuoteList = stQuoteService.findQuoteQueueByStock(ssSearchQuoteDTO);
 
                 if (CollectionUtils.isNotEmpty(ssQuoteList)) {
                     for (StQuote ssq : ssQuoteList) {
+                        ssq.setAccountNum(stAccountService.findAccountNumByAccountId(ssq.getAccountId()));
                         builder.addQuoteInfo(ParamBuilderUtil.getQuoteInfoBuilder(ssq));
                     }
                 }
@@ -287,6 +288,8 @@ public class MessageHandle {
 
                 if (CollectionUtils.isNotEmpty(sqRecordList)) {
                     for (StTradeRecord sqr : sqRecordList) {
+                        sqr.setSellerAccountNum(stAccountService.findAccountNumByAccountId(sqr.getSellerAccountId()));
+                        sqr.setBuyerAccountNum(stAccountService.findAccountNumByAccountId(sqr.getBuyerAccountId()));
                         builder.addTradeRecordInfo(ParamBuilderUtil.getTradeRecordInfoBuilder(sqr, ""));
                     }
                 }

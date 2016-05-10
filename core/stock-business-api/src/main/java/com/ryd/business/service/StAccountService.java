@@ -5,6 +5,7 @@ import com.ryd.business.model.StAccount;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>标题:帐户Service--基础业务</p>
@@ -89,6 +90,18 @@ public interface StAccountService {
      */
     public List<StAccount> findStAccontByAccountType(Short accountType);
 
+    /**
+     * 查询所有的帐号
+     * @return
+     */
+    public Map<String, String> findAllAccountNum();
+
+    /**
+     * 根据Id查询帐号
+     * @param accountId
+     * @return
+     */
+    public String findAccountNumByAccountId(String accountId);
     /**
      * 删除用户
      * @param accountId

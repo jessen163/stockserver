@@ -55,6 +55,7 @@ public class ClientConstants {
     public static List<StQuote> monitorQuoteSellList = null;
     //监控端股票信息
     public static List<StStock> monitorStockInfoList = null;
+    public static Map<String, StStock> monitorStockInfoMap = new HashMap<String, StStock>();
 
     public static void stockListToMap() {
         if (CollectionUtils.isNotEmpty(stStockList)) {
@@ -109,6 +110,15 @@ public class ClientConstants {
             for (StStockConfig cj : stStockConfigList) {
                 stStockConfigMapKeyId.put(cj.getId(),cj);
                 stStockConfigMapKeyCode.put(cj.getStockCode(),cj);
+            }
+        }
+    }
+
+    public static void monitorStockInfoListToMap(){
+        if(CollectionUtils.isNotEmpty(monitorStockInfoList)) {
+            monitorStockInfoMap.clear();
+            for (StStock ss : monitorStockInfoList) {
+                monitorStockInfoMap.put(ss.getStockCode(),ss);
             }
         }
     }
