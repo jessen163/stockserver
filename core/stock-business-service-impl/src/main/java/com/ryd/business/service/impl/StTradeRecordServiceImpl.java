@@ -194,9 +194,15 @@ public class StTradeRecordServiceImpl implements StTradeRecordService {
     @Override
     public List<StTradeRecord> findTradeRecordListByStock(SearchTradeRecordDTO searchTradeRecordDTO) {
         List<StTradeRecord> stTradeRecordList = null;
+        Object tradeRecordListObj = null;
+        if (StringUtils.isEmpty(searchTradeRecordDTO.getStockId())) {
+            tradeRecordListObj = iCacheService.getObjectByKey(CacheConstant.CACHEKEY_TRADERECORDLIST, null);
+        } else {
+            tradeRecordListObj = iCacheService.getObjectByKey(CacheConstant.CACHEKEY_TRADERECORDLIST_STOCKID, searchTradeRecordDTO.getStockId(), null);
+        }
         // 单只股票的交易记录列表
-        if (iCacheService.getObjectByKey(CacheConstant.CACHEKEY_TRADERECORDLIST_STOCKID, searchTradeRecordDTO.getStockId(), null)!=null) {
-            stTradeRecordList = (LinkedList<StTradeRecord>)iCacheService.getObjectByKey(CacheConstant.CACHEKEY_TRADERECORDLIST_STOCKID, searchTradeRecordDTO.getStockId(), null);
+        if (tradeRecordListObj != null) {
+            stTradeRecordList = (LinkedList<StTradeRecord>) tradeRecordListObj;
         }
         return stTradeRecordList;
     }
@@ -268,27 +274,38 @@ public class StTradeRecordServiceImpl implements StTradeRecordService {
             record.setDealTax(taxFee);
             record.setDateTime(System.currentTimeMillis());
 
-            this.addTradeRecord(record);
+//            this.addTradeRecord(record);
+            boolean isAddSuccess = stTradeRecordDao.add(record) > 0;
+            if(!isAddSuccess){
+                throw new TradeBusinessException("交易记录添加失败");
+            }
 
             // 更新交易记录到缓存,总的交易记录列表
             LinkedList<StTradeRecord> stTradeRecordList = null;
-            if (iCacheService.getObjectByKey(CacheConstant.CACHEKEY_TRADERECORDLIST, null)!=null) {
-                stTradeRecordList = (LinkedList<StTradeRecord>)iCacheService.getObjectByKey(CacheConstant.CACHEKEY_TRADERECORDLIST, null);
+            Object traderecordListObj = iCacheService.getObjectByKey(CacheConstant.CACHEKEY_TRADERECORDLIST, null);
+            if (traderecordListObj != null) {
+                stTradeRecordList = (LinkedList<StTradeRecord>) traderecordListObj;
                 if (stTradeRecordList.size()>20) {
                     stTradeRecordList.removeFirst();
                 }
-                stTradeRecordList.add(record);
-                iCacheService.setObjectByKey(CacheConstant.CACHEKEY_TRADERECORDLIST, stTradeRecordList);
+            } else {
+                stTradeRecordList = new LinkedList<StTradeRecord>();
             }
+            stTradeRecordList.add(record);
+            iCacheService.setObjectByKey(CacheConstant.CACHEKEY_TRADERECORDLIST, stTradeRecordList);
+
             // 单只股票的交易记录列表
-            if (iCacheService.getObjectByKey(CacheConstant.CACHEKEY_TRADERECORDLIST_STOCKID, record.getStockId(), null)!=null) {
-                stTradeRecordList = (LinkedList<StTradeRecord>)iCacheService.getObjectByKey(CacheConstant.CACHEKEY_TRADERECORDLIST_STOCKID, record.getStockId(), null);
-                if (stTradeRecordList.size()>20) {
+            Object tradeRecordListObj = iCacheService.getObjectByKey(CacheConstant.CACHEKEY_TRADERECORDLIST_STOCKID, record.getStockId(), null);
+            if (tradeRecordListObj!=null) {
+                stTradeRecordList = (LinkedList<StTradeRecord>) tradeRecordListObj;
+                if (stTradeRecordList.size() > 20) {
                     stTradeRecordList.removeFirst();
                 }
-                stTradeRecordList.add(record);
-                iCacheService.setObjectByKey(CacheConstant.CACHEKEY_TRADERECORDLIST, record.getStockId(), stTradeRecordList, 60*60);
+            } else {
+                stTradeRecordList = new LinkedList<StTradeRecord>();
             }
+            stTradeRecordList.add(record);
+            iCacheService.setObjectByKey(CacheConstant.CACHEKEY_TRADERECORDLIST_STOCKID, record.getStockId(), stTradeRecordList, 60*60*4);
 
             //添加资金流水
             List<StMoneyJournal> moneyJournals = new ArrayList<StMoneyJournal>();
