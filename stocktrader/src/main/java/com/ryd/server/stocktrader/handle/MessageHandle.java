@@ -273,6 +273,7 @@ public class MessageHandle {
 
                 if (CollectionUtils.isNotEmpty(ssQuoteList)) {
                     for (StQuote ssq : ssQuoteList) {
+                        ssq.setAccountNum(stAccountService.findAccountNumByAccountId(ssq.getAccountId()));
                         builder.addQuoteInfo(ParamBuilderUtil.getQuoteInfoBuilder(ssq));
                     }
                 }
@@ -287,6 +288,8 @@ public class MessageHandle {
 
                 if (CollectionUtils.isNotEmpty(sqRecordList)) {
                     for (StTradeRecord sqr : sqRecordList) {
+                        sqr.setSellerAccountNum(stAccountService.findAccountNumByAccountId(sqr.getSellerAccountId()));
+                        sqr.setBuyerAccountNum(stAccountService.findAccountNumByAccountId(sqr.getBuyerAccountId()));
                         builder.addTradeRecordInfo(ParamBuilderUtil.getTradeRecordInfoBuilder(sqr, ""));
                     }
                 }
