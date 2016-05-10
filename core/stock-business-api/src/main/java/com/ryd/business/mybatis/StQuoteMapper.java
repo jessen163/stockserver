@@ -32,4 +32,11 @@ public interface StQuoteMapper {
                                            @Param(value = "endTime") Long endTime,
                                            @Param(value = "limit") Integer limit,
                                            @Param(value = "offset") Integer offset);
+
+    List<StQuote> selectListByStatus(@Param(value = "record") StQuote record,
+                                     @Param(value = "list") List<Short> statusList,
+                                           @Param(value = "startTime") Long startTime,
+                                           @Param(value = "endTime") Long endTime,
+                                           @Param(value = "limit") Integer limit,
+                                           @Param(value = "offset") Integer offset);
 }
