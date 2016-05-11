@@ -76,10 +76,14 @@ public class SyncStockThread implements Runnable {
             e.printStackTrace();
         } finally {
             cdAnswer.countDown();
-            stockList.clear();
-            stockQQList.clear();
-            stockList = null;
-            stockQQList = null;
+            if (stockQQList != null) {
+                stockQQList.clear();
+                stockQQList = null;
+            }
+            if (stockList != null) {
+                stockList.clear();
+                stockList = null;
+            }
         }
     }
 
@@ -94,6 +98,11 @@ public class SyncStockThread implements Runnable {
 
         String[] stockCodeStrArr = stockCodeStr.split(",");
         String[] stockListStrArr = stockListStr.split(";\\n");
+        if (stockCodeStrArr.length!=stockListStrArr.length) {
+            System.out.println(stockCodeStrArr);
+            System.out.println(stockListStrArr);
+            throw new RuntimeException("股票代码异常");
+        }
         for (int i = 0; i < stockCodeStrArr.length; i++) {
             StStock stock = getStockFromQqByStr(stockCodeStrArr[i], stockListStrArr[i].trim());
             if (stock==null) {
@@ -358,7 +367,7 @@ public class SyncStockThread implements Runnable {
                 SimulationQuoteDTO s = new SimulationQuoteDTO();
                 s.setStockId(stStock.getStockCode());
                 s.setQuotePrice(priceArr[i]);
-                s.setAmount(amountArr[i]);
+                s.setAmount(amountArr[i]*100);
                 s.setQuoteType(typeArr[i]);
                 s.setDateTime(System.currentTimeMillis());
                 simulationQuoteDTOList.add(s);
