@@ -1,9 +1,13 @@
 package com.ryd.server.stocktrader.swing.frame;
 
+import com.ryd.basecommon.protocol.protobuf.DiyNettyMessage;
+import com.ryd.basecommon.util.ApplicationConstants;
 import com.ryd.business.model.StQuote;
 import com.ryd.business.model.StTradeRecord;
 import com.ryd.server.stocktrader.swing.common.ClientConstants;
 import com.ryd.server.stocktrader.swing.common.ListToArray;
+import com.ryd.server.stocktrader.swing.service.impl.MessageServiceImpl;
+import com.ryd.server.stocktrader.utils.TestParamBuilderUtil;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -29,6 +33,8 @@ public class MonitorListDialog extends JDialog {
 	public static String[] columnNamer = {"买入帐户","卖出帐户","股票代码", "股票名称","报价", "数量","交易时间", "ID"};
 
 	private static MonitorListDialog quoteListDialog;
+
+	private String stockId;
 
 	JTable table,table2,table3;
 
@@ -83,6 +89,20 @@ public class MonitorListDialog extends JDialog {
 		JPanel buttonPanel = new JPanel();
 		buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
 
+		JButton refreshButton = new JButton("刷新");
+		refreshButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				DiyNettyMessage.NettyMessage.Builder builderb = TestParamBuilderUtil.getStockInfoBuilder(ApplicationConstants.NETTYMESSAGE_ID_SINGLESTOCKTRADEQUEUE, ApplicationConstants.STOCK_QUOTETYPE_SELL,stockId);
+				MessageServiceImpl.sendMessage(builderb.build());
+
+				DiyNettyMessage.NettyMessage.Builder builders = TestParamBuilderUtil.getStockInfoBuilder(ApplicationConstants.NETTYMESSAGE_ID_SINGLESTOCKTRADEQUEUE, ApplicationConstants.STOCK_QUOTETYPE_BUY, stockId);
+				MessageServiceImpl.sendMessage(builders.build());
+
+				DiyNettyMessage.NettyMessage.Builder builderr = TestParamBuilderUtil.getStockInfoBuilder(ApplicationConstants.NETTYMESSAGE_ID_SINGLESTOCKTRADERECORD, 0, stockId);
+				MessageServiceImpl.sendMessage(builderr.build());
+			}
+		});
+
 		JButton jcloseButton = new JButton("退出");
 		jcloseButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -91,6 +111,7 @@ public class MonitorListDialog extends JDialog {
 		});
 
 		buttonPanel.add(Box.createHorizontalGlue());
+		buttonPanel.add(refreshButton);
 		buttonPanel.add(jcloseButton);
 
 		panelContainer.add(panel1, BorderLayout.NORTH);
@@ -100,8 +121,8 @@ public class MonitorListDialog extends JDialog {
         add(panelContainer);
 	}
 
-	public void open() {
-		setTableData();
+	public void open(String stockId) {
+		this.stockId = stockId;
 		setVisible(true);
 	}
 

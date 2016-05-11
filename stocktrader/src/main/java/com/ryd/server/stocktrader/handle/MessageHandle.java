@@ -41,7 +41,7 @@ public class MessageHandle {
         stStockService = SpringUtils.getBean(StStockService.class, "stStockServiceImpl");
         stStockConfigService = SpringUtils.getBean(StStockConfigService.class, "stStockConfigServiceImpl");
     }
-
+    static volatile int i=0;
     /**
      * 处理客户端消息
      * @param request
@@ -113,26 +113,27 @@ public class MessageHandle {
                 }
                 break;
             case ApplicationConstants.NETTYMESSAGE_ID_QUOTE:
-                DiyNettyMessage.QuoteInfo quote = request.getQuoteInfoList().get(0);
-
-                StQuote q = new StQuote();
-                q.setStockId(quote.getStockId());
-                q.setAccountId(request.getAccountId());
-                q.setQuotePrice(BigDecimal.valueOf(quote.getStockPrice()));
-                q.setQuoteType((short) quote.getQuoteType());
-                q.setAmount(Long.valueOf(quote.getAmount()));
-
-                int rs = -1;
-                try {
-                    rs = stQuoteService.saveQuoteList(q);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                if(rs > 0 ){
-                    builder.setStatus(1);
-                }else{
-                    builder.setStatus(2);
-                }
+                i++;
+                System.out.println(i);
+//                DiyNettyMessage.QuoteInfo quote = request.getQuoteInfoList().get(0);
+//                StQuote q = new StQuote();
+//                q.setStockId(quote.getStockId());
+//                q.setAccountId(request.getAccountId());
+//                q.setQuotePrice(BigDecimal.valueOf(quote.getStockPrice()));
+//                q.setQuoteType((short) quote.getQuoteType());
+//                q.setAmount(Long.valueOf(quote.getAmount()));
+//
+//                int rs = -1;
+//                try {
+//                    rs = stQuoteService.saveQuoteList(q);
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+//                if(rs > 0 ){
+//                    builder.setStatus(1);
+//                }else{
+//                    builder.setStatus(2);
+//                }
                 break;
             case ApplicationConstants.NETTYMESSAGE_ID_WITHDRAWORDER:
                 DiyNettyMessage.QuoteInfo revokeQuote = request.getQuoteInfoList().get(0);

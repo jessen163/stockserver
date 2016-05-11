@@ -79,15 +79,17 @@ public class MessageServiceImpl extends MessageServiceI {
                 break;
             case ApplicationConstants.NETTYMESSAGE_ID_QUOTE:
                 int qrs = request.getStatus();
-                if(qrs == 1) {
-                    JOptionPane.showMessageDialog(null, "报价成功", "提示",
-                            JOptionPane.ERROR_MESSAGE);
-                    QuotePriceJDialog.instance().dispose();
-                }else{
-                    JOptionPane.showMessageDialog(null, "报价失败", "提示",
-                            JOptionPane.ERROR_MESSAGE);
-                }
+                if(!ApplicationConstants.isAutoTradeMainThreadStop){
+                    if (qrs == 1) {
+                        JOptionPane.showMessageDialog(null, "报价成功", "提示", JOptionPane.ERROR_MESSAGE);
 
+                        QuotePriceJDialog.instance().dispose();
+
+                    } else {
+                        JOptionPane.showMessageDialog(null, "报价失败", "提示",
+                                JOptionPane.ERROR_MESSAGE);
+                    }
+                }
                 break;
             case ApplicationConstants.NETTYMESSAGE_ID_WITHDRAWORDER:
                 int wrs = request.getStatus();
@@ -206,7 +208,7 @@ public class MessageServiceImpl extends MessageServiceI {
                         ClientConstants.monitorTradeRecordList.add(mstri);
                     }
                 }
-                MonitorListDialog.instance().open();
+                MonitorListDialog.instance().setTableData();
                 break;
             case ApplicationConstants.NETTYMESSAGE_ID_MONITOR_STOCKINFO:
                 List<DiyNettyMessage.StockInfo> mstinfos = request.getStockInfoList();

@@ -2,14 +2,19 @@ package com.ryd.server.stocktrader.swing.frame;
 
 import com.ryd.basecommon.protocol.protobuf.DiyNettyMessage;
 import com.ryd.basecommon.util.ApplicationConstants;
+import com.ryd.business.dto.AutomatedTradingDTO;
 import com.ryd.business.model.StAccount;
 import com.ryd.business.model.StPosition;
 import com.ryd.business.model.StStock;
+import com.ryd.business.model.StStockConfig;
 import com.ryd.server.stocktrader.swing.common.ClientConstants;
 import com.ryd.server.stocktrader.swing.common.ListToArray;
 import com.ryd.server.stocktrader.swing.listener.QuoteListListener;
 import com.ryd.server.stocktrader.swing.listener.StockSearchListener;
+import com.ryd.server.stocktrader.swing.net.ClientServer;
 import com.ryd.server.stocktrader.swing.service.impl.MessageServiceImpl;
+import com.ryd.server.stocktrader.swing.thread.AutoMainThread;
+import com.ryd.server.stocktrader.swing.thread.AutoTradeThread;
 import com.ryd.server.stocktrader.utils.TestParamBuilderUtil;
 
 import javax.swing.*;
@@ -18,7 +23,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
-
+import java.util.TimerTask;
+import java.util.concurrent.*;
+import java.util.Timer;
 /**
  * <p>标题:客户端主界面</p>
  * <p>描述:客户端主界面</p>
@@ -47,7 +54,6 @@ public class MainFrame extends JFrame {
 	public MainFrame() {
 		super("个人信息");
 		addComponent();
-       
 	}
 	
 	JLabel accountLab, totalMoneyLab, useMoneyLab;
@@ -148,8 +154,8 @@ public class MainFrame extends JFrame {
 				int selectedRow = table2.getSelectedRow();
 				if (selectedRow != -1) {
 					String stockCode = (String) table2.getValueAt(selectedRow, 0);
-					QuotePriceJDialog.instance().open(stockCode,1);
-				}else{
+					QuotePriceJDialog.instance().open(stockCode, 1);
+				} else {
 					JOptionPane.showMessageDialog(null, "请选择对应股票", "提示",
 							JOptionPane.ERROR_MESSAGE);
 				}
@@ -164,7 +170,7 @@ public class MainFrame extends JFrame {
 					String stockCode = (String) table2.getValueAt(selectedRow, 0);
 					String stockName = (String) table2.getValueAt(selectedRow, 1);
 					StockInfoDialog.instance(instance()).open(stockCode);
-				}else{
+				} else {
 					JOptionPane.showMessageDialog(null, "请选择对应股票", "提示",
 							JOptionPane.ERROR_MESSAGE);
 				}
@@ -213,6 +219,28 @@ public class MainFrame extends JFrame {
 			 }
 		 });
 
+
+		 JButton autoStartQuoteButton = new JButton("自动报价开始");
+		 autoStartQuoteButton.addActionListener(new ActionListener() {
+			 public void actionPerformed(ActionEvent e) {
+				 if(ApplicationConstants.isAutoTradeMainThreadStop) {
+					 ScheduledExecutorService  es = Executors.newScheduledThreadPool(1);// 线程池
+					 es.scheduleAtFixedRate(new AutoMainThread(), 0, 3, TimeUnit.SECONDS);
+				 }else{
+					 JOptionPane.showMessageDialog(null, "自动交易已启动", "提示",
+							 JOptionPane.ERROR_MESSAGE);;
+				 }
+			 }
+		 });
+
+		 JButton autoStopQuoteButton = new JButton("自动报价结束");
+		 autoStopQuoteButton.addActionListener(new ActionListener() {
+			 public void actionPerformed(ActionEvent e) {
+				 ApplicationConstants.isAutoTradeMainThreadStop = true;
+				 ClientConstants.treadint = 0;
+			 }
+		 });
+
 		 JButton refreshButton = new JButton("刷新");
 		 refreshButton.addActionListener(new ActionListener() {
 			 public void actionPerformed(ActionEvent e) {
@@ -245,6 +273,9 @@ public class MainFrame extends JFrame {
 	      
 		 buttonPanel.add(Box.createHorizontalGlue ());
 
+		 buttonPanel.add(autoStartQuoteButton);
+		 buttonPanel.add(autoStopQuoteButton);
+
 		 buttonPanel.add(refreshButton);
 
 		 buttonPanel.add(closeButton);
@@ -257,7 +288,6 @@ public class MainFrame extends JFrame {
 	 }
 	
 	 public void addComponent() {
-	
         createTopPanel();
         createMiddlePanel();
         createBottomPanel();
