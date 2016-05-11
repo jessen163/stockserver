@@ -31,6 +31,6 @@ public class BusinessConstants {
     // 初始化报价数据 默认未初始化
     public volatile static boolean isInitQuoteSuccess = false;
 
-
-
+    // 是否可以报价
+    public volatile static boolean isCanQuote = false;
 }
