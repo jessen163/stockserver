@@ -11,6 +11,7 @@ import com.ryd.business.exception.QuoteBusinessException;
 import com.ryd.business.model.StQuote;
 import com.ryd.business.model.StStock;
 import com.ryd.business.service.*;
+import com.ryd.business.service.thread.GenerateSimulationQuoteThread;
 import com.ryd.business.service.util.BusinessConstants;
 import com.ryd.business.service.util.Utils;
 import com.ryd.cache.service.ICacheService;
@@ -237,6 +238,7 @@ public class StQuoteServiceImpl implements StQuoteService {
         }
         Collection<String> stockIdList = BusinessConstants.stTradeQueueMap.keySet();
         List<String> stockIdListNew = new ArrayList<String>(stockIdList);
+        stockIdList=null;
         return stockIdListNew;
     }
 
@@ -264,6 +266,7 @@ public class StQuoteServiceImpl implements StQuoteService {
             } else if (searchQuoteDTO.getQuoteType() == ApplicationConstants.STOCK_QUOTETYPE_SELL) {
                 quoteList = tradeQueueDTO.sellList;
             }
+            tradeQueueDTO = null;
         }
         Collection<StQuote> collectionList = quoteList.values();
         List<StQuote> list = new ArrayList<StQuote>();
@@ -286,6 +289,7 @@ public class StQuoteServiceImpl implements StQuoteService {
             } else if(searchQuoteDTO.getQuoteType()==ApplicationConstants.STOCK_QUOTETYPE_SELL) {
                 quoteList.putAll(tradeQueueDTO.sellList);
             }
+            tradeQueueDTO = null;
             if (quoteList.size()>20) {
                 break;
             }
@@ -305,6 +309,7 @@ public class StQuoteServiceImpl implements StQuoteService {
         }
         // 获取队列中的第一条买/卖报价
         StQuote quote = tradeQueueDTO.getFristStQuoteFromQueue(searchQuoteDTO.getQuoteType());
+        tradeQueueDTO = null;
         return quote;
     }
 
@@ -379,6 +384,7 @@ public class StQuoteServiceImpl implements StQuoteService {
                 tradeQueueDTO.addSellStQuote(quote);
             }
             BusinessConstants.stTradeQueueMap.put(quote.getStockCode(), tradeQueueDTO);
+            tradeQueueDTO = null;
             // TODO 放入缓存
         }
 
@@ -451,6 +457,7 @@ public class StQuoteServiceImpl implements StQuoteService {
         }
         if (!isRemove) return false;
         BusinessConstants.stTradeQueueMap.put(stockCode, tradeQueueDTO);
+        tradeQueueDTO = null;
         // TODO 放入缓存
         iCacheService.setObjectByKey(CacheConstant.CACHEKEY_SIMULATIONQUOTELIST, BusinessConstants.simulateQuoteMap);
 
@@ -496,7 +503,7 @@ public class StQuoteServiceImpl implements StQuoteService {
         List<StQuote> newStQuoteList = new ArrayList<StQuote>();
         BlockingQueue<Runnable> quoteQueue = new LinkedBlockingQueue<Runnable>();
         // TODO 用于发消息的线程池
-//        ThreadPoolExecutor quoteService = new ThreadPoolExecutor(50, 50, 1, TimeUnit.MINUTES, quoteQueue);
+        ThreadPoolExecutor quoteService = new ThreadPoolExecutor(5, 50, 1, TimeUnit.MINUTES, quoteQueue);
         for (String stockCode : BusinessConstants.simulateQuoteMap.keySet()) {
             List<SimulationQuoteDTO> simulationQuoteDTOList = BusinessConstants.simulateQuoteMap.get(stockCode);
             if (!StringUtils.isEmpty(simulationQuoteDTOList)) {
@@ -523,7 +530,7 @@ public class StQuoteServiceImpl implements StQuoteService {
                     stQuoteList.add(quote);
                     // TODO 将模拟报价放入消息队列，异步入库
 //                    iMessageQueue.sendMessage(ApplicationConstants.PUSHMESSAGE_SIMULATIONQUOTE, FileUtils.objectToByte(quote));
-//                    quoteService.execute(new GenerateSimulationQuoteThread(iMessageQueue, quote));
+                    quoteService.execute(new GenerateSimulationQuoteThread(iMessageQueue, quote));
                 }
                 newStQuoteList.addAll(stQuoteList);
                 stQuoteList.clear();
@@ -546,9 +553,9 @@ public class StQuoteServiceImpl implements StQuoteService {
                 e.printStackTrace();
             }
         }
-        System.out.println("simulationCount:"+BusinessConstants.simulateQuoteMap.size());
+        System.out.println("simulationCount:" + BusinessConstants.simulateQuoteMap.size());
         BusinessConstants.simulateQuoteMap.clear();
-
+        quoteService.shutdown();
 
         /*ExecutorService stockService = Executors.newFixedThreadPool(10);
         final CountDownLatch cdOrder = new CountDownLatch(1);//指挥官的命令，设置为1，指挥官一下达命令，则cutDown,变为0，战士们执行任务
@@ -594,6 +601,7 @@ public class StQuoteServiceImpl implements StQuoteService {
                     tradeQueueDTO.addSellStQuote(quote);
                 }
                 BusinessConstants.stTradeQueueMap.put(stockCode, tradeQueueDTO);
+                tradeQueueDTO = null;
             }
         }
 
