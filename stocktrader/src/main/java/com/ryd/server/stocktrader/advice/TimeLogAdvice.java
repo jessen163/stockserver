@@ -30,7 +30,7 @@ public class TimeLogAdvice {
      * 定义Pointcut，Pointcut的名称为aspectjMethod()，此方法没有返回值和参数
      * 该方法就是一个标识，不进行调用* com.tgb.aop.*.find*(..)execution(* com.xyz.service..*.*(..))
      */
-    @Pointcut("execution(* com.ryd.*.service.impl.*.*(..))")
+    @Pointcut("execution(* com.ryd.business.service.impl.*.*(..))")
     public void aspectjMethod(){
         logger.debug("aspectjMethod");
     };
@@ -44,10 +44,10 @@ public class TimeLogAdvice {
     public void beforeAdvice(JoinPoint joinPoint) {
         logger.debug(joinPoint.getTarget().getClass() + ":" + joinPoint.getSignature().getName() + " start ...");
 //        System.out.println(joinPoint.getTarget().getClass() + ":" + joinPoint.getSignature().getName() + " start ...");
-//        Object obj[] = joinPoint.getArgs();
-//        for(Object o :obj){
-//            logger.debug("o:"+o);
-//        }
+        Object obj[] = joinPoint.getArgs();
+        for(Object o :obj){
+            logger.debug("o:"+o);
+        }
     }
 
     /**
@@ -78,9 +78,13 @@ public class TimeLogAdvice {
         Object retVal = pjp.proceed();
         long end = System.currentTimeMillis();
 //        logger.debug("耗时：" + (end-start) + "ms");
-        if ((end-start)/1000>1) {
-            logger.warn(pjp.getTarget().getClass()+":"+pjp.getSignature().getName()+" 耗时超过(待优化)："+(end-start)+"ms");
-            System.out.println(pjp.getTarget().getClass()+":"+pjp.getSignature().getName()+" 耗时超过(待优化)："+(end-start)+"ms");
+        if ((end-start)>5) {
+            logger.warn(pjp.getTarget().getClass() + ":" + pjp.getSignature().getName() + " 耗时超过(待优化)：" + (end - start) + "ms");
+            System.out.println(pjp.getTarget().getClass() + ":" + pjp.getSignature().getName() + " 耗时超过(待优化)：" + (end - start) + "ms");
+            Object obj[] = pjp.getArgs();
+//            for(Object o :obj){
+//                System.out.println(pjp.getSignature().getName()+"参数：" + o);
+//            }
         }
 //        logger.debug(pjp.getSignature().getName()+" 返回值：" + retVal);
         return retVal;

@@ -1,7 +1,6 @@
 package com.ryd.server.stocktrader.quartz;
 
 import com.ryd.basecommon.util.ApplicationConstants;
-import com.ryd.business.model.StPosition;
 import com.ryd.business.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -52,14 +51,19 @@ public class StockTraderTask {
         if (ApplicationConstants.isMainThreadStop||ApplicationConstants.isSubThreadStop) {
             runStockTraderEngine();
         }
+        long start = System.currentTimeMillis();
         // 每天下午4：00停止交易引擎
         // 每分钟停止交易业务，启动股票价格更新线程
         stStockService.executeRealTimeStockInfo();
+        System.out.println((System.currentTimeMillis() - start) / 1000 + "秒");
+        long start2 = System.currentTimeMillis();
         ApplicationConstants.isSubThreadWait = true;
-        // 生成马甲订单
+//        // 生成马甲订单
         stQuoteService.executeSimulationQuote();
+        System.out.println((System.currentTimeMillis() - start) / 1000+"秒-----------end");
         // 4、完成后模拟单后启动报价
         ApplicationConstants.isSubThreadWait = false;
+        System.out.println((System.currentTimeMillis() - start2) / 1000+"秒-----------simulate");
     }
 
     /**

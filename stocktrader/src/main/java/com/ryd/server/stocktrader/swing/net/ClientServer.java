@@ -13,7 +13,7 @@ public class ClientServer implements Runnable {
     public void run() {
         try {
             StockClient client = new StockClient();//192.168.5.47
-            client.connect("127.0.0.1", 9999);
+            client.connect("192.168.5.10", 9999);
         } catch (Exception e) {
             e.printStackTrace();
         }
