@@ -113,6 +113,7 @@ public class MonitorFrame extends JFrame {
                     String stockCode = (String) table2.getValueAt(selectedRow, 0);
                     StStockConfig st = ClientConstants.stStockConfigMapKeyCode.get(stockCode);
                     getData(st.getId());
+                    MonitorListDialog.instance().open(st.getId());
                 } else {
                     JOptionPane.showMessageDialog(null, "请选择对应股票", "提示",
                             JOptionPane.ERROR_MESSAGE);
@@ -143,6 +144,7 @@ public class MonitorFrame extends JFrame {
         recordButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                  getData("");
+                 MonitorListDialog.instance().open("");
             }
         });
 

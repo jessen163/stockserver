@@ -57,6 +57,10 @@ public class ClientConstants {
     public static List<StStock> monitorStockInfoList = null;
     public static Map<String, StStock> monitorStockInfoMap = new HashMap<String, StStock>();
 
+    public static volatile int treadint = 0;
+
+    public static boolean isCanAutoQuote = true;
+
     public static void stockListToMap() {
         if (CollectionUtils.isNotEmpty(stStockList)) {
             stStockMap.clear();

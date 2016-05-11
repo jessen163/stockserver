@@ -41,7 +41,6 @@ public class MessageHandle {
         stStockService = SpringUtils.getBean(StStockService.class, "stStockServiceImpl");
         stStockConfigService = SpringUtils.getBean(StStockConfigService.class, "stStockConfigServiceImpl");
     }
-
     /**
      * 处理客户端消息
      * @param request
@@ -114,7 +113,6 @@ public class MessageHandle {
                 break;
             case ApplicationConstants.NETTYMESSAGE_ID_QUOTE:
                 DiyNettyMessage.QuoteInfo quote = request.getQuoteInfoList().get(0);
-
                 StQuote q = new StQuote();
                 q.setStockId(quote.getStockId());
                 q.setAccountId(request.getAccountId());
