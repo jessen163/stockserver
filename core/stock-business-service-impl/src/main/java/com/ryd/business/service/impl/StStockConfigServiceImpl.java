@@ -35,6 +35,9 @@ public class StStockConfigServiceImpl implements StStockConfigService {
         if (BusinessConstants.stockCodeStockIdMap==null||BusinessConstants.stockCodeStockIdMap.size()==0) {
             int offset = (pageIndex-1)*limit;
             stStockConfigList = stStockConfigDao.getTList(null, null, null, limit, offset);
+            BusinessConstants.stockConfigMap.clear();
+            BusinessConstants.stockCodeStockIdMap.clear();
+            BusinessConstants.stockIdStockCodeMap.clear();
             for (StStockConfig stock: stStockConfigList) {
                 BusinessConstants.stockConfigMap.put(stock.getId(), stock);
                 BusinessConstants.stockCodeStockIdMap.put(stock.getStockCode(), stock.getId());

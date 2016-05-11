@@ -13,6 +13,7 @@ import com.ryd.business.service.StStockService;
 import com.ryd.business.service.thread.SyncStockThread;
 import com.ryd.business.service.util.BusinessConstants;
 import com.ryd.cache.service.ICacheService;
+import com.ryd.messagequeue.service.IMessageQueue;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,6 +36,8 @@ public class StStockServiceImpl implements StStockService {
     private StStockConfigService stStockConfigService;
     @Autowired
     private ICacheService iCacheService;
+    @Autowired
+    private IMessageQueue iMessageQueue;
 
     @Override
     public boolean saveStockBatch(List<StStock> stStockList) {
@@ -64,7 +67,7 @@ public class StStockServiceImpl implements StStockService {
             int length = stockCodeStringBuffer.toString().split(",").length;
             if (length==10) {
                 // 同步股票信息
-                stockService.execute(new SyncStockThread(stockCodeStringBuffer.toString(), iCacheService, cdOrder, cdAnswer, this));
+                stockService.execute(new SyncStockThread(stockService, iMessageQueue, stockCodeStringBuffer.toString(), iCacheService, cdOrder, cdAnswer, this));
                 stockCodeStringBuffer = new StringBuffer();
                 int threadSize = stockQueue.size();
 //                System.out.println("线程队列大小为-->"+threadSize);
@@ -75,7 +78,7 @@ public class StStockServiceImpl implements StStockService {
 //            i++;
         }
         if (!stockCodeStringBuffer.toString().isEmpty()) {
-            stockService.execute(new SyncStockThread(stockCodeStringBuffer.toString(), iCacheService, cdOrder, cdAnswer, this));
+            stockService.execute(new SyncStockThread(stockService, iMessageQueue, stockCodeStringBuffer.toString(), iCacheService, cdOrder, cdAnswer, this));
         }
 
         try {
@@ -91,8 +94,9 @@ public class StStockServiceImpl implements StStockService {
         System.out.println("股票实时价格-数量：" + BusinessConstants.stockPriceMap.size());
         iCacheService.setObjectByKey(CacheConstant.CACHEKEY_STOCK_PRICELIST, BusinessConstants.stockPriceMap);
         iCacheService.setObjectByKey(CacheConstant.CACHEKEY_SIMULATIONQUOTELIST, BusinessConstants.simulateQuoteMap);
+        BusinessConstants.tempStockPriceMap.clear();
 //        iCacheService.setObjectByKey(CacheConstant.CACHEKEY_SIMULATIONQUOTELIST, BusinessConstants.simulateQuoteMap);
-        stockService.shutdownNow();
+        stockService.shutdown();
         return true;
     }
 
