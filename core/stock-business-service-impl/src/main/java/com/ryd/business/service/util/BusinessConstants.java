@@ -25,7 +25,8 @@ public class BusinessConstants {
     public static ConcurrentHashMap<String, StStock> stockPriceMap = new ConcurrentHashMap<String, StStock>();
     // 股票实时价格临时变量
     public static ConcurrentHashMap<String, StStock> tempStockPriceMap = new ConcurrentHashMap<String, StStock>();
-
+    // 参数配置临时变量
+    public static ConcurrentHashMap<String, String> systemConfigMap = new ConcurrentHashMap<String, String>();
     //队列-多只股票
     public static ConcurrentHashMap<String,StTradeQueueDTO> stTradeQueueMap = new ConcurrentHashMap<String,StTradeQueueDTO>();
     // 初始化报价数据 默认未初始化
