@@ -3,6 +3,8 @@ package com.ryd.system.dao;
 import com.ryd.basecommon.dao.BaseDao;
 import com.ryd.system.model.StSystemParam;
 
+import java.util.List;
+
 /**
  * <p>标题:参数配置Dap</p>
  * <p>描述:参数配置Dao</p>
@@ -18,4 +20,6 @@ public interface StSystemParamDao extends BaseDao<StSystemParam> {
      * @return
      */
     public String getParamByKey(String key);
+
+    public List<StSystemParam> getParamByKeyType(List<Short> keyTypes);
 }
