@@ -1,19 +1,18 @@
 package com.ryd.business.service.thread;
 
-import com.ryd.basecommon.util.ApplicationConstants;
-import com.ryd.basecommon.util.CacheConstant;
-import com.ryd.basecommon.util.DateUtils;
-import com.ryd.basecommon.util.HttpclientUtil;
+import com.ryd.basecommon.util.*;
 import com.ryd.business.dto.SimulationQuoteDTO;
 import com.ryd.business.model.StStock;
 import com.ryd.business.service.StStockService;
 import com.ryd.business.service.util.BusinessConstants;
 import com.ryd.cache.service.ICacheService;
+import com.ryd.messagequeue.service.IMessageQueue;
 import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ThreadPoolExecutor;
 
 /**
  *
@@ -34,17 +33,25 @@ public class SyncStockThread implements Runnable {
 
     private CountDownLatch cdAnswer;
 
-    public SyncStockThread(String stockCodeStr, ICacheService cacheService, CountDownLatch cdOrder, CountDownLatch cdAnswer, StStockService stStockService) {
+    private ThreadPoolExecutor executorService;
+
+    private IMessageQueue iMessageQueue;
+
+    public SyncStockThread(ThreadPoolExecutor executorService, IMessageQueue iMessageQueue, String stockCodeStr, ICacheService cacheService, CountDownLatch cdOrder, CountDownLatch cdAnswer, StStockService stStockService) {
         this.stockCodeStr = stockCodeStr;
         this.cacheService = cacheService;
         this.stStockService = stStockService;
         this.cdOrder = cdOrder;
         this.cdAnswer = cdAnswer;
+        this.executorService = executorService;
+        this.iMessageQueue = iMessageQueue;
     }
 
     @Override
     public void run() {
         logger.info("更新股票实时信息.............start...........");
+        List<StStock> stockList = null;
+        List<StStock> stockQQList = null;
         try {
             cdOrder.await();
             // 下载股票价格信息
@@ -55,19 +62,24 @@ public class SyncStockThread implements Runnable {
             String stockInfoQqServerStr = HttpclientUtil.doGet(ApplicationConstants.STOCK_SERVER_STOCKTURNOVER_QQ_URL + stockCodeStr);
 
             // 通过字符串转换成股票信息
-            List<StStock> stockList = getStockInfoByStr(stockCodeStr, stockInfoStr, stockInfoTurnoverStr);
+            stockList = getStockInfoByStr(stockCodeStr, stockInfoStr, stockInfoTurnoverStr);
             // 通过字符串转换成股票信息
-            List<StStock> stockQQList = getStockInfoFromQQByStr(stockCodeStr, stockInfoQqServerStr);
+            stockQQList = getStockInfoFromQQByStr(stockCodeStr, stockInfoQqServerStr);
 
             // 保存股票价格等信息
 //            stStockService.saveStockBatch(stockList);
             stStockService.saveStockBatch(stockQQList);
+            executorService.execute(new SyncStockMessageThread(iMessageQueue, stockList));
 //            addSimulationQuote(stockList);
             addSimulationQuote(stockQQList);
         } catch (InterruptedException e) {
             e.printStackTrace();
         } finally {
             cdAnswer.countDown();
+            stockList.clear();
+            stockQQList.clear();
+            stockList = null;
+            stockQQList = null;
         }
     }
 
@@ -130,7 +142,7 @@ public class SyncStockThread implements Runnable {
 
             if (sk==null || sk.length<32) return null;
             sts = new StStock();
-//            sts.setStockId(stockCode);
+//            sts.setStockId(UUIDUtils.uuidTrimLine());
             sts.setStockCode(stockCode.substring(2));// 获取股票代码
             sts.setStockName(sk[1]);
             // 【2】股票代码
