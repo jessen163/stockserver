@@ -49,6 +49,8 @@ public class StStockServiceImpl implements StStockService {
 //        ExecutorService stockService = Executors.newFixedThreadPool(10);
         BlockingQueue<Runnable> stockQueue = new LinkedBlockingQueue<Runnable>();
         ThreadPoolExecutor stockService = new ThreadPoolExecutor(20, 20, 1, TimeUnit.MINUTES, stockQueue);
+        BlockingQueue<Runnable> messageQueue = new LinkedBlockingQueue<Runnable>();
+        ThreadPoolExecutor syncStockMessageService = new ThreadPoolExecutor(20, 20, 1, TimeUnit.MINUTES, messageQueue);
         final CountDownLatch cdOrder = new CountDownLatch(1);//指挥官的命令，设置为1，指挥官一下达命令，则cutDown,变为0，战士们执行任务
 
         List<StStockConfig> list = stStockConfigService.findStockConfig(null, 1, Integer.MAX_VALUE);
@@ -67,7 +69,7 @@ public class StStockServiceImpl implements StStockService {
             int length = stockCodeStringBuffer.toString().split(",").length;
             if (length==10) {
                 // 同步股票信息
-                stockService.execute(new SyncStockThread(stockService, iMessageQueue, stockCodeStringBuffer.toString(), iCacheService, cdOrder, cdAnswer, this));
+                stockService.execute(new SyncStockThread(syncStockMessageService, iMessageQueue, stockCodeStringBuffer.toString(), iCacheService, cdOrder, cdAnswer, this));
                 stockCodeStringBuffer = new StringBuffer();
                 int threadSize = stockQueue.size();
 //                System.out.println("线程队列大小为-->"+threadSize);
@@ -96,7 +98,8 @@ public class StStockServiceImpl implements StStockService {
         iCacheService.setObjectByKey(CacheConstant.CACHEKEY_SIMULATIONQUOTELIST, BusinessConstants.simulateQuoteMap);
         BusinessConstants.tempStockPriceMap.clear();
 //        iCacheService.setObjectByKey(CacheConstant.CACHEKEY_SIMULATIONQUOTELIST, BusinessConstants.simulateQuoteMap);
-        stockService.shutdown();
+        stockService.shutdownNow();
+        syncStockMessageService.shutdown();
         return true;
     }
 
