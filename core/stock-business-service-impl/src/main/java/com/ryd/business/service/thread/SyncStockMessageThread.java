@@ -22,6 +22,6 @@ public class SyncStockMessageThread implements Runnable {
 
     @Override
     public void run() {
-        iMessageQueue.sendMessage(ApplicationConstants.PUSHMESSAGE_STOCKPRICELIST, FileUtils.objectToByte(stockList));
+//        iMessageQueue.sendMessage(ApplicationConstants.PUSHMESSAGE_STOCKPRICELIST, FileUtils.objectToByte(stockList));
     }
 }
