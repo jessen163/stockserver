@@ -36,8 +36,6 @@ import java.util.concurrent.*;
 @Service
 public class StQuoteServiceImpl implements StQuoteService {
     @Autowired
-    private StDateScheduleService stDateScheduleService;
-    @Autowired
     private StQuoteDao stQuoteDao;
     @Autowired
     private StSystemParamService stSystemParamService;
@@ -81,10 +79,9 @@ public class StQuoteServiceImpl implements StQuoteService {
     public Integer saveQuoteList(List<StQuote> quoteList, int type) throws Exception{
         Integer quoteFlag = 0;
         boolean rs = false;
-        StQuote stQuote = null;
         // 验证报价参数
         // 验证报价状态（是否可以报价）
-//        1、是否节假日getIsFestival 2、是否交易时间
+        //是否交易时间
         // 将报价保存到mysql数据库 失败后回滚
         // 将报价加入队列 失败后回滚
 
@@ -92,7 +89,7 @@ public class StQuoteServiceImpl implements StQuoteService {
         if (type==ApplicationConstants.ACCOUNT_TYPE_REAL) {
             if (StringUtils.isEmpty(quoteList)) return -1; // 参数不匹配
             // 交易时间内
-            if (!stDateScheduleService.getIsCanQuote()) {
+            if (BusinessConstants.isCanQuote) {
                 // 非交易时间
                 return -2;
             }
@@ -111,26 +108,18 @@ public class StQuoteServiceImpl implements StQuoteService {
                     throw new QuoteBusinessException("股票价格信息不存在");
                 }
                 quote.setStockCode(stock.getStockCode());
-                if (!isStockQuotePriceInScope(BigDecimal.valueOf(stock.getBfclosePrice()), quote.getQuotePrice())) {
+                if (!isStockQuotePriceInScope(stock, quote.getQuotePrice())) {
                     // 超出涨跌幅
                     return -4;
                 }
-                if (quote.getDateTime()==null||quote.getDateTime()==0L) {
-                    quote.setDateTime(System.currentTimeMillis());
-                }
+                quote.setDateTime(System.currentTimeMillis());
             }
             // 账户金额是否够用
             for (StQuote quote: quoteList) {
-                rs = false;
                 quote.setQuoteId(UUIDUtils.uuidTrimLine());
-                // 用于排序的字段
-//                long timeSort = Integer.parseInt(String.valueOf(quote.getDateTime()).substring(7));
-//                quote.setTimeSort(timeSort);
-
                 quote.setCurrentAmount(quote.getAmount());
                 quote.setStatus(ApplicationConstants.STOCK_STQUOTE_STATUS_TRUSTEE);
-                quote.setUserType(quote.getUserType() == null ? ApplicationConstants.ACCOUNT_TYPE_REAL : quote.getUserType());
-    //            quote.setDateTime(System.currentTimeMillis());
+                quote.setUserType(ApplicationConstants.ACCOUNT_TYPE_REAL);
                 //买股票
                 if (quote.getQuoteType().shortValue() == ApplicationConstants.STOCK_QUOTETYPE_BUY.shortValue()) {
 
@@ -152,7 +141,6 @@ public class StQuoteServiceImpl implements StQuoteService {
                     //委托卖股票，减少股票持仓数量
                     rs = stPositionService.updatePositionReduce(quote.getAccountId(), quote.getStockId(), quote.getAmount());
                 }
-                stQuote = quote;
             }
         }
         // 添加报价到队列，同时保存到数据库 失败后回滚
@@ -610,19 +598,14 @@ public class StQuoteServiceImpl implements StQuoteService {
 
     /**
      * 是否在范围内报价
-     * @param closePrice 昨日收盘价
-     * @param quotePrice 当前报价
+     * @param stStock
+     * @param quotePrice
      * @return
      */
-    private boolean isStockQuotePriceInScope(BigDecimal closePrice, BigDecimal quotePrice){
-
-        BigDecimal extent = ArithUtil.multiply(closePrice, new BigDecimal(stSystemParamService.getParamByKey(CacheConstant.CACHEKEY_STOCK_UP_AND_DOWN_PERCENT)));
-
-        BigDecimal maxPrice = ArithUtil.add(closePrice, extent);
-        BigDecimal minPrice = ArithUtil.subtract(closePrice,extent);
+    private boolean isStockQuotePriceInScope(StStock stStock, BigDecimal quotePrice){
 
         //报价大于等于最小价格，小于等于最大价格，可以正常报价
-        if((ArithUtil.compare(quotePrice, minPrice)>=0) && (ArithUtil.compare(quotePrice, maxPrice)<=0)){
+        if((ArithUtil.compare(quotePrice, BigDecimal.valueOf(stStock.getMinPrice()))>=0) && (ArithUtil.compare(quotePrice, BigDecimal.valueOf(stStock.getMaxPrice()))<=0)){
             return true;
         }
 
