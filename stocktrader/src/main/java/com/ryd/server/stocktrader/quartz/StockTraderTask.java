@@ -2,6 +2,7 @@ package com.ryd.server.stocktrader.quartz;
 
 import com.ryd.basecommon.util.ApplicationConstants;
 import com.ryd.business.service.*;
+import com.ryd.business.service.util.BusinessConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -34,6 +35,7 @@ public class StockTraderTask {
     @Scheduled(cron = "0 * 8-22 ? * *")
     public void runStockTraderEngine() {
         if (ApplicationConstants.isMainThreadStop||ApplicationConstants.isSubThreadStop) {
+            BusinessConstants.isCanQuote = true;
             ApplicationConstants.isMainThreadStop = false;
             ApplicationConstants.isSubThreadStop = false;
             stTradeRecordService.updateStockTrading();
@@ -72,6 +74,7 @@ public class StockTraderTask {
      */
     @Scheduled(cron = "0 0 22 ? * *")
     public void stopStockTrader() {
+        BusinessConstants.isCanQuote = false;
         ApplicationConstants.isMainThreadStop = true;
         ApplicationConstants.isSubThreadStop = true;
     }
