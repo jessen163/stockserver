@@ -63,4 +63,9 @@ public class StSystemParamDaoImpl implements StSystemParamDao {
     public String getParamByKey(String key){
         return stSystemParamMapper.selectByKey(key);
     }
+
+    @Override
+    public List<StSystemParam> getParamByKeyType(List<Short> keyTypes) {
+        return stSystemParamMapper.selectByKeyTypes(keyTypes);
+    }
 }

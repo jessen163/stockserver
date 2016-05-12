@@ -16,6 +16,8 @@ public interface StSystemParamMapper {
 
     String selectByKey(String key);
 
+    List<StSystemParam> selectByKeyTypes(@Param(value = "list") List<Short> keyTypes);
+
     int updateByPrimaryKeySelective(StSystemParam record);
 
     int updateByPrimaryKey(StSystemParam record);
