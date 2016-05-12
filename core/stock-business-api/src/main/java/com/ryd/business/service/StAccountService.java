@@ -30,6 +30,16 @@ public interface StAccountService {
      */
     public boolean updateStAccount(StAccount account);
 
+
+    /**
+     * 可用资产增加或减少
+     * @param accountId
+     * @param money
+     * @param type 1 增加 2减少
+     * @return
+     * @throws Exception
+     */
+    public boolean updateUseMoneyAddReduce(String accountId, BigDecimal money, int type) throws Exception;
     /**
      * 增加资产
      * @param accountId

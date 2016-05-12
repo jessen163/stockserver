@@ -28,6 +28,15 @@ public interface StPositionDao extends BaseDao<StPosition> {
      */
     public int getCount();
 
+    /**
+     * 修改股票数量
+     * @param positionId
+     * @param amount
+     * @param marketAmount
+     * @return
+     */
+    public int updateAmountByKey(String positionId, Long amount, Long marketAmount);
+
 
     public int addBatch(List<StPosition> list);
 

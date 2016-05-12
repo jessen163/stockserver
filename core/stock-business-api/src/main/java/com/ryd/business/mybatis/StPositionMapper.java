@@ -32,6 +32,11 @@ public interface StPositionMapper {
 
     int updateBatchSelective(List<StPosition> list);
 
+    int updateAmountByPrimaryKey(@Param(value = "positionId") String positionId,
+                                 @Param(value = "amount") Long amount,
+                                 @Param(value = "marketAmount") Long marketAmount);
+
+
     List<StPosition> selectListByKeySelective(@Param(value = "record") StPosition record,
                                                   @Param(value = "limit") Integer limit,
                                                   @Param(value = "offset") Integer offset);

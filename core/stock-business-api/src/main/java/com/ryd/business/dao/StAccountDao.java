@@ -3,6 +3,7 @@ package com.ryd.business.dao;
 import com.ryd.basecommon.dao.BaseDao;
 import com.ryd.business.model.StAccount;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
@@ -49,5 +50,11 @@ public interface StAccountDao  extends BaseDao<StAccount> {
      * @return
      */
     public List<StAccount> getAccountNumList();
+
+    /**
+     * 修改可用资产
+     * @return
+     */
+    public int updateUseMoneybyKey(String accountId, BigDecimal money);
 
 }

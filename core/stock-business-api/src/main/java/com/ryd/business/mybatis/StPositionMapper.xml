@@ -199,4 +199,16 @@
       where position_id = #{item.positionId,jdbcType=CHAR}
     </foreach>
   </update>
+  <update id="updateAmountByPrimaryKey">
+    update st_position
+    <set>
+      <if test="amount != null">
+        amount = #{amount,jdbcType=BIGINT},
+      </if>
+      <if test="marketAmount != null">
+        market_amount = #{marketAmount,jdbcType=BIGINT},
+      </if>
+    </set>
+    where position_id = #{positionId,jdbcType=CHAR}
+  </update>
 </mapper>

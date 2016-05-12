@@ -3,9 +3,11 @@ package com.ryd.business.service.impl;
 import com.ryd.basecommon.util.ApplicationConstants;
 import com.ryd.business.dto.AutomatedTradingDTO;
 import com.ryd.business.dto.SearchStockDTO;
+import com.ryd.business.model.StAccount;
 import com.ryd.business.model.StQuote;
 import com.ryd.business.model.StStock;
 import com.ryd.business.service.AutomatedTradingService;
+import com.ryd.business.service.StAccountService;
 import com.ryd.business.service.StQuoteService;
 import com.ryd.business.service.StStockService;
 import com.ryd.cache.service.ICacheService;
@@ -28,12 +30,16 @@ public class AutomatedTradingServiceImpl implements AutomatedTradingService {
     private ICacheService iCacheService;
     @Autowired
     private StQuoteService stQuoteService;
+    @Autowired
+    private StAccountService stAccountService;
 
     @Override
     public boolean addAutomatedTradingByStock(AutomatedTradingDTO automatedTradingDTO) {
         SearchStockDTO searchStockDTO = new SearchStockDTO();
         searchStockDTO.setStockId(automatedTradingDTO.getStockId());
         StStock stStock = stStockService.findStockListByStock(searchStockDTO);
+        StAccount stAccount = stAccountService.getStAccountById(automatedTradingDTO.getAccountId());
+        if(stStock==null||stAccount==null)return false;
         double minBuyPrice = stStock.getBuyFivePrice()-0.01;
         double maxSellPrice = stStock.getBuyFivePrice()+0.01;
         List<StQuote> quoteList = new ArrayList<StQuote>();
@@ -42,16 +48,16 @@ public class AutomatedTradingServiceImpl implements AutomatedTradingService {
         buyQuote.setQuoteType(ApplicationConstants.STOCK_QUOTETYPE_BUY);
         buyQuote.setAmount(100L);
         buyQuote.setAccountId(automatedTradingDTO.getAccountId());
-        buyQuote.setUserType(ApplicationConstants.ACCOUNT_TYPE_VIRTUAL);
+        buyQuote.setUserType(stAccount.getAccountType());
         buyQuote.setQuotePrice(BigDecimal.valueOf(minBuyPrice));
         quoteList.add(buyQuote);
 
         StQuote sellQuote = new StQuote();
         sellQuote.setStockId(searchStockDTO.getStockId());
-        sellQuote.setQuoteType(ApplicationConstants.STOCK_QUOTETYPE_BUY);
+        sellQuote.setQuoteType(ApplicationConstants.STOCK_QUOTETYPE_SELL);
         sellQuote.setAmount(100L);
         sellQuote.setAccountId(automatedTradingDTO.getAccountId());
-        sellQuote.setUserType(ApplicationConstants.ACCOUNT_TYPE_VIRTUAL);
+        sellQuote.setUserType(stAccount.getAccountType());
         sellQuote.setQuotePrice(BigDecimal.valueOf(maxSellPrice));
         quoteList.add(sellQuote);
 

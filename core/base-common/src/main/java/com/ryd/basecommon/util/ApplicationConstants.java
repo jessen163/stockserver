@@ -67,10 +67,6 @@ public class ApplicationConstants {
     public static final Short STOCK_QUOTETYPE_BUY = 1;
     public static final Short STOCK_QUOTETYPE_SELL = 2;
 
-    //1、增加，2、减少
-    public static final Integer STOCK_STQUOTE_ACCOUNTMONEY_TYPE_ADD=1;
-    public static final Integer STOCK_STQUOTE_ACCOUNTMONEY_TYPE_REDUSE=2;
-
     //报价状态 1.托管  2.交易中 3.已成交 4.撤单  5. 结算未成交 6.结算部分股票成交
     public static final Short STOCK_STQUOTE_STATUS_TRUSTEE=1;
     public static final Short STOCK_STQUOTE_STATUS_DEALING=2;
@@ -89,9 +85,9 @@ public class ApplicationConstants {
     public static final Integer STQUOTE_TRADE_TIMECOMPARE_2 = 2;
     public static final Integer STQUOTE_TRADE_TIMECOMPARE_3 = 3;
 
-    //1.节假日 2.特殊工作日
-    public static final Short DATE_SCHEDULE_FESTIVALDAY = 1;
-    public static final Short DATE_SCHEDULE_SEPCIAL_WORKDAY = 2;
+    //用户可用资产操作类型 1.增加 2.减少
+    public static final Integer STACCOUNT_USEMONEY_TYPE_ADD = 1;
+    public static final Integer STACCOUNT_USEMONEY_TYPE_REDUSE = 2;
 
     //帐户类型 1.真实账户 2.马甲帐户
     public static final Short ACCOUNT_TYPE_REAL = 1;

@@ -3,6 +3,7 @@ package com.ryd.business.mybatis;
 import com.ryd.business.model.StAccount;
 import org.apache.ibatis.annotations.Param;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
@@ -26,6 +27,9 @@ public interface StAccountMapper {
     int updateByPrimaryKey(StAccount record);
 
     int updateBatch(List<StAccount> list);
+
+    int updateUseMoneyByPrimaryKey(@Param(value = "id") String id,
+                                   @Param(value = "money") BigDecimal money);
 
     int updateBatchSelective(List<StAccount> list);
 

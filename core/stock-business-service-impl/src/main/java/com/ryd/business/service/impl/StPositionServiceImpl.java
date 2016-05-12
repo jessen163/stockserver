@@ -57,6 +57,7 @@ public class StPositionServiceImpl implements StPositionService {
         return true;
     }
 
+
     @Override
     public boolean updatePositionAdd(String accountId, String stockId, Long amount) throws Exception {
         boolean rs = false;
@@ -81,7 +82,7 @@ public class StPositionServiceImpl implements StPositionService {
             Long camount = position.getAmount();
             //增加持仓
             position.setAmount(camount+amount);
-            rs = stPositionDao.update(position) > 0;
+            rs = stPositionDao.updateAmountByKey(position.getPositionId(),position.getAmount(),null) > 0;
         }
 
         if(!rs){
@@ -94,19 +95,13 @@ public class StPositionServiceImpl implements StPositionService {
     public boolean updatePositionRevokeAdd(String accountId, String stockId, Long amount) throws Exception {
         boolean rs = false;
         StPosition position = stPositionDao.getPositionByAccountStock(accountId, stockId);
-        StAccount stAccount = stAccountService.getStAccountById(accountId);
-        //如果是马甲帐户，帐户持仓不做处理
-        if(stAccount!=null && stAccount.getAccountType() == ApplicationConstants.ACCOUNT_TYPE_VIRTUAL){
-            return true;
-        }
-
         //原有持仓
         Long camount = position.getMarketAmount();
         Long aamount = position.getAmount();
         //增加持仓
         position.setMarketAmount(camount + amount);
-        position.setAmount(aamount+amount);
-        rs = stPositionDao.update(position) > 0;
+        position.setAmount(aamount + amount);
+        rs = stPositionDao.updateAmountByKey(position.getPositionId(),position.getAmount(),position.getMarketAmount()) > 0;
 
         if(!rs){
             throw new PositionBusinessException("持仓增加失败");
@@ -137,7 +132,7 @@ public class StPositionServiceImpl implements StPositionService {
                 //减少持仓
                 position.setMarketAmount(camount - amount);
                 position.setAmount(aamount - amount);
-                rs = stPositionDao.update(position) > 0;
+                rs = stPositionDao.updateAmountByKey(position.getPositionId(),position.getAmount(),position.getMarketAmount()) > 0;
                 if(!rs){
                     throw new PositionBusinessException("持仓减少失败");
                 }

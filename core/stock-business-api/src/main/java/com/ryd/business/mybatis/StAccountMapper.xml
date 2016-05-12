@@ -376,4 +376,11 @@
       where id = #{item.id,jdbcType=CHAR}
     </foreach>
   </update>
+  <update id="updateUseMoneyByPrimaryKey">
+    update st_account
+    <set>
+    use_money = #{money,jdbcType=DECIMAL} + st_account.use_money
+    </set>
+    where id = #{id,jdbcType=CHAR}
+  </update>
 </mapper>

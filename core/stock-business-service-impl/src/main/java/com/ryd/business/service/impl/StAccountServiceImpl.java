@@ -49,6 +49,18 @@ public class StAccountServiceImpl implements StAccountService {
     }
 
     @Override
+    public boolean updateUseMoneyAddReduce(String accountId, BigDecimal money, int type) throws Exception {
+        if(type == ApplicationConstants.STACCOUNT_USEMONEY_TYPE_REDUSE.intValue()){
+           money = ArithUtil.multiply(money,new BigDecimal(-1));
+        }
+        try {
+            return stAccountDao.updateUseMoneybyKey(accountId, money) > 0;
+        } catch (Exception e){
+            throw new AccountBusinessException("帐户增加资产失败");
+        }
+    }
+
+    @Override
     public boolean updateStAccountMoneyAdd(String accountId, BigDecimal money) throws Exception{
         boolean rs = false;
 

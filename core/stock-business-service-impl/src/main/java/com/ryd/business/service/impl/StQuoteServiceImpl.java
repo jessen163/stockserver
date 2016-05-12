@@ -134,7 +134,7 @@ public class StQuoteServiceImpl implements StQuoteService {
                     quote.setFrozeMoney(ArithUtil.scale(rsArr[1]));
                     quote.setCommissionFee(ArithUtil.scale(rsArr[0]));
                     //买家减少资产
-                    rs = stAccountService.updateStAccountMoneyReduce(quote.getAccountId(), quote.getFrozeMoney());
+                    rs = stAccountService.updateUseMoneyAddReduce(quote.getAccountId(), quote.getFrozeMoney(), ApplicationConstants.STACCOUNT_USEMONEY_TYPE_REDUSE);
 
                 } else if (quote.getQuoteType().shortValue() == ApplicationConstants.STOCK_QUOTETYPE_SELL.shortValue()) { //卖股票
 
@@ -172,7 +172,7 @@ public class StQuoteServiceImpl implements StQuoteService {
                 boolean rs = false;
                 if (quote.getQuoteType().intValue() == ApplicationConstants.STOCK_QUOTETYPE_BUY) {
                     //撤回托管买股票费用,帐户增加资产
-                    rs = stAccountService.updateStAccountMoneyAdd(quote.getAccountId(),quote.getFrozeMoney());
+                    rs = stAccountService.updateUseMoneyAddReduce(quote.getAccountId(), quote.getFrozeMoney(), ApplicationConstants.STACCOUNT_USEMONEY_TYPE_REDUSE);
                 } else if (quote.getQuoteType().intValue() == ApplicationConstants.STOCK_QUOTETYPE_SELL){
                     //撤回托管为卖的股票，持仓数量增加
                     rs = stPositionService.updatePositionRevokeAdd(quote.getAccountId(), quote.getStockId(), quote.getCurrentAmount());
